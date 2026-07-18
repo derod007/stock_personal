@@ -1,0 +1,5 @@
+/data/raw/
+/data/ohlcv/
+/vendor/
+*.log
+.DS_Store

@@ -1,0 +1,13 @@
+{
+  "name": "acdun/chart-entry-lab",
+  "description": "Entry-time chart feature lab for Account 1 swing signals (PHP)",
+  "type": "project",
+  "require": {
+    "php": ">=8.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "ChartEntryLab\\": "src/"
+    }
+  }
+}

@@ -42,6 +42,18 @@ final class EntrySignalExtractor
                 ]);
             }
         }
+        // "soxs 3.36" / "쏙스 3.63" 한 줄 포지션
+        if (preg_match_all('/(?:^|[\s\n])(soxs|SOXS|쏙스)\s*([0-9]+(?:\.[0-9]+)?)/u', $blob, $m, PREG_SET_ORDER)) {
+            foreach ($m as $i => $row) {
+                $events[] = $this->makeEvent($post, $baseId . '-soxs-px-' . $i, [
+                    'side' => 'long',
+                    'entry_price' => (float) $row[2],
+                    'symbol_hint' => 'SOXS',
+                    'tags' => ['parsed_entry', 'soxs_line_price'],
+                    'raw_quote' => trim($row[0]),
+                ]);
+            }
+        }
         // "코루매수 완 19.50" / "SOXS 매수타점이 3.91"
         if (preg_match_all('/([A-Za-z가-힣0-9_]+)\s*(?:매수(?:타점)?|롱)\s*(?:완|이|이?\s*)?(?:이|가|은|는)?\s*([0-9]+(?:\.[0-9]+)?)/u', $blob, $m, PREG_SET_ORDER)) {
             foreach ($m as $i => $row) {
@@ -203,10 +215,10 @@ final class EntrySignalExtractor
             return ['symbol' => 'SNDK_SHORT', 'note' => '샌디스크 숏/인버스성', 'underlying' => 'SNDK', 'product_type' => 'leveraged'];
         }
         if (preg_match('/^쏙스\b|^SOXS\b/iu', trim($text)) || preg_match('/\b(?:쏙스|SOXS)\s*[0-9]/iu', $text)) {
-            return ['symbol' => 'SOXS', 'note' => '반도체 인버스', 'underlying' => 'SOX', 'product_type' => 'leveraged_etf'];
+            return ['symbol' => 'SOXS', 'note' => '반도체 인버스 → curate 시 MU 본주 치환', 'underlying' => 'MU', 'product_type' => 'leveraged_etf'];
         }
         if (preg_match('/코루/u', $text)) {
-            return ['symbol' => '122630.KS', 'note' => '코덱스 레버리지 추정', 'underlying' => 'KOSPI200', 'product_type' => 'leveraged_etf'];
+            return ['symbol' => '122630.KS', 'note' => '코덱스 레버리지 → curate 시 삼전 본주 치환', 'underlying' => '005930.KS', 'product_type' => 'leveraged_etf'];
         }
         if (preg_match('/샌디.*2배|2배.*샌디/u', $text)) {
             return ['symbol' => 'SNDK_2X', 'note' => '샌디스크 2배 상품', 'underlying' => 'SNDK', 'product_type' => 'leveraged'];
@@ -215,7 +227,7 @@ final class EntrySignalExtractor
             return ['symbol' => 'SNDK_SHORT', 'note' => '샌디스크 숏/인버스성', 'underlying' => 'SNDK', 'product_type' => 'leveraged'];
         }
         if (preg_match('/SOXS|쏙스/iu', $text)) {
-            return ['symbol' => 'SOXS', 'note' => '반도체 인버스', 'underlying' => 'SOX', 'product_type' => 'leveraged_etf'];
+            return ['symbol' => 'SOXS', 'note' => '반도체 인버스 → curate 시 MU 본주 치환', 'underlying' => 'MU', 'product_type' => 'leveraged_etf'];
         }
         if (preg_match('/샌디|샌디스크|SNDK/iu', $text)) {
             return ['symbol' => 'SNDK', 'note' => '샌디스크 본주 또는 관련', 'underlying' => 'SNDK', 'product_type' => 'us_stock'];
@@ -223,8 +235,11 @@ final class EntrySignalExtractor
         if (preg_match('/마이크론|\bMU\b/iu', $text)) {
             return ['symbol' => 'MU', 'note' => '', 'underlying' => 'MU', 'product_type' => 'us_stock'];
         }
-        if (preg_match('/하이닉스|하닉/u', $text)) {
+        if (preg_match('/하이닉스|하닉|\b닉스\b|sk하이닉스/iu', $text)) {
             return ['symbol' => '000660.KS', 'note' => 'SK하이닉스', 'underlying' => '000660.KS', 'product_type' => 'kr_stock'];
+        }
+        if (preg_match('/삼하/u', $text)) {
+            return ['symbol' => '000660.KS', 'note' => '삼하(삼성·하이닉스) — 대표 심볼 하이닉스', 'underlying' => '000660.KS', 'product_type' => 'kr_stock'];
         }
         if (preg_match('/삼전|삼성전자/u', $text)) {
             return ['symbol' => '005930.KS', 'note' => '삼성전자', 'underlying' => '005930.KS', 'product_type' => 'kr_stock'];

@@ -6,6 +6,7 @@ require __DIR__ . '/bootstrap.php';
 
 use ChartEntryLab\EntryRepository;
 use ChartEntryLab\FeatureEngine;
+use ChartEntryLab\SymbolMap;
 use ChartEntryLab\YahooChartClient;
 
 $root = dirname(__DIR__);
@@ -13,17 +14,22 @@ $repo = new EntryRepository($root . '/data/entries.json');
 $client = new YahooChartClient($root . '/data/ohlcv');
 $engine = new FeatureEngine();
 
-$map = [
-    'SNDK' => 'SNDK',
-    'SOXS' => 'SOXS',
-    'MU' => 'MU',
-];
+$onlyLearning = in_array('--learning', $argv, true);
 
 foreach ($repo->all() as $entry) {
+    $use = (string) ($entry['learning_use'] ?? '');
+    if ($onlyLearning && !in_array($use, ['full', 'structure_only'], true)) {
+        continue;
+    }
     $sym = (string) ($entry['related_underlying'] ?? $entry['symbol'] ?? '');
-    $yahoo = $map[$sym] ?? null;
+    $yahoo = SymbolMap::toYahoo($sym);
+    if ($yahoo === null) {
+        echo str_repeat('=', 72) . PHP_EOL;
+        echo ($entry['id'] ?? '?') . " | skip no-chart ({$sym})\n\n";
+        continue;
+    }
     echo str_repeat('=', 72) . PHP_EOL;
-    echo ($entry['id'] ?? '?') . ' | ' . ($entry['posted_at_kst'] ?? '') . PHP_EOL;
+    echo ($entry['id'] ?? '?') . ' | use=' . ($use !== '' ? $use : 'unset') . ' | ' . ($entry['posted_at_kst'] ?? '') . PHP_EOL;
     echo ($entry['raw_quote'] ?? '') . PHP_EOL;
 
     if ($yahoo === null) {
@@ -33,14 +39,18 @@ foreach ($repo->all() as $entry) {
 
     try {
         $bars = $client->fetch($yahoo, '3mo', '1d');
-        // posted_at 이전 마지막 일봉까지로 피처 계산
+        // posted_at 이전 마지막 일봉까지로 피처 계산 (봉 시각은 KST로 해석 — 미래 누수 방지)
+        $tz = new DateTimeZone('Asia/Seoul');
         $posted = isset($entry['posted_at_kst'])
             ? new DateTimeImmutable((string) $entry['posted_at_kst'])
             : null;
         if ($posted !== null) {
             $bars = array_values(array_filter(
                 $bars,
-                static fn(array $b): bool => new DateTimeImmutable($b['time_kst']) <= $posted
+                static function (array $b) use ($posted, $tz): bool {
+                    $barTime = new DateTimeImmutable($b['time_kst'], $tz);
+                    return $barTime <= $posted;
+                }
             ));
         }
         if (count($bars) < 30) {

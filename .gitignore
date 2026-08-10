@@ -1,5 +1,8 @@
 /data/raw/
+/data/alpha/raw/
 /data/ohlcv/
+/data/backtests/
+/data/alerts/
 /vendor/
 *.log
 .DS_Store

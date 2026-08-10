@@ -36,6 +36,20 @@
 
 **결론:** 이 글은 감이 아니라 **급락 슈팅 이후 절반 되돌림 눌림 롱**으로 읽는 것이 타당합니다. 1분봉·이상 거래량은 일봉만으로는 검증 불가(분봉 수집 필요).
 
+### FeatureEngine 대조 (2026-07-18)
+
+실행: `php bin/verify_case_a.php` (`e-20260709-sndk-structure-long`, posted_at 이전 봉만, KST 파싱)
+
+| 항목 | 결과 |
+|------|------|
+| 직전 봉 | 07-08 세션 (KST 파싱) |
+| `swing_method` | `flush_pre_peak` (아래꼬리 슈팅 + 직전 피크) |
+| `flush_low` / `invalidation` | ≈1485 |
+| `higher_low` | true |
+| `half_retrace` | ≈1883 (수동 ≈1767, ±8% 내) → **PASS** |
+
+참고: 07-07 슈팅은 긴 음봉이 아니라 **긴 아래꼬리**라 몸통 비율만으로는 탐지 불가 → 윅 슈팅 규칙 추가.
+
 ---
 
 ## 케이스 B — 2026-07-08 SOXS 프로그램 타점 3.91
@@ -88,6 +102,8 @@
 ```bash
 php bin/fetch_yahoo.php SNDK 3mo 1d
 php bin/fetch_yahoo.php MU 3mo 1d
-php bin/analyze_entries.php
+php bin/analyze_entries.php --learning
+php bin/verify_case_a.php
 php bin/score_symbol.php MU
+php bin/write_weekly_memo.php
 ```

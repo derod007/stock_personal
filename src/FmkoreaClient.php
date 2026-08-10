@@ -49,6 +49,65 @@ final class FmkoreaClient
         return $this->get($url, $useCache);
     }
 
+    /**
+     * 본문 + 댓글 페이지(cpage) HTML을 모두 가져온다.
+     *
+     * @return list<string> [본문HTML, 댓글페이지1, ...]
+     */
+    public function fetchDocumentPages(int|string $documentSrl, bool $useCache = true, int $maxCommentPages = 15): array
+    {
+        $srl = (string) $documentSrl;
+        $main = $this->fetchDocument($srl, $useCache);
+        $pages = [$main];
+
+        $maxPage = $this->detectCommentPageCount($main);
+        $maxPage = max(1, min($maxCommentPages, $maxPage));
+
+        for ($cpage = 1; $cpage <= $maxPage; $cpage++) {
+            $url = 'https://www.fmkorea.com/index.php?' . http_build_query([
+                'document_srl' => $srl,
+                'mid' => 'stock',
+                'cpage' => $cpage,
+            ], '', '&', PHP_QUERY_RFC3986);
+            try {
+                $pages[] = $this->get($url, $useCache);
+            } catch (\Throwable $e) {
+                // 댓글 페이지만 실패하면 본문만이라도 유지
+                break;
+            }
+        }
+
+        return $pages;
+    }
+
+    private function detectCommentPageCount(string $html): int
+    {
+        $max = 1;
+        // document_cpage = 현재 댓글 페이지(최대가 아님). 링크·현재값을 합쳐 상한을 잡는다.
+        if (preg_match('/window\.document_cpage\s*=\s*(\d+)/', $html, $m)) {
+            $max = max($max, (int) $m[1]);
+        }
+        // 댓글 영역 페이징만 (게시판 page= 와 구분)
+        if (preg_match('/id="comment".*?<\/form>/su', $html, $section)
+            || preg_match('/class="fdb_lst[^"]*".*?class="bd_pg[^"]*".*?<\/div>/su', $html, $section)
+        ) {
+            $chunk = $section[0];
+            if (preg_match_all('/[?&]cpage=(\d+)/', $chunk, $m)) {
+                foreach ($m[1] as $p) {
+                    $max = max($max, (int) $p);
+                }
+            }
+            if (preg_match('/<strong[^>]*class="[^"]*this[^"]*"[^>]*>\s*(\d+)\s*<\/strong>/u', $chunk, $m)) {
+                $max = max($max, (int) $m[1]);
+            }
+        } elseif (preg_match_all('/[?&]cpage=(\d+)/', $html, $m)) {
+            foreach ($m[1] as $p) {
+                $max = max($max, (int) $p);
+            }
+        }
+        return $max;
+    }
+
     public function get(string $url, bool $useCache = true): string
     {
         $cacheKey = sha1($url) . '.html';

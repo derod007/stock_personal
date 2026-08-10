@@ -4,19 +4,36 @@
         "source_url": "https://www.fmkorea.com/10057057385",
         "posted_at_kst": "2026-07-08T14:40:00+09:00",
         "author": "노라무",
-        "symbol": "SOXS",
-        "symbol_note": "글에 3.91로 표기. Yahoo 당시 SOXS는 40달러대. 역분할/다른상품/표기단위 가능성 있음 → 구조만 참고",
-        "side": "long",
-        "entry_price": 3.91,
+        "symbol": "MU",
+        "symbol_note": "글에 3.91로 표기. Yahoo 당시 SOXS는 40달러대. 역분할/다른상품/표기단위 가능성 있음 → 구조만 참고 | SOXS(반도체 3x 인버스) → MU 본주 (방향 반전) · 원상품 side=long → 본주 side=short",
+        "side": "short",
+        "entry_price": null,
         "entry_price_ref": "program_output",
         "stop_price": null,
         "target_price": null,
-        "product_type": "leveraged_etf",
+        "product_type": "us_stock",
         "tags": [
             "program",
-            "test_point"
+            "test_point",
+            "from_leveraged_proxy",
+            "structure_or_view",
+            "inverse_side_flipped"
         ],
-        "raw_quote": "테스트로 해봣는데 SOXS 매수타점이 3.91인데?"
+        "raw_quote": "테스트로 해봣는데 SOXS 매수타점이 3.91인데?",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "source_instrument": "SOXS",
+        "leveraged_entry_price": 3.91,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "related_underlying": "MU",
+        "proxy_bias": "short"
     },
     {
         "id": "e-20260708-lemon-shortswing",
@@ -35,26 +52,50 @@
             "short_swing",
             "small_size"
         ],
-        "raw_quote": "레몬헬스케어 11460 매수 손절 -3% 1주로 하세요"
+        "raw_quote": "레몬헬스케어 11460 매수 손절 -3% 1주로 하세요",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "yahoo_chart_unavailable"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "chart_available": false
     },
     {
         "id": "e-20260708-sndk-2x-entry",
         "source_url": "https://www.fmkorea.com/10054691255",
         "posted_at_kst": "2026-07-08T00:00:00+09:00",
         "author": "노라무",
-        "symbol": "SNDK_2X",
-        "symbol_note": "샌디스크 2배 상품. 본주 SNDK와 가격대 다름",
+        "symbol": "SNDK",
+        "symbol_note": "샌디스크 2배 상품. 본주 SNDK와 가격대 다름 | 샌디 2배 → SNDK 본주 (가격 라벨 제외, 구조·방향만) · 원상품 side=long → 본주 side=long",
         "side": "long",
-        "entry_price": 16.9,
+        "entry_price": null,
         "stop_price": null,
         "target_price": null,
-        "product_type": "leveraged",
+        "product_type": "us_stock",
         "related_underlying": "SNDK",
         "tags": [
             "entry_disclosure",
-            "leveraged"
+            "leveraged",
+            "from_leveraged_proxy",
+            "structure_or_view"
         ],
-        "raw_quote": "샌디스크 2배 진입공시 평단 16.9불"
+        "raw_quote": "샌디스크 2배 진입공시 평단 16.9불",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "source_instrument": "SNDK_2X",
+        "leveraged_entry_price": 16.9,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "proxy_bias": "long"
     },
     {
         "id": "e-20260708-sndk-flip",
@@ -72,7 +113,15 @@
             "stop_defined",
             "hedge"
         ],
-        "raw_quote": "샌디숏매도 샌디롱 매수 / 샌디 1588깨지면 손절 / 이후 gg 손절 관망"
+        "raw_quote": "샌디숏매도 샌디롱 매수 / 샌디 1588깨지면 손절 / 이후 gg 손절 관망",
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": "stop"
     },
     {
         "id": "e-20260709-sndk-structure-long",
@@ -92,77 +141,136 @@
             "half_retrace",
             "1m_confirm"
         ],
-        "raw_quote": "쌍봉→하방슈팅→쌍바닥실패→저항터치·저점상승→절반지지·1분봉·이상거래량 롱 / 목표가 1815 / 올라갈때사지말고 눌림에서"
+        "raw_quote": "쌍봉→하방슈팅→쌍바닥실패→저항터치·저점상승→절반지지·1분봉·이상거래량 롱 / 목표가 1815 / 올라갈때사지말고 눌림에서",
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
     },
     {
         "id": "e-20260716-koru",
         "source_url": "https://www.fmkorea.com/10088290916",
         "posted_at_kst": "2026-07-16T01:42:00+09:00",
         "author": "노라무",
-        "symbol": "122630.KS",
-        "symbol_note": "코덱스 레버리지(추정, 글에 코루)",
+        "symbol": "005930.KS",
+        "symbol_note": "코덱스 레버리지(추정, 글에 코루) | 코루(코스피 레버) → 삼전 본주로 국장 방향 대응 · 원상품 side=long → 본주 side=long",
         "side": "long",
-        "entry_price": 19.5,
+        "entry_price": null,
         "entry_price_alt": 19.52,
         "stop_price": null,
         "target_price": null,
-        "product_type": "leveraged_etf",
+        "product_type": "kr_stock",
         "tags": [
             "panic_dip",
             "split_entry",
-            "do_not_copy"
+            "do_not_copy",
+            "from_leveraged_proxy",
+            "structure_or_view"
         ],
-        "raw_quote": "개미털었으니 코루매수 완 19.50 / 분할 19.52 / 따라하면 돈만녹는다"
+        "raw_quote": "개미털었으니 코루매수 완 19.50 / 분할 19.52 / 따라하면 돈만녹는다",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "source_instrument": "122630.KS",
+        "leveraged_entry_price": 19.5,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "related_underlying": "005930.KS",
+        "proxy_bias": "long"
     },
     {
         "id": "e-20260716-sndk-long-1363",
         "source_url": "https://www.fmkorea.com/10096316655",
         "posted_at_kst": "2026-07-16T00:00:00+09:00",
         "author": "노라무",
-        "symbol": "SNDK_2X",
+        "symbol": "SNDK",
         "related_underlying": "SNDK",
         "side": "long",
-        "entry_price": 13.63,
+        "entry_price": null,
         "stop_price": null,
         "target_price": null,
-        "product_type": "leveraged",
+        "product_type": "us_stock",
         "tags": [
-            "entry_disclosure"
+            "entry_disclosure",
+            "from_leveraged_proxy",
+            "structure_or_view"
         ],
-        "raw_quote": "샌디롱 진입 13.63"
+        "raw_quote": "샌디롱 진입 13.63",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "source_instrument": "SNDK_2X",
+        "leveraged_entry_price": 13.63,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "proxy_bias": "long",
+        "symbol_note": "샌디 2배 → SNDK 본주 (가격 라벨 제외, 구조·방향만) · 원상품 side=long → 본주 side=long"
     },
     {
         "id": "e-20260717-sndk-long-1230",
         "source_url": "https://www.fmkorea.com/10095647739",
         "posted_at_kst": "2026-07-17T19:16:00+09:00",
         "author": "노라무",
-        "symbol": "SNDK_2X",
+        "symbol": "SNDK",
         "related_underlying": "SNDK",
         "side": "long",
-        "entry_price": 12.3,
+        "entry_price": null,
         "stop_price": null,
-        "target_price": 15,
-        "product_type": "leveraged",
+        "target_price": null,
+        "product_type": "us_stock",
         "tags": [
             "view_flip_short_to_long",
-            "target_defined"
+            "target_defined",
+            "from_leveraged_proxy",
+            "structure_or_view"
         ],
-        "raw_quote": "숏뷰에서 롱 전환 가능 / 샌디롱 평단 12.30 / 15불에 매도예정"
+        "raw_quote": "숏뷰에서 롱 전환 가능 / 샌디롱 평단 12.30 / 15불에 매도예정",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "source_instrument": "SNDK_2X",
+        "leveraged_entry_price": 12.3,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": 15,
+        "proxy_bias": "long",
+        "symbol_note": "샌디 2배 → SNDK 본주 (가격 라벨 제외, 구조·방향만) · 원상품 side=long → 본주 side=long"
     },
     {
         "id": "x-20260708-soxs-sndkshort-tp",
         "source_url": "https://www.fmkorea.com/10052187738",
         "posted_at_kst": "2026-07-08T00:00:00+09:00",
         "author": "노라무",
-        "symbol": "SOXS",
+        "symbol": "MU",
         "side": "exit",
         "entry_price": null,
         "stop_price": null,
-        "target_price": 5.05,
-        "product_type": "leveraged_etf",
+        "target_price": null,
+        "product_type": "us_stock",
         "tags": [
             "take_profit",
-            "scale_out"
+            "scale_out",
+            "from_leveraged_proxy",
+            "structure_or_view",
+            "inverse_side_flipped"
         ],
         "raw_quote": "레버리지라서 중간중간 매도 / 샌디숏 4.29 / 쏙스 5.05",
         "linked_symbols": [
@@ -170,7 +278,22 @@
                 "symbol": "SNDK_SHORT",
                 "target_price": 4.29
             }
-        ]
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": "target",
+        "source_instrument": "SOXS",
+        "leveraged_entry_price": null,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": 5.05,
+        "related_underlying": "MU",
+        "proxy_bias": "neutral",
+        "symbol_note": "SOXS(반도체 3x 인버스) → MU 본주 (방향 반전) · 원상품 side=exit → 본주 side=exit"
     },
     {
         "id": "fm-10096189080-structure",
@@ -190,7 +313,15 @@
         "symbol": "UNKNOWN",
         "symbol_note": "심볼 미확정",
         "related_underlying": null,
-        "product_type": "unknown"
+        "product_type": "unknown",
+        "learning_use": "ignore",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "no_tradeable_levels"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
     },
     {
         "id": "fm-10095647739-structure",
@@ -199,7 +330,7 @@
         "title": "자  지금자리 중요한자리입니다.",
         "posted_at_kst": "2026-07-17T19:08:00+09:00",
         "author": "노라무",
-        "collected_at_kst": "2026-07-18T20:22:09+09:00",
+        "collected_at_kst": "2026-07-18T23:42:35+09:00",
         "source": "fmkorea_scraper",
         "side": "mixed_or_hedge",
         "entry_price": null,
@@ -207,10 +338,18 @@
             "structure_or_view"
         ],
         "raw_quote": "자  지금자리 중요한자리입니다.\n숏뷰에서 롱으로 전환이 될수도있어요\n\n오늘 장 잘 살펴보시길 바래요",
-        "symbol": "UNKNOWN",
-        "symbol_note": "심볼 미확정",
-        "related_underlying": null,
-        "product_type": "unknown"
+        "symbol": "SNDK",
+        "symbol_note": "동일 스레드 맥락상 샌디 관련 구조 뷰",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
     },
     {
         "id": "fm-10060109504-structure",
@@ -230,7 +369,15 @@
         "symbol": "SNDK",
         "symbol_note": "샌디스크 본주 또는 관련",
         "related_underlying": "SNDK",
-        "product_type": "us_stock"
+        "product_type": "us_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
     },
     {
         "id": "fm-10057057385-structure",
@@ -241,25 +388,42 @@
         "author": "노라무",
         "collected_at_kst": "2026-07-18T20:21:43+09:00",
         "source": "fmkorea_scraper",
-        "side": "mixed_or_hedge",
+        "side": "short",
         "entry_price": null,
         "tags": [
-            "structure_or_view"
+            "structure_or_view",
+            "from_leveraged_proxy",
+            "inverse_side_flipped"
         ],
         "raw_quote": "조만간 직접 매매는 안할듯\n프로그램 돈주고 만들고있는데 이거 인간보다 프로그램이 더 정확하긴하네...ㅋㅋㅋㅋ 역시 심리는 무시할수없네 테스트로 해봣는데 SOXS 매수타점이 3.91인데? 조만간 해외여행 한달살기 할수있을려나\n외인매수 기관매수 개인매수는 심리만 파악할뿐 저는 그거믿은적 한번도없어요\n비밀~!\n팔려면 어지러움 ",
-        "symbol": "SOXS",
-        "symbol_note": "반도체 인버스",
-        "related_underlying": "SOX",
-        "product_type": "leveraged_etf"
+        "symbol": "MU",
+        "symbol_note": "반도체 인버스 | SOXS(반도체 3x 인버스) → MU 본주 (방향 반전) · 원상품 side=mixed_or_hedge → 본주 side=mixed_or_hedge",
+        "related_underlying": "MU",
+        "product_type": "us_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "source_instrument": "SOXS",
+        "leveraged_entry_price": null,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "stop_price": null,
+        "target_price": null,
+        "proxy_bias": "short"
     },
     {
         "id": "fm-10056965677-stop-0",
         "source_url": "https://www.fmkorea.com/10056965677",
         "document_srl": "10056965677",
         "title": "단기 트레이딩 추천",
-        "posted_at_kst": "2026-07-08T14:30:00+09:00",
+        "posted_at_kst": "2026-07-08T14:15:00+09:00",
         "author": "노라무",
-        "collected_at_kst": "2026-07-18T20:22:53+09:00",
+        "collected_at_kst": "2026-07-18T23:26:28+09:00",
         "source": "fmkorea_scraper",
         "side": "risk",
         "stop_price": null,
@@ -271,7 +435,16 @@
         "symbol": "247960.KQ",
         "symbol_note": "레몬헬스케어",
         "related_underlying": "247960.KQ",
-        "product_type": "kr_stock"
+        "product_type": "kr_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "yahoo_chart_unavailable"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "chart_available": false
     },
     {
         "id": "fm-10054691255-entry-0",
@@ -283,16 +456,33 @@
         "collected_at_kst": "2026-07-18T20:22:53+09:00",
         "source": "fmkorea_scraper",
         "side": "long",
-        "entry_price": 16.9,
+        "entry_price": null,
         "currency": "USD",
         "tags": [
-            "parsed_entry"
+            "parsed_entry",
+            "from_leveraged_proxy",
+            "structure_or_view"
         ],
         "raw_quote": "평단 16.9불",
-        "symbol": "SNDK_2X",
-        "symbol_note": "샌디스크 2배 상품",
+        "symbol": "SNDK",
+        "symbol_note": "샌디스크 2배 상품 | 샌디 2배 → SNDK 본주 (가격 라벨 제외, 구조·방향만) · 원상품 side=long → 본주 side=long",
         "related_underlying": "SNDK",
-        "product_type": "leveraged"
+        "product_type": "us_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "source_instrument": "SNDK_2X",
+        "leveraged_entry_price": 16.9,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "stop_price": null,
+        "target_price": null,
+        "proxy_bias": "long"
     },
     {
         "id": "fm-10057150073-stop2-0",
@@ -304,16 +494,34 @@
         "collected_at_kst": "2026-07-18T20:22:53+09:00",
         "source": "fmkorea_scraper",
         "side": "risk",
-        "stop_price": 1588,
+        "stop_price": null,
         "stop_rule": "break_level",
         "tags": [
-            "parsed_stop"
+            "parsed_stop",
+            "from_leveraged_proxy",
+            "structure_or_view",
+            "inverse_side_flipped"
         ],
         "raw_quote": "1588깨지면 손절",
-        "symbol": "SNDK_SHORT",
-        "symbol_note": "샌디스크 숏/인버스성",
+        "symbol": "SNDK",
+        "symbol_note": "샌디스크 숏/인버스성 | 샌디숏/인버스 → SNDK 본주 (방향 반전) · 원상품 side=risk → 본주 side=risk",
         "related_underlying": "SNDK",
-        "product_type": "leveraged"
+        "product_type": "us_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "source_instrument": "SNDK_SHORT",
+        "leveraged_entry_price": null,
+        "leveraged_stop_price": 1588,
+        "leveraged_target_price": null,
+        "entry_price": null,
+        "target_price": null,
+        "proxy_bias": "neutral"
     },
     {
         "id": "fm-10052187738-structure",
@@ -324,16 +532,33 @@
         "author": "노라무",
         "collected_at_kst": "2026-07-18T20:21:43+09:00",
         "source": "fmkorea_scraper",
-        "side": "short",
+        "side": "long",
         "entry_price": null,
         "tags": [
-            "structure_or_view"
+            "structure_or_view",
+            "from_leveraged_proxy",
+            "inverse_side_flipped"
         ],
         "raw_quote": "샌디숏 쏙스 익절가\n계속 물어보는 사람들있어서 이거 레버리지라서 중간중간 매도하면서 보세요 샌디숏 4.29 쏙스 5.05",
-        "symbol": "SOXS",
-        "symbol_note": "반도체 인버스",
-        "related_underlying": "SOX",
-        "product_type": "leveraged_etf"
+        "symbol": "MU",
+        "symbol_note": "반도체 인버스 | SOXS(반도체 3x 인버스) → MU 본주 (방향 반전) · 원상품 side=short → 본주 side=long",
+        "related_underlying": "MU",
+        "product_type": "us_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "source_instrument": "SOXS",
+        "leveraged_entry_price": null,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "stop_price": null,
+        "target_price": null,
+        "proxy_bias": "long"
     },
     {
         "id": "fm-10095647739-entry-0",
@@ -345,16 +570,33 @@
         "collected_at_kst": "2026-07-18T20:22:53+09:00",
         "source": "fmkorea_scraper",
         "side": "mixed_or_hedge",
-        "entry_price": 12.3,
+        "entry_price": null,
         "currency": "unknown",
         "tags": [
-            "parsed_entry"
+            "parsed_entry",
+            "from_leveraged_proxy",
+            "structure_or_view"
         ],
         "raw_quote": "평단 12.30\n",
         "symbol": "SNDK",
-        "symbol_note": "샌디스크 본주 또는 관련",
+        "symbol_note": "샌디스크 본주 또는 관련 [auto] 본주 대비 가격대 불일치 → 레버 타점으로 재분류 | 샌디 2배 → SNDK 본주 (가격 라벨 제외, 구조·방향만) · 원상품 side=mixed_or_hedge → 본주 side=mixed_or_hedge",
         "related_underlying": "SNDK",
-        "product_type": "us_stock"
+        "product_type": "us_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "source_instrument": "SNDK_2X",
+        "leveraged_entry_price": 12.3,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "stop_price": null,
+        "target_price": null,
+        "proxy_bias": "mixed"
     },
     {
         "id": "fm-10095647739-tp2-0",
@@ -366,15 +608,32 @@
         "collected_at_kst": "2026-07-18T20:22:53+09:00",
         "source": "fmkorea_scraper",
         "side": "exit",
-        "target_price": 15,
+        "target_price": null,
         "tags": [
-            "parsed_target"
+            "parsed_target",
+            "from_leveraged_proxy",
+            "structure_or_view"
         ],
         "raw_quote": "15불에 매도예정",
         "symbol": "SNDK",
-        "symbol_note": "샌디스크 본주 또는 관련",
+        "symbol_note": "샌디스크 본주 또는 관련 [auto] 본주 대비 가격대 불일치 → 레버 타점으로 재분류 | 샌디 2배 → SNDK 본주 (가격 라벨 제외, 구조·방향만) · 원상품 side=exit → 본주 side=exit",
         "related_underlying": "SNDK",
-        "product_type": "us_stock"
+        "product_type": "us_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": "target",
+        "source_instrument": "SNDK_2X",
+        "leveraged_entry_price": null,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": 15,
+        "entry_price": null,
+        "stop_price": null,
+        "proxy_bias": "neutral"
     },
     {
         "id": "fm-10096316655-entry-0",
@@ -386,16 +645,33 @@
         "collected_at_kst": "2026-07-18T20:22:53+09:00",
         "source": "fmkorea_scraper",
         "side": "long",
-        "entry_price": 13.63,
+        "entry_price": null,
         "currency": "unknown",
         "tags": [
-            "parsed_entry"
+            "parsed_entry",
+            "from_leveraged_proxy",
+            "structure_or_view"
         ],
         "raw_quote": "진입\n13.63\n",
         "symbol": "SNDK",
-        "symbol_note": "샌디스크 본주 또는 관련",
+        "symbol_note": "샌디스크 본주 또는 관련 [auto] 본주 대비 가격대 불일치 → 레버 타점으로 재분류 | 샌디 2배 → SNDK 본주 (가격 라벨 제외, 구조·방향만) · 원상품 side=long → 본주 side=long",
         "related_underlying": "SNDK",
-        "product_type": "us_stock"
+        "product_type": "us_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "source_instrument": "SNDK_2X",
+        "leveraged_entry_price": 13.63,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "stop_price": null,
+        "target_price": null,
+        "proxy_bias": "long"
     },
     {
         "id": "fm-10087170200-structure",
@@ -412,10 +688,18 @@
             "structure_or_view"
         ],
         "raw_quote": "뭐 감히 말하자면\n현재 시나리오를 두개로 짜고잇는데 선물 825 - 1284 이정도로 나오고 사실상 이제는 큰 상승이 나오긴어려움 보통은 내가생각하는 조정은 가격조정으로 -50% 찍히고 기간조정으로 왔다리갔다리 박스를 만들면서 거기서 레버 녹인다음에 나중에 작업치면서 올리는 그림이 제일좋은데 지금 이제 가격조정 시작해서 ",
-        "symbol": "UNKNOWN",
-        "symbol_note": "심볼 미확정",
+        "symbol": "KR_MARKET_VIEW",
+        "symbol_note": "국장/선물 시나리오 (개별 종목 아님)",
         "related_underlying": null,
-        "product_type": "unknown"
+        "product_type": "market_view",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "market_scenario_no_ticker"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
     },
     {
         "id": "fm-10038691200-structure",
@@ -435,7 +719,15 @@
         "symbol": "005930.KS",
         "symbol_note": "삼성전자",
         "related_underlying": "005930.KS",
-        "product_type": "kr_stock"
+        "product_type": "kr_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
     },
     {
         "id": "fm-10056824769-structure",
@@ -452,10 +744,18 @@
             "structure_or_view"
         ],
         "raw_quote": "선물기준 국장 시나리오\n1025 까지 자리가 나있어서 거기가기전까지는 롱포로 전환 안할듯?\n네 거기를 터치해야 롱이 될지 말지 결정될듯? 아마도 이게 눌림일수도있고 상승끝일수도있고 그거는 mm마음이긴한데 그래도 조정으로 되지않을까 생각중 가격조정이 나오고 이후에 기간조정으로 말라죽인다음에 움직일꺼라서 롱은 안탄다는거에요 ",
-        "symbol": "UNKNOWN",
-        "symbol_note": "심볼 미확정",
+        "symbol": "KR_MARKET_VIEW",
+        "symbol_note": "국장/선물 시나리오 (개별 종목 아님)",
         "related_underlying": null,
-        "product_type": "unknown"
+        "product_type": "market_view",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "market_scenario_no_ticker"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
     },
     {
         "id": "fm-10057510515-structure",
@@ -475,27 +775,43 @@
         "symbol": "UNKNOWN",
         "symbol_note": "심볼 미확정",
         "related_underlying": null,
-        "product_type": "unknown"
+        "product_type": "unknown",
+        "learning_use": "ignore",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "hedge_advice_not_tradeable"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
     },
     {
         "id": "fm-10089740119-structure",
         "source_url": "https://www.fmkorea.com/10089740119",
         "document_srl": "10089740119",
         "title": "ㅋㅋㅋ 내가 6월에 비중줄여라, 삼하 절때사지마라 할때는 욕하다가",
-        "posted_at_kst": "2026-07-16T10:28:00+09:00",
+        "posted_at_kst": "2026-07-16T10:24:00+09:00",
         "author": "노라무",
-        "collected_at_kst": "2026-07-18T20:22:53+09:00",
+        "collected_at_kst": "2026-07-18T23:42:35+09:00",
         "source": "fmkorea_scraper",
         "side": "long",
         "entry_price": null,
         "tags": [
             "structure_or_view"
         ],
-        "raw_quote": "ㅋㅋㅋ 내가 6월에 비중줄여라, 삼하 절때사지마라 할때는 욕하다가\n이제 빠지니까 욕하고 '펀더멘탈은 안깨졌다!' 하던 사람들이 이제는 롱숭이들 대가리 깨졌죠? 나는 롱숭이였어 참고로\n선언합니다. 코스피 5700부근 갑니다.\n선제조건은 하이닉스가 오늘 190을 지켜주지못했을때",
+        "raw_quote": "ㅋㅋㅋ 내가 6월에 비중줄여라, 삼하 절때사지마라 할때는 욕하다가\n이제 빠지니까 \n\n욕하고 '펀더멘탈은 안깨졌다!' 하던 사람들이 이제는 \n\n롱숭이들 대가리 깨졌죠? \n\nㅇㅈㄹ 하는 글올리네 \n\n역겹노 ㅋㅋㅋㅋ\n\n나는 롱숭이였어 참고로 ",
         "symbol": "000660.KS",
-        "symbol_note": "SK하이닉스",
+        "symbol_note": "삼하(삼성·하이닉스) — 대표 심볼 하이닉스",
         "related_underlying": "000660.KS",
-        "product_type": "kr_stock"
+        "product_type": "kr_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
     },
     {
         "id": "fm-10093834545-structure",
@@ -504,18 +820,26 @@
         "title": "샌디스크 / 마이크론 / 시게이트 / EWY / 스페이스 x / 오라클 차트분석",
         "posted_at_kst": "2026-07-17T09:59:00+09:00",
         "author": "노라무",
-        "collected_at_kst": "2026-07-18T20:22:53+09:00",
+        "collected_at_kst": "2026-07-18T23:42:35+09:00",
         "source": "fmkorea_scraper",
-        "side": "short",
+        "side": "mixed_or_hedge",
         "entry_price": null,
         "tags": [
             "structure_or_view"
         ],
-        "raw_quote": "샌디스크 / 마이크론 / 시게이트 / EWY / 스페이스 x / 오라클 차트분석\n샌디스크 오르면 숏치고 자리보면 얘는끝났어요 마이크론 받을려면 800불근처에서 해야됩니다 800불도 깨지면 끝 시게이트 받을꺼면 700불에서 받을만하구용 EWY 받을자리는 156불정도 오라클 140때리고 저점 못올리면 사망차트 올숏!\n올숏!",
+        "raw_quote": "샌디스크 / 마이크론 / 시게이트 / EWY / 스페이스 x / 오라클 차트분석\n샌디스크 \n\n제가 좋아하는 종목이죠 \n\n오르면 숏치고 오르면 숏치고 \n\n자리보면 \n\n얘는끝났어요 \n\n뭐 할말이없습니다. 끝입니다.\n\n마이크론 \n\n얘는 그나마 괜찮은거같아요 \n\n예전에 마이크론 800불간다고 한거같은데 \n\n뭐 그때도 욕먹었었는데",
         "symbol": "SNDK",
         "symbol_note": "샌디스크 본주 또는 관련",
         "related_underlying": "SNDK",
-        "product_type": "us_stock"
+        "product_type": "us_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
     },
     {
         "id": "fm-10060109504-tp-0",
@@ -524,18 +848,26 @@
         "title": "샌디 롱본이유",
         "posted_at_kst": "2026-07-09T02:07:00+09:00",
         "author": "노라무",
-        "collected_at_kst": "2026-07-18T20:22:53+09:00",
+        "collected_at_kst": "2026-07-18T23:26:17+09:00",
         "source": "fmkorea_scraper",
         "side": "exit",
         "target_price": 1815,
         "tags": [
             "parsed_target"
         ],
-        "raw_quote": "목표가는 1815",
+        "raw_quote": "목표가는  1815",
         "symbol": "SNDK",
         "symbol_note": "샌디스크 본주 또는 관련",
         "related_underlying": "SNDK",
-        "product_type": "us_stock"
+        "product_type": "us_stock",
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": "target"
     },
     {
         "id": "fm-10057057385-entry2-0",
@@ -546,16 +878,34 @@
         "author": "노라무",
         "collected_at_kst": "2026-07-18T20:22:53+09:00",
         "source": "fmkorea_scraper",
-        "side": "long",
-        "entry_price": 3.91,
+        "side": "short",
+        "entry_price": null,
         "tags": [
-            "parsed_entry"
+            "parsed_entry",
+            "from_leveraged_proxy",
+            "structure_or_view",
+            "inverse_side_flipped"
         ],
         "raw_quote": "SOXS 매수타점이 3.91",
-        "symbol": "SOXS",
-        "symbol_note": "반도체 인버스",
-        "related_underlying": "SOX",
-        "product_type": "leveraged_etf"
+        "symbol": "MU",
+        "symbol_note": "반도체 인버스 | SOXS(반도체 3x 인버스) → MU 본주 (방향 반전) · 원상품 side=long → 본주 side=short",
+        "related_underlying": "MU",
+        "product_type": "us_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "source_instrument": "SOXS",
+        "leveraged_entry_price": 3.91,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "stop_price": null,
+        "target_price": null,
+        "proxy_bias": "short"
     },
     {
         "id": "fm-10052187738-tp3-0",
@@ -567,16 +917,34 @@
         "collected_at_kst": "2026-07-18T20:22:53+09:00",
         "source": "fmkorea_scraper",
         "side": "exit",
-        "target_price": 4.29,
+        "target_price": null,
         "tags": [
             "parsed_target",
-            "scale_out"
+            "scale_out",
+            "from_leveraged_proxy",
+            "structure_or_view",
+            "inverse_side_flipped"
         ],
         "raw_quote": "샌디숏 4.29",
-        "symbol": "SNDK_SHORT",
-        "symbol_note": "샌디스크 숏/인버스성",
+        "symbol": "SNDK",
+        "symbol_note": "샌디스크 숏/인버스성 | 샌디숏/인버스 → SNDK 본주 (방향 반전) · 원상품 side=exit → 본주 side=exit",
         "related_underlying": "SNDK",
-        "product_type": "leveraged"
+        "product_type": "us_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": "target",
+        "source_instrument": "SNDK_SHORT",
+        "leveraged_entry_price": null,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": 4.29,
+        "entry_price": null,
+        "stop_price": null,
+        "proxy_bias": "neutral"
     },
     {
         "id": "fm-10052187738-tp3-1",
@@ -588,16 +956,34 @@
         "collected_at_kst": "2026-07-18T20:22:53+09:00",
         "source": "fmkorea_scraper",
         "side": "exit",
-        "target_price": 5.05,
+        "target_price": null,
         "tags": [
             "parsed_target",
-            "scale_out"
+            "scale_out",
+            "from_leveraged_proxy",
+            "structure_or_view",
+            "inverse_side_flipped"
         ],
         "raw_quote": "쏙스 5.05",
-        "symbol": "SOXS",
-        "symbol_note": "반도체 인버스",
-        "related_underlying": "SOX",
-        "product_type": "leveraged_etf"
+        "symbol": "MU",
+        "symbol_note": "반도체 인버스 | SOXS(반도체 3x 인버스) → MU 본주 (방향 반전) · 원상품 side=exit → 본주 side=exit",
+        "related_underlying": "MU",
+        "product_type": "us_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": "target",
+        "source_instrument": "SOXS",
+        "leveraged_entry_price": null,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": 5.05,
+        "entry_price": null,
+        "stop_price": null,
+        "proxy_bias": "neutral"
     },
     {
         "id": "fm-10088290916-entry-0",
@@ -609,16 +995,33 @@
         "collected_at_kst": "2026-07-18T20:22:53+09:00",
         "source": "fmkorea_scraper",
         "side": "long",
-        "entry_price": 19.52,
+        "entry_price": null,
         "currency": "unknown",
         "tags": [
-            "parsed_entry"
+            "parsed_entry",
+            "from_leveraged_proxy",
+            "structure_or_view"
         ],
         "raw_quote": "분할해서 19.52",
-        "symbol": "122630.KS",
-        "symbol_note": "코덱스 레버리지 추정",
-        "related_underlying": "KOSPI200",
-        "product_type": "leveraged_etf"
+        "symbol": "005930.KS",
+        "symbol_note": "코덱스 레버리지 추정 | 코루(코스피 레버) → 삼전 본주로 국장 방향 대응 · 원상품 side=long → 본주 side=long",
+        "related_underlying": "005930.KS",
+        "product_type": "kr_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "source_instrument": "122630.KS",
+        "leveraged_entry_price": 19.52,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "stop_price": null,
+        "target_price": null,
+        "proxy_bias": "long"
     },
     {
         "id": "fm-10088290916-entry2-0",
@@ -630,15 +1033,32 @@
         "collected_at_kst": "2026-07-18T20:22:53+09:00",
         "source": "fmkorea_scraper",
         "side": "long",
-        "entry_price": 19.5,
+        "entry_price": null,
         "tags": [
-            "parsed_entry"
+            "parsed_entry",
+            "from_leveraged_proxy",
+            "structure_or_view"
         ],
         "raw_quote": "코루매수 완 19.50",
-        "symbol": "122630.KS",
-        "symbol_note": "코덱스 레버리지 추정",
-        "related_underlying": "KOSPI200",
-        "product_type": "leveraged_etf"
+        "symbol": "005930.KS",
+        "symbol_note": "코덱스 레버리지 추정 | 코루(코스피 레버) → 삼전 본주로 국장 방향 대응 · 원상품 side=long → 본주 side=long",
+        "related_underlying": "005930.KS",
+        "product_type": "kr_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "source_instrument": "122630.KS",
+        "leveraged_entry_price": 19.5,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "stop_price": null,
+        "target_price": null,
+        "proxy_bias": "long"
     },
     {
         "id": "fm-10083410204-tp-0",
@@ -647,17 +1067,3031 @@
         "title": "공시",
         "posted_at_kst": "2026-07-14T22:16:00+09:00",
         "author": "노라무",
-        "collected_at_kst": "2026-07-18T20:22:18+09:00",
+        "collected_at_kst": "2026-07-18T23:42:35+09:00",
         "source": "fmkorea_scraper",
         "side": "exit",
-        "target_price": 528,
+        "target_price": null,
+        "tags": [
+            "parsed_target",
+            "from_leveraged_proxy",
+            "structure_or_view"
+        ],
+        "raw_quote": "목표가 528",
+        "symbol": "005930.KS",
+        "symbol_note": "코덱스 레버리지 추정 | 코루(코스피 레버) → 삼전 본주로 국장 방향 대응 · 원상품 side=exit → 본주 side=exit",
+        "related_underlying": "005930.KS",
+        "product_type": "kr_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": "target",
+        "source_instrument": "122630.KS",
+        "leveraged_entry_price": null,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": 528,
+        "entry_price": null,
+        "stop_price": null,
+        "proxy_bias": "neutral"
+    },
+    {
+        "id": "fm-10076696039-structure",
+        "source_url": "https://www.fmkorea.com/10076696039",
+        "document_srl": "10076696039",
+        "title": "공시",
+        "posted_at_kst": "2026-07-13T08:48:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-18T23:42:35+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view"
+        ],
+        "raw_quote": "공시\n저번주 금요일 \n\n오일롱탐 \n\n71.11\n\n오버위캔",
+        "symbol": "UNKNOWN",
+        "symbol_note": "심볼 미확정",
+        "related_underlying": null,
+        "product_type": "unknown",
+        "learning_use": "ignore",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "off_universe_chat"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10063880696-structure",
+        "source_url": "https://www.fmkorea.com/10063880696",
+        "document_srl": "10063880696",
+        "title": "축축...도로롱",
+        "posted_at_kst": "2026-07-09T22:35:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-18T23:26:17+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view"
+        ],
+        "raw_quote": "축축...도로롱\n에욱 ",
+        "symbol": "UNKNOWN",
+        "symbol_note": "심볼 미확정",
+        "related_underlying": null,
+        "product_type": "unknown",
+        "learning_use": "ignore",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "off_universe_chat"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10060275670-tp-0",
+        "source_url": "https://www.fmkorea.com/10060275670",
+        "document_srl": "10060275670",
+        "title": "샌디 롱",
+        "posted_at_kst": "2026-07-09T04:58:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-18T23:26:17+09:00",
+        "source": "fmkorea_scraper",
+        "side": "exit",
+        "target_price": 1815,
         "tags": [
             "parsed_target"
         ],
-        "raw_quote": "목표가 528",
-        "symbol": "122630.KS",
-        "symbol_note": "코덱스 레버리지 추정",
-        "related_underlying": "KOSPI200",
-        "product_type": "leveraged_etf"
+        "raw_quote": "목표가는 1815",
+        "symbol": "SNDK",
+        "symbol_note": "샌디스크 본주 또는 관련",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": "target"
+    },
+    {
+        "id": "e-20260717-mu-buyzone-800",
+        "source_url": "https://www.fmkorea.com/10093834545",
+        "document_srl": "10093834545",
+        "posted_at_kst": "2026-07-17T09:59:00+09:00",
+        "author": "노라무",
+        "symbol": "MU",
+        "side": "long",
+        "entry_price": 800,
+        "entry_price_ref": "buy_zone_declared",
+        "stop_price": null,
+        "target_price": null,
+        "product_type": "us_stock",
+        "tags": [
+            "buy_zone",
+            "structure_level",
+            "manual_seed"
+        ],
+        "raw_quote": "마이크론 받을려면 800불근처에서 해야됩니다 800불도 깨지면 끝",
+        "source": "manual_seed",
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "e-20260703-samsung-resist-330k",
+        "source_url": "https://www.fmkorea.com/10038691200",
+        "document_srl": "10038691200",
+        "posted_at_kst": "2026-07-03T23:44:00+09:00",
+        "author": "노라무",
+        "symbol": "005930.KS",
+        "side": "long",
+        "entry_price": null,
+        "entry_price_ref": "structure_reclaim",
+        "stop_price": null,
+        "target_price": 330000,
+        "product_type": "kr_stock",
+        "tags": [
+            "resistance_level",
+            "structure_playbook",
+            "manual_seed"
+        ],
+        "raw_quote": "33만원을 뚫지 못한다면 하락추세… 저점을 올려주고 33만원을 때리고 또 저점을 올려줘야됨. 아직은 진입 안함",
+        "source": "manual_seed",
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "e-20260716-hynix-190-level",
+        "source_url": "https://www.fmkorea.com/10089740119",
+        "document_srl": "10089740119",
+        "posted_at_kst": "2026-07-16T10:28:00+09:00",
+        "author": "노라무",
+        "symbol": "000660.KS",
+        "side": "risk",
+        "entry_price": null,
+        "stop_price": 1900000,
+        "stop_rule": "break_level",
+        "target_price": null,
+        "product_type": "kr_stock",
+        "symbol_note": "글의 190 = 190만원으로 해석",
+        "tags": [
+            "invalidation_declared",
+            "manual_seed"
+        ],
+        "raw_quote": "선제조건은 하이닉스가 오늘 190을 지켜주지못했을때",
+        "source": "manual_seed",
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "e-20260717-stx-buyzone-700",
+        "source_url": "https://www.fmkorea.com/10093834545",
+        "document_srl": "10093834545",
+        "posted_at_kst": "2026-07-17T09:59:00+09:00",
+        "author": "노라무",
+        "symbol": "STX",
+        "side": "long",
+        "entry_price": 700,
+        "entry_price_ref": "buy_zone_declared",
+        "stop_price": null,
+        "target_price": null,
+        "product_type": "us_stock",
+        "tags": [
+            "buy_zone",
+            "structure_level",
+            "manual_seed"
+        ],
+        "raw_quote": "시게이트 받을꺼면 700불에서 받을만하구용",
+        "source": "manual_seed",
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "e-20260717-orcl-140-level",
+        "source_url": "https://www.fmkorea.com/10093834545",
+        "document_srl": "10093834545",
+        "posted_at_kst": "2026-07-17T09:59:00+09:00",
+        "author": "노라무",
+        "symbol": "ORCL",
+        "side": "short",
+        "entry_price": null,
+        "stop_price": null,
+        "target_price": 140,
+        "product_type": "us_stock",
+        "tags": [
+            "resistance_level",
+            "structure_level",
+            "manual_seed"
+        ],
+        "raw_quote": "오라클 140때리고 저점 못올리면 사망차트",
+        "source": "manual_seed",
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "e-20260717-ewy-buyzone-156",
+        "source_url": "https://www.fmkorea.com/10093834545",
+        "document_srl": "10093834545",
+        "posted_at_kst": "2026-07-17T09:59:00+09:00",
+        "author": "노라무",
+        "symbol": "EWY",
+        "side": "long",
+        "entry_price": 156,
+        "entry_price_ref": "buy_zone_declared",
+        "stop_price": null,
+        "target_price": null,
+        "product_type": "us_stock",
+        "symbol_note": "한국 ETF — 1번 계좌 직접 종목은 아니나 구조 라벨용",
+        "tags": [
+            "buy_zone",
+            "structure_level",
+            "manual_seed"
+        ],
+        "raw_quote": "EWY 받을자리는 156불정도",
+        "source": "manual_seed",
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10057921826-structure",
+        "source_url": "https://www.fmkorea.com/10057921826",
+        "document_srl": "10057921826",
+        "title": "공시",
+        "posted_at_kst": "2026-07-08T17:41:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-18T23:26:20+09:00",
+        "source": "fmkorea_scraper",
+        "side": "mixed_or_hedge",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view"
+        ],
+        "raw_quote": "공시\n본장 개장 후 \n\n롱 전량 본전청산\n숏",
+        "symbol": "UNKNOWN",
+        "symbol_note": "심볼 미확정",
+        "related_underlying": null,
+        "product_type": "unknown",
+        "learning_use": "ignore",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "off_universe_chat"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10057249649-structure",
+        "source_url": "https://www.fmkorea.com/10057249649",
+        "document_srl": "10057249649",
+        "title": "재공시",
+        "posted_at_kst": "2026-07-08T15:35:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-18T23:26:23+09:00",
+        "source": "fmkorea_scraper",
+        "side": "mixed_or_hedge",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_leveraged_proxy",
+            "inverse_side_flipped"
+        ],
+        "raw_quote": "재공시\n샌디숏 진입.\n3.63\n\n1차매수",
+        "symbol": "SNDK",
+        "symbol_note": "샌디스크 숏/인버스성 | 샌디숏/인버스 → SNDK 본주 (방향 반전) · 원상품 side=mixed_or_hedge → 본주 side=mixed_or_hedge",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "source_instrument": "SNDK_SHORT",
+        "leveraged_entry_price": null,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "stop_price": null,
+        "target_price": null,
+        "proxy_bias": "mixed"
+    },
+    {
+        "id": "fm-10057150073-structure",
+        "source_url": "https://www.fmkorea.com/10057150073",
+        "document_srl": "10057150073",
+        "title": "공시",
+        "posted_at_kst": "2026-07-08T15:05:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-18T23:26:26+09:00",
+        "source": "fmkorea_scraper",
+        "side": "mixed_or_hedge",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_leveraged_proxy",
+            "inverse_side_flipped"
+        ],
+        "raw_quote": "공시\n샌디숏매도 \n\n샌디롱 매수 \n\n이거는 손익비싸움으로 들어간거라 \n\n따라하지마세요 ",
+        "symbol": "SNDK",
+        "symbol_note": "샌디스크 숏/인버스성 | 샌디숏/인버스 → SNDK 본주 (방향 반전) · 원상품 side=mixed_or_hedge → 본주 side=mixed_or_hedge",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "source_instrument": "SNDK_SHORT",
+        "leveraged_entry_price": null,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "stop_price": null,
+        "target_price": null,
+        "proxy_bias": "mixed"
+    },
+    {
+        "id": "snap-ge70-000660.KS-2026-05-12",
+        "source_url": null,
+        "posted_at_kst": "2026-05-12T15:00:00+09:00",
+        "author": "engine_snapshot",
+        "symbol": "000660.KS",
+        "related_underlying": "000660.KS",
+        "side": "long",
+        "entry_price": 1835000,
+        "entry_price_ref": "engine_asof_close",
+        "stop_price": 1804000,
+        "target_price": null,
+        "product_type": "kr_stock",
+        "tags": [
+            "engine_ge70_snapshot",
+            "not_noramu_post",
+            "structure_level"
+        ],
+        "raw_quote": "[engine] 000660.KS asof 2026-05-12 score=100 half=1876500 invalidation=1804000 cluster=2026-05-12~2026-05-18",
+        "source": "engine_ge70_snapshot",
+        "symbol_note": "노라무 글이 아님. 고점수 구간 엔진 스냅샷 — 성과 분포/백테스트 보강용",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "engine_snapshot_not_noramu"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "snap-ge70-MU-2026-05-12",
+        "source_url": null,
+        "posted_at_kst": "2026-05-12T15:00:00+09:00",
+        "author": "engine_snapshot",
+        "symbol": "MU",
+        "related_underlying": "MU",
+        "side": "long",
+        "entry_price": 766.58,
+        "entry_price_ref": "engine_asof_close",
+        "stop_price": 706.6,
+        "target_price": null,
+        "product_type": "us_stock",
+        "tags": [
+            "engine_ge70_snapshot",
+            "not_noramu_post",
+            "structure_level"
+        ],
+        "raw_quote": "[engine] MU asof 2026-05-12 score=100 half=762.635 invalidation=706.6 cluster=2026-05-12~2026-05-25",
+        "source": "engine_ge70_snapshot",
+        "symbol_note": "노라무 글이 아님. 고점수 구간 엔진 스냅샷 — 성과 분포/백테스트 보강용",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "engine_snapshot_not_noramu"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "snap-ge70-000660.KS-2026-06-30",
+        "source_url": null,
+        "posted_at_kst": "2026-06-30T15:00:00+09:00",
+        "author": "engine_snapshot",
+        "symbol": "000660.KS",
+        "related_underlying": "000660.KS",
+        "side": "long",
+        "entry_price": 2650000,
+        "entry_price_ref": "engine_asof_close",
+        "stop_price": 2453000,
+        "target_price": null,
+        "product_type": "kr_stock",
+        "tags": [
+            "engine_ge70_snapshot",
+            "not_noramu_post",
+            "structure_level"
+        ],
+        "raw_quote": "[engine] 000660.KS asof 2026-06-30 score=90 half=2699000 invalidation=2453000 cluster=2026-06-30~2026-06-30",
+        "source": "engine_ge70_snapshot",
+        "symbol_note": "노라무 글이 아님. 고점수 구간 엔진 스냅샷 — 성과 분포/백테스트 보강용",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "engine_snapshot_not_noramu"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "snap-ge70-005930.KS-2026-05-18",
+        "source_url": null,
+        "posted_at_kst": "2026-05-18T15:00:00+09:00",
+        "author": "engine_snapshot",
+        "symbol": "005930.KS",
+        "related_underlying": "005930.KS",
+        "side": "long",
+        "entry_price": 281000,
+        "entry_price_ref": "engine_asof_close",
+        "stop_price": 266000,
+        "target_price": null,
+        "product_type": "kr_stock",
+        "tags": [
+            "engine_ge70_snapshot",
+            "not_noramu_post",
+            "structure_level"
+        ],
+        "raw_quote": "[engine] 005930.KS asof 2026-05-18 score=90 half=282750 invalidation=266000 cluster=2026-05-15~2026-05-25",
+        "source": "engine_ge70_snapshot",
+        "symbol_note": "노라무 글이 아님. 고점수 구간 엔진 스냅샷 — 성과 분포/백테스트 보강용",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "engine_snapshot_not_noramu"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "snap-ge70-005930.KS-2026-06-19",
+        "source_url": null,
+        "posted_at_kst": "2026-06-19T15:00:00+09:00",
+        "author": "engine_snapshot",
+        "symbol": "005930.KS",
+        "related_underlying": "005930.KS",
+        "side": "long",
+        "entry_price": 354000,
+        "entry_price_ref": "engine_asof_close",
+        "stop_price": 346250,
+        "target_price": null,
+        "product_type": "kr_stock",
+        "tags": [
+            "engine_ge70_snapshot",
+            "not_noramu_post",
+            "structure_level"
+        ],
+        "raw_quote": "[engine] 005930.KS asof 2026-06-19 score=90 half=358125 invalidation=346250 cluster=2026-06-19~2026-06-30",
+        "source": "engine_ge70_snapshot",
+        "symbol_note": "노라무 글이 아님. 고점수 구간 엔진 스냅샷 — 성과 분포/백테스트 보강용",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "engine_snapshot_not_noramu"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "snap-ge70-084370.KQ-2026-03-10",
+        "source_url": null,
+        "posted_at_kst": "2026-03-10T15:00:00+09:00",
+        "author": "engine_snapshot",
+        "symbol": "084370.KQ",
+        "related_underlying": "084370.KQ",
+        "side": "long",
+        "entry_price": 129300,
+        "entry_price_ref": "engine_asof_close",
+        "stop_price": 113800,
+        "target_price": null,
+        "product_type": "kr_stock",
+        "tags": [
+            "engine_ge70_snapshot",
+            "not_noramu_post",
+            "structure_level"
+        ],
+        "raw_quote": "[engine] 084370.KQ asof 2026-03-10 score=90 half=125650 invalidation=113800 cluster=2026-03-10~2026-03-11",
+        "source": "engine_ge70_snapshot",
+        "symbol_note": "노라무 글이 아님. 고점수 구간 엔진 스냅샷 — 성과 분포/백테스트 보강용",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "engine_snapshot_not_noramu"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "snap-ge70-084370.KQ-2026-05-14",
+        "source_url": null,
+        "posted_at_kst": "2026-05-14T15:00:00+09:00",
+        "author": "engine_snapshot",
+        "symbol": "084370.KQ",
+        "related_underlying": "084370.KQ",
+        "side": "long",
+        "entry_price": 145200,
+        "entry_price_ref": "engine_asof_close",
+        "stop_price": 126200,
+        "target_price": null,
+        "product_type": "kr_stock",
+        "tags": [
+            "engine_ge70_snapshot",
+            "not_noramu_post",
+            "structure_level"
+        ],
+        "raw_quote": "[engine] 084370.KQ asof 2026-05-14 score=90 half=142100 invalidation=126200 cluster=2026-05-12~2026-05-14",
+        "source": "engine_ge70_snapshot",
+        "symbol_note": "노라무 글이 아님. 고점수 구간 엔진 스냅샷 — 성과 분포/백테스트 보강용",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "engine_snapshot_not_noramu"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "snap-ge70-084370.KQ-2026-06-16",
+        "source_url": null,
+        "posted_at_kst": "2026-06-16T15:00:00+09:00",
+        "author": "engine_snapshot",
+        "symbol": "084370.KQ",
+        "related_underlying": "084370.KQ",
+        "side": "long",
+        "entry_price": 176700,
+        "entry_price_ref": "engine_asof_close",
+        "stop_price": 169600,
+        "target_price": null,
+        "product_type": "kr_stock",
+        "tags": [
+            "engine_ge70_snapshot",
+            "not_noramu_post",
+            "structure_level"
+        ],
+        "raw_quote": "[engine] 084370.KQ asof 2026-06-16 score=90 half=176100 invalidation=169600 cluster=2026-06-16~2026-06-19",
+        "source": "engine_ge70_snapshot",
+        "symbol_note": "노라무 글이 아님. 고점수 구간 엔진 스냅샷 — 성과 분포/백테스트 보강용",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "engine_snapshot_not_noramu"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "snap-ge70-MU-2026-06-08",
+        "source_url": null,
+        "posted_at_kst": "2026-06-08T15:00:00+09:00",
+        "author": "engine_snapshot",
+        "symbol": "MU",
+        "related_underlying": "MU",
+        "side": "long",
+        "entry_price": 949.28,
+        "entry_price_ref": "engine_asof_close",
+        "stop_price": 864.01,
+        "target_price": null,
+        "product_type": "us_stock",
+        "tags": [
+            "engine_ge70_snapshot",
+            "not_noramu_post",
+            "structure_level"
+        ],
+        "raw_quote": "[engine] MU asof 2026-06-08 score=90 half=976.65 invalidation=864.01 cluster=2026-06-08~2026-06-16",
+        "source": "engine_ge70_snapshot",
+        "symbol_note": "노라무 글이 아님. 고점수 구간 엔진 스냅샷 — 성과 분포/백테스트 보강용",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "engine_snapshot_not_noramu"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "snap-ge70-MU-2026-06-26",
+        "source_url": null,
+        "posted_at_kst": "2026-06-26T15:00:00+09:00",
+        "author": "engine_snapshot",
+        "symbol": "MU",
+        "related_underlying": "MU",
+        "side": "long",
+        "entry_price": 1132.33,
+        "entry_price_ref": "engine_asof_close",
+        "stop_price": 991.1,
+        "target_price": null,
+        "product_type": "us_stock",
+        "tags": [
+            "engine_ge70_snapshot",
+            "not_noramu_post",
+            "structure_level"
+        ],
+        "raw_quote": "[engine] MU asof 2026-06-26 score=90 half=1102.33 invalidation=991.1 cluster=2026-06-26~2026-06-30",
+        "source": "engine_ge70_snapshot",
+        "symbol_note": "노라무 글이 아님. 고점수 구간 엔진 스냅샷 — 성과 분포/백테스트 보강용",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "engine_snapshot_not_noramu"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "snap-ge70-SNDK-2026-05-12",
+        "source_url": null,
+        "posted_at_kst": "2026-05-12T15:00:00+09:00",
+        "author": "engine_snapshot",
+        "symbol": "SNDK",
+        "related_underlying": "SNDK",
+        "side": "long",
+        "entry_price": 1452.02,
+        "entry_price_ref": "engine_asof_close",
+        "stop_price": 1367,
+        "target_price": null,
+        "product_type": "us_stock",
+        "tags": [
+            "engine_ge70_snapshot",
+            "not_noramu_post",
+            "structure_level"
+        ],
+        "raw_quote": "[engine] SNDK asof 2026-05-12 score=90 half=1483.5 invalidation=1367 cluster=2026-05-12~2026-05-15",
+        "source": "engine_ge70_snapshot",
+        "symbol_note": "노라무 글이 아님. 고점수 구간 엔진 스냅샷 — 성과 분포/백테스트 보강용",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "engine_snapshot_not_noramu"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "snap-ge70-SNDK-2026-06-08",
+        "source_url": null,
+        "posted_at_kst": "2026-06-08T15:00:00+09:00",
+        "author": "engine_snapshot",
+        "symbol": "SNDK",
+        "related_underlying": "SNDK",
+        "side": "long",
+        "entry_price": 1642,
+        "entry_price_ref": "engine_asof_close",
+        "stop_price": 1514.36,
+        "target_price": null,
+        "product_type": "us_stock",
+        "tags": [
+            "engine_ge70_snapshot",
+            "not_noramu_post",
+            "structure_level"
+        ],
+        "raw_quote": "[engine] SNDK asof 2026-06-08 score=90 half=1687.68 invalidation=1514.36 cluster=2026-06-08~2026-06-10",
+        "source": "engine_ge70_snapshot",
+        "symbol_note": "노라무 글이 아님. 고점수 구간 엔진 스냅샷 — 성과 분포/백테스트 보강용",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "engine_snapshot_not_noramu"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10024780453-structure",
+        "source_url": "https://www.fmkorea.com/10024780453",
+        "document_srl": "10024780453",
+        "title": "흠",
+        "posted_at_kst": "2026-06-30T20:14:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-18T23:55:21+09:00",
+        "source": "fmkorea_scraper",
+        "side": "short",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_leveraged_proxy",
+            "inverse_side_flipped"
+        ],
+        "raw_quote": "흠\n나만숏뷰임?\n\n////////////\n\n결단내림 \n\n쏙스 없는사람들 \n\n빨리한걸수도있긴한데 \n\n3.63정도에 포지션없는 사람들은 soxs 진입가능 \n\n손절은 3.58이탈하면 손절하면됨 ",
+        "symbol": "MU",
+        "symbol_note": "반도체 인버스 → curate 시 MU 본주 치환 | SOXS(반도체 3x 인버스) → MU 본주 (방향 반전) · 원상품 side=mixed_or_hedge → 본주 side=mixed_or_hedge",
+        "related_underlying": "MU",
+        "product_type": "us_stock",
+        "source_instrument": "SOXS",
+        "leveraged_entry_price": null,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "stop_price": null,
+        "target_price": null,
+        "proxy_bias": "short",
+        "exclude_price_label": true,
+        "learning_use": "structure_only",
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10025703673-structure",
+        "source_url": "https://www.fmkorea.com/10025703673",
+        "document_srl": "10025703673",
+        "title": "님들생각은어떰",
+        "posted_at_kst": "2026-06-30T23:48:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-18T23:55:21+09:00",
+        "source": "fmkorea_scraper",
+        "side": "short",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_leveraged_proxy",
+            "inverse_side_flipped"
+        ],
+        "raw_quote": "님들생각은어떰\n그냥 박스는 맞는거같은데 \n\n나는 숏같은데 \n\n님들은 어떻게생각함 \n\n나는 일단 다시 잡긴했음 3.3에",
+        "symbol": "MU",
+        "symbol_note": "3달러대·숏 맥락 → SOXS로 간주 후 본주 치환 | SOXS(반도체 3x 인버스) → MU 본주 (방향 반전) · 원상품 side=long → 본주 side=short",
+        "related_underlying": "MU",
+        "product_type": "us_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "source_instrument": "SOXS",
+        "leveraged_entry_price": null,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "stop_price": null,
+        "target_price": null,
+        "proxy_bias": "short"
+    },
+    {
+        "id": "fm-10026337261-structure",
+        "source_url": "https://www.fmkorea.com/10026337261",
+        "document_srl": "10026337261",
+        "title": "gg",
+        "posted_at_kst": "2026-07-01T03:44:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-18T23:55:21+09:00",
+        "source": "fmkorea_scraper",
+        "side": "short",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view"
+        ],
+        "raw_quote": "gg\n네 너무 일찍한거같아요 \n\ngg 숏뷰 취소입니다 ",
+        "symbol": "SNDK",
+        "symbol_note": "동일 스레드 맥락상 샌디 관련 구조 뷰",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10018613515-structure",
+        "source_url": "https://www.fmkorea.com/10018613515",
+        "document_srl": "10018613515",
+        "title": "변수는",
+        "posted_at_kst": "2026-06-29T14:10:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-18T23:55:21+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view"
+        ],
+        "raw_quote": "변수는\n딱 지금자리에서 지지나온뒤에 반등나오는거임 \n\n주봉상 삼전이 딱 반등자리인데 \n\n어떻게될려나 \n\n오늘이 월요일이라 예측할수가없네 ",
+        "symbol": "005930.KS",
+        "symbol_note": "삼성전자",
+        "related_underlying": "005930.KS",
+        "product_type": "kr_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10018538879-structure",
+        "source_url": "https://www.fmkorea.com/10018538879",
+        "document_srl": "10018538879",
+        "title": "종목추천.",
+        "posted_at_kst": "2026-06-29T13:50:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-18T23:55:21+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": 436000,
+        "tags": [
+            "structure_or_view"
+        ],
+        "raw_quote": "종목추천.\n삼성에피스홀딩스 \n\n처음 내려올때는 안봤는데 오늘보니까 중심값뚫었네 \n\n저상태에서  저점들어올리면  매력적인구간이라 \n\n40만원이탈 안하고 올려주면 매우 좋은자리 \n\n436000부터 천천히 분할매수 해보셈 ",
+        "symbol": "EPIS_HOLDINGS",
+        "symbol_note": "삼성에피스홀딩스 (코어 외 · 방식 샘플)",
+        "related_underlying": "EPIS_HOLDINGS",
+        "product_type": "kr_stock",
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "stop_price": 400000,
+        "chart_available": false
+    },
+    {
+        "id": "fm-10016561104-structure",
+        "source_url": "https://www.fmkorea.com/10016561104",
+        "document_srl": "10016561104",
+        "title": "기법이나 뿌려야겠당",
+        "posted_at_kst": "2026-06-29T00:09:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-19T00:07:19+09:00",
+        "source": "fmkorea_scraper",
+        "side": "short",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view"
+        ],
+        "raw_quote": "기법이나 뿌려야겠당\n이평 정배열 상태 \n\n60일선 - 240일선의 이격도가 과하게 벌어져있을경우\n\n엔벨로프 하단선 \n\n터치를 하면 반등을 주는 경우가 매우많음 \n\n대신 첫 박스 돌파 이후에 눌림구간에서 앞에 저점을 올린 후 가 가장 확률이 높음 \n\n예시로 \n\n삼성물산 \n\nsk하이닉스 \n\n현대차 \n\n얘는 과매도가 한번있었네",
+        "symbol": "000660.KS",
+        "symbol_note": "SK하이닉스",
+        "related_underlying": "000660.KS",
+        "product_type": "kr_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10005003740-structure",
+        "source_url": "https://www.fmkorea.com/10005003740",
+        "document_srl": "10005003740",
+        "title": "sk하이닉스 단순분석",
+        "posted_at_kst": "2026-06-26T13:01:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-19T00:07:19+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "hynix_watch",
+            "no_entry_yet"
+        ],
+        "raw_quote": "sk하이닉스 단순분석\n볼벤상단에서 안빠질려고 계속 발버둥중\n\n예전에 지지라인 258 말해준곳에서 반등나와서 지금 쌍봉을 만든형태인데 \n\n60분봉상 앞에만들어둔 변곡점구간 박스권 상단 터치하고 슬금슬금올리는데 단기트레이딩용으로 잡을만함 \n\n하지만 큰추세에서 차트가 너무 애매하고 \n\n손절라인 258 잡으면 -4.5%정도임 \n",
+        "symbol": "000660.KS",
+        "symbol_note": "손절/지지 258만 · 당시는 진입 안 함(엔벨·저점상향 후 검토)",
+        "related_underlying": "000660.KS",
+        "product_type": "kr_stock",
+        "stop_price": 2580000,
+        "stop_price_ref": "258만_라인",
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10002894034-soxs-336",
+        "source_url": "https://www.fmkorea.com/10002894034",
+        "document_srl": "10002894034",
+        "posted_at_kst": "2026-06-25T22:40:00+09:00",
+        "author": "노라무",
+        "symbol": "MU",
+        "related_underlying": "MU",
+        "side": "short",
+        "entry_price": null,
+        "entry_price_ref": "raw_quote",
+        "stop_price": null,
+        "target_price": null,
+        "product_type": "us_stock",
+        "tags": [
+            "parsed_entry",
+            "manual_soxs_line",
+            "from_leveraged_proxy",
+            "structure_or_view",
+            "inverse_side_flipped"
+        ],
+        "raw_quote": "리 포지션\nsoxs 3.36",
+        "title": "리 포지션",
+        "source": "manual_seed_from_srl",
+        "symbol_note": "본문 soxs 3.36 → curate 시 MU 숏 바이어스 | SOXS(반도체 3x 인버스) → MU 본주 (방향 반전) · 원상품 side=long → 본주 side=short",
+        "source_instrument": "SOXS",
+        "leveraged_entry_price": 3.36,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "proxy_bias": "short",
+        "exclude_price_label": true,
+        "learning_use": "structure_only",
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-9986794614-hynix-stop-open",
+        "source_url": "https://www.fmkorea.com/9986794614",
+        "document_srl": "9986794614",
+        "posted_at_kst": "2026-06-22T10:33:00+09:00",
+        "author": "노라무",
+        "symbol": "000660.KS",
+        "related_underlying": "000660.KS",
+        "side": "observe",
+        "entry_price": null,
+        "stop_price": null,
+        "stop_rule": "today_open_or_scalp",
+        "target_price": null,
+        "product_type": "kr_stock",
+        "tags": [
+            "structure_or_view",
+            "hynix_stop_hint"
+        ],
+        "raw_quote": "오랜만에 종베나 해볼까\nsk하이닉스 \n\n손절은 오늘 시가정도? \n\n무서우면 솔탑투로 해도되고 ",
+        "title": "오랜만에 종베나 해볼까",
+        "source": "manual_seed_from_srl",
+        "symbol_note": "손절≈당일 시가 또는 스캘핑",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10014269367-structure",
+        "source_url": "https://www.fmkorea.com/10014269367",
+        "document_srl": "10014269367",
+        "title": "후...",
+        "posted_at_kst": "2026-06-28T15:25:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-19T00:07:19+09:00",
+        "source": "fmkorea_scraper",
+        "side": "short",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view"
+        ],
+        "raw_quote": "후...\n이번 하락은 다를겁니다.\n\n뭐 내가 틀리고 올라갈수도 있겠죠\n\n근데 내가 항상 차트를 보면서 설명했지만 \n\n차트도 차트인데\n\n유독 국장만 심하게빠질수도있어요\n\n그래서 삼하 인버스 레버를 안하고 미장간거에요\n\n환차익으로 손절나오면 그걸로 메꿀려고 \n\n환전은 1504원에 다했어요\n\n내일봅시다\n\n주갤에 상주 그만하시고",
+        "symbol": "000660.KS",
+        "symbol_note": "삼하(삼성·하이닉스) — 대표 심볼 하이닉스",
+        "related_underlying": "000660.KS",
+        "product_type": "kr_stock",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-9932310089-hynix-185-188",
+        "source_url": "https://www.fmkorea.com/9932310089",
+        "document_srl": "9932310089",
+        "posted_at_kst": "2026-06-09T08:19:00+09:00",
+        "author": "노라무",
+        "symbol": "000660.KS",
+        "related_underlying": "000660.KS",
+        "side": "long",
+        "entry_price": 1865000,
+        "entry_price_ref": "188~185만_중간",
+        "stop_price": 1660000,
+        "stop_price_ref": "반등실패시_166만",
+        "target_price": null,
+        "product_type": "kr_stock",
+        "tags": [
+            "parsed_entry",
+            "center_line",
+            "higher_structure"
+        ],
+        "raw_quote": "닉스를 188~185에 잡은이유\n정배열·매물대 중심값·지표 하단 지지. 반등 실패 시 166까지. 헤드앤숄더로 빠져도 자리.",
+        "title": "닉스를 188~185에 잡은이유",
+        "source": "manual_seed_from_srl",
+        "symbol_note": "진입 185~188만 · 무효/확장 하락 166만",
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-9933222183-hynix-216-exit",
+        "source_url": "https://www.fmkorea.com/9933222183",
+        "document_srl": "9933222183",
+        "posted_at_kst": "2026-06-09T13:27:00+09:00",
+        "author": "노라무",
+        "symbol": "000660.KS",
+        "related_underlying": "000660.KS",
+        "side": "exit",
+        "entry_price": null,
+        "stop_price": null,
+        "target_price": 2160000,
+        "product_type": "kr_stock",
+        "tags": [
+            "take_profit",
+            "position_cleared"
+        ],
+        "raw_quote": "sk하이닉스\n216 만원 정도는 찍을거같은데 찍고나서는 조금 위험합니다 저는 포지션 다정리했구 차익실현물량 기다리는 중",
+        "title": "sk하이닉스",
+        "source": "manual_seed_from_srl",
+        "symbol_note": "목표가≈216만 언급 후 전량 정리",
+        "exit_reason": "target",
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00"
+    },
+    {
+        "id": "fm-10101711650-semi-wait-bias",
+        "source_url": "https://www.fmkorea.com/10101711650",
+        "document_srl": "10101711650",
+        "posted_at_kst": "2026-07-19T01:44:00+09:00",
+        "author": "노라무",
+        "symbol": "MU",
+        "related_underlying": "MU",
+        "side": "short",
+        "entry_price": null,
+        "stop_price": null,
+        "target_price": null,
+        "product_type": "us_stock",
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "semi_risk_off",
+            "wait_lower_low_then_lift"
+        ],
+        "raw_quote": "흠 뭐 별건아닌데\r\n다음주도 사실 보이긴함... 윗꼬리 음봉, 주봉 종가 아래로 밀릴 가능성.\r\n다다음주에 저점 한번 더 깨고 위로 들어올려주면 이쁜그림.\r\n반도체 큰돈 거의 이탈 → 애플/금융지주/빅테크/코인 쪽 추정.\r\n\r\n[댓글]\r\n- 고점 만들고 매도+인버스/옵션 → 위로 툭툭은 개미, 몸통이 진짜\r\n- 세력 회수는 하락 시작부터. 본주+숏레버/옵션\r\n- 이미 -40%면 지금 손절이 손해일 수 있음 → 반등 때 조금씩 정리. 평소 손절 -5~10%. 개잡주 즉시\r\n- 저점 한번 더 깰거같음(담주일수도). 급등한 애들은 가격조정·설거지 큼\r\n- 큰세력은 롱보다 숏으로 크게\r\n- 26일 시즌종료일수도 눌림일수도 → 이동 or 천천히 매집",
+        "title": "흠 뭐 별건아닌데",
+        "source": "manual_seed_from_srl",
+        "symbol_note": "반도체 리스크오프·신규롱 비권고. 다다음주 저점재이탈 후 들어올림 그림 대기. (본문+댓글)",
+        "proxy_bias": "short",
+        "source_instrument": "POST_VIEW",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10101711650-hynix-wait-bias",
+        "source_url": "https://www.fmkorea.com/10101711650",
+        "document_srl": "10101711650",
+        "posted_at_kst": "2026-07-19T01:44:00+09:00",
+        "author": "노라무",
+        "symbol": "000660.KS",
+        "related_underlying": "000660.KS",
+        "side": "short",
+        "entry_price": null,
+        "stop_price": null,
+        "target_price": null,
+        "product_type": "kr_stock",
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "semi_risk_off",
+            "wait_lower_low_then_lift"
+        ],
+        "raw_quote": "흠 뭐 별건아닌데\r\n다음주도 사실 보이긴함... 윗꼬리 음봉, 주봉 종가 아래로 밀릴 가능성.\r\n다다음주에 저점 한번 더 깨고 위로 들어올려주면 이쁜그림.\r\n반도체 큰돈 거의 이탈 → 애플/금융지주/빅테크/코인 쪽 추정.\r\n\r\n[댓글]\r\n- 고점 만들고 매도+인버스/옵션 → 위로 툭툭은 개미, 몸통이 진짜\r\n- 세력 회수는 하락 시작부터. 본주+숏레버/옵션\r\n- 이미 -40%면 지금 손절이 손해일 수 있음 → 반등 때 조금씩 정리. 평소 손절 -5~10%. 개잡주 즉시\r\n- 저점 한번 더 깰거같음(담주일수도). 급등한 애들은 가격조정·설거지 큼\r\n- 큰세력은 롱보다 숏으로 크게\r\n- 26일 시즌종료일수도 눌림일수도 → 이동 or 천천히 매집",
+        "title": "흠 뭐 별건아닌데",
+        "source": "manual_seed_from_srl",
+        "symbol_note": "국장 반도체(하닉)도 동일 시황 — 신규롱 보류, 저점재이탈→들어올림 후 재검토",
+        "proxy_bias": "short",
+        "source_instrument": "POST_VIEW",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10104757537-structure",
+        "source_url": "https://www.fmkorea.com/10104757537",
+        "document_srl": "10104757537",
+        "title": "흠",
+        "posted_at_kst": "2026-07-19T20:28:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-20T17:39:30+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "conditional"
+        ],
+        "raw_quote": "흠\n내일은 도지캔들 \n\n화요일날 상승나올거같은데?\n\n1678안깨지는 선에서 저점 올려주면 이거 위로 튈각이 보임.\n\newy도 내가 생각한 저점때리고 올려준구간이고 (더빠지긴했지만)\n\n애지간하면 더안빠지긴할거같은데\n\n조건부임 \n\n저점깨고 올릴수있음\n\n시나리오는 2개 \n\n저점깨고 올린다.\n\n저점 지켜주고 올린다.\n\n쨋든 올려",
+        "symbol": "000660.KS",
+        "symbol_note": "SK하이닉스 — 1678(167.8만) 지지 조건부 반등 시나리오",
+        "related_underlying": "000660.KS",
+        "product_type": "kr_stock",
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "stop_price": 1678000,
+        "stop_rule": "text_level_1678",
+        "author_comments": [
+            "근데....이거 희망회로임\n\n찐 노라무 의견들려주면 저점깨고 패닉셀 물량 받아먹고 올릴거임 \n\n내가 세력이라도 저점깨겠다",
+            "진류군 저점을 잡을생각을 버리셈\n\n나도 저점 잘 못잡는데 어케잡누",
+            "진류군 오히려 9월까지 버틸거같음",
+            "손절하라고 기회줄거같은데",
+            "진류군 300찍을 때 하닉 180아래간다고 말했는데 이제 150간다고하면 ㅡ.ㅡ",
+            "이런개나리 시발",
+            "wnsgus67 노반꿀",
+            "한도기 네?",
+            "디카프리오 희망은 버리셈",
+            "진류군 애초에 나는 프로그램을 쓴다니까 \n\n님들이 팔았어요? 어케하셨지 이러는데 내가 매매을 안해요 깨어있을때 빼고\n\n나는 사실 매매 잘안하고 손땐지 좀됬음\n\n프로그램써서 계좌에 돈박아놓으면 알아서 설정한대로 하니까\n\n그러니까 팔았는지 주 포지션 뭔지 물어보셔도 나도 프로그램보고 말하는거라 ㅋㅋ\n\n숏끝나면 알아서 말해드릴게 \n\n이런거 물어보는 이유가 숏타서 물어보시는거아니심?",
+            "코지D 그래서 몰빵하면 다털리고 가는거임",
+            "코지D 이미 악성재고임",
+            "노라무 큰물량들은 이미 다 나갔다니까"
+        ]
+    },
+    {
+        "id": "fm-10108920981-structure",
+        "source_url": "https://www.fmkorea.com/10108920981",
+        "document_srl": "10108920981",
+        "title": "일단 (수정)[속보] 이란 “중재국 휴전 제안 받았다” 외교 재가동 확인",
+        "posted_at_kst": "2026-07-20T16:28:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-20T17:45:15+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "conditional_long"
+        ],
+        "raw_quote": "조건부 롱\n오늘 저가 이탈하지않을시\n조금더보면 어제저가 이탈하지않을시\n롱라무 출격\n\n[댓글] 차트 후 재료. / 미장으로하셈 / 자리는 있는건데 반등나올거같음 / 저점손절 생각하고",
+        "symbol": "US_MARKET_VIEW",
+        "symbol_note": "미장 조건부 롱 (오늘·어제 저가 이탈 시 무효). 평단300은 풍자 댓글이지 타점 아님",
+        "related_underlying": null,
+        "product_type": "market_view",
+        "author_comments": [
+            "차트 후 재료.",
+            "호갱o 그래서 유일한 정보는 차트라고 그리그리 설명을해줘도 \n\n삼하만 사면된다. (평단 300만원) 포텐 ㅇㅈㄹ하니까\n\n쳐발리는거지",
+            "미장으로하셈",
+            "호갱o 자리는 있는건데 \n\n반등나올거같음",
+            "이러니까 개미들이 저점을 어떻게찾아..",
+            "홀나오진영진 그럼늦긴함 \n\n저점손절 생각하고해보세ㅐㅁ"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "market_scenario_no_ticker"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10108710418-structure",
+        "source_url": "https://www.fmkorea.com/10108710418",
+        "document_srl": "10108710418",
+        "title": "신용한도초과",
+        "posted_at_kst": "2026-07-20T15:29:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-20T17:45:15+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "avoid_list",
+            "index_view"
+        ],
+        "raw_quote": "신용 한도초과\n\nsk하이닉스\nsk스퀘어\n현대차\n두산에너빌리티\n삼성sdi\nlg전자\n한화오션\nskc\n\n이종목들은 피하셈\n저점깰듯\n\n[댓글] 지수는 지금자리에서 약 7%정도가 더빠져야된다. / 희망을 바라지마라. / 나스닥 더빠지겠는데 / (분봉 기준) 롱 같긴함·미장기준",
+        "symbol": "KR_MARKET_VIEW",
+        "symbol_note": "신용한도초과 종목 회피 + 국장/나스닥 추가하락 뷰 (개별 타점 아님)",
+        "related_underlying": null,
+        "product_type": "market_view",
+        "author_comments": [
+            "정보 \n\n지수는 지금자리에서 약 7%정도가 더빠져야된다.",
+            "희망을 바라지마라.",
+            "나스닥 심상치않은데...\n\n더빠지겠는데",
+            "아니 롱 같긴함",
+            "노라무 분봉이 이쁘긴한데",
+            "TomHardy 물론 미장기준 ㅋㅋ",
+            "IlIlIl1l 38?",
+            "Diokn 키움기준"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "market_scenario_no_ticker"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10109858796-structure",
+        "source_url": "https://www.fmkorea.com/10109858796",
+        "document_srl": "10109858796",
+        "title": "롱숭이",
+        "posted_at_kst": "2026-07-20T20:38:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-20T23:40:07+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": null,
+        "currency": "USD",
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "scale_in",
+            "long_confirm",
+            "from_leveraged_proxy"
+        ],
+        "raw_quote": "롱라무 출격!\n자리좋아요\n제가 말했던 시나리오대로 가네요\n첫번째거로\n\n[댓글] 아래 빠지는거까지 생각하고 분할로진입 / 풀롱은 아직 / 안깨겠다 차트좋네 / 평단 12.79 따라하지말라는건 이유가있음",
+        "symbol": "SNDK",
+        "symbol_note": "샌디 2배 평단 12.79 맥락 → SNDK 본주 구조·방향만 (가격 라벨 제외). 이전 조건부롱(오늘저가) 시나리오 1 확인 [auto] 본주 대비 가격대 불일치 → 레버 타점으로 재분류 | 샌디 2배 → SNDK 본주 (가격 라벨 제외, 구조·방향만) · 원상품 side=long → 본주 side=long",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "source_instrument": "SNDK_2X",
+        "author_comments": [
+            "노라무 이제 말하는것도 질리긴한데 \n\n아래 빠지는거까지 생각하고 분할로진입하는걸 계속 말합니다",
+            "내지갑승천 \"지금\"",
+            "흠 깨고갈려나",
+            "ONESTOP 맘에듬",
+            "패션빌런 머금",
+            "훔바형사실좋아해 풀롱은 아직..",
+            "노라무 안깨겠다 차트좋네",
+            "노라무 그...내 평단이 12.79임 \n\n따라하지말라는건 이유가있으용"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "leveraged_entry_price": 12.79,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "stop_price": null,
+        "target_price": null,
+        "proxy_bias": "long"
+    },
+    {
+        "id": "fm-10110499691-structure",
+        "source_url": "https://www.fmkorea.com/10110499691",
+        "document_srl": "10110499691",
+        "title": "미래를 알고싶니",
+        "posted_at_kst": "2026-07-20T23:27:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-20T23:40:07+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "weekly_chart"
+        ],
+        "raw_quote": "주붕주붕들아...\n나도 알고싶단다...\n이렇게 나오지않을까\n이거보고있긴한데\n\n[댓글] 샌디주봉",
+        "symbol": "SNDK",
+        "symbol_note": "샌디 주봉 시나리오 관망 (차트 경로 가설, 타점 없음)",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "author_comments": [
+            "샌디주봉"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10111485405-structure",
+        "source_url": "https://www.fmkorea.com/10111485405",
+        "document_srl": "10111485405",
+        "title": "아우 이뻐라ㅜ",
+        "posted_at_kst": "2026-07-21T09:33:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-21T12:48:24+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "long_confirm"
+        ],
+        "raw_quote": "롱숭롱숭!\n\n[댓글] 뷰는 시장 따라 바꾸는 게 당연 / 롱롱롱 / 둘다 동화되어 움직임 / 화장품·이터닉스 차트 좋다(잡담)",
+        "symbol": "SNDK",
+        "symbol_note": "전일 롱숭이(샌디2배) 연속 — 차트 이쁨·롱 유지 확인. 타점 없음",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "author_comments": [
+            "그리고 뷰가 계속 바뀐다고 지랄하는새끼들은 뇌가 비었냐?\n\n시장이 목석처럼 가~만히있냐?\n지능이 딸린거같아...\n\n당연히 대응하고 바꿔야지 \n\n뒤에서 흑인이 바지내리고 다가오는데 안도망쳐?",
+            "하 또 시계풀게만드네 \n\n찡찡이들이랑 맡겨놓은것처럼 물어보는 쉑들\n\n닥치고 화장품이나 사라니까\n\n이터닉스같은애들도 차트좋은데 뭔 맨날이상한 종목물어보노",
+            "끄아아아아악\n\n아ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ빠ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ스ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ벅ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ시ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ켜",
+            "세력 오이데 오이데",
+            "이현주 ?",
+            "노라무 아니 그쪽으로 결론이가는거?\n\n아니 왜 \n\n네?",
+            "롱롱롱롱!!!!!!!!!!!!",
+            "꿀덮 ㅎㅎ 그냥 기록용이라니까",
+            "뽀득뽀도득 둘다 어차피 동화되어서 움직임",
+            "데인저클로즈 세력이 발라먹는거지뭐 ㅋㅋ\n뭘 어떻게해석해",
+            "조선의14번타자 카시오",
+            "보보스부거 전문적인 설명 / 길고 지루하고 현학적임\n흑인이 바지내리고 나한테 다가옴 / 간단함 한번에 이해가능함.",
+            "라우시엔 ???:오이데 오이데"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10111896138-structure",
+        "source_url": "https://www.fmkorea.com/10111896138",
+        "document_srl": "10111896138",
+        "title": "흠흠",
+        "posted_at_kst": "2026-07-21T11:42:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-21T12:48:24+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments"
+        ],
+        "raw_quote": "부끄러워잉ㅇ\n\n[댓글] 하닉기준으로 말했는데 국장 노이즈 / 샌디가 말한대로 정확하게 나오긴 했는데 사실 틀린거지 / 샌디기준 1570 때릴자리 서너번 말함",
+        "symbol": "SNDK",
+        "symbol_note": "샌디 경로 회고 + 1570 자리 재확인. 하닉/국장은 노이즈 많음 참고",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "target_price": 1570,
+        "target_rule": "comment_sndk_1570",
+        "author_comments": [
+            "국장만 7~8년 해보셈 \n\n이게 보일수밖에없음",
+            "이류 (솔깃)",
+            "하닉기준으로 말하긴했는데 \n\n국장은 노이즈가 좀 심하네 \n\n샌디가 내가 말한대로 정확하게나오긴했는데 \n\n사실 틀린거지",
+            "노라무 이거맞추면 나도 좀 무서운데",
+            "회킬러 오이쉐에에!",
+            "한화우승수리 샌디기준 1570 때릴자리있다고 서너번 말하긴했음",
+            "쓰읍 금단의영역까지 한번 해봐? ㅋㅋㅋㅋ\n\n코오롱티슈진 하따를 한번해볼까"
+        ],
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10112026086-structure",
+        "source_url": "https://www.fmkorea.com/10112026086",
+        "document_srl": "10112026086",
+        "title": "찐반등은 아니라고 보긴하는데 이거 가겠는데요?",
+        "posted_at_kst": "2026-07-21T12:23:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-21T12:48:24+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": null,
+        "tags": [
+            "parsed_target",
+            "from_post_comments",
+            "level_target",
+            "structure_level"
+        ],
+        "raw_quote": "샌디기준 1570 때리러갈듯?\n이쁘네\n저점다진게 정석이라서\n어우 이쁘다\n\n[댓글] 진짜 떡벽 / 하닉 200찍으면 런쳐(230→200 변경) / 아직 숏뷰입니다만",
+        "symbol": "SNDK",
+        "symbol_note": "샌디 본주 목표가 1570. 찐반등 부정하되 1570 방향·저점 다짐. 하닉 200은 부수(숏뷰)",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "target_price": 1570,
+        "target_rule": "text_sndk_1570",
+        "author_comments": [
+            "송서래 못뚫어요 ㅋㅋㅋ 호가창 물량보고 떡벽이라하는데 저게 진짜 떡벽입니다.",
+            "쓰읍 하닉 200찍으면 런쳐야겠고만\n\n230봤는데 200으로 변경",
+            "dkddjl 아직 숏뷰입니다만."
+        ],
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10113974991-sndk-target",
+        "source_url": "https://www.fmkorea.com/10113974991",
+        "document_srl": "10113974991",
+        "title": "지금 손절을 생각한다?",
+        "posted_at_kst": "2026-07-21T21:13:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-23T03:16:39+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": null,
+        "target_price": 1570,
+        "target_rule": "text_sndk_1570_today_or_tomorrow",
+        "tags": [
+            "parsed_target",
+            "from_post_comments",
+            "level_target"
+        ],
+        "raw_quote": "하닉 200오면 그때해보샘\n지금은 좀 에바고\n오늘 이거\n샌디가 1570 때릴거같거든\n오늘 안때리면 내일갈듯?",
+        "symbol": "SNDK",
+        "symbol_note": "샌디 본주 목표가 1570 (당일~익일)",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "author_comments": [
+            "ㅅㅂ 뷰말해주는데 포가 짜다",
+            "노라무 돈 안줄꺼면 포나주셈"
+        ],
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10113974991-hynix-level",
+        "source_url": "https://www.fmkorea.com/10113974991",
+        "document_srl": "10113974991",
+        "title": "지금 손절을 생각한다?",
+        "posted_at_kst": "2026-07-21T21:13:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-23T03:16:39+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "stop_price": 2000000,
+        "stop_rule": "text_hynix_200_man",
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "level_stop"
+        ],
+        "raw_quote": "하닉 200오면 그때해보샘\n지금은 좀 에바고",
+        "symbol": "000660.KS",
+        "symbol_note": "SK하이닉스 — 200(200만) 오면 손절 검토, 지금은 에바",
+        "related_underlying": "000660.KS",
+        "product_type": "kr_stock",
+        "author_comments": [
+            "ㅅㅂ 뷰말해주는데 포가 짜다",
+            "노라무 돈 안줄꺼면 포나주셈"
+        ],
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10114347242-structure",
+        "source_url": "https://www.fmkorea.com/10114347242",
+        "document_srl": "10114347242",
+        "title": "샌디가즈아",
+        "posted_at_kst": "2026-07-21T22:35:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-23T03:16:39+09:00",
+        "source": "fmkorea_scraper",
+        "side": "exit",
+        "entry_price": null,
+        "target_price": 1570,
+        "target_rule": "comment_1570_hit",
+        "tags": [
+            "parsed_target",
+            "from_post_comments",
+            "target_hit"
+        ],
+        "raw_quote": "끄아아아악\n엄마 엽떡시켜!\n\n[댓글] 1570때려!",
+        "symbol": "SNDK",
+        "symbol_note": "샌디 1570 타격 확인(직전 목표가 달성 환호)",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "author_comments": [
+            "1570때려!",
+            "이기면장땡2 ㅇㅇ"
+        ],
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": "target"
+    },
+    {
+        "id": "fm-10114366833-structure",
+        "source_url": "https://www.fmkorea.com/10114366833",
+        "document_srl": "10114366833",
+        "title": "모두가 숏을 외칠때",
+        "posted_at_kst": "2026-07-21T22:40:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-23T03:16:39+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "contrarian",
+            "switch_plan"
+        ],
+        "raw_quote": "나는 롱을 친다!\n키이이이야\n\n[댓글] 때리면 숏전환합니다 / 스엑 숏 전량청산 완 / 오라클숏은 더길게보는중 / 따라해도 ㅇㅈ",
+        "symbol": "SNDK",
+        "symbol_note": "샌디 롱(역발상). 목표가 때리면 숏전환 예고. 스엑숏 청산·ORCL숏은 장기 유지(부수)",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "author_comments": [
+            "홀나오진영진 개추 존나잘맞네",
+            "노라무 때리면 숏전환합니다.",
+            "따라해도 ㅇㅈ",
+            "스엑 숏 전량청산 완\n\n오라클숏은 더길게보는중",
+            "티원월즈우승기원 넹",
+            "디카프리오 거래되는데?",
+            "밥충님 조선은 5년보세요"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10114953032-structure",
+        "source_url": "https://www.fmkorea.com/10114953032",
+        "document_srl": "10114953032",
+        "title": "정확하지? 스위칭",
+        "posted_at_kst": "2026-07-22T01:22:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-23T03:16:39+09:00",
+        "source": "fmkorea_scraper",
+        "side": "short",
+        "entry_price": null,
+        "stop_price": null,
+        "stop_rule": "percent_2",
+        "stop_percent": 2,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "do_not_copy",
+            "scale_in",
+            "switch_to_short"
+        ],
+        "raw_quote": "흠그래그래 오버슈팅생각해서 숏은 분할로 접근할거임\n숏 스위칭\n모두가 롱이라 할때 나는 숏을친다\n숏진입\n따라하지마세요\n\n[댓글] 손절 2퍼 / 1601 / 숏 홀딩중 / 저점 올리면 롱 / 지금매수는 병신",
+        "symbol": "SNDK",
+        "symbol_note": "샌디 숏 스위칭(오버슈팅). 분할·손절 2%. 절대가격 손절 아님. 1601 언급(구조 레벨). 따라하지 말 것",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "structure_level": 1601,
+        "author_comments": [
+            "아마도 국장때문에 자꾸 버티거나 오버슈팅나오는거같음",
+            "내가 사라 안했잖아? 알아서 팔고 알아서 하쇼",
+            "따라사는 새끼가 병신이지 \n\n뷰올리는 내가 병신이 아니다?",
+            "검사머 가져와잇!",
+            "아 샌디가 오버슈팅나온게 좀 수상하긴한데 \n\n쓰읍....그래도 아직 롱 안볼래",
+            "No.1문동주 오버슈팅이 나올만은했던게 \n\n숏물량이 워낙많아야지 ㅋㅋㅋ\n\n스퀴즈 같이 터지면서 오버슈팅나온거라봐도되긴합니다",
+            "노라무 그래서 분할로 접근한거에요 숏포지션을",
+            "아마 숏은 정리는 해야하긴할거같아요 지금자리는 애매해서 \n\n차라리 저점올려두고 위때리는거보고 롱을타지않을까? 싶네요",
+            "노라무 상황보고 프로그램이 알아서 하게 냅둘려구요",
+            "지금매수는 병신들만 하는겁니다. \n\n사실 관망이 더유리해요",
+            "노라무 너무쎄게말하니",
+            "ModelQ ㅋㅋㅋㅋ ㄴㄴ \n\n1주만샀다니까 \n\n바로쩜하가네 저거하지마셈",
+            "데인저클로즈 뚫리면 좋은거지 안그래? \n\n나는 또 말하지만 \n\n지금자리에서 \n\n원래포지션 유지하고 아무것도 안할거임 \n\n손절나가면 아~무것도 안할거다",
+            "뿌찍",
+            "따라하지마세요",
+            "라이오옹 헉",
+            "롯숭이 쓰읍! \n\n1601!",
+            "No.1문동주 근데 1601이 뭐임?",
+            "No.1문동주 오홍",
+            "전략적 취침 \n\n주바",
+            "따라할꺼면 찡찡거리지마셈",
+            "흠 뚫었네?\n\n이러고 저점 올리면 롱인디",
+            "조선의14번타자 오버슈팅인거지 여기서 저점 올려주면 롱인거지만 나는 숏아직 휼딩중",
+            "노라무 이제 다 분할매수끝아서",
+            "노라무 여기서 손절 2퍼잡고 가는거야 \n\n손절나오면 자리보다가 저점올리면 롱타는거고"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10115454254-structure",
+        "source_url": "https://www.fmkorea.com/10115454254",
+        "document_srl": "10115454254",
+        "title": "씁박 나털고가니?",
+        "posted_at_kst": "2026-07-22T09:14:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-23T03:16:39+09:00",
+        "source": "fmkorea_scraper",
+        "side": "exit",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "stopped_out",
+            "has_chart_image"
+        ],
+        "raw_quote": "ㅠㅠㅠ\n보수적으로 할껄그랬네\n아쉽다\n\n[댓글] 틀려서 아쉽다고하는거임 / 오늘 시가 이탈하지않는선에서 더보세요 / 정유주 이쁘다 / 종목 물어봐도 답장 안함",
+        "symbol": "SNDK",
+        "symbol_note": "야간 숏 스위칭 이후 털림(손절/무효) 회고. 첨부 이미지 있음. 시가 이탈 여부 관망 코멘트",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "chart_image": "https://image.fmkorea.com/files/attach/new5/20260722/10115454254_192159903_c6600f9b1b80579ec177ae38f2f69e18.png.webp",
+        "author_comments": [
+            "로마네스크a 드실만하시네 추카추카",
+            "내가사면올라 넹 틀려서 아쉽다고하는거임",
+            "너무더어어어워 오일은 뭐 \n\n여기서 말고 나중에 말해드림",
+            "Ballo ㅊㅋ",
+            "정유주 이쁘다",
+            "로마네스크a 이터닉스 먹었어요? 대단하시네",
+            "노라무 오늘 시가 이탈하지않는선에서 더보세요",
+            "안뇽하세영 그거는...그냥 댓글로 한말이라 뭐 햇제는 굳이?",
+            "오늘밤우주숏 이터로 많이 드셨나보네 \n\n축하드려요",
+            "알상무야호 넹",
+            "알상무야호 종목은 물어보셔도 답장안해드려요"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": "stop"
+    },
+    {
+        "id": "fm-10115561901-structure",
+        "source_url": "https://www.fmkorea.com/10115561901",
+        "document_srl": "10115561901",
+        "title": "09:57",
+        "posted_at_kst": "2026-07-22T09:59:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-23T03:16:39+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "do_nothing",
+            "short_holding"
+        ],
+        "raw_quote": "아무것도 안할겁니다\n하닉 200때렸어요 (손절할거면 200에 하라고 말했구요)\n지금 타고있는건 숏이구\n이거 손절나가면 관망때릴겁니다\n지금자리는 그 어떤것도 안하는게 유리합니다\n하닉 고점 230→200\n샌디스크는 조금 많이 틀리긴했는데 오버슈팅 조심하라고는 했음\n조언은 아무것도하지마세여\n\n[댓글] 20%~30% 1차 / 70~80% 2차 = 비중 분할(가격 아님) / 오버슈팅까지 본다고 말함",
+        "symbol": "SNDK",
+        "symbol_note": "숏 홀딩 중·손절 나면 관망. 신규 매매 금지. 샌디 오버슈팅 오판 인정. (70은 2차 비중%이지 가격 아님)",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "author_comments": [
+            "나는 경고했어",
+            "홀나오진영진 1030",
+            "치트키 이번주 ㅇ0상중",
+            "레블스플랜 관세때부터 싸하다가 \n\n대볌인 브리핑할때 뭔 주교 대하듯이 하니까 거기서 느꼈지",
+            "멘탈리티 여기 규칙위반이라",
+            "발락 애초에 오버슈팅까지 본다고 말했습니다.\n\n오늘 아침에 잡았어요",
+            "노라무 20% ~ 30% 1차매수 \n70~80% 2차매수"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": "observe"
+    },
+    {
+        "id": "fm-10115561901-hynix-200",
+        "source_url": "https://www.fmkorea.com/10115561901",
+        "document_srl": "10115561901",
+        "title": "09:57",
+        "posted_at_kst": "2026-07-22T09:59:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-23T03:16:39+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "stop_price": 2000000,
+        "stop_rule": "text_hynix_200_hit",
+        "tags": [
+            "parsed_stop",
+            "from_post_comments",
+            "level_confirmed"
+        ],
+        "raw_quote": "하닉 200때렸어요 (손절할거면 200에 하라고 말했구요)\n제가 하닉 고점을 230보다가 200으로 줄였어요",
+        "symbol": "000660.KS",
+        "symbol_note": "SK하이닉스 200(200만) 도달 확인. 고점 전망 230→200 하향. 손절 후보 레벨",
+        "related_underlying": "000660.KS",
+        "product_type": "kr_stock",
+        "author_comments": [
+            "나는 경고했어",
+            "발락 애초에 오버슈팅까지 본다고 말했습니다.\n\n오늘 아침에 잡았어요"
+        ],
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10118100479-structure",
+        "source_url": "https://www.fmkorea.com/10118100479",
+        "document_srl": "10118100479",
+        "title": "조회수 뭐고",
+        "posted_at_kst": "2026-07-22T22:07:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-23T03:16:39+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "target_price": 1650,
+        "target_rule": "comment_watch_1650_break",
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "has_chart_image",
+            "level_watch"
+        ],
+        "raw_quote": "6.6만 실화가...\n\n[댓글] 저점 다지고 올리면 어깨 / 오버슈팅 / 손절 5% 휩쏘 / 보수적으로 1000깨짐 / 박스하단 / 돌파면 저점확인 롱 / 1650 뚫는지봐야됨",
+        "symbol": "SNDK",
+        "symbol_note": "09:57 글 캡처 공유 + 샌디 구조 후속. 1650 돌파 여부 관전. 손절 5%(휩쏘). 첨부=10115561901 스크린샷",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "stop_percent": 5,
+        "chart_image": "https://image.fmkorea.com/./files/attach/new5/20260722/10118105735_192159903_101eba5b0b27331d27eafde96ec73f2f.jpg",
+        "author_comments": [
+            "노라무 ㅅㅂ 이런거 돈주고도 못보는데 너무짜네",
+            "조회수가 6.6인데 포가 너무짜다",
+            "노라무 흑흐규ㅠㅠ",
+            "내가 좀 쉽게 글을 쓰는 푠이긴해 \n\n그럼죽어 문법으로 쓰니까",
+            "저점 다지고 올리면 어깨가 나올듯?",
+            "노라무 아무리봐도 오버슈팅인데...\n\n저기를 그냥뚫을수가없는디 \n\n앞에 고가라인 터치이후에 과매수가 나온건가",
+            "어차피 손절나갈려면 5%는 빠져야됨 ㅋㅋ \n\n휩쏘까지 생각해서 천천히잡은거라",
+            "킬베로스 답은 다알려준거깉은데",
+            "ㅅㅂ 잡담인데 저게맞나",
+            "허언증 헉 거기는좀",
+            "ADI 거기도 좀...",
+            "루멘텀 ㄱㅡ",
+            "황밸러 어허 유도하지마쇼!",
+            "노란무 그럴수도 \n\nㄱㅡ",
+            "손절왕김쏙쓰 어서오세여",
+            "연기금. 예?\n\n거기는 괜찮아요",
+            "손흥민팬보이 보수적으로본거라 정확하게 하면 1000깨짐",
+            "허리자세교정 간다고 확정인게아니라 갈수도있다임",
+            "허언증 허억",
+            "티원월즈우승기원 박스하단찍긴했는데 \n\n이거 반등이 나오는 구간이아님 차라리 아래로 밀고 거기서 저점만들지",
+            "티원월즈우승기원 큰 반등을 노리긴어렵고 \n\n반등은 나올수있음",
+            "돌파나오네 \n\n이라믄 저점확인하고 롱타야겠당",
+            "노라무 1650 뚫는지봐야됨"
+        ],
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10121007342-structure",
+        "source_url": "https://www.fmkorea.com/10121007342",
+        "document_srl": "10121007342",
+        "title": "흠.",
+        "posted_at_kst": "2026-07-23T18:33:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-27T13:15:28+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "flat"
+        ],
+        "raw_quote": "음.\n관망갈게요\nㅊ포지션 없어요\n\n[댓글] 지금은 숏이 더유리함 / 일단 숏이 유리함",
+        "symbol": "SNDK",
+        "symbol_note": "포지션 없음·관망. 분봉상 숏 유리 코멘트(샌디 맥락)",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "author_comments": [
+            "양쪽 포지션이 다 열려있네 \n\n옵션쪽봐야될듯?",
+            "노라무 어제기준 분봉으로는 롱이유리했고 지금은 숏이 더유리함",
+            "싸하네",
+            "노라무 일단 숏이 유리함",
+            "샐러맨더 ㅋㅋ",
+            "니게르 랄로 이론 참고"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": "observe"
+    },
+    {
+        "id": "fm-10122031277-structure",
+        "source_url": "https://www.fmkorea.com/10122031277",
+        "document_srl": "10122031277",
+        "title": "fhd",
+        "posted_at_kst": "2026-07-23T22:39:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-27T13:15:28+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": null,
+        "stop_price": 1550,
+        "stop_rule": "comment_break_1550",
+        "tags": [
+            "parsed_stop",
+            "from_post_comments",
+            "long_entry"
+        ],
+        "raw_quote": "네 롱볼게요\n\n[댓글] 어깨 만들겠네 / 1550 이탈시 손절 / 샌디 가네요",
+        "symbol": "SNDK",
+        "symbol_note": "샌디 롱. 1550 이탈 시 손절",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "author_comments": [
+            "어깨 만들겠네",
+            "1550 이탈시 손절잡고 해야겟당",
+            "역시 차트는 맞어~ \n\n샌디 가네요",
+            "흠 스큐를 살까"
+        ],
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10125998889-structure",
+        "source_url": "https://www.fmkorea.com/10125998889",
+        "document_srl": "10125998889",
+        "title": "toseltmzm",
+        "posted_at_kst": "2026-07-24T22:47:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-27T13:15:28+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": null,
+        "stop_price": 1480,
+        "stop_rule": "text_close_support_1480",
+        "target_price": 1800,
+        "target_rule": "comment_1800_after_support_green",
+        "tags": [
+            "parsed_target",
+            "parsed_stop",
+            "from_post_comments",
+            "conditional"
+        ],
+        "raw_quote": "1480부근 종가지지해주는지보고\n지지해주면 그 다음 캔들보면서 포지션정해야될듯\n\n[댓글] 1480 지지 후 다음봉 양봉이면 저점갱신 확인 후 샌디 1800불",
+        "symbol": "SNDK",
+        "symbol_note": "제목 자판오류(새디스크). 1480 종가 지지→다음봉 확인 후 롱. 목표가 1800",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "author_comments": [
+            "슬랙 그런 미친놈이 어디에있음 ㅋㅋ",
+            "1480 지지나온뒤에 다음봉 양봉뜨면 \n\n저점 갱신으로 확인하고 샌디스크 1800불찍으러 갈듯?"
+        ],
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10126096892-ionq",
+        "source_url": "https://www.fmkorea.com/10126096892",
+        "document_srl": "10126096892",
+        "title": "오랜만 추천",
+        "posted_at_kst": "2026-07-24T23:14:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-27T13:15:28+09:00",
+        "source": "fmkorea_scraper",
+        "side": "short",
+        "entry_price": null,
+        "stop_price": 5.5,
+        "stop_rule": "text_hold_above_5_5_for_short",
+        "tags": [
+            "parsed_stop",
+            "from_post_comments",
+            "short_rec",
+            "cancel_if_sndk_1480"
+        ],
+        "raw_quote": "양자 숏칠게요\nionz\n5.5불 이탈하지 않는선에서\n가능합니다.\n천천히 담으세요\n\n[조건] 샌디 오늘 1480 지지하면 취소",
+        "symbol": "IONQ",
+        "symbol_note": "IONQ(ionz) 숏. 5.5 이탈 시 무효. 샌디 1480 지지 시 숏 추천 일괄 취소",
+        "related_underlying": "IONQ",
+        "product_type": "us_stock",
+        "cancel_if": {
+            "symbol": "SNDK",
+            "level": 1480,
+            "rule": "support_holds"
+        },
+        "author_comments": [
+            "가치투자입니다.",
+            "슬랙 할머니도 패는데 \n\n다른걸못패겠나",
+            "샌디 이제 그만패고 다른애들좀 팰려고",
+            "미장 국장 ㅈㅈ \n\n당분간 롱안탈듯?",
+            "진류군 이야 정답",
+            "노라무 이미죽은애들 패는게 더맛있움\n\n더군다나 추천한거는 대시세가 깨지는자리",
+            "노라무 대신 샌디가 1480 지켜주면 다취소됨",
+            "나락 가보자잇"
+        ],
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10126096892-nbis",
+        "source_url": "https://www.fmkorea.com/10126096892",
+        "document_srl": "10126096892",
+        "title": "오랜만 추천",
+        "posted_at_kst": "2026-07-24T23:14:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-27T13:15:28+09:00",
+        "source": "fmkorea_scraper",
+        "side": "short",
+        "entry_price": null,
+        "stop_rule": "text_today_open_hold",
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "short_rec",
+            "cancel_if_sndk_1480"
+        ],
+        "raw_quote": "nbiz\n네비우스그룹 숏\n가능합니다.\n오늘시가 이탈하지않는선에서\n천천히 분할로 담으세요\n\n[조건] 샌디 오늘 1480 지지하면 취소",
+        "symbol": "NBIS",
+        "symbol_note": "NBIS(네비우스) 숏. 당일 시가 이탈 시 무효. 샌디 1480 지지 시 숏 추천 일괄 취소",
+        "related_underlying": "NBIS",
+        "product_type": "us_stock",
+        "cancel_if": {
+            "symbol": "SNDK",
+            "level": 1480,
+            "rule": "support_holds"
+        },
+        "author_comments": [
+            "가치투자입니다.",
+            "슬랙 할머니도 패는데 \n\n다른걸못패겠나",
+            "샌디 이제 그만패고 다른애들좀 팰려고",
+            "미장 국장 ㅈㅈ \n\n당분간 롱안탈듯?",
+            "진류군 이야 정답",
+            "노라무 이미죽은애들 패는게 더맛있움\n\n더군다나 추천한거는 대시세가 깨지는자리",
+            "노라무 대신 샌디가 1480 지켜주면 다취소됨",
+            "나락 가보자잇"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10126096892-soxs",
+        "source_url": "https://www.fmkorea.com/10126096892",
+        "document_srl": "10126096892",
+        "title": "오랜만 추천",
+        "posted_at_kst": "2026-07-24T23:14:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-27T13:15:28+09:00",
+        "source": "fmkorea_scraper",
+        "side": "short",
+        "entry_price": 40,
+        "stop_price": 40,
+        "stop_rule": "text_soxs_hold_above_40",
+        "tags": [
+            "parsed_entry",
+            "soxs_line_price",
+            "from_post_comments",
+            "cancel_if_sndk_1480",
+            "from_leveraged_proxy"
+        ],
+        "raw_quote": "SOXS\n40불 이탈하지않는선에서\n천천히 분할매수 가능합니다.\n\n[조건] 샌디 오늘 1480 지지하면 취소",
+        "symbol": "MU",
+        "symbol_note": "SOXS 분할매수(반도체 숏 바이어스). 40 이탈 무효. 샌디 1480 지지 시 숏 추천 일괄 취소",
+        "related_underlying": "MU",
+        "product_type": "us_stock",
+        "source_instrument": "SOXS",
+        "leveraged_entry_price": 40,
+        "leveraged_stop_price": 40,
+        "cancel_if": {
+            "symbol": "SNDK",
+            "level": 1480,
+            "rule": "support_holds"
+        },
+        "author_comments": [
+            "가치투자입니다.",
+            "슬랙 할머니도 패는데 \n\n다른걸못패겠나",
+            "샌디 이제 그만패고 다른애들좀 팰려고",
+            "미장 국장 ㅈㅈ \n\n당분간 롱안탈듯?",
+            "진류군 이야 정답",
+            "노라무 이미죽은애들 패는게 더맛있움\n\n더군다나 추천한거는 대시세가 깨지는자리",
+            "노라무 대신 샌디가 1480 지켜주면 다취소됨",
+            "나락 가보자잇"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "proxy_bias": "short"
+    },
+    {
+        "id": "fm-10126096892-sndk-cancel",
+        "source_url": "https://www.fmkorea.com/10126096892",
+        "document_srl": "10126096892",
+        "title": "오랜만 추천",
+        "posted_at_kst": "2026-07-24T23:14:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-27T13:15:28+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "stop_price": 1480,
+        "stop_rule": "cancel_shorts_if_support",
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "gate_level"
+        ],
+        "raw_quote": "위 종목들의 매수조건은\n샌디가 오늘 1480 지지해주면\n취소됩니다.",
+        "symbol": "SNDK",
+        "symbol_note": "IONQ/NBIS/SOXS 숏·매수 추천의 취소 조건: 1480 지지",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "author_comments": [
+            "가치투자입니다.",
+            "슬랙 할머니도 패는데 \n\n다른걸못패겠나",
+            "샌디 이제 그만패고 다른애들좀 팰려고",
+            "미장 국장 ㅈㅈ \n\n당분간 롱안탈듯?",
+            "진류군 이야 정답",
+            "노라무 이미죽은애들 패는게 더맛있움\n\n더군다나 추천한거는 대시세가 깨지는자리",
+            "노라무 대신 샌디가 1480 지켜주면 다취소됨",
+            "나락 가보자잇"
+        ],
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10126186138-structure",
+        "source_url": "https://www.fmkorea.com/10126186138",
+        "document_srl": "10126186138",
+        "title": "롱 이제 안봅니다.",
+        "posted_at_kst": "2026-07-24T23:41:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-27T13:15:28+09:00",
+        "source": "fmkorea_scraper",
+        "side": "short",
+        "entry_price": null,
+        "stop_price": 1480,
+        "stop_rule": "short_if_fails_1480_else_long",
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "conditional"
+        ],
+        "raw_quote": "네 올숏만 볼게요\n조건은\n샌디가 1480 지켜주지못하면\n\n[댓글] 1480 지켜주면 몰라용/롱봐야죠 / 오라클 나락",
+        "symbol": "SNDK",
+        "symbol_note": "1480 실패 시 올숏. 지키면 롱 재개 가능. ORCL 숏 부수 언급",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "author_comments": [
+            "대신 조건이 있어용 \n\n샌디가 오늘 1480 지켜주면 몰라용",
+            "노라무 지켜주면 롱봐야죠",
+            "올 숏올숏\n\n오라클 나락가즈아",
+            "티원월즈우승기원 그냥"
+        ],
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10126197768-skyq",
+        "source_url": "https://www.fmkorea.com/10126197768",
+        "document_srl": "10126197768",
+        "title": "비가오는~거리에~",
+        "posted_at_kst": "2026-07-24T23:46:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-27T13:15:28+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "reveal",
+            "scale_out"
+        ],
+        "raw_quote": "혼자 버려진 채로~\n\n[댓글] 매집하던 개잡주는 스카이쿼리 / 40퍼익절 / 1480 지지나오면 숏추천 다 취소",
+        "symbol": "SKYQ",
+        "symbol_note": "스카이쿼리(SKYQ) 매집 공개. 40% 익절 언급. (밈 이미지 첨부)",
+        "related_underlying": "SKYQ",
+        "product_type": "us_stock",
+        "take_profit_percent": 40,
+        "author_comments": [
+            "1480 지지나오면 다른애들 숏추천한거 다 취소입니다.",
+            "글 하나만 올려야겠네 \n\n관리하기 빡세노",
+            "매집하던 개잡주는 스카이쿼리였습니다\n\n짜잔!",
+            "노라무 40퍼익절오ㅓㄴ",
+            "No.1문동주 슼은 괜찮"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10134640552-hynix",
+        "source_url": "https://www.fmkorea.com/10134640552",
+        "document_srl": "10134640552",
+        "title": "sk 하이닉스 차트분석",
+        "posted_at_kst": "2026-07-27T08:06:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-27T13:15:28+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": 1400000,
+        "entry_price_alt": 1350000,
+        "entry_price_ref": "buy_zone_140_to_135_man",
+        "entry_price_high": 1590000,
+        "target_price": 1900000,
+        "target_rule": "tech_bounce_then_fail_190",
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "has_chart_image",
+            "buy_zone",
+            "no_buy_now"
+        ],
+        "raw_quote": "지금은? 안받는다\n올라가도? 쳐맞고 빠질자리\n받아볼려면 159 / 140~135 두번 나눠\n못해도 190은 때리지않을까?\n매물 떡벽, 저점 안믿음\n\n[댓글] 하닉 140만원대 오면 삼 / SDI 35만 / 네이버 20만아래 / 현대차 30만아래 / SKT 7만대",
+        "symbol": "000660.KS",
+        "symbol_note": "지금 안받음(기술반등 후 하락). 매수존 159만·140~135만 분할. 반등 시 190만 가능하나 떡벽",
+        "related_underlying": "000660.KS",
+        "product_type": "kr_stock",
+        "chart_image": "https://image.fmkorea.com/files/attach/new5/20260727/10134640552_192159903_6b8afb03c43182ff38abbd28af27b8c9.png.webp",
+        "author_comments": [
+            "쓰읍 그냥 여기에 의견을 좀 말해줄게\n\n삼성sdi 35만원 오면 삼 \n\nsk하이닉스 140만원대 오면 삼 \n\n네이버 20만원 아래오면 그냥 계속삼 \n\n현대차는 30만원 아래오면삼 \n\nsk텔레콤은 7만원대? 오면 비중좀 넣어야지",
+            "쓰읍 발언 수정좀 해도되나...\n\n5700뷰는 취소좀 해도될까요...?\n\n선생님들",
+            "노라무 아 잠만잠만 \n\n6128~5835 이렇게 수정좀할게용",
+            "노라무 또말하지만 희망을 버리셈 \n\n냉정하게 판단하셈\n\n돈 앞에서는 희망이란 단어는 무의미함.\n\n돈때문에 가족도버리는데 \n\n쌩판모르는남들을 살려줄이유가?",
+            "sk이노베이션 자리가 좀 좋아보이네 \n\n내려오면",
+            "좋은것만 먹고자라면 애버린다.",
+            "데인저클로즈 이런 의견이 나오지않을정도로 빠지는게 조정임",
+            "대신에 한번정도는 더 올려줄자리가 보이긴함 .\n\n하이닉스보다 삼전이 더 좋아보이는건 기분탓?",
+            "노라무 자리가 보이는거지 간다는게아님",
+            "꾸벅123 네이버는 20만원 아래에서 천천히 모아 \n\n지금 내가 유일하게 국장하는게 \n\n네이버랑 조선주들인데 \n\n다 길게보는거임",
+            "노라무 누가 박살나서 안한대 \n\n나는 항상 장기는 4~5년이라니까",
+            "노라무 추가ㅓㄱ으로 sk텔레콤까찌? \n\n이정도?",
+            "송서래 그냥? ㅋㅋ",
+            "네이버는 조롱해도 \n\n20만원 아래에서 천천히 모으셈 \n\n최소 2~3년임",
+            "이게막상 지금안사면 존나갈거같고 \n\n막 어떠카지!!! \n\n이러는데 결국 내려옴 \n\n그때사면됨 \n\n시간을 못기다리겠다? \n\n그럼 ㅅㅂ 바카라나 하러가샘"
+        ],
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10134640552-basket",
+        "source_url": "https://www.fmkorea.com/10134640552",
+        "document_srl": "10134640552",
+        "title": "sk 하이닉스 차트분석",
+        "posted_at_kst": "2026-07-27T08:06:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-27T13:15:28+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "long_term_basket"
+        ],
+        "raw_quote": "SDI 35만 / 네이버 20만아래 천천히(2~3년) / 현대차 30만아래 / SKT 7만대 / 조선주 장기 / 6128~5835로 뷰 수정(5700 취소)",
+        "symbol": "KR_MARKET_VIEW",
+        "symbol_note": "국장 장기 매수존 바구니(댓글). 자리가 보이는 것이지 간다는 뜻 아님",
+        "related_underlying": null,
+        "product_type": "market_view",
+        "levels": {
+            "006400.KS": 350000,
+            "035420.KS": 200000,
+            "005380.KS": 300000,
+            "017670.KS": 70000,
+            "view_band": [
+                5835,
+                6128
+            ]
+        },
+        "author_comments": [],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "market_scenario_no_ticker"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10134709499-structure",
+        "source_url": "https://www.fmkorea.com/10134709499",
+        "document_srl": "10134709499",
+        "title": "이거는 그냥 장난식 잡담인데",
+        "posted_at_kst": "2026-07-27T08:38:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-27T13:15:28+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "not_recommendation"
+        ],
+        "raw_quote": "국장에 플리토라는 종목이 보여서 차트를봤는데\n이거 이놈 수상한데?\n추천아니고\n나중에 봤을때 많이 올라가있을거같음\n한 최소1년뒤?",
+        "symbol": "300080.KQ",
+        "symbol_note": "플리토 — 추천 아님·최소 1년 관점 잡담",
+        "related_underlying": "300080.KQ",
+        "product_type": "kr_stock",
+        "author_comments": [
+            "떨공삼 헉 조떄따!!!!!!!!!!",
+            "5줌마시고싶어요 ))(())(("
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10134954955-hynix-inv",
+        "source_url": "https://www.fmkorea.com/10134954955",
+        "document_srl": "10134954955",
+        "title": "맛만 볼까요? 숏충이 출격",
+        "posted_at_kst": "2026-07-27T10:26:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-27T13:15:28+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": 12000,
+        "entry_price_alt": 12200,
+        "entry_price_ref": "buy_zone_12000_12200",
+        "target_price": 15000,
+        "target_rule": "text_above_15000",
+        "stop_percent": 5,
+        "stop_rule": "percent_5",
+        "tags": [
+            "parsed_entry",
+            "parsed_target",
+            "from_post_comments",
+            "from_leveraged_proxy",
+            "taste_only",
+            "short_term"
+        ],
+        "raw_quote": "SOL sk 하이닉스 인버스 두배\n진입가능해보입니다.\n12000~12200 부근에서 잡는게 유리하고\n손절은 한 -5%잡으시고\n15000원 위에서 익절하는걸로\n돌파매매 느낌\n오래 안걸리고 이번주안에 매도\n\n[댓글] 맛만 / 인버스 두배 / 40% 가능?",
+        "symbol": "0197X0.KS",
+        "symbol_note": "SOL 하닉선물 인버스2X(0197X0). 맛만. 본주 보유하며 같이 하지 말 것. 하이닉스 숏 바이어스",
+        "related_underlying": "000660.KS",
+        "product_type": "kr_leveraged_etf",
+        "source_instrument": "0197X0.KS",
+        "leveraged_entry_price": 12100,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": 15000,
+        "author_comments": [
+            "뭐 그런말하던데 \n\n먹으면 혼자먹지 남한테 말안한다 \n\n그래 \n\n국장 떠났으니까 안먹어서 말해주는건 괜찮지?\n\n사실맞는말이긴해 \n\n그래서 예전에는 내가 남는찌끄래기 추천했음 \n\n인정 ㅋㅋㅋ\n\n지금은 메인 추천해주잖아 한잔해",
+            "맛만 보세요 \n\n이걸로 손해본거 좀 매꾸시고 \n\n본주가지고있으면서 이거 하는사람은 없겠지 ㅋㅋ",
+            "고작 이거하는데 손발이 발발발 떨리고 불안하면 님 그릇에 안맞게 돈을운용하는거임 \n\nㅇㅇ \n\n참고하셈",
+            "인버스 두배 추천을 지금하는 사람은 나바께없지않을까",
+            "국장은 다른거 말고 화장품만사라했지 \n\n으이?!!",
+            "과연...135만원대가올것인지",
+            "노라무 잘하면 40%정도 먹을수도?",
+            "오일 분봉이 심상치않네",
+            "5줌마시고싶어요 9월은 맞음 \n\n8월상으로 보면 차트가 애매하게 안맞아서",
+            "5줌마시고싶어요 너무 대놓고 / 정석적인 \n\n이런걸 안좋아함",
+            "노라무 또 말하지만 \n\n소문난 잔치집에 먹을음식 없다.",
+            "5줌마시고싶어요 옛말 잘 찾아보셈 \n\n거기서 심리적인건 다 배웠음 \n\n나는 \n\n그냥 나이먹으면서 (사실 얼마 안먹긴했는데)\n\n느끼는건 어르신들이 하는말은 틀린게없다. 임 \n\n옛말에 틀린건 하나도없음 ㅇㅇ\n\n잘 찾아보셈 유명한걸로",
+            "보보스부거 사진"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10140416132-structure",
+        "source_url": "https://www.fmkorea.com/10140416132",
+        "document_srl": "10140416132",
+        "title": "그동안의 기록",
+        "posted_at_kst": "2026-07-28T15:46:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-29T17:23:15+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "retrospective",
+            "from_post_comments",
+            "image_only"
+        ],
+        "raw_quote": "그동안의 기록\n\n무섭도숏...\n글릭 마지막 문장은 원화에서 달러임\n글릭 이게 좀 아쉽긴함 \n\n나는 더올라갈거같았는데 \n\n빼버리더라구 \n\n국장 살아나기전까지는 환전안할건데 \n\n조금씩 이라도 환전은해두셈",
+        "symbol": "US_MARKET_VIEW",
+        "symbol_note": "과거 숏뷰 글(예: 9989208253) 기록 모음 — 신규 진입가 없음",
+        "related_underlying": null,
+        "product_type": "market_view",
+        "author_comments": [
+            "무섭도숏...",
+            "글릭 마지막 문장은 원화에서 달러임",
+            "글릭 이게 좀 아쉽긴함 \n\n나는 더올라갈거같았는데 \n\n빼버리더라구 \n\n국장 살아나기전까지는 환전안할건데 \n\n조금씩 이라도 환전은해두셈"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "market_scenario_no_ticker"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "stop_price": null,
+        "target_price": null,
+        "enriched_at_kst": "2026-07-29T17:27:55+09:00"
+    },
+    {
+        "id": "fm-10140676456-oil",
+        "source_url": "https://www.fmkorea.com/10140676456",
+        "document_srl": "10140676456",
+        "title": "뭐 여러가지 의견이있는데",
+        "posted_at_kst": "2026-07-28T16:41:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-29T17:23:19+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": 80,
+        "tags": [
+            "parsed_entry",
+            "parsed_target",
+            "from_post_comments",
+            "oil"
+        ],
+        "raw_quote": "뭐 여러가지 의견이있는데\n이거 기름쪽 악재터질거같은데 \n\n나만그런가 \n\n80불정도 지지나오면 \n\n이거 전고때리러감\n \n뭘까 \n\n설마 가겠니싶긴한데 \n\n뭐지?\n리리리자로 차트대로 안가면 내가 뭘로 돈벌어먹을까...\n\n나 원래 선물위주로햇었음\n하나질문 오일은 선물입니다...\n건축킹 차트잘보면 다보임 ㅋㅋ\n\n옵션도 어디에걸려있",
+        "symbol": "CL=F",
+        "symbol_note": "WTI 원유 선물 — 80불 지지 후 전고(차트 103) 시나리오",
+        "related_underlying": "CL=F",
+        "product_type": "commodity_futures",
+        "author_comments": [
+            "리리리자로 차트대로 안가면 내가 뭘로 돈벌어먹을까...\n\n나 원래 선물위주로햇었음",
+            "하나질문 오일은 선물입니다...",
+            "건축킹 차트잘보면 다보임 ㅋㅋ\n\n옵션도 어디에걸려있는지 대충보이고",
+            "너무더어어어워 그 안에 님이 들어갈수도 ㄷㄷ",
+            "박현빈샤방샤방 빗각은 박스권 기법 파생형임",
+            "노라무 기본에만 충실해도 다른기법안씀 ㅋㅋ",
+            "박현빈샤방샤방 이번에 올라간게 비 정상적으로 올라간거지 \n\n원래는 수평이 근본임",
+            "박현빈샤방샤방 빗각도 맞음 \n\n그거해도됨"
+        ],
+        "learning_use": "needs_review",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "unclassified_product_type"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "entry_price_ref": "support_80",
+        "target_price": 103,
+        "target_rule": "chart_level_103_prev_high_zone",
+        "stop_price": null,
+        "enriched_at_kst": "2026-07-29T17:27:55+09:00"
+    },
+    {
+        "id": "fm-10140804189-structure",
+        "source_url": "https://www.fmkorea.com/10140804189",
+        "document_srl": "10140804189",
+        "title": "팁 하나 알려주자면",
+        "posted_at_kst": "2026-07-28T17:09:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-29T17:23:31+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "index_view",
+            "no_long_this_week"
+        ],
+        "raw_quote": "팁 하나 알려주자면\n꽉찬 장대음봉 나오고 +3거래일뒤에 보셈 \n\n그전까지는 그 음봉때문에 올라가지도못함 ㅇㅇ\n\n지수 더뺴야된다 \n\n그래야 올라갈수있어 \n\n이번주는 롱탈생각하지마셈 \n\n내가말한곳까지 오면 그때부터 천천히해도 늦지않음 \n\n나스닥 선물기준 \n\n26800아래와야됨 \n\nsqqq 괜찮다고하는 이유가있음 \n이제 뷰안올",
+        "symbol": "SQQQ",
+        "symbol_note": "지수 더 빼야·이번주 롱 탈 생각 금지. SQQQ 괜찮다 함. NQ 26800 아래 조건. (댓글 SOXS/하닉인버스는 보조)",
+        "related_underlying": "SQQQ",
+        "product_type": "us_etf",
+        "author_comments": [
+            "이제 뷰안올려야징 \n\n나 쉴게~",
+            "노라무 8월은 알아서 하세요들~",
+            "코지D 똥글은 싸러올게",
+            "으라짜챠 휩쏘라 생각하는거지?\n\n그리고 내가 좀 일찍봄\n \n그래서 \n\n분할로 들어가는거고 \n\nsk하이닉스 인버스 나는 가지고잇음 ㅇㅇ",
+            "5줌마시고싶어요 양봉 안뜰수도있음 \n\n반도체 힘좋아서 저렇게 예측한건데 \n\n이러면 힘 다빠지지 \n\n쏙스 지금도 자리 괜찮은거보니까 \n\n더빠지겠다",
+            "진류군 누가그래",
+            "진류군 지금 쏚스기준 돌파자리인데",
+            "노라무 노이즈는 나올수있겠지만 큰 추세는 바뀌지않음",
+            "꾸벅123 나는 책을 추천안하는데 \n\n아마 심법관련책 은 추천했음",
+            "sseg 이제 뭘해도 \n\n도파민이 안돌아...\n\n여행은 이미 안간지 오래고 \n\n다른거 뭘해도 \n\n이미...ㅠㅠ",
+            "Speyside 애나 키울까",
+            "5줌마시고싶어요 보육원에 달마다 돈 보내는데 \n\n흠...입양을할까",
+            "5줌마시고싶어요 결혼은 하기싫은딩",
+            "필동면옥 남녀평등 어디갔노",
+            "M.Mudryk ㅎㅎ",
+            "판타 반등주겠지?",
+            "판타 안줄수도있고",
+            "허리자세교정 비중조절잘하면 ?",
+            "snxx는 6.8불대 오지않을까",
+            "로드웰 예전에 했음 \n\n지금은 안해 미장만해도 벅참",
+            "롯숭이 어떤 재료 일지는 세팅은 해두지 \n\n뉴스보고",
+            "노라무 근데 지금은 재료장이 아니라 차트장이라 ㅋㅋ",
+            "sseg 4~6월이 재료장입니다만.",
+            "악마의대변인 \"135\"",
+            "노라무열혈팬 ㅁ노노",
+            "드롤링 부산아이다",
+            "악마의대변인 ㄹㅇㅋㅋ"
+        ],
+        "source_instrument": "SQQQ",
+        "leveraged_entry_price": null,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "stop_price": null,
+        "target_price": null,
+        "proxy_bias": "mixed",
+        "exclude_price_label": true,
+        "learning_use": "structure_only",
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "level_note": "나스닥 선물 26800 아래 와야 천천히 롱 검토",
+        "enriched_at_kst": "2026-07-29T17:27:55+09:00"
+    },
+    {
+        "id": "fm-10142556015-sndk",
+        "source_url": "https://www.fmkorea.com/10142556015",
+        "document_srl": "10142556015",
+        "title": "롱",
+        "posted_at_kst": "2026-07-28T23:10:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-29T17:23:51+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": 1007,
+        "tags": [
+            "parsed_entry",
+            "from_post_comments",
+            "buy_zone"
+        ],
+        "raw_quote": "롱\n샌디 1007~978\n\n하닉 135\n\n적어주고갈게",
+        "symbol": "SNDK",
+        "symbol_note": "샌디 롱 구간 1007~978",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "author_comments": [
+            "검사머 오 티케팅함?"
+        ],
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "entry_price_alt": 978,
+        "entry_price_ref": "buy_zone_1007_978",
+        "stop_price": null,
+        "target_price": null,
+        "enriched_at_kst": "2026-07-29T17:27:55+09:00"
+    },
+    {
+        "id": "fm-10142556015-hynix",
+        "source_url": "https://www.fmkorea.com/10142556015",
+        "document_srl": "10142556015",
+        "title": "롱",
+        "posted_at_kst": "2026-07-28T23:10:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-29T17:23:51+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": 1350000,
+        "tags": [
+            "parsed_entry",
+            "from_post_comments",
+            "buy_zone"
+        ],
+        "raw_quote": "롱\n샌디 1007~978\n\n하닉 135\n\n적어주고갈게",
+        "symbol": "000660.KS",
+        "symbol_note": "하닉 135(135만) 롱 자리",
+        "related_underlying": "000660.KS",
+        "product_type": "kr_stock",
+        "author_comments": [
+            "검사머 오 티케팅함?"
+        ],
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "entry_price_ref": "text_level_135_만원",
+        "stop_price": null,
+        "target_price": null,
+        "enriched_at_kst": "2026-07-29T17:27:55+09:00"
+    },
+    {
+        "id": "fm-10144806677-hynix",
+        "source_url": "https://www.fmkorea.com/10144806677",
+        "document_srl": "10144806677",
+        "title": "결국 이렇게 되네요",
+        "posted_at_kst": "2026-07-29T14:19:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-29T17:23:58+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "washout",
+            "no_leverage",
+            "oversold_long"
+        ],
+        "raw_quote": "결국 이렇게 되네요\n6월 23일~ 7월 29일 오늘까지 \n\n결국 옵니다.\n\n기다리면 원하는 가격이옵니다.\n\n휩쏘까지 생각했을떄 \n\n120자리까지 생각은했어요 \n\n근데 진짜 휩쏘까지 나오네요 \n\n서킷 두번걸리고 난리도 아닙니다....\n\n저는 베팅할겁니다. \n\n과매도 맞습니다. \n\n다만 혹시모를 또한번의 하락이 한번정도는 나",
+        "symbol": "000660.KS",
+        "symbol_note": "6/23 분석→7/29 휩쏘. 120만 자리까지 염두. 과매도 롱 베팅. 레버 금지. 추가하락 대비 예수금",
+        "related_underlying": "000660.KS",
+        "product_type": "kr_stock",
+        "author_comments": [
+            "대신 레버는 금지입니다.",
+            "저기에 타고있다고 생각해봐요 ㅋㅋㅋ\n\n어휴 무섭다.",
+            "나로호호 내가 왜 누나야"
+        ],
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "stop_price": 1200000,
+        "stop_rule": "washout_thought_120_만원",
+        "target_price": null,
+        "enriched_at_kst": "2026-07-29T17:27:55+09:00"
+    },
+    {
+        "id": "fm-10144880503-long-ramu",
+        "source_url": "https://www.fmkorea.com/10144880503",
+        "document_srl": "10144880503",
+        "title": "지금자리는 쫄면 병신임",
+        "posted_at_kst": "2026-07-29T14:35:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-07-29T17:24:11+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "long_ramu",
+            "execution_signal"
+        ],
+        "raw_quote": "지금자리는 쫄면 병신임\n롱라무 출격 \n\nㅇㅇㅇ \n약 한달만에 롱라무 출격 \n\n\"두둥\"\n망토까지 3만남았내ㅔ\n슬랙 그건좀 ㅁ\n\n나는 언제쉼\n나는노예입니다 이게 대하락?\n블핑지수제니 그래야 털지\n뽀득뽀도득 이제는 좀 비추임 \n\n내려오는거 롱으로 받아먹을자리 보는게 이득\n페라쟈 f5 많이누르는분들이 많아요 ㅋㅋ\n허언증 씁박 \n",
+        "symbol": "000660.KS",
+        "symbol_note": "롱라무 출격. 직전 글 하닉 135만·휩쏘 120만·샌디 1007~978 맥락의 실행 신호(절대가 재기재 없음)",
+        "related_underlying": "000660.KS",
+        "product_type": "kr_stock",
+        "author_comments": [
+            "약 한달만에 롱라무 출격 \n\n\"두둥\"",
+            "망토까지 3만남았내ㅔ",
+            "슬랙 그건좀 ㅁ\n\n나는 언제쉼",
+            "나는노예입니다 이게 대하락?",
+            "블핑지수제니 그래야 털지",
+            "뽀득뽀도득 이제는 좀 비추임 \n\n내려오는거 롱으로 받아먹을자리 보는게 이득",
+            "페라쟈 f5 많이누르는분들이 많아요 ㅋㅋ",
+            "허언증 씁박 \n\n예로부터 한화에는 돈걸지말라고 으르신들이 말했다",
+            "회킬러 어르신 말은 훈수가 아니라 농축된 삶의 진리다"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "stop_price": null,
+        "target_price": null,
+        "enriched_at_kst": "2026-07-29T17:27:55+09:00"
+    },
+    {
+        "id": "fm-10148442533-hynix",
+        "source_url": "https://www.fmkorea.com/10148442533",
+        "document_srl": "10148442533",
+        "title": "SK하이닉스",
+        "posted_at_kst": "2026-07-30T08:06:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-08-02T00:06:31+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": 1329000,
+        "tags": [
+            "parsed_entry",
+            "parsed_stop",
+            "from_post_comments",
+            "buy_zone"
+        ],
+        "raw_quote": "SK하이닉스\n차트상 저점구간에 온거같네요\n\n1329000원 근처에서 매수 하면좋을거같아요\n\n손절선은 어제 1246000원 구간잡고 해보세요\n슬랙 할말하않.\n132터치는 한번 나올수있으셈~\n마나아라123 차트는 하닉이 더잘맞아요\n허언증 훠어!!!!!!\n지수추종이나해 트럼프사진이 올라오며\n\n???:비가오는날엔~\n와사비꽃게랑 ",
+        "symbol": "000660.KS",
+        "symbol_note": "하닉 저점구간. 132.9만 근처 매수, 손절 124.6만. 댓글: 132 터치 한 번 나올 수 있음",
+        "related_underlying": "000660.KS",
+        "product_type": "kr_stock",
+        "author_comments": [
+            "슬랙 할말하않.",
+            "132터치는 한번 나올수있으셈~",
+            "마나아라123 차트는 하닉이 더잘맞아요",
+            "허언증 훠어!!!!!!",
+            "지수추종이나해 트럼프사진이 올라오며\n\n???:비가오는날엔~",
+            "와사비꽃게랑 기대하고있어",
+            "노라무 주갤의 정상화를 실시하겠다."
+        ],
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "entry_price_ref": "text_1329000",
+        "stop_price": 1246000,
+        "stop_rule": "text_1246000_yesterday",
+        "target_price": null,
+        "enriched_at_kst": "2026-08-02T00:08:25+09:00"
+    },
+    {
+        "id": "fm-10154223876-oil",
+        "source_url": "https://www.fmkorea.com/10154223876",
+        "document_srl": "10154223876",
+        "title": "오일 좀빠지겠다",
+        "posted_at_kst": "2026-07-31T13:26:00+09:00",
+        "author": "노라무",
+        "symbol": "CL=F",
+        "side": "short",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "oil",
+            "level_update"
+        ],
+        "raw_quote": "오일 좀빠지겠다 이거 너무 급하게반등나왔네 저점올리면 모를까 오늘기준으로는 일단 80불은 꺠지겠네 이것만하고 why 이것만하고 별거아님 악마의대변인 근데 오일은 지금 바카라구간이라 나도 진짜 나도 모르긴함 방향성을 정하는구간이라 근데 일단 너무 급반등이나와서 아래로 갈거같다...이런거지 이건 틀릴수있움",
+        "product_type": "commodity_futures",
+        "learning_use": "needs_review",
+        "learning_reasons": [
+            "unclassified_product_type"
+        ],
+        "source": "fmkorea_scraper",
+        "author_comments": [
+            "이것만하고 why",
+            "이것만하고 별거아님",
+            "악마의대변인 근데 오일은 지금 바카라구간이라 나도 진짜 나도 모르긴함\n\n방향성을 정하는구간이라 근데 일단 너무 급반등이나와서 아래로 갈거같다...이런거지 이건 틀릴수있움"
+        ],
+        "collected_at_kst": "2026-08-02T00:06:35+09:00",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "stop_price": null,
+        "target_price": 80,
+        "target_rule": "break_below_80",
+        "level_note": "오늘 기준 80불 깨질 듯. 저점 올리면 모를까. 바카라(방향 정하는) 구간·틀릴 수 있음",
+        "symbol_note": "WTI — 급반등 과열 → 하방. 80 지지 붕괴 시나리오(직전 80지지 롱과 반대 업데이트)",
+        "related_underlying": "CL=F",
+        "enriched_at_kst": "2026-08-02T00:08:25+09:00"
+    },
+    {
+        "id": "fm-10155665489-structure",
+        "source_url": "https://www.fmkorea.com/10155665489",
+        "document_srl": "10155665489",
+        "title": "내가 보는 그림이 궁금하면",
+        "posted_at_kst": "2026-07-31T19:18:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-08-02T00:06:42+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "spy_compare"
+        ],
+        "raw_quote": "내가 보는 그림이 궁금하면\n에스피지 차트로 비교해서보셈\n선물 감사합니다.\n\n보내주신 선물들은 노라무 뱃살 국부펀드에 모일예정이며\n\n지방배당금 수령은 9월넷째주입니다.\n\n감사합니다.\n투키 쫄면 병신이라니까 \n\n무슨이슈있음?\n\n나 누워서 백수행동하느라 못봤어",
+        "symbol": "SPY",
+        "symbol_note": "에스피지(SPY) 차트로 비교해 보라는 구조 힌트. 절대가 타점 없음",
+        "related_underlying": "SPY",
+        "product_type": "us_etf",
+        "author_comments": [
+            "선물 감사합니다.\n\n보내주신 선물들은 노라무 뱃살 국부펀드에 모일예정이며\n\n지방배당금 수령은 9월넷째주입니다.\n\n감사합니다.",
+            "투키 쫄면 병신이라니까 \n\n무슨이슈있음?\n\n나 누워서 백수행동하느라 못봤어"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "stop_price": null,
+        "target_price": null,
+        "enriched_at_kst": "2026-08-02T00:08:25+09:00"
+    },
+    {
+        "id": "fm-10156545102-sndk",
+        "source_url": "https://www.fmkorea.com/10156545102",
+        "document_srl": "10156545102",
+        "title": "키야",
+        "posted_at_kst": "2026-07-31T22:50:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-08-02T00:06:53+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": 1172,
+        "tags": [
+            "parsed_entry",
+            "from_post_comments",
+            "support_test"
+        ],
+        "raw_quote": "키야\n바로올려야되는자리에서 이렇게 민다고?\n\n대단스\n노라무 고작 80퍼먹을려고 추천한거아님\n\n올인도박았는데\n병설유치원일진 1172 때리고 올라가는거 보세요\n\n어차피 평단 존나낮아서 쫄이유가없음\n익절할꺼면 털고 나가셈\n\n익절는 항상옳다",
+        "symbol": "SNDK",
+        "symbol_note": "바로 올려야 할 자리에서 밀림. 댓글: 1172 터치 후 상승. 익절은 항상 옳다",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "author_comments": [
+            "노라무 고작 80퍼먹을려고 추천한거아님\n\n올인도박았는데",
+            "병설유치원일진 1172 때리고 올라가는거 보세요\n\n어차피 평단 존나낮아서 쫄이유가없음",
+            "익절할꺼면 털고 나가셈\n\n익절는 항상옳다"
+        ],
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "exit_reason": null,
+        "entry_price_ref": "comment_1172_touch",
+        "stop_price": null,
+        "target_price": null,
+        "enriched_at_kst": "2026-08-02T00:08:25+09:00"
+    },
+    {
+        "id": "fm-10160571194-lesson1",
+        "source_url": "https://www.fmkorea.com/10160571194",
+        "document_srl": "10160571194",
+        "title": "차트 불법과외 -1편",
+        "posted_at_kst": "2026-08-01T23:02:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-08-02T00:14:50+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": 1120,
+        "tags": [
+            "parsed_entry",
+            "parsed_target",
+            "from_post_comments",
+            "technique_lesson",
+            "illegal_tutoring_1",
+            "box_after_breakout",
+            "candle_recipe",
+            "convergence_location"
+        ],
+        "raw_quote": "차트 불법과외 -1편\n내일알려드릴게 \n\n영웅문 점검이라 \n\n대충은 알고있으셈 \n\n내가 좋아하는 패턴은 다알지? \n\n장대양봉 이후 도지가 연속으로 뜨고 \n\n이후에 거래량없는 장대음봉 이후 바로 장대양봉뜨는거 \n\n이걸 굉장히 좋아함.\n\n뭐 물론 상황에 따라 다르지만 .\n\n보통은 올라간뒤(앞 매물대를  다 돌파한 뒤에 나오는)",
+        "symbol": "SNDK",
+        "symbol_note": "불법과외1편: 1120 터치 후 상승 선호, 1465 예상. 다음주 화~수. 기법 본문은 structure 태그",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "author_comments": [
+            "이런거 알려주는사람 없다? \n\n이유는 알지?\n\nㅇ이거 뭐 되게 별거아닌거같은데 \n\n원래는 알려주면 안되는거임",
+            "ㄱㄷ 추가 계속해볼께 \n\nㅅㅂ 토스증권으로하는중이라 머리아픔",
+            "존ㄴ나 어려운말 쓰면서 이러면 이렇고 저러면 저렇고 \n\n무슨 수치가 이렇고 \n\n보조지표는 최대한 많이써야되고 \n\n= 지루하고 현학적이고 사기꾼\n\n박스박스 \n수렴 \n박스 \n돌파 \n눌림 \n\n-쉽고 재밌음 진짜임",
+            "보조지표 2~3개면됨 \n\n여러개 무조건써야된다 ㅇㅈㄹ 하는새끼들은 사기꾼들임 \n\n님들이 그렇다는겡아니라 돈받고 파는 새끼들기준ㅇ임",
+            "국장ㅇ 에스피지 차트보셈",
+            "잡주의도로롱 다시는 앱장수렴에서 사지말도록",
+            "재승샷12 내 뷰 보기싫어?",
+            "윈드서플라이 ㅇ이수스페셜티케미칼 주봉으로보면 됩니다."
+        ],
+        "learning_use": "full",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "explicit_sndk_levels_plus_technique_lesson"
+        ],
+        "curated_at_kst": "2026-08-02T00:14:50+09:00",
+        "exit_reason": null,
+        "entry_price_ref": "text_1120_touch_then_lift",
+        "target_price": 1465,
+        "target_rule": "text_1465",
+        "stop_price": null,
+        "technique_summary": {
+            "favorite_candle": "장대양봉→도지연속→거래량없는장대음봉→즉시장대양봉",
+            "favorite_context": "앞 매물대 돌파 후(상승 후)에서만 선호. 하락 중 동일패턴은 승률 처참",
+            "convergence_rule": "수렴 돌파 추격 금지. 돌파 후 윗구간 박스 확인 후에야 롱. 박스 없으면 수렴차트여도 롱 안 봄",
+            "timeframe_bias": "일·주봉 수렴 > 분봉 수렴. 앱장·거래량 빈 수렴 불신. 저점대비 +40% 후 수렴 불신",
+            "example": "이수스페셜티케미칼 주봉"
+        },
+        "enriched_at_kst": "2026-08-02T00:16:04+09:00"
     }
 ]

@@ -329,7 +329,7 @@ final class AuthorPerspective
                 'invalidation' => $chartInv,
                 'target_hint' => $chartTarget,
                 'method' => 'noramu_half_retrace',
-                'method_label' => '노라무식: 고점·저점 중간 ±4% · 손절선=최근 저점',
+                'method_label' => '고점·저점 중간 ±4% · 손절선=최근 저점',
             ];
         }
 
@@ -346,7 +346,7 @@ final class AuthorPerspective
                 'invalidation' => $chartInv,
                 'target_hint' => $chartTarget,
                 'method' => 'digingonyou_fallback_chart',
-                'method_label' => '디깅온유: 글에 매수가 없어 차트 중간 가격을 임시 사용',
+                'method_label' => '기타: 글에 매수가 없어 차트 중간 가격을 임시 사용',
             ];
         }
 
@@ -384,7 +384,7 @@ final class AuthorPerspective
             'invalidation' => $inv,
             'target_hint' => $targetHint,
             'method' => 'digingonyou_declared_prices',
-            'method_label' => '디깅온유식: 글 매수가 구간 · 손절선=손절/매수가−5%',
+            'method_label' => '기타: 글 매수가 구간 · 손절선=손절/매수가−5%',
         ];
     }
 
@@ -568,8 +568,8 @@ final class AuthorPerspective
     ): string {
         if ($n === 0) {
             return sprintf(
-                '%s 탭: 이 종목 관련 최근 글이 없어 공통 차트 구조만 표시 (점수 %s, 행동 %s).',
-                $author,
+                '%s: 이 종목 관련 최근 글이 없어 공통 차트 구조만 표시 (점수 %s, 행동 %s).',
+                $this->displayAuthor($author),
                 $chartScore !== null ? (string) $chartScore : '—',
                 $chartAction !== '' ? $chartAction : '—'
             );
@@ -606,7 +606,7 @@ final class AuthorPerspective
 
         return sprintf(
             '%s 관점: 관련 글 %d건 → %s%s. %s. %s (공통 차트점수 %s)',
-            $author,
+            $this->displayAuthor($author),
             $n,
             $stanceKo,
             $levelBit,
@@ -652,7 +652,7 @@ final class AuthorPerspective
         }
 
         $sentence = sprintf(
-            '합침: 노라무=%s · 디깅온유=%s · 공통차트=%s. %s',
+            '합침: 차트=%s · 기타=%s · 공통차트=%s. %s',
             (string) ($noramu['author_action_label'] ?? $a),
             (string) ($dgo['author_action_label'] ?? $b),
             $chartAction !== '' ? $chartAction : '—',
@@ -660,6 +660,11 @@ final class AuthorPerspective
         );
 
         return ['agree' => $agree, 'sentence' => $sentence];
+    }
+
+    private function displayAuthor(string $author): string
+    {
+        return $author === '노라무' ? '차트' : ($author === '디깅온유' ? '기타' : $author);
     }
 
     /**

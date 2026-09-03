@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "lesson_id": "noramu_top_pattern_v1",
+  "importance": "critical",
+  "source": {
+    "document_srl": "10237234875",
+    "url": "https://www.fmkorea.com/10237234875",
+    "title": "새벽반 전용 고점판독기법",
+    "posted_at_kst": "2026-08-21T00:22:00+09:00",
+    "archive": "data/important_posts/10237234875.json",
+    "image_count": 11,
+    "comment_count": 137,
+    "author_comment_count": 11
+  },
+  "scope": [
+    "kr_stock",
+    "us_stock",
+    "daily",
+    "intraday"
+  ],
+  "thesis": "강한 상승 뒤 이전 고점을 돌파하지 못하고 고점을 낮춘 다음, 앞선 파동의 중심값과 하단을 시험하고 상승 추세선까지 이탈하면 이전 두 번째 파동 구간 아래로 밀릴 확률이 높아진다.",
+  "stages": [
+    {
+      "id": "prior_rally",
+      "meaning": "여러 파동으로 고점을 갱신해 온 선행 상승이 있어야 한다.",
+      "detector": "최근 65봉 저점 대비 주요 고점 상승률 18% 이상"
+    },
+    {
+      "id": "failed_break",
+      "meaning": "주요 고점 돌파에 실패하거나 근접한 뒤 밀린다.",
+      "detector": "주요 고점 뒤 후속 고점이 기존 고점의 102%를 넘지 않음"
+    },
+    {
+      "id": "lower_highs",
+      "meaning": "지켜 주는 듯하면서 후속 고점이 낮아진다.",
+      "detector": "고점 이후 구간 전반부 최고가보다 후반부 최고가가 1% 이상 낮음"
+    },
+    {
+      "id": "midpoint_test",
+      "meaning": "선행 상승 파동 중심값에서 비비거나 중심을 잃는다.",
+      "detector": "고점 이후 봉 중 파동 50% 값 ±1% 접촉이 3회 이상이고 종가가 중심값 1% 아래"
+    },
+    {
+      "id": "trend_break",
+      "meaning": "상승 저점을 이은 추세 지지선을 이탈한다.",
+      "detector": "최근 두 상승 피벗 저점 연장선보다 종가가 max(ATR14×0.25, 추세선×0.5%) 이상 아래"
+    },
+    {
+      "id": "wave_floor",
+      "meaning": "앞선 두 번째 파동 하단을 터치하거나 이탈하면 강한 매수가 유입될 수 있으나, 지지 확인 전 선매수하지 않는다.",
+      "detector": "최근 8봉 저가가 이전 파동 피벗 저점의 1.5% 이내 또는 아래"
+    }
+  ],
+  "states": {
+    "watch": "선행 상승과 고점 돌파 실패. 점수 -6, 추적 관찰.",
+    "warning": "고점 하향과 중심값 또는 추세선 훼손. 점수 -12, 신규 매수 대기.",
+    "confirmed": "고점 하향·추세선 이탈·파동 하단 시험 동시 충족. 점수 -22, 신규 매수 금지 및 반등 시 축소 검토."
+  },
+  "phases": {
+    "top_watch": "고점 돌파 실패만 확인된 추적 단계",
+    "distribution": "고점 하향과 중심값/추세선 훼손이 진행되는 신규 롱 차단 단계",
+    "capitulation": "두 번째 파동 하단이 실제 이탈된 단계. 매수 유입 가능성은 관찰하되 선매수하지 않음",
+    "bounce_confirmed": "하단 이탈 저점보다 최근 저점이 높고 직전 반등 고점을 98% 이상 회복한 단계. 고점 하드 필터 해제"
+  },
+  "recovery_rule": "하단 이탈 뒤 반등이 앞선 급등 구간의 윗꼬리/저항을 회복하고 저점을 높이면 붕괴가 아닌 반등 확인으로 본다.",
+  "inverse_rule": "가격을 상하 반전해 같은 조건을 적용한다. 역저점은 확인 전 가산하지 않고 warning +5, confirmed +12만 반영한다.",
+  "risk_controls": [
+    "헤드앤숄더라는 이름만으로 확정하지 않는다.",
+    "단일 조건이 아니라 고점 실패·고점 하향·중심/추세 훼손을 단계적으로 본다.",
+    "패턴은 확률이며 거래량·시장/섹터 맥락과 함께 사용한다.",
+    "파동 하단 이탈 직후 매수세가 강할 수 있으므로 손절 추격과 선매수를 모두 피한다.",
+    "가격 목표를 직접 제공한 글이 아니므로 가격 학습 라벨에서는 제외한다.",
+    "고점판독이 보여도 숏은 추천이 아니라 헷지용이다. 원에 표시한 아래 구간은 빠질 자리가 있다는 뜻이지 무조건 간다는 뜻이 아니다.",
+    "패턴은 맞아도 변수가 있으면 확정하지 않는다. 차트상 죽었다는 말로 바꾸지 않는다."
+  ],
+  "related_posts": [
+    {
+      "document_srl": "10253333481",
+      "url": "https://www.fmkorea.com/10253333481",
+      "title": "숏?을 본이유",
+      "posted_at_kst": "2026-08-24T22:52:00+09:00",
+      "archive": "data/important_posts/10253333481.json",
+      "note": "고점판독 실전 적용. 반도체 숏=헷지. 원 구간=자리 있음, 무조건 아님. 댓글: 마이크론, 미장 영향."
+    }
+  ],
+  "implementation": {
+    "detector_class": "ChartEntryLab\\NoramuTopPattern",
+    "feature_keys": [
+      "top_pattern_status",
+      "top_pattern_phase",
+      "inverse_bottom_status",
+      "inverse_bottom_phase",
+      "top_pattern_adjustment",
+      "top_pattern",
+      "inverse_bottom_pattern"
+    ],
+    "learning_use": "structure_only",
+    "exclude_price_label": true
+  }
+}

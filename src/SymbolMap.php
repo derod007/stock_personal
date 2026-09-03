@@ -32,6 +32,8 @@ final class SymbolMap
         '005380.KS' => '005380.KS',
         '017670.KS' => '017670.KS',
         '006400.KS' => '006400.KS',
+        '096770.KS' => '096770.KS',
+        '003680.KS' => '003680.KS',
         '300080.KQ' => '300080.KQ',
         // SOL 하닉 인버스2X — Yahoo 미확인 시 본주 프록시만
         '0197X0.KS' => null,
@@ -97,6 +99,11 @@ final class SymbolMap
         '삼성sdi' => '006400.KS',
         '삼성SDI' => '006400.KS',
         'sdi' => '006400.KS',
+        '대원전선' => '006340.KS',
+        '대원' => '006340.KS',
+        'sk이노베이션' => '096770.KS',
+        '한성기업' => '003680.KS',
+        'gs건설' => '006360.KS',
         'sk텔레콤' => '017670.KS',
         'skt' => '017670.KS',
         '하닉인버스' => '0197X0.KS',
@@ -109,6 +116,17 @@ final class SymbolMap
         '원유' => 'CL=F',
         'crude' => 'CL=F',
         'cl' => 'CL=F',
+        '빙그레' => '005180.KS',
+        '이노테크' => '469610.KQ',
+        '져스텍' => '153890.KQ',
+        '한화생명' => '088350.KS',
+        '씨젠' => '096530.KQ',
+        '로보티즈' => '108490.KQ',
+        '농심' => '004370.KS',
+        'sgc에너지' => '005090.KS',
+        '마녀공장' => '439090.KQ',
+        'snxx' => 'SNDK',
+        '삼하' => '000660.KS',
     ];
 
     public static function toYahoo(string $symbol): ?string
@@ -120,11 +138,9 @@ final class SymbolMap
         if (array_key_exists($symbol, self::YAHOO)) {
             return self::YAHOO[$symbol];
         }
-        // 이미 Yahoo 형태로 보이면 그대로
+        // 이미 Yahoo 형태로 보이면 대문자로 통일 (304100.ks → 304100.KS)
         if (preg_match('/^[A-Z0-9.^_-]+$/i', $symbol) === 1) {
-            return strtoupper($symbol) === $symbol || str_contains($symbol, '.')
-                ? $symbol
-                : strtoupper($symbol);
+            return strtoupper($symbol);
         }
         return null;
     }
@@ -185,8 +201,11 @@ final class SymbolMap
         if ($yahoo === null) {
             return null;
         }
-        if (str_ends_with($yahoo, '.KS') || str_ends_with($yahoo, '.KQ')) {
+        if (str_ends_with($yahoo, '.KS')) {
             return 'KRX:' . substr($yahoo, 0, -3);
+        }
+        if (str_ends_with($yahoo, '.KQ')) {
+            return 'KOSDAQ:' . substr($yahoo, 0, -3);
         }
         // 미장: 거래소 미지정 시 TV가 해석 (NYSE/NASDAQ 혼재 대응)
         return strtoupper($yahoo);
@@ -199,5 +218,43 @@ final class SymbolMap
             return null;
         }
         return 'https://www.tradingview.com/chart/?symbol=' . rawurlencode($tv) . '&interval=' . rawurlencode($interval);
+    }
+
+    /** .KS → 코스피, .KQ → 코스닥. 그 외는 null. */
+    public static function marketLabel(string $yahooOrInternal): ?string
+    {
+        $yahoo = self::toYahoo($yahooOrInternal) ?? $yahooOrInternal;
+        if (str_ends_with($yahoo, '.KS')) {
+            return '코스피';
+        }
+        if (str_ends_with($yahoo, '.KQ')) {
+            return '코스닥';
+        }
+
+        return null;
+    }
+
+    /** 별칭 표에서 한글 종목명. 없으면 null. */
+    public static function koreanName(string $yahooOrInternal): ?string
+    {
+        $yahoo = self::toYahoo($yahooOrInternal) ?? strtoupper(trim($yahooOrInternal));
+        $best = null;
+        $bestLen = 0;
+        foreach (self::ALIASES as $alias => $internal) {
+            if (preg_match('/[가-힣]/u', $alias) !== 1) {
+                continue;
+            }
+            $mapped = self::toYahoo($internal) ?? $internal;
+            if ($mapped !== $yahoo && $internal !== $yahoo) {
+                continue;
+            }
+            $len = mb_strlen($alias);
+            if ($len > $bestLen) {
+                $best = $alias;
+                $bestLen = $len;
+            }
+        }
+
+        return $best;
     }
 }

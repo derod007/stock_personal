@@ -13,7 +13,9 @@ final class FmkoreaPostParser
      *   author:string,
      *   posted_at_kst:?string,
      *   body:string,
-     *   author_comments:list<string>
+     *   author_comments:list<string>,
+     *   comments:list<array{comment_srl:?string,author:string,text:string,is_author:bool}>,
+     *   images:list<array{url:string,alt:string,lazy:bool,order:int}>
      * }
      */
     public function parse(string $html, ?string $authorNick = null): array
@@ -31,7 +33,9 @@ final class FmkoreaPostParser
      *   author:string,
      *   posted_at_kst:?string,
      *   body:string,
-     *   author_comments:list<string>
+     *   author_comments:list<string>,
+     *   comments:list<array{comment_srl:?string,author:string,text:string,is_author:bool}>,
+     *   images:list<array{url:string,alt:string,lazy:bool,order:int}>
      * }
      */
     public function parsePages(array $htmlPages, ?string $authorNick = null): array
@@ -45,6 +49,8 @@ final class FmkoreaPostParser
                 'posted_at_kst' => null,
                 'body' => '',
                 'author_comments' => [],
+                'comments' => [],
+                'images' => [],
             ];
         }
 
@@ -70,6 +76,7 @@ final class FmkoreaPostParser
 
         $bodyHtml = $this->matchOne('/class="[^"]*xe_content[^"]*"[^>]*>(.*?)<\/div>/su', $main) ?? '';
         $body = $this->normalizeText($bodyHtml);
+        $images = $this->collectBodyImages($bodyHtml);
         // 동영상만 있고 본문 텍스트가 meta에만 있는 경우 보정
         if ($body === '' || preg_match('/Video 태그를 지원하지 않는/u', $body) === 1) {
             $meta = $this->matchOne('/<meta\s+name="description"\s+content="([^"]*)"/u', $main)
@@ -84,10 +91,17 @@ final class FmkoreaPostParser
         }
 
         $authorComments = [];
+        $comments = [];
         $memberId = $this->extractAuthorMemberId($main);
         foreach ($htmlPages as $pageHtml) {
-            foreach ($this->collectAuthorComments($pageHtml, $author, $memberId) as $c) {
-                $authorComments[] = $c;
+            foreach ($this->collectComments($pageHtml, $author, $memberId) as $comment) {
+                $key = $comment['comment_srl'] ?? sha1($comment['author'] . "\n" . $comment['text']);
+                $comments[$key] = $comment;
+            }
+        }
+        foreach ($comments as $comment) {
+            if ($comment['is_author']) {
+                $authorComments[] = $comment['text'];
             }
         }
 
@@ -98,31 +112,86 @@ final class FmkoreaPostParser
             'posted_at_kst' => $posted,
             'body' => $body,
             'author_comments' => array_values(array_unique($authorComments)),
+            'comments' => array_values($comments),
+            'images' => $images,
         ];
     }
 
     /**
-     * @return list<string>
+     * @return list<array{comment_srl:?string,author:string,text:string,is_author:bool}>
      */
-    private function collectAuthorComments(string $html, string $author, ?string $memberId = null): array
+    private function collectComments(string $html, string $author, ?string $memberId = null): array
     {
-        $authorComments = [];
+        $comments = [];
         $memberId ??= $this->extractAuthorMemberId($html);
 
         if (preg_match_all('/<li\b[^>]*\bfdb_itm\b[^>]*>.*?<\/li>/su', $html, $blocks)) {
             foreach ($blocks[0] as $block) {
-                if (!$this->isAuthorCommentBlock($block, $author, $memberId)) {
-                    continue;
-                }
                 $cHtml = $this->matchOne('/class="[^"]*xe_content[^"]*"[^>]*>(.*?)<\/div>/su', $block) ?? '';
                 $cText = $this->normalizeText($cHtml);
                 if ($cText !== '') {
-                    $authorComments[] = $cText;
+                    $commentSrl = $this->matchOne('/<li\b[^>]*\bid=[\'"]comment_(\d+)/su', $block);
+                    $nick = '';
+                    if (preg_match(
+                        '/<div class="meta">.*?class=[\'"]member_\d+[^\'"]*[\'"][^>]*>(.*?)<\/a>/su',
+                        $block,
+                        $nickMatch
+                    )) {
+                        $nick = html_entity_decode(
+                            trim(strip_tags($nickMatch[1])),
+                            ENT_QUOTES | ENT_HTML5,
+                            'UTF-8'
+                        );
+                    }
+                    $isAuthor = $this->isAuthorCommentBlock($block, $author, $memberId);
+                    $comments[] = [
+                        'comment_srl' => $commentSrl,
+                        'author' => $nick !== '' ? $nick : ($isAuthor ? $author : 'UNKNOWN'),
+                        'text' => $cText,
+                        'is_author' => $isAuthor,
+                    ];
                 }
             }
         }
 
-        return array_values(array_unique($authorComments));
+        return $comments;
+    }
+
+    /**
+     * 지연 로딩(data-original) 이미지를 포함해 본문 첨부 순서를 보존한다.
+     *
+     * @return list<array{url:string,alt:string,lazy:bool,order:int}>
+     */
+    private function collectBodyImages(string $bodyHtml): array
+    {
+        if (!preg_match_all('/<img\b[^>]*>/su', $bodyHtml, $matches)) {
+            return [];
+        }
+
+        $images = [];
+        foreach ($matches[0] as $tag) {
+            $lazyUrl = $this->matchOne('/\bdata-original=[\'"]([^\'"]+)[\'"]/su', $tag);
+            $src = $this->matchOne('/\bsrc=[\'"]([^\'"]+)[\'"]/su', $tag);
+            $url = $lazyUrl ?? $src;
+            if ($url === null || $url === '' || str_contains($url, '/transparent.gif')) {
+                continue;
+            }
+            $url = html_entity_decode($url, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            if (str_starts_with($url, '//')) {
+                $url = 'https:' . $url;
+            } elseif (str_starts_with($url, '/')) {
+                $url = 'https://www.fmkorea.com' . $url;
+            }
+            $alt = $this->matchOne('/\balt=[\'"]([^\'"]*)[\'"]/su', $tag) ?? '';
+            $images[] = [
+                'url' => $url,
+                'alt' => html_entity_decode($alt, ENT_QUOTES | ENT_HTML5, 'UTF-8'),
+                'lazy' => $lazyUrl !== null,
+                'order' => count($images) + 1,
+            ];
+        }
+
+        return $images;
     }
 
     private function isAuthorCommentBlock(string $block, string $author, ?string $memberId): bool

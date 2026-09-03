@@ -32,7 +32,7 @@ final class NewEntryGuide
         $low = is_array($zone) && is_numeric($zone['low'] ?? null) ? (float) $zone['low'] : null;
         $high = is_array($zone) && is_numeric($zone['high'] ?? null) ? (float) $zone['high'] : null;
         $mid = is_array($zone) && is_numeric($zone['mid'] ?? null) ? (float) $zone['mid'] : null;
-        $inv = is_numeric($proposal['invalidation'] ?? null) ? (float) $proposal['invalidation'] : null;
+        $inv = $this->structureInvalidation($proposal, $features);
         $action = (string) ($proposal['action'] ?? '');
         $deep = is_numeric($features['swing_low'] ?? null) ? (float) $features['swing_low'] : $inv;
 
@@ -74,7 +74,7 @@ final class NewEntryGuide
             ];
         }
 
-        if ($inv !== null && $price < $inv) {
+        if ($inv !== null && $price < $inv * 0.999) {
             return [
                 'available' => false,
                 'buy_now' => false,
@@ -109,7 +109,7 @@ final class NewEntryGuide
                     $this->n($mid)
                 ),
                 'note' => $deep !== null && $deep < $low
-                    ? sprintf('더 깊게 오면 손절선/최근 저점 %s 근처까지가 2차로 볼 자리.', $this->n($deep))
+                    ? sprintf('더 깊게 오면 구조 최근 저점 %s 근처까지가 2차로 볼 자리.', $this->n($deep))
                     : '고점·저점의 중간 ±4% 구간이 1차로 새로 볼 사는 가격입니다.',
             ];
         }
@@ -132,9 +132,7 @@ final class NewEntryGuide
                     $this->n($mid),
                     $buyNow ? '' : ' (점수가 낮으면 지켜보기 유지)'
                 ),
-                'note' => $inv !== null
-                    ? sprintf('손절선 후보 %s. 아래로 깨지면 이번 매수 계획은 끝.', $this->n($inv))
-                    : '손절선도 같이 적어 두세요.',
+                'note' => $this->stopNote($proposal, $inv),
             ];
         }
 
@@ -157,6 +155,63 @@ final class NewEntryGuide
                 ? sprintf('그 전에 손절선 %s를 다시 지켜야 합니다.', $this->n($inv))
                 : '저점이 올라온 뒤 중간 가격에 다시 오는지를 봅니다.',
         ];
+    }
+
+    /**
+     * 노라무식 2단 손절(타이트=직전 저가 / 넓게=가로 매물대)을 문장으로.
+     *
+     * @param array<string, mixed> $proposal
+     */
+    private function stopNote(array $proposal, ?float $inv): string
+    {
+        $tight = is_numeric($proposal['invalidation_tight'] ?? null)
+            ? (float) $proposal['invalidation_tight']
+            : null;
+        $wide = is_numeric($proposal['invalidation_wide'] ?? null)
+            ? (float) $proposal['invalidation_wide']
+            : null;
+
+        if (!empty($proposal['stop_plan_adjusted']) && $tight !== null) {
+            return $wide !== null && abs($tight - $wide) / max($wide, 0.0001) > 0.005
+                ? sprintf(
+                    '예정 진입가 아래 손절 2단: 가까운 구조 %s / 넓은 구조 %s. 현재가 기준 당일 저가는 손절로 쓰지 않음.',
+                    $this->n($tight),
+                    $this->n($wide)
+                )
+                : sprintf('예정 진입가 아래 구조 손절 %s.', $this->n($tight));
+        }
+
+        if ($tight !== null && $wide !== null && abs($tight - $wide) / max($wide, 0.0001) > 0.005) {
+            return sprintf(
+                '손절 2단: 타이트 %s(당일 저가) / 넓게 %s(가로 매물대). 넓은 쪽이 깨지면 이번 매수 계획은 끝.',
+                $this->n($tight),
+                $this->n($wide)
+            );
+        }
+
+        return $inv !== null
+            ? sprintf('손절선 후보 %s. 아래로 깨지면 이번 매수 계획은 끝.', $this->n($inv))
+            : '손절선도 같이 적어 두세요.';
+    }
+
+    /**
+     * 당일 저가(타이트 손절)가 아니라, 이번 그림이 끝나는 구조 손절선.
+     *
+     * @param array<string, mixed> $proposal
+     * @param array<string, mixed> $features
+     */
+    private function structureInvalidation(array $proposal, array $features): ?float
+    {
+        foreach (['invalidation_wide', 'invalidation', 'invalidation_structural'] as $key) {
+            if (is_numeric($proposal[$key] ?? null)) {
+                return (float) $proposal[$key];
+            }
+        }
+        if (is_numeric($features['swing_low'] ?? null)) {
+            return (float) $features['swing_low'];
+        }
+
+        return null;
     }
 
     private function n(float $v): string

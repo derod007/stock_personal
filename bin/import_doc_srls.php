@@ -79,12 +79,20 @@ foreach ($srls as $srl) {
                 'learning_reasons' => ['no_signal_extracted'],
                 'source' => 'fmkorea_scraper',
                 'author_comments' => $post['author_comments'] ?? [],
+                'comment_count' => count($post['comments'] ?? []),
+                'image_count' => count($post['images'] ?? []),
                 'collected_at_kst' => (new DateTimeImmutable('now', new DateTimeZone('Asia/Seoul')))->format(DATE_ATOM),
             ];
         } else {
             foreach ($events as &$ev) {
                 $ev['author'] = '노라무';
                 $ev['author_comments'] = $post['author_comments'] ?? [];
+                $ev['comment_count'] = count($post['comments'] ?? []);
+                $ev['image_count'] = count($post['images'] ?? []);
+                $archiveRel = 'data/important_posts/' . $srl . '.json';
+                if (is_file($root . '/' . $archiveRel)) {
+                    $ev['important_post_archive'] = $archiveRel;
+                }
                 $tags = is_array($ev['tags'] ?? null) ? $ev['tags'] : [];
                 if (($post['author_comments'] ?? []) !== []) {
                     $tags[] = 'from_post_comments';
@@ -99,6 +107,8 @@ foreach ($srls as $srl) {
             'title' => $post['title'] ?? '',
             'pages' => count($pages),
             'author_comments' => count($post['author_comments'] ?? []),
+            'comments' => count($post['comments'] ?? []),
+            'images' => count($post['images'] ?? []),
             'events' => count($events),
         ];
         echo sprintf(

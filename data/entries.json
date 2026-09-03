@@ -26,7 +26,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "source_instrument": "SOXS",
         "leveraged_entry_price": 3.91,
@@ -59,7 +59,7 @@
         "learning_reasons": [
             "yahoo_chart_unavailable"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "chart_available": false
     },
@@ -89,7 +89,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "source_instrument": "SNDK_2X",
         "leveraged_entry_price": 16.9,
@@ -120,7 +120,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": "stop"
     },
     {
@@ -148,7 +148,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -178,7 +178,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "source_instrument": "122630.KS",
         "leveraged_entry_price": 19.5,
@@ -211,7 +211,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "source_instrument": "SNDK_2X",
         "leveraged_entry_price": 13.63,
@@ -245,7 +245,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "source_instrument": "SNDK_2X",
         "leveraged_entry_price": 12.3,
@@ -285,7 +285,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": "target",
         "source_instrument": "SOXS",
         "leveraged_entry_price": null,
@@ -320,7 +320,7 @@
         "learning_reasons": [
             "no_tradeable_levels"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -348,7 +348,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -376,7 +376,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -406,7 +406,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "source_instrument": "SOXS",
         "leveraged_entry_price": null,
@@ -442,7 +442,7 @@
         "learning_reasons": [
             "yahoo_chart_unavailable"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "chart_available": false
     },
@@ -474,7 +474,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "source_instrument": "SNDK_2X",
         "leveraged_entry_price": 16.9,
@@ -513,7 +513,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "source_instrument": "SNDK_SHORT",
         "leveraged_entry_price": null,
@@ -550,7 +550,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "source_instrument": "SOXS",
         "leveraged_entry_price": null,
@@ -588,7 +588,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "source_instrument": "SNDK_2X",
         "leveraged_entry_price": 12.3,
@@ -625,7 +625,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": "target",
         "source_instrument": "SNDK_2X",
         "leveraged_entry_price": null,
@@ -663,7 +663,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "source_instrument": "SNDK_2X",
         "leveraged_entry_price": 13.63,
@@ -698,7 +698,7 @@
         "learning_reasons": [
             "market_scenario_no_ticker"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -726,7 +726,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -754,7 +754,7 @@
         "learning_reasons": [
             "market_scenario_no_ticker"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -782,7 +782,7 @@
         "learning_reasons": [
             "hedge_advice_not_tradeable"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -810,7 +810,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -838,7 +838,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -866,7 +866,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": "target"
     },
     {
@@ -897,7 +897,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "source_instrument": "SOXS",
         "leveraged_entry_price": 3.91,
@@ -936,7 +936,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": "target",
         "source_instrument": "SNDK_SHORT",
         "leveraged_entry_price": null,
@@ -975,7 +975,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": "target",
         "source_instrument": "SOXS",
         "leveraged_entry_price": null,
@@ -1013,7 +1013,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "source_instrument": "122630.KS",
         "leveraged_entry_price": 19.52,
@@ -1050,7 +1050,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "source_instrument": "122630.KS",
         "leveraged_entry_price": 19.5,
@@ -1087,7 +1087,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": "target",
         "source_instrument": "122630.KS",
         "leveraged_entry_price": null,
@@ -1122,7 +1122,7 @@
         "learning_reasons": [
             "off_universe_chat"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1150,7 +1150,7 @@
         "learning_reasons": [
             "off_universe_chat"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1178,7 +1178,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": "target"
     },
     {
@@ -1207,7 +1207,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1236,7 +1236,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1265,7 +1265,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1294,7 +1294,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1322,7 +1322,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1352,7 +1352,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1380,7 +1380,7 @@
         "learning_reasons": [
             "off_universe_chat"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1410,7 +1410,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "source_instrument": "SNDK_SHORT",
         "leveraged_entry_price": null,
@@ -1447,7 +1447,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "source_instrument": "SNDK_SHORT",
         "leveraged_entry_price": null,
@@ -1484,7 +1484,7 @@
         "learning_reasons": [
             "engine_snapshot_not_noramu"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1514,7 +1514,7 @@
         "learning_reasons": [
             "engine_snapshot_not_noramu"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1544,7 +1544,7 @@
         "learning_reasons": [
             "engine_snapshot_not_noramu"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1574,7 +1574,7 @@
         "learning_reasons": [
             "engine_snapshot_not_noramu"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1604,7 +1604,7 @@
         "learning_reasons": [
             "engine_snapshot_not_noramu"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1634,7 +1634,7 @@
         "learning_reasons": [
             "engine_snapshot_not_noramu"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1664,7 +1664,7 @@
         "learning_reasons": [
             "engine_snapshot_not_noramu"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1694,7 +1694,7 @@
         "learning_reasons": [
             "engine_snapshot_not_noramu"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1724,7 +1724,7 @@
         "learning_reasons": [
             "engine_snapshot_not_noramu"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1754,7 +1754,7 @@
         "learning_reasons": [
             "engine_snapshot_not_noramu"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1784,7 +1784,7 @@
         "learning_reasons": [
             "engine_snapshot_not_noramu"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1814,7 +1814,7 @@
         "learning_reasons": [
             "engine_snapshot_not_noramu"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1851,7 +1851,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1881,7 +1881,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "source_instrument": "SOXS",
         "leveraged_entry_price": null,
@@ -1916,7 +1916,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1944,7 +1944,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -1972,7 +1972,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "stop_price": 400000,
         "chart_available": false
@@ -2002,7 +2002,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -2034,7 +2034,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -2073,7 +2073,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -2104,7 +2104,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -2132,7 +2132,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -2165,7 +2165,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -2196,7 +2196,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00"
+        "curated_at_kst": "2026-08-27T15:42:41+09:00"
     },
     {
         "id": "fm-10101711650-semi-wait-bias",
@@ -2229,7 +2229,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -2263,7 +2263,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -2293,7 +2293,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "stop_price": 1678000,
         "stop_rule": "text_level_1678",
@@ -2348,7 +2348,7 @@
         "learning_reasons": [
             "market_scenario_no_ticker"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -2389,7 +2389,7 @@
         "learning_reasons": [
             "market_scenario_no_ticker"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -2433,7 +2433,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "leveraged_entry_price": 12.79,
         "leveraged_stop_price": null,
@@ -2472,7 +2472,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -2517,7 +2517,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -2557,7 +2557,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -2595,7 +2595,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -2631,7 +2631,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -2667,7 +2667,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -2703,7 +2703,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": "target"
     },
     {
@@ -2743,7 +2743,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -2806,7 +2806,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -2851,7 +2851,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": "stop"
     },
     {
@@ -2891,7 +2891,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": "observe"
     },
     {
@@ -2927,7 +2927,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -2987,7 +2987,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -3025,7 +3025,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": "observe"
     },
     {
@@ -3063,7 +3063,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -3102,7 +3102,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -3150,7 +3150,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -3197,7 +3197,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -3249,7 +3249,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "proxy_bias": "short"
     },
@@ -3292,7 +3292,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -3330,7 +3330,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -3369,7 +3369,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -3424,7 +3424,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -3465,7 +3465,7 @@
         "learning_reasons": [
             "market_scenario_no_ticker"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -3499,7 +3499,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -3557,7 +3557,7 @@
         "learning_reasons": [
             "leveraged_to_spot_proxy"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null
     },
     {
@@ -3593,7 +3593,7 @@
         "learning_reasons": [
             "market_scenario_no_ticker"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "stop_price": null,
         "target_price": null,
@@ -3637,7 +3637,7 @@
         "learning_reasons": [
             "unclassified_product_type"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "entry_price_ref": "support_80",
         "target_price": 103,
@@ -3709,7 +3709,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "level_note": "나스닥 선물 26800 아래 와야 천천히 롱 검토",
         "enriched_at_kst": "2026-07-29T17:27:55+09:00"
@@ -3744,7 +3744,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "entry_price_alt": 978,
         "entry_price_ref": "buy_zone_1007_978",
@@ -3782,7 +3782,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "entry_price_ref": "text_level_135_만원",
         "stop_price": null,
@@ -3823,7 +3823,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "stop_price": 1200000,
         "stop_rule": "washout_thought_120_만원",
@@ -3869,7 +3869,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "stop_price": null,
         "target_price": null,
@@ -3912,7 +3912,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "entry_price_ref": "text_1329000",
         "stop_price": 1246000,
@@ -3951,7 +3951,7 @@
         "collected_at_kst": "2026-08-02T00:06:35+09:00",
         "exclude_price_label": true,
         "price_scale_suspect": false,
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "stop_price": null,
         "target_price": 80,
@@ -3992,7 +3992,7 @@
         "learning_reasons": [
             "structure_view_only"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "stop_price": null,
         "target_price": null,
@@ -4030,7 +4030,7 @@
         "learning_reasons": [
             "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:16:04+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "entry_price_ref": "comment_1172_touch",
         "stop_price": null,
@@ -4077,9 +4077,9 @@
         "exclude_price_label": false,
         "price_scale_suspect": false,
         "learning_reasons": [
-            "explicit_sndk_levels_plus_technique_lesson"
+            "spot_equity"
         ],
-        "curated_at_kst": "2026-08-02T00:14:50+09:00",
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
         "exit_reason": null,
         "entry_price_ref": "text_1120_touch_then_lift",
         "target_price": 1465,
@@ -4093,5 +4093,954 @@
             "example": "이수스페셜티케미칼 주봉"
         },
         "enriched_at_kst": "2026-08-02T00:16:04+09:00"
+    },
+    {
+        "id": "fm-10194043747-daewon",
+        "source_url": "https://www.fmkorea.com/10194043747",
+        "document_srl": "10194043747",
+        "title": "ㅗ",
+        "posted_at_kst": "2026-08-10T14:58:00+09:00",
+        "author": "노라무",
+        "symbol": "006340.KS",
+        "side": "long",
+        "entry_price": 14570,
+        "tags": [
+            "parsed_entry",
+            "parsed_stop",
+            "from_post_comments",
+            "close_bet",
+            "two_tier_stop",
+            "horizontal_level"
+        ],
+        "raw_quote": "ㅗ 종가베팅 가능해보입니다. 대원전선 오늘 저가 이탈안하면 괜찮습니다. 고고 씽 알등이를 처단하라. 박현빈샤방샤방 돈없어서 못들어가는거 추천해줄게 넓게보면 13400 이탈만 안하면됩니다,. 의문의 거래량 나와서 후두둑 빠질수도있음 ㅋㅋㅋㅋ",
+        "product_type": "kr_stock",
+        "learning_use": "full",
+        "learning_reasons": [
+            "spot_equity"
+        ],
+        "source": "fmkorea_scraper",
+        "author_comments": [
+            "알등이를 처단하라.",
+            "박현빈샤방샤방 돈없어서 못들어가는거 추천해줄게",
+            "넓게보면 13400 이탈만 안하면됩니다,.",
+            "의문의 거래량 나와서 후두둑 빠질수도있음 ㅋㅋㅋㅋ"
+        ],
+        "collected_at_kst": "2026-08-11T03:27:20+09:00",
+        "exclude_price_label": false,
+        "price_scale_suspect": false,
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null,
+        "entry_price_ref": "close_bet_at_1458",
+        "stop_price": 13940,
+        "stop_rule": "today_low_tight",
+        "stop_price_wide": 13400,
+        "stop_rule_wide": "box_low_13400_prev_swing_low",
+        "target_price": null,
+        "symbol_note": "대원전선 종가베팅. 타이트 손절=당일 저가 13,940 / 넓게=13,400(박스 하단·8/07 저가). 댓글: 의문의 거래량 나오면 후두둑 빠질 수 있음",
+        "related_underlying": "006340.KS",
+        "technique_summary": {
+            "entry_style": "종가베팅(장 마감 직전 진입)",
+            "stop_tight": "당일 저가 이탈 시 무효",
+            "stop_wide": "반복 터치된 가로 레벨 13,400 이탈 시 무효",
+            "level_basis": "13,400 = 07-01 고가·종가, 07-15 종가, 07-14·07-22 고가(13,440), 08-07 저가 — 6봉 이상 반복 접촉",
+            "risk_note": "의문의 거래량 발생 시 급락 가능"
+        },
+        "enriched_at_kst": "2026-08-11T03:31:10+09:00"
+    },
+    {
+        "id": "fm-10192959424-stub",
+        "source_url": "https://www.fmkorea.com/10192959424",
+        "document_srl": "10192959424",
+        "title": "주하도로",
+        "posted_at_kst": "2026-08-10T08:06:00+09:00",
+        "author": "노라무",
+        "symbol": "KR_MARKET_VIEW",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "stub",
+            "with_comments"
+        ],
+        "raw_quote": "주하도로 도로도로 로봇주 잘 지켜봐야겠다 코스닥 돈 들어왔네 sk이노베이션은 중장기 하면 기가 막히겠는데 에이치브이엠 공부 가능하겠네 노라무 비츠로넥스텍이랑",
+        "product_type": "market_view",
+        "learning_use": "structure_only",
+        "learning_reasons": [
+            "market_scenario_no_ticker"
+        ],
+        "source": "fmkorea_scraper",
+        "author_comments": [
+            "sk이노베이션은 중장기 하면 기가 막히겠는데",
+            "에이치브이엠 공부 가능하겠네",
+            "노라무 비츠로넥스텍이랑"
+        ],
+        "collected_at_kst": "2026-08-13T23:10:57+09:00",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null,
+        "symbol_note": "테마 관찰(로봇) · 댓글: SK이노베이션 중장기, 에이치브이엠 공부, 비츠로넥스텍"
+    },
+    {
+        "id": "fm-10192993492-structure",
+        "source_url": "https://www.fmkorea.com/10192993492",
+        "document_srl": "10192993492",
+        "title": "오늘 주의점",
+        "posted_at_kst": "2026-08-10T08:25:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-08-13T23:10:57+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments"
+        ],
+        "raw_quote": "오늘 주의점\n장 초반에 올라가는거에 너무 따라가지마셈 \n\n종가씹창단 올수도?\n추격매수 위험한날\n딱 그거임 \n\n내가 말하는 바카라구간.\n\n보이지않는 손이 방향성을 결정하는구간\n선물기준 930아래가 보이는데 \n\n흠....어떻게될지...\n\n반등한다는 가정하에 \n\n분할매수는 가능할거같은데 \n\n손절생각은 무조건해야될듯?\n건축킹 그",
+        "symbol": "KR_MARKET_VIEW",
+        "symbol_note": "국장/선물 시나리오 (개별 종목 아님)",
+        "related_underlying": null,
+        "product_type": "market_view",
+        "author_comments": [
+            "추격매수 위험한날",
+            "딱 그거임 \n\n내가 말하는 바카라구간.\n\n보이지않는 손이 방향성을 결정하는구간",
+            "선물기준 930아래가 보이는데 \n\n흠....어떻게될지...\n\n반등한다는 가정하에 \n\n분할매수는 가능할거같은데 \n\n손절생각은 무조건해야될듯?",
+            "건축킹 그렇게 뺄려면 \n\n한달뒤에 그렇게 될듯?\n\n지금당장은 어깨만드는 움직임이라서 \n\n지금자리에서 저점 올려놓고 위로올리면 \n\n1140까지는 감",
+            "5줌마시고싶어요 [삭제된 댓글입니다.]",
+            "납치 조심하세요들",
+            "코스닥 소부장애들은 괜찮네",
+            "분할로 천천히 할사람들은 해도되는데 \n\n미수몰빵하지말라는거임",
+            "퇴학자A 맨날쓰는데?"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "market_scenario_no_ticker"
+        ],
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10193140500-stub",
+        "source_url": "https://www.fmkorea.com/10193140500",
+        "document_srl": "10193140500",
+        "title": "쓰읍",
+        "posted_at_kst": "2026-08-10T09:41:00+09:00",
+        "author": "노라무",
+        "symbol": "006360.KS",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "stub",
+            "with_comments"
+        ],
+        "raw_quote": "쓰읍 로봇 냄새 너무나는데 gs건설도 냄새난다",
+        "product_type": "kr_stock",
+        "learning_use": "structure_only",
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "source": "fmkorea_scraper",
+        "author_comments": [
+            "gs건설도 냄새난다"
+        ],
+        "collected_at_kst": "2026-08-13T23:10:57+09:00",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null,
+        "related_underlying": "006360.KS",
+        "symbol_note": "GS건설 관찰(진입가 없음)"
+    },
+    {
+        "id": "fm-10193231976-stub",
+        "source_url": "https://www.fmkorea.com/10193231976",
+        "document_srl": "10193231976",
+        "title": ".",
+        "posted_at_kst": "2026-08-10T10:22:00+09:00",
+        "author": "노라무",
+        "symbol": "UNKNOWN",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "stub",
+            "with_comments"
+        ],
+        "raw_quote": ". 스테이블코인 쪽 얘네들 뭔가 뭔가네... 얘네도 준비를하는건가 ",
+        "product_type": "unknown",
+        "learning_use": "ignore",
+        "learning_reasons": [
+            "off_universe_chat"
+        ],
+        "source": "fmkorea_scraper",
+        "author_comments": [],
+        "collected_at_kst": "2026-08-13T23:10:57+09:00",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10197872142-stub",
+        "source_url": "https://www.fmkorea.com/10197872142",
+        "document_srl": "10197872142",
+        "title": "씁박",
+        "posted_at_kst": "2026-08-11T14:49:00+09:00",
+        "author": "노라무",
+        "symbol": "003680.KS",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "stub",
+            "with_comments"
+        ],
+        "raw_quote": "씁박 한성기업 추천할려다가 시총보고 안했는데 가노..ㅠ 악마의대변인 그래서 추천안함 ㅋㅋ",
+        "product_type": "kr_stock",
+        "learning_use": "structure_only",
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "source": "fmkorea_scraper",
+        "author_comments": [
+            "악마의대변인 그래서 추천안함 ㅋㅋ"
+        ],
+        "collected_at_kst": "2026-08-13T23:10:57+09:00",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null,
+        "related_underlying": "003680.KS",
+        "symbol_note": "한성기업 — 시총 보고 추천 안 함(관찰)"
+    },
+    {
+        "id": "fm-10198167920-structure",
+        "source_url": "https://www.fmkorea.com/10198167920",
+        "document_srl": "10198167920",
+        "title": "흠 좆된거 같은데요?",
+        "posted_at_kst": "2026-08-11T16:23:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-08-13T23:10:57+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments"
+        ],
+        "raw_quote": "흠 좆된거 같은데요?\n흠...\n\n오일이 너무 이쁘게올리는데 \n\n좆된거같은데요?\n그 댓글쓸때 속이 훤하게 보이는글 보이는데 \n\n적당히 ㅎㅎ\n써도 대답안해줄건데\n애지간하면 \n\n이런말안하는데 \n\n진짜 좆된듯? \n\n지금 차트만 봤을때\n노라무 애초에 미장간것도 변동성 빨아먹을려고한건데 \n\n변동성 다뒤졌는데 미장에서 할이유가?\n조선",
+        "symbol": "CL=F",
+        "related_underlying": "CL=F",
+        "product_type": "us_stock",
+        "author_comments": [
+            "그 댓글쓸때 속이 훤하게 보이는글 보이는데 \n\n적당히 ㅎㅎ",
+            "써도 대답안해줄건데",
+            "애지간하면 \n\n이런말안하는데 \n\n진짜 좆된듯? \n\n지금 차트만 봤을때",
+            "노라무 애초에 미장간것도 변동성 빨아먹을려고한건데 \n\n변동성 다뒤졌는데 미장에서 할이유가?",
+            "조선의14번타자 정답!",
+            "내가 말하는게 다 정답이아닙니다!",
+            "잘못하면 106불인데 \n\n106불 돌파하면 130불위로 자리있어요 \n\n쓰읍 반등이 너무 이쁘게나오는데",
+            "주리니스날 역사적인 순간입니다.\n\n기분 좋게 감상하시죠",
+            "5줌마시고싶어요 모르지?",
+            "허리자세교정 반도치 먹을거 없어서 나온건데",
+            "퇴학자A 돼지찌개",
+            "투키 하수 : 유가 좆됬네 코스피 코스닥 돔 \n\n고수: 유가 레버리지 3배 슛",
+            "그 나 따라오는사람들은 유의해야될게 \n\n나는 변동성에서만 움직임 \n\n쥐좆 변동은 건들이지도 않는다는거임 \n\n알사람들은 알텐데",
+            "노라무 매집 하라는거는 쥐좆 변동일때 작업치는 물량보고 \n\n매집해서 따라가라는거임 \n\n나중에 큰 변동성나오니까",
+            "선물쪽으로 갈까....\n\n현물은 재미없을지도",
+            "통통쌈 고수",
+            "허언증 오일팔아요? 첨들었음",
+            "허언증 어흐~",
+            "징거버거 겠노"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null,
+        "symbol_note": "원유 반등이 너무 예쁨(과열 경계). 106불 돌파하면 130불 위 자리. 변동성 있을 때만 움직임. 매집은 저변동 때 작업 물량 보고 큰 변동 기다림.",
+        "technique_summary": {
+            "extension": "106 돌파 → 130 위",
+            "vol_filter": "작은 변동은 안 건드림. 저변동 매집 → 큰 변동성에서 움직임"
+        }
+    },
+    {
+        "id": "fm-10198411686-structure",
+        "source_url": "https://www.fmkorea.com/10198411686",
+        "document_srl": "10198411686",
+        "title": "sk하이닉스",
+        "posted_at_kst": "2026-08-11T17:22:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-08-13T23:51:43+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "browser_html",
+            "from_post_comments"
+        ],
+        "raw_quote": "sk하이닉스\n오늘 올린거 \n\n구라일 가능성이 높아요 \n\n보통 이런자리에서 따라타는 사람들 많은데 \n\n저는 안건듭니다.\n\n개구라 양봉이라 ㅋㅋㅋ\n\n이거 136구간 때려주고 \n\n휩쏘나온다음에 \n\n저 구간 이탈을 안해야 올라가는 차트에요 \n\n이거 저기이탈하면 102만원보입니다. \n\n애지간하면 이탈안하고 그냥 \n\n빠진다? 빠져버",
+        "symbol": "000660.KS",
+        "symbol_note": "오늘 양봉은 따라타지 않음(개구라 양봉). 136만 구간 이탈 안 해야 상승. 이탈 시 102만. 매수구간이긴 하나 천천히 매집·아래 휩쏘 가능.",
+        "related_underlying": "000660.KS",
+        "product_type": "kr_stock",
+        "author_comments": [
+            "저지능야수단 트레이딩이니까 \n\n말만 가치투자라고 하지만 그럴 사람들은 10년 20년 들고가는게 가치투자고 \n\n주갤 대부분은 트레이딩에 포함되는 매매거든 그래서 차트가 더 중요함",
+            "꿀덮 고아원이나 보육원에 소액이라도 좋으니 기부 많이하세요\n\n기분 좋아요 ㅎㅎ",
+            "빗각 쳤을때 지금구간이 매수구간은 맞는데 \n\n천천히 매집하세요 살꺼면 \n\n아래로 휩쏘한번 나올겁니다,.",
+            "MOOST 겠냐",
+            "카서스 하고싶은대로하세요"
+        ],
+        "import_file": "10198411686.html",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null,
+        "technique_summary": {
+            "no_chase": "장대양봉 따라타기 금지",
+            "hold_level": "136만 구간 유지",
+            "invalidation": "이탈 시 102만",
+            "entry_style": "천천히 매집. 아래로 휩쏘 한 번 나올 수 있음"
+        }
+    },
+    {
+        "id": "fm-10199084157-structure",
+        "source_url": "https://www.fmkorea.com/10199084157",
+        "document_srl": "10199084157",
+        "title": "다행스",
+        "posted_at_kst": "2026-08-11T20:15:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-08-13T23:51:43+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "browser_html",
+            "from_post_comments"
+        ],
+        "raw_quote": "다행스\n쳐맞고 빠지네 \n설마 저기 뚫는줄알았다.\n여기주인장대머리 차트상 쳐맞는자리라 이제 저점 또 올리면 진짜 돔이지 뭐 그때 되면 알겠지 \n\n일단 몰라\nDASAN 빗각도 수평이랑 이론은 비슷해요 거서 거기임",
+        "symbol": "KR_MARKET_VIEW",
+        "symbol_note": "차트상 쳐맞는 자리. 저점 또 올리면 돔. 빗각≈수평 매물대.",
+        "related_underlying": null,
+        "product_type": "market_view",
+        "author_comments": [
+            "설마 저기 뚫는줄알았다.",
+            "여기주인장대머리 차트상 쳐맞는자리라 이제 저점 또 올리면 진짜 돔이지 뭐 그때 되면 알겠지 \n\n일단 몰라",
+            "DASAN 빗각도 수평이랑 이론은 비슷해요 거서 거기임"
+        ],
+        "import_file": "10199084157.html",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "market_scenario_no_ticker"
+        ],
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10200934389-stub",
+        "source_url": "https://www.fmkorea.com/10200934389",
+        "document_srl": "10200934389",
+        "title": "단타일지",
+        "posted_at_kst": "2026-08-12T11:04:00+09:00",
+        "author": "노라무",
+        "symbol": "UNKNOWN",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "stub",
+            "with_comments",
+            "browser_html"
+        ],
+        "raw_quote": "단타일지 끝나면 올림",
+        "product_type": "unknown",
+        "learning_use": "ignore",
+        "learning_reasons": [
+            "placeholder_post"
+        ],
+        "source": "fmkorea_scraper",
+        "author_comments": [
+            "끝나면 올림"
+        ],
+        "collected_at_kst": "2026-08-13T23:51:43+09:00",
+        "import_file": "10200934389.html",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10203444631-structure",
+        "source_url": "https://www.fmkorea.com/10203444631",
+        "document_srl": "10203444631",
+        "title": "살기감지.",
+        "posted_at_kst": "2026-08-12T22:45:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-08-13T23:51:43+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "browser_html",
+            "from_post_comments",
+            "from_leveraged_proxy",
+            "inverse_side_flipped"
+        ],
+        "raw_quote": "살기감지.\n이유 \n\n저기 내려갔다가 올라갔어야됨\n\nㅇㅇ이거 \n\n저기서 찐반으로 볼수있는데 \n\n쓰읍...애~매해 \n\n갭자리를 때려줘야되는구간에서 안때린다?\n\n이상함...\n\n그냥 저렇게올려버리면 \n\n다음날에 장대음봉이 꽂히는자리라서 \n\n일단 모르겠고 \n\n자리는좋음 \n\n위에 차트가 쏙슬인데 \n\n자리는 좋아 음 그래 \n\n관망할게",
+        "symbol": "MU",
+        "symbol_note": "쏙스 차트 관망. 갭 안 때림·장대음 위험. 롱/숏 선언은 아님. | SOXS(반도체 3x 인버스) → MU 본주 (방향 반전) · 원상품 side=short → 본주 side=long",
+        "related_underlying": "MU",
+        "product_type": "us_stock",
+        "author_comments": [
+            "사회실험중인데 존나웃기네 ㅋㅋㅋ",
+            "물론 내가 말하는대로 따라하면안됨 \n\n나는 지금 최대한 중립적으로 말하고있거든?\n\n내가 지금 로ㅠㅇ이나 숏이라고한 한적이없음",
+            "노라무 찐반이 아닐수도있음 \n\n지금시나리오는 내가 책정한게 아니기때문에 분석을 안해놔서 나도 정확하게 못말해줌",
+            "찐반은 맞는거같음 \n\n앞자리 때려주는거보니까",
+            "✚",
+            "정방수류탄 읽기 귀찮으면 새글씀"
+        ],
+        "import_file": "10203444631.html",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null,
+        "source_instrument": "SOXS",
+        "leveraged_entry_price": null,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "stop_price": null,
+        "target_price": null,
+        "proxy_bias": "long"
+    },
+    {
+        "id": "fm-10209710123-structure",
+        "source_url": "https://www.fmkorea.com/10209710123",
+        "document_srl": "10209710123",
+        "title": "삼성전자 sk하이닉스",
+        "posted_at_kst": "2026-08-14T11:33:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-08-14T14:08:23+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "samha_no_entry",
+            "from_post_comments"
+        ],
+        "raw_quote": "삼성전자 sk하이닉스\n\n들어갈자리없음 \n\n지금들어가면 쳐물리는자리임\nsnxx4.9 ✚",
+        "symbol": "000660.KS",
+        "symbol_note": "SK하이닉스",
+        "related_underlying": "000660.KS",
+        "product_type": "kr_stock",
+        "author_comments": [
+            "들어갈자리없음 \n\n지금들어가면 쳐물리는자리임",
+            "snxx4.9 ✚"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10209549096-structure",
+        "source_url": "https://www.fmkorea.com/10209549096",
+        "document_srl": "10209549096",
+        "title": "흠",
+        "posted_at_kst": "2026-08-14T10:57:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-08-14T14:08:23+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments",
+            "study_watchlist",
+            "nuclear_flow_comment"
+        ],
+        "raw_quote": "흠\n굳이 삼하를 사야되나?\n\n음음 \n\n다른거 좋은거 많은데 \n\n물린사람들은 뭐 아쉬운건데\n\n난 굳이 삼하를 할 이유를 못찾겠는데 \n\n다른거 좋은거 많음.\n공부하기좋은 종목 \n빙그레\n이노테크 \n져스텍\n한화생명 \n씨젠\n로보티즈\n농심\nsgc에너지\n마녀공장\n노라무 뭐 내돈아니니까 뭐라말은 못하는데 \n\n지가 손절안해놓고 남한테 뭐",
+        "symbol": "000660.KS",
+        "symbol_note": "삼하 추격 비추천 + 공부용 차트 예시 (타점 아님)",
+        "related_underlying": "000660.KS",
+        "product_type": "kr_stock",
+        "author_comments": [
+            "공부하기좋은 종목 \n빙그레\n이노테크 \n져스텍\n한화생명 \n씨젠\n로보티즈\n농심\nsgc에너지\n마녀공장",
+            "노라무 뭐 내돈아니니까 뭐라말은 못하는데 \n\n지가 손절안해놓고 남한테 뭐라하는게 존나웃김 ㅋㅋ",
+            "아니 맞잖아 ㅋㅋㅋ \n\n국장하는데 굳이 삼하를 해야되나",
+            "정지훈의주식교실 용기가 없다 \n\n이게 제일 이해가안감 \n\n그냥 지가 병신행동하는건데 \n\n참...\n\n모르겠음",
+            "✚",
+            "홀나오진영진 ✚",
+            "원전 돈들어오네",
+            "궁금한게 \n\n댓글보면 \n\n손절을 아예 안하는사람들은 뭐임?\n\n주식을 왜하는거임"
+        ],
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10209710123-soxs-px-0",
+        "source_url": "https://www.fmkorea.com/10209710123",
+        "document_srl": "10209710123",
+        "title": "삼성전자 sk하이닉스",
+        "posted_at_kst": "2026-08-14T11:33:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-08-14T14:08:23+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": null,
+        "tags": [
+            "parsed_entry",
+            "sndk_line_price",
+            "from_post_comments",
+            "from_leveraged_proxy",
+            "structure_or_view"
+        ],
+        "raw_quote": "snxx4.9",
+        "symbol": "SNDK",
+        "symbol_note": "샌디스크 본주 또는 관련 [auto] 본주 대비 가격대 불일치 → 레버 타점으로 재분류 | 샌디 2배 → SNDK 본주 (가격 라벨 제외, 구조·방향만) · 원상품 side=long → 본주 side=long",
+        "related_underlying": "SNDK",
+        "product_type": "us_stock",
+        "author_comments": [
+            "들어갈자리없음 \n\n지금들어가면 쳐물리는자리임",
+            "snxx4.9 ✚"
+        ],
+        "source_instrument": "SNDK_2X",
+        "leveraged_entry_price": 4.9,
+        "leveraged_stop_price": null,
+        "leveraged_target_price": null,
+        "stop_price": null,
+        "target_price": null,
+        "proxy_bias": "long",
+        "exclude_price_label": true,
+        "learning_use": "structure_only",
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "leveraged_to_spot_proxy"
+        ],
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10237234875-structure",
+        "source_url": "https://www.fmkorea.com/10237234875",
+        "document_srl": "10237234875",
+        "title": "새벽반 전용 고점판독기법",
+        "posted_at_kst": "2026-08-21T00:22:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-08-21T01:48:53+09:00",
+        "source": "fmkorea_scraper",
+        "side": "long",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "important_lesson",
+            "top_failure_pattern",
+            "inverse_bottom_pattern",
+            "no_direct_entry",
+            "from_post_comments"
+        ],
+        "raw_quote": "새벽반 전용 고점판독기법\n미장 국장 \n\n다 사용가능 \n\n패턴을 기억해두세요 \n\n1번패턴 \n\n2번패턴 \n\n뭐 이해하기 어렵겠지만 \n\n차트들을 둘러보면 \n\n보통?(보편적으로 경험상)\n\n이런느낌입니다.\n\n원리는 \n\n앞에 라인을 잘 먹다가 \n\n갑자기 고점을 돌파하지못하고(부근이거나 근접한뒤) 내려가는데 앞에 파동이나왔던 저점구간",
+        "symbol": "000660.KS",
+        "symbol_note": "SK하이닉스",
+        "related_underlying": "000660.KS",
+        "product_type": "kr_stock",
+        "lesson_ref": "noramu_top_pattern_v1",
+        "important_post_archive": "data/important_posts/10237234875.json",
+        "author_comments": [
+            "헤드앤숄더가 나오는 이유 라고 말하면 되려나",
+            "하나 알려주자면 \n\n차트를 거꾸로 적용하면? \n\n.....\n\n네~",
+            "노라무 ✚",
+            "RsiMACD ✚",
+            "건실한가치투자자 ✚",
+            "주식바보스피키 ✚",
+            "악마의대변인 ✚",
+            "울산탈출하고싶다 ✚",
+            "EAZYART ✚",
+            "EAZYART 컴퓨터는 아무이상이 없으용",
+            "잡주의도로롱 ✚"
+        ],
+        "comment_count": 137,
+        "image_count": 11,
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only",
+            "important_pattern_lesson",
+            "no_direct_price_label"
+        ],
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10252773497-stub",
+        "source_url": "https://www.fmkorea.com/10252773497",
+        "document_srl": "10252773497",
+        "title": "재생에너지",
+        "posted_at_kst": "2026-08-24T20:23:00+09:00",
+        "author": "노라무",
+        "symbol": "UNKNOWN",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "stub",
+            "with_comments"
+        ],
+        "raw_quote": "재생에너지 돈이 좀 도는데 코지D 병먹금 하 추천아니니까 구경만하세요",
+        "product_type": "unknown",
+        "learning_use": "needs_review",
+        "learning_reasons": [
+            "symbol_unknown"
+        ],
+        "source": "fmkorea_scraper",
+        "author_comments": [
+            "코지D 병먹금",
+            "하 추천아니니까 구경만하세요"
+        ],
+        "comment_count": 26,
+        "image_count": 0,
+        "collected_at_kst": "2026-08-24T23:16:32+09:00",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10253333481-structure",
+        "source_url": "https://www.fmkorea.com/10253333481",
+        "document_srl": "10253333481",
+        "title": "숏?을 본이유",
+        "posted_at_kst": "2026-08-24T22:52:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-08-24T23:16:36+09:00",
+        "source": "fmkorea_scraper",
+        "side": "short",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments"
+        ],
+        "raw_quote": "숏?을 본이유\n숏을 추천까지는 아니고 \n\n그냥 헷지용으로 담으라한건 \n\n아 참고로 \n\n내가 말하는 숏은 반도체 숏을 말하는거임 \n\n고점판독차트가 나왔네? \n\n그래서 숏을 헷징용으로 하라한거고 \n\n저기 원 그려둔곳까지 빠질 자리가 있음 \n\n여기서 중요한건 \n\n자리가 있다지 \n\n저기를 무조건 간다는 아님 \nEAZYART 대충",
+        "symbol": "MU",
+        "related_underlying": "MU",
+        "product_type": "us_stock",
+        "author_comments": [
+            "EAZYART 대충은 보일거임 \n\n패턴이라 눈에 익히면",
+            "주링주링 그런게 아니고 \n\n패턴은 맞는데 \n\n변수가 있으니까 \n\n확정안하는거죵",
+            "건실한가치투자자 ㅊㅊㅊ",
+            "재승샷12 뭐 그렇게 생각해도되는데 \n\n흠 \n\n패턴상 보통 저기를 갔다 정도 라고 생각하시면대여\n\n무조건은 없습니다.",
+            "챱쥬챱챱쥬 아무래도 \n\n미장의 영향이 좀 있겠죠?",
+            "뽀득뽀도득 노노 마이크론",
+            "rlaehd77 지금 차트상 죽었다 이런건없는디용 \n\n기냥 패턴상 움직인다 이정도"
+        ],
+        "comment_count": 42,
+        "image_count": 2,
+        "important_post_archive": "data/important_posts/10253333481.json",
+        "lesson_ref": "noramu_top_pattern_v1",
+        "symbol_note": "반도체 숏은 추천이 아니라 헷지. 고점판독 원이 가리키는 아래 구간은 자리일 뿐 무조건 아님.",
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "structure_view_only"
+        ],
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10255293752-stub",
+        "source_url": "https://www.fmkorea.com/10255293752",
+        "document_srl": "10255293752",
+        "title": "푸드",
+        "posted_at_kst": "2026-08-25T14:12:00+09:00",
+        "author": "노라무",
+        "symbol": "UNKNOWN",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "stub",
+            "with_comments"
+        ],
+        "raw_quote": "푸드 현대그린푸드 롯데웰푸드 삼양식품 빙그레 농심 소비재쪽에 돈이 상당히 많이들어왔는데 뭐야이거!",
+        "product_type": "unknown",
+        "learning_use": "needs_review",
+        "learning_reasons": [
+            "symbol_unknown"
+        ],
+        "source": "fmkorea_scraper",
+        "author_comments": [],
+        "comment_count": 13,
+        "image_count": 0,
+        "collected_at_kst": "2026-08-25T15:32:27+09:00",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10255319108-structure",
+        "source_url": "https://www.fmkorea.com/10255319108",
+        "document_srl": "10255319108",
+        "title": "종가베팅",
+        "posted_at_kst": "2026-08-25T14:20:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-08-25T15:32:31+09:00",
+        "source": "fmkorea_scraper",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments"
+        ],
+        "raw_quote": "종가베팅\n흠...한번할까...\n\n고민되네\n\nLs 찌리릿 가능해보이는데 \n\n한번 해봅시다.\n\n손절은 오늘저가 이탈시 손절 \n\n오랜만에~\n5줌마시고싶어요 23때릴자리있어서 종가베팅\n자기야나주갤만해 뭐 어쩌겠어 시장이 이런걸\n유리기판도 돈을 아주 살짝넣엇네",
+        "symbol": "UNKNOWN",
+        "symbol_note": "심볼 미확정",
+        "related_underlying": null,
+        "product_type": "unknown",
+        "author_comments": [
+            "5줌마시고싶어요 23때릴자리있어서 종가베팅",
+            "자기야나주갤만해 뭐 어쩌겠어 시장이 이런걸",
+            "유리기판도 돈을 아주 살짝넣엇네"
+        ],
+        "comment_count": 42,
+        "image_count": 0,
+        "learning_use": "needs_review",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "symbol_unknown"
+        ],
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10255360724-stub",
+        "source_url": "https://www.fmkorea.com/10255360724",
+        "document_srl": "10255360724",
+        "title": "건전하네",
+        "posted_at_kst": "2026-08-25T14:33:00+09:00",
+        "author": "노라무",
+        "symbol": "UNKNOWN",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "stub",
+            "with_comments"
+        ],
+        "raw_quote": "건전하네 순환매 지리노 철강에도 돈들어오네 ㅋㅋ",
+        "product_type": "unknown",
+        "learning_use": "needs_review",
+        "learning_reasons": [
+            "symbol_unknown"
+        ],
+        "source": "fmkorea_scraper",
+        "author_comments": [],
+        "comment_count": 9,
+        "image_count": 0,
+        "collected_at_kst": "2026-08-25T15:32:35+09:00",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10263595258-stub",
+        "source_url": "https://www.fmkorea.com/10263595258",
+        "document_srl": "10263595258",
+        "title": "종가베팅",
+        "posted_at_kst": "2026-08-27T15:13:00+09:00",
+        "author": "노라무",
+        "symbol": "UNKNOWN",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "stub",
+            "with_comments"
+        ],
+        "raw_quote": "종가베팅 할까말까../. 레인보우로보틱스 or sk이터닉스인데 고민되네 내일 애매할거같은디... 흠 구경만해봐도됨 애~매하다 1ㅈ부만사서하셈 안하는게좋겠다",
+        "product_type": "unknown",
+        "learning_use": "needs_review",
+        "learning_reasons": [
+            "symbol_unknown"
+        ],
+        "source": "fmkorea_scraper",
+        "author_comments": [
+            "레인보우로보틱스 or sk이터닉스인데 \n\n고민되네 \n\n내일 애매할거같은디...\n\n흠\n\n구경만해봐도됨",
+            "애~매하다 1ㅈ부만사서하셈 \n\n안하는게좋겠다"
+        ],
+        "comment_count": 46,
+        "image_count": 0,
+        "collected_at_kst": "2026-08-27T15:30:31+09:00",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10263522225-stub",
+        "source_url": "https://www.fmkorea.com/10263522225",
+        "document_srl": "10263522225",
+        "title": "삼성sdi는",
+        "posted_at_kst": "2026-08-27T14:51:00+09:00",
+        "author": "노라무",
+        "symbol": "UNKNOWN",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "stub",
+            "with_comments"
+        ],
+        "raw_quote": "삼성sdi는 35오면 사라했었나? 음 그래그래 나는 58에 던질거임 63%정도되겠네 ",
+        "product_type": "unknown",
+        "learning_use": "needs_review",
+        "learning_reasons": [
+            "symbol_unknown"
+        ],
+        "source": "fmkorea_scraper",
+        "author_comments": [],
+        "comment_count": 17,
+        "image_count": 1,
+        "collected_at_kst": "2026-08-27T15:42:29+09:00",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10263508249-stub",
+        "source_url": "https://www.fmkorea.com/10263508249",
+        "document_srl": "10263508249",
+        "title": "찌릿찌릿",
+        "posted_at_kst": "2026-08-27T14:47:00+09:00",
+        "author": "노라무",
+        "symbol": "UNKNOWN",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "stub",
+            "with_comments"
+        ],
+        "raw_quote": "찌릿찌릿 으그극 엄청난바지33 20000 오면 보셈 지금은 좀 별로임 저기서 바로 올렸어야됨 hmm 빠진거 아쉽네",
+        "product_type": "unknown",
+        "learning_use": "needs_review",
+        "learning_reasons": [
+            "symbol_unknown"
+        ],
+        "source": "fmkorea_scraper",
+        "author_comments": [
+            "엄청난바지33 20000 오면 보셈 지금은 좀 별로임 저기서 바로 올렸어야됨",
+            "hmm 빠진거 아쉽네"
+        ],
+        "comment_count": 33,
+        "image_count": 1,
+        "collected_at_kst": "2026-08-27T15:42:33+09:00",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10259378473-stub",
+        "source_url": "https://www.fmkorea.com/10259378473",
+        "document_srl": "10259378473",
+        "title": "흠",
+        "posted_at_kst": "2026-08-26T14:38:00+09:00",
+        "author": "노라무",
+        "symbol": "CL=F",
+        "side": "observe",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "stub",
+            "with_comments"
+        ],
+        "raw_quote": "흠 에스오일뭐고? sk이노베이션은악재있어서 많이 빠진거고 sk아이테크놀로지는 상한가쳤고 뭐냐진짜 국장매운맛 오랜만이네 에스오일은 오늘 만들어둔 저가만 이탈안하면되는데 이렇게되면 흠",
+        "product_type": "us_stock",
+        "learning_use": "structure_only",
+        "learning_reasons": [
+            "oil_market_view"
+        ],
+        "source": "fmkorea_scraper",
+        "author_comments": [
+            "에스오일은 오늘 만들어둔 저가만 이탈안하면되는데 이렇게되면 흠"
+        ],
+        "comment_count": 19,
+        "image_count": 0,
+        "collected_at_kst": "2026-08-27T15:42:37+09:00",
+        "related_underlying": "CL=F",
+        "symbol_note": "원유 뷰 (개별 국장 종목 아님)",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null
+    },
+    {
+        "id": "fm-10258828377-structure",
+        "source_url": "https://www.fmkorea.com/10258828377",
+        "document_srl": "10258828377",
+        "title": "이쁘네",
+        "posted_at_kst": "2026-08-26T11:39:00+09:00",
+        "author": "노라무",
+        "collected_at_kst": "2026-08-27T15:42:41+09:00",
+        "source": "fmkorea_scraper",
+        "side": "short",
+        "entry_price": null,
+        "tags": [
+            "structure_or_view",
+            "from_post_comments"
+        ],
+        "raw_quote": "이쁘네\n일단 숏치진말고 상황지켜봐야될듯?\n선물기준 1180 정도 때릴 자리있어서 \n\n흠",
+        "symbol": "KR_MARKET_VIEW",
+        "symbol_note": "국장/선물 시나리오 (개별 종목 아님)",
+        "related_underlying": null,
+        "product_type": "market_view",
+        "author_comments": [
+            "선물기준 1180 정도 때릴 자리있어서 \n\n흠"
+        ],
+        "comment_count": 34,
+        "image_count": 0,
+        "learning_use": "structure_only",
+        "exclude_price_label": true,
+        "price_scale_suspect": false,
+        "learning_reasons": [
+            "market_scenario_no_ticker"
+        ],
+        "curated_at_kst": "2026-08-27T15:42:41+09:00",
+        "exit_reason": null
     }
 ]

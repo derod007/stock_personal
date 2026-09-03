@@ -9,7 +9,7 @@ namespace ChartEntryLab;
  */
 final class AlphaEntries
 {
-    public const TAB_NORAMU = 'noramu';
+    public const TAB_NORAMU = 'chart';
     public const TAB_DIGINGONYOU = 'digingonyou';
     public const TAB_MERGED = 'merged';
 
@@ -25,11 +25,14 @@ final class AlphaEntries
      */
     public static function normalizeTab(?string $tab): array
     {
+        if ($tab === 'noramu') {
+            $tab = self::TAB_NORAMU;
+        }
         $id = is_string($tab) && in_array($tab, self::TABS, true) ? $tab : self::TAB_NORAMU;
         $label = match ($id) {
-            self::TAB_DIGINGONYOU => '디깅온유',
+            self::TAB_DIGINGONYOU => '기타',
             self::TAB_MERGED => '합침',
-            default => '노라무',
+            default => '차트',
         };
 
         return ['id' => $id, 'label' => $label];

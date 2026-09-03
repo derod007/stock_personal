@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "lesson_id": "noramu_theme_smell_v1",
+  "importance": "high",
+  "source": {
+    "kind": "inferred_tape_plus_author_voice",
+    "posted_at_kst": "2026-08-24T00:35:00+09:00",
+    "author": "노라무",
+    "post_summary": "내일 국장 AI챗봇 쪽 돈이 들어올 것 같다. 구경만. 차트 냄새. 지금은 높은 자리, 내려오면 좋다.",
+    "tape_date": "2026-08-21",
+    "note": "글 자체는 티커·가격이 없다. 직전 거래일(금요일) 테마 등락·거래량·장중 고저로 같은 말버릇을 수치화한다."
+  },
+  "scope": [
+    "kr_stock",
+    "daily",
+    "theme",
+    "amount_scan"
+  ],
+  "thesis": "테마가 아직 안 올라도, 선도주 대금이 터지고 핵심 종목이 장중 고가를 찍은 뒤 종가를 못 지키면 ‘내일 돈 들어올 냄새’다. 시초가 추격이 아니라 구경·내려오면 검토다.",
+  "tape_example": {
+    "theme": "AI 챗봇(챗GPT 등)",
+    "theme_change_pct": -1.71,
+    "up": 6,
+    "down": 24,
+    "names": {
+      "039980": "폴라리스AI +9.2% 거래량 12.2배, 종가 중간 — 선도 점화",
+      "108860": "셀바스AI 고가 10290 종가 9390, 거래량 3.7배, 종가 저가 근처 — 찔러보고 못 지킴",
+      "304100": "솔트룩스 고가 16610 종가 15370, 거래량 2.5배 — 같은 그림",
+      "377480": "마음AI 고가 11260 종가 10150, 거래량 3.5배 — 같은 그림"
+    }
+  },
+  "states": {
+    "ignite": "거래량 급증 + 넓은 변동 + 종가가 양봉·중간 이상. 테마 점화 후보. 추격 금지, 구경.",
+    "poke_fail": "거래량 급증 + 넓은 변동 + 종가가 저가 근처. 돈이 찔러 보고 못 지킴. 내려오면 관심.",
+    "poke": "거래량·변동은 났지만 점화/실패로 나누기 애매. 테마만 표시."
+  },
+  "thresholds": {
+    "min_range_pct": 6.0,
+    "min_vol_multiple": 2.0,
+    "ignite_vol_multiple": 3.0,
+    "poke_fail_close_loc": 0.25,
+    "ignite_close_loc": 0.4,
+    "lagging_theme_max_pct": 1.2,
+    "lagging_theme_min_pct": -8.0
+  },
+  "risk_controls": [
+    "매수 신호가 아니다. 구경·관심만.",
+    "장중 고가 추격과 시초가 풀매수를 금지한다.",
+    "테마가 이미 급등 중이면 ‘오늘 돈 몰린 곳’이지 냄새가 아니다.",
+    "손절선이 깨진 종목은 예전 중간가를 진입가로 쓰지 않는다.",
+    "점수를 올리지 않는다. 배지·정렬·관찰 용도만."
+  ],
+  "implementation": {
+    "detector_class": "ChartEntryLab\\ThemeSmell",
+    "feature_keys": [
+      "theme_smell_status",
+      "theme_smell_label",
+      "theme_smell_note",
+      "theme_smell"
+    ],
+    "scan_keys": [
+      "theme_smell_status",
+      "theme_smell_label",
+      "theme_smell_note"
+    ],
+    "learning_use": "structure_only",
+    "exclude_price_label": true
+  }
+}

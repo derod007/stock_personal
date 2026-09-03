@@ -53,12 +53,18 @@ final class AccountPlaybook
             '애매하면 지금은 안 삼',
             '불법과외1: 수렴 돌파만 보고 추격 금지 — 돌파 후 윗구간 박스 확인',
             '불법과외1: 선호캔들(장대양→도지→거래량없는장대음→장대양)은 매물대 돌파 후에만',
+            '고점판독: 돌파 실패→고점 하향→파동 중심·하단 시험→상승 추세선 이탈이면 신규 매수 금지',
+            '손절은 2단으로: 타이트=당일 저가, 넓게=여러 번 걸린 가로 매물대',
+            '익절은 2단으로: 1차=직전 고점, 2차=같은 폭을 위로 한 번 더(또는 그 사이 가로 저항)',
         ];
         if ($p->id === 'isa') {
             $rules[] = 'ISA/연금: 회전율 낮게, 점수 문턱 상향';
         }
 
         $levels = $this->buildLevels($features);
+        $lastPx = is_numeric($features['price'] ?? null) ? (float) $features['price'] : null;
+        $invPx = is_numeric($levels['invalidation'] ?? null) ? (float) $levels['invalidation'] : null;
+        $structureBroken = $lastPx !== null && $invPx !== null && $lastPx < $invPx * 0.999;
 
         if ($p->isBlocked($symbol)) {
             return [
@@ -77,6 +83,25 @@ final class AccountPlaybook
             ];
         }
 
+        if ($structureBroken) {
+            return [
+                'action' => 'hold_or_trim_on_strength',
+                'size_hint' => '새로 사지 말 것 — 이번 그림 손절선 이탈',
+                'rules' => $rules,
+                'reason' => sprintf(
+                    '%s [%s]: 현재가가 손절선 %s 아래. 이번 그림은 끝. 예전 중간 가격대로 새로 사지 말 것.',
+                    $symbol,
+                    $p->id,
+                    (string) $invPx
+                ),
+                'entry_zone' => $levels['entry_zone'],
+                'invalidation' => $levels['invalidation'],
+                'target_hint' => $levels['target_hint'],
+                'blocked' => false,
+                'profile' => $p->id,
+            ];
+        }
+
         $score = (int) ($features['pullback_long_score'] ?? 0);
         $higherLow = (bool) ($features['higher_low'] ?? false);
         $flush = (bool) ($features['flush_bar_recent'] ?? false);
@@ -88,6 +113,30 @@ final class AccountPlaybook
             && !empty($features['lesson1_candle_recipe']);
         $recipeBreak = ($features['lesson1_candle_context'] ?? null) === 'after_supply_break'
             && !empty($features['lesson1_candle_recipe']);
+        $spikeDumpStatus = (string) ($features['spike_dump_status'] ?? 'none');
+        $spikeDumpNote = (string) ($features['spike_dump_note'] ?? '');
+
+        // 1~3일 급등 후 급락 → 중간 반등은 허공. 신규 롱 보류
+        if ($spikeDumpStatus !== 'none') {
+            return [
+                'action' => 'wait',
+                'size_hint' => '현금 유지 — 급등 후 급락, 중간가 추격 금지',
+                'rules' => $rules,
+                'reason' => sprintf(
+                    '%s [%s]: 급등 후 급락(%s, 점수 %d). %s',
+                    $symbol,
+                    $p->id,
+                    $spikeDumpStatus,
+                    $score,
+                    $spikeDumpNote !== '' ? $spikeDumpNote : '급등 전 가로가 지지되는지 보기'
+                ),
+                'entry_zone' => $levels['entry_zone'],
+                'invalidation' => $levels['invalidation'],
+                'target_hint' => $levels['target_hint'],
+                'blocked' => false,
+                'profile' => $p->id,
+            ];
+        }
 
         // 돌파만 있고 윗박스 없음 → 추격 롱 금지 (점수 높아도 관심/대기로)
         if ($breakoutNoBox && !$upperBox && !$recipeBreak) {
@@ -226,15 +275,23 @@ final class AccountPlaybook
      * @return array{
      *   entry_zone:?array{low:float,high:float,mid:float,rule:string},
      *   invalidation:?float,
-     *   target_hint:?array{price:float,rule:string}
+     *   invalidation_tight:?float,
+     *   invalidation_wide:?float,
+     *   invalidation_rule:string,
+     *   target_hint:?array{price:float,rule:string,wide:?float,wide_rule:string},
+     *   target_tight:?float,
+     *   target_wide:?float,
+     *   target_wide_rule:string
      * }
      */
     private function buildLevels(array $features): array
     {
         $half = $features['half_retrace'] ?? null;
         $invalidation = $features['invalidation_level'] ?? null;
-        $target = $features['suggested_target_half_to_high'] ?? null;
         $swingHigh = $features['swing_high'] ?? ($features['swing_high_20'] ?? null);
+        $targetTight = $features['target_tight'] ?? $swingHigh;
+        $targetWide = $features['target_wide'] ?? null;
+        $targetWideRule = (string) ($features['target_wide_rule'] ?? '');
 
         $entryZone = null;
         if (is_numeric($half)) {
@@ -248,22 +305,28 @@ final class AccountPlaybook
         }
 
         $targetHint = null;
-        if (is_numeric($target)) {
+        if (is_numeric($targetTight)) {
             $targetHint = [
-                'price' => round((float) $target, 4),
-                'rule' => 'midpoint_half_to_swing_high',
-            ];
-        } elseif (is_numeric($swingHigh)) {
-            $targetHint = [
-                'price' => round((float) $swingHigh, 4),
+                'price' => round((float) $targetTight, 4),
                 'rule' => 'structure_swing_high',
+                'wide' => is_numeric($targetWide) ? round((float) $targetWide, 4) : null,
+                'wide_rule' => $targetWideRule,
             ];
         }
+
+        $tight = $features['stop_tight'] ?? null;
+        $wide = $features['stop_wide'] ?? $invalidation;
 
         return [
             'entry_zone' => $entryZone,
             'invalidation' => is_numeric($invalidation) ? round((float) $invalidation, 4) : null,
+            'invalidation_tight' => is_numeric($tight) ? round((float) $tight, 4) : null,
+            'invalidation_wide' => is_numeric($wide) ? round((float) $wide, 4) : null,
+            'invalidation_rule' => (string) ($features['invalidation_rule'] ?? 'structure_swing_low'),
             'target_hint' => $targetHint,
+            'target_tight' => is_numeric($targetTight) ? round((float) $targetTight, 4) : null,
+            'target_wide' => is_numeric($targetWide) ? round((float) $targetWide, 4) : null,
+            'target_wide_rule' => $targetWideRule,
         ];
     }
 }

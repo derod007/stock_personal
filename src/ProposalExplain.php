@@ -63,20 +63,51 @@ final class ProposalExplain
         if ($lesson1 !== '') {
             $summary = trim($summary . ' ' . $lesson1);
         }
+        $levelsNote = trim((string) ($proposal['levels_note'] ?? ''));
+        if ($levelsNote !== '' && !str_contains($levelsNote, '없음') && !str_contains($levelsNote, '부족')) {
+            $summary = trim($summary . ' ' . $levelsNote);
+        }
+
+        $actionLabel = self::ACTION_LABELS[$action] ?? $action;
+        if (($newEntry['status'] ?? '') === 'structure_broken' || $vsZone === 'below_invalidation') {
+            $actionLabel = '이번 그림 끝 — 새로 사지 말 것';
+        }
 
         return [
-            'action_label' => self::ACTION_LABELS[$action] ?? $action,
+            'action_label' => $actionLabel,
             'summary' => $summary,
             'new_entry_sentence' => is_array($newEntry) ? (string) ($newEntry['sentence'] ?? '') : '',
             'price_vs_zone' => $vsZone,
             'price_vs_zone_label' => $vsLabel,
             'entry_zone_note' => '최근 고점과 저점의 중간 가격 ±4%. “지금 시장가로 사라”가 아니라, 차트 그림이 살아 있을 때 내려오면 볼 관심 구간.',
-            'invalidation_note' => '최근 저점. 이 아래로 깨지면 이번 매수 계획은 끝 — 손절·지켜보기 후보.',
-            'target_rule_note' => '규칙: 중간 가격↔최근 고점의 사이(또는 최근 고점). 과거 글 평균이 아님.',
-            'target_learned_note' => '참고: 과거 노라무 글에 적힌 목표가의 중앙값. 지금 차트의 적정가가 아님.',
+            'invalidation_note' => ($proposal['invalidation_rule'] ?? '') === 'planned_entry_below_zone'
+                ? '예정 진입가보다 아래에 있는 구조 저점·가로 지지만 손절로 사용. 현재가 기준 당일 저가가 진입가보다 높으면 제외.'
+                : (str_starts_with((string) ($proposal['invalidation_rule'] ?? ''), 'horizontal_level')
+                    ? '여러 번 걸린 가로 가격대(매물대). 이 아래로 깨지면 이번 매수 계획은 끝 — 손절·지켜보기 후보.'
+                    : '최근 저점. 이 아래로 깨지면 이번 매수 계획은 끝 — 손절·지켜보기 후보.'),
+            'target_rule_note' => $this->targetRuleNote($proposal, $features),
+            'target_learned_note' => '참고: 과거 글에 적힌 목표가의 중앙값. 지금 차트의 적정가가 아님.',
+            'eta_note' => '최근 14봉 하루 평균 움직임으로 가격까지 거리를 나눈 거래일. 그 날짜에 도착한다는 뜻이 아님.',
             'not_market_order' => !in_array($action, ['add_on_pullback', 'watchlist_buy_zone'], true)
                 || $vsZone !== 'in_zone',
         ];
+    }
+
+    /**
+     * @param array<string, mixed> $proposal
+     * @param array<string, mixed> $features
+     */
+    private function targetRuleNote(array $proposal, array $features): string
+    {
+        $wideRule = (string) ($proposal['target_wide_rule'] ?? $features['target_wide_rule'] ?? '');
+        if (str_starts_with($wideRule, 'horizontal_resistance')) {
+            return '규칙: 1차=직전 스윙 고점, 2차=고점과 측정이동 사이 가로 저항. 과거 글 평균이 아님.';
+        }
+        if ($wideRule === 'measured_move_1x') {
+            return '규칙: 1차=직전 스윙 고점, 2차=같은 스윙 폭을 고점 위로 한 번 더. 과거 글 평균이 아님.';
+        }
+
+        return '규칙: 1차=직전 스윙 고점. 2차는 같은 폭을 위로 한 번 더(또는 그 사이 가로 저항). 과거 글 평균이 아님.';
     }
 
     /**
@@ -140,13 +171,15 @@ final class ProposalExplain
             $bits[] = (string) $proxyBias['note'];
         }
 
-        $bits[] = match ($action) {
-            'add_on_pullback' => '점수·차트 그림이 맞아, 내려올 때 나눠서 사기를 검토할 수 있는 상태입니다.',
-            'watchlist_buy_zone' => '관심만 — 지금 바로 전부 사라는 뜻이 아닙니다.',
-            'hold_or_trim_on_strength' => '새로 사기보다 지켜보기·비중 줄이기가 우선입니다.',
-            'wait' => '지금은 안 삼: 현금 유지.',
-            default => '',
-        };
+        if (($newEntry['status'] ?? '') !== 'structure_broken') {
+            $bits[] = match ($action) {
+                'add_on_pullback' => '점수·차트 그림이 맞아, 내려올 때 나눠서 사기를 검토할 수 있는 상태입니다.',
+                'watchlist_buy_zone' => '관심만 — 지금 바로 전부 사라는 뜻이 아닙니다.',
+                'hold_or_trim_on_strength' => '새로 사기보다 지켜보기·비중 줄이기가 우선입니다.',
+                'wait' => '지금은 안 삼: 현금 유지.',
+                default => '',
+            };
+        }
 
         return trim(implode(' ', array_filter($bits)));
     }

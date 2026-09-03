@@ -47,7 +47,7 @@ final class DigingonyouMethod
             return [
                 'ok' => false,
                 'method' => 'digingonyou_support_reentry',
-                'method_label' => '디깅온유식: 지지선 밟고 다시 사기 (데이터 부족)',
+                'method_label' => '기타: 지지선 밟고 다시 사기 (데이터 부족)',
                 'score' => 0,
                 'action' => 'wait',
                 'action_label' => '지금은 안 삼',
@@ -55,7 +55,7 @@ final class DigingonyouMethod
                 'invalidation' => null,
                 'target_hint' => null,
                 'size_hint' => '차트 피처 부족',
-                'reason' => '디깅온유 규칙 적용에 필요한 저점/가격이 없습니다.',
+                'reason' => '이 규칙 적용에 필요한 저점/가격이 없습니다.',
                 'near_flush_buy' => false,
                 'extended_from_flush' => false,
             ];
@@ -122,7 +122,7 @@ final class DigingonyouMethod
             $actionLabel = '지금은 안 삼 — 1차 지지선 깨짐';
             $size = '새로 사기 보류 · 2차 지지선(' . $this->n($secondSupport) . ') 확인 전 현금';
             $reason = sprintf(
-                '디깅온유식: 현재가 %s가 1차 지지선/손절선(%s) 아래. 다음 아래(약 %s) 열린 구간 — 새로 사지 말 것.',
+                '기타: 현재가 %s가 1차 지지선/손절선(%s) 아래. 다음 아래(약 %s) 열린 구간 — 새로 사지 말 것.',
                 $this->n($price),
                 $this->n($invalidation),
                 $this->n($secondSupport)
@@ -132,7 +132,7 @@ final class DigingonyouMethod
             $actionLabel = '지지선 밟고 나눠서 사기 검토';
             $size = '가진 현금 나눠서 (한 번에 몰빵 금지)';
             $reason = sprintf(
-                '디깅온유식: %s(%s) 근처 «밟으면 매수» 구간 %s~%s. 프로그램이 누르면 나눠서 사기 후보(점수 %d).',
+                '기타: %s(%s) 근처 «밟으면 매수» 구간 %s~%s. 프로그램이 누르면 나눠서 사기 후보(점수 %d).',
                 $supportMode === 'flush' ? '급락 저점' : '표시해 둔 지지선',
                 $this->n($structLow),
                 $this->n($zoneLow),
@@ -144,7 +144,7 @@ final class DigingonyouMethod
             $actionLabel = '새로 사지 말 것 · 올라오면 나눠 팔기 검토';
             $size = '새로 사지 말 것. 갖고 있으면 올라오는 구간에서 일부 줄이기';
             $reason = sprintf(
-                '디깅온유식: 1차 지지선 대비 +%.1f%% 반등. 나눠 팔고 다시 살 자리 대기(점수 %d).',
+                '기타: 1차 지지선 대비 +%.1f%% 반등. 나눠 팔고 다시 살 자리 대기(점수 %d).',
                 $rallyFromLowPct,
                 $score
             );
@@ -153,7 +153,7 @@ final class DigingonyouMethod
             $actionLabel = '관심 — 지지선 근처 대기';
             $size = '대기 후 지지선 밟을 때 나눠서';
             $reason = sprintf(
-                '디깅온유식: 관심 구간 %s~%s 대기(점수 %d). 쫓아 사기 아님. 깨지면 2차≈%s.',
+                '기타: 관심 구간 %s~%s 대기(점수 %d). 쫓아 사기 아님. 깨지면 2차≈%s.',
                 $this->n($zoneLow),
                 $this->n($zoneHigh),
                 $score,
@@ -164,7 +164,7 @@ final class DigingonyouMethod
             $actionLabel = '지금은 안 삼';
             $size = '현금 유지';
             $reason = sprintf(
-                '디깅온유식: 지지선 다시 사기 조건 미충족(점수 %d). 관심 구간 %s~%s.',
+                '기타: 지지선 다시 사기 조건 미충족(점수 %d). 관심 구간 %s~%s.',
                 $score,
                 $this->n($zoneLow),
                 $this->n($zoneHigh)
@@ -174,7 +174,7 @@ final class DigingonyouMethod
         return [
             'ok' => true,
             'method' => 'digingonyou_support_reentry',
-            'method_label' => '디깅온유식: 급락/표시 지지선~+8% 밟고 사기 · 올라오면 나눠 팔기 · 손절선=1차 저점',
+            'method_label' => '기타: 급락/표시 지지선~+8% 밟고 사기 · 올라오면 나눠 팔기 · 손절선=1차 저점',
             'score' => $score,
             'action' => $action,
             'action_label' => $actionLabel,

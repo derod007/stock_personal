@@ -35,7 +35,7 @@ final class AlertWebhook
         }
 
         $lines = [
-            "noramu alert · profile=`{$profileId}` · " . count($alerts) . '건',
+            "alert · profile=`{$profileId}` · " . count($alerts) . '건',
             '',
         ];
         foreach (array_slice($alerts, 0, 12) as $a) {
@@ -54,7 +54,7 @@ final class AlertWebhook
         $payload = json_encode([
             'content' => $text,
             'text' => $text,
-            'username' => 'noramu',
+            'username' => 'chart',
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
         $ch = curl_init($this->url);

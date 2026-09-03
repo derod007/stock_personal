@@ -70,12 +70,27 @@ final class EntryCurator
         $productType = (string) ($entry['product_type'] ?? 'unknown');
         $tags = array_map('strval', $entry['tags'] ?? []);
         $note = (string) ($entry['symbol_note'] ?? '');
-        $blob = trim(($entry['title'] ?? '') . "\n" . ($entry['raw_quote'] ?? ''));
+        $blob = trim(
+            ($entry['title'] ?? '') . "\n"
+            . ($entry['raw_quote'] ?? '') . "\n"
+            . implode("\n", is_array($entry['author_comments'] ?? null) ? $entry['author_comments'] : [])
+        );
         $reasons = [];
 
         $priceSuspect = $this->isPriceScaleSuspect($entry, $note);
         if ($priceSuspect) {
             $reasons[] = 'price_scale_suspect';
+        }
+
+        if (preg_match('/공부하기좋은\s*종목/u', $blob) === 1) {
+            $tags[] = 'study_watchlist';
+            if (preg_match('/원전.{0,12}돈/u', $blob) === 1) {
+                $tags[] = 'nuclear_flow_comment';
+            }
+            $entry['tags'] = array_values(array_unique($tags));
+            if (($entry['symbol_note'] ?? '') === '' || preg_match('/삼하/u', (string) ($entry['symbol_note'] ?? '')) === 1) {
+                $entry['symbol_note'] = '삼하 추격 비추천 + 공부용 차트 예시 (타점 아님)';
+            }
         }
 
         if ($symbol === 'UNKNOWN' || $productType === 'unknown') {
@@ -170,7 +185,9 @@ final class EntryCurator
             $entry['learning_use'] = 'structure_only';
             $entry['exclude_price_label'] = true;
             $entry['price_scale_suspect'] = false;
-            $entry['learning_reasons'] = ['structure_view_only'];
+            $entry['learning_reasons'] = in_array('important_lesson', $tags, true)
+                ? ['structure_view_only', 'important_pattern_lesson', 'no_direct_price_label']
+                : ['structure_view_only'];
             $entry['curated_at_kst'] = $this->nowKst();
             return $entry;
         }
@@ -303,6 +320,16 @@ final class EntryCurator
             $entry['exclude_price_label'] = true;
             $entry['price_scale_suspect'] = false;
             $entry['learning_reasons'] = ['mapped_samha_or_hynix'];
+            if (preg_match('/공부하기좋은\s*종목/u', $blob) === 1) {
+                $tags = array_map('strval', $entry['tags'] ?? []);
+                $tags[] = 'study_watchlist';
+                if (preg_match('/원전.{0,12}돈/u', $blob) === 1) {
+                    $tags[] = 'nuclear_flow_comment';
+                }
+                $entry['tags'] = array_values(array_unique($tags));
+                $entry['symbol_note'] = '삼하 추격 비추천 + 공부용 차트 예시 (타점 아님)';
+                $entry['learning_reasons'][] = 'study_watchlist';
+            }
             $entry['curated_at_kst'] = $this->nowKst();
             return $entry;
         }
@@ -324,6 +351,75 @@ final class EntryCurator
             $entry['exclude_price_label'] = true;
             $entry['price_scale_suspect'] = false;
             $entry['learning_reasons'] = ['market_scenario_no_ticker'];
+            $entry['curated_at_kst'] = $this->nowKst();
+            return $entry;
+        }
+
+        if (preg_match('/단타일지/u', $blob) === 1 && preg_match('/끝나면\s*올림/u', $blob) === 1) {
+            $entry['learning_use'] = 'ignore';
+            $entry['exclude_price_label'] = true;
+            $entry['price_scale_suspect'] = false;
+            $entry['learning_reasons'] = ['placeholder_post'];
+            $entry['curated_at_kst'] = $this->nowKst();
+            return $entry;
+        }
+
+        if (preg_match('/한성기업/u', $blob) === 1) {
+            $entry['symbol'] = '003680.KS';
+            $entry['related_underlying'] = '003680.KS';
+            $entry['product_type'] = 'kr_stock';
+            $entry['symbol_note'] = '한성기업 — 시총 보고 추천 안 함(관찰)';
+            $entry['learning_use'] = 'structure_only';
+            $entry['exclude_price_label'] = true;
+            $entry['price_scale_suspect'] = false;
+            $entry['learning_reasons'] = ['watch_no_recommend'];
+            $entry['curated_at_kst'] = $this->nowKst();
+            return $entry;
+        }
+
+        if (preg_match('/스테이블코인/u', $blob) === 1) {
+            $entry['learning_use'] = 'ignore';
+            $entry['exclude_price_label'] = true;
+            $entry['price_scale_suspect'] = false;
+            $entry['learning_reasons'] = ['off_universe_chat'];
+            $entry['curated_at_kst'] = $this->nowKst();
+            return $entry;
+        }
+
+        if (preg_match('/유가|원유|오일/u', $blob) === 1 && preg_match('/오일롱/u', $blob) !== 1) {
+            $entry['symbol'] = 'CL=F';
+            $entry['related_underlying'] = 'CL=F';
+            $entry['product_type'] = 'us_stock';
+            $entry['symbol_note'] = '원유 뷰 (개별 국장 종목 아님)';
+            $entry['learning_use'] = 'structure_only';
+            $entry['exclude_price_label'] = true;
+            $entry['price_scale_suspect'] = false;
+            $entry['learning_reasons'] = ['oil_market_view'];
+            $entry['curated_at_kst'] = $this->nowKst();
+            return $entry;
+        }
+
+        if (preg_match('/GS건설|지에스건설/iu', $blob) === 1) {
+            $entry['symbol'] = '006360.KS';
+            $entry['related_underlying'] = '006360.KS';
+            $entry['product_type'] = 'kr_stock';
+            $entry['symbol_note'] = 'GS건설 관찰(진입가 없음)';
+            $entry['learning_use'] = 'structure_only';
+            $entry['exclude_price_label'] = true;
+            $entry['price_scale_suspect'] = false;
+            $entry['learning_reasons'] = ['watch_no_entry'];
+            $entry['curated_at_kst'] = $this->nowKst();
+            return $entry;
+        }
+
+        if (preg_match('/로봇주|로봇\s*냄새|에이치브이엠|비츠로넥스텍/u', $blob) === 1) {
+            $entry['symbol'] = 'KR_MARKET_VIEW';
+            $entry['symbol_note'] = '테마 관찰(로봇 등) — 진입가 없음';
+            $entry['product_type'] = 'market_view';
+            $entry['learning_use'] = 'structure_only';
+            $entry['exclude_price_label'] = true;
+            $entry['price_scale_suspect'] = false;
+            $entry['learning_reasons'] = ['theme_watch_no_entry'];
             $entry['curated_at_kst'] = $this->nowKst();
             return $entry;
         }

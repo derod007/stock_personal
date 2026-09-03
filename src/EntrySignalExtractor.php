@@ -29,6 +29,7 @@ final class EntrySignalExtractor
 
         $events = [];
         $baseId = 'fm-' . ($post['document_srl'] ?? sha1($post['title']));
+        $isTopPatternLesson = (string) ($post['document_srl'] ?? '') === '10237234875';
 
         // 평단/매수/진입/타점 (공백·조사 변형 허용)
         if (preg_match_all('/(?:평단|매수(?:타점|완)?|진입|타점|분할해서)\s*([0-9]+(?:\.[0-9]+)?)\s*(불|달러|원|₩)?/u', $blob, $m, PREG_SET_ORDER)) {
@@ -42,14 +43,16 @@ final class EntrySignalExtractor
                 ]);
             }
         }
-        // "soxs 3.36" / "쏙스 3.63" 한 줄 포지션
-        if (preg_match_all('/(?:^|[\s\n])(soxs|SOXS|쏙스)\s*([0-9]+(?:\.[0-9]+)?)/u', $blob, $m, PREG_SET_ORDER)) {
+        // "soxs 3.36" / "쏙스 3.63" / "snxx4.9" 한 줄 포지션
+        if (preg_match_all('/(?:^|[\s\n])(soxs|SOXS|쏙스|snxx|SNDK|sndk)\s*([0-9]+(?:\.[0-9]+)?)/u', $blob, $m, PREG_SET_ORDER)) {
             foreach ($m as $i => $row) {
+                $tok = strtolower($row[1]);
+                $hint = in_array($tok, ['snxx', 'sndk'], true) ? 'SNDK' : 'SOXS';
                 $events[] = $this->makeEvent($post, $baseId . '-soxs-px-' . $i, [
                     'side' => 'long',
                     'entry_price' => (float) $row[2],
-                    'symbol_hint' => 'SOXS',
-                    'tags' => ['parsed_entry', 'soxs_line_price'],
+                    'symbol_hint' => $hint,
+                    'tags' => ['parsed_entry', $hint === 'SNDK' ? 'sndk_line_price' : 'soxs_line_price'],
                     'raw_quote' => trim($row[0]),
                 ]);
             }
@@ -127,11 +130,29 @@ final class EntrySignalExtractor
         }
 
         // 심볼 힌트만 있는 구조 글
-        if ($events === [] && preg_match('/차트|분석|숏|롱|자리|시나리오|프로그램|비중/u', $blob)) {
+        $needsSamhaView = preg_match('/삼성전자|하이닉스|삼하/u', $post['title'] . "\n" . $blob) === 1
+            && preg_match('/들어갈자리없음|물리는자리|굳이\s*삼하/u', $blob) === 1;
+        if ($events === [] && preg_match('/차트|분석|숏|롱|자리|시나리오|프로그램|비중|삼하|공부하기/u', $blob) === 1) {
+            $structureTags = ['structure_or_view'];
+            if ($isTopPatternLesson) {
+                $structureTags = array_merge($structureTags, [
+                    'important_lesson',
+                    'top_failure_pattern',
+                    'inverse_bottom_pattern',
+                    'no_direct_entry',
+                ]);
+            }
             $events[] = $this->makeEvent($post, $baseId . '-structure', [
                 'side' => $this->inferSide($blob, 'observe'),
                 'entry_price' => null,
-                'tags' => ['structure_or_view'],
+                'tags' => $structureTags,
+                'raw_quote' => mb_substr($blob, 0, 180),
+            ]);
+        } elseif ($needsSamhaView) {
+            $events[] = $this->makeEvent($post, $baseId . '-structure', [
+                'side' => 'observe',
+                'entry_price' => null,
+                'tags' => ['structure_or_view', 'samha_no_entry'],
                 'raw_quote' => mb_substr($blob, 0, 180),
             ]);
         }
@@ -140,8 +161,14 @@ final class EntrySignalExtractor
         foreach ($events as &$e) {
             $raw = trim((string) ($e['raw_quote'] ?? ''));
             $hint = trim((string) ($e['symbol_hint'] ?? ''));
+            $tags = array_map('strval', $e['tags'] ?? []);
             $resolved = null;
-            if ($raw !== '') {
+            $isViewOnly = in_array('structure_or_view', $tags, true)
+                && !in_array('parsed_entry', $tags, true);
+            if ($isViewOnly && trim((string) ($post['title'] ?? '')) !== '') {
+                $resolved = $this->resolveSymbol((string) $post['title']);
+            }
+            if ($raw !== '' && ($resolved === null || $resolved['symbol'] === 'UNKNOWN')) {
                 $resolved = $this->resolveSymbol($raw);
             }
             if (($resolved === null || $resolved['symbol'] === 'UNKNOWN') && $hint !== '') {
@@ -154,6 +181,10 @@ final class EntrySignalExtractor
             $e['symbol_note'] = $resolved['note'];
             $e['related_underlying'] = $resolved['underlying'];
             $e['product_type'] = $resolved['product_type'];
+            if ($isTopPatternLesson) {
+                $e['lesson_ref'] = 'noramu_top_pattern_v1';
+                $e['important_post_archive'] = 'data/important_posts/10237234875.json';
+            }
             unset($e['symbol_hint']);
         }
         unset($e);
@@ -229,7 +260,7 @@ final class EntrySignalExtractor
         if (preg_match('/SOXS|쏙스/iu', $text)) {
             return ['symbol' => 'SOXS', 'note' => '반도체 인버스 → curate 시 MU 본주 치환', 'underlying' => 'MU', 'product_type' => 'leveraged_etf'];
         }
-        if (preg_match('/샌디|샌디스크|SNDK/iu', $text)) {
+        if (preg_match('/샌디|샌디스크|SNDK|snxx/iu', $text)) {
             return ['symbol' => 'SNDK', 'note' => '샌디스크 본주 또는 관련', 'underlying' => 'SNDK', 'product_type' => 'us_stock'];
         }
         if (preg_match('/마이크론|\bMU\b/iu', $text)) {
@@ -249,6 +280,21 @@ final class EntrySignalExtractor
         }
         if (preg_match('/오라클|ORCL/iu', $text)) {
             return ['symbol' => 'ORCL', 'note' => '', 'underlying' => 'ORCL', 'product_type' => 'us_stock'];
+        }
+        if (preg_match('/대원전선/u', $text)) {
+            return ['symbol' => '006340.KS', 'note' => '대원전선', 'underlying' => '006340.KS', 'product_type' => 'kr_stock'];
+        }
+        if (preg_match('/한성기업/u', $text)) {
+            return ['symbol' => '003680.KS', 'note' => '한성기업', 'underlying' => '003680.KS', 'product_type' => 'kr_stock'];
+        }
+        if (preg_match('/GS건설|지에스건설/iu', $text)) {
+            return ['symbol' => '006360.KS', 'note' => 'GS건설', 'underlying' => '006360.KS', 'product_type' => 'kr_stock'];
+        }
+        if (preg_match('/sk이노베이션|에스케이이노/iu', $text)) {
+            return ['symbol' => '096770.KS', 'note' => 'SK이노베이션', 'underlying' => '096770.KS', 'product_type' => 'kr_stock'];
+        }
+        if (preg_match('/유가|원유|오일/u', $text) === 1 && preg_match('/오일롱/u', $text) !== 1) {
+            return ['symbol' => 'CL=F', 'note' => '원유(WTI)', 'underlying' => 'CL=F', 'product_type' => 'us_stock'];
         }
         return ['symbol' => 'UNKNOWN', 'note' => '심볼 미확정', 'underlying' => null, 'product_type' => 'unknown'];
     }

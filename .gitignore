@@ -3,6 +3,7 @@
 /data/ohlcv/
 /data/backtests/
 /data/alerts/
+/data/cache/
 /vendor/
 *.log
 .DS_Store

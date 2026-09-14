@@ -1,0 +1,26 @@
+name: Frozen research diagnosis
+on:
+  push:
+    branches: ['codex/loss-diagnosis-v4']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  diagnosis:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m unittest discover -s tests -p 'test_diagnosis.py'
+      - uses: actions/download-artifact@v4
+        with:
+          name: profitability-research
+          run-id: 34879718710
+          github-token: ${{ github.token }}
+          path: data/research
+      - run: python3 bin/diagnose_research.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: loss-diagnosis
+          path: data/research/

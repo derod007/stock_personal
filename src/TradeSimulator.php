@@ -35,6 +35,11 @@ final class TradeSimulator
         }
         $bars = array_values(array_filter($bars, static fn(array $b): bool => ($b['available_at'] ?? 0) > ($plan['signal_at'] ?? PHP_INT_MAX)));
         usort($bars, static fn(array $a, array $b): int => $a['available_at'] <=> $b['available_at']);
+        $trailing = ($plan['exit_mode'] ?? 'fixed') === 'trailing';
+        $trailDistance = (float) ($plan['trail_distance'] ?? 0);
+        if ($trailing && (!is_finite($trailDistance) || $trailDistance <= 0)) {
+            throw new \InvalidArgumentException('Trailing distance must be positive');
+        }
         $ttl = (int) ($plan['order_valid_bars'] ?? 3);
         $filledAt = null;
         $fill = null;
@@ -60,11 +65,11 @@ final class TradeSimulator
             }
             $out['bars'] = $i - $filledAt + 1;
             $stopHit = $bar['low'] <= $stop;
-            $targetHit = $bar['high'] >= $target;
+            $targetHit = !$trailing && $bar['high'] >= $target;
             $exit = null;
             $why = null;
             // On later sessions an opening gap resolves chronology; within a bar stop wins ties.
-            if ($i > $filledAt && $bar['open'] >= $target) {
+            if (!$trailing && $i > $filledAt && $bar['open'] >= $target) {
                 $why = 'target';
                 $exit = $target;
             } elseif ($stopHit) {
@@ -85,6 +90,8 @@ final class TradeSimulator
                     'hit_stop' => $why === 'stop', 'hit_target' => $why === 'target',
                     'net_return_pct' => round($net, 4), 'ret_close_pct' => round($net, 4)]);
             }
+            // Only a completed close raises the stop for the NEXT session.
+            if ($trailing) { $stop = max($stop, (float) $bar['close'] - $trailDistance); }
         }
         return array_replace($out, ['status' => $filledAt !== null ? 'incomplete' : (count($bars) >= $ttl ? 'unfilled' : 'pending'),
             'complete' => $filledAt === null && count($bars) >= $ttl]);

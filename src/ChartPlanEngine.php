@@ -58,6 +58,13 @@ final class ChartPlanEngine
         }
         $plan['candidate_available'] = $plan['candidate'] !== null;
         $plan['confirmation_status'] = $plan['ready'] ? 'confirmed' : 'waiting';
+        $plan['diagnostics'] = [
+            'patterns' => ['breakout_retest' => $retest, 'trend_pullback' => $pullback],
+            'selected_pattern' => $plan['pattern'],
+            'final_status' => $plan['status'],
+            'candidate_available' => $plan['candidate_available'],
+            'order_ready' => $plan['ready'],
+        ];
         return ['features' => $features, 'decision' => $decision, 'plan' => $plan];
     }
 

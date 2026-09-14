@@ -62,7 +62,7 @@ final class KrAmountScanner
         $profileId = $this->service->profile()->id;
         // v18: completed-bar confirmed-retest plans (invalidate legacy buy-zone cache).
         $cacheFile = sprintf(
-            '%s/kr_amount_scan_v18_%s_%s_%d.json',
+            '%s/kr_amount_scan_v19_%s_%s_%d.json',
             $this->cacheDir,
             $market,
             $profileId,
@@ -181,7 +181,7 @@ final class KrAmountScanner
                 $score = (int) $proposal['score'];
             }
             $entryRecommend = in_array($action, self::ENTRY_ACTIONS, true)
-                && !empty($newEntry['available']);
+                && !empty($newEntry['order_ready']);
 
             $lesson1Hit = !empty($proposal['lesson1_candle_recipe'])
                 || !empty($proposal['lesson1_upper_box'])
@@ -200,6 +200,9 @@ final class KrAmountScanner
             $row['action_label'] = (string) ($explain['action_label'] ?? $action);
             $row['entry_recommend'] = $entryRecommend;
             $row['buy_now'] = !empty($newEntry['buy_now']);
+            $row['candidate_available'] = !empty($newEntry['candidate_available']);
+            $row['reward_risk_range'] = $proposal['price_candidate']['reward_risk'] ?? null;
+            $row['trend_context'] = $proposal['trend_context'] ?? null;
             $row['entry_status'] = (string) ($newEntry['status'] ?? 'unavailable');
             $row['lesson1_hit'] = $lesson1Hit;
             $row['lesson1_note'] = $lesson1Note !== '' ? $lesson1Note : null;

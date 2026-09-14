@@ -83,13 +83,15 @@ final class ProposalService
         try {
             $bars = $this->client->fetch(
                 $symbol,
-                '3mo',
+                '2y',
                 '1d',
                 useCache: $useCache,
                 maxAgeSeconds: $cacheMaxAgeSeconds,
             );
-            $features = $this->engine->extract($bars);
-            $decision = $this->playbook->decide($features, $symbol);
+            $shared = new ChartPlanEngine();
+            $analysis = $shared->analyze($bars, $symbol, time(), $profileId);
+            $features = $analysis['features'];
+            $decision = $analysis['decision'];
             $tv = SymbolMap::tradingViewUrl($symbol);
             $hourly = (new HourlyAssist($this->client))->analyze($symbol);
             $allEntries = $this->entries?->all() ?? [];
@@ -259,7 +261,12 @@ final class ProposalService
 
             $proposal['new_entry'] = (new NewEntryGuide())->build($proposal, $features);
             $proposal = $this->applyStructureBrokenHardFilter($proposal);
+            // Author opinions remain reference material; final levels/action come from the replayable engine.
+            $proposal = $shared->apply($proposal, $analysis['plan']);
             $proposal['explain'] = (new ProposalExplain())->build($proposal, $features);
+            $decision = array_replace($decision, array_intersect_key($proposal, array_flip([
+                'action', 'entry_zone', 'invalidation', 'target_hint', 'size_hint', 'reason', 'rules',
+            ])));
 
             return [
                 'ok' => true,

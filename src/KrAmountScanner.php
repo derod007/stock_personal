@@ -60,9 +60,9 @@ final class KrAmountScanner
             throw new \InvalidArgumentException('지원하지 않는 스캔 시장: ' . $market);
         }
         $profileId = $this->service->profile()->id;
-        // v17: 다음 금융 거래대금 순위
+        // v18: completed-bar confirmed-retest plans (invalidate legacy buy-zone cache).
         $cacheFile = sprintf(
-            '%s/kr_amount_scan_v17_%s_%s_%d.json',
+            '%s/kr_amount_scan_v18_%s_%s_%d.json',
             $this->cacheDir,
             $market,
             $profileId,
@@ -428,6 +428,7 @@ final class KrAmountScanner
         }
 
         return match ((string) ($row['entry_status'] ?? '')) {
+            'ready' => 3,
             'in_zone' => 3,
             'below_half_wait_recover' => 2,
             'wait_pullback' => 1,

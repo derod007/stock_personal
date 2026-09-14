@@ -31,7 +31,7 @@ foreach ($repo->all() as $entry) {
     }
 
     try {
-        $bars = $client->fetch($yahoo, '6mo', '1d', useCache: true);
+        $bars = $client->fetch($yahoo, '2y', '1d', useCache: true);
         $row = $bt->evaluate($entry, $bars, $yahoo);
         if ($row !== null) {
             $results[] = $row;
@@ -62,7 +62,7 @@ file_put_contents($jsonPath, json_encode($out, JSON_PRETTY_PRINT | JSON_UNESCAPE
 
 $mdPath = $root . '/docs/backtest-latest.md';
 $md = [];
-$md[] = '# 백테스트 요약 (latest)';
+$md[] = '# 게시 시점의 공통 전략 재생 (작성자 실매매 성과 아님)';
 $md[] = '';
 $md[] = '생성: ' . $out['generated_at_kst'];
 $md[] = '';
@@ -70,7 +70,7 @@ $md[] = '원본 JSON: `' . str_replace($root . DIRECTORY_SEPARATOR, '', $jsonPat
 $md[] = '';
 $md[] = '## 점수 밴드별';
 $md[] = '';
-$md[] = '| band | n | avg_score | h5 avg_ret | h5 win | h5 stop | h5 target | h10 avg_ret | h20 avg_ret |';
+$md[] = '| band | anchors | avg_score | h5 net_ret | h5 win | h5 stop | h5 target | h10 net_ret | h20 net_ret |';
 $md[] = '|------|--:|----------:|-----------:|-------:|--------:|----------:|------------:|------------:|';
 foreach ($summary['by_band'] as $band => $row) {
     if (($row['n'] ?? 0) === 0) {
@@ -115,7 +115,7 @@ foreach ($results as $r) {
     );
 }
 $md[] = '';
-$md[] = '> 샘플 수가 적을 때 승률은 참고용. `full` 라벨을 늘린 뒤 다시 돌릴 것.';
+$md[] = '> 첫 청산의 비용 차감 수익률. 미체결·미완료는 수익률에서 제외. 같은 신호 중복은 요약에서 제외. 작성자 가격을 체결가로 사용하지 않음. 기본 편도 비용 10bp, 슬리피지 5bp는 실험용 가정.';
 $md[] = '';
 file_put_contents($mdPath, implode("\n", $md));
 

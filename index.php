@@ -11,6 +11,7 @@ use ChartEntryLab\KrAmountLeadersClient;
 use ChartEntryLab\KrAmountScanner;
 use ChartEntryLab\LearnedLevels;
 use ChartEntryLab\ProposalService;
+use ChartEntryLab\ScanSnapshot;
 use ChartEntryLab\SymbolMap;
 use ChartEntryLab\SectorMap;
 use ChartEntryLab\YahooChartClient;
@@ -69,6 +70,7 @@ if ($scanMode) {
         new KrAmountLeadersClient($cacheDir),
         $noramuService,
         $cacheDir,
+        snapshots: new ScanSnapshot(__DIR__ . '/data/scan_snapshots'),
     );
     $scanReport = $scanner->scan(
         limit: $scanLimit,
@@ -324,7 +326,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
             </div>
             <div>
               <dt>점수</dt>
-              <dd>저점 상승·거래량·추세·관심구간 거리 등에 패턴 가감점을 더한 0~100 구조 점수입니다. 수익 확률 자체는 아닙니다. 스캔 기본 정렬은 이 점수 순입니다.</dd>
+              <dd>저점 상승·거래량·추세·관심구간 거리 등에 패턴 가감점을 더한 0~100 구조 점수입니다. 수익 확률 자체는 아닙니다. 스캔 기본 정렬은 지금 진입순입니다.</dd>
             </div>
           </dl>
         </section>
@@ -345,7 +347,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
             </div>
             <div>
               <dt>지금 진입순</dt>
-              <dd>관심 구간에 들어와 나눠 사기를 검토하는 종목을 위로 올립니다. 이미 구간 위에서 쫓아 사는 자리와 손절선이 깨진 그림은 아래로 둡니다. 같은 단계면 점수 순입니다.</dd>
+              <dd>관심 구간에 들어와 나눠 사기를 검토하는 종목을 위로 올립니다. 스캔 기본 정렬입니다. 이미 구간 위에서 쫓아 사는 자리와 손절선이 깨진 그림은 아래로 둡니다. 같은 단계면 점수 순입니다.</dd>
             </div>
             <div>
               <dt>오늘 돈 몰린 곳</dt>
@@ -482,6 +484,13 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
                   $scanBuyNowCount++;
               }
           }
+          $scanReview = (new ScanSnapshot(__DIR__ . '/data/scan_snapshots'))->reviewAgainst(
+              $scanRows,
+              isset($scanReport['fetched_at']) ? (string) $scanReport['fetched_at'] : null
+          );
+          $scanReviewRows = is_array($scanReview) && is_array($scanReview['rows'] ?? null)
+              ? array_slice($scanReview['rows'], 0, 12)
+              : [];
         ?>
         <?php if (empty($scanReport['ok'])): ?>
           <p class="scan__error" role="alert"><?= h((string) ($scanReport['error'] ?? '스캔 실패')) ?></p>
@@ -629,10 +638,78 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
           <?php elseif (is_array($flow) && ($flow['error'] ?? '') !== '' && $flowThemes === [] && $flowSpikes === []): ?>
             <p class="scan__note">테마 흐름: <?= h((string) $flow['error']) ?></p>
           <?php endif; ?>
+          <?php if ($scanReviewRows !== []): ?>
+            <div class="flow-box">
+              <p class="flow-box__title">
+                어제 스캔 → 오늘
+                <?= tip("직전 거래일 스캔 가격 대비 오늘 스캔 현재가입니다.
+어제 진입 후보를 앞에 두고, 움직임이 큰 종목을 보여 줍니다. 추격 신호가 아닙니다.") ?>
+              </p>
+              <p class="flow-spikes">
+                <?= h((string) ($scanReview['date'] ?? '')) ?>
+                <?php
+                  $reviewAt = (string) ($scanReview['fetched_at'] ?? '');
+                  if (preg_match('/\d{2}:\d{2}/', $reviewAt, $rm)) {
+                      echo ' · ' . h($rm[0]);
+                  }
+                ?>
+              </p>
+              <div class="scan-table-wrap">
+                <table class="scan-table scan-table--review">
+                  <thead>
+                    <tr>
+                      <th>종목</th>
+                      <th>어제점수</th>
+                      <th>어제자리</th>
+                      <th>오늘</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($scanReviewRows as $rv): ?>
+                      <?php
+                        $rvYahoo = (string) ($rv['yahoo'] ?? '');
+                        $rvPct = $rv['since_scan_pct'] ?? null;
+                        $rvStatus = (string) ($rv['entry_status'] ?? '');
+                        $rvSeat = !empty($rv['buy_now'])
+                            ? '지금'
+                            : (!empty($rv['entry_recommend'])
+                                ? '관심'
+                                : match ($rvStatus) {
+                                    'in_zone' => '구간',
+                                    'wait_pullback' => '기다림',
+                                    'below_half_wait_recover' => '회복대기',
+                                    'structure_broken' => '손절아래',
+                                    default => '—',
+                                });
+                      ?>
+                      <tr>
+                        <td>
+                          <a href="?<?= h($qsProfile) ?>&symbol=<?= rawurlencode($rvYahoo) ?>">
+                            <?= h((string) ($rv['name'] ?? $rvYahoo)) ?>
+                          </a>
+                          <?php if (!empty($rv['lagging_theme'])): ?>
+                            <span class="badge badge--smell">구경만</span>
+                          <?php endif; ?>
+                          <?php if (($rv['spike_dump_status'] ?? 'none') !== 'none'): ?>
+                            <span class="badge badge--top-risk">급등후급락</span>
+                          <?php endif; ?>
+                        </td>
+                        <td class="mono"><?= h(isset($rv['score']) ? (string) $rv['score'] : '—') ?></td>
+                        <td><?= h($rvSeat) ?></td>
+                        <td class="mono<?= is_numeric($rvPct) ? (((float) $rvPct >= 0) ? ' is-up' : ' is-down') : '' ?>">
+                          <?= h(is_numeric($rvPct) ? sprintf('%+.1f%%', (float) $rvPct) : (empty($rv['still_in_scan']) ? '스캔 밖' : '—')) ?>
+                        </td>
+                      </tr>
+                    <?php endforeach; ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          <?php endif; ?>
           <div class="scan-toolbar">
             <div class="scan-sort" id="scan-sort" role="group" aria-label="정렬">
-              <button type="button" class="sector-chip is-active" data-sort="score" aria-pressed="true">점수순</button>
-              <button type="button" class="sector-chip" data-sort="entry" aria-pressed="false">지금 진입순<?php if ($scanBuyNowCount > 0): ?> (<?= (int) $scanBuyNowCount ?>)<?php endif; ?></button>
+              <button type="button" class="sector-chip" data-sort="score" aria-pressed="false">점수순</button>
+              <button type="button" class="sector-chip is-active" data-sort="entry" aria-pressed="true">지금 진입순<?php if ($scanBuyNowCount > 0): ?> (<?= (int) $scanBuyNowCount ?>)<?php endif; ?></button>
             </div>
           <?php if ($scanBucketsUsed !== [] || (int) ($scanSummary['smell'] ?? 0) > 0 || (int) ($scanSummary['lagging'] ?? 0) > 0 || (int) ($scanSummary['spike_dump'] ?? 0) > 0): ?>
             <div class="sector-filters" id="sector-filters" role="group" aria-label="업종 필터">
@@ -760,8 +837,9 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
             </table>
           </div>
           <p class="scan__note">
-            기본은 <strong>점수순</strong>입니다. «지금 진입순»은 관심 구간 안에서 나눠 사기 검토가 되는 종목을 위로 올립니다. «대금순위»는 거래대금 원래 순위입니다.
+            기본은 <strong>지금 진입순</strong>입니다. «점수순»은 구조 점수만으로 다시 정렬합니다.
             종목 클릭 → 티커 분석. 빨간 «불법과외» = 불법과외1 패턴.
+            어제 스캔이 있으면 위에 «어제 스캔 → 오늘»로 직전 스캔가 대비 등락을 보여 줍니다.
           </p>
         <?php endif; ?>
       <?php else: ?>
@@ -1548,6 +1626,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
         });
         sorted.forEach((tr) => tbody.appendChild(tr));
       };
+      applySort('entry');
       sortBar.addEventListener('click', (e) => {
         const btn = e.target.closest('[data-sort]');
         if (!btn) return;

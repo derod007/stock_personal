@@ -13,6 +13,7 @@ final class KrAmountScanner
     private const ENTRY_ACTIONS = ['add_on_pullback', 'watchlist_buy_zone'];
 
     private readonly SectorMap $sectors;
+    private readonly ScanSnapshot $snapshots;
 
     public function __construct(
         private readonly KrAmountLeadersClient $leaders,
@@ -21,11 +22,13 @@ final class KrAmountScanner
         /** 스캔 결과(점수·신규진입 문장) 캐시. 현재가가 빨리 식어서 짧게 둔다. */
         private readonly int $cacheTtlSeconds = 300,
         ?SectorMap $sectors = null,
+        ?ScanSnapshot $snapshots = null,
     ) {
         if (!is_dir($this->cacheDir)) {
             mkdir($this->cacheDir, 0777, true);
         }
         $this->sectors = $sectors ?? new SectorMap($this->cacheDir . '/sector');
+        $this->snapshots = $snapshots ?? new ScanSnapshot(dirname($this->cacheDir, 2) . '/scan_snapshots');
     }
 
     /**
@@ -69,6 +72,11 @@ final class KrAmountScanner
         if ($useCache && is_file($cacheFile) && (time() - filemtime($cacheFile)) < $this->cacheTtlSeconds) {
             /** @var array<string,mixed> $cached */
             $cached = json_decode((string) file_get_contents($cacheFile), true, 512, JSON_THROW_ON_ERROR);
+            $this->snapshots->save($cached, overwrite: false);
+            if (is_array($cached['rows'] ?? null)) {
+                $cached['rows'] = $this->sortByEntryThenScore($cached['rows']);
+            }
+
             return $cached;
         }
 
@@ -234,30 +242,8 @@ final class KrAmountScanner
             $rows[] = $row;
         }
 
-        // 기본은 구조 점수 순. «지금 진입순»은 화면에서 다시 정렬한다.
-        usort($rows, function (array $a, array $b): int {
-            $sa = is_int($a['score'] ?? null) ? $a['score'] : -1;
-            $sb = is_int($b['score'] ?? null) ? $b['score'] : -1;
-            if ($sa !== $sb) {
-                return $sb <=> $sa;
-            }
-            if (($a['lesson1_hit'] ?? false) !== ($b['lesson1_hit'] ?? false)) {
-                return ($b['lesson1_hit'] ?? false) <=> ($a['lesson1_hit'] ?? false);
-            }
-            $smellA = $this->smellRank((string) ($a['theme_smell_status'] ?? 'none'));
-            $smellB = $this->smellRank((string) ($b['theme_smell_status'] ?? 'none'));
-            if ($smellA !== $smellB) {
-                return $smellB <=> $smellA;
-            }
-            if (($a['buy_now'] ?? false) !== ($b['buy_now'] ?? false)) {
-                return ($b['buy_now'] ?? false) <=> ($a['buy_now'] ?? false);
-            }
-            if (($a['entry_recommend'] ?? false) !== ($b['entry_recommend'] ?? false)) {
-                return ($b['entry_recommend'] ?? false) <=> ($a['entry_recommend'] ?? false);
-            }
-
-            return ($a['amount_rank'] ?? 999) <=> ($b['amount_rank'] ?? 999);
-        });
+        // 기본은 지금 진입순. 점수순은 화면에서 다시 정렬한다.
+        $rows = $this->sortByEntryThenScore($rows);
 
         $flow = $this->attachSmellContext($this->moneyFlow($leaders, $useCache), $rows);
         $rows = $this->tagLaggingThemeRows($rows, $flow);
@@ -295,6 +281,7 @@ final class KrAmountScanner
             $cacheFile,
             json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
         );
+        $this->snapshots->save($payload, overwrite: true);
 
         return $payload;
     }
@@ -394,6 +381,58 @@ final class KrAmountScanner
         unset($row);
 
         return $rows;
+    }
+
+    /**
+     * @param list<array<string,mixed>> $rows
+     * @return list<array<string,mixed>>
+     */
+    private function sortByEntryThenScore(array $rows): array
+    {
+        usort($rows, function (array $a, array $b): int {
+            $ea = $this->entryRank($a);
+            $eb = $this->entryRank($b);
+            if ($ea !== $eb) {
+                return $eb <=> $ea;
+            }
+            $sa = is_int($a['score'] ?? null) ? $a['score'] : -1;
+            $sb = is_int($b['score'] ?? null) ? $b['score'] : -1;
+            if ($sa !== $sb) {
+                return $sb <=> $sa;
+            }
+            if (($a['lesson1_hit'] ?? false) !== ($b['lesson1_hit'] ?? false)) {
+                return ($b['lesson1_hit'] ?? false) <=> ($a['lesson1_hit'] ?? false);
+            }
+            $smellA = $this->smellRank((string) ($a['theme_smell_status'] ?? 'none'));
+            $smellB = $this->smellRank((string) ($b['theme_smell_status'] ?? 'none'));
+            if ($smellA !== $smellB) {
+                return $smellB <=> $smellA;
+            }
+
+            return ($a['amount_rank'] ?? 999) <=> ($b['amount_rank'] ?? 999);
+        });
+
+        return $rows;
+    }
+
+    /**
+     * @param array<string,mixed> $row
+     */
+    private function entryRank(array $row): int
+    {
+        if (!empty($row['buy_now'])) {
+            return 5;
+        }
+        if (!empty($row['entry_recommend'])) {
+            return 4;
+        }
+
+        return match ((string) ($row['entry_status'] ?? '')) {
+            'in_zone' => 3,
+            'below_half_wait_recover' => 2,
+            'wait_pullback' => 1,
+            default => 0,
+        };
     }
 
     private function smellRank(string $status): int

@@ -4,6 +4,7 @@
 /data/backtests/
 /data/alerts/
 /data/cache/
+/data/scan_snapshots/
 /vendor/
 *.log
 .DS_Store

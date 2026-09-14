@@ -2272,6 +2272,15 @@ textarea {
   color: var(--accent-ink);
 }
 
+.scan-table--review {
+  margin: 0.35rem 0 0.15rem;
+}
+.scan-table--review th,
+.scan-table--review td {
+  padding-top: 0.28rem;
+  padding-bottom: 0.28rem;
+}
+
 .btn-scan--ghost {
   border-color: var(--border-default);
   background: var(--surface-2);

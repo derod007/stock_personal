@@ -7,7 +7,7 @@ namespace ChartEntryLab;
 /** Shared, deterministic daily signal path for UI, scanner and replay. No author-price overrides. */
 final class ChartPlanEngine
 {
-    public function analyze(array $bars, string $symbol, int $asOf, string $profile = 'account1'): array
+    public function analyze(array $bars, string $symbol, int $asOf, string $profile = 'account1', bool $useContext = true): array
     {
         $bars = CandleClock::completed($bars, $symbol, $asOf);
         if (count($bars) < 40) {
@@ -15,7 +15,30 @@ final class ChartPlanEngine
         }
         $features = (new FeatureEngine())->extract($bars);
         $decision = AccountPlaybook::forProfile($profile)->decide($features, $symbol);
-        $plan = (new BreakoutRetest())->analyze($bars);
+        $retest = (new BreakoutRetest())->analyze($bars);
+        $pullback = (new TrendPullback())->analyze($bars, $features);
+        $context = (new TrendContext())->analyze($bars, $symbol, $asOf);
+        $plan = !empty($retest['ready']) ? $retest
+            : (!empty($pullback['ready']) || $pullback['candidate'] !== null ? $pullback : $retest);
+        $plan['pattern'] = $plan['version'];
+        $plan['context'] = $context;
+        $plan['context_applied'] = $useContext;
+        $candidate = $plan['candidate'] ?? null;
+        if ($candidate === null && is_numeric($plan['entry'] ?? null)) {
+            $candidate = PriceCandidate::build((float) $plan['entry'], (float) $plan['entry'],
+                (float) $plan['stop'], (float) $plan['target'], $plan['version']);
+        }
+        $candidate ??= (new PriceCandidate())->fromStructure($features);
+        $plan['candidate'] = $candidate;
+        if ($candidate !== null && empty($plan['ready'])) {
+            $plan['reason'] .= ' · 관심 가격 후보 있음, 진입 확인 전';
+        }
+        if ($useContext && ($context['daily'] === 'down' || ($context['weekly'] === 'down'
+            && ($context['daily'] !== 'up' || (float) ($plan['reward_risk'] ?? 0) < 2.0)))) {
+            $plan['ready'] = false;
+            $plan['status'] = 'context_wait';
+            $plan['reason'] = $context['label'] . ': 상위 추세·손익비 추가 확인 필요';
+        }
         $latest = $bars[array_key_last($bars)]['available_at'];
         $features['asof_kst'] = (new \DateTimeImmutable('@' . $latest))->setTimezone(new \DateTimeZone('Asia/Seoul'))->format('Y-m-d H:i:s');
         $plan['asof'] = $asOf;
@@ -30,40 +53,52 @@ final class ChartPlanEngine
                 && ($features['top_pattern_phase'] ?? '') !== 'bounce_confirmed')) {
             $plan = array_replace($plan, ['ready' => false, 'status' => 'risk_blocked', 'reason' => '급등 후 급락 또는 고점 붕괴 경고로 신규 진입 보류']);
         }
+        if (in_array($plan['status'], ['stale_data', 'blocked'], true)) {
+            $plan['candidate'] = null;
+        }
+        $plan['candidate_available'] = $plan['candidate'] !== null;
+        $plan['confirmation_status'] = $plan['ready'] ? 'confirmed' : 'waiting';
         return ['features' => $features, 'decision' => $decision, 'plan' => $plan];
     }
 
     public function apply(array $proposal, array $plan): array
     {
         $ready = !empty($plan['ready']);
-        $entry = $ready ? $plan['entry'] : null;
-        $stop = $ready ? $plan['stop'] : null;
-        $target = $ready ? $plan['target'] : null;
+        $candidate = $plan['candidate'] ?? null;
+        // Never revive a hidden candidate from legacy numbers for stale or blocked data.
+        if (in_array($plan['status'], ['stale_data', 'blocked'], true)) { $candidate = null; }
+        $available = is_array($candidate);
         $proposal['trade_plan'] = $plan;
-        $proposal['legacy_rules_reference'] = $proposal['rules'] ?? [];
-        $proposal['rules'] = ['완료 일봉만 사용', '재지지 후 별도 확인 봉 필요', '손절 < 진입 < 목표', '최소 손익비 1.5', '확인 다음 거래봉부터 3봉 지정가 유효'];
-        $proposal['legacy_digingonyou_method'] = $proposal['digingonyou_method'] ?? null;
+        $proposal['price_candidate'] = $candidate;
+        $proposal['trend_context'] = $plan['context'] ?? null;
+        $proposal['rules'] = ['완료 일봉 기준', '관심 가격과 주문 확인 분리', '구조 손절·첫 저항 기준 손익비',
+            '확인 후 다음 3개 거래봉 지정가', '큰 추세 하락은 추가 확인'];
         unset($proposal['digingonyou_method']);
         $proposal['action'] = $plan['status'] === 'blocked' ? 'blocked' : ($ready ? 'watchlist_buy_zone' : 'wait');
-        $proposal['entry_zone'] = $ready ? ['low' => $entry, 'high' => $entry, 'mid' => $entry, 'rule' => 'confirmed_retest_limit'] : null;
+        $proposal['entry_zone'] = $available ? ['low' => $candidate['low'], 'high' => $candidate['high'],
+            'mid' => $candidate['mid'], 'rule' => $candidate['source']] : null;
         foreach (['invalidation', 'invalidation_tight', 'invalidation_wide', 'invalidation_structural'] as $k) {
-            $proposal[$k] = $stop;
+            $proposal[$k] = $available ? $candidate['stop'] : null;
         }
-        $proposal['target_hint'] = $ready ? ['price' => $target, 'rule' => $plan['target_rule'], 'wide' => null, 'wide_rule' => 'none'] : null;
-        $proposal['target_tight'] = $target;
+        $proposal['target_hint'] = $available ? ['price' => $candidate['target'], 'rule' => 'candidate_structural_target', 'wide' => null] : null;
+        $proposal['target_tight'] = $available ? $candidate['target'] : null;
         $proposal['target_wide'] = null;
         $proposal['target_wide_rule'] = 'none';
         $proposal['eta'] = null;
-        $proposal['invalidation_rule'] = 'retest_low_minus_atr_buffer';
-        $proposal['level_method'] = BreakoutRetest::VERSION;
-        $proposal['level_method_label'] = '완료 일봉 돌파·재지지 확인 / 구조 손절 / 손익비';
+        $proposal['invalidation_rule'] = 'candidate_structure_atr_buffer';
+        $proposal['level_method'] = 'multi_pattern_v2';
+        $proposal['level_method_label'] = '가격 후보 / 진입 확인 / 큰 추세 분리';
         $proposal['reason'] = $plan['reason'];
-        $proposal['size_hint'] = $ready ? '다음 거래봉부터 지정가 검토. 현재 종가에 체결된 것으로 간주하지 않음.' : '신규 진입 보류';
-        $proposal['new_entry'] = ['available' => $ready, 'buy_now' => false, 'order_ready' => $ready,
-            'status' => $plan['status'], 'price' => $entry, 'low' => $entry, 'high' => $entry,
-            'deep_support' => $stop, 'sentence' => $plan['reason'],
-            'note' => $ready ? '진입 ' . $entry . ' / 손절 ' . $stop . ' / 목표 ' . $target . ' / 손익비 ' . $plan['reward_risk']
-                : '점수·과거 글 가격만으로 신규 주문을 활성화하지 않습니다.'];
+        $proposal['size_hint'] = $ready ? '패턴 확인 완료: 다음 거래봉 지정가 검토' : '관심 가격은 주문 지시가 아님';
+        $sentence = ($available ? '관심 ' . $candidate['low'] . '~' . $candidate['high'] . ' / 손절 후보 '
+            . $candidate['stop'] . ' / 목표 후보 ' . $candidate['target'] . ' · ' : '') . $plan['reason'];
+        $proposal['new_entry'] = ['available' => $available, 'candidate_available' => $available,
+            'buy_now' => false, 'order_ready' => $ready, 'status' => $plan['status'],
+            'price' => $available ? $candidate['mid'] : null, 'low' => $candidate['low'] ?? null,
+            'high' => $candidate['high'] ?? null, 'deep_support' => $candidate['stop'] ?? null,
+            'sentence' => $sentence, 'note' => $ready
+                ? '확인 지정가 ' . $plan['entry'] . ' / 손익비 ' . $plan['reward_risk']
+                : '후보 가격에 도달해도 패턴 확인 전에는 주문하지 않음'];
         return $proposal;
     }
 }

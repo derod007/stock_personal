@@ -95,7 +95,7 @@ $replay = (new EntryBacktester())->evaluate(['id' => 'test', 'learning_use' => '
     'posted_at_kst' => date(DATE_ATOM, $asOf), 'entry_price' => 999, 'stop_price' => 2000], $fixture, '005930.KS');
 check($replay['plan']['entry'] === $live['plan']['entry'] && $replay['plan']['stop'] === $live['plan']['stop'], 'Live and replay share plan, author prices never replace it');
 $projection = $engine->apply(['action' => 'add_on_pullback', 'score' => 100], array_replace($live['plan'], ['ready' => false, 'status' => 'await_confirmation']));
-check(!$projection['new_entry']['available'] && !$projection['new_entry']['buy_now'] && $projection['entry_zone'] === null, 'High score or author bias cannot bypass confirmation');
+check($projection['new_entry']['available'] && !$projection['new_entry']['buy_now'] && !$projection['new_entry']['order_ready'], 'Candidate remains visible without bypassing confirmation');
 check($engine->analyze($fixture, '005930.KS', $asOf + 5 * 86400)['plan']['status'] === 'stale_data', 'Stale data blocks new orders');
 $agg = (new EntryBacktester())->aggregate([$r, ['status' => 'incomplete', 'complete' => false]]);
 check($agg['n'] === 0, 'Incomplete/unfilled trades excluded from performance');

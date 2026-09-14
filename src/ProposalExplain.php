@@ -39,11 +39,11 @@ final class ProposalExplain
         if (is_array($proposal['trade_plan'] ?? null)) {
             $p = $proposal['trade_plan'];
             return [
-                'action_label' => !empty($p['ready']) ? '재지지 확인 · 다음 거래봉 지정가 검토' : '신규 진입 대기',
+                'action_label' => !empty($p['ready']) ? '패턴 확인 · 지정가 검토' : (!empty($p['candidate_available']) ? '가격 후보 있음 · 진입 확인 전' : '신규 진입 대기'),
                 'summary' => $p['reason'], 'new_entry_sentence' => $p['reason'],
-                'price_vs_zone' => 'conditional_limit', 'price_vs_zone_label' => '완료 일봉 기준 조건부 지정가',
-                'entry_zone_note' => '확인 봉 종가를 지정가 상한으로 사용. 다음 3개 거래봉 안에만 유효.',
-                'invalidation_note' => '재지지 구간 저점에서 돌파 전 ATR의 0.2배 아래. 체결 후 장중 이탈 기준.',
+                'price_vs_zone' => 'conditional_limit', 'price_vs_zone_label' => !empty($p['ready']) ? '확인 완료 · 별도 지정가 참고' : '관심 구간 · 매수 확인 전',
+                'entry_zone_note' => '표시 가격은 구조·눌림 기준 관심 후보. 확인 지정가는 별도로 표시하며 다음 3봉 안에만 유효.',
+                'invalidation_note' => '해당 후보의 구조 저점 아래 ATR 여유를 둔 손절 후보. 패턴별 기준이며 확인 전 주문은 아님.',
                 'target_rule_note' => '위쪽 과거 고가 중 가장 가까운 저항 또는 박스 폭 목표 중 낮은 값.',
                 'target_learned_note' => '과거 글 가격은 참고용이며 주문 가격 계산에 사용하지 않음.',
                 'eta_note' => '도달일을 예측하지 않음.', 'not_market_order' => true,

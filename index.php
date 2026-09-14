@@ -990,7 +990,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
             );
         } else {
             $memoText = sprintf(
-                "%s일 (%s) 현재가 %s\n%s 진입\n%s 손절%s\n%s 익절%s",
+                "%s일 (%s) 완료 종가 %s\n%s 관심 진입 후보\n%s 손절 후보%s\n%s 목표 후보%s",
                 $memoDate,
                 $memoTime,
                 $memoCurrent,
@@ -1001,6 +1001,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
                 $memoTargetEta
             );
         }
+        if (isset($proposal['trade_plan'])) { $memoText .= "\n" . $oneLine; }
       ?>
       <?php
         $lvList = is_array($proposal['levels'] ?? null) ? $proposal['levels'] : [];
@@ -1136,6 +1137,28 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
           </p>
         <?php endif; ?>
 
+        <?php if (is_array($proposal['trade_plan'] ?? null)): ?>
+          <?php $tp = $proposal['trade_plan']; $pc = $proposal['price_candidate'] ?? null; ?>
+          <article class="info-card">
+            <h3>진입 확인 · 큰 추세</h3>
+            <p><?= h((string) ($tp['context']['label'] ?? '추세 자료 없음')) ?> · <?= h((string) ($tp['context']['warning'] ?? '')) ?></p>
+            <p><?= !empty($tp['ready']) ? '패턴 확인 완료 · 다음 거래봉 지정가 검토' : '진입 확인 전 · 표시 가격은 관심 후보' ?></p>
+            <p><?= h((string) ($tp['reason'] ?? '')) ?></p>
+            <?php if (!empty($tp['ready'])): ?>
+              <p>확인 지정가 <?= h(fmtNum($tp['entry'], 4)) ?> / 손절 <?= h(fmtNum($tp['stop'], 4)) ?> / 목표 <?= h(fmtNum($tp['target'], 4)) ?> / 손익비 <?= h((string) $tp['reward_risk']) ?></p>
+            <?php endif; ?>
+            <?php if (is_array($pc)): ?>
+              <table>
+                <thead><tr><th>진입 위치</th><th>가격</th><th>비용 전 손익비</th></tr></thead>
+                <tbody>
+                <?php foreach (['low' => '구간 하단', 'mid' => '구간 중앙', 'high' => '구간 상단'] as $key => $label): ?>
+                  <tr><td><?= h($label) ?></td><td><?= h(fmtNum($pc[$key], 4)) ?></td><td><?= h((string) $pc['reward_risk'][$key]) ?></td></tr>
+                <?php endforeach; ?>
+                </tbody>
+              </table>
+            <?php endif; ?>
+          </article>
+        <?php endif; ?>
         <div class="metric-grid" aria-label="핵심 가격 요약">
           <article class="metric">
             <span class="metric__label"><?= isset($proposal['trade_plan']) ? '최근 완료 일봉 종가' : '현재가' ?></span>
@@ -1143,7 +1166,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
             <small><?= h((string) ($proposal['asof_kst'] ?? '')) ?></small>
           </article>
           <article class="metric metric--accent">
-            <span class="metric__label">추천 진입</span>
+            <span class="metric__label">관심 진입 구간</span>
             <?php if ($structureBroken): ?>
               <strong class="metric__value">없음</strong>
               <small>손절선 이탈 · 이번 그림 무효</small>
@@ -1161,7 +1184,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
             <?php endif; ?>
           </article>
           <article class="metric metric--danger">
-            <span class="metric__label">손절</span>
+            <span class="metric__label">손절 후보</span>
             <?php if ($structureBroken): ?>
               <strong class="metric__value mono"><?= h(fmtNum($stopWide ?? $proposal['invalidation'] ?? null, $pxDec)) ?></strong>
               <small>이미 이탈</small>
@@ -1176,7 +1199,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
             <?php endif; ?>
           </article>
           <article class="metric metric--success">
-            <span class="metric__label">익절</span>
+            <span class="metric__label">목표 후보</span>
             <?php if ($structureBroken || !$entryAvailable): ?>
               <strong class="metric__value">—</strong>
               <small>이번 그림 무효</small>

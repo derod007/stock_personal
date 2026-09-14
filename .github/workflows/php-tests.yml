@@ -7,9 +7,35 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: PHP version
-        run: php --version
+      - run: php --version
       - name: Syntax
-        run: find src bin tests -name '*.php' -print0 | xargs -0 -n1 php -l
-      - name: Deterministic regression checks
-        run: php tests/run.php
+        run: |
+          find src bin tests -name '*.php' -print0 | xargs -0 -n1 php -l
+          php -l index.php
+      - name: Regression
+        run: php tests/v2.php
+  comparison:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch public history
+        run: python3 bin/fetch_comparison_data.py
+      - name: Compare fixed rules on identical history
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, subprocess
+          root = pathlib.Path("data/comparison")
+          for s in json.loads((root/"sources.json").read_text()):
+              if "file" not in s: continue
+              p = subprocess.run(["php", "bin/compare_strategies.php", "--file="+s["file"], "--symbol="+s["symbol"]], text=True, capture_output=True)
+              if p.returncode: raise RuntimeError(p.stderr + p.stdout)
+              result = json.loads(p.stdout)
+              (root/(s["symbol"]+"-comparison.json")).write_text(p.stdout)
+              print("COMPARISON="+json.dumps(result))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: comparison-data-and-results
+          path: data/comparison/

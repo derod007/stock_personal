@@ -1,0 +1,23 @@
+name: Strategy research
+on:
+  push:
+    branches: ['codex/profitability-research-v3']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  research:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: php tests/v3.php
+      - name: Fetch five years for multiple sectors and markets
+        run: python3 bin/fetch_comparison_data.py --years=5 --symbols=MU,AAPL,MSFT,JPM,XOM,005930.KS,000660.KS,005380.KS --out=data/research
+      - name: Replay and compare
+        run: python3 bin/run_research.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: profitability-research
+          path: data/research/

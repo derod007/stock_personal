@@ -1,0 +1,191 @@
+{
+  "implementation_commit": "a95de5722d441d060a4babcc9529ea509b12cec2",
+  "sources": [
+    {
+      "symbol": "MU",
+      "fetched_at": "2026-09-14T18:15:52.079485+00:00",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/MU?range=5y&interval=1d",
+      "sha256": "77c2bbab6e3a877364e831579110ee56bbc8d60e8db9e59c147ce390ff905f40",
+      "bars": 1255,
+      "file": "data/research/MU.json"
+    },
+    {
+      "symbol": "AAPL",
+      "fetched_at": "2026-09-14T18:15:52.426259+00:00",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/AAPL?range=5y&interval=1d",
+      "sha256": "f6a225f2aaae5e2aa9be73b1ae7bbcd0e06d0be936550bd3dd61b944d57ae06a",
+      "bars": 1255,
+      "file": "data/research/AAPL.json"
+    },
+    {
+      "symbol": "MSFT",
+      "fetched_at": "2026-09-14T18:15:52.585929+00:00",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT?range=5y&interval=1d",
+      "sha256": "818115198489d95ab750bddd4f2081f531ebca662f79424ca77361b9629d9e6a",
+      "bars": 1255,
+      "file": "data/research/MSFT.json"
+    },
+    {
+      "symbol": "JPM",
+      "fetched_at": "2026-09-14T18:15:52.924339+00:00",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/JPM?range=5y&interval=1d",
+      "sha256": "cb250d8cf780be60f4c041716c4817fa3cd1b128324d9213668f7d847e3ec8cd",
+      "bars": 1255,
+      "file": "data/research/JPM.json"
+    },
+    {
+      "symbol": "XOM",
+      "fetched_at": "2026-09-14T18:15:53.217152+00:00",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/XOM?range=5y&interval=1d",
+      "sha256": "3b2eb496ce78e7328613606a75d1c3a230b412bf17438c19301590262df67920",
+      "bars": 1255,
+      "file": "data/research/XOM.json"
+    },
+    {
+      "symbol": "005930.KS",
+      "fetched_at": "2026-09-14T18:15:53.457371+00:00",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/005930.KS?range=5y&interval=1d",
+      "sha256": "caddd5caf8ac4408e83052a3aade058f73600722e1e435db97074a46536f6134",
+      "bars": 1218,
+      "file": "data/research/005930.KS.json"
+    },
+    {
+      "symbol": "000660.KS",
+      "fetched_at": "2026-09-14T18:15:53.584150+00:00",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/000660.KS?range=5y&interval=1d",
+      "sha256": "089445519023d1ae3cdf17a1f9acf3eae9d4ddf0f2f328b020d6401d80580155",
+      "bars": 1218,
+      "file": "data/research/000660.KS.json"
+    },
+    {
+      "symbol": "005380.KS",
+      "fetched_at": "2026-09-14T18:15:53.767546+00:00",
+      "source": "https://query1.finance.yahoo.com/v8/finance/chart/005380.KS?range=5y&interval=1d",
+      "sha256": "f587d417a28be9cd108139e6245829da19a66b5a1dd7adc79a281c2c8530bc7b",
+      "bars": 1218,
+      "file": "data/research/005380.KS.json"
+    }
+  ],
+  "summary": {
+    "sources_requested": 8,
+    "successful": 8,
+    "errors": [],
+    "development_scores": {
+      "confirmed_fixed": {
+        "closed": 4,
+        "symbols_with_trades": 4,
+        "expectancy_pct": -2.3385249999999997
+      },
+      "confirmed_trailing": {
+        "closed": 4,
+        "symbols_with_trades": 4,
+        "expectancy_pct": -4.02235
+      },
+      "candidate_fixed": {
+        "closed": 85,
+        "symbols_with_trades": 8,
+        "expectancy_pct": -0.4419870588235294
+      },
+      "candidate_trailing": {
+        "closed": 84,
+        "symbols_with_trades": 8,
+        "expectancy_pct": -0.36225714285714294
+      }
+    },
+    "selected_on_development_only": null,
+    "production_change": false,
+    "reason": "Research comparison only; no automatic production promotion",
+    "partition_results": {
+      "development": {
+        "confirmed_fixed": {
+          "closed": 4,
+          "orders": 4,
+          "expectancy_pct": -2.3385249999999997,
+          "positive_symbols": 1,
+          "worst_symbol_closed_trade_drawdown_pct": 10.349799999999998
+        },
+        "confirmed_trailing": {
+          "closed": 4,
+          "orders": 4,
+          "expectancy_pct": -4.02235,
+          "positive_symbols": 0,
+          "worst_symbol_closed_trade_drawdown_pct": 10.349799999999998
+        },
+        "candidate_fixed": {
+          "closed": 85,
+          "orders": 312,
+          "expectancy_pct": -0.4419870588235294,
+          "positive_symbols": 2,
+          "worst_symbol_closed_trade_drawdown_pct": 18.178396923274832
+        },
+        "candidate_trailing": {
+          "closed": 84,
+          "orders": 301,
+          "expectancy_pct": -0.36225714285714294,
+          "positive_symbols": 3,
+          "worst_symbol_closed_trade_drawdown_pct": 19.203703431429297
+        }
+      },
+      "validation": {
+        "confirmed_fixed": {
+          "closed": 1,
+          "orders": 1,
+          "expectancy_pct": -0.0916,
+          "positive_symbols": 0,
+          "worst_symbol_closed_trade_drawdown_pct": 0.09160000000000279
+        },
+        "confirmed_trailing": {
+          "closed": 1,
+          "orders": 1,
+          "expectancy_pct": 1.8761,
+          "positive_symbols": 1,
+          "worst_symbol_closed_trade_drawdown_pct": 0
+        },
+        "candidate_fixed": {
+          "closed": 20,
+          "orders": 110,
+          "expectancy_pct": -0.2954,
+          "positive_symbols": 3,
+          "worst_symbol_closed_trade_drawdown_pct": 6.735035582490112
+        },
+        "candidate_trailing": {
+          "closed": 18,
+          "orders": 108,
+          "expectancy_pct": -0.9617333333333333,
+          "positive_symbols": 2,
+          "worst_symbol_closed_trade_drawdown_pct": 6.685200000000002
+        }
+      },
+      "holdout": {
+        "confirmed_fixed": {
+          "closed": 3,
+          "orders": 4,
+          "expectancy_pct": 5.3994333333333335,
+          "positive_symbols": 1,
+          "worst_symbol_closed_trade_drawdown_pct": 3.8833000000000006
+        },
+        "confirmed_trailing": {
+          "closed": 3,
+          "orders": 4,
+          "expectancy_pct": 3.0404,
+          "positive_symbols": 1,
+          "worst_symbol_closed_trade_drawdown_pct": 1.9233000000000056
+        },
+        "candidate_fixed": {
+          "closed": 36,
+          "orders": 165,
+          "expectancy_pct": 2.8481444444444444,
+          "positive_symbols": 5,
+          "worst_symbol_closed_trade_drawdown_pct": 15.387755615200005
+        },
+        "candidate_trailing": {
+          "closed": 36,
+          "orders": 153,
+          "expectancy_pct": 3.7347083333333333,
+          "positive_symbols": 5,
+          "worst_symbol_closed_trade_drawdown_pct": 15.387755615200005
+        }
+      }
+    }
+  }
+}

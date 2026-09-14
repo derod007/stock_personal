@@ -13,7 +13,7 @@ jobs:
           find src bin tests -name '*.php' -print0 | xargs -0 -n1 php -l
           php -l index.php
       - name: Regression
-        run: php tests/v3.php
+        run: php tests/v4.php
   comparison:
     if: github.event_name == 'push'
     runs-on: ubuntu-24.04

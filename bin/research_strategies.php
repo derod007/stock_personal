@@ -12,7 +12,7 @@ $bars=CandleClock::completed(json_decode(file_get_contents($o['file']),true,512,
 $n=count($bars);
 if($n<400) throw new RuntimeException('400 completed bars required');
 $cut1=(int)floor($n*0.6); $cut2=(int)floor($n*0.8);
-$modes=['confirmed_fixed','confirmed_trailing','candidate_fixed','candidate_trailing'];
+$modes=['confirmed_fixed','confirmed_trailing','candidate_fixed','candidate_trailing','candidate_recovery_fixed'];
 $trades=$counts=$observations=[]; $busy=[];
 $engine=new ChartPlanEngine();
 $log=fopen($o['out'].'.jsonl','w');
@@ -47,6 +47,9 @@ for($i=119;$i<$n;$i++) {
     foreach($modes as $mode) {
         if($asOf<=($busy[$g][$mode]??0)) { $row['orders'][$mode]=['status'=>'busy']; continue; }
         $order=$p;
+        if($mode==='candidate_recovery_fixed' && !\ChartEntryLab\RecoveryGate::passes(array_slice($bars,0,$i+1))) {
+            $row['orders'][$mode]=['status'=>'recovery_gate_failed']; continue;
+        }
         if(str_starts_with($mode,'candidate')) {
             // Explicit experimental early-entry alternative; production readiness is untouched.
             if($candidate===null || in_array($p['status'],['stale_data','blocked','risk_blocked','context_wait'],true)) continue;

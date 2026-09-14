@@ -37,7 +37,7 @@ final class YahooChartClient
         bool $useCache = true,
         ?int $maxAgeSeconds = null,
     ): array {
-        $cacheFile = sprintf('%s/%s_%s_%s.json', $this->cacheDir, $symbol, $range, $interval);
+        $cacheFile = sprintf('%s/%s_%s_%s_closed_v2.json', $this->cacheDir, $symbol, $range, $interval);
         // 새로고침이면 네이버 당일 고저도 같이 새로 받는다
         $useNaverCache = $useCache && $maxAgeSeconds !== 0;
 
@@ -145,10 +145,18 @@ final class YahooChartClient
                 'low' => (float) ($quote['low'][$i] ?? $quote['close'][$i]),
                 'close' => (float) $quote['close'][$i],
                 'volume' => (int) ($quote['volume'][$i] ?? 0),
+                'synthetic' => !isset($quote['open'][$i], $quote['high'][$i], $quote['low'][$i]),
             ];
         }
 
-        $rows = $this->mergeRegularMarketPrice($rows, $result);
+        // Live quote substitution corrupts historical/intraday OHLC. Daily incomplete bars are excluded downstream.
+        if ($interval === '1d') {
+            $rows = $this->mergeRegularMarketPrice($rows, $result);
+            foreach ($rows as &$row) {
+                $row['is_complete'] = CandleClock::closeTime($row, $symbol) <= time();
+            }
+            unset($row);
+        }
         $rows = $this->sortByTime($rows);
         if ($rows === []) {
             throw new \RuntimeException("No usable candles for {$symbol}");
@@ -197,10 +205,15 @@ final class YahooChartClient
                 continue;
             }
             $q = $quotes[$day];
+            // Do not replace an already completed Yahoo candle with a potentially stale Naver cache.
+            if (!empty($rows[$i]['is_complete']) && empty($rows[$i]['synthetic'])) {
+                continue;
+            }
             $rows[$i]['open'] = (float) $q['open'];
             $rows[$i]['high'] = (float) $q['high'];
             $rows[$i]['low'] = (float) $q['low'];
             $rows[$i]['close'] = (float) $q['close'];
+            $rows[$i]['synthetic'] = false;
             if ((int) $q['volume'] > 0) {
                 $rows[$i]['volume'] = (int) $q['volume'];
             }
@@ -219,6 +232,7 @@ final class YahooChartClient
                 'low' => (float) $q['low'],
                 'close' => (float) $q['close'],
                 'volume' => (int) $q['volume'],
+                'is_complete' => false, // provisional until a fresh primary-source fetch confirms it
             ];
         }
 
@@ -264,6 +278,7 @@ final class YahooChartClient
                 'low' => $price,
                 'close' => $price,
                 'volume' => 0,
+                'synthetic' => true,
             ]];
         }
 
@@ -297,6 +312,7 @@ final class YahooChartClient
             'low' => $price,
             'close' => $price,
             'volume' => 0,
+            'synthetic' => true,
         ];
 
         return $rows;

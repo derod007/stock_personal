@@ -931,7 +931,8 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
         $entry2nd = is_array($zone) && is_numeric($zone['low'] ?? null) ? (float) $zone['low'] : null;
         $supportLv = is_numeric($proposal['level_support'] ?? null) ? (float) $proposal['level_support'] : null;
         if (
-            $supportLv !== null
+            !isset($proposal['trade_plan'])
+            && $supportLv !== null
             && $entryMid !== null
             && $supportLv < $entryMid
             && ($stopWide === null || $supportLv > (float) $stopWide)
@@ -1137,7 +1138,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
 
         <div class="metric-grid" aria-label="핵심 가격 요약">
           <article class="metric">
-            <span class="metric__label">현재가</span>
+            <span class="metric__label"><?= isset($proposal['trade_plan']) ? '최근 완료 일봉 종가' : '현재가' ?></span>
             <strong class="metric__value mono"><?= h(fmtNum($px, $pxDec)) ?></strong>
             <small><?= h((string) ($proposal['asof_kst'] ?? '')) ?></small>
           </article>
@@ -1200,7 +1201,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
                 <dd class="mono"><?= h(fmtNum($px, $pxDec)) ?></dd>
               </div>
               <div>
-                <dt>추천 진입<?= tip("최근 고점·저점의 중간(절반 되돌림).
+                <dt>추천 진입<?= tip(isset($proposal['trade_plan']) ? (string) ($explain['entry_zone_note'] ?? '') : "최근 고점·저점의 중간(절반 되돌림).
 글에 숫자가 없어도 이 규칙을 씁니다.
 1차=중간, 2차=관심구간 하단 또는 가로 지지.
 손절선을 이미 깨면 이 숫자는 추천이 아닙니다.") ?></dt>

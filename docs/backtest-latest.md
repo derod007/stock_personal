@@ -1,5 +1,7 @@
 # 백테스트 요약 (latest)
 
+> **이하 표는 2026-07-18 구형 엔진의 보관 기록입니다.** 미체결·손절 이후 기간 수익률 등이 섞여 있어 새 전략 성과로 사용하지 마세요. 새 엔진 적용 후 `php bin/backtest_entries.php`로 다시 생성해야 합니다.
+
 생성: 2026-07-18T23:42:35+09:00
 
 원본 JSON: `C:\Users\acdun\Desktop\dev\noramu/data/backtests/backtest-20260718-234235.json`

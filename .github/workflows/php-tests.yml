@@ -1,0 +1,15 @@
+name: PHP signal and replay checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: PHP version
+        run: php --version
+      - name: Syntax
+        run: find src bin tests -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Deterministic regression checks
+        run: php tests/run.php

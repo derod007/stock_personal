@@ -1,5 +1,24 @@
 # 진입 보조
 
+## 2026-09: 완료 일봉 재지지 계획 v1
+
+현재 메인 추천은 **돌파 → 재지지 → 별도 확인 봉 → 손익비 검증**을 통과해야 활성화됩니다.
+기존 글·차트 점수는 참고로 남으며, 새 글이나 과거 절대가격이 신규 주문을 활성화하지 않습니다.
+세 탭 모두 최종 주문 계획은 동일한 공통 엔진을 사용하고, 작성자별 관점은 참고로 보존합니다.
+미완성 일봉을 제외하므로 가격은 실시간 호가가 아닌 최근 완료 일봉 종가입니다.
+
+```bash
+php tests/run.php
+php bin/score_symbol.php MU
+php bin/backtest_strategy.php --symbol=MU --split=2025-10-01 --holding=10 > strategy-mu.json
+php bin/backtest_strategy.php --symbol=005930.KS --file=data/ohlcv/my-daily.json --split=2025-10-01
+php bin/backtest_entries.php
+```
+
+검증 기간을 보고 조건을 조정했다면 그 기간은 더 이상 독립 검증 구간이 아닙니다.
+사용법·가정·기존 보고서와의 차이는 [설계와 검증 안내](docs/retest-upgrade.md)를 참고하세요.
+아래 초기 기획·배점 설명은 역사적 배경이며, 새 추천의 진입 허용 조건과는 구분합니다.
+
 수집한 매매 기록을 데이터화하고, 그 논리로 **관심구간·손절·익절**을 제안하는 개인용 차트 보조.
 
 ## 내가 원하는 것

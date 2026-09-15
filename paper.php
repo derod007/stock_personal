@@ -40,6 +40,7 @@ $equity=PaperPortfolio::equity($s);$reserve=PaperPortfolio::reserved($s);$last=$
 <tr><th>유효 종가 기준 최대 낙폭</th><td><?= ph(round($s['max_drawdown']*100,2)) ?>%</td></tr>
 <tr><th>완료 거래 / 이익 / 손실</th><td><?= ph($s['closed_trades']) ?> / <?= ph($s['wins']) ?> / <?= ph($s['losses']) ?></td></tr>
 </tbody></table>
+<p><a href="paper_compare.php">기준·후보 전략 비교</a></p>
 <h2>보유 종목과 대기 주문</h2>
 <table><thead><tr><th>종목</th><th>상태</th><th>수량</th><th>계획 진입 / 손절 / 목표</th><th>계획 위험</th></tr></thead><tbody>
 <?php foreach($s['active'] as $symbol=>$o): ?><tr><td><?= ph($symbol) ?></td><td><?= $o['filled']?'보유':'지정가 대기' ?></td><td><?= ph($o['quantity']) ?></td><td><?= ph($o['plan']['entry'].' / '.$o['plan']['stop'].' / '.$o['plan']['target']) ?></td><td><?= ph(round($o['planned_risk'],2)) ?></td></tr><?php endforeach ?>

@@ -10,3 +10,5 @@
 .DS_Store
 /data/paper/
 /data/paper-demo/
+/data/paper-logs/
+/.venv/

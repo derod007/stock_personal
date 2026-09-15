@@ -13,10 +13,15 @@ for symbol in args.symbols.split(","):
     record = {"symbol": symbol, "fetched_at": dt.datetime.now(dt.timezone.utc).isoformat()}
     bars = []
     try:
-        url = "https://query1.finance.yahoo.com/v8/finance/chart/" + symbol + f"?range={args.years}y&interval=1d"
+        url = "https://query1.finance.yahoo.com/v8/finance/chart/" + symbol + f"?range={args.years}y&interval=1d&events=div%2Csplits"
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=25) as r:
             raw = r.read()
+        # Preserve the provider response so adjusted close and corporate actions can be audited.
+        raw_path = out / (symbol + "-provider.json")
+        raw_path.write_bytes(raw)
+        record.update({"provider_file": str(raw_path), "provider_sha256": hashlib.sha256(raw).hexdigest(),
+                       "price_basis": "provider quote OHLC; no additional adjustment applied"})
         data = json.loads(raw)["chart"]["result"][0]
         q = data["indicators"]["quote"][0]
         for i, stamp in enumerate(data["timestamp"]):
@@ -35,6 +40,10 @@ for symbol in args.symbols.split(","):
                 url = "https://stooq.com/q/d/l/?s=" + symbol.lower() + ".us&i=d"
                 with urllib.request.urlopen(url, timeout=25) as r:
                     raw = r.read()
+                raw_path = out / (symbol + "-provider.csv")
+                raw_path.write_bytes(raw)
+                record.update({"provider_file": str(raw_path), "provider_sha256": hashlib.sha256(raw).hexdigest(),
+                               "price_basis": "Stooq CSV; adjustment basis not independently verified"})
                 for row in list(csv.DictReader(io.StringIO(raw.decode()))) [-(args.years*255):]:
                     stamp = dt.datetime.fromisoformat(row["Date"] + "T16:00:00").replace(tzinfo=ZoneInfo("America/New_York"))
                     bars.append({"time": int(stamp.timestamp()), "time_kst": stamp.astimezone(dt.timezone(dt.timedelta(hours=9))).strftime("%Y-%m-%d %H:%M:%S"),

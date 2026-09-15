@@ -1,0 +1,28 @@
+name: Stop distance and execution audit
+on:
+  push:
+    branches: ['codex/stop-audit-v5']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m unittest discover -s tests -p 'test_*.py'
+      - run: python3 -m py_compile bin/audit_stops.py bin/fetch_comparison_data.py
+      - run: php tests/v4.php
+      - uses: actions/download-artifact@v4
+        with:
+          name: profitability-research
+          run-id: 34879718710
+          github-token: ${{ github.token }}
+          path: data/research
+      - run: python3 bin/audit_stops.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stop-audit
+          path: data/research/

@@ -13,8 +13,11 @@ jobs:
           find src bin tests -name '*.php' -print0 | xargs -0 -n1 php -l
           php -l index.php
           php -l paper.php
+          php -l paper_diagnostics.php
       - name: Regression
-        run: php tests/v7.php
+        run: php tests/v8.php
+      - name: Operational logging tests
+        run: python3 -m unittest discover -s tests -p "test_*.py"
   comparison:
     if: github.event_name == 'push'
     runs-on: ubuntu-24.04

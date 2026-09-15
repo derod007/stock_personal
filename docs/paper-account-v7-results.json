@@ -1,0 +1,68 @@
+{
+  "implementation_commit": "3fa117bbb980ab25343fbe2b5910ba09d523e17d",
+  "mode": "replay",
+  "source_run": 34879718710,
+  "validation_run": 34945370818,
+  "results": {
+    "kr": {
+      "cash": 9892654.652362281,
+      "closed_trades": 2,
+      "currency": "KRW",
+      "decision_reasons": {
+        "data_quality": 315,
+        "signal_not_confirmed": 3160
+      },
+      "event_counts": {
+        "account_started": 1,
+        "decision": 3475,
+        "equity": 1159,
+        "exit": 2,
+        "fill": 2,
+        "order": 2,
+        "snapshot": 3477
+      },
+      "latest_equity": {
+        "cash": 9892654.652362281,
+        "drawdown": 0.010734534763771841,
+        "equity": 9892654.652362281,
+        "realized": -107345.34763771901,
+        "reserved_cash": 0,
+        "session": 1789108200,
+        "stale_positions": [],
+        "unrealized": 4.656612873077393e-10
+      },
+      "max_drawdown": 0.010734534763771841,
+      "mode": "replay"
+    },
+    "us": {
+      "cash": 102687.23224477856,
+      "closed_trades": 7,
+      "currency": "USD",
+      "decision_reasons": {
+        "signal_not_confirmed": 5967
+      },
+      "event_counts": {
+        "account_started": 1,
+        "decision": 5967,
+        "equity": 1195,
+        "exit": 7,
+        "fill": 7,
+        "order": 8,
+        "order_cancelled": 1,
+        "snapshot": 5975
+      },
+      "latest_equity": {
+        "cash": 102687.23224477856,
+        "drawdown": 0.01540056020026026,
+        "equity": 102687.23224477856,
+        "realized": 2687.2322447785536,
+        "reserved_cash": 0,
+        "session": 1789156800,
+        "stale_positions": [],
+        "unrealized": 1.8189894035458565e-12
+      },
+      "max_drawdown": 0.017384834400110627,
+      "mode": "replay"
+    }
+  }
+}

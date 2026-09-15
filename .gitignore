@@ -8,3 +8,5 @@
 /vendor/
 *.log
 .DS_Store
+/data/paper/
+/data/paper-demo/

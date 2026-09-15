@@ -1,0 +1,39 @@
+name: Paper account checks
+on:
+  push:
+    branches: ['codex/paper-account-v7']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  paper:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      PAPER_STATE_DIR: ${{ github.workspace }}/data/paper-demo
+    steps:
+      - uses: actions/checkout@v4
+      - run: php tests/v7.php
+      - run: python3 -m unittest discover -s tests -p 'test_*.py'
+      - run: php -l paper.php
+      - uses: actions/download-artifact@v4
+        with:
+          name: profitability-research
+          run-id: 34879718710
+          github-token: ${{ github.token }}
+          path: data/research
+      - name: Replay original market data in separate currency accounts
+        run: |
+          php bin/paper_account.php --config=config/paper-us.json --data=data/research --mode=replay
+          php bin/paper_account.php --config=config/paper-kr.json --data=data/research --mode=replay
+      - name: Idempotency and historical revision integration
+        run: python3 tests/paper_integration.py
+      - name: Render read-only screen
+        run: |
+          php -r '$_GET=["account"=>"paper-us","mode"=>"replay"]; include "paper.php";' > data/paper-demo/paper-us.html
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: paper-account-replay
+          path: data/paper-demo/

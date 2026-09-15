@@ -1,0 +1,841 @@
+{
+  "implementation_commit": "749244711b83cae0fca43ddfef8f1ab2081e9379",
+  "source_run": 34879718710,
+  "results": {
+    "groups": {
+      "development": {
+        "candidate_fixed": {
+          "ambiguity_flagged_orders": 1,
+          "by_width": {
+            "0.5_to_1_atr": {
+              "closed": 47,
+              "early_stop_3_bars": 21,
+              "mean_net_pct": -0.7785553191489362,
+              "stop_exits": 38
+            },
+            "1_to_2_atr": {
+              "closed": 13,
+              "early_stop_3_bars": 3,
+              "mean_net_pct": 0.40469999999999995,
+              "stop_exits": 7
+            },
+            "under_0.5_atr": {
+              "closed": 25,
+              "early_stop_3_bars": 17,
+              "mean_net_pct": -0.249516,
+              "stop_exits": 20
+            }
+          },
+          "closed": 85,
+          "filled": 85,
+          "mean_net_pct": -0.44198705882352946,
+          "median_fill_risk_atr": 0.7518054168989569,
+          "orders": 312,
+          "post_stop": {
+            "5": {
+              "censored": 2,
+              "eligible": 63,
+              "mean_lowest_return_from_exit_pct": -3.3384443056005626,
+              "mean_terminal_return_from_exit_pct": -0.6696737574186612,
+              "recovered_entry_on_close": 28,
+              "terminal_above_entry": 20
+            },
+            "10": {
+              "censored": 2,
+              "eligible": 63,
+              "mean_lowest_return_from_exit_pct": -4.744854907663405,
+              "mean_terminal_return_from_exit_pct": -0.4714407394178441,
+              "recovered_entry_on_close": 34,
+              "terminal_above_entry": 18
+            },
+            "20": {
+              "censored": 2,
+              "eligible": 63,
+              "mean_lowest_return_from_exit_pct": -6.630291637903111,
+              "mean_terminal_return_from_exit_pct": 1.5290992312961897,
+              "recovered_entry_on_close": 44,
+              "terminal_above_entry": 33
+            }
+          },
+          "same_day_entry_stop": 26,
+          "stop_exits": 65,
+          "unflagged_closed_count": 85,
+          "unflagged_mean_net_pct": -0.44198705882352946,
+          "width_buckets": {
+            "0.5_to_1_atr": 47,
+            "1_to_2_atr": 13,
+            "under_0.5_atr": 25
+          }
+        },
+        "candidate_trailing": {
+          "ambiguity_flagged_orders": 1,
+          "by_width": {
+            "0.5_to_1_atr": {
+              "closed": 47,
+              "early_stop_3_bars": 23,
+              "mean_net_pct": -0.3331021276595745,
+              "stop_exits": 44
+            },
+            "1_to_2_atr": {
+              "closed": 12,
+              "early_stop_3_bars": 2,
+              "mean_net_pct": -1.0091916666666667,
+              "stop_exits": 11
+            },
+            "under_0.5_atr": {
+              "closed": 25,
+              "early_stop_3_bars": 19,
+              "mean_net_pct": -0.10654000000000002,
+              "stop_exits": 24
+            }
+          },
+          "closed": 84,
+          "filled": 84,
+          "mean_net_pct": -0.36225714285714283,
+          "median_fill_risk_atr": 0.7141929054678662,
+          "orders": 301,
+          "post_stop": {
+            "5": {
+              "censored": 2,
+              "eligible": 77,
+              "mean_lowest_return_from_exit_pct": -3.1733820608678815,
+              "mean_terminal_return_from_exit_pct": -0.3648910193951116,
+              "recovered_entry_on_close": 42,
+              "terminal_above_entry": 31
+            },
+            "10": {
+              "censored": 2,
+              "eligible": 77,
+              "mean_lowest_return_from_exit_pct": -4.8185326465257585,
+              "mean_terminal_return_from_exit_pct": -0.8572740407385671,
+              "recovered_entry_on_close": 46,
+              "terminal_above_entry": 23
+            },
+            "20": {
+              "censored": 3,
+              "eligible": 76,
+              "mean_lowest_return_from_exit_pct": -6.760021854446231,
+              "mean_terminal_return_from_exit_pct": 1.31621966118499,
+              "recovered_entry_on_close": 56,
+              "terminal_above_entry": 40
+            }
+          },
+          "same_day_entry_stop": 27,
+          "stop_exits": 79,
+          "unflagged_closed_count": 84,
+          "unflagged_mean_net_pct": -0.36225714285714283,
+          "width_buckets": {
+            "0.5_to_1_atr": 47,
+            "1_to_2_atr": 12,
+            "under_0.5_atr": 25
+          }
+        },
+        "confirmed_fixed": {
+          "ambiguity_flagged_orders": 0,
+          "by_width": {
+            "0.5_to_1_atr": {
+              "closed": 1,
+              "early_stop_3_bars": 1,
+              "mean_net_pct": -2.3799,
+              "stop_exits": 1
+            },
+            "1_to_2_atr": {
+              "closed": 3,
+              "early_stop_3_bars": 1,
+              "mean_net_pct": -2.324733333333333,
+              "stop_exits": 2
+            }
+          },
+          "closed": 4,
+          "filled": 4,
+          "mean_net_pct": -2.3385249999999997,
+          "median_fill_risk_atr": 1.2014154311967222,
+          "orders": 4,
+          "post_stop": {
+            "5": {
+              "censored": 0,
+              "eligible": 3,
+              "mean_lowest_return_from_exit_pct": -5.411504393575344,
+              "mean_terminal_return_from_exit_pct": -2.0526700035184606,
+              "recovered_entry_on_close": 0,
+              "terminal_above_entry": 0
+            },
+            "10": {
+              "censored": 0,
+              "eligible": 3,
+              "mean_lowest_return_from_exit_pct": -7.541791733154591,
+              "mean_terminal_return_from_exit_pct": -3.2405756028734705,
+              "recovered_entry_on_close": 1,
+              "terminal_above_entry": 1
+            },
+            "20": {
+              "censored": 0,
+              "eligible": 3,
+              "mean_lowest_return_from_exit_pct": -12.900059927350904,
+              "mean_terminal_return_from_exit_pct": -6.677917478622249,
+              "recovered_entry_on_close": 1,
+              "terminal_above_entry": 1
+            }
+          },
+          "same_day_entry_stop": 0,
+          "stop_exits": 3,
+          "unflagged_closed_count": 4,
+          "unflagged_mean_net_pct": -2.3385249999999997,
+          "width_buckets": {
+            "0.5_to_1_atr": 1,
+            "1_to_2_atr": 3
+          }
+        },
+        "confirmed_trailing": {
+          "ambiguity_flagged_orders": 0,
+          "by_width": {
+            "0.5_to_1_atr": {
+              "closed": 1,
+              "early_stop_3_bars": 1,
+              "mean_net_pct": -2.3799,
+              "stop_exits": 1
+            },
+            "1_to_2_atr": {
+              "closed": 3,
+              "early_stop_3_bars": 1,
+              "mean_net_pct": -4.569833333333333,
+              "stop_exits": 3
+            }
+          },
+          "closed": 4,
+          "filled": 4,
+          "mean_net_pct": -4.02235,
+          "median_fill_risk_atr": 1.2014154311967222,
+          "orders": 4,
+          "post_stop": {
+            "5": {
+              "censored": 0,
+              "eligible": 4,
+              "mean_lowest_return_from_exit_pct": -3.5887393040280187,
+              "mean_terminal_return_from_exit_pct": -0.1669211914984372,
+              "recovered_entry_on_close": 1,
+              "terminal_above_entry": 1
+            },
+            "10": {
+              "censored": 0,
+              "eligible": 4,
+              "mean_lowest_return_from_exit_pct": -5.186454808712455,
+              "mean_terminal_return_from_exit_pct": -0.7466685004651888,
+              "recovered_entry_on_close": 2,
+              "terminal_above_entry": 2
+            },
+            "20": {
+              "censored": 0,
+              "eligible": 4,
+              "mean_lowest_return_from_exit_pct": -10.236613688594609,
+              "mean_terminal_return_from_exit_pct": -5.477457030347499,
+              "recovered_entry_on_close": 2,
+              "terminal_above_entry": 1
+            }
+          },
+          "same_day_entry_stop": 0,
+          "stop_exits": 4,
+          "unflagged_closed_count": 4,
+          "unflagged_mean_net_pct": -4.02235,
+          "width_buckets": {
+            "0.5_to_1_atr": 1,
+            "1_to_2_atr": 3
+          }
+        }
+      },
+      "holdout": {
+        "candidate_fixed": {
+          "ambiguity_flagged_orders": 2,
+          "by_width": {
+            "0.5_to_1_atr": {
+              "closed": 18,
+              "early_stop_3_bars": 7,
+              "mean_net_pct": 0.36939444444444447,
+              "stop_exits": 11
+            },
+            "1_to_2_atr": {
+              "closed": 13,
+              "early_stop_3_bars": 2,
+              "mean_net_pct": 7.886707692307692,
+              "stop_exits": 5
+            },
+            "under_0.5_atr": {
+              "closed": 5,
+              "early_stop_3_bars": 3,
+              "mean_net_pct": -1.3286200000000001,
+              "stop_exits": 4
+            }
+          },
+          "closed": 36,
+          "filled": 38,
+          "mean_net_pct": 2.8481444444444444,
+          "median_fill_risk_atr": 0.9318611334053554,
+          "orders": 165,
+          "post_stop": {
+            "5": {
+              "censored": 0,
+              "eligible": 20,
+              "mean_lowest_return_from_exit_pct": -1.7681675131345491,
+              "mean_terminal_return_from_exit_pct": 3.252184436009876,
+              "recovered_entry_on_close": 9,
+              "terminal_above_entry": 7
+            },
+            "10": {
+              "censored": 0,
+              "eligible": 20,
+              "mean_lowest_return_from_exit_pct": -3.7208348431464997,
+              "mean_terminal_return_from_exit_pct": 2.4471031146957176,
+              "recovered_entry_on_close": 12,
+              "terminal_above_entry": 7
+            },
+            "20": {
+              "censored": 0,
+              "eligible": 20,
+              "mean_lowest_return_from_exit_pct": -6.102497897506948,
+              "mean_terminal_return_from_exit_pct": 3.4112814128599207,
+              "recovered_entry_on_close": 14,
+              "terminal_above_entry": 11
+            }
+          },
+          "same_day_entry_stop": 3,
+          "stop_exits": 20,
+          "unflagged_closed_count": 36,
+          "unflagged_mean_net_pct": 2.8481444444444444,
+          "width_buckets": {
+            "0.5_to_1_atr": 18,
+            "1_to_2_atr": 15,
+            "under_0.5_atr": 5
+          }
+        },
+        "candidate_trailing": {
+          "ambiguity_flagged_orders": 2,
+          "by_width": {
+            "0.5_to_1_atr": {
+              "closed": 19,
+              "early_stop_3_bars": 9,
+              "mean_net_pct": 1.9518894736842105,
+              "stop_exits": 17
+            },
+            "1_to_2_atr": {
+              "closed": 11,
+              "early_stop_3_bars": 2,
+              "mean_net_pct": 9.573445454545455,
+              "stop_exits": 10
+            },
+            "under_0.5_atr": {
+              "closed": 6,
+              "early_stop_3_bars": 4,
+              "mean_net_pct": -1.3240500000000002,
+              "stop_exits": 6
+            }
+          },
+          "closed": 36,
+          "filled": 38,
+          "mean_net_pct": 3.7347083333333333,
+          "median_fill_risk_atr": 0.9173470361299128,
+          "orders": 153,
+          "post_stop": {
+            "5": {
+              "censored": 0,
+              "eligible": 33,
+              "mean_lowest_return_from_exit_pct": -3.525030135189448,
+              "mean_terminal_return_from_exit_pct": 1.584123145386591,
+              "recovered_entry_on_close": 21,
+              "terminal_above_entry": 18
+            },
+            "10": {
+              "censored": 0,
+              "eligible": 33,
+              "mean_lowest_return_from_exit_pct": -5.266934199306893,
+              "mean_terminal_return_from_exit_pct": 2.086694524902383,
+              "recovered_entry_on_close": 24,
+              "terminal_above_entry": 19
+            },
+            "20": {
+              "censored": 0,
+              "eligible": 33,
+              "mean_lowest_return_from_exit_pct": -8.641815016292254,
+              "mean_terminal_return_from_exit_pct": 0.9931865935745876,
+              "recovered_entry_on_close": 26,
+              "terminal_above_entry": 16
+            }
+          },
+          "same_day_entry_stop": 5,
+          "stop_exits": 33,
+          "unflagged_closed_count": 36,
+          "unflagged_mean_net_pct": 3.7347083333333333,
+          "width_buckets": {
+            "0.5_to_1_atr": 19,
+            "1_to_2_atr": 13,
+            "under_0.5_atr": 6
+          }
+        },
+        "confirmed_fixed": {
+          "ambiguity_flagged_orders": 0,
+          "by_width": {
+            "1_to_2_atr": {
+              "closed": 3,
+              "early_stop_3_bars": 1,
+              "mean_net_pct": 5.399433333333333,
+              "stop_exits": 2
+            }
+          },
+          "closed": 3,
+          "filled": 3,
+          "mean_net_pct": 5.399433333333333,
+          "median_fill_risk_atr": 1.3419840448163243,
+          "orders": 4,
+          "post_stop": {
+            "5": {
+              "censored": 0,
+              "eligible": 2,
+              "mean_lowest_return_from_exit_pct": -1.8110501052928996,
+              "mean_terminal_return_from_exit_pct": -0.6798446820661497,
+              "recovered_entry_on_close": 0,
+              "terminal_above_entry": 0
+            },
+            "10": {
+              "censored": 0,
+              "eligible": 2,
+              "mean_lowest_return_from_exit_pct": -4.192919372571563,
+              "mean_terminal_return_from_exit_pct": -1.8448553084987995,
+              "recovered_entry_on_close": 0,
+              "terminal_above_entry": 0
+            },
+            "20": {
+              "censored": 0,
+              "eligible": 2,
+              "mean_lowest_return_from_exit_pct": -4.880203829692331,
+              "mean_terminal_return_from_exit_pct": -0.9210117795974526,
+              "recovered_entry_on_close": 0,
+              "terminal_above_entry": 0
+            }
+          },
+          "same_day_entry_stop": 0,
+          "stop_exits": 2,
+          "unflagged_closed_count": 3,
+          "unflagged_mean_net_pct": 5.399433333333333,
+          "width_buckets": {
+            "1_to_2_atr": 3
+          }
+        },
+        "confirmed_trailing": {
+          "ambiguity_flagged_orders": 0,
+          "by_width": {
+            "1_to_2_atr": {
+              "closed": 3,
+              "early_stop_3_bars": 1,
+              "mean_net_pct": 3.0404,
+              "stop_exits": 3
+            }
+          },
+          "closed": 3,
+          "filled": 3,
+          "mean_net_pct": 3.0404,
+          "median_fill_risk_atr": 1.3419840448163243,
+          "orders": 4,
+          "post_stop": {
+            "5": {
+              "censored": 0,
+              "eligible": 3,
+              "mean_lowest_return_from_exit_pct": -0.985867453861892,
+              "mean_terminal_return_from_exit_pct": 2.5260530773683474,
+              "recovered_entry_on_close": 1,
+              "terminal_above_entry": 1
+            },
+            "10": {
+              "censored": 0,
+              "eligible": 3,
+              "mean_lowest_return_from_exit_pct": -2.9302536013844507,
+              "mean_terminal_return_from_exit_pct": 4.06810265754263,
+              "recovered_entry_on_close": 1,
+              "terminal_above_entry": 1
+            },
+            "20": {
+              "censored": 0,
+              "eligible": 3,
+              "mean_lowest_return_from_exit_pct": -3.5537856474988936,
+              "mean_terminal_return_from_exit_pct": 8.739457325358766,
+              "recovered_entry_on_close": 1,
+              "terminal_above_entry": 1
+            }
+          },
+          "same_day_entry_stop": 0,
+          "stop_exits": 3,
+          "unflagged_closed_count": 3,
+          "unflagged_mean_net_pct": 3.0404,
+          "width_buckets": {
+            "1_to_2_atr": 3
+          }
+        }
+      },
+      "validation": {
+        "candidate_fixed": {
+          "ambiguity_flagged_orders": 0,
+          "by_width": {
+            "0.5_to_1_atr": {
+              "closed": 10,
+              "early_stop_3_bars": 3,
+              "mean_net_pct": 0.7585599999999999,
+              "stop_exits": 7
+            },
+            "1_to_2_atr": {
+              "closed": 5,
+              "early_stop_3_bars": 1,
+              "mean_net_pct": -2.4839,
+              "stop_exits": 4
+            },
+            "under_0.5_atr": {
+              "closed": 5,
+              "early_stop_3_bars": 4,
+              "mean_net_pct": -0.21481999999999998,
+              "stop_exits": 4
+            }
+          },
+          "closed": 20,
+          "filled": 20,
+          "mean_net_pct": -0.29540000000000005,
+          "median_fill_risk_atr": 0.7560833247020899,
+          "orders": 110,
+          "post_stop": {
+            "5": {
+              "censored": 0,
+              "eligible": 15,
+              "mean_lowest_return_from_exit_pct": -1.7189901729832258,
+              "mean_terminal_return_from_exit_pct": 2.358460897980833,
+              "recovered_entry_on_close": 7,
+              "terminal_above_entry": 5
+            },
+            "10": {
+              "censored": 1,
+              "eligible": 14,
+              "mean_lowest_return_from_exit_pct": -2.3511282541514587,
+              "mean_terminal_return_from_exit_pct": 1.8739018733910142,
+              "recovered_entry_on_close": 9,
+              "terminal_above_entry": 5
+            },
+            "20": {
+              "censored": 3,
+              "eligible": 12,
+              "mean_lowest_return_from_exit_pct": -3.3610648169565454,
+              "mean_terminal_return_from_exit_pct": 3.1603426936327716,
+              "recovered_entry_on_close": 11,
+              "terminal_above_entry": 7
+            }
+          },
+          "same_day_entry_stop": 6,
+          "stop_exits": 15,
+          "unflagged_closed_count": 20,
+          "unflagged_mean_net_pct": -0.29540000000000005,
+          "width_buckets": {
+            "0.5_to_1_atr": 10,
+            "1_to_2_atr": 5,
+            "under_0.5_atr": 5
+          }
+        },
+        "candidate_trailing": {
+          "ambiguity_flagged_orders": 0,
+          "by_width": {
+            "0.5_to_1_atr": {
+              "closed": 8,
+              "early_stop_3_bars": 3,
+              "mean_net_pct": -1.6924625,
+              "stop_exits": 8
+            },
+            "1_to_2_atr": {
+              "closed": 4,
+              "early_stop_3_bars": 1,
+              "mean_net_pct": -3.56765,
+              "stop_exits": 4
+            },
+            "under_0.5_atr": {
+              "closed": 6,
+              "early_stop_3_bars": 5,
+              "mean_net_pct": 1.74985,
+              "stop_exits": 5
+            }
+          },
+          "closed": 18,
+          "filled": 20,
+          "mean_net_pct": -0.9617333333333333,
+          "median_fill_risk_atr": 0.7252700063652595,
+          "orders": 108,
+          "post_stop": {
+            "5": {
+              "censored": 0,
+              "eligible": 17,
+              "mean_lowest_return_from_exit_pct": -1.672242262111636,
+              "mean_terminal_return_from_exit_pct": 2.178328021302657,
+              "recovered_entry_on_close": 9,
+              "terminal_above_entry": 7
+            },
+            "10": {
+              "censored": 1,
+              "eligible": 16,
+              "mean_lowest_return_from_exit_pct": -2.221850368191727,
+              "mean_terminal_return_from_exit_pct": 2.0239993308411126,
+              "recovered_entry_on_close": 11,
+              "terminal_above_entry": 7
+            },
+            "20": {
+              "censored": 3,
+              "eligible": 14,
+              "mean_lowest_return_from_exit_pct": -3.0665155498320953,
+              "mean_terminal_return_from_exit_pct": 3.2609037032230876,
+              "recovered_entry_on_close": 13,
+              "terminal_above_entry": 9
+            }
+          },
+          "same_day_entry_stop": 6,
+          "stop_exits": 17,
+          "unflagged_closed_count": 18,
+          "unflagged_mean_net_pct": -0.9617333333333333,
+          "width_buckets": {
+            "0.5_to_1_atr": 9,
+            "1_to_2_atr": 5,
+            "under_0.5_atr": 6
+          }
+        },
+        "confirmed_fixed": {
+          "ambiguity_flagged_orders": 0,
+          "by_width": {
+            "0.5_to_1_atr": {
+              "closed": 1,
+              "early_stop_3_bars": 0,
+              "mean_net_pct": -0.0916,
+              "stop_exits": 0
+            }
+          },
+          "closed": 1,
+          "filled": 1,
+          "mean_net_pct": -0.0916,
+          "median_fill_risk_atr": 0.8733932575581069,
+          "orders": 1,
+          "post_stop": {
+            "5": {
+              "censored": 0,
+              "eligible": 0,
+              "mean_lowest_return_from_exit_pct": null,
+              "mean_terminal_return_from_exit_pct": null,
+              "recovered_entry_on_close": 0,
+              "terminal_above_entry": 0
+            },
+            "10": {
+              "censored": 0,
+              "eligible": 0,
+              "mean_lowest_return_from_exit_pct": null,
+              "mean_terminal_return_from_exit_pct": null,
+              "recovered_entry_on_close": 0,
+              "terminal_above_entry": 0
+            },
+            "20": {
+              "censored": 0,
+              "eligible": 0,
+              "mean_lowest_return_from_exit_pct": null,
+              "mean_terminal_return_from_exit_pct": null,
+              "recovered_entry_on_close": 0,
+              "terminal_above_entry": 0
+            }
+          },
+          "same_day_entry_stop": 0,
+          "stop_exits": 0,
+          "unflagged_closed_count": 1,
+          "unflagged_mean_net_pct": -0.0916,
+          "width_buckets": {
+            "0.5_to_1_atr": 1
+          }
+        },
+        "confirmed_trailing": {
+          "ambiguity_flagged_orders": 0,
+          "by_width": {
+            "0.5_to_1_atr": {
+              "closed": 1,
+              "early_stop_3_bars": 0,
+              "mean_net_pct": 1.8761,
+              "stop_exits": 1
+            }
+          },
+          "closed": 1,
+          "filled": 1,
+          "mean_net_pct": 1.8761,
+          "median_fill_risk_atr": 0.8733932575581069,
+          "orders": 1,
+          "post_stop": {
+            "5": {
+              "censored": 0,
+              "eligible": 1,
+              "mean_lowest_return_from_exit_pct": -5.926075570706535,
+              "mean_terminal_return_from_exit_pct": -3.8095583661129973,
+              "recovered_entry_on_close": 1,
+              "terminal_above_entry": 0
+            },
+            "10": {
+              "censored": 0,
+              "eligible": 1,
+              "mean_lowest_return_from_exit_pct": -9.453615576816233,
+              "mean_terminal_return_from_exit_pct": -8.454769534436824,
+              "recovered_entry_on_close": 1,
+              "terminal_above_entry": 0
+            },
+            "20": {
+              "censored": 0,
+              "eligible": 1,
+              "mean_lowest_return_from_exit_pct": -16.738917842241996,
+              "mean_terminal_return_from_exit_pct": -11.250808686008074,
+              "recovered_entry_on_close": 1,
+              "terminal_above_entry": 0
+            }
+          },
+          "same_day_entry_stop": 0,
+          "stop_exits": 1,
+          "unflagged_closed_count": 1,
+          "unflagged_mean_net_pct": 1.8761,
+          "width_buckets": {
+            "0.5_to_1_atr": 1
+          }
+        }
+      }
+    },
+    "production_change": false,
+    "quality": [
+      {
+        "completed_bars": 1215,
+        "corporate_action_verification": "unknown: frozen source did not retain adjusted closes or events",
+        "excluded_invalid_ohlc": [
+          {
+            "date": "2023-02-02",
+            "ohlc": {
+              "close": 91400,
+              "high": 94900,
+              "low": 92700,
+              "open": 94900
+            }
+          },
+          {
+            "date": "2023-02-09",
+            "ohlc": {
+              "close": 94900,
+              "high": 94800,
+              "low": 92600,
+              "open": 94800
+            }
+          },
+          {
+            "date": "2024-10-14",
+            "ohlc": {
+              "close": 186000,
+              "high": 192300,
+              "low": 186900,
+              "open": 186900
+            }
+          }
+        ],
+        "frozen_bars": 1218,
+        "hash_verified": true,
+        "large_close_jumps": [],
+        "ohlcv_valid": false,
+        "symbol": "000660.KS"
+      },
+      {
+        "completed_bars": 1216,
+        "corporate_action_verification": "unknown: frozen source did not retain adjusted closes or events",
+        "excluded_invalid_ohlc": [
+          {
+            "date": "2023-02-01",
+            "ohlc": {
+              "close": 167000,
+              "high": 171500,
+              "low": 168700,
+              "open": 169200
+            }
+          },
+          {
+            "date": "2024-01-15",
+            "ohlc": {
+              "close": 187500,
+              "high": 187200,
+              "low": 185800,
+              "open": 186000
+            }
+          }
+        ],
+        "frozen_bars": 1218,
+        "hash_verified": true,
+        "large_close_jumps": [],
+        "ohlcv_valid": false,
+        "symbol": "005380.KS"
+      },
+      {
+        "completed_bars": 1217,
+        "corporate_action_verification": "unknown: frozen source did not retain adjusted closes or events",
+        "excluded_invalid_ohlc": [
+          {
+            "date": "2024-10-14",
+            "ohlc": {
+              "close": 59300,
+              "high": 61200,
+              "low": 59400,
+              "open": 59500
+            }
+          }
+        ],
+        "frozen_bars": 1218,
+        "hash_verified": true,
+        "large_close_jumps": [],
+        "ohlcv_valid": false,
+        "symbol": "005930.KS"
+      },
+      {
+        "completed_bars": 1254,
+        "corporate_action_verification": "unknown: frozen source did not retain adjusted closes or events",
+        "excluded_invalid_ohlc": [],
+        "frozen_bars": 1255,
+        "hash_verified": true,
+        "large_close_jumps": [],
+        "ohlcv_valid": true,
+        "symbol": "AAPL"
+      },
+      {
+        "completed_bars": 1254,
+        "corporate_action_verification": "unknown: frozen source did not retain adjusted closes or events",
+        "excluded_invalid_ohlc": [],
+        "frozen_bars": 1255,
+        "hash_verified": true,
+        "large_close_jumps": [],
+        "ohlcv_valid": true,
+        "symbol": "JPM"
+      },
+      {
+        "completed_bars": 1254,
+        "corporate_action_verification": "unknown: frozen source did not retain adjusted closes or events",
+        "excluded_invalid_ohlc": [],
+        "frozen_bars": 1255,
+        "hash_verified": true,
+        "large_close_jumps": [],
+        "ohlcv_valid": true,
+        "symbol": "MSFT"
+      },
+      {
+        "completed_bars": 1254,
+        "corporate_action_verification": "unknown: frozen source did not retain adjusted closes or events",
+        "excluded_invalid_ohlc": [],
+        "frozen_bars": 1255,
+        "hash_verified": true,
+        "large_close_jumps": [],
+        "ohlcv_valid": true,
+        "symbol": "MU"
+      },
+      {
+        "completed_bars": 1254,
+        "corporate_action_verification": "unknown: frozen source did not retain adjusted closes or events",
+        "excluded_invalid_ohlc": [],
+        "frozen_bars": 1255,
+        "hash_verified": true,
+        "large_close_jumps": [],
+        "ohlcv_valid": true,
+        "symbol": "XOM"
+      }
+    ],
+    "scope": "Initial risk uses signal-time ATR; recovery labels exclude exit day and stay within partition. Unflagged subset is not an alternative strategy."
+  }
+}

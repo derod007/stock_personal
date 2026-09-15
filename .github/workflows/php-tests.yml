@@ -14,8 +14,9 @@ jobs:
           php -l index.php
           php -l paper.php
           php -l paper_diagnostics.php
+          php -l paper_compare.php
       - name: Regression
-        run: php tests/v8.php
+        run: php tests/v10.php
       - name: Operational logging tests
         run: python3 -m unittest discover -s tests -p "test_*.py"
   comparison:

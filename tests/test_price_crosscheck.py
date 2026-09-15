@@ -6,6 +6,10 @@ class CrosscheckTest(unittest.TestCase):
         self.assertFalse(m.valid(None))
         self.assertFalse(m.valid(dict(open=100,high=101,low=99,close=98)))
         self.assertFalse(m.same(None,{}))
+    def test_euc_kr_provider_response(self):
+        xml='<?xml version="1.0" encoding="EUC-KR"?><protocol name="삼성전자"><item data="20241014|59500|61200|59400|59300|1"/></protocol>'
+        rows=m.parse_naver(xml.encode("euc-kr"))
+        self.assertEqual(rows["2024-10-14"]["close"],59300)
     def test_full_ohlc_match(self):
         a=dict(open=100,high=110,low=90,close=105)
         self.assertTrue(m.valid(a));self.assertTrue(m.same(a,dict(a)))

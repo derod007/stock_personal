@@ -1,5 +1,5 @@
 """Read-only cross-check of six known invalid candles; never overwrites frozen prices."""
-import datetime as dt, hashlib, json, pathlib, urllib.request, xml.etree.ElementTree as ET
+import datetime as dt, hashlib, json, pathlib, re, urllib.request, xml.etree.ElementTree as ET
 from zoneinfo import ZoneInfo
 
 CASES={"000660.KS":["2023-02-02","2023-02-09","2024-10-14"],
@@ -11,6 +11,18 @@ def valid(b):
 
 def same(a,b):
     return a is not None and b is not None and all(abs(a[k]-b[k])<=max(0.01,abs(a[k])*1e-6) for k in FIELDS)
+
+def parse_naver(raw):
+    declaration=re.search(br'encoding=["\\\']([^"\\\']+)["\\\']',raw[:200],re.I)
+    encoding=declaration.group(1).decode("ascii") if declaration else "utf-8"
+    root=ET.fromstring(raw.decode(encoding))
+    result={}
+    for item in root.iter("item"):
+        parts=item.attrib["data"].split("|")
+        if len(parts)>=5:
+            day=dt.datetime.strptime(parts[0],"%Y%m%d").strftime("%Y-%m-%d")
+            result[day]=dict(zip(FIELDS,map(float,parts[1:5])))
+    return result
 
 def fetch(url,path):
     req=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0"})
@@ -43,11 +55,7 @@ def main():
         try:
             raw,meta["naver"]=fetch("https://fchart.stock.naver.com/sise.nhn?symbol="+symbol[:6]+
                 "&timeframe=day&count=1600&requestType=0",out/(symbol+"-naver.xml"))
-            for item in ET.fromstring(raw).iter("item"):
-                parts=item.attrib["data"].split("|")
-                if len(parts)>=5:
-                    day=dt.datetime.strptime(parts[0],"%Y%m%d").strftime("%Y-%m-%d")
-                    naver[day]=dict(zip(FIELDS,map(float,parts[1:5])))
+            naver=parse_naver(raw)
         except Exception as e:meta["naver_error"]=str(e)
         for day in dates:
             a=yahoo.get(day);b=naver.get(day)

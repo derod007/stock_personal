@@ -3,6 +3,10 @@ spec=importlib.util.spec_from_file_location("audit","bin/audit_stops.py")
 m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 
 class StopAuditTest(unittest.TestCase):
+    def test_invalid_ohlc_matches_replay_guard(self):
+        self.assertFalse(m.valid_ohlc(dict(open=0,high=100,low=90,close=95)))
+        self.assertFalse(m.valid_ohlc(dict(open=100,high=99,low=90,close=95)))
+        self.assertTrue(m.valid_ohlc(dict(open=95,high=100,low=90,close=95)))
     def test_atr_uses_past_only(self):
         bars=[dict(open=100,high=101,low=99,close=100) for _ in range(16)]
         self.assertEqual(m.atr14(bars,14),2)

@@ -2,6 +2,11 @@
 import argparse, collections, datetime as dt, hashlib, json, math, pathlib, statistics
 from zoneinfo import ZoneInfo
 
+def valid_ohlc(b):
+    return all(isinstance(b.get(k),(float,int)) and math.isfinite(b[k]) and b[k]>0
+               for k in ["open","high","low","close"]) and (
+        b["low"]<=min(b["open"],b["close"])<=max(b["open"],b["close"])<=b["high"])
+
 def atr14(bars, i):
     if i < 14: return None
     return round(statistics.mean(max(bars[j]["high"]-bars[j]["low"],
@@ -48,6 +53,13 @@ def summarize(rows):
          "median_fill_risk_atr":statistics.median(ratios) if ratios else None,
          "width_buckets":dict(collections.Counter(width_bucket(r["fill_risk_atr"]) for r in rows if r["filled"])),
          "post_stop":{}}
+    out["by_width"]={}
+    for bucket in sorted(set(width_bucket(r["fill_risk_atr"]) for r in rows if r["filled"])):
+        sample=[r for r in closed if width_bucket(r["fill_risk_atr"])==bucket]
+        out["by_width"][bucket]={"closed":len(sample),
+            "stop_exits":sum(r["first_exit"]=="stop" for r in sample),
+            "early_stop_3_bars":sum(r["first_exit"]=="stop" and r["bars"]<=3 for r in sample),
+            "mean_net_pct":mean([r["net_return_pct"] for r in sample])}
     for h in [5,10,20]:
         labels=[r["post_stop"][str(h)] for r in stops]
         valid=[x for x in labels if x["complete"]]
@@ -66,19 +78,22 @@ def audit(root):
         raw=(root/(symbol+".json")).read_bytes()
         if hashlib.sha256(raw).hexdigest()!=sources[symbol]["sha256"]:
             raise ValueError("Frozen input hash mismatch: "+symbol)
-        bars=json.loads(raw); timezone=ZoneInfo("Asia/Seoul" if symbol.endswith(".KS") else "America/New_York")
+        raw_bars=json.loads(raw); bars=[]; invalid=[]; timezone=ZoneInfo("Asia/Seoul" if symbol.endswith(".KS") else "America/New_York")
         date=lambda stamp:dt.datetime.fromtimestamp(stamp,timezone).date()
         seen=set(); jumps=[]
-        for i,b in enumerate(bars):
+        for i,b in enumerate(raw_bars):
             if not all(isinstance(b[k],(float,int)) and math.isfinite(b[k]) for k in ["time","open","high","low","close","volume"]):
                 raise ValueError("Invalid numeric bar: "+symbol)
-            if not (0<b["low"]<=min(b["open"],b["close"])<=max(b["open"],b["close"])<=b["high"] and b["volume"]>=0):
-                raise ValueError("Invalid OHLC: "+symbol)
+            if not valid_ohlc(b):
+                invalid.append({"date":str(date(b["time"])),"ohlc":{k:b[k] for k in ["open","high","low","close"]}})
+                continue
+            if b["volume"]<0: raise ValueError("Negative volume: "+symbol)
             day=date(b["time"])
-            if day in seen or (i and bars[i-1]["time"]>=b["time"]): raise ValueError("Duplicate/unsorted session: "+symbol)
+            if day in seen or (bars and bars[-1]["time"]>=b["time"]): raise ValueError("Duplicate/unsorted session: "+symbol)
             seen.add(day)
-            if i and abs(b["close"]/bars[i-1]["close"]-1)>=0.3:
-                jumps.append({"date":str(day),"close_change_pct":(b["close"]/bars[i-1]["close"]-1)*100})
+            if bars and abs(b["close"]/bars[-1]["close"]-1)>=0.3:
+                jumps.append({"date":str(day),"close_change_pct":(b["close"]/bars[-1]["close"]-1)*100})
+            bars.append(b)
         sessions={date(b["time"]):i for i,b in enumerate(bars)}
         audit_rows=[json.loads(x) for x in pathlib.Path(str(path)[:-5]+".jsonl").read_text().splitlines()]
         by_stamp={r["asof"]:sessions[date(r["asof"])] for r in audit_rows}
@@ -108,7 +123,7 @@ def audit(root):
                         d["post_stop"][str(h)]=post_stop(bars,by_stamp[t["exit_at"]],cuts[row["partition"]],
                                                        t["entry_fill"],t["exit_fill"],h)
                 details.append(d);groups[(row["partition"],mode)].append(d)
-        quality.append({"symbol":symbol,"hash_verified":True,"ohlcv_valid":True,"frozen_bars":len(bars),
+        quality.append({"symbol":symbol,"hash_verified":True,"ohlcv_valid":not invalid,"excluded_invalid_ohlc":invalid,"frozen_bars":len(raw_bars),
             "completed_bars":n,"large_close_jumps":jumps,
             "corporate_action_verification":"unknown: frozen source did not retain adjusted closes or events"})
     if not details: raise ValueError("No audited orders")
@@ -133,7 +148,7 @@ def audit(root):
     lines += ["", "같은 날 체결·손절됐다는 사실만으로 순서 불명은 아닙니다. 정상적인 연속 가격에서는 매수 지정가를 거쳐 더 낮은 손절가에 도달합니다.",
               "불확실성 표시는 일봉 모델의 일부 한계만 포착하며 갭·유동성·부분체결을 검증하지 않습니다.",
               "손절 후 회복은 손절을 없애거나 넓혔을 때의 순수익이 아닙니다. 그 사이 추가 하락·자금 점유·새 거래 기회가 달라집니다.",
-              "원본 해시와 OHLC 구조를 검사했습니다. 기존 원본에 수정종가·기업행위가 없어 액면분할/배당 보정의 적정성은 확인되지 않았습니다.",
+              "원본 해시와 OHLC 구조를 검사했습니다. 유효하지 않은 OHLC는 기존 CandleClock과 동일하게 제외하고 목록을 남깁니다. 기존 원본에 수정종가·기업행위가 없어 액면분할/배당 보정의 적정성은 확인되지 않았습니다.",
               "30% 이상 종가 변화는 조사 대상이며 기업행위 오류라고 단정하지 않습니다.",
               "세부 분포와 불확실성 표시 제외 평균은 JSON에 있습니다. 제외 평균은 선택된 하위집합 통계이며 개선된 전략 수익률이 아닙니다."]
     (root/"stop-audit.md").write_text("\n".join(lines))

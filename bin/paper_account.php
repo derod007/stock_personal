@@ -17,12 +17,22 @@ $path=$directory.'/'.$config['id'].'-'.$mode.'.json';
 $data=rtrim($o['data'],'/');$now=time();
 $manifest=json_decode(file_get_contents($data.'/sources.json'),true,512,JSON_THROW_ON_ERROR);
 $sources=[];foreach($manifest as $source)$sources[$source['symbol']]=$source;
-$raw=[];$sessions=[];$completed=[];$cutoffs=[];
+$raw=[];$sessions=[];$completed=[];$cutoffs=[];$inputFiles=[];
 foreach($config['symbols'] as $symbol=>$sector) {
     $file=$data.'/'.$symbol.'.json';
     if(!isset($sources[$symbol]['sha256']) || !is_file($file)) {$raw[$symbol]=[];$completed[$symbol]=[];continue;}
     if(hash_file('sha256',$file)!==$sources[$symbol]['sha256']) throw new RuntimeException('Source hash mismatch: '.$symbol);
-    $raw[$symbol]=json_decode(file_get_contents($file),true,512,JSON_THROW_ON_ERROR);
+    $bytes=file_get_contents($file);
+    $inputFiles[$sources[$symbol]['sha256']]=$bytes;
+    $sources[$symbol]['archive_hash']=$sources[$symbol]['sha256'];
+    if(isset($sources[$symbol]['provider_file'],$sources[$symbol]['provider_sha256'])) {
+        $provider=$data.'/'.basename($sources[$symbol]['provider_file']);
+        if(!is_file($provider) || hash_file('sha256',$provider)!==$sources[$symbol]['provider_sha256']) throw new RuntimeException('Provider response hash mismatch');
+        $inputFiles[$sources[$symbol]['provider_sha256']]=file_get_contents($provider);
+    }
+    $raw[$symbol]=json_decode($bytes,true,512,JSON_THROW_ON_ERROR);
+    foreach($raw[$symbol] as &$b) $b['available_at']=CandleClock::closeTime($b,$symbol);
+    unset($b);
     $captured=strtotime($sources[$symbol]['fetched_at']??'');
     if($captured===false) throw new RuntimeException('Source capture timestamp required: '.$symbol);
     $cutoffs[$symbol]=min($now,$captured);
@@ -41,13 +51,14 @@ foreach(glob(dirname(__DIR__).'/src/*.php') as $file) $versionInputs[basename($f
 $version=hash('sha256',PaperJournal::encode($versionInputs));
 $configHash=hash('sha256',PaperJournal::encode($config));
 $journal=new PaperJournal($path);
-$result=$journal->transact(function(&$s,$emit)use($config,$mode,$version,$configHash,$dates,$latest,$raw,$sources,$completed,$now,$conflicts,$cutoffs) {
+$result=$journal->transact(function(&$s,$emit)use($config,$mode,$version,$configHash,$dates,$latest,$raw,$sources,$completed,$now,$conflicts,$cutoffs,$inputFiles,$directory) {
     if($s===null) {
         $s=PaperPortfolio::start($config,$version,$mode);$s['config_hash']=$configHash;
         $emit('account_started',['config'=>$config,'mode'=>$mode,'version'=>$version]);
     }
     if($s['version']!==$version || $s['config_hash']!==$configHash || $s['mode']!==$mode) throw new RuntimeException('Pinned version/config changed; use a new account ID');
     if(!empty($s['halted'])) throw new RuntimeException('Account halted after a historical data revision; review journal and use a new account ID');
+    foreach($inputFiles as $hash=>$bytes) PaperJournal::archive($directory.'/inputs',$hash,$bytes);
     $pastRaw=function(string $symbol,int $date)use($raw,$cutoffs):array {
         return array_values(array_filter($raw[$symbol],fn($b)=>CandleClock::closeTime($b,$symbol)<=min($date,$cutoffs[$symbol]??0)));
     };

@@ -9,6 +9,22 @@ final class PaperJournal
     {
         return json_encode($value,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRESERVE_ZERO_FRACTION|JSON_THROW_ON_ERROR);
     }
+    public static function archive(string $directory,string $hash,string $bytes): string
+    {
+        if(hash('sha256',$bytes)!==$hash) throw new \RuntimeException('Archive hash mismatch');
+        if(!is_dir($directory) && !mkdir($directory,0700,true) && !is_dir($directory)) throw new \RuntimeException('Cannot create input archive');
+        $file=$directory.'/'.$hash.'.data';
+        if(is_file($file)) {
+            if(hash_file('sha256',$file)!==$hash) throw new \RuntimeException('Archived source was modified');
+            return $file;
+        }
+        $tmp=tempnam($directory,'.input-');
+        if($tmp===false) throw new \RuntimeException('Cannot archive input');
+        try {
+            if(file_put_contents($tmp,$bytes)!==strlen($bytes) || !rename($tmp,$file)) throw new \RuntimeException('Cannot archive input');
+        } finally {if(is_file($tmp))unlink($tmp);}
+        return $file;
+    }
     public function read(): ?array
     {
         if(!is_file($this->path)) return null;

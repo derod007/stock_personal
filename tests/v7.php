@@ -60,6 +60,9 @@ check($q['can_simulate'] && in_array('corporate_action_adjustment_unverified',$q
 $bad=$trendBars;$bad[count($bad)-1]['high']=1;
 check(!PaperQuality::inspect($bad,'005930.KS',end($trendBars)['available_at'],[])['can_simulate'],'Recent invalid candle blocks simulated trading');
 $dir=sys_get_temp_dir().'/paper-test-'.bin2hex(random_bytes(5));$file=$dir.'/account.json';
+$archive=PaperJournal::archive($dir.'/inputs',hash('sha256','[]'),'[]');
+check(file_get_contents($archive)==='[]','Source input is archived by content hash');
+check(PaperJournal::archive($dir.'/inputs',hash('sha256','[]'),'[]')===$archive,'Identical input reuses the same archive');
 $j=new PaperJournal($file);
 $j->transact(function(&$state,$append){$state=['x'=>1];$append('snapshot',['value'=>100]);});
 $original=file_get_contents($file);
@@ -70,5 +73,5 @@ check(count($j->read()['events'])===2,'Journal hash chain survives update');
 $tampered=json_decode(file_get_contents($file),true);$tampered['events'][0]['payload']['value']=99;file_put_contents($file,json_encode($tampered));
 $detected=false;try{$j->read();}catch(RuntimeException $e){$detected=true;}
 check($detected,'Journal detects modified historical payload');
-unlink($file);unlink($file.'.lock');rmdir($dir);
+unlink($file);unlink($file.'.lock');unlink($archive);rmdir($dir.'/inputs');rmdir($dir);
 echo 'V7 PASS '.$checks.' total checks'.PHP_EOL;

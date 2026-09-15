@@ -1,0 +1,12 @@
+name: Paper experiment checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  experiment:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: php tests/v10.php
+      - run: php -l paper_compare.php
+      - run: python3 -m py_compile bin/paper_compare_daily.py

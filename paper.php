@@ -19,7 +19,7 @@ $s=$d['state']??null;
 <p><a href="index.php">종목 분석</a> · <a href="?account=paper-us">미국 모의 계좌</a> · <a href="?account=paper-kr">한국 모의 계좌</a></p>
 <form method="get"><label>계좌 ID <input name="account" value="<?= ph($id) ?>"></label>
 <label>기록 종류 <select name="mode"><option value="forward" <?= $mode==='forward'?'selected':'' ?>>앞으로 기록한 추천</option><option value="replay" <?= $mode==='replay'?'selected':'' ?>>과거 재현</option></select></label><button>조회</button></form>
-<p><a href="paper_diagnostics.php?account=<?= ph($id) ?>&amp;mode=<?= ph($mode) ?>">실행·추천 진단</a> · <a href="paper_compare.php">전략 비교</a></p>
+<p><a href="paper_diagnostics.php?account=<?= ph($id) ?>&amp;mode=<?= ph($mode) ?>">실행·추천 진단</a></p>
 <p>실제 주문을 보내지 않는 모의 기록입니다. 과거 재현 결과와 앞으로 기록한 추천은 별도 계좌로 관리합니다.</p>
 <?php if($error): ?><p><?= ph($error) ?></p><?php elseif(!$s): ?>
 <p>아직 기록이 없습니다. 프로젝트 폴더에서 아래 명령으로 수집·기록한 뒤 다시 조회하세요.</p>
@@ -40,6 +40,7 @@ $equity=PaperPortfolio::equity($s);$reserve=PaperPortfolio::reserved($s);$last=$
 <tr><th>유효 종가 기준 최대 낙폭</th><td><?= ph(round($s['max_drawdown']*100,2)) ?>%</td></tr>
 <tr><th>완료 거래 / 이익 / 손실</th><td><?= ph($s['closed_trades']) ?> / <?= ph($s['wins']) ?> / <?= ph($s['losses']) ?></td></tr>
 </tbody></table>
+<p><a href="paper_compare.php">기준·후보 전략 비교</a></p>
 <h2>보유 종목과 대기 주문</h2>
 <table><thead><tr><th>종목</th><th>상태</th><th>수량</th><th>계획 진입 / 손절 / 목표</th><th>계획 위험</th></tr></thead><tbody>
 <?php foreach($s['active'] as $symbol=>$o): ?><tr><td><?= ph($symbol) ?></td><td><?= $o['filled']?'보유':'지정가 대기' ?></td><td><?= ph($o['quantity']) ?></td><td><?= ph($o['plan']['entry'].' / '.$o['plan']['stop'].' / '.$o['plan']['target']) ?></td><td><?= ph(round($o['planned_risk'],2)) ?></td></tr><?php endforeach ?>

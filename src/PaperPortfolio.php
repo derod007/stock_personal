@@ -52,6 +52,7 @@ final class PaperPortfolio
                     $emit('order_cancelled',['symbol'=>$symbol,'session'=>$session,'reason'=>'data_quality']);
                     unset($s['active'][$symbol]);unset($o);
                 }
+                unset($o);
                 continue;
             }
             $bar=$bars[$symbol];
@@ -106,7 +107,7 @@ final class PaperPortfolio
             foreach($s['active'] as $sym=>$o) {
                 $riskUsed+=$o['planned_risk'];
                 if($cfg['symbols'][$sym]===$sector) {
-                    $sectorUsed+=$o['filled']?$o['quantity']*max($o['plan']['entry'],$s['marks'][$sym]['close']??0):$o['reservation'];
+                    $sectorUsed+=$o['filled']?max($o['reservation'],$o['quantity']*($s['marks'][$sym]['close']??0)):$o['reservation'];
                 }
             }
             $risk=max(0,min($equity*$cfg['risk_pct'],$equity*$cfg['total_risk_pct']-$riskUsed));

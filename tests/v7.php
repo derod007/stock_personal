@@ -50,8 +50,10 @@ check(count(array_filter($forward['active'],fn($o)=>$o['filled']))===2,'First fu
 $catchup=PaperPortfolio::start($cfg,'v1','forward');
 PaperPortfolio::advance($catchup,$days[0],$barsFor($days[0]),$fixture($days[0],true,'catchup'),$emit);
 check($catchup['active']===[],'Retrospective catchup signal cannot create an order');
+$activeBeforeMissing=PaperJournal::encode($forward['active']);
 $missing=$fixture($days[2]+86400,false);$missing['AA']['quality']['can_simulate']=false;
 PaperPortfolio::advance($forward,$days[2]+86400,[],$missing,$emit);
+check(PaperJournal::encode($forward['active'])===$activeBeforeMissing,'Missing bars cannot mutate another position through shared references');
 check(end($forward['equity'])['drawdown']===null && count(end($forward['equity'])['stale_positions'])===2,'Missing position marks produce estimated equity, not measured drawdown');
 $q=PaperQuality::inspect($trendBars,'005930.KS',end($trendBars)['available_at'],[]);
 check($q['can_simulate'] && in_array('corporate_action_adjustment_unverified',$q['warnings'],true),'Adjustment uncertainty is preserved as a warning');

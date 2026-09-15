@@ -36,3 +36,26 @@ try{$j->transact(function(&$s,$emit)use($source,$changed,$t){$s=PaperExperiment:
 echeck(hash_file('sha256',$dir.'/pair.json')===$hash,'failed update rolls back both arms');
 }finally{foreach(glob($dir.'/*') as $f)unlink($f);rmdir($dir);}
 echo "v10: 13 experiment checks passed\n";
+
+$dir=sys_get_temp_dir().'/experiment-cli-'.bin2hex(random_bytes(5));mkdir($dir);
+$old=getenv('PAPER_STATE_DIR');putenv('PAPER_STATE_DIR='.$dir);
+try {
+ $versions=[];foreach(glob(__DIR__.'/../src/*.php') as $file)$versions[basename($file)]=hash_file('sha256',$file);
+ $fixture=$source;$fixture['state']['version']=hash('sha256',PaperJournal::encode($versions));
+ $j=new PaperJournal($dir.'/source-replay.json');
+ $j->transact(function(&$s,$emit)use($fixture){$s=$fixture['state'];foreach($fixture['events'] as $e)$emit($e['type'],$e['payload']);});
+ $sourceHash=hash_file('sha256',$dir.'/source-replay.json');
+ $cmd=escapeshellarg(PHP_BINARY).' '.escapeshellarg(__DIR__.'/../bin/paper_compare.php').' --source=source --experiment=cli --mode=replay';
+ exec($cmd,$output,$code);$report=json_decode(implode("\n",$output),true,512,JSON_THROW_ON_ERROR);
+ echeck($code===0 && $report['identity_check']==='matched','real CLI independent identical states');
+ $pairHash=hash_file('sha256',$dir.'/experiments/cli-replay.json');$output=[];
+ exec($cmd,$output,$code);
+ echeck($code===0 && $pairHash===hash_file('sha256',$dir.'/experiments/cli-replay.json'),'real CLI repeat byte-identical');
+ echeck($sourceHash===hash_file('sha256',$dir.'/source-replay.json'),'real CLI preserves source journal');
+}finally{
+ putenv($old===false?'PAPER_STATE_DIR':'PAPER_STATE_DIR='.$old);
+ foreach(glob($dir.'/experiments/*')?:[] as $file)unlink($file);
+ if(is_dir($dir.'/experiments'))rmdir($dir.'/experiments');
+ foreach(glob($dir.'/*') as $file)unlink($file);rmdir($dir);
+}
+echo "v10: 16 total experiment checks passed\n";

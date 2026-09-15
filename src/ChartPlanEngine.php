@@ -97,14 +97,24 @@ final class ChartPlanEngine
         $proposal['level_method_label'] = '가격 후보 / 진입 확인 / 큰 추세 분리';
         $proposal['reason'] = $plan['reason'];
         $proposal['size_hint'] = $ready ? '패턴 확인 완료: 다음 거래봉 지정가 검토' : '관심 가격은 주문 지시가 아님';
-        $sentence = ($available ? '관심 ' . $candidate['low'] . '~' . $candidate['high'] . ' / 손절 후보 '
-            . $candidate['stop'] . ' / 목표 후보 ' . $candidate['target'] . ' · ' : '') . $plan['reason'];
+        $entry = is_numeric($plan['entry'] ?? null) ? PriceCandidate::trunc((float) $plan['entry']) : null;
+        $stop = is_numeric($plan['stop'] ?? null) ? PriceCandidate::trunc((float) $plan['stop']) : null;
+        $target = is_numeric($plan['target'] ?? null) ? PriceCandidate::trunc((float) $plan['target']) : null;
+        if ($ready) {
+            $plan['entry'] = $entry;
+            $plan['stop'] = $stop;
+            $plan['target'] = $target;
+            $proposal['trade_plan'] = $plan;
+        }
+        $sentence = ($available ? '관심 ' . PriceCandidate::text($candidate['low']) . '~' . PriceCandidate::text($candidate['high'])
+            . ' / 손절 후보 ' . PriceCandidate::text($candidate['stop'])
+            . ' / 목표 후보 ' . PriceCandidate::text($candidate['target']) . ' · ' : '') . $plan['reason'];
         $proposal['new_entry'] = ['available' => $available, 'candidate_available' => $available,
             'buy_now' => false, 'order_ready' => $ready, 'status' => $plan['status'],
             'price' => $available ? $candidate['mid'] : null, 'low' => $candidate['low'] ?? null,
             'high' => $candidate['high'] ?? null, 'deep_support' => $candidate['stop'] ?? null,
             'sentence' => $sentence, 'note' => $ready
-                ? '확인 지정가 ' . $plan['entry'] . ' / 손익비 ' . $plan['reward_risk']
+                ? '확인 지정가 ' . PriceCandidate::text($entry) . ' / 손익비 ' . $plan['reward_risk']
                 : '후보 가격에 도달해도 패턴 확인 전에는 주문하지 않음'];
         return $proposal;
     }

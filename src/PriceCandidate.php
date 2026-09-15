@@ -4,15 +4,30 @@ namespace ChartEntryLab;
 
 final class PriceCandidate
 {
+    /** Truncate fractional price digits (display/order levels). */
+    public static function trunc(float $v): float
+    {
+        return $v >= 0.0 ? floor($v) : ceil($v);
+    }
+
+    public static function text(mixed $v): string
+    {
+        if (!is_numeric($v)) {
+            return '—';
+        }
+
+        return number_format(self::trunc((float) $v), 0, '.', ',');
+    }
+
     public static function build(float $low, float $high, float $stop, float $target, string $source): ?array
     {
         foreach ([$low, $high, $stop, $target] as $v) {
             if (!is_finite($v) || $v <= 0) { return null; }
         }
-        $low = round($low, 4); $high = round($high, 4);
-        $stop = round($stop, 4); $target = round($target, 4);
+        $low = self::trunc($low); $high = self::trunc($high);
+        $stop = self::trunc($stop); $target = self::trunc($target);
         if (!($stop < $low && $low <= $high && $high < $target)) { return null; }
-        $mid = round(($low + $high) / 2, 4);
+        $mid = self::trunc(($low + $high) / 2);
         $rr = static fn(float $e): float => round(($target - $e) / ($e - $stop), 3);
         return ['low' => $low, 'mid' => $mid, 'high' => $high, 'stop' => $stop, 'target' => $target,
             'source' => $source, 'reward_risk' => ['low' => $rr($low), 'mid' => $rr($mid), 'high' => $rr($high)],

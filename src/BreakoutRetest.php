@@ -63,15 +63,15 @@ final class BreakoutRetest
                                 $target = (float) $old['high'];
                             }
                         }
-                        $entry = round($entry, 4);
-                        $stop = round($stop, 4);
-                        $target = round($target, 4);
+                        $entry = PriceCandidate::trunc($entry);
+                        $stop = PriceCandidate::trunc($stop);
+                        $target = PriceCandidate::trunc($target);
                         $rr = $entry > $stop ? ($target - $entry) / ($entry - $stop) : 0.0;
                         $valid = $stop > 0 && $stop < $entry && $entry < $target && $rr >= self::MIN_RR;
                         return array_replace($plan, ['status' => $valid ? 'ready' : 'rejected_rr', 'ready' => $valid,
                             'reason' => $valid ? '재지지 후 고점 회복 확인. 다음 3개 거래봉 지정가 계획, 손익비 ' . round($rr, 2)
                                 : '재지지 확인됐지만 첫 저항까지 손익비 부족: 진입 보류',
-                            'entry' => round($entry, 4), 'stop' => round($stop, 4), 'target' => round($target, 4),
+                            'entry' => $entry, 'stop' => $stop, 'target' => $target,
                             'reward_risk' => round($rr, 3), 'target_rule' => 'nearest_known_high_or_box_measured_move',
                             'signal_at' => $bars[$j]['available_at'], 'retest_at' => $bars[$retest]['available_at']]);
                     }

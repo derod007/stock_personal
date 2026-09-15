@@ -10,6 +10,7 @@ use ChartEntryLab\EntryRepository;
 use ChartEntryLab\KrAmountLeadersClient;
 use ChartEntryLab\KrAmountScanner;
 use ChartEntryLab\LearnedLevels;
+use ChartEntryLab\PriceCandidate;
 use ChartEntryLab\ProposalService;
 use ChartEntryLab\ScanSnapshot;
 use ChartEntryLab\SymbolMap;
@@ -1145,14 +1146,14 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
             <p><?= !empty($tp['ready']) ? '패턴 확인 완료 · 다음 거래봉 지정가 검토' : '진입 확인 전 · 표시 가격은 관심 후보' ?></p>
             <p><?= h((string) ($tp['reason'] ?? '')) ?></p>
             <?php if (!empty($tp['ready'])): ?>
-              <p>확인 지정가 <?= h(fmtNum($tp['entry'], 4)) ?> / 손절 <?= h(fmtNum($tp['stop'], 4)) ?> / 목표 <?= h(fmtNum($tp['target'], 4)) ?> / 손익비 <?= h((string) $tp['reward_risk']) ?></p>
+              <p>확인 지정가 <?= h(PriceCandidate::text($tp['entry'])) ?> / 손절 <?= h(PriceCandidate::text($tp['stop'])) ?> / 목표 <?= h(PriceCandidate::text($tp['target'])) ?> / 손익비 <?= h((string) $tp['reward_risk']) ?></p>
             <?php endif; ?>
             <?php if (is_array($pc)): ?>
               <table>
                 <thead><tr><th>진입 위치</th><th>가격</th><th>비용 전 손익비</th></tr></thead>
                 <tbody>
                 <?php foreach (['low' => '구간 하단', 'mid' => '구간 중앙', 'high' => '구간 상단'] as $key => $label): ?>
-                  <tr><td><?= h($label) ?></td><td><?= h(fmtNum($pc[$key], 4)) ?></td><td><?= h((string) $pc['reward_risk'][$key]) ?></td></tr>
+                  <tr><td><?= h($label) ?></td><td><?= h(PriceCandidate::text($pc[$key] ?? null)) ?></td><td><?= h((string) $pc['reward_risk'][$key]) ?></td></tr>
                 <?php endforeach; ?>
                 </tbody>
               </table>

@@ -45,12 +45,14 @@ final class TrendPullback
                 : (!$dry ? '눌림 도착, 거래량 감소 확인 필요' : '눌림·거래량 감소 관찰, 이후 고점 회복 확인 필요'),
             'candidate' => $candidate, 'volume_contracted' => $dry]);
         if (!$confirmed) { return $p; }
-        $entry = round((float) $last['close'], 4);
+        $entry = PriceCandidate::trunc((float) $last['close']);
+        $stop = PriceCandidate::trunc((float) $stop);
+        $target = PriceCandidate::trunc((float) $target);
         $rr = $entry > $stop ? ($target - $entry) / ($entry - $stop) : 0;
         return array_replace($p, ['status' => $rr >= 1.5 && $target > $entry ? 'ready' : 'rejected_rr',
             'ready' => $rr >= 1.5 && $target > $entry, 'reason' => $rr >= 1.5 ? '상승 추세 눌림 후 고점 회복 확인'
                 : '반등 확인됐지만 확인 가격의 손익비 부족',
-            'entry' => $entry, 'stop' => round($stop, 4), 'target' => round($target, 4),
+            'entry' => $entry, 'stop' => $stop, 'target' => $target,
             'reward_risk' => round($rr, 3), 'target_rule' => 'prior_20_bar_high',
             'signal_at' => $last['available_at']]);
     }

@@ -103,7 +103,7 @@ def audit(root):
               "validation":by_stamp[research["holdout_from"]],"holdout":n}
         for row in audit_rows:
             signal=row["asof"]; i=by_stamp[signal]; atr=atr14(bars,i)
-            for mode,t in row["orders"].items():
+            for mode,t in (row["orders"] or {}).items():
                 if "filled" not in t: continue
                 if mode.startswith("candidate"): levels=row["candidate"]; planned=levels["mid"]
                 else:

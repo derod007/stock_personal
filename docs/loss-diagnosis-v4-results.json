@@ -1,0 +1,568 @@
+{
+  "implementation_commit": "ba5a9c62437a2d48d1c1dfb06837287349164d4b",
+  "frozen_input_run": 34879718710,
+  "diagnosis": {
+    "symbols": 8,
+    "stage_counts": {
+      "development": {
+        "final:risk_blocked": 924,
+        "breakout_retest:no_setup": 3621,
+        "trend_pullback:no_setup": 3256,
+        "trend_pullback:rising_structure:fail": 3051,
+        "trend_pullback:atr_valid:pass": 4996,
+        "final:no_setup": 698,
+        "final:context_wait": 1531,
+        "breakout_retest:await_retest": 308,
+        "breakout_retest:await_confirmation": 268,
+        "breakout_retest:expired": 238,
+        "final:ready": 4,
+        "trend_pullback:ready": 6,
+        "trend_pullback:rising_structure:pass": 1945,
+        "trend_pullback:valid_zone:pass": 1740,
+        "trend_pullback:near_ma20:pass": 1581,
+        "trend_pullback:volume_contracted:pass": 611,
+        "trend_pullback:recovery_close:pass": 517,
+        "trend_pullback:bullish_candle:pass": 878,
+        "trend_pullback:volume_recovery:pass": 817,
+        "trend_pullback:fresh_confirmation:pass": 1208,
+        "trend_pullback:await_confirmation": 1506,
+        "trend_pullback:recovery_close:fail": 1223,
+        "trend_pullback:bullish_candle:fail": 862,
+        "trend_pullback:fresh_confirmation:fail": 532,
+        "trend_pullback:volume_contracted:fail": 1129,
+        "trend_pullback:volume_recovery:fail": 923,
+        "final:await_confirmation": 1368,
+        "final:expired": 83,
+        "final:rejected_rr": 68,
+        "trend_pullback:rejected_rr": 69,
+        "final:wait_pullback": 156,
+        "trend_pullback:wait_pullback": 159,
+        "trend_pullback:near_ma20:fail": 159,
+        "final:await_retest": 72,
+        "trend_pullback:valid_zone:fail": 205,
+        "breakout_retest:invalidated": 540,
+        "final:invalidated": 92,
+        "breakout_retest:rejected_rr": 20,
+        "breakout_retest:ready": 1
+      },
+      "validation": {
+        "final:context_wait": 732,
+        "breakout_retest:no_setup": 1557,
+        "trend_pullback:no_setup": 1406,
+        "trend_pullback:rising_structure:fail": 1303,
+        "trend_pullback:atr_valid:pass": 1984,
+        "final:risk_blocked": 372,
+        "trend_pullback:rising_structure:pass": 681,
+        "trend_pullback:valid_zone:fail": 103,
+        "final:no_setup": 259,
+        "final:await_confirmation": 417,
+        "trend_pullback:await_confirmation": 466,
+        "trend_pullback:valid_zone:pass": 578,
+        "trend_pullback:near_ma20:pass": 500,
+        "trend_pullback:volume_contracted:fail": 350,
+        "trend_pullback:recovery_close:fail": 411,
+        "trend_pullback:bullish_candle:fail": 299,
+        "trend_pullback:volume_recovery:fail": 315,
+        "trend_pullback:fresh_confirmation:pass": 404,
+        "trend_pullback:volume_contracted:pass": 228,
+        "trend_pullback:volume_recovery:pass": 263,
+        "trend_pullback:rejected_rr": 34,
+        "trend_pullback:recovery_close:pass": 167,
+        "trend_pullback:bullish_candle:pass": 279,
+        "trend_pullback:fresh_confirmation:fail": 174,
+        "final:await_retest": 33,
+        "breakout_retest:await_retest": 131,
+        "final:wait_pullback": 78,
+        "trend_pullback:wait_pullback": 78,
+        "trend_pullback:near_ma20:fail": 78,
+        "breakout_retest:await_confirmation": 54,
+        "breakout_retest:invalidated": 157,
+        "final:rejected_rr": 29,
+        "breakout_retest:rejected_rr": 5,
+        "breakout_retest:expired": 79,
+        "final:expired": 40,
+        "final:invalidated": 23,
+        "final:ready": 1,
+        "breakout_retest:ready": 1
+      },
+      "holdout": {
+        "final:await_retest": 71,
+        "breakout_retest:await_retest": 271,
+        "trend_pullback:no_setup": 1057,
+        "trend_pullback:rising_structure:fail": 929,
+        "trend_pullback:atr_valid:pass": 1986,
+        "final:wait_pullback": 123,
+        "trend_pullback:wait_pullback": 136,
+        "trend_pullback:rising_structure:pass": 1057,
+        "trend_pullback:valid_zone:pass": 929,
+        "trend_pullback:near_ma20:fail": 136,
+        "trend_pullback:volume_contracted:fail": 662,
+        "trend_pullback:recovery_close:pass": 334,
+        "trend_pullback:bullish_candle:pass": 480,
+        "trend_pullback:volume_recovery:pass": 452,
+        "trend_pullback:fresh_confirmation:pass": 583,
+        "trend_pullback:recovery_close:fail": 595,
+        "trend_pullback:volume_recovery:fail": 477,
+        "trend_pullback:fresh_confirmation:fail": 346,
+        "trend_pullback:bullish_candle:fail": 449,
+        "trend_pullback:valid_zone:fail": 128,
+        "final:expired": 48,
+        "breakout_retest:expired": 135,
+        "final:await_confirmation": 663,
+        "trend_pullback:await_confirmation": 755,
+        "trend_pullback:near_ma20:pass": 793,
+        "breakout_retest:await_confirmation": 94,
+        "breakout_retest:rejected_rr": 7,
+        "final:risk_blocked": 413,
+        "breakout_retest:no_setup": 1210,
+        "breakout_retest:invalidated": 266,
+        "final:rejected_rr": 34,
+        "trend_pullback:rejected_rr": 37,
+        "trend_pullback:volume_contracted:pass": 267,
+        "final:context_wait": 371,
+        "final:no_setup": 223,
+        "final:invalidated": 36,
+        "final:ready": 4,
+        "trend_pullback:ready": 1,
+        "breakout_retest:ready": 3
+      }
+    },
+    "losses": {
+      "development": {
+        "confirmed_fixed": {
+          "n": 3,
+          "categories": {
+            "early_stop_within_3_bars": 2,
+            "other_loss": 1
+          },
+          "avg_net_return_pct": -5.284666666666666
+        },
+        "confirmed_trailing": {
+          "n": 4,
+          "categories": {
+            "early_stop_within_3_bars": 2,
+            "gave_back_2pct_close_gain": 1,
+            "other_loss": 1
+          },
+          "avg_net_return_pct": -4.02235
+        },
+        "candidate_fixed": {
+          "n": 65,
+          "categories": {
+            "early_stop_within_3_bars": 41,
+            "gave_back_2pct_close_gain": 11,
+            "other_loss": 13
+          },
+          "avg_net_return_pct": -2.1120261538461538
+        },
+        "candidate_trailing": {
+          "n": 74,
+          "categories": {
+            "early_stop_within_3_bars": 44,
+            "gave_back_2pct_close_gain": 17,
+            "other_loss": 13
+          },
+          "avg_net_return_pct": -1.9614432432432432
+        }
+      },
+      "validation": {
+        "candidate_fixed": {
+          "n": 15,
+          "categories": {
+            "other_loss": 4,
+            "gave_back_2pct_close_gain": 3,
+            "early_stop_within_3_bars": 8
+          },
+          "avg_net_return_pct": -2.2071
+        },
+        "candidate_trailing": {
+          "n": 15,
+          "categories": {
+            "other_loss": 4,
+            "gave_back_2pct_close_gain": 3,
+            "early_stop_within_3_bars": 8
+          },
+          "avg_net_return_pct": -2.13202
+        },
+        "confirmed_fixed": {
+          "n": 1,
+          "categories": {
+            "gave_back_2pct_close_gain": 1
+          },
+          "avg_net_return_pct": -0.0916
+        }
+      },
+      "holdout": {
+        "candidate_fixed": {
+          "n": 20,
+          "categories": {
+            "gave_back_2pct_close_gain": 5,
+            "early_stop_within_3_bars": 11,
+            "other_loss": 4
+          },
+          "avg_net_return_pct": -4.14763
+        },
+        "candidate_trailing": {
+          "n": 24,
+          "categories": {
+            "gave_back_2pct_close_gain": 7,
+            "early_stop_within_3_bars": 14,
+            "other_loss": 3
+          },
+          "avg_net_return_pct": -3.4815333333333336
+        },
+        "confirmed_fixed": {
+          "n": 2,
+          "categories": {
+            "gave_back_2pct_close_gain": 1,
+            "early_stop_within_3_bars": 1
+          },
+          "avg_net_return_pct": -2.9033
+        },
+        "confirmed_trailing": {
+          "n": 2,
+          "categories": {
+            "gave_back_2pct_close_gain": 1,
+            "early_stop_within_3_bars": 1
+          },
+          "avg_net_return_pct": -1.7871000000000001
+        }
+      }
+    },
+    "production_change": false,
+    "scope": "Descriptive association, not causal filter effect; overlapping excluded candidate days",
+    "development_focus": "early_stop_within_3_bars"
+  },
+  "rejected_development": [
+    {
+      "partition": "development",
+      "reason": "final:risk_blocked",
+      "candidate_days": 565,
+      "mean_forward_close_10_pct": 0.565933994303867,
+      "positive_fraction": 0.5274336283185841
+    },
+    {
+      "partition": "development",
+      "reason": "trend_pullback:rising_structure:fail",
+      "candidate_days": 1884,
+      "mean_forward_close_10_pct": 0.9575874135366611,
+      "positive_fraction": 0.5562632696390658
+    },
+    {
+      "partition": "development",
+      "reason": "trend_pullback:atr_valid:pass",
+      "candidate_days": 3790,
+      "mean_forward_close_10_pct": 0.5460246498758144,
+      "positive_fraction": 0.5393139841688654
+    },
+    {
+      "partition": "development",
+      "reason": "final:no_setup",
+      "candidate_days": 504,
+      "mean_forward_close_10_pct": 0.6797119273167966,
+      "positive_fraction": 0.5416666666666666
+    },
+    {
+      "partition": "development",
+      "reason": "final:context_wait",
+      "candidate_days": 984,
+      "mean_forward_close_10_pct": 1.0649887756224166,
+      "positive_fraction": 0.5650406504065041
+    },
+    {
+      "partition": "development",
+      "reason": "trend_pullback:rising_structure:pass",
+      "candidate_days": 1906,
+      "mean_forward_close_10_pct": 0.13921234833487267,
+      "positive_fraction": 0.5225603357817419
+    },
+    {
+      "partition": "development",
+      "reason": "trend_pullback:valid_zone:pass",
+      "candidate_days": 1726,
+      "mean_forward_close_10_pct": 0.16264259708601533,
+      "positive_fraction": 0.5243337195828505
+    },
+    {
+      "partition": "development",
+      "reason": "trend_pullback:near_ma20:pass",
+      "candidate_days": 1569,
+      "mean_forward_close_10_pct": 0.16355362136194487,
+      "positive_fraction": 0.521351179094965
+    },
+    {
+      "partition": "development",
+      "reason": "trend_pullback:volume_contracted:pass",
+      "candidate_days": 607,
+      "mean_forward_close_10_pct": -0.08248680496516879,
+      "positive_fraction": 0.5090609555189456
+    },
+    {
+      "partition": "development",
+      "reason": "trend_pullback:recovery_close:fail",
+      "candidate_days": 1214,
+      "mean_forward_close_10_pct": 0.2327481740886508,
+      "positive_fraction": 0.5321252059308073
+    },
+    {
+      "partition": "development",
+      "reason": "trend_pullback:bullish_candle:fail",
+      "candidate_days": 855,
+      "mean_forward_close_10_pct": 0.14310120791636813,
+      "positive_fraction": 0.5228070175438596
+    },
+    {
+      "partition": "development",
+      "reason": "trend_pullback:volume_recovery:pass",
+      "candidate_days": 806,
+      "mean_forward_close_10_pct": 0.20665977279963263,
+      "positive_fraction": 0.5297766749379652
+    },
+    {
+      "partition": "development",
+      "reason": "trend_pullback:fresh_confirmation:fail",
+      "candidate_days": 531,
+      "mean_forward_close_10_pct": 0.0303409506616145,
+      "positive_fraction": 0.5028248587570622
+    },
+    {
+      "partition": "development",
+      "reason": "trend_pullback:volume_contracted:fail",
+      "candidate_days": 1119,
+      "mean_forward_close_10_pct": 0.295612701683932,
+      "positive_fraction": 0.5326184092940125
+    },
+    {
+      "partition": "development",
+      "reason": "trend_pullback:volume_recovery:fail",
+      "candidate_days": 920,
+      "mean_forward_close_10_pct": 0.12407972358038977,
+      "positive_fraction": 0.5195652173913043
+    },
+    {
+      "partition": "development",
+      "reason": "trend_pullback:fresh_confirmation:pass",
+      "candidate_days": 1195,
+      "mean_forward_close_10_pct": 0.2214310274218788,
+      "positive_fraction": 0.5338912133891214
+    },
+    {
+      "partition": "development",
+      "reason": "trend_pullback:recovery_close:pass",
+      "candidate_days": 512,
+      "mean_forward_close_10_pct": -0.0035842983850773403,
+      "positive_fraction": 0.505859375
+    },
+    {
+      "partition": "development",
+      "reason": "trend_pullback:bullish_candle:pass",
+      "candidate_days": 871,
+      "mean_forward_close_10_pct": 0.18182501699422243,
+      "positive_fraction": 0.5258323765786452
+    },
+    {
+      "partition": "development",
+      "reason": "final:await_confirmation",
+      "candidate_days": 1333,
+      "mean_forward_close_10_pct": 0.20658790346725886,
+      "positive_fraction": 0.5258814703675919
+    },
+    {
+      "partition": "development",
+      "reason": "final:expired",
+      "candidate_days": 74,
+      "mean_forward_close_10_pct": 0.3825471960750822,
+      "positive_fraction": 0.5405405405405406
+    },
+    {
+      "partition": "development",
+      "reason": "final:rejected_rr",
+      "candidate_days": 68,
+      "mean_forward_close_10_pct": -0.3375490506024471,
+      "positive_fraction": 0.5
+    },
+    {
+      "partition": "development",
+      "reason": "final:wait_pullback",
+      "candidate_days": 155,
+      "mean_forward_close_10_pct": 0.23316214170422236,
+      "positive_fraction": 0.5612903225806452
+    },
+    {
+      "partition": "development",
+      "reason": "trend_pullback:near_ma20:fail",
+      "candidate_days": 157,
+      "mean_forward_close_10_pct": 0.15353815702911452,
+      "positive_fraction": 0.554140127388535
+    },
+    {
+      "partition": "development",
+      "reason": "final:await_retest",
+      "candidate_days": 47,
+      "mean_forward_close_10_pct": -1.152553350203307,
+      "positive_fraction": 0.3829787234042553
+    },
+    {
+      "partition": "development",
+      "reason": "trend_pullback:valid_zone:fail",
+      "candidate_days": 180,
+      "mean_forward_close_10_pct": -0.0854577035788621,
+      "positive_fraction": 0.5055555555555555
+    },
+    {
+      "partition": "development",
+      "reason": "final:invalidated",
+      "candidate_days": 60,
+      "mean_forward_close_10_pct": 1.6074998795413973,
+      "positive_fraction": 0.6166666666666667
+    }
+  ],
+  "comparison": {
+    "sources_requested": 8,
+    "successful": 8,
+    "errors": [],
+    "development_scores": {
+      "confirmed_fixed": {
+        "closed": 4,
+        "symbols_with_trades": 4,
+        "expectancy_pct": -2.3385249999999997
+      },
+      "confirmed_trailing": {
+        "closed": 4,
+        "symbols_with_trades": 4,
+        "expectancy_pct": -4.02235
+      },
+      "candidate_fixed": {
+        "closed": 85,
+        "symbols_with_trades": 8,
+        "expectancy_pct": -0.4419870588235294
+      },
+      "candidate_trailing": {
+        "closed": 84,
+        "symbols_with_trades": 8,
+        "expectancy_pct": -0.36225714285714294
+      },
+      "candidate_recovery_fixed": {
+        "closed": 31,
+        "symbols_with_trades": 8,
+        "expectancy_pct": -0.9667709677419355
+      }
+    },
+    "selected_on_development_only": null,
+    "production_change": false,
+    "reason": "Research comparison only; no automatic production promotion",
+    "partition_results": {
+      "development": {
+        "confirmed_fixed": {
+          "closed": 4,
+          "orders": 4,
+          "expectancy_pct": -2.3385249999999997,
+          "positive_symbols": 1,
+          "worst_symbol_closed_trade_drawdown_pct": 10.349799999999998
+        },
+        "confirmed_trailing": {
+          "closed": 4,
+          "orders": 4,
+          "expectancy_pct": -4.02235,
+          "positive_symbols": 0,
+          "worst_symbol_closed_trade_drawdown_pct": 10.349799999999998
+        },
+        "candidate_fixed": {
+          "closed": 85,
+          "orders": 312,
+          "expectancy_pct": -0.4419870588235294,
+          "positive_symbols": 2,
+          "worst_symbol_closed_trade_drawdown_pct": 18.178396923274832
+        },
+        "candidate_trailing": {
+          "closed": 84,
+          "orders": 301,
+          "expectancy_pct": -0.36225714285714294,
+          "positive_symbols": 3,
+          "worst_symbol_closed_trade_drawdown_pct": 19.203703431429297
+        },
+        "candidate_recovery_fixed": {
+          "closed": 31,
+          "orders": 167,
+          "expectancy_pct": -0.9667709677419355,
+          "positive_symbols": 2,
+          "worst_symbol_closed_trade_drawdown_pct": 10.408074099369525
+        }
+      },
+      "validation": {
+        "confirmed_fixed": {
+          "closed": 1,
+          "orders": 1,
+          "expectancy_pct": -0.0916,
+          "positive_symbols": 0,
+          "worst_symbol_closed_trade_drawdown_pct": 0.09160000000000279
+        },
+        "confirmed_trailing": {
+          "closed": 1,
+          "orders": 1,
+          "expectancy_pct": 1.8761,
+          "positive_symbols": 1,
+          "worst_symbol_closed_trade_drawdown_pct": 0
+        },
+        "candidate_fixed": {
+          "closed": 20,
+          "orders": 110,
+          "expectancy_pct": -0.2954,
+          "positive_symbols": 3,
+          "worst_symbol_closed_trade_drawdown_pct": 6.735035582490112
+        },
+        "candidate_trailing": {
+          "closed": 18,
+          "orders": 108,
+          "expectancy_pct": -0.9617333333333333,
+          "positive_symbols": 2,
+          "worst_symbol_closed_trade_drawdown_pct": 6.685200000000002
+        },
+        "candidate_recovery_fixed": {
+          "closed": 5,
+          "orders": 58,
+          "expectancy_pct": 3.16838,
+          "positive_symbols": 2,
+          "worst_symbol_closed_trade_drawdown_pct": 1.593
+        }
+      },
+      "holdout": {
+        "confirmed_fixed": {
+          "closed": 3,
+          "orders": 4,
+          "expectancy_pct": 5.3994333333333335,
+          "positive_symbols": 1,
+          "worst_symbol_closed_trade_drawdown_pct": 3.8833000000000006
+        },
+        "confirmed_trailing": {
+          "closed": 3,
+          "orders": 4,
+          "expectancy_pct": 3.0404,
+          "positive_symbols": 1,
+          "worst_symbol_closed_trade_drawdown_pct": 1.9233000000000056
+        },
+        "candidate_fixed": {
+          "closed": 36,
+          "orders": 165,
+          "expectancy_pct": 2.8481444444444444,
+          "positive_symbols": 5,
+          "worst_symbol_closed_trade_drawdown_pct": 15.387755615200005
+        },
+        "candidate_trailing": {
+          "closed": 36,
+          "orders": 153,
+          "expectancy_pct": 3.7347083333333333,
+          "positive_symbols": 5,
+          "worst_symbol_closed_trade_drawdown_pct": 15.387755615200005
+        },
+        "candidate_recovery_fixed": {
+          "closed": 11,
+          "orders": 106,
+          "expectancy_pct": 3.622145454545455,
+          "positive_symbols": 4,
+          "worst_symbol_closed_trade_drawdown_pct": 12.111099999999997
+        }
+      }
+    }
+  }
+}

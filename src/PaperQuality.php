@@ -20,6 +20,7 @@ final class PaperQuality
         }
         $last=$completed===[]?null:end($completed)['available_at'];
         $reasons=[];$warnings=[];
+        if(empty($source['sha256'])) $reasons[]='missing_source';
         if(count($completed)<60) $reasons[]='insufficient_history';
         if($last!==$session) $reasons[]='missing_session';
         if($recentInvalid!==[]) $reasons[]='invalid_recent_ohlcv';

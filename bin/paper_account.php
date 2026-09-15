@@ -12,6 +12,7 @@ if(empty($o['config']) || empty($o['data'])) throw new InvalidArgumentException(
 $config=json_decode(file_get_contents($o['config']),true,512,JSON_THROW_ON_ERROR);
 if(!preg_match('/^[a-z0-9_-]{1,64}$/',$config['id']??'')) throw new InvalidArgumentException('Invalid account ID');
 $mode=$o['mode']??'forward';
+if(!in_array($mode,['forward','replay'],true)) throw new InvalidArgumentException('Invalid mode');
 $directory=getenv('PAPER_STATE_DIR')?:dirname(__DIR__,2).'/stock-personal-paper';
 $path=$directory.'/'.$config['id'].'-'.$mode.'.json';
 $data=rtrim($o['data'],'/');$now=time();
@@ -19,6 +20,7 @@ $manifest=json_decode(file_get_contents($data.'/sources.json'),true,512,JSON_THR
 $sources=[];foreach($manifest as $source)$sources[$source['symbol']]=$source;
 $raw=[];$sessions=[];$completed=[];$cutoffs=[];$inputFiles=[];
 foreach($config['symbols'] as $symbol=>$sector) {
+    if(!preg_match('/^[A-Z0-9][A-Z0-9.=-]{0,24}$/',$symbol)) throw new InvalidArgumentException('Invalid symbol');
     $file=$data.'/'.$symbol.'.json';
     if(!isset($sources[$symbol]['sha256']) || !is_file($file)) {$raw[$symbol]=[];$completed[$symbol]=[];continue;}
     if(hash_file('sha256',$file)!==$sources[$symbol]['sha256']) throw new RuntimeException('Source hash mismatch: '.$symbol);
@@ -59,6 +61,17 @@ $result=$journal->transact(function(&$s,$emit)use($config,$mode,$version,$config
     if($s['version']!==$version || $s['config_hash']!==$configHash || $s['mode']!==$mode) throw new RuntimeException('Pinned version/config changed; use a new account ID');
     if(!empty($s['halted'])) throw new RuntimeException('Account halted after a historical data revision; review journal and use a new account ID');
     foreach($inputFiles as $hash=>$bytes) PaperJournal::archive($directory.'/inputs',$hash,$bytes);
+    // Keep the original history when a provider's rolling window drops its oldest bars.
+    foreach($config['symbols'] as $symbol=>$sector) {
+        $merged=[];
+        foreach(($s['history'][$symbol]??[]) as $b) $merged[$b['available_at']]=$b;
+        foreach($raw[$symbol] as $b) {
+            if($b['available_at']<=($cutoffs[$symbol]??0)) $merged[$b['available_at']]=$b;
+        }
+        ksort($merged,SORT_NUMERIC);$raw[$symbol]=array_values($merged);
+        if($raw[$symbol]!==[]) $cutoffs[$symbol]=max($cutoffs[$symbol]??0,end($raw[$symbol])['available_at']);
+        $completed[$symbol]=CandleClock::completed($raw[$symbol],$symbol,$cutoffs[$symbol]??0);
+    }
     $pastRaw=function(string $symbol,int $date)use($raw,$cutoffs):array {
         return array_values(array_filter($raw[$symbol],fn($b)=>CandleClock::closeTime($b,$symbol)<=min($date,$cutoffs[$symbol]??0)));
     };
@@ -71,6 +84,7 @@ $result=$journal->transact(function(&$s,$emit)use($config,$mode,$version,$config
             return;
         }
     }
+    $s['history']=$raw;
     $first=$s['last_session']===0;
     foreach($dates as $date) {
         if($date<=$s['last_session'] || ($first && $mode==='forward' && $date!==$latest)) continue;

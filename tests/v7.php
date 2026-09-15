@@ -55,10 +55,10 @@ $missing=$fixture($days[2]+86400,false);$missing['AA']['quality']['can_simulate'
 PaperPortfolio::advance($forward,$days[2]+86400,[],$missing,$emit);
 check(PaperJournal::encode($forward['active'])===$activeBeforeMissing,'Missing bars cannot mutate another position through shared references');
 check(end($forward['equity'])['drawdown']===null && count(end($forward['equity'])['stale_positions'])===2,'Missing position marks produce estimated equity, not measured drawdown');
-$q=PaperQuality::inspect($trendBars,'005930.KS',end($trendBars)['available_at'],[]);
+$q=PaperQuality::inspect($trendBars,'005930.KS',end($trendBars)['available_at'],['sha256'=>'fixture']);
 check($q['can_simulate'] && in_array('corporate_action_adjustment_unverified',$q['warnings'],true),'Adjustment uncertainty is preserved as a warning');
 $bad=$trendBars;$bad[count($bad)-1]['high']=1;
-check(!PaperQuality::inspect($bad,'005930.KS',end($trendBars)['available_at'],[])['can_simulate'],'Recent invalid candle blocks simulated trading');
+check(!PaperQuality::inspect($bad,'005930.KS',end($trendBars)['available_at'],['sha256'=>'fixture'])['can_simulate'],'Recent invalid candle blocks simulated trading');
 $dir=sys_get_temp_dir().'/paper-test-'.bin2hex(random_bytes(5));$file=$dir.'/account.json';
 $archive=PaperJournal::archive($dir.'/inputs',hash('sha256','[]'),'[]');
 check(file_get_contents($archive)==='[]','Source input is archived by content hash');

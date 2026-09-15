@@ -15,6 +15,16 @@ with tempfile.TemporaryDirectory() as tmp:
     tmp=pathlib.Path(tmp);source=tmp/"source";shutil.copytree("data/research",source)
     target=tmp/"state";target.mkdir();(target/"paper-us-replay.json").write_bytes(before)
     bars=json.loads((source/"MU.json").read_text())
+    # A rolling-window truncation must not erase old input or halt the account.
+    cropped=json.dumps(bars[10:]).encode()
+    (source/"MU.json").write_bytes(cropped)
+    meta=json.loads((source/"sources.json").read_text())
+    for m in meta:
+        if m["symbol"]=="MU":m["sha256"]=hashlib.sha256(cropped).hexdigest()
+    (source/"sources.json").write_text(json.dumps(meta))
+    env=dict(os.environ,PAPER_STATE_DIR=str(target))
+    subprocess.run(["php","bin/paper_account.php","--config=config/paper-us.json","--data="+str(source),"--mode=replay"],env=env,check=True)
+    assert (target/"paper-us-replay.json").read_bytes()==before,"Rolling window changed frozen history"
     bars[0]["volume"]+=1
     raw=json.dumps(bars).encode();(source/"MU.json").write_bytes(raw)
     meta=json.loads((source/"sources.json").read_text())

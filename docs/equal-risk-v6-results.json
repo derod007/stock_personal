@@ -1,0 +1,942 @@
+{
+  "implementation_commit": "6b3412dd421c364c7ca2795facaa4df40fa65f53",
+  "frozen_source_run": 34879718710,
+  "crosscheck": {
+    "cases": [
+      {
+        "adjustment_factor": 0.9723842655908096,
+        "date": "2023-02-02",
+        "fresh_yahoo": {
+          "close": 91400,
+          "high": 94900,
+          "low": 92700,
+          "open": 94900
+        },
+        "fresh_yahoo_valid": false,
+        "frozen": {
+          "close": 91400,
+          "high": 94900,
+          "low": 92700,
+          "open": 94900
+        },
+        "naver": {
+          "close": 93400,
+          "high": 94900,
+          "low": 92700,
+          "open": 94900
+        },
+        "naver_valid": true,
+        "provenance": {
+          "adjustment_note": "adjclose/quote-close is observed only; no OHLC conversion or adjustment certification",
+          "events": {
+            "dividends": {
+              "1640736000": {
+                "amount": 1540,
+                "date": 1640736000
+              },
+              "1648598400": {
+                "amount": 300,
+                "date": 1648598400
+              },
+              "1656460800": {
+                "amount": 300,
+                "date": 1656460800
+              },
+              "1664409600": {
+                "amount": 300,
+                "date": 1664409600
+              },
+              "1672185600": {
+                "amount": 300,
+                "date": 1672185600
+              },
+              "1680134400": {
+                "amount": 300,
+                "date": 1680134400
+              },
+              "1687996800": {
+                "amount": 300,
+                "date": 1687996800
+              },
+              "1695686400": {
+                "amount": 300,
+                "date": 1695686400
+              },
+              "1703635200": {
+                "amount": 300,
+                "date": 1703635200
+              },
+              "1711584000": {
+                "amount": 300,
+                "date": 1711584000
+              },
+              "1719446400": {
+                "amount": 300,
+                "date": 1719446400
+              },
+              "1727395200": {
+                "amount": 300,
+                "date": 1727395200
+              },
+              "1740614400": {
+                "amount": 1304,
+                "date": 1740614400
+              },
+              "1748476800": {
+                "amount": 375,
+                "date": 1748476800
+              },
+              "1756339200": {
+                "amount": 375,
+                "date": 1756339200
+              },
+              "1764201600": {
+                "amount": 375,
+                "date": 1764201600
+              },
+              "1772064000": {
+                "amount": 1875,
+                "date": 1772064000
+              },
+              "1779926400": {
+                "amount": 375,
+                "date": 1779926400
+              },
+              "1787875200": {
+                "amount": 375,
+                "date": 1787875200
+              }
+            }
+          },
+          "naver": {
+            "fetched_at": "2026-09-15T02:21:29.502108+00:00",
+            "file": "data/research/crosscheck/000660.KS-naver.xml",
+            "sha256": "03326ee13661e6e179e506ead2fad48008b31d33971d38590faf49b73effadec",
+            "url": "https://fchart.stock.naver.com/sise.nhn?symbol=000660&timeframe=day&count=1600&requestType=0"
+          },
+          "yahoo": {
+            "fetched_at": "2026-09-15T02:21:28.188475+00:00",
+            "file": "data/research/crosscheck/000660.KS-yahoo.json",
+            "sha256": "89c2c01b1a82a1956b63f6d4d3c86bc1a9462216b2adf68dac831ee98c6f438e",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/000660.KS?range=5y&interval=1d&events=div%2Csplits"
+          }
+        },
+        "providers_agree": false,
+        "status": "unresolved_difference",
+        "symbol": "000660.KS"
+      },
+      {
+        "adjustment_factor": 0.9723841708377239,
+        "date": "2023-02-09",
+        "fresh_yahoo": {
+          "close": 94900,
+          "high": 94800,
+          "low": 92600,
+          "open": 94800
+        },
+        "fresh_yahoo_valid": false,
+        "frozen": {
+          "close": 94900,
+          "high": 94800,
+          "low": 92600,
+          "open": 94800
+        },
+        "naver": {
+          "close": 94400,
+          "high": 94800,
+          "low": 92600,
+          "open": 94800
+        },
+        "naver_valid": true,
+        "provenance": {
+          "adjustment_note": "adjclose/quote-close is observed only; no OHLC conversion or adjustment certification",
+          "events": {
+            "dividends": {
+              "1640736000": {
+                "amount": 1540,
+                "date": 1640736000
+              },
+              "1648598400": {
+                "amount": 300,
+                "date": 1648598400
+              },
+              "1656460800": {
+                "amount": 300,
+                "date": 1656460800
+              },
+              "1664409600": {
+                "amount": 300,
+                "date": 1664409600
+              },
+              "1672185600": {
+                "amount": 300,
+                "date": 1672185600
+              },
+              "1680134400": {
+                "amount": 300,
+                "date": 1680134400
+              },
+              "1687996800": {
+                "amount": 300,
+                "date": 1687996800
+              },
+              "1695686400": {
+                "amount": 300,
+                "date": 1695686400
+              },
+              "1703635200": {
+                "amount": 300,
+                "date": 1703635200
+              },
+              "1711584000": {
+                "amount": 300,
+                "date": 1711584000
+              },
+              "1719446400": {
+                "amount": 300,
+                "date": 1719446400
+              },
+              "1727395200": {
+                "amount": 300,
+                "date": 1727395200
+              },
+              "1740614400": {
+                "amount": 1304,
+                "date": 1740614400
+              },
+              "1748476800": {
+                "amount": 375,
+                "date": 1748476800
+              },
+              "1756339200": {
+                "amount": 375,
+                "date": 1756339200
+              },
+              "1764201600": {
+                "amount": 375,
+                "date": 1764201600
+              },
+              "1772064000": {
+                "amount": 1875,
+                "date": 1772064000
+              },
+              "1779926400": {
+                "amount": 375,
+                "date": 1779926400
+              },
+              "1787875200": {
+                "amount": 375,
+                "date": 1787875200
+              }
+            }
+          },
+          "naver": {
+            "fetched_at": "2026-09-15T02:21:29.502108+00:00",
+            "file": "data/research/crosscheck/000660.KS-naver.xml",
+            "sha256": "03326ee13661e6e179e506ead2fad48008b31d33971d38590faf49b73effadec",
+            "url": "https://fchart.stock.naver.com/sise.nhn?symbol=000660&timeframe=day&count=1600&requestType=0"
+          },
+          "yahoo": {
+            "fetched_at": "2026-09-15T02:21:28.188475+00:00",
+            "file": "data/research/crosscheck/000660.KS-yahoo.json",
+            "sha256": "89c2c01b1a82a1956b63f6d4d3c86bc1a9462216b2adf68dac831ee98c6f438e",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/000660.KS?range=5y&interval=1d&events=div%2Csplits"
+          }
+        },
+        "providers_agree": false,
+        "status": "unresolved_difference",
+        "symbol": "000660.KS"
+      },
+      {
+        "adjustment_factor": 0.9874438004032258,
+        "date": "2024-10-14",
+        "fresh_yahoo": {
+          "close": 186000,
+          "high": 192300,
+          "low": 186900,
+          "open": 186900
+        },
+        "fresh_yahoo_valid": false,
+        "frozen": {
+          "close": 186000,
+          "high": 192300,
+          "low": 186900,
+          "open": 186900
+        },
+        "naver": {
+          "close": 187500,
+          "high": 192300,
+          "low": 186900,
+          "open": 186900
+        },
+        "naver_valid": true,
+        "provenance": {
+          "adjustment_note": "adjclose/quote-close is observed only; no OHLC conversion or adjustment certification",
+          "events": {
+            "dividends": {
+              "1640736000": {
+                "amount": 1540,
+                "date": 1640736000
+              },
+              "1648598400": {
+                "amount": 300,
+                "date": 1648598400
+              },
+              "1656460800": {
+                "amount": 300,
+                "date": 1656460800
+              },
+              "1664409600": {
+                "amount": 300,
+                "date": 1664409600
+              },
+              "1672185600": {
+                "amount": 300,
+                "date": 1672185600
+              },
+              "1680134400": {
+                "amount": 300,
+                "date": 1680134400
+              },
+              "1687996800": {
+                "amount": 300,
+                "date": 1687996800
+              },
+              "1695686400": {
+                "amount": 300,
+                "date": 1695686400
+              },
+              "1703635200": {
+                "amount": 300,
+                "date": 1703635200
+              },
+              "1711584000": {
+                "amount": 300,
+                "date": 1711584000
+              },
+              "1719446400": {
+                "amount": 300,
+                "date": 1719446400
+              },
+              "1727395200": {
+                "amount": 300,
+                "date": 1727395200
+              },
+              "1740614400": {
+                "amount": 1304,
+                "date": 1740614400
+              },
+              "1748476800": {
+                "amount": 375,
+                "date": 1748476800
+              },
+              "1756339200": {
+                "amount": 375,
+                "date": 1756339200
+              },
+              "1764201600": {
+                "amount": 375,
+                "date": 1764201600
+              },
+              "1772064000": {
+                "amount": 1875,
+                "date": 1772064000
+              },
+              "1779926400": {
+                "amount": 375,
+                "date": 1779926400
+              },
+              "1787875200": {
+                "amount": 375,
+                "date": 1787875200
+              }
+            }
+          },
+          "naver": {
+            "fetched_at": "2026-09-15T02:21:29.502108+00:00",
+            "file": "data/research/crosscheck/000660.KS-naver.xml",
+            "sha256": "03326ee13661e6e179e506ead2fad48008b31d33971d38590faf49b73effadec",
+            "url": "https://fchart.stock.naver.com/sise.nhn?symbol=000660&timeframe=day&count=1600&requestType=0"
+          },
+          "yahoo": {
+            "fetched_at": "2026-09-15T02:21:28.188475+00:00",
+            "file": "data/research/crosscheck/000660.KS-yahoo.json",
+            "sha256": "89c2c01b1a82a1956b63f6d4d3c86bc1a9462216b2adf68dac831ee98c6f438e",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/000660.KS?range=5y&interval=1d&events=div%2Csplits"
+          }
+        },
+        "providers_agree": false,
+        "status": "unresolved_difference",
+        "symbol": "000660.KS"
+      },
+      {
+        "adjustment_factor": 0.8585387350299402,
+        "date": "2023-02-01",
+        "fresh_yahoo": {
+          "close": 167000,
+          "high": 171500,
+          "low": 168700,
+          "open": 169200
+        },
+        "fresh_yahoo_valid": false,
+        "frozen": {
+          "close": 167000,
+          "high": 171500,
+          "low": 168700,
+          "open": 169200
+        },
+        "naver": {
+          "close": 170000,
+          "high": 171500,
+          "low": 168700,
+          "open": 169200
+        },
+        "naver_valid": true,
+        "provenance": {
+          "adjustment_note": "adjclose/quote-close is observed only; no OHLC conversion or adjustment certification",
+          "events": {
+            "dividends": {
+              "1640736000": {
+                "amount": 4000,
+                "date": 1640736000
+              },
+              "1656460800": {
+                "amount": 1000,
+                "date": 1656460800
+              },
+              "1672185600": {
+                "amount": 6000,
+                "date": 1672185600
+              },
+              "1687996800": {
+                "amount": 1500,
+                "date": 1687996800
+              },
+              "1695686400": {
+                "amount": 1500,
+                "date": 1695686400
+              },
+              "1709078400": {
+                "amount": 8400,
+                "date": 1709078400
+              },
+              "1711584000": {
+                "amount": 2000,
+                "date": 1711584000
+              },
+              "1719446400": {
+                "amount": 2000,
+                "date": 1719446400
+              },
+              "1727395200": {
+                "amount": 2000,
+                "date": 1727395200
+              },
+              "1740614400": {
+                "amount": 6000,
+                "date": 1740614400
+              },
+              "1748476800": {
+                "amount": 2500,
+                "date": 1748476800
+              },
+              "1756339200": {
+                "amount": 2500,
+                "date": 1756339200
+              },
+              "1764201600": {
+                "amount": 2500,
+                "date": 1764201600
+              },
+              "1772064000": {
+                "amount": 2500,
+                "date": 1772064000
+              },
+              "1779926400": {
+                "amount": 2500,
+                "date": 1779926400
+              },
+              "1787875200": {
+                "amount": 2500,
+                "date": 1787875200
+              }
+            }
+          },
+          "naver": {
+            "fetched_at": "2026-09-15T02:21:30.672711+00:00",
+            "file": "data/research/crosscheck/005380.KS-naver.xml",
+            "sha256": "c2642ac790f5aff113723abe066127c764d189455d4bc7c542784cc2cd19dcb5",
+            "url": "https://fchart.stock.naver.com/sise.nhn?symbol=005380&timeframe=day&count=1600&requestType=0"
+          },
+          "yahoo": {
+            "fetched_at": "2026-09-15T02:21:29.682838+00:00",
+            "file": "data/research/crosscheck/005380.KS-yahoo.json",
+            "sha256": "ad7c0babca78625d92685bbcbd15de99c7fbd2969f9b8858397c602749a67642",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/005380.KS?range=5y&interval=1d&events=div%2Csplits"
+          }
+        },
+        "providers_agree": false,
+        "status": "unresolved_difference",
+        "symbol": "005380.KS"
+      },
+      {
+        "adjustment_factor": 0.8716136666666666,
+        "date": "2024-01-15",
+        "fresh_yahoo": {
+          "close": 187500,
+          "high": 187200,
+          "low": 185800,
+          "open": 186000
+        },
+        "fresh_yahoo_valid": false,
+        "frozen": {
+          "close": 187500,
+          "high": 187200,
+          "low": 185800,
+          "open": 186000
+        },
+        "naver": {
+          "close": 187500,
+          "high": 188600,
+          "low": 185800,
+          "open": 186000
+        },
+        "naver_valid": true,
+        "provenance": {
+          "adjustment_note": "adjclose/quote-close is observed only; no OHLC conversion or adjustment certification",
+          "events": {
+            "dividends": {
+              "1640736000": {
+                "amount": 4000,
+                "date": 1640736000
+              },
+              "1656460800": {
+                "amount": 1000,
+                "date": 1656460800
+              },
+              "1672185600": {
+                "amount": 6000,
+                "date": 1672185600
+              },
+              "1687996800": {
+                "amount": 1500,
+                "date": 1687996800
+              },
+              "1695686400": {
+                "amount": 1500,
+                "date": 1695686400
+              },
+              "1709078400": {
+                "amount": 8400,
+                "date": 1709078400
+              },
+              "1711584000": {
+                "amount": 2000,
+                "date": 1711584000
+              },
+              "1719446400": {
+                "amount": 2000,
+                "date": 1719446400
+              },
+              "1727395200": {
+                "amount": 2000,
+                "date": 1727395200
+              },
+              "1740614400": {
+                "amount": 6000,
+                "date": 1740614400
+              },
+              "1748476800": {
+                "amount": 2500,
+                "date": 1748476800
+              },
+              "1756339200": {
+                "amount": 2500,
+                "date": 1756339200
+              },
+              "1764201600": {
+                "amount": 2500,
+                "date": 1764201600
+              },
+              "1772064000": {
+                "amount": 2500,
+                "date": 1772064000
+              },
+              "1779926400": {
+                "amount": 2500,
+                "date": 1779926400
+              },
+              "1787875200": {
+                "amount": 2500,
+                "date": 1787875200
+              }
+            }
+          },
+          "naver": {
+            "fetched_at": "2026-09-15T02:21:30.672711+00:00",
+            "file": "data/research/crosscheck/005380.KS-naver.xml",
+            "sha256": "c2642ac790f5aff113723abe066127c764d189455d4bc7c542784cc2cd19dcb5",
+            "url": "https://fchart.stock.naver.com/sise.nhn?symbol=005380&timeframe=day&count=1600&requestType=0"
+          },
+          "yahoo": {
+            "fetched_at": "2026-09-15T02:21:29.682838+00:00",
+            "file": "data/research/crosscheck/005380.KS-yahoo.json",
+            "sha256": "ad7c0babca78625d92685bbcbd15de99c7fbd2969f9b8858397c602749a67642",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/005380.KS?range=5y&interval=1d&events=div%2Csplits"
+          }
+        },
+        "providers_agree": false,
+        "status": "unresolved_difference",
+        "symbol": "005380.KS"
+      },
+      {
+        "adjustment_factor": 0.9691798851180439,
+        "date": "2024-10-14",
+        "fresh_yahoo": {
+          "close": 59300,
+          "high": 61200,
+          "low": 59400,
+          "open": 59500
+        },
+        "fresh_yahoo_valid": false,
+        "frozen": {
+          "close": 59300,
+          "high": 61200,
+          "low": 59400,
+          "open": 59500
+        },
+        "naver": {
+          "close": 60800,
+          "high": 61200,
+          "low": 59400,
+          "open": 59500
+        },
+        "naver_valid": true,
+        "provenance": {
+          "adjustment_note": "adjclose/quote-close is observed only; no OHLC conversion or adjustment certification",
+          "events": {
+            "dividends": {
+              "1632873600": {
+                "amount": 361,
+                "date": 1632873600
+              },
+              "1640736000": {
+                "amount": 361,
+                "date": 1640736000
+              },
+              "1648598400": {
+                "amount": 361,
+                "date": 1648598400
+              },
+              "1656460800": {
+                "amount": 361,
+                "date": 1656460800
+              },
+              "1664409600": {
+                "amount": 361,
+                "date": 1664409600
+              },
+              "1672185600": {
+                "amount": 361,
+                "date": 1672185600
+              },
+              "1680134400": {
+                "amount": 361,
+                "date": 1680134400
+              },
+              "1687996800": {
+                "amount": 361,
+                "date": 1687996800
+              },
+              "1695686400": {
+                "amount": 361,
+                "date": 1695686400
+              },
+              "1703635200": {
+                "amount": 361,
+                "date": 1703635200
+              },
+              "1711584000": {
+                "amount": 361,
+                "date": 1711584000
+              },
+              "1719446400": {
+                "amount": 361,
+                "date": 1719446400
+              },
+              "1727395200": {
+                "amount": 361,
+                "date": 1727395200
+              },
+              "1735257600": {
+                "amount": 363,
+                "date": 1735257600
+              },
+              "1743120000": {
+                "amount": 365,
+                "date": 1743120000
+              },
+              "1750982400": {
+                "amount": 367,
+                "date": 1750982400
+              },
+              "1759104000": {
+                "amount": 370,
+                "date": 1759104000
+              },
+              "1766966400": {
+                "amount": 566,
+                "date": 1766966400
+              },
+              "1774828800": {
+                "amount": 372,
+                "date": 1774828800
+              },
+              "1782691200": {
+                "amount": 374,
+                "date": 1782691200
+              }
+            }
+          },
+          "naver": {
+            "fetched_at": "2026-09-15T02:21:31.722056+00:00",
+            "file": "data/research/crosscheck/005930.KS-naver.xml",
+            "sha256": "81f00e1deea2708fbd3f326f11b4aca2313f609a0f2cff7b08474213712835d4",
+            "url": "https://fchart.stock.naver.com/sise.nhn?symbol=005930&timeframe=day&count=1600&requestType=0"
+          },
+          "yahoo": {
+            "fetched_at": "2026-09-15T02:21:30.872505+00:00",
+            "file": "data/research/crosscheck/005930.KS-yahoo.json",
+            "sha256": "832f96615e8b04694bda1466de016b0d67fae4f76822d2f39ef4e51069988175",
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/005930.KS?range=5y&interval=1d&events=div%2Csplits"
+          }
+        },
+        "providers_agree": false,
+        "status": "unresolved_difference",
+        "symbol": "005930.KS"
+      }
+    ],
+    "corporate_action_certification": false,
+    "counts": {
+      "two_providers_agree_on_valid_ohlc": 0,
+      "unavailable": 0,
+      "unresolved_difference": 6
+    },
+    "frozen_data_changed": false
+  },
+  "results": [
+    {
+      "candidate_counts": {
+        "development": {
+          "common_capital_rejection": 19,
+          "eligible_candidate_days": 937
+        },
+        "holdout": {
+          "common_capital_rejection": 1,
+          "eligible_candidate_days": 560
+        },
+        "validation": {
+          "common_capital_rejection": 6,
+          "eligible_candidate_days": 361
+        }
+      },
+      "errors": [],
+      "groups": {
+        "development": {
+          "atr_floor_1": {
+            "closed": 81,
+            "gap_losses_over_1r": 7,
+            "mean_net_r": -0.19410820139740598,
+            "orders": 302,
+            "positive_symbols": 2,
+            "win_rate": 0.2962962962962963
+          },
+          "skip_under_1_atr": {
+            "closed": 44,
+            "gap_losses_over_1r": 2,
+            "mean_net_r": -0.16383815215250944,
+            "orders": 180,
+            "positive_symbols": 2,
+            "win_rate": 0.22727272727272727
+          },
+          "structure": {
+            "closed": 83,
+            "gap_losses_over_1r": 6,
+            "mean_net_r": -0.22386787451955648,
+            "orders": 307,
+            "positive_symbols": 2,
+            "win_rate": 0.2289156626506024
+          }
+        },
+        "holdout": {
+          "atr_floor_1": {
+            "closed": 35,
+            "gap_losses_over_1r": 3,
+            "mean_net_r": 0.3546373753305204,
+            "orders": 164,
+            "positive_symbols": 4,
+            "win_rate": 0.45714285714285713
+          },
+          "skip_under_1_atr": {
+            "closed": 27,
+            "gap_losses_over_1r": 1,
+            "mean_net_r": 0.2861150517095555,
+            "orders": 112,
+            "positive_symbols": 4,
+            "win_rate": 0.4074074074074074
+          },
+          "structure": {
+            "closed": 35,
+            "gap_losses_over_1r": 3,
+            "mean_net_r": 0.49009566835140267,
+            "orders": 164,
+            "positive_symbols": 6,
+            "win_rate": 0.45714285714285713
+          }
+        },
+        "validation": {
+          "atr_floor_1": {
+            "closed": 19,
+            "gap_losses_over_1r": 2,
+            "mean_net_r": -0.029799432258535014,
+            "orders": 107,
+            "positive_symbols": 3,
+            "win_rate": 0.3684210526315789
+          },
+          "skip_under_1_atr": {
+            "closed": 16,
+            "gap_losses_over_1r": 3,
+            "mean_net_r": -0.3330715309993326,
+            "orders": 74,
+            "positive_symbols": 3,
+            "win_rate": 0.25
+          },
+          "structure": {
+            "closed": 21,
+            "gap_losses_over_1r": 2,
+            "mean_net_r": -0.31433812487271695,
+            "orders": 110,
+            "positive_symbols": 2,
+            "win_rate": 0.23809523809523808
+          }
+        }
+      },
+      "production_change": false,
+      "root": "data/research",
+      "successful_symbols": [
+        "MU",
+        "AAPL",
+        "MSFT",
+        "JPM",
+        "XOM",
+        "005930.KS",
+        "000660.KS",
+        "005380.KS"
+      ]
+    },
+    {
+      "candidate_counts": {
+        "development": {
+          "common_capital_rejection": 25,
+          "eligible_candidate_days": 365
+        },
+        "holdout": {
+          "common_capital_rejection": 1,
+          "eligible_candidate_days": 174
+        },
+        "validation": {
+          "common_capital_rejection": 3,
+          "eligible_candidate_days": 168
+        }
+      },
+      "errors": [],
+      "groups": {
+        "development": {
+          "atr_floor_1": {
+            "closed": 32,
+            "gap_losses_over_1r": 2,
+            "mean_net_r": 0.38894944614315535,
+            "orders": 120,
+            "positive_symbols": 3,
+            "win_rate": 0.5
+          },
+          "skip_under_1_atr": {
+            "closed": 17,
+            "gap_losses_over_1r": 2,
+            "mean_net_r": -0.18827321986789367,
+            "orders": 81,
+            "positive_symbols": 1,
+            "win_rate": 0.23529411764705882
+          },
+          "structure": {
+            "closed": 32,
+            "gap_losses_over_1r": 3,
+            "mean_net_r": 0.1111681817756846,
+            "orders": 121,
+            "positive_symbols": 2,
+            "win_rate": 0.375
+          }
+        },
+        "holdout": {
+          "atr_floor_1": {
+            "closed": 16,
+            "gap_losses_over_1r": 1,
+            "mean_net_r": 0.2405146299859533,
+            "orders": 55,
+            "positive_symbols": 2,
+            "win_rate": 0.375
+          },
+          "skip_under_1_atr": {
+            "closed": 11,
+            "gap_losses_over_1r": 1,
+            "mean_net_r": 0.14553638384990852,
+            "orders": 39,
+            "positive_symbols": 1,
+            "win_rate": 0.36363636363636365
+          },
+          "structure": {
+            "closed": 16,
+            "gap_losses_over_1r": 1,
+            "mean_net_r": 0.2915271664064668,
+            "orders": 55,
+            "positive_symbols": 2,
+            "win_rate": 0.375
+          }
+        },
+        "validation": {
+          "atr_floor_1": {
+            "closed": 12,
+            "gap_losses_over_1r": 0,
+            "mean_net_r": -0.09772661939992718,
+            "orders": 55,
+            "positive_symbols": 1,
+            "win_rate": 0.3333333333333333
+          },
+          "skip_under_1_atr": {
+            "closed": 5,
+            "gap_losses_over_1r": 0,
+            "mean_net_r": 0.11580203927995283,
+            "orders": 33,
+            "positive_symbols": 1,
+            "win_rate": 0.4
+          },
+          "structure": {
+            "closed": 12,
+            "gap_losses_over_1r": 1,
+            "mean_net_r": -0.00968840289584529,
+            "orders": 55,
+            "positive_symbols": 2,
+            "win_rate": 0.3333333333333333
+          }
+        }
+      },
+      "production_change": false,
+      "root": "data/risk-new-symbols",
+      "successful_symbols": [
+        "GOOG",
+        "COST",
+        "JNJ"
+      ]
+    }
+  ]
+}

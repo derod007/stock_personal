@@ -1,0 +1,37 @@
+name: Equal risk stop comparison
+on:
+  push:
+    branches: ['codex/equal-risk-v6']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  research:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - run: php tests/v6.php
+      - run: python3 -m unittest discover -s tests -p 'test_*.py'
+      - uses: actions/download-artifact@v4
+        with:
+          name: profitability-research
+          run-id: 34879718710
+          github-token: ${{ github.token }}
+          path: data/research
+      - name: Crosscheck known invalid prices against two current providers
+        run: python3 bin/crosscheck_prices.py
+      - name: Frozen eight-symbol comparison
+        run: python3 bin/run_risk_stops.py --root=data/research
+      - name: Fetch three previously unused symbols
+        run: python3 bin/fetch_comparison_data.py --years=5 --symbols=GOOG,COST,JNJ --out=data/risk-new-symbols
+      - name: Supplemental comparison without retuning
+        run: python3 bin/run_risk_stops.py --root=data/risk-new-symbols
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: equal-risk-results
+          path: |
+            data/research/
+            data/risk-new-symbols/

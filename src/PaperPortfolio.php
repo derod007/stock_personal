@@ -42,12 +42,16 @@ final class PaperPortfolio
     }
     public static function advance(array &$s,int $session,array $bars,array $snapshots,callable $emit): void
     {
-        if($session<=$s['last_session']) return;
+        if($session<=$s['last_session'] || !empty($s['halted'])) return;
         $cfg=$s['config'];ksort($snapshots);
         // Existing reservations are executed before new close-time signals are considered.
         foreach(array_keys($s['active']) as $symbol) {
             $o=&$s['active'][$symbol];
             if(!isset($bars[$symbol]) || empty($snapshots[$symbol]['quality']['can_simulate'])) {
+                if($o['filled'] && empty($s['halted'])) {
+                    $s['halted']=true;$s['halt_reason']='unpriced_position';
+                    $emit('account_halted',['symbol'=>$symbol,'session'=>$session,'reason'=>'unpriced_position','action'=>'do_not_infer_missing_execution_path']);
+                }
                 if(!$o['filled']) {
                     $emit('order_cancelled',['symbol'=>$symbol,'session'=>$session,'reason'=>'data_quality']);
                     unset($s['active'][$symbol]);unset($o);

@@ -29,7 +29,7 @@ $equity=PaperPortfolio::equity($s);$reserve=PaperPortfolio::reserved($s);$last=$
 ?>
 <h2><?= ph($id) ?> · <?= ph($s['config']['currency']) ?> · <?= $mode==='forward'?'앞으로 기록한 추천':'과거 재현' ?></h2>
 <p>마지막 평가: <?= ph(pt($s['last_session'])) ?> KST · 전략 버전 <?= ph(substr($s['version'],0,12)) ?></p>
-<?php if(!empty($s['halted'])): ?><p><strong>과거 가격 변경이 발견되어 계좌 처리를 중단했습니다. 이전 추천은 보존됐습니다.</strong></p><?php endif ?>
+<?php if(!empty($s['halted'])): ?><p><strong><?= ($s['halt_reason']??'historical_revision')==='unpriced_position'?'보유 종목의 가격 경로를 확인할 수 없어 계좌 처리를 중단했습니다. 누락 기간의 체결을 추측하지 않습니다.':'과거 가격 변경이 발견되어 계좌 처리를 중단했습니다. 이전 추천은 보존됐습니다.' ?></strong></p><?php endif ?>
 <?php if(!empty($last['stale_positions'])): ?><p><strong>최신 가격을 확인하지 못한 보유 종목: <?= ph(implode(', ',$last['stale_positions'])) ?>. 자산은 마지막 유효 가격 기준 추정치입니다.</strong></p><?php endif ?>
 <table><tbody>
 <tr><th>현금 / 주문 예약금</th><td><?= ph(number_format($s['cash'],2)) ?> / <?= ph(number_format($reserve,2)) ?></td></tr>

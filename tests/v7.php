@@ -53,6 +53,7 @@ check($catchup['active']===[],'Retrospective catchup signal cannot create an ord
 $activeBeforeMissing=PaperJournal::encode($forward['active']);
 $missing=$fixture($days[2]+86400,false);$missing['AA']['quality']['can_simulate']=false;
 PaperPortfolio::advance($forward,$days[2]+86400,[],$missing,$emit);
+check(!empty($forward['halted']),'Unobservable held-position execution halts account rather than resuming across gaps');
 check(PaperJournal::encode($forward['active'])===$activeBeforeMissing,'Missing bars cannot mutate another position through shared references');
 check(end($forward['equity'])['drawdown']===null && count(end($forward['equity'])['stale_positions'])===2,'Missing position marks produce estimated equity, not measured drawdown');
 $q=PaperQuality::inspect($trendBars,'005930.KS',end($trendBars)['available_at'],['sha256'=>'fixture']);

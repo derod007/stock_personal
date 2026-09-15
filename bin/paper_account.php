@@ -59,7 +59,7 @@ $result=$journal->transact(function(&$s,$emit)use($config,$mode,$version,$config
         $emit('account_started',['config'=>$config,'mode'=>$mode,'version'=>$version]);
     }
     if($s['version']!==$version || $s['config_hash']!==$configHash || $s['mode']!==$mode) throw new RuntimeException('Pinned version/config changed; use a new account ID');
-    if(!empty($s['halted'])) throw new RuntimeException('Account halted after a historical data revision; review journal and use a new account ID');
+    if(!empty($s['halted'])) throw new RuntimeException('Account halted after a data revision or unavailable position price; review journal and use a new account ID');
     foreach($inputFiles as $hash=>$bytes) PaperJournal::archive($directory.'/inputs',$hash,$bytes);
     // Keep the original history when a provider's rolling window drops its oldest bars.
     foreach($config['symbols'] as $symbol=>$sector) {
@@ -79,7 +79,7 @@ $result=$journal->transact(function(&$s,$emit)use($config,$mode,$version,$config
         [$symbol,$date]=explode(':',$key);
         $hash=hash('sha256',PaperJournal::encode($pastRaw($symbol,(int)$date)));
         if($hash!==$frozen['input_hash']) {
-            $s['halted']=true;
+            $s['halted']=true;$s['halt_reason']='historical_revision';
             $emit('data_revision',['snapshot'=>$key,'original_hash'=>$frozen['input_hash'],'new_hash'=>$hash,'action'=>'halt_account_without_rewriting_history']);
             return;
         }

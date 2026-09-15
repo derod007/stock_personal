@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 require __DIR__.'/bin/bootstrap.php';
-require __DIR__.'/bin/paper/TradeReview.php';
+require_once __DIR__.'/bin/paper/TradeReview.php';
 use ChartEntryLab\PaperJournal;
 function th(mixed $x): string {return htmlspecialchars((string)$x,ENT_QUOTES,'UTF-8');}
 function tn(mixed $x,int $dec=2): string {return $x===null?'—':number_format((float)$x,$dec);}

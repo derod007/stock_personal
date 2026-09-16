@@ -2622,3 +2622,147 @@ body.is-loading .panel--scan {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Paper account screens share the chart shell */
+.paper-tabs {
+  margin-top: 0.85rem;
+}
+
+.paper-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 0.65rem 0.85rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  background: var(--surface-1);
+}
+
+.paper-filter label {
+  display: grid;
+  gap: 0.35rem;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.paper-filter input,
+.paper-filter select {
+  min-height: 2.6rem;
+  min-width: 10rem;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  background: var(--surface-inset);
+  color: var(--text-primary);
+  font: inherit;
+}
+
+.paper-filter button {
+  min-height: 2.6rem;
+  padding: 0 1rem;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-md);
+  background: var(--accent);
+  color: var(--on-accent);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.paper-filter button:hover {
+  border-color: var(--accent-ink);
+  background: var(--accent-ink);
+  color: var(--surface-0);
+}
+
+.paper-note,
+.paper-lede {
+  margin: 0.75rem 0 0;
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.paper-alert {
+  margin: 0.75rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--danger);
+  border-radius: var(--radius-md);
+  background: var(--danger-fill);
+  color: var(--danger);
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.paper-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+}
+
+.paper-pre {
+  overflow-x: auto;
+  margin: 0.75rem 0 0;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  background: var(--surface-inset);
+  color: var(--text-secondary);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.paper-section-title {
+  margin: 0 0 0.45rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.paper-trade {
+  margin-top: 0.7rem;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+}
+
+.paper-trade summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.paper-trade summary:hover {
+  color: var(--accent-ink);
+}
+
+.paper-trade p {
+  margin: 0.55rem 0 0;
+  color: var(--text-secondary);
+  font-size: 0.84rem;
+}
+
+.paper-kv th {
+  width: 38%;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.paper-empty {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: 0.86rem;
+}
+
+.panel .scan-table-wrap {
+  max-height: none;
+}
+
+.panel .scan-table {
+  min-width: 0;
+}

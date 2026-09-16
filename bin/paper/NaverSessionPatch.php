@@ -26,8 +26,6 @@ final class PaperNaverSessionPatch
             if ($q === null) {
                 continue;
             }
-            $day = (string) ($q['date'] ?? self::barDay($bar));
-            $session = new DateTimeImmutable($day . ' 15:30:00', new DateTimeZone('Asia/Seoul'));
             $bar['open'] = (float) $q['open'];
             $bar['high'] = (float) $q['high'];
             $bar['low'] = (float) $q['low'];
@@ -35,9 +33,6 @@ final class PaperNaverSessionPatch
             if ((int) $q['volume'] > 0) {
                 $bar['volume'] = (int) $q['volume'];
             }
-            $bar['time'] = $session->getTimestamp();
-            $bar['time_kst'] = $session->format('Y-m-d H:i:s');
-            $bar['session'] = 'krx_regular';
             $overlayed++;
         }
         unset($bar);
@@ -71,10 +66,12 @@ final class PaperNaverSessionPatch
             }
             /** @var list<array<string,mixed>> $bars */
             $bars = json_decode((string) file_get_contents($file), true, 512, JSON_THROW_ON_ERROR);
-            $quotes = $naver->recent($symbol, 2, false);
+            $quotes = $naver->recent($symbol, 1, false);
             if ($quotes === []) {
                 throw new RuntimeException('Naver regular-session quotes unavailable for ' . $symbol);
             }
+            krsort($quotes);
+            $quotes = array_slice($quotes, 0, 2, true);
             [$bars, $count] = self::patchBars($bars, $quotes);
             if ($count === 0) {
                 throw new RuntimeException('Naver regular-session overlay matched no bars for ' . $symbol);

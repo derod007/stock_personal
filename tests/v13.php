@@ -25,8 +25,15 @@ $bars = [[
 [$patched, $count] = PaperNaverSessionPatch::patchBars($bars, $quotes);
 v13($count === 1, 'same-day bar overlayed');
 v13($patched[0]['close'] === 105.0 && $patched[0]['volume'] === 123, '본장 OHLC+volume applied');
-v13($patched[0]['session'] === 'krx_regular', 'session tag');
-v13($patched[0]['time_kst'] === '2026-09-15 15:30:00', 'close stamped at 15:30 KST');
+v13($patched[0]['time_kst'] === $day->format('Y-m-d H:i:s'), 'Yahoo timestamp kept');
+$olderDay = new DateTimeImmutable('2026-09-14 09:00:00', new DateTimeZone('Asia/Seoul'));
+$mixed = [
+    ['time' => $olderDay->getTimestamp(), 'time_kst' => $olderDay->format('Y-m-d H:i:s'), 'open' => 8.0, 'high' => 9.0, 'low' => 7.0, 'close' => 8.5, 'volume' => 5],
+    $bars[0],
+];
+$limited = array_slice($quotes, 0, 1, true);
+[$onlyLatest, $latestCount] = PaperNaverSessionPatch::patchBars($mixed, $limited);
+v13($latestCount === 1 && $onlyLatest[0]['close'] === 8.5 && $onlyLatest[1]['close'] === 105.0, 'older bars stay Yahoo when quote window is latest only');
 
 $midnight = new DateTimeImmutable('2026-09-16 00:30:00', new DateTimeZone('Asia/Seoul'));
 $late = [[

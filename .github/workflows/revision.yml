@@ -1,0 +1,12 @@
+name: Historical revision diagnostics
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  revision:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: php -l bin/paper_account.php && php -l paper_revisions.php
+      - run: php tests/revision.php
+      - run: python3 tests/revision_integration.py

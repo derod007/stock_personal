@@ -40,10 +40,8 @@ final class ScanSnapshot
             if (strlen($code) !== 6) {
                 continue;
             }
-            // 등락 비교용은 장중 네이버가. proposal 완료 일봉 종가를 쓰면 마감 전엔 어제와 같아 +0.0%가 된다.
-            $live = $row['naver_price'] ?? null;
-            $chart = $row['price'] ?? null;
-            $price = is_numeric($live) ? (float) $live : (is_numeric($chart) ? (float) $chart : null);
+            $selected = self::comparisonPrice($row);
+            $price = $selected['price'];
             $rows[] = [
                 'code' => $code,
                 'yahoo' => (string) ($row['yahoo'] ?? ''),
@@ -56,6 +54,8 @@ final class ScanSnapshot
                 'lagging_theme' => !empty($row['lagging_theme']),
                 'spike_dump_status' => (string) ($row['spike_dump_status'] ?? 'none'),
                 'price' => $price,
+                'price_source' => $selected['source'],
+                'price_observed_at' => (string) ($report['fetched_at'] ?? ''),
                 'change_pct' => is_numeric($row['change_pct'] ?? null) ? (float) $row['change_pct'] : null,
                 'amount_rank' => $row['amount_rank'] ?? null,
             ];
@@ -104,9 +104,8 @@ final class ScanSnapshot
             $oldPx = is_numeric($old['price'] ?? null) ? (float) $old['price'] : null;
             $newPx = null;
             if (is_array($now)) {
-                // 오늘 쪽은 스냅샷 저장 전이라도 네이버 현재가를 우선해 장중 등락을 본다.
-                $newPx = $now['naver_price'] ?? $now['price'] ?? null;
-                $newPx = is_numeric($newPx) ? (float) $newPx : null;
+                $selected = self::comparisonPrice($now);
+                $newPx = $selected['price'];
             }
             $since = ($oldPx !== null && $newPx !== null && $oldPx > 0)
                 ? (($newPx - $oldPx) / $oldPx) * 100
@@ -124,6 +123,10 @@ final class ScanSnapshot
                 'spike_dump_status' => (string) ($old['spike_dump_status'] ?? 'none'),
                 'yesterday_price' => $oldPx,
                 'today_price' => $newPx,
+                'yesterday_price_source' => $old['price_source'] ?? 'legacy_unknown',
+                'yesterday_price_observed_at' => $old['price_observed_at'] ?? ($prev['fetched_at'] ?? ''),
+                'today_price_source' => is_array($now) ? $selected['source'] : 'unavailable',
+                'today_price_observed_at' => $todayFetchedAt ?? '',
                 'since_scan_pct' => $since !== null ? round($since, 2) : null,
                 'still_in_scan' => $now !== null,
             ];
@@ -183,6 +186,18 @@ final class ScanSnapshot
         }
 
         return null;
+    }
+
+    /** Scan observation time is not the exchange quote timestamp. */
+    private static function comparisonPrice(array $row): array
+    {
+        foreach (['naver_price' => 'naver_scan', 'price' => 'row_price_fallback'] as $key => $source) {
+            $value = $row[$key] ?? null;
+            if (is_numeric($value) && is_finite((float) $value) && (float) $value > 0) {
+                return ['price' => (float) $value, 'source' => $source];
+            }
+        }
+        return ['price' => null, 'source' => 'unavailable'];
     }
 
     private function fileFor(string $day): string

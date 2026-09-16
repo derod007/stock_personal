@@ -40,7 +40,10 @@ final class ScanSnapshot
             if (strlen($code) !== 6) {
                 continue;
             }
-            $price = $row['price'] ?? $row['naver_price'] ?? null;
+            // 등락 비교용은 장중 네이버가. proposal 완료 일봉 종가를 쓰면 마감 전엔 어제와 같아 +0.0%가 된다.
+            $live = $row['naver_price'] ?? null;
+            $chart = $row['price'] ?? null;
+            $price = is_numeric($live) ? (float) $live : (is_numeric($chart) ? (float) $chart : null);
             $rows[] = [
                 'code' => $code,
                 'yahoo' => (string) ($row['yahoo'] ?? ''),
@@ -52,7 +55,7 @@ final class ScanSnapshot
                 'theme_smell_status' => (string) ($row['theme_smell_status'] ?? 'none'),
                 'lagging_theme' => !empty($row['lagging_theme']),
                 'spike_dump_status' => (string) ($row['spike_dump_status'] ?? 'none'),
-                'price' => is_numeric($price) ? (float) $price : null,
+                'price' => $price,
                 'change_pct' => is_numeric($row['change_pct'] ?? null) ? (float) $row['change_pct'] : null,
                 'amount_rank' => $row['amount_rank'] ?? null,
             ];
@@ -101,7 +104,8 @@ final class ScanSnapshot
             $oldPx = is_numeric($old['price'] ?? null) ? (float) $old['price'] : null;
             $newPx = null;
             if (is_array($now)) {
-                $newPx = $now['price'] ?? $now['naver_price'] ?? null;
+                // 오늘 쪽은 스냅샷 저장 전이라도 네이버 현재가를 우선해 장중 등락을 본다.
+                $newPx = $now['naver_price'] ?? $now['price'] ?? null;
                 $newPx = is_numeric($newPx) ? (float) $newPx : null;
             }
             $since = ($oldPx !== null && $newPx !== null && $oldPx > 0)

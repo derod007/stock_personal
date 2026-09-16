@@ -644,8 +644,8 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
             <div class="flow-box">
               <p class="flow-box__title">
                 어제 스캔 → 오늘
-                <?= tip("직전 거래일 스캔 가격 대비 오늘 스캔 현재가입니다.
-어제 진입 후보를 앞에 두고, 움직임이 큰 종목을 보여 줍니다. 추격 신호가 아닙니다.") ?>
+                <?= tip("직전 스캔 당시 네이버 현재가 대비 오늘 스캔 네이버가입니다.
+차트 완료 일봉 종가가 아닙니다. 어제 진입 후보를 앞에 두고, 움직임이 큰 종목을 보여 줍니다. 추격 신호가 아닙니다.") ?>
               </p>
               <p class="flow-spikes">
                 <?= h((string) ($scanReview['date'] ?? '')) ?>

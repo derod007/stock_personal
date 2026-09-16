@@ -18,10 +18,12 @@ class DailyTests(unittest.TestCase):
             calls=[]
             def runner(cmd, **kw):
                 calls.append((cmd,kw))
-                stage='collect' if len(calls)==1 else 'account'
+                script=' '.join(str(part) for part in cmd)
+                stage='collect' if 'fetch_comparison_data.py' in script else (
+                    'naver_session' if 'paper_patch_naver_daily.php' in script else 'account')
                 if failure==stage:
                     raise subprocess.CalledProcessError(3,cmd,stderr='test failure')
-                if len(calls)==2:
+                if stage=='account':
                     return SimpleNamespace(stdout=json.dumps({'account':'test','mode':'forward','last_session':100,'halted':halted}))
                 return SimpleNamespace(returncode=0)
             code=daily.update(config,root/'state',runner)
@@ -44,6 +46,22 @@ class DailyTests(unittest.TestCase):
     def test_halt_is_not_success(self):
         code,r,_=self.exercise(halted=True)
         self.assertEqual(code,2);self.assertEqual(r['status'],'halted')
+    def test_korean_symbols_overlay_naver_before_account(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=pathlib.Path(tmp)
+            config=root/'config.json'
+            config.write_text(json.dumps({'id':'test','symbols':{'005930.KS':'semi'}}))
+            calls=[]
+            def runner(cmd, **kw):
+                calls.append(cmd)
+                if str(cmd[1]).endswith('paper_account.php'):
+                    return SimpleNamespace(stdout=json.dumps({'account':'test','mode':'forward','last_session':100,'halted':False}))
+                return SimpleNamespace(returncode=0)
+            code=daily.update(config,root/'state',runner)
+            self.assertEqual(code,0)
+            self.assertEqual(len(calls),3)
+            self.assertTrue(str(calls[1][1]).endswith('paper_patch_naver_daily.php'))
+            self.assertTrue(str(calls[2][1]).endswith('paper_account.php'))
     def test_atomic_replacement(self):
         with tempfile.TemporaryDirectory() as tmp:
             p=pathlib.Path(tmp)/'runs/a.json'

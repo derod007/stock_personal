@@ -12,10 +12,17 @@ final class PaperStrategyVersion
         foreach($paths as $path){
             if(!preg_match('~^(src|bin)/[A-Za-z0-9_./-]+\.php$~',$path)||str_contains($path,'..'))throw new RuntimeException('Invalid strategy path');
             if(!is_file($root.'/'.$path))throw new RuntimeException('Strategy file missing: '.$path);
-            $hashes[$path]=hash_file('sha256',$root.'/'.$path);
+            $hashes[$path]=self::fileHash($root.'/'.$path);
         }
         return hash('sha256',PaperJournal::encode(['schema'=>1,'files'=>$hashes]));
     }
+    public static function fileHash(string $path): string
+    {
+        $bytes=file_get_contents($path);
+        if($bytes===false)throw new RuntimeException('Cannot read strategy file');
+        return hash('sha256',str_replace("\r\n","\n",$bytes));
+    }
+
     public static function compatible(string $version,string $current,?string $root=null):bool
     {
         if(hash_equals($current,$version))return true;

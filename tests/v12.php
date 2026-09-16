@@ -18,6 +18,8 @@ try {
  $paths=json_decode(file_get_contents($root.'/config/paper-strategy-files.json'),true);
  foreach(array_merge($paths,['config/paper-strategy-files.json','config/paper-legacy-versions.json','src/ScanSnapshot.php']) as $p){$target=$dir.'/'.$p;if(!is_dir(dirname($target)))mkdir(dirname($target),0700,true);copy($root.'/'.$p,$target);}
  vc(PaperStrategyVersion::current($dir)===$current,'copied strategy fingerprint stable');
+ file_put_contents($dir.'/src/AccountPlaybook.php',str_replace("\n","\r\n",file_get_contents($dir.'/src/AccountPlaybook.php')));
+ vc(PaperStrategyVersion::current($dir)===$current,'CRLF does not change fingerprint');
  file_put_contents($dir.'/src/ScanSnapshot.php',"\n// display change",FILE_APPEND);vc(PaperStrategyVersion::current($dir)===$current,'display change excluded');
  file_put_contents($dir.'/src/TradeSimulator.php',"\n// execution change",FILE_APPEND);$changed=PaperStrategyVersion::current($dir);
  vc($changed!==$current && !PaperStrategyVersion::compatible($original['version'],$changed,$dir),'core change cannot use legacy exemption');

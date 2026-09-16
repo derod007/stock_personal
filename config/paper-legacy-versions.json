@@ -1,13 +1,18 @@
 {
   "schema": 1,
   "versions": {
+    "dfd62421f4ed0c0e0e6f03a7394bdd664f9442448ca08d5b254f4845a5318981": {
+      "compatible_strategy": "8cb35d31e62c5bc80d827b2045c620669e2e814dbeb7bb3ff572eebedf4278a7",
+      "verified_source_commit": "local-paper-us-kr-forward",
+      "scope": "Windows all-src digest on the live paper-us/paper-kr accounts; trading files match the LF-normalized scoped hash"
+    },
     "aaeddd9501ec26fbd55183c1fcd7af565a42b8498b3382baad48257875fcf09b": {
-      "compatible_strategy": "a97d2d73779ebf98f9623b1b4630ece2b4757da5cda56d6ff8a0388ec6374d18",
+      "compatible_strategy": "8cb35d31e62c5bc80d827b2045c620669e2e814dbeb7bb3ff572eebedf4278a7",
       "verified_source_commit": "504fe93f59cdd2ef2a150c3328d62762f0346d58",
       "scope": "all-src legacy digest; trading dependencies identical, scan display difference excluded"
     },
     "26d0d0a979bf2f10f9405e24182b2d584cb47ca8112f4fbd1b8a8b7b0c98783c": {
-      "compatible_strategy": "a97d2d73779ebf98f9623b1b4630ece2b4757da5cda56d6ff8a0388ec6374d18",
+      "compatible_strategy": "8cb35d31e62c5bc80d827b2045c620669e2e814dbeb7bb3ff572eebedf4278a7",
       "verified_source_commit": "aa709edbbc74a9d2b797cf7a64cae84da7153bf0",
       "scope": "all-src legacy digest; trading dependencies identical, scan display difference excluded"
     }

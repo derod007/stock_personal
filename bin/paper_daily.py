@@ -43,6 +43,11 @@ def update(config_path, state_dir, runner=subprocess.run):
             runner([sys.executable, str(ROOT / "bin/fetch_comparison_data.py"), "--years=5",
                     "--symbols=" + ",".join(config["symbols"]), "--out=" + tmp],
                    cwd=ROOT, env=env, check=True, timeout=1800)
+            if any(re.fullmatch(r"\d{6}(?:\.(?:KS|KQ))?", str(symbol), re.I) for symbol in config["symbols"]):
+                record["stage"] = "naver_session"
+                save_record(log, record)
+                runner(["php", str(ROOT / "bin/paper_patch_naver_daily.php"), "--dir=" + tmp],
+                       cwd=ROOT, env=env, check=True, timeout=300)
             record["stage"] = "account"
             save_record(log, record)
             result = runner(["php", str(ROOT / "bin/paper_account.php"), "--config=" + str(config_path),

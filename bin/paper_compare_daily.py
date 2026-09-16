@@ -28,7 +28,7 @@ def main():
     r={'started_at':int(time.time()),'finished_at':None,'status':'running','stage':'source'}
     save_record(log,r)
     try:
-        subprocess.run([sys.executable,str(ROOT/'bin/paper_daily.py'),'--config='+str(config)],cwd=ROOT,env=env,check=True,timeout=3700)
+        subprocess.run([sys.executable,str(ROOT/'bin/paper_daily.py'),'--config='+str(config)],cwd=ROOT,env=env,check=True,timeout=4200)
         r['stage']='comparison';save_record(log,r)
         cmd=['php',str(ROOT/'bin/paper_compare.php'),'--source='+account,'--experiment='+a.experiment]
         if a.candidate_ttl:cmd.append('--candidate-ttl='+a.candidate_ttl)

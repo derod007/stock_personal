@@ -27,6 +27,7 @@ $report=PaperDiagnostics::summarize($d['events']??[]);
 <?php foreach($runs['recent'] as $r): ?><tr><td><?= dh(dt($r['started_at']).' / '.dt($r['finished_at']??0)) ?></td><td><?= dh(PaperDiagnostics::label($r['outcome'])) ?></td><td><?= dh($r['stage'].' / '.($r['error_type']??'—')) ?></td><td><?= dh(dt($r['summary']['last_session']??0)) ?></td></tr><?php endforeach ?></tbody></table>
 <?php endif ?>
 <?php if($runs && $runs['invalid_files']): ?><p>읽을 수 없는 실행 로그 <?= dh($runs['invalid_files']) ?>개가 있습니다.</p><?php endif ?>
+<p><a href="paper_revisions.php?account=<?= dh($id) ?>&amp;mode=<?= dh($mode) ?>">과거 데이터 변경 진단</a></p>
 <h2>추천·주문 진단</h2>
 <?php if($error): ?><p><?= dh($error) ?></p><?php elseif(!$d['state']): ?><p>아직 계좌 기록이 없습니다. 실행 상태부터 확인하세요.</p><?php else: ?>
 <?php if(!empty($d['state']['halted'])): ?><p><strong>계좌 중단: <?= dh($d['state']['halt_reason']??'unknown') ?>. 정상적인 추천 없음과 다릅니다.</strong></p><?php endif ?>

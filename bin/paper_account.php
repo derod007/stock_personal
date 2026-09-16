@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require __DIR__.'/bootstrap.php';
+require __DIR__.'/paper/Revision.php';
 use ChartEntryLab\PaperJournal;
 use ChartEntryLab\PaperPortfolio;
 use ChartEntryLab\PaperQuality;
@@ -53,7 +54,7 @@ foreach(glob(dirname(__DIR__).'/src/*.php') as $file) $versionInputs[basename($f
 $version=hash('sha256',PaperJournal::encode($versionInputs));
 $configHash=hash('sha256',PaperJournal::encode($config));
 $journal=new PaperJournal($path);
-$result=$journal->transact(function(&$s,$emit)use($config,$mode,$version,$configHash,$dates,$latest,$raw,$sources,$completed,$now,$conflicts,$cutoffs,$inputFiles,$directory) {
+$result=$journal->transact(function(&$s,$emit)use($config,$mode,$version,$configHash,$dates,$latest,$raw,$sources,$completed,$now,$conflicts,$cutoffs,$inputFiles,$directory,$journal) {
     if($s===null) {
         $s=PaperPortfolio::start($config,$version,$mode);$s['config_hash']=$configHash;
         $emit('account_started',['config'=>$config,'mode'=>$mode,'version'=>$version]);
@@ -80,7 +81,12 @@ $result=$journal->transact(function(&$s,$emit)use($config,$mode,$version,$config
         $hash=hash('sha256',PaperJournal::encode($pastRaw($symbol,(int)$date)));
         if($hash!==$frozen['input_hash']) {
             $s['halted']=true;$s['halt_reason']='historical_revision';
-            $emit('data_revision',['snapshot'=>$key,'original_hash'=>$frozen['input_hash'],'new_hash'=>$hash,'action'=>'halt_account_without_rewriting_history']);
+            $details=PaperRevision::describe($s,$raw,$sources,($journal->read()['events']??[]),$now);
+            $bytes=PaperJournal::encode($details);$reportHash=hash('sha256',$bytes);
+            PaperJournal::archive($directory.'/inputs',$reportHash,$bytes);
+            $emit('data_revision',['snapshot'=>$key,'original_hash'=>$frozen['input_hash'],'new_hash'=>$hash,
+                'action'=>'halt_account_without_rewriting_history','report_hash'=>$reportHash,
+                'changed_rows'=>$details['change_count'],'classification'=>$details['classification']]);
             return;
         }
     }

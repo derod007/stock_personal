@@ -19,6 +19,7 @@ jobs:
         run: |
           php tests/v9.php
           php tests/v13.php
+          php tests/v14.php
       - name: Operational logging tests
         run: python3 -m unittest discover -s tests -p "test_*.py"
   comparison:

@@ -14,14 +14,20 @@ final class PaperPortfolio
             if($config[$k]>1) throw new \InvalidArgumentException('Limits must be fractions');
         }
         if($config['max_positions']!=(int)$config['max_positions']) throw new \InvalidArgumentException('Integer position limit required');
-        foreach($config['symbols'] as $symbol=>$sector) {
-            $kr=str_ends_with($symbol,'.KS') || str_ends_with($symbol,'.KQ');
-            if(($config['currency']==='KRW')!==$kr || $sector==='') throw new \InvalidArgumentException('Separate market/currency accounts required');
+        $symbols=$config['symbols']??[];
+        if(!is_array($symbols)) throw new \InvalidArgumentException('Invalid symbols');
+        if($symbols===[]) {
+            if(($config['universe']??'')!=='kr_amount_scan') throw new \InvalidArgumentException('Symbols required');
+        } else {
+            foreach($symbols as $symbol=>$sector) {
+                $kr=str_ends_with($symbol,'.KS') || str_ends_with($symbol,'.KQ');
+                if(($config['currency']==='KRW')!==$kr || $sector==='') throw new \InvalidArgumentException('Separate market/currency accounts required');
+            }
         }
         return ['config'=>$config,'version'=>$version,'mode'=>$mode,'cash'=>(float)$config['initial_cash'],
             'realized'=>0.0,'active'=>[],'marks'=>[],'last_session'=>0,'last_snapshots'=>[],
             'peak_equity'=>(float)$config['initial_cash'],'max_drawdown'=>0.0,'equity'=>[],
-            'frozen'=>[],'closed_trades'=>0,'wins'=>0,'losses'=>0];
+            'frozen'=>[],'closed_trades'=>0,'wins'=>0,'losses'=>0,'sectors'=>[]];
     }
     public static function equity(array $s): float
     {
@@ -107,10 +113,10 @@ final class PaperPortfolio
             if(!($stop>0 && $entry>$stop && $target>$entry)) {
                 $emit('decision',['symbol'=>$symbol,'session'=>$session,'status'=>'no_order','reason'=>'invalid_plan']);continue;
             }
-            $equity=self::equity($s);$sector=$cfg['symbols'][$symbol];$sectorUsed=0.0;$riskUsed=0.0;
+            $equity=self::equity($s);$sector=self::sectorOf($s,$symbol);$sectorUsed=0.0;$riskUsed=0.0;
             foreach($s['active'] as $sym=>$o) {
                 $riskUsed+=$o['planned_risk'];
-                if($cfg['symbols'][$sym]===$sector) {
+                if(self::sectorOf($s,$sym)===$sector) {
                     $sectorUsed+=$o['filled']?max($o['reservation'],$o['quantity']*($s['marks'][$sym]['close']??0)):$o['reservation'];
                 }
             }
@@ -138,5 +144,10 @@ final class PaperPortfolio
             'unrealized'=>$equity-$cfg['initial_cash']-$s['realized'],'realized'=>$s['realized'],
             'drawdown'=>$drawdown,'stale_positions'=>$stale];
         $s['equity'][]=$point;$emit('equity',$point);$s['last_session']=$session;
+    }
+    private static function sectorOf(array $s,string $symbol): string
+    {
+        $sector=($s['sectors']??[])[$symbol]??($s['config']['symbols']??[])[$symbol]??'unclassified';
+        return $sector===''?'unclassified':$sector;
     }
 }

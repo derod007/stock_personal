@@ -21,8 +21,12 @@ final class PaperExperiment
                 'source_cursor'=>0,'source_hash'=>'','last_session'=>0,'first_session'=>null,'sessions'=>0,'blocked_snapshots'=>0,
                 'baseline'=>PaperPortfolio::start($s['config'],$s['version'],$mode),
                 'candidate'=>PaperPortfolio::start($s['config'],$s['version'],$mode)];
+            $pair['baseline']['sectors']=$s['sectors']??[];
+            $pair['candidate']['sectors']=$s['sectors']??[];
             $emit('experiment_started',['definition'=>$definition,'created_at'=>$now,'source_version'=>$s['version']]);
         }
+        $pair['baseline']['sectors']=$s['sectors']??($pair['baseline']['sectors']??[]);
+        $pair['candidate']['sectors']=$s['sectors']??($pair['candidate']['sectors']??[]);
         if(!empty($pair['baseline']['halted']) || !empty($pair['candidate']['halted']))throw new RuntimeException('Experiment arm halted; review and start a new ID');
         $cursor=$pair['source_cursor'];$events=$source['events'];
         if($cursor>count($events) || ($cursor && $events[$cursor-1]['hash']!==$pair['source_hash']))throw new RuntimeException('Source history changed or rolled back');
@@ -36,9 +40,11 @@ final class PaperExperiment
         foreach($sessions as $at=>$entries) {
             if($at<=$pair['last_session'])continue;
             if($mode==='forward' && $pair['first_session']===null && $at!==$latest)continue;
-            if(count($entries)!==count($s['config']['symbols']))throw new RuntimeException('Incomplete shared session');
+            $wanted=$s['config']['symbols']??[];
+            if($wanted===[]) $wanted=array_fill_keys(array_keys($entries),'unclassified');
+            elseif(count($entries)!==count($wanted))throw new RuntimeException('Incomplete shared session');
             $snap=[];$bars=[];$refs=[];
-            foreach($s['config']['symbols'] as $symbol=>$sector) {
+            foreach($wanted as $symbol=>$sector) {
                 if(!isset($entries[$symbol]))throw new RuntimeException('Missing source symbol');
                 $p=$entries[$symbol]['snapshot'];$refs[$symbol]=$entries[$symbol]['event_hash'];
                 // A newly created experimental order cannot execute before this comparison actually ran.

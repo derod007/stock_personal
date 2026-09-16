@@ -6,22 +6,31 @@ require __DIR__.'/paper/StrategyVersion.php';
 use ChartEntryLab\PaperJournal;
 use ChartEntryLab\PaperPortfolio;
 use ChartEntryLab\PaperQuality;
+use ChartEntryLab\PaperScanUniverse;
 use ChartEntryLab\CandleClock;
 use ChartEntryLab\ChartPlanEngine;
 
-$o=getopt('',['config:','data:','mode:']);
+$o=getopt('',['config:','data:','mode:','symbols-file:']);
 if(empty($o['config']) || empty($o['data'])) throw new InvalidArgumentException('--config and --data required');
 $config=json_decode(file_get_contents($o['config']),true,512,JSON_THROW_ON_ERROR);
 if(!preg_match('/^[a-z0-9_-]{1,64}$/',$config['id']??'')) throw new InvalidArgumentException('Invalid account ID');
 $mode=$o['mode']??'forward';
 if(!in_array($mode,['forward','replay'],true)) throw new InvalidArgumentException('Invalid mode');
+$evalSymbols=$config['symbols']??[];
+if(!is_array($evalSymbols)) throw new InvalidArgumentException('Invalid symbols');
+if(isset($o['symbols-file'])) {
+    if(($config['universe']??'')!=='kr_amount_scan') throw new InvalidArgumentException('symbols-file requires universe kr_amount_scan');
+    $evalSymbols=json_decode(file_get_contents($o['symbols-file']),true,512,JSON_THROW_ON_ERROR);
+    if(!is_array($evalSymbols) || $evalSymbols===[]) throw new InvalidArgumentException('Invalid symbols-file');
+}
+$pinned=PaperScanUniverse::pinned($config);
 $directory=getenv('PAPER_STATE_DIR')?:dirname(__DIR__,2).'/stock-personal-paper';
 $path=$directory.'/'.$config['id'].'-'.$mode.'.json';
 $data=rtrim($o['data'],'/');$now=time();
 $manifest=json_decode(file_get_contents($data.'/sources.json'),true,512,JSON_THROW_ON_ERROR);
 $sources=[];foreach($manifest as $source)$sources[$source['symbol']]=$source;
 $raw=[];$sessions=[];$completed=[];$cutoffs=[];$inputFiles=[];
-foreach($config['symbols'] as $symbol=>$sector) {
+foreach($evalSymbols as $symbol=>$sector) {
     if(!preg_match('/^[A-Z0-9][A-Z0-9.=-]{0,24}$/',$symbol)) throw new InvalidArgumentException('Invalid symbol');
     $file=$data.'/'.$symbol.'.json';
     if(!isset($sources[$symbol]['sha256']) || !is_file($file)) {$raw[$symbol]=[];$completed[$symbol]=[];continue;}
@@ -51,19 +60,21 @@ if($sessions===[]) throw new RuntimeException('No completed market sessions in i
 $dates=array_keys($sessions);sort($dates);$latest=end($dates);
 $conflicts=is_file($data.'/price-crosscheck.json')?(json_decode(file_get_contents($data.'/price-crosscheck.json'),true,512,JSON_THROW_ON_ERROR)['cases']??[]):[];
 $version=PaperStrategyVersion::current();
-$configHash=hash('sha256',PaperJournal::encode($config));
+$configHash=hash('sha256',PaperJournal::encode($pinned));
 $journal=new PaperJournal($path);
-$result=$journal->transact(function(&$s,$emit)use($config,$mode,$version,$configHash,$dates,$latest,$raw,$sources,$completed,$now,$conflicts,$cutoffs,$inputFiles,$directory,$journal) {
+$result=$journal->transact(function(&$s,$emit)use($pinned,$evalSymbols,$mode,$version,$configHash,$dates,$latest,$raw,$sources,$completed,$now,$conflicts,$cutoffs,$inputFiles,$directory,$journal) {
     if($s===null) {
-        $s=PaperPortfolio::start($config,$version,$mode);$s['config_hash']=$configHash;$s['strategy_fingerprint']=$version;
-        $emit('account_started',['config'=>$config,'mode'=>$mode,'version'=>$version]);
+        $s=PaperPortfolio::start($pinned,$version,$mode);$s['config_hash']=$configHash;$s['strategy_fingerprint']=$version;
+        $emit('account_started',['config'=>$pinned,'mode'=>$mode,'version'=>$version]);
     }
     if($s['config_hash']!==$configHash || $s['mode']!==$mode) throw new RuntimeException('Pinned version/config changed; use a new account ID');
     if(!empty($s['halted'])) throw new RuntimeException('Account halted after a data revision or unavailable position price; review journal and use a new account ID');
     PaperStrategyVersion::adopt($s,$version,$emit);
+    if(!isset($s['sectors'])||!is_array($s['sectors'])) $s['sectors']=[];
+    foreach($evalSymbols as $symbol=>$sector) $s['sectors'][$symbol]=$sector;
     foreach($inputFiles as $hash=>$bytes) PaperJournal::archive($directory.'/inputs',$hash,$bytes);
     // Keep the original history when a provider's rolling window drops its oldest bars.
-    foreach($config['symbols'] as $symbol=>$sector) {
+    foreach($evalSymbols as $symbol=>$sector) {
         $merged=[];
         foreach(($s['history'][$symbol]??[]) as $b) $merged[$b['available_at']]=$b;
         foreach($raw[$symbol] as $b) {
@@ -73,8 +84,14 @@ $result=$journal->transact(function(&$s,$emit)use($config,$mode,$version,$config
         if($raw[$symbol]!==[]) $cutoffs[$symbol]=max($cutoffs[$symbol]??0,end($raw[$symbol])['available_at']);
         $completed[$symbol]=CandleClock::completed($raw[$symbol],$symbol,$cutoffs[$symbol]??0);
     }
+    foreach(($s['history']??[]) as $symbol=>$bars) {
+        if(!isset($raw[$symbol])) {
+            $raw[$symbol]=$bars;
+            if($bars!==[]) $cutoffs[$symbol]=end($bars)['available_at'];
+        }
+    }
     $pastRaw=function(string $symbol,int $date)use($raw,$cutoffs):array {
-        return array_values(array_filter($raw[$symbol],fn($b)=>CandleClock::closeTime($b,$symbol)<=min($date,$cutoffs[$symbol]??0)));
+        return array_values(array_filter($raw[$symbol]??[],fn($b)=>CandleClock::closeTime($b,$symbol)<=min($date,$cutoffs[$symbol]??0)));
     };
     foreach($s['frozen'] as $key=>$frozen) {
         [$symbol,$date]=explode(':',$key);
@@ -95,7 +112,7 @@ $result=$journal->transact(function(&$s,$emit)use($config,$mode,$version,$config
     foreach($dates as $date) {
         if($date<=$s['last_session'] || ($first && $mode==='forward' && $date!==$latest)) continue;
         $barSet=[];$snapshots=[];$enough=false;
-        foreach($config['symbols'] as $symbol=>$sector) {
+        foreach($evalSymbols as $symbol=>$sector) {
             $past=$pastRaw($symbol,$date);$valid=array_values(array_filter($completed[$symbol],fn($b)=>$b['available_at']<=$date));
             if(count($valid)>=60)$enough=true;
             $quality=PaperQuality::inspect($past,$symbol,$date,$sources[$symbol]??['error'=>'missing_source'],$conflicts);

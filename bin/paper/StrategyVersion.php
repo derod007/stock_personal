@@ -34,7 +34,7 @@ final class PaperStrategyVersion
     public static function verify(array $state,string $current):void
     {
         if(!self::compatible($state['version'],$current))throw new RuntimeException('Pinned strategy changed or unverified legacy version; use a new account ID');
-        if(isset($state['strategy_fingerprint']) && !hash_equals($current,$state['strategy_fingerprint']))throw new RuntimeException('Pinned strategy fingerprint changed');
+        if(isset($state['strategy_fingerprint']) && !hash_equals($current,$state['strategy_fingerprint']) && !self::compatible($state['strategy_fingerprint'],$current))throw new RuntimeException('Pinned strategy fingerprint changed');
     }
     public static function adopt(array &$state,string $current,callable $emit):void
     {

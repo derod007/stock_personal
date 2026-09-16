@@ -14,6 +14,7 @@
   "src/PaperJournal.php",
   "src/PaperPortfolio.php",
   "src/PaperQuality.php",
+  "src/PaperScanUniverse.php",
   "src/PriceCandidate.php",
   "src/SpikeDump.php",
   "src/ThemeSmell.php",

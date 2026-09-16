@@ -1,6 +1,7 @@
 @echo off
 setlocal
-rem Daily paper-account updater for Task Scheduler.
+rem Daily paper compare updater for Task Scheduler.
+rem Runs paper_compare_daily (source daily + experiment) for US then KR.
 rem KR after KRX close; US after US cash equity close (KST).
 
 set "ROOT=c:\Users\acdun\Desktop\dev\noramu"
@@ -25,12 +26,12 @@ set "STAMP=%DATE:/=-%_%TIME::=-%"
 set "STAMP=%STAMP: =0%"
 set "LOG=%LOGDIR%\paper-%STAMP%.log"
 
-echo ===== paper daily start %DATE% %TIME% =====>> "%LOG%"
-"%PYTHON%" bin\paper_daily.py --config=config\paper-kr.json >> "%LOG%" 2>&1
-set "KR_EC=%ERRORLEVEL%"
-"%PYTHON%" bin\paper_daily.py --config=config\paper-us.json >> "%LOG%" 2>&1
+echo ===== paper compare daily start %DATE% %TIME% =====>> "%LOG%"
+"%PYTHON%" bin\paper_compare_daily.py --config=config\paper-us.json --experiment=us-identity >> "%LOG%" 2>&1
 set "US_EC=%ERRORLEVEL%"
-echo ===== paper daily end KR=%KR_EC% US=%US_EC% %DATE% %TIME% =====>> "%LOG%"
+"%PYTHON%" bin\paper_compare_daily.py --config=config\paper-kr.json --experiment=kr-identity >> "%LOG%" 2>&1
+set "KR_EC=%ERRORLEVEL%"
+echo ===== paper compare daily end US=%US_EC% KR=%KR_EC% %DATE% %TIME% =====>> "%LOG%"
 
-if not "%KR_EC%"=="0" exit /b %KR_EC%
-exit /b %US_EC%
+if not "%US_EC%"=="0" exit /b %US_EC%
+exit /b %KR_EC%

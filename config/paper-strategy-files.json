@@ -1,0 +1,23 @@
+[
+  "bin/bootstrap.php",
+  "bin/paper/StrategyVersion.php",
+  "bin/paper_account.php",
+  "src/AccountPlaybook.php",
+  "src/AccountProfile.php",
+  "src/BreakoutRetest.php",
+  "src/CandleClock.php",
+  "src/ChartPlanEngine.php",
+  "src/FeatureEngine.php",
+  "src/HorizontalLevels.php",
+  "src/NoramuLesson1.php",
+  "src/NoramuTopPattern.php",
+  "src/PaperJournal.php",
+  "src/PaperPortfolio.php",
+  "src/PaperQuality.php",
+  "src/PriceCandidate.php",
+  "src/SpikeDump.php",
+  "src/ThemeSmell.php",
+  "src/TradeSimulator.php",
+  "src/TrendContext.php",
+  "src/TrendPullback.php"
+]

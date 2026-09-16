@@ -2,6 +2,7 @@
 declare(strict_types=1);
 require __DIR__.'/bootstrap.php';
 require __DIR__.'/paper/Revision.php';
+require __DIR__.'/paper/StrategyVersion.php';
 use ChartEntryLab\PaperJournal;
 use ChartEntryLab\PaperPortfolio;
 use ChartEntryLab\PaperQuality;
@@ -49,18 +50,17 @@ foreach($config['symbols'] as $symbol=>$sector) {
 if($sessions===[]) throw new RuntimeException('No completed market sessions in input');
 $dates=array_keys($sessions);sort($dates);$latest=end($dates);
 $conflicts=is_file($data.'/price-crosscheck.json')?(json_decode(file_get_contents($data.'/price-crosscheck.json'),true,512,JSON_THROW_ON_ERROR)['cases']??[]):[];
-$versionInputs=[];
-foreach(glob(dirname(__DIR__).'/src/*.php') as $file) $versionInputs[basename($file)]=hash_file('sha256',$file);
-$version=hash('sha256',PaperJournal::encode($versionInputs));
+$version=PaperStrategyVersion::current();
 $configHash=hash('sha256',PaperJournal::encode($config));
 $journal=new PaperJournal($path);
 $result=$journal->transact(function(&$s,$emit)use($config,$mode,$version,$configHash,$dates,$latest,$raw,$sources,$completed,$now,$conflicts,$cutoffs,$inputFiles,$directory,$journal) {
     if($s===null) {
-        $s=PaperPortfolio::start($config,$version,$mode);$s['config_hash']=$configHash;
+        $s=PaperPortfolio::start($config,$version,$mode);$s['config_hash']=$configHash;$s['strategy_fingerprint']=$version;
         $emit('account_started',['config'=>$config,'mode'=>$mode,'version'=>$version]);
     }
-    if($s['version']!==$version || $s['config_hash']!==$configHash || $s['mode']!==$mode) throw new RuntimeException('Pinned version/config changed; use a new account ID');
+    if($s['config_hash']!==$configHash || $s['mode']!==$mode) throw new RuntimeException('Pinned version/config changed; use a new account ID');
     if(!empty($s['halted'])) throw new RuntimeException('Account halted after a data revision or unavailable position price; review journal and use a new account ID');
+    PaperStrategyVersion::adopt($s,$version,$emit);
     foreach($inputFiles as $hash=>$bytes) PaperJournal::archive($directory.'/inputs',$hash,$bytes);
     // Keep the original history when a provider's rolling window drops its oldest bars.
     foreach($config['symbols'] as $symbol=>$sector) {
@@ -107,7 +107,7 @@ $result=$journal->transact(function(&$s,$emit)use($config,$mode,$version,$config
             if($valid!==[] && end($valid)['available_at']===$date)$barSet[$symbol]=end($valid);
             $snapshots[$symbol]=['symbol'=>$symbol,'session'=>$date,'recorded_at'=>$now,
                 'origin'=>$mode==='replay'?'replay':($date===$latest?'forward':'catchup'),
-                'version'=>$version,'input_hash'=>hash('sha256',PaperJournal::encode($past)),
+                'version'=>$s['version'],'input_hash'=>hash('sha256',PaperJournal::encode($past)),
                 'plan'=>$plan,'quality'=>$quality];
         }
         if(!$enough && $mode==='replay') continue;

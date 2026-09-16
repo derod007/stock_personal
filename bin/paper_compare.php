@@ -2,6 +2,7 @@
 declare(strict_types=1);
 require __DIR__.'/bootstrap.php';
 require __DIR__.'/paper/Experiment.php';
+require __DIR__.'/paper/StrategyVersion.php';
 use ChartEntryLab\PaperJournal;
 $o=getopt('',['source:','experiment:','mode:','candidate-ttl:']);
 $id=$o['experiment']??'';$source=$o['source']??'';$mode=$o['mode']??'forward';
@@ -16,8 +17,7 @@ try {
     $result=$j->transact(function(&$p,$emit)use($dir,$source,$mode,$definition){
         $d=(new PaperJournal($dir.'/'.$source.'-'.$mode.'.json'))->read();
         if(!$d || !$d['state'])throw new RuntimeException('Source account not found');
-        $versions=[];foreach(glob(dirname(__DIR__).'/src/*.php') as $file)$versions[basename($file)]=hash_file('sha256',$file);
-        if(hash('sha256',PaperJournal::encode($versions))!==$d['state']['version'])throw new RuntimeException('Source strategy differs from installed code');
+        PaperStrategyVersion::verify($d['state'],PaperStrategyVersion::current());
         $p=PaperExperiment::update($p,$d,$definition,time(),$emit);
     });
     echo PaperJournal::encode(PaperExperiment::report($result['state'])).PHP_EOL;

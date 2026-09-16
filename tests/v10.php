@@ -41,7 +41,8 @@ $dir=sys_get_temp_dir().'/experiment-cli-'.bin2hex(random_bytes(5));mkdir($dir);
 $old=getenv('PAPER_STATE_DIR');putenv('PAPER_STATE_DIR='.$dir);
 try {
  $versions=[];foreach(glob(__DIR__.'/../src/*.php') as $file)$versions[basename($file)]=hash_file('sha256',$file);
- $fixture=$source;$fixture['state']['version']=hash('sha256',PaperJournal::encode($versions));
+ require_once __DIR__.'/../bin/paper/StrategyVersion.php';
+ $fixture=$source;$fixture['state']['version']=PaperStrategyVersion::current();
  $j=new PaperJournal($dir.'/source-replay.json');
  $j->transact(function(&$s,$emit)use($fixture){$s=$fixture['state'];foreach($fixture['events'] as $e)$emit($e['type'],$e['payload']);});
  $sourceHash=hash_file('sha256',$dir.'/source-replay.json');

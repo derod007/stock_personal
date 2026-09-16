@@ -1,0 +1,12 @@
+name: Strategy version scope and scan prices
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  scope:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: php -l bin/paper/StrategyVersion.php && php -l src/ScanSnapshot.php
+      - run: php tests/v12.php
+      - run: python3 tests/version_integration.py

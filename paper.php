@@ -19,7 +19,7 @@ $s=$d['state']??null;
 <p><a href="index.php">종목 분석</a> · <a href="?account=paper-us">미국 모의 계좌</a> · <a href="?account=paper-kr">한국 모의 계좌</a></p>
 <form method="get"><label>계좌 ID <input name="account" value="<?= ph($id) ?>"></label>
 <label>기록 종류 <select name="mode"><option value="forward" <?= $mode==='forward'?'selected':'' ?>>앞으로 기록한 추천</option><option value="replay" <?= $mode==='replay'?'selected':'' ?>>과거 재현</option></select></label><button>조회</button></form>
-<p><a href="paper_diagnostics.php?account=<?= ph($id) ?>&amp;mode=<?= ph($mode) ?>">실행·추천 진단</a></p>
+<p><a href="paper_diagnostics.php?account=<?= ph($id) ?>&amp;mode=<?= ph($mode) ?>">실행·추천 진단</a> · <a href="paper_trades.php?account=<?= ph($id) ?>&amp;mode=<?= ph($mode) ?>">거래별 성과 분석</a></p>
 <p>실제 주문을 보내지 않는 모의 기록입니다. 과거 재현 결과와 앞으로 기록한 추천은 별도 계좌로 관리합니다.</p>
 <?php if($error): ?><p><?= ph($error) ?></p><?php elseif(!$s): ?>
 <p>아직 기록이 없습니다. 프로젝트 폴더에서 아래 명령으로 수집·기록한 뒤 다시 조회하세요.</p>

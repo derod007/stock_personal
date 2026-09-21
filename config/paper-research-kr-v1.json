@@ -1,0 +1,28 @@
+{
+  "id": "research-kr-v1",
+  "currency": "KRW",
+  "initial_cash": 100000000,
+  "max_positions": 4,
+  "risk_pct": 0.01,
+  "position_pct": 0.2,
+  "sector_pct": 0.4,
+  "total_risk_pct": 0.03,
+  "symbols": {
+    "005930.KS": "semiconductors",
+    "000660.KS": "semiconductors",
+    "005380.KS": "automotive",
+    "000270.KS": "automotive",
+    "105560.KS": "financials",
+    "055550.KS": "financials",
+    "035420.KS": "internet",
+    "035720.KS": "internet",
+    "051910.KS": "materials",
+    "010130.KS": "materials"
+  },
+  "universe": {
+    "version": 1,
+    "defined_on": "2026-09-16",
+    "selection": "Manual fixed sample: two symbols in each of five research sectors; no return ranking",
+    "limitations": "Not an index or representative market sample; current-name selection can introduce survivorship bias; sector labels are manual research buckets"
+  }
+}

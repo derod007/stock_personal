@@ -1,0 +1,42 @@
+name: Fixed research universe checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: php -l paper_universe.php && php -l bin/paper/Universe.php
+      - run: php tests/universe.php
+      - run: python3 -m unittest discover -s tests -p 'test_research_daily.py'
+  public-preflight:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Observe public data coverage without opening accounts
+        run: |
+          python3 - <<'PY'
+          import json,pathlib,subprocess,sys,tempfile,time
+          sys.path.insert(0,'bin')
+          from paper_research_daily import audit_collection
+          result={}
+          for market in ['us','kr']:
+              config=json.loads(pathlib.Path('config/paper-research-'+market+'-v1.json').read_text())
+              start=time.monotonic()
+              with tempfile.TemporaryDirectory() as tmp:
+                  try:
+                      p=subprocess.run([sys.executable,'bin/fetch_comparison_data.py','--years=2','--symbols='+','.join(config['symbols']),'--out='+tmp],capture_output=True,text=True,timeout=600)
+                      coverage=audit_collection(pathlib.Path(tmp),config['symbols'])
+                      result[market]={'collector_exit':p.returncode,'elapsed_seconds':round(time.monotonic()-start,2),'coverage':coverage}
+                  except Exception as e:
+                      result[market]={'error_type':type(e).__name__,'elapsed_seconds':round(time.monotonic()-start,2)}
+              print(market,json.dumps(result[market]))
+          pathlib.Path('universe-preflight.json').write_text(json.dumps(result,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: universe-preflight
+          path: universe-preflight.json

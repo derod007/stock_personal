@@ -22,6 +22,18 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 
 ---
 
+## 2026-09-21 15:55 · Cursor · 끝
+- 한 일: 잘못된 어제스캔 프롬프트 삭제, 모의계좌는 고정종목이 아니라 당일 스캔 추천으로 매매하라는 아스트라 프롬프트로 바꿈
+- 파일: `docs/astra-paper-scan-universe-prompt.md`, `docs/astra-yesterday-rescan-prompt.md`, `docs/work-log.md`
+- 커밋: 안 함
+- 롤백: `docs/astra-yesterday-rescan-prompt.md` 삭제
+
+## 2026-09-21 15:50 · Cursor · 끝
+- 한 일: 어제 스캔 밖 재조회 합의를 아스트라 프롬프트로 정리
+- 파일: `docs/astra-yesterday-rescan-prompt.md`, `docs/work-log.md`
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-09-21 15:02 · Astra · 끝
 - 한 일: 최신 main 확인 후 진입 조건별 통과/탈락/미평가·단독 탈락 집계와 고정 연구 계좌의 거래량 85→95% 비교 실험 추가. 기존 전략/계좌/TTL 실험 유지. 신규 PHP 기능·CLI·원본 보존 및 Python 실행 테스트 통과
 - 파일: `paper_entry.php`, `bin/paper_entry_compare.php`, `bin/paper_entry_daily.py`, `tests/test_entry_daily.py`, `tests/entry.php`, `docs/entry-volume-experiment.md`, `bin/paper/EntryRelaxation.php`, `bin/paper/EntryExperiment.php`, `bin/paper/EntryGates.php`, `bin/paper/Chrome.php`, `.github/workflows/entry.yml`, `tests/entry_cli.php`, `docs/work-log.md`

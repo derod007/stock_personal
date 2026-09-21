@@ -12,10 +12,11 @@ $bars=[];$start=new DateTimeImmutable('2025-10-06');
 for($i=0;$i<60;$i++){
     $close=$i<30?50+$i:80+($i-30)*0.4;
     if($i>=55)$close=[88,86,84.5,84,85.5][$i-55];
-    $open=$i===59?84.2:$close-0.2;
+    $close+=1000; // Moderate percentage rise: no independent top-collapse warning in this fixture.
+    $open=$i===59?1084.2:$close-0.2;
     $day=$start->modify('+'.$i.' weekdays')->format('Y-m-d');
     $at=(new DateTimeImmutable($day.' 15:30:00',new DateTimeZone('Asia/Seoul')))->getTimestamp();
-    $bars[]=['time'=>$at,'available_at'=>$at,'open'=>$open,'high'=>$close+0.8,'low'=>min($open,$close)-0.4,'close'=>$close,'volume'=>$i>=56&&$i<=58?900:($i===59?1400:1000)];
+    $bars[]=['time'=>$at,'time_kst'=>$day.' 15:30:00','available_at'=>$at,'open'=>$open,'high'=>$close+0.8,'low'=>min($open,$close)-0.4,'close'=>$close,'volume'=>$i>=56&&$i<=58?900:($i===59?1400:1000)];
 }
 $at=end($bars)['available_at'];$analysis=(new ChartPlanEngine())->analyze($bars,'005930.KS',$at);
 ck(PaperEntryRelaxation::onlyVolumeMissing($analysis['plan']),'real engine volume-only near miss');
@@ -23,6 +24,10 @@ $snapshot=['symbol'=>'005930.KS','session'=>$at,'recorded_at'=>$at+10,'origin'=>
     'plan'=>$analysis['plan'],'quality'=>['can_simulate'=>true,'status'=>'warning','reasons'=>[]]];
 $changed=PaperEntryRelaxation::apply($snapshot,$bars);
 ck(!$snapshot['plan']['ready'] && $changed['plan']['ready'],'real engine .90 volume confirms only candidate');
+$strictBars=$bars;for($i=56;$i<=58;$i++)$strictBars[$i]['volume']=500;
+$strict=(new ChartPlanEngine())->analyze($strictBars,'005930.KS',$at)['plan'];
+ck($strict['ready'],'strict fixture confirms with stronger contraction');
+foreach(['entry','stop','target','reward_risk','order_valid_bars'] as $k)ck($changed['plan'][$k]===$strict[$k],'same strict risk/price formula '.$k);
 ck($changed['quality']===$snapshot['quality'] && $changed['input_hash']===$snapshot['input_hash'],'quality and input unchanged');
 $future=$bars;$future[]=array_replace(end($bars),['time'=>$at+86400,'available_at'=>$at+86400,'close'=>999]);
 ck(PaperEntryRelaxation::apply($snapshot,$future)===$changed,'future candle cannot affect candidate');
@@ -34,7 +39,7 @@ $a=$analysis;$a['plan']['context']['daily']='down';ck(PaperEntryRelaxation::from
 $a=$analysis;$a['plan']['context']=['daily'=>'flat','weekly'=>'down'];ck(PaperEntryRelaxation::fromAnalysis($a,$bars)===$a['plan'],'weekly down blocked');
 $highVol=$bars;for($i=56;$i<=58;$i++)$highVol[$i]['volume']=1000;
 ck(PaperEntryRelaxation::fromAnalysis($analysis,$highVol)===$analysis['plan'],'no contraction still blocked');
-$lowRR=$bars;$lowRR[59]['close']=100;ck(PaperEntryRelaxation::fromAnalysis($analysis,$lowRR)===$analysis['plan'],'poor reward risk blocked');
+$lowRR=$bars;$lowRR[59]['close']=1100;ck(PaperEntryRelaxation::fromAnalysis($analysis,$lowRR)===$analysis['plan'],'poor reward risk blocked');
 $missing=$snapshot;$missing['plan']['diagnostics']=[];
 $catchup=$snapshot;$catchup['origin']='catchup';
 $r=PaperEntryGates::summarize([['type'=>'snapshot','payload'=>$snapshot],['type'=>'snapshot','payload'=>$missing],['type'=>'snapshot','payload'=>$catchup]]);
@@ -55,7 +60,7 @@ $halt=$source;$halt['state']['halted']=true;try{PaperEntryExperiment::update($pa
 $quality=$source;$quality['events'][0]['payload']['quality']['can_simulate']=false;
 $q=PaperEntryExperiment::update(null,$quality,$def,$at+10,$emit);ck($q['candidate']['active']===[],'quality blocked cannot order even if relaxed signal ready');
 // Next completed session can fill; signal session cannot. Both arms retain shared risk limits.
-$next=$at+86400;$b=['time'=>$next,'available_at'=>$next,'open'=>85,'high'=>86,'low'=>84,'close'=>85,'volume'=>1000];
+$next=$at+86400;$b=['time'=>$next,'available_at'=>$next,'open'=>1085,'high'=>1086,'low'=>1084,'close'=>1085,'volume'=>1000];
 $source['state']['history']['005930.KS'][]=$b;$source['state']['last_session']=$next;
 $p=$source['events'][0]['payload'];$p['session']=$next;$p['plan']=['ready'=>false,'status'=>'no_setup'];$p['input_hash']='next';
 $source['events'][]=['type'=>'snapshot','payload'=>$p,'hash'=>'h2'];

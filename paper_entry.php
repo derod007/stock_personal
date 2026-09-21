@@ -14,7 +14,9 @@ try {
     if($s)$r=PaperEntryGates::summarize($s['events'],$origin);
     $d=(new PaperJournal($dir.'/entry-experiments/'.$exp.'-'.$mode.'.json'))->read();
     if($d){
-        if($d['state']['definition']['source']!==$id)throw new RuntimeException('계좌와 실험의 원본 ID가 다릅니다.');
+        if($d['state']['definition']['source']!==$id){$health='선택한 실험의 원본 계좌가 다릅니다. 원본 진단만 표시합니다.';$d=null;}
+    }
+    if($d){
         $pair=PaperExperiment::report($d['state']);$arms=[];
         foreach(['baseline','candidate'] as $arm){$ev=[];foreach($d['events'] as $e)if($e['type']==='arm_event' && $e['payload']['arm']===$arm)$ev[]=$e['payload'];$arms[$arm]=PaperEntryGates::summarize($ev,$origin);}
         if(!$s || !empty($s['state']['halted']))$health='원본 없음/중단: 마지막 비교 기록입니다.';
@@ -38,7 +40,7 @@ paper_open(['title'=>'진입 조건 진단·완화 실험','page'=>'entry','acco
 <?php endif ?></section>
 <section class="panel"><h2>거래량 85% → 95% 비교 실험</h2>
 <p>사전 지정한 가설입니다. 최다 탈락 원인으로 확인됐다는 뜻이 아닙니다. 손절·손익비·상위 추세·품질·위험 한도는 유지합니다.</p>
-<?php if(!$pair): ?><p>아직 비교 기록이 없습니다. 연구용 일일 래퍼를 실행하세요.</p><pre>python bin/paper_entry_daily.py --config=config/paper-research-us-v1.json --experiment=us-volume95-v1</pre>
+<?php if(!$pair): ?><p><?= paper_esc($health) ?></p><p>이 계좌에 연결된 비교 기록이 없습니다. 연구용 일일 래퍼를 실행하세요.</p><pre>python bin/paper_entry_daily.py --config=config/paper-research-us-v1.json --experiment=us-volume95-v1</pre>
 <?php else: ?>
 <p><?= paper_esc($health) ?></p><p><?= paper_esc($pair['decision']) ?> · <?= paper_esc(implode(', ',$pair['reasons'])) ?></p>
 <p>공통 <?= $pair['sessions'] ?>세션 · 시작/마지막 <?= paper_esc($pair['first_session']?gmdate('Y-m-d H:i',$pair['first_session']):'—') ?> / <?= paper_esc($pair['last_session']?gmdate('Y-m-d H:i',$pair['last_session']):'—') ?> UTC</p>

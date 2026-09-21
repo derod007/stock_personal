@@ -3,6 +3,14 @@
 ## 모의 계좌와 고정 추천 기록
 
 프로젝트 폴더에서 `python bin/paper_daily.py --config=config/paper-us.json`을 실행하면 설정된 종목의 최신 판단을 저장하고 모의 계좌를 업데이트합니다. 한국 계좌는 `config/paper-kr.json`을 사용합니다.
+한국 `paper-kr`은 **20:20에 하루 한 번 거래대금 TOP100을 스캔**하고, `entry_recommend`(확인·`order_ready`) 또는 `buy_now`인 종목만 신규 후보로 사용합니다. 스캔 밖의 기존 보유·대기 주문은 기존 규칙으로 계속 처리하며, 추천과 보유가 모두 없으면 빈 유니버스로 정상 종료합니다.
+
+```bash
+python bin/paper_daily.py --config=config/paper-kr.json
+```
+
+`config/paper-kr.json`의 `universe: kr_amount_scan`, `scan_limit: 100`, `symbols: {}`를 유지합니다. 과거 3종목이나 연구용 고정 10종목으로 대체하지 않습니다. 한국 운영 예약은 `bin/run_paper_daily.cmd --kr` 또는 위 명령을 사용하며, 연구 래퍼로 교체하지 않습니다. [한국 모의 예약·점검](docs/paper-kr-scan.md)을 참고하세요.
+
 웹의 **모의 계좌** 메뉴 또는 `paper.php`에서 현금·보유·손익·데이터 품질·추천 이력을 조회합니다.
 실제 기록은 명령을 실행해야 시작되며, 과거 재현과 별도입니다. [사용법·한도·검증 결과](docs/paper-account-v7.md)를 먼저 확인하세요.
 
@@ -60,7 +68,9 @@ php bin/backtest_entries.php
 6. **최종목표**
    최종목표는 완벽한 프로그램화로 사용자가 원하는 종목명(티커)를 넣을 경우 자동으로 진입가와 손절가, 익절가를 표현해주기위함임.
 
-## 1번 계좌 (적용 대상)
+## 1번 계좌 (초기 기획 참고 종목)
+
+아래 표는 초기 기획 배경이며 현재 `paper-kr`의 매매 종목 목록이 아닙니다.
 
 | 구분 | 종목/자산 |
 |------|-----------|

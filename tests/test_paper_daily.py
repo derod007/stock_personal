@@ -103,6 +103,37 @@ class DailyTests(unittest.TestCase):
             self.assertEqual(len(calls),1)
             record=json.loads(next((root/'state/runs/test-forward').glob('*.json')).read_text())
             self.assertTrue(record['summary']['empty_universe'])
+    def test_scan_once_keeps_holding_without_recommendations(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=pathlib.Path(tmp);config=root/'config.json'
+            config.write_text(json.dumps({'id':'paper-kr','universe':'kr_amount_scan','scan_limit':100,'symbols':{}}))
+            before=config.read_bytes();calls=[]
+            def runner(cmd, **kw):
+                calls.append(cmd)
+                if str(cmd[1]).endswith('paper_scan_universe.php'):
+                    self.assertIn('--limit=100',cmd)
+                    return SimpleNamespace(stdout=json.dumps({'ok':True,'symbols':{'035720.KS':'internet'},'held':['035720.KS'],'candidates':[]}))
+                if str(cmd[1]).endswith('paper_account.php'):
+                    names=pathlib.Path(next(x.split('=',1)[1] for x in cmd if x.startswith('--symbols-file=')))
+                    self.assertEqual(json.loads(names.read_text()),{'035720.KS':'internet'})
+                    return SimpleNamespace(stdout=json.dumps({'account':'paper-kr','mode':'forward','halted':False}))
+                return SimpleNamespace(returncode=0)
+            self.assertEqual(daily.update(config,root/'state',runner),0)
+            self.assertEqual(sum(str(c[1]).endswith('paper_scan_universe.php') for c in calls),1)
+            self.assertIn('--symbols=035720.KS',calls[1])
+            self.assertEqual(config.read_bytes(),before)
+
+    def test_kr_scheduler_uses_operating_daily_not_research(self):
+        root=pathlib.Path(__file__).resolve().parents[1]
+        script=(root/'bin/run_paper_daily.cmd').read_text()
+        block=script.rsplit('if "!RUN_KR!"=="1" (',1)[1]
+        self.assertIn('bin\\paper_daily.py --config=config\\paper-kr.json',block)
+        self.assertNotIn('paper_compare_daily.py',block)
+        self.assertNotIn('paper_research_daily.py',script)
+        self.assertNotIn('paper_entry_daily.py',script)
+        self.assertNotIn('research-kr',script)
+        self.assertIn('paper_compare_daily.py --config=config\\paper-us.json --experiment=us-identity',script)
+
     def test_atomic_replacement(self):
         with tempfile.TemporaryDirectory() as tmp:
             p=pathlib.Path(tmp)/'runs/a.json'

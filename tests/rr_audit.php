@@ -1,0 +1,93 @@
+<?php
+declare(strict_types=1);
+require __DIR__.'/../bin/bootstrap.php';
+require __DIR__.'/../bin/paper/RrAudit.php';
+use ChartEntryLab\ChartPlanEngine;
+use ChartEntryLab\PaperScanUniverse;
+function ck(bool $v,string $label):void {if(!$v)throw new RuntimeException($label);echo "OK $label\n";}
+$bars=[];$start=new DateTimeImmutable('2025-10-06');
+for($i=0;$i<60;$i++) {
+    $close=$i<30?50+$i:80+($i-30)*0.4;
+    if($i>=55)$close=[88,86,84.5,84,89.8][$i-55];
+    $close+=1000;$open=$i===59?1084.2:$close-0.2;
+    $day=$start->modify('+'.$i.' weekdays')->format('Y-m-d');
+    $at=(new DateTimeImmutable($day.' 15:30:00',new DateTimeZone('Asia/Seoul')))->getTimestamp();
+    $bars[]=['time'=>$at,'time_kst'=>$day.' 15:30:00','available_at'=>$at,'open'=>$open,'high'=>$close+0.8,
+        'low'=>min($open,$close)-0.4,'close'=>$close,'volume'=>$i>=56&&$i<=58?500:($i===59?1400:1000)];
+}
+$at=end($bars)['available_at']; $engine=new ChartPlanEngine();
+$a=$engine->analyze($bars,'005930.KS',$at);
+$r=PaperRrAudit::capture(['yahoo'=>'005930.KS'],['ok'=>true,'research_input'=>['bars'=>$bars,'analysis'=>$a]]);
+$p=$r['patterns'][1];
+ck($p['raw_status']==='rejected_rr','real engine confirms pattern but rejects RR');
+ck($p['status']==='added','eligible RR-only confirmed pattern added to research');
+ck($p['candidate']['entry']<$p['original']['entry'] && $p['candidate']['reward_risk']>=1.5,'lower limit RR at least 1.5');
+foreach(['stop','target','signal_at']as $k) ck($p['candidate'][$k]===$p['original'][$k],'freeze '.$k);
+ck($p['candidate']['order_valid_bars']===3 && !$p['operational_order'],'3-bar research only');
+ck($engine->analyze($bars,'005930.KS',$at)===$a,'audit leaves real strategy output unchanged');
+$projection=$engine->apply([], $a['plan']);
+ck(PaperScanUniverse::symbols(['ok'=>true,'rows'=>[['yahoo'=>'005930.KS','entry_recommend'=>$projection['new_entry']['order_ready'],'buy_now'=>false]]],[],[])===[], 'research candidate never enters operational universe');
+foreach(['risk_blocked','context_wait','blocked','stale_data'] as $status) {
+    $b=$a;$b['plan']['status']=$status;
+    $x=PaperRrAudit::evaluate($b,$r['quality'])[1];
+    ck($x['confirmed_rr_rejection'] && $x['candidate']===null && in_array($status,$x['exclusion_reasons']), 'preserve overwritten RR / '.$status);
+}
+$b=$a;$b['features']['spike_dump_status']='warning';$b['features']['top_pattern_status']='confirmed';$b['features']['top_pattern_phase']='collapse';$b['plan']['context']['daily']='down';
+$x=PaperRrAudit::evaluate($b,$r['quality'])[1];
+ck(count(array_intersect(['spike_dump','top_collapse','context_wait'],$x['exclusion_reasons']))===3,'retain simultaneous blockers');
+$b=$a;$b['plan']['pattern']='breakout_retest_v1';
+ck(in_array('not_selected_pattern',PaperRrAudit::evaluate($b,$r['quality'])[1]['exclusion_reasons']),'no substitution of non-selected pattern');
+$b=$a;$b['plan']['diagnostics']['patterns']['trend_pullback']['status']='await_confirmation';
+$b['plan']['diagnostics']['patterns']['trend_pullback']['gates']['volume_contracted']=false;
+$x=PaperRrAudit::evaluate($b,$r['quality'])[1];
+ck(!$x['confirmed_rr_rejection'] && isset($x['missing_conditions']['volume_contracted']),'unconfirmed excluded with missing volume logged');
+$b=$a;unset($b['plan']['diagnostics']['patterns']['trend_pullback']['gates']['recovery_close']);
+$x=PaperRrAudit::evaluate($b,$r['quality'])[1];
+ck(isset($x['not_evaluated']['recovery_close']) && !isset($x['missing_conditions']['recovery_close']),'unknown is not a failed gate');
+$b=$a;$raw=&$b['plan']['diagnostics']['patterns']['trend_pullback'];$raw['stop']=100;$raw['target']=101;$raw['entry']=102;
+ck(in_array('no_valid_lower_limit',PaperRrAudit::evaluate($b,$r['quality'])[1]['exclusion_reasons']),'integer truncation cannot produce invalid order');
+$q=$r['quality'];$q['can_simulate']=false;$q['reasons']=['duplicate_session'];
+ck(in_array('data_quality_blocked',PaperRrAudit::evaluate($a,$q)[1]['exclusion_reasons']),'quality guard preserved');
+$unavailable=PaperRrAudit::capture(['yahoo'=>'123456.KS'],['ok'=>true]);
+ck($unavailable['reason']==='cached_evidence_unavailable','cached evidence never fabricated');
+ck(PaperRrAudit::outcome($r,$p['candidate'],$bars,$at)['status']==='no_future_bars','no future observations distinct from failed order');
+$c=$p['candidate'];$future=$bars;
+$next=['time'=>$at+86400,'time_kst'=>date('Y-m-d H:i:s',$at+86400),'available_at'=>$at+86400,'open'=>$c['entry']+1,'high'=>$c['target']-0.1,'low'=>$c['stop']-1,'close'=>$c['entry'],'volume'=>1000];
+$future[]=$next;
+$o=PaperRrAudit::outcome($r,$c,$future,$at+86400);
+ck($o['status']==='closed' && $o['first_exit']==='stop' && $o['entry_bar_stop_touch'],'same-bar entry and stop explicitly recorded');
+ck($o['net_return_pct']<0 && $o['fee_bps_per_side']===10.0 && $o['slippage_bps']===5.0,'existing costs used');
+ck(PaperRrAudit::outcome($r,$c,$future,$at)['status']==='no_future_bars','asof prevents future leakage');
+$bad=$future;$bad[0]['close']+=0.1;
+ck(PaperRrAudit::outcome($r,$c,$bad,$at+86400)['status']==='historical_revision_or_missing','revision blocks replay');
+$bad=$future;$bad[]=$next;
+ck(PaperRrAudit::outcome($r,$c,$bad,$at+86400)['status']==='future_quality_blocked','duplicate future bar blocks replay');
+$bad=$future;$bad[count($bad)-1]['high']=0;
+ck(PaperRrAudit::outcome($r,$c,$bad,$at+86400)['status']==='future_quality_blocked','invalid last future bar cannot disappear as no observation');
+$bad=$r;$bad['bars'][0]['volume']++;
+ck(PaperRrAudit::outcome($bad,$c,$future,$at+86400)['status']==='input_hash_mismatch','tampered snapshot blocked');
+$miss=$bars;
+for($i=1;$i<=3;$i++) $miss[]=array_replace($next,['time'=>$at+$i*86400,'available_at'=>$at+$i*86400,'low'=>$c['entry']+0.1,'close'=>$c['entry']+0.5]);
+ck(PaperRrAudit::outcome($r,$c,$miss,$at+3*86400)['status']==='unfilled','order expires after three bars');
+$touch=$bars;$touch[]=array_replace($next,['high'=>$c['target']+1]);
+$o=PaperRrAudit::outcome($r,$c,$touch,$at+86400);
+ck($o['status']==='cancelled_before_entry' && $o['ambiguous_bar'],'target/limit ambiguity cancels order conservatively');
+$s=PaperRrAudit::summary([$r,$unavailable]);
+ck($s['confirmed_rr_symbol_days']===array_sum($s['rr_final_statuses']) && $s['added']+$s['excluded']===$s['confirmed_rr_patterns'],'count reconciliation');
+$tmp=sys_get_temp_dir().'/rr-test-'.bin2hex(random_bytes(4));
+$saved=PaperRrAudit::save($tmp,['fetched_at'=>'test'],[$r]);
+$saved2=PaperRrAudit::save($tmp,['fetched_at'=>'test'],[$r]);
+ck($saved['path']!==$saved2['path'],'reruns never overwrite evidence');
+file_put_contents($tmp.'/005930.KS.json',PaperRrAudit::encode($future));
+$cli=dirname(__DIR__).'/bin/paper_rr_audit.php';
+$run=static function(array $args)use($cli):array {
+    $command=escapeshellarg(PHP_BINARY).' -n '.escapeshellarg($cli).' '.implode(' ',array_map('escapeshellarg',$args));
+    exec($command.' 2>&1',$lines,$code); return [$code,implode("\n",$lines)];
+};
+[$code,$text]=$run(['--input='.$saved['path'],'--prices='.$tmp,'--out='.$tmp.'/replay.json']);
+ck($code===0 && json_decode($text,true)['outcomes']['closed']===1,'offline replay CLI');
+[$code]=$run(['--input='.$saved['path'],'--out='.$saved['path']]);
+ck($code!==0,'CLI cannot overwrite observation');
+[$code,$text]=$run(['--history='.$tmp,'--from=2025-12-26','--to=2025-12-26','--out='.$tmp.'/history.json']);
+ck($code===0 && str_contains(json_decode($text,true)['membership'],'NOT_historical_daily_TOP100'),'historical union clearly labelled');
+foreach(glob($tmp.'/*')as $f)unlink($f);rmdir($tmp);

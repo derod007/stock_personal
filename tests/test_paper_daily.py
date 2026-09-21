@@ -134,6 +134,19 @@ class DailyTests(unittest.TestCase):
         self.assertNotIn('research-kr',script)
         self.assertIn('paper_compare_daily.py --config=config\\paper-us.json --experiment=us-identity',script)
 
+    def test_rr_audit_status_saved_even_with_empty_universe(self):
+        for status in ('saved', 'partial', 'failed'):
+            with self.subTest(status=status), tempfile.TemporaryDirectory() as tmp:
+                root=pathlib.Path(tmp);config=root/'config.json'
+                config.write_text(json.dumps({'id':'paper-kr','universe':'kr_amount_scan','symbols':{}}))
+                audit={'status':status,'path':'rr-audit/paper-kr/run.json'}
+                def runner(cmd, **kw):
+                    self.assertTrue(str(cmd[1]).endswith('paper_scan_universe.php'))
+                    return SimpleNamespace(stdout=json.dumps({'ok':True,'symbols':{},'rr_audit':audit}))
+                self.assertEqual(daily.update(config,root/'state',runner),0)
+                record=json.loads(next((root/'state/runs/paper-kr-forward').glob('*.json')).read_text())
+                self.assertEqual(record['scan']['rr_audit'],audit)
+
     def test_atomic_replacement(self):
         with tempfile.TemporaryDirectory() as tmp:
             p=pathlib.Path(tmp)/'runs/a.json'

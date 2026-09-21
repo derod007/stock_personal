@@ -59,7 +59,7 @@ def update(config_path, state_dir, runner=subprocess.run):
                 if not isinstance(eval_symbols, dict):
                     raise ValueError("Invalid scan symbols")
                 record["scan"] = {"summary": payload.get("summary"), "held": payload.get("held"),
-                                  "candidates": payload.get("candidates")}
+                                  "candidates": payload.get("candidates"), "rr_audit": payload.get("rr_audit")}
                 save_record(log, record)
                 if eval_symbols == {}:
                     record["status"] = "success"

@@ -53,6 +53,7 @@ final class KrAmountScanner
         ?int $yahooMaxAgeSeconds = 600,
         /** all=코스피+코스닥, kospi=코스피만 */
         string $market = 'all',
+        ?callable $onResearch = null,
     ): array {
         $limit = max(1, min(200, $limit));
         $market = strtolower($market);
@@ -117,7 +118,13 @@ final class KrAmountScanner
                 $yahoo,
                 useCache: $useYahooCache,
                 cacheMaxAgeSeconds: $yahooAge,
+                captureResearch: $onResearch !== null,
             );
+            // Observer receives the exact analysis input, never a later Yahoo-cache approximation.
+            // A cached scan has no callback; the caller must record missing evidence explicitly.
+            if ($onResearch !== null) {
+                $onResearch($leader, $result);
+            }
             $sector = $this->sectors->resolve($yahoo, useCache: $useCache);
             $row = [
                 'amount_rank' => $leader['rank'],

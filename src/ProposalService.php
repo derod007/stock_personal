@@ -59,7 +59,7 @@ final class ProposalService
      *   tradingview_url:?string
      * }
      */
-    public function propose(string $input, bool $useCache = true, ?int $cacheMaxAgeSeconds = null): array
+    public function propose(string $input, bool $useCache = true, ?int $cacheMaxAgeSeconds = null, bool $captureResearch = false): array
     {
         $input = trim($input);
         $profileId = $this->playbook->profile()->id;
@@ -268,7 +268,7 @@ final class ProposalService
                 'action', 'entry_zone', 'invalidation', 'target_hint', 'size_hint', 'reason', 'rules',
             ])));
 
-            return [
+            return ($captureResearch ? ['research_input' => ['bars' => $bars, 'analysis' => $analysis]] : []) + [
                 'ok' => true,
                 'input' => $input,
                 'symbol' => $symbol,

@@ -13,6 +13,8 @@ python bin/paper_daily.py --config=config/paper-kr.json
 
 프로젝트 밖에서 실행할 때는 스크립트 경로를 절대 경로로 지정합니다. 상대 config 경로는 프로젝트 기준으로 해석합니다. PHP는 스케줄러 계정의 PATH에 있어야 합니다. 웹과 예약 작업은 같은 PAPER_STATE_DIR 및 파일 접근 권한을 사용해야 합니다. 미설정 시 기존처럼 프로젝트 옆 stock-personal-paper 폴더를 사용합니다.
 
+한국 `paper-kr` 예약은 20:20에 위 daily 명령을 사용합니다. TOP100 추천과 기존 보유·대기 주문을 평가하며, 추천·보유가 모두 없을 때 `empty_universe`로 정상 종료합니다. 연구용 래퍼로 바꾸지 않습니다.
+
 ## 실행 상태
 
 각 실행은 별도 `runs/<account>-forward/<run-id>.json`에 시작, 현재 단계, 종료, 결과를 원자적으로 저장합니다. 수집과 계좌 갱신은 각 30분 제한입니다. 기존 계좌 파일/전략 해시는 변경하지 않으며 별도 계좌 생성이 필요 없습니다.

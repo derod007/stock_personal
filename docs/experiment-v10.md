@@ -4,12 +4,14 @@
 
 ## 기본 시작 및 예약
 
-기존 daily 명령 대신 아래 래퍼를 예약하면 기존 계좌 갱신 뒤 비교를 실행합니다. 기존 예약과 중복 등록할 필요는 없습니다. 자동으로 PC의 예약 작업을 수정하지 않습니다.
+미국은 기존 daily 명령 대신 아래 래퍼를 예약하면 기존 계좌 갱신 뒤 비교를 실행합니다. 기존 예약과 중복 등록할 필요는 없습니다. 자동으로 PC의 예약 작업을 수정하지 않습니다.
 
 ```
 python bin/paper_compare_daily.py --config=config/paper-us.json --experiment=us-identity
-python bin/paper_compare_daily.py --config=config/paper-kr.json --experiment=kr-identity
+python bin/paper_daily.py --config=config/paper-kr.json
 ```
+
+한국 운영 예약은 20:20의 `paper_daily.py --config=config/paper-kr.json`으로 유지합니다. TOP100을 한 번 스캔하며 연구용 고정 종목군을 사용하지 않습니다. 한국 동일 전략 비교가 별도로 필요하면 위 갱신 성공 후 `php bin/paper_compare.php --source=paper-kr --experiment=kr-identity`로 저장된 기록만 읽습니다. 이 비교를 위해 추가 스캔을 예약하지 않습니다. 빈 추천으로 원본 계좌가 아직 없으면 비교도 실행하지 않습니다.
 
 웹 `paper_compare.php`에서 실험 ID로 조회합니다. 기존 Python/PHP PATH 및 PAPER_STATE_DIR 설정을 그대로 사용합니다. 로그는 experiment-runs/<ID>에 시작/종료/실패 단계를 남깁니다. 원본 수집 실패/계좌 중단이면 비교 단계로 진행하지 않습니다.
 

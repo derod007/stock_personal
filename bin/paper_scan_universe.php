@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/paper/RrAudit.php';
 
 use ChartEntryLab\EntryRepository;
 use ChartEntryLab\KrAmountLeadersClient;
@@ -35,11 +36,20 @@ $service = new ProposalService(
     entries: new EntryRepository($root . '/data/entries.json'),
 );
 $scanner = new KrAmountScanner(new KrAmountLeadersClient($cacheDir), $service, $cacheDir);
+$auditRecords = [];
+$auditErrors = [];
 $report = $scanner->scan(
     limit: $limit,
     useCache: $useCache,
     useYahooCache: $useCache,
     yahooMaxAgeSeconds: $useCache ? 600 : 0,
+    onResearch: static function (array $leader, array $result) use (&$auditRecords, &$auditErrors): void {
+        try {
+            $auditRecords[(string) $leader['yahoo']] = PaperRrAudit::capture($leader, $result);
+        } catch (Throwable $e) {
+            $auditErrors[] = (string) $leader['yahoo'] . ': ' . $e->getMessage();
+        }
+    },
     onProgress: static function (int $i, int $total, string $yahoo, string $name): void {
         fwrite(STDERR, sprintf("[%d/%d] %s %s\n", $i, $total, $yahoo, $name));
     },
@@ -51,6 +61,23 @@ if (empty($report['ok'])) {
 }
 
 $directory = getenv('PAPER_STATE_DIR') ?: dirname(__DIR__, 2) . '/stock-personal-paper';
+$audit = ['status' => 'failed'];
+try {
+    foreach ($report['rows'] as $row) {
+        $symbol = (string) $row['yahoo'];
+        if (!isset($auditRecords[$symbol])) {
+            $auditRecords[$symbol] = PaperRrAudit::capture(
+                ['yahoo' => $symbol, 'name' => $row['name'] ?? $symbol, 'rank' => $row['amount_rank'] ?? null],
+                ['ok' => $row['ok'] ?? false, 'error' => $row['error'] ?? null],
+            );
+        }
+    }
+    $audit = PaperRrAudit::save($directory . '/rr-audit/' . $config['id'], $report, array_values($auditRecords));
+    if ($auditErrors !== []) { $audit['status'] = 'partial'; $audit['errors'] = $auditErrors; }
+} catch (Throwable $e) {
+    $audit['error'] = $e->getMessage();
+    fwrite(STDERR, 'RR audit failed: ' . $e->getMessage() . PHP_EOL);
+}
 $path = $directory . '/' . $config['id'] . '-forward.json';
 $held = [];
 $heldSectors = [];
@@ -76,4 +103,5 @@ echo json_encode([
     'summary' => $report['summary'] ?? null,
     'fetched_at' => $report['fetched_at'] ?? null,
     'limit' => $limit,
+    'rr_audit' => $audit,
 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . PHP_EOL;

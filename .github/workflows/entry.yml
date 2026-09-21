@@ -1,0 +1,12 @@
+name: Entry gate diagnostics and controlled relaxation
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: php -l paper_entry.php && php -l bin/paper_entry_compare.php
+      - run: php tests/entry_cli.php
+      - run: python3 -m unittest discover -s tests -p 'test_entry_daily.py'

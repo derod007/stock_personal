@@ -20,6 +20,7 @@ paper_open(['title'=>'모의 계좌 기록','page'=>'account','account'=>$id,'mo
   <label>기록 종류 <select name="mode"><option value="forward" <?= $mode==='forward'?'selected':'' ?>>앞으로 기록한 추천</option><option value="replay" <?= $mode==='replay'?'selected':'' ?>>과거 재현</option></select></label>
   <button>조회</button>
 </form>
+<p><a href="paper_universe.php">고정 종목군 연구</a></p>
 <p class="paper-lede">실제 주문을 보내지 않는 모의 기록입니다. 과거 재현 결과와 앞으로 기록한 추천은 별도 계좌로 관리합니다.</p>
 <?php if($error): ?>
 <section class="panel panel--error"><h2>읽을 수 없음</h2><p><?= ph($error) ?></p></section>

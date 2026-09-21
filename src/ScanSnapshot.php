@@ -133,24 +133,24 @@ final class ScanSnapshot
         }
 
         usort($out, static function (array $a, array $b): int {
-            $pa = $a['buy_now'] || $a['entry_recommend'];
-            $pb = $b['buy_now'] || $b['entry_recommend'];
-            if ($pa !== $pb) {
-                return $pb <=> $pa;
+            $sa = is_int($a['score'] ?? null) ? $a['score'] : -1;
+            $sb = is_int($b['score'] ?? null) ? $b['score'] : -1;
+            if ($sa !== $sb) {
+                return $sb <=> $sa;
             }
-            $sa = $a['since_scan_pct'];
-            $sb = $b['since_scan_pct'];
-            if ($sa === null && $sb === null) {
+            $pa = $a['since_scan_pct'];
+            $pb = $b['since_scan_pct'];
+            if ($pa === null && $pb === null) {
                 return 0;
             }
-            if ($sa === null) {
+            if ($pa === null) {
                 return 1;
             }
-            if ($sb === null) {
+            if ($pb === null) {
                 return -1;
             }
 
-            return abs((float) $sb) <=> abs((float) $sa);
+            return abs((float) $pb) <=> abs((float) $pa);
         });
 
         return [
@@ -158,6 +158,45 @@ final class ScanSnapshot
             'fetched_at' => (string) ($prev['fetched_at'] ?? ''),
             'rows' => $out,
         ];
+    }
+
+    /**
+     * Visible 어제-점수순 행 중 오늘 대금 스캔에 없는 종목만 추가 조회해 등락을 채운다.
+     *
+     * @param array{date?:string,fetched_at?:string,rows:list<array<string,mixed>>} $review
+     * @param callable(array<string,mixed>):(?array<string,mixed>) $fetchToday
+     * @return array{date?:string,fetched_at?:string,rows:list<array<string,mixed>>}
+     */
+    public function fillOutsideScan(array $review, callable $fetchToday, int $limit = 12): array
+    {
+        $rows = is_array($review['rows'] ?? null) ? $review['rows'] : [];
+        $end = min(max(0, $limit), count($rows));
+        for ($i = 0; $i < $end; $i++) {
+            $row = $rows[$i];
+            if (!empty($row['still_in_scan']) || is_numeric($row['since_scan_pct'] ?? null)) {
+                continue;
+            }
+            try {
+                $extra = $fetchToday($row);
+            } catch (\Throwable) {
+                continue;
+            }
+            if (!is_array($extra)) {
+                continue;
+            }
+            $selected = self::comparisonPrice($extra);
+            $newPx = $selected['price'];
+            $oldPx = is_numeric($row['yesterday_price'] ?? null) ? (float) $row['yesterday_price'] : null;
+            $rows[$i]['today_price'] = $newPx;
+            $rows[$i]['today_price_source'] = $newPx !== null ? 'outside_rescan' : 'unavailable';
+            $rows[$i]['outside_rescanned'] = true;
+            $rows[$i]['since_scan_pct'] = ($oldPx !== null && $newPx !== null && $oldPx > 0)
+                ? round((($newPx - $oldPx) / $oldPx) * 100, 2)
+                : null;
+        }
+        $review['rows'] = $rows;
+
+        return $review;
     }
 
     /**

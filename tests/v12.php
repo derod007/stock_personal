@@ -27,13 +27,28 @@ try {
  $names=[];foreach(glob($root.'/src/*.php') as $p)$names[basename($p,'.php')]='src/'.basename($p);
  foreach($paths as $p)foreach($names as $name=>$dep)if(preg_match('/\b'.preg_quote($name,'/').'\b/',file_get_contents($root.'/'.$p)))vc(in_array($dep,$paths,true),'dependency covered '.$name);
  $snap=new ScanSnapshot($dir.'/scan');
- $rows=[['code'=>'000001','naver_price'=>'bad','price'=>100],['code'=>'000002','naver_price'=>0,'price'=>200],['code'=>'000003','naver_price'=>110,'price'=>90],['code'=>'000004','naver_price'=>-1,'price'=>null]];
+ $rows=[['code'=>'000001','naver_price'=>'bad','price'=>100,'score'=>40],['code'=>'000002','naver_price'=>0,'price'=>200,'score'=>90],['code'=>'000003','naver_price'=>110,'price'=>90,'score'=>70],['code'=>'000004','naver_price'=>-1,'price'=>null],['code'=>'000099','naver_price'=>50,'price'=>50,'score'=>99]];
  $snap->save(['ok'=>true,'fetched_at'=>'2026-09-15 12:00:00','rows'=>$rows]);
- $review=$snap->reviewAgainst($rows,'2026-09-16 12:00:00');
- foreach($review['rows'] as $row)vc($row['yesterday_price']===$row['today_price'],'save/review identical fallback '.$row['code']);
+ $today=array_slice($rows,0,4);
+ $review=$snap->reviewAgainst($today,'2026-09-16 12:00:00');
+ foreach($review['rows'] as $row) {
+  if ($row['code']==='000099') {
+   vc($row['still_in_scan']===false && $row['since_scan_pct']===null,'dropout stays outside today scan');
+   continue;
+  }
+  vc($row['yesterday_price']===$row['today_price'],'save/review identical fallback '.$row['code']);
+ }
  $by=[];foreach($review['rows'] as $row)$by[$row['code']]=$row;
  vc($by['000001']['today_price_source']==='row_price_fallback' && $by['000003']['today_price_source']==='naver_scan','source recorded');
  vc($by['000004']['since_scan_pct']===null,'invalid prices never produce returns');
  vc($by['000003']['yesterday_price_observed_at']==='2026-09-15 12:00:00','scan observation timestamp preserved');
+ vc(array_column($review['rows'],'code')===['000099','000002','000003','000001','000004'],'review sorted by yesterday score');
+ $filled=$snap->fillOutsideScan($review,static fn(array $row):array=>['naver_price'=>60],12);
+ $byFilled=[];foreach($filled['rows'] as $row)$byFilled[$row['code']]=$row;
+ vc(($byFilled['000099']['since_scan_pct']??null)===20.0 && !empty($byFilled['000099']['outside_rescanned']),'dropout extra scan fills return');
+ vc(($byFilled['000002']['since_scan_pct']??null)===$by['000002']['since_scan_pct'],'in-scan rows not extra scanned');
+ $calls=0;
+ $snap->fillOutsideScan($review,static function(array $row)use(&$calls):array{$calls++;return ['naver_price'=>60];},12);
+ vc($calls===1,'extra scan only dropouts in first 12');
 }finally{rm12($dir);}
 echo "SCOPE_AND_SCAN_PASS\n";

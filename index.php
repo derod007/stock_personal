@@ -10,6 +10,7 @@ use ChartEntryLab\EntryRepository;
 use ChartEntryLab\KrAmountLeadersClient;
 use ChartEntryLab\KrAmountScanner;
 use ChartEntryLab\LearnedLevels;
+use ChartEntryLab\NaverDailyQuotes;
 use ChartEntryLab\PriceCandidate;
 use ChartEntryLab\ProposalService;
 use ChartEntryLab\ScanSnapshot;
@@ -486,10 +487,63 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
                   $scanBuyNowCount++;
               }
           }
-          $scanReview = (new ScanSnapshot(__DIR__ . '/data/scan_snapshots'))->reviewAgainst(
+          $scanSnap = new ScanSnapshot(__DIR__ . '/data/scan_snapshots');
+          $scanReview = $scanSnap->reviewAgainst(
               $scanRows,
               isset($scanReport['fetched_at']) ? (string) $scanReport['fetched_at'] : null
           );
+          if (is_array($scanReview)) {
+              $naverQuotes = new NaverDailyQuotes(__DIR__ . '/data/ohlcv/naver');
+              $yahooClient = new YahooChartClient(__DIR__ . '/data/ohlcv');
+              $yahooAge = $scanRefresh ? 0 : 600;
+              $minNaverDate = (new DateTimeImmutable('now', new DateTimeZone('Asia/Seoul')))
+                  ->modify('-3 days')
+                  ->format('Y-m-d');
+              $scanReview = $scanSnap->fillOutsideScan(
+                  $scanReview,
+                  static function (array $row) use ($yahooClient, $naverQuotes, $yahooAge, $minNaverDate): ?array {
+                      $symbol = (string) ($row['yahoo'] ?? '');
+                      if ($symbol === '') {
+                          $symbol = (string) ($row['code'] ?? '');
+                      }
+                      if ($symbol === '') {
+                          return null;
+                      }
+                      $quotes = $naverQuotes->recent($symbol, useCache: $yahooAge > 0);
+                      if ($quotes !== []) {
+                          krsort($quotes);
+                          $latest = $quotes[array_key_first($quotes)];
+                          $qDate = is_array($latest) ? (string) ($latest['date'] ?? '') : '';
+                          if (
+                              $qDate >= $minNaverDate
+                              && is_array($latest)
+                              && is_numeric($latest['close'] ?? null)
+                              && (float) $latest['close'] > 0
+                          ) {
+                              return ['naver_price' => (float) $latest['close']];
+                          }
+                      }
+                      try {
+                          $bars = $yahooClient->fetch(
+                              $symbol,
+                              '2y',
+                              '1d',
+                              useCache: $yahooAge > 0,
+                              maxAgeSeconds: $yahooAge,
+                          );
+                      } catch (\Throwable) {
+                          return null;
+                      }
+                      $last = $bars !== [] ? $bars[array_key_last($bars)] : null;
+                      $price = is_array($last) && is_numeric($last['close'] ?? null)
+                          ? (float) $last['close']
+                          : null;
+
+                      return ['price' => $price];
+                  },
+                  12
+              );
+          }
           $scanReviewRows = is_array($scanReview) && is_array($scanReview['rows'] ?? null)
               ? array_slice($scanReview['rows'], 0, 12)
               : [];
@@ -645,7 +699,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
               <p class="flow-box__title">
                 어제 스캔 → 오늘
                 <?= tip("직전 스캔 당시 네이버 현재가 대비 오늘 스캔 네이버가입니다.
-차트 완료 일봉 종가가 아닙니다. 어제 진입 후보를 앞에 두고, 움직임이 큰 종목을 보여 줍니다. 추격 신호가 아닙니다.") ?>
+차트 완료 일봉 종가가 아닙니다. 어제 점수 높은 순입니다. 오늘 대금 100에 없으면 그 종목만 다시 조회합니다.") ?>
               </p>
               <p class="flow-spikes">
                 <?= h((string) ($scanReview['date'] ?? '')) ?>

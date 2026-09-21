@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
-require __DIR__.'/bin/bootstrap.php';
-require __DIR__.'/bin/paper/Experiment.php';
-require __DIR__.'/bin/paper/EntryGates.php';
-require __DIR__.'/bin/paper/Chrome.php';
+require_once __DIR__.'/bin/bootstrap.php';
+require_once __DIR__.'/bin/paper/Experiment.php';
+require_once __DIR__.'/bin/paper/EntryGates.php';
+require_once __DIR__.'/bin/paper/Chrome.php';
 use ChartEntryLab\PaperJournal;
 $id=$_GET['account']??'research-us-v1';$mode=$_GET['mode']??'forward';$origin=$_GET['origin']??($mode==='replay'?'replay':'forward');$exp=$_GET['experiment']??'us-volume95-v1';
 foreach([$id,$exp] as $v)if(!is_string($v)||!preg_match('/^[a-z0-9_-]{1,64}$/',$v)){http_response_code(400);exit('잘못된 ID');}

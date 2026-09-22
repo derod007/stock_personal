@@ -163,7 +163,7 @@ $q = 'account=' . rawurlencode($id) . '&mode=' . rawurlencode($mode);
 <?php endif ?>
 <?php
 if ($mode === 'forward') {
-    try { paper_followup_panel(PaperFollowup::load(dirname($dir, 2), $id)); }
+    try { $state = dirname($dir, 2); paper_followup_panel(PaperFollowup::load($state, $id), null, $state . '/runs/' . $id . '-forward'); }
     catch (Throwable $e) { echo '<p class="paper-alert">후속 추적 기록 읽기 실패</p>'; }
 }
 paper_close();

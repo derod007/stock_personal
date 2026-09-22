@@ -17,6 +17,15 @@ ok($x['complete'] && abs($x['horizons'][1]['return_pct']-1)<1e-8 && abs($x['hori
 ok(abs($x['horizons'][3]['max_up_pct']-5)<1e-8 && abs($x['horizons'][3]['max_down_pct']+1)<1e-8,'future high/low excursions');
 $early=PaperFollowup::evaluate($r,$bars,$bars[62]['available_at']);
 ok($early['horizons'][3]['status']==='complete'&&$early['horizons'][5]['return_pct']===null,'as-of excludes future and incomplete horizon is null');
+$stale=$early;$stale['status']='pending';$stale['latest_session']=$session;$stale['as_of']=$now;
+$failed=['symbol'=>'000660.KS','status'=>'price_or_evaluation_error','rejected'=>true,'error'=>'Yahoo HTTP 404','horizons'=>[]];
+$health=PaperFollowup::health(['generated_at'=>$now,'as_of'=>$now,'status'=>'partial','rows'=>['a'=>$x,'b'=>$stale,'c'=>$failed],'errors'=>[['file'=>'bad.json','error'=>'Invalid observation']]],[
+ ['started_at'=>$now-86400,'finished_at'=>$now-86300,'status'=>'success','followup'=>['status'=>'saved','finished_at'=>$now-86200]],
+ ['started_at'=>$now-3600,'finished_at'=>$now-3500,'status'=>'failed','followup'=>['status'=>'failed','finished_at'=>$now-3500,'error_type'=>'RuntimeException']],
+],$now);
+ok($health['latest_start']===$now-3600&&$health['latest_success_at']===$now-86300&&$health['followup_success_status']==='saved','last run and last success stay distinct');
+ok($health['tracking_rows']===1&&$health['complete_rows']===1&&$health['tracking_symbols']===1&&$health['stale_rows']===1,'open tracking and stale prices are counted');
+ok($health['price_failures']===1&&$health['rejected_samples'][20]===1&&$health['rejected_samples'][5]===1&&count($health['errors'])===2,'price failure and 5/20 completed samples');
 $s=PaperFollowup::summarize([$x,$early]);
 ok($s['groups']['rr']['horizons'][20]['n']===1 && $s['groups']['rr']['signals']===2,'completed denominators only');
 ok(count($s['groups'])===3 && $s['observations']===2,'overlap groups without multiplying observations');
@@ -51,6 +60,7 @@ try{
  ok($weekly['summary']===null&&$weekly['followup']['summary']['observations']===1,'weekly followup works without account orders');
  require __DIR__.'/../bin/paper/FollowupPanel.php';ob_start();paper_followup_panel($report);$html=ob_get_clean();
  ok(str_contains($html,'&lt;fixture&gt;')&&!str_contains($html,'<fixture>'),'read-only panel escapes names');
+ ok(str_contains($html,'마지막 실행·성공 시각')&&str_contains($html,'추적 중·관측 완료 종목 수')&&str_contains($html,'가격 갱신 실패·오래된 데이터')&&str_contains($html,'기간별 완료 표본 수')&&str_contains($html,'php bin/paper_followup.php --account=test'),'status panel shows rerun guidance');
  $new=$r;$new['symbol']='000660.KS';$b['records']=[$new];file_put_contents($audit.'/20250101-000002-000000000003.json',PaperRrAudit::encode($b));
  exec($cmd,$output,$code);$partial=PaperFollowup::load($root,'test');ok($partial['status']==='partial'&&$partial['summary']['statuses']['price_or_evaluation_error']===1,'missing off-scan price visible not zero return');
 }finally{

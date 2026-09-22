@@ -110,6 +110,74 @@ final class PaperFollowup
         }
         return $out;
     }
+    /** @param list<array<string,mixed>> $runs */
+    public static function health(?array $report,array $runs,int $now):array
+    {
+        $latest=null;$successAt=null;$followupStatus=null;$followupError=null;$followupSeenAt=null;$followupSuccessAt=null;$followupSuccessStatus=null;$invalid=0;
+        foreach($runs as $run){
+            if(!is_array($run)||!is_int($run['started_at']??null)||!in_array($run['status']??'',['success','failed','halted','running'],true)){$invalid++;continue;}
+            if($latest===null||$run['started_at']>=$latest['started_at'])$latest=$run;
+            if($run['status']==='success')$successAt=max($successAt??0,(int)($run['finished_at']??$run['started_at']));
+            $followup=$run['followup']??null;
+            if(!is_array($followup)||!isset($followup['status'])||$followup['status']==='running')continue;
+            $at=(int)($followup['finished_at']??$run['finished_at']??$run['started_at']);
+            $status=(string)$followup['status'];
+            if($followupSeenAt===null||$at>=$followupSeenAt){$followupSeenAt=$at;$followupStatus=$status;$followupError=$followup['error_type']??null;}
+            if(in_array($status,['saved','partial','no_observations'],true)&&($followupSuccessAt===null||$at>=$followupSuccessAt)){
+                $followupSuccessAt=$at;$followupSuccessStatus=$status;
+            }
+        }
+        $runStatus=$latest['status']??null;
+        if($runStatus==='running'&&$now-(int)$latest['started_at']>3700)$runStatus='unfinished';
+        $rows=is_array($report['rows']??null)?$report['rows']:[];
+        $trackRows=0;$doneRows=0;$trackSymbols=[];$doneSymbols=[];$priceRows=0;$priceSymbols=[];$staleRows=0;$staleSymbols=[];
+        foreach($rows as $row){
+            if(!is_array($row))continue;
+            $symbol=(string)($row['symbol']??'');$status=(string)($row['status']??'');
+            if($status==='complete'){$doneRows++;if($symbol!=='')$doneSymbols[$symbol]=true;}
+            elseif(in_array($status,['pending','no_future_bars'],true)){$trackRows++;if($symbol!=='')$trackSymbols[$symbol]=true;}
+            if($status==='price_or_evaluation_error'){$priceRows++;if($symbol!=='')$priceSymbols[$symbol]=true;}
+            $latestBar=$row['latest_session']??$row['session']??null;
+            if(in_array($status,['pending','no_future_bars'],true)&&is_int($latestBar)&&($report['as_of']??$now)-$latestBar>4*86400){
+                $staleRows++;if($symbol!=='')$staleSymbols[$symbol]=true;
+            }
+        }
+        $errors=[];
+        foreach($report['errors']??[] as $error){
+            if(!is_array($error))continue;
+            $errors[]=['where'=>(string)($error['symbol']??$error['file']??'기록'),'detail'=>(string)($error['error']??'오류')];
+        }
+        foreach($rows as $row){
+            if(!is_array($row)||($row['status']??'')!=='price_or_evaluation_error'||!isset($row['error']))continue;
+            $errors[]=['where'=>(string)($row['symbol']??'종목'),'detail'=>(string)$row['error']];
+        }
+        return ['latest_start'=>$latest['started_at']??null,'latest_status'=>$runStatus,'latest_success_at'=>$successAt,
+            'generated_at'=>$report['generated_at']??null,'followup_status'=>$report['status']??$followupStatus,
+            'followup_success_at'=>$followupSuccessAt,'followup_success_status'=>$followupSuccessStatus,
+            'followup_error_type'=>$followupStatus==='failed'?$followupError:null,'invalid_run_files'=>$invalid,
+            'tracking_rows'=>$trackRows,'tracking_symbols'=>count($trackSymbols),'complete_rows'=>$doneRows,
+            'complete_symbols'=>count($doneSymbols),'price_failures'=>$priceRows,'price_failure_symbols'=>count($priceSymbols),
+            'stale_rows'=>$staleRows,'stale_symbols'=>count($staleSymbols),'samples'=>self::horizonSamples($rows),
+            'rejected_samples'=>self::horizonSamples($rows,rejectedOnly:true),'errors'=>$errors];
+    }
+    public static function horizonSamples(array $rows,bool $rejectedOnly=false):array
+    {
+        $samples=array_fill_keys(self::HORIZONS,0);
+        foreach($rows as $row){
+            if(!is_array($row)||($rejectedOnly&&empty($row['rejected'])))continue;
+            foreach(self::HORIZONS as $n)if(($row['horizons'][$n]['status']??'')==='complete')$samples[$n]++;
+        }
+        return $samples;
+    }
+    public static function readRuns(string $directory):array
+    {
+        $runs=[];
+        foreach(glob($directory.'/*.json')?:[] as $file){
+            try{$run=json_decode((string)file_get_contents($file),true,512,JSON_THROW_ON_ERROR);if(is_array($run))$runs[]=$run;}
+            catch(Throwable $e){$runs[]=['invalid'=>true];}
+        }
+        return $runs;
+    }
     public static function load(string $dir,string $id,?array $window=null):?array
     {
         if(!preg_match('/^[a-z0-9_-]{1,64}$/',$id))throw new InvalidArgumentException('Invalid account');

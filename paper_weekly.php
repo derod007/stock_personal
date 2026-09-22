@@ -57,7 +57,7 @@ paper_open(['title'=>'주간 모의 계좌 요약','page'=>'weekly','account'=>$
 <?php
 if($mode==='forward'){
     if($r['followup_error'])echo '<p class="paper-alert">'.wh($r['followup_error']).'</p>';
-    else paper_followup_panel($r['followup'], $r['window']);
+    paper_followup_panel($r['followup'], $r['window'], $dir.'/runs/'.$id.'-forward');
 }
 endif;
 paper_close();

@@ -22,10 +22,10 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 
 ---
 
-## 2026-09-23 · Astra · 진행
-- 한 일: 탈락 종목 후속 추적·사유별 성과·지정가 자동 재검증·주간 화면 연결 구현, GitHub CI 검증 진행
+## 2026-09-23 01:04 · Astra · 끝
+- 한 일: 탈락 종목 후속 추적·사유별 성과·지정가 자동 재검증·주간 화면 연결 완료. 신규 PHP 21개, Python 전체 37개 및 기존 RR/스캔/주간 회귀 CI 통과
 - 파일: Followup 모듈/CLI/화면, daily, Weekly, 테스트, 사용 문서
-- 커밋: Add automatic rejection followup and weekly outcome summaries
+- 커밋: 95308de974c63ad2dcc2ee6db7f5854ac2d130ef / PR #18
 - 롤백: 없음
 
 ## 2026-09-23 00:52 · Cursor · 끝

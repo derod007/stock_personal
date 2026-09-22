@@ -106,6 +106,22 @@ def update(config_path, state_dir, runner=subprocess.run):
         print("Paper update failed at " + record["stage"] + ": " + type(exc).__name__, file=sys.stderr)
         return 1
     finally:
+        # Independent observation work also runs on zero recommendations or a failed account update.
+        if universe == "kr_amount_scan" and "scan" in record:
+            record["followup"] = {"status": "running", "started_at": int(time.time())}
+            save_record(log, record)
+            try:
+                followup = runner(["php", str(ROOT / "bin/paper_followup.php"), "--account=" + account],
+                                  cwd=ROOT, env=env, check=True, timeout=2400,
+                                  capture_output=True, text=True, encoding="utf-8", errors="replace")
+                result = json.loads(followup.stdout)
+                if not isinstance(result, dict) or result.get("status") not in ("saved", "partial", "no_observations"):
+                    raise ValueError("Invalid followup summary")
+                record["followup"].update(result)
+            except Exception as exc:
+                record["followup"].update(status="failed", error_type=type(exc).__name__)
+                print("Followup failed: " + type(exc).__name__, file=sys.stderr)
+            record["followup"]["finished_at"] = int(time.time())
         record["finished_at"] = int(time.time())
         save_record(log, record)
 
@@ -125,3 +141,4 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+

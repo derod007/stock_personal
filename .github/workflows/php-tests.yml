@@ -22,6 +22,10 @@ jobs:
           php tests/v13.php
           php tests/v14.php
           php tests/rr_view.php
+          php tests/followup.php
+          php tests/rr_audit.php
+          php tests/rr_scan.php
+          php tests/weekly.php
           php tests/amount_exclude.php
       - name: Operational logging tests
         run: python3 -m unittest discover -s tests -p "test_*.py"
@@ -50,3 +54,4 @@ jobs:
         with:
           name: comparison-data-and-results
           path: data/comparison/
+

@@ -5,6 +5,7 @@ declare(strict_types=1);
 require __DIR__ . '/bin/bootstrap.php';
 require __DIR__ . '/bin/paper/RrView.php';
 require_once __DIR__ . '/bin/paper/Chrome.php';
+require_once __DIR__ . '/bin/paper/FollowupPanel.php';
 
 use ChartEntryLab\ChartPlanEngine;
 use ChartEntryLab\YahooChartClient;
@@ -160,7 +161,12 @@ $q = 'account=' . rawurlencode($id) . '&mode=' . rawurlencode($mode);
 </section>
 <?php endif ?>
 <?php endif ?>
-<?php paper_close();
+<?php
+if ($mode === 'forward') {
+    try { paper_followup_panel(PaperFollowup::load(dirname($dir, 2), $id)); }
+    catch (Throwable $e) { echo '<p class="paper-alert">후속 추적 기록 읽기 실패</p>'; }
+}
+paper_close();
 
 /** @param list<array<string,mixed>> $records
  *  @return array<string,list<array<string,mixed>>>
@@ -240,3 +246,4 @@ function rr_preview_from_scan(string $root): array
         'records' => $records,
     ];
 }
+

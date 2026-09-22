@@ -22,6 +22,12 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 
 ---
 
+## 2026-09-23 · Astra · 진행
+- 한 일: 탈락 종목 후속 추적·사유별 성과·지정가 자동 재검증·주간 화면 연결 구현, GitHub CI 검증 진행
+- 파일: Followup 모듈/CLI/화면, daily, Weekly, 테스트, 사용 문서
+- 커밋: Add automatic rejection followup and weekly outcome summaries
+- 롤백: 없음
+
 ## 2026-09-23 00:52 · Cursor · 끝
 - 한 일: 워뇨띠 자료 폴더를 git 제외로 바꿈
 - 파일: `.gitignore`, `docs/work-log.md`
@@ -161,3 +167,4 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 - 파일: `docs/work-log.md`, `.cursor/rules/work-log.mdc`
 - 커밋: 안 함
 - 롤백: 없음
+

@@ -2,6 +2,7 @@
 declare(strict_types=1);
 require __DIR__.'/bin/bootstrap.php';require_once __DIR__.'/bin/paper/Experiment.php';require_once __DIR__.'/bin/paper/Weekly.php';require_once __DIR__.'/bin/paper/Diagnostics.php';
 require_once __DIR__.'/bin/paper/Chrome.php';
+require_once __DIR__.'/bin/paper/FollowupPanel.php';
 use ChartEntryLab\PaperJournal;
 function wh(mixed $x):string{return paper_esc($x);}
 function wt(?int $t):string{return $t?(new DateTimeImmutable('@'.$t))->setTimezone(new DateTimeZone('Asia/Seoul'))->format('Y-m-d H:i'):'—';}
@@ -53,5 +54,11 @@ paper_open(['title'=>'주간 모의 계좌 요약','page'=>'weekly','account'=>$
 <?php foreach($r['comparisons_current'] as $c): ?><p class="paper-lede"><?= wh(paper_account_name((string) $c['definition']['id'])) ?> · <?= wh(paper_ko((string) $c['identity_check'])) ?> · <?= $c['source_sync']?'원본과 갱신 일치':'원본과 갱신 불일치' ?><br><?= wh($c['decision'].' / '.paper_ko_join($c['reasons'])) ?> · 마지막 평가 <?= wh(wt($c['last_session'])) ?></p><?php if($c['operations']): ?><p class="paper-note">선택 주 비교 실행: <?= wh(paper_ko_counts($c['operations']['counts'])) ?> · 마지막 시작 <?= wh(wt($c['operations']['latest_start'])) ?></p><?php endif; endforeach ?>
 <?php if($r['comparison_read_errors']): ?><p class="paper-alert">비교 파일 읽기 오류 <?= wh($r['comparison_read_errors']) ?>개 (동일 기록 종류의 전체 비교 파일). 동일 전략 정상으로 간주하지 않습니다.</p><?php endif ?>
 <p class="paper-note">주간 완료 거래 수가 적으면 손익은 관측값일 뿐입니다. 자동 조건 변경이나 전략 승격은 없습니다. 거래 집계는 세션 시각, 실행/중단 발견은 실제 기록 시각 기준입니다.</p>
-<?php endif;
+<?php
+if($mode==='forward'){
+    if($r['followup_error'])echo '<p class="paper-alert">'.wh($r['followup_error']).'</p>';
+    else paper_followup_panel($r['followup'], $r['window']);
+}
+endif;
 paper_close();
+

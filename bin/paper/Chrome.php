@@ -37,6 +37,7 @@ function paper_open(array $opts): void
         'compare' => 'paper_compare.php',
         'revisions' => 'paper_revisions.php',
         'entry' => 'paper_entry.php',
+        'rr' => 'paper_rr.php',
     ];
     $script = $scripts[$page] ?? 'paper.php';
     $isKr = str_contains($account, '-kr') || str_starts_with($experiment, 'kr-');
@@ -83,6 +84,7 @@ function paper_open(array $opts): void
       <a class="tabs__link<?= $on('weekly') ?>" href="paper_weekly.php?<?= paper_esc($q) ?>"<?= $now('weekly') ?>>주간</a>
       <a class="tabs__link<?= $on('compare') ?>" href="paper_compare.php?experiment=<?= paper_esc($isKr ? 'kr-identity' : 'us-identity') ?>&amp;mode=<?= paper_esc($mode) ?>"<?= $now('compare') ?>>비교</a>
       <a class="tabs__link<?= $on('entry') ?>" href="paper_entry.php?<?= paper_esc($q) ?>"<?= $now('entry') ?>>진입 조건</a>
+      <a class="tabs__link<?= $on('rr') ?>" href="paper_rr.php?<?= paper_esc($q) ?>"<?= $now('rr') ?>>탈락 로그</a>
       <a class="tabs__link<?= $on('revisions') ?>" href="paper_revisions.php?<?= paper_esc($q) ?>"<?= $now('revisions') ?>>데이터 변경</a>
     </nav>
 <?php

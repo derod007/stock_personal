@@ -15,11 +15,13 @@ jobs:
           php -l paper.php
           php -l paper_diagnostics.php
           php -l paper_trades.php
+          php -l paper_rr.php
       - name: Regression
         run: |
           php tests/v9.php
           php tests/v13.php
           php tests/v14.php
+          php tests/rr_view.php
       - name: Operational logging tests
         run: python3 -m unittest discover -s tests -p "test_*.py"
   comparison:

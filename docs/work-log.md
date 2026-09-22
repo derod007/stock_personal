@@ -22,10 +22,16 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 
 ---
 
+## 2026-09-23 00:52 · Cursor · 끝
+- 한 일: 워뇨띠 자료 폴더를 git 제외로 바꿈
+- 파일: `.gitignore`, `docs/work-log.md`
+- 커밋: 워뇨띠 자료는 저장소에 올리지 않음
+- 롤백: 없음
+
 ## 2026-09-23 00:45 · Cursor · 끝
 - 한 일: 거래대금 순위에서 스팩, ETF, ETN, 단일종목 레버리지를 빼고 다음 종목으로 채움
 - 파일: `src/KrAmountLeadersClient.php`, `index.php`, `tests/amount_exclude.php`, `.github/workflows/php-tests.yml`, `docs/work-log.md`
-- 커밋: 안 함
+- 커밋: db769a9
 - 롤백: 없음
 
 ## 2026-09-22 14:34 · Cursor · 끝

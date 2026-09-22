@@ -7,6 +7,7 @@ namespace ChartEntryLab;
 /**
  * 다음 금융 거래대금(accTradePrice) 순위.
  * 고가·저거래량 종목도 대금 TOP에 들어온다.
+ * 스팩, ETF, ETN, 단일종목 레버리지는 순위에서 빼고 다음 종목으로 채운다.
  * 다음이 막히면 네이버 거래량 상위 표의 대금 컬럼으로 폴백한다.
  */
 final class KrAmountLeadersClient
@@ -47,7 +48,7 @@ final class KrAmountLeadersClient
             throw new \InvalidArgumentException('지원하지 않는 거래대금 시장: ' . $market);
         }
         $cacheFile = sprintf(
-            '%s/kr_amount_leaders_v4_%s_%d.json',
+            '%s/kr_amount_leaders_v5_%s_%d.json',
             $this->cacheDir,
             $market,
             $limit
@@ -152,12 +153,41 @@ final class KrAmountLeadersClient
                 break;
             }
             $page++;
-            if ($page > 3) {
+            if ($page > 10) {
                 break;
             }
         }
 
         return $rows;
+    }
+
+    /** 거래대금 순위에 넣지 않는 상품. 보통주·우선주·리츠 이름은 통과한다. */
+    public static function excludedFromAmountRank(string $name): bool
+    {
+        $name = trim($name);
+        if ($name === '') {
+            return false;
+        }
+        if (preg_match('/스팩|기업인수목적|단일종목|ETN/ui', $name) === 1) {
+            return true;
+        }
+        $upper = strtoupper($name);
+        foreach ([
+            'KODEX', 'TIGER', 'KOSEF', 'KINDEX', 'KOACT', 'ACE', 'SOL ', 'PLUS',
+            'RISE', 'HANARO', 'ARIRANG', 'KBSTAR', 'TIMEFOLIO', 'WON ', '1Q ',
+            'KIWOOM', 'TREX', 'FOCUS', 'UNICORN', 'HK ', 'MASTER', 'TIME ',
+        ] as $prefix) {
+            if (str_starts_with($upper, $prefix)) {
+                return true;
+            }
+        }
+        foreach (['히어로즈', '마이티', '에셋플러스'] as $prefix) {
+            if (str_starts_with($name, $prefix)) {
+                return true;
+            }
+        }
+
+        return preg_match('/인버스|레버리지|커버드콜|(?<![A-Za-z])ETF(?![A-Za-z])/u', $name) === 1;
     }
 
     /**
@@ -190,6 +220,11 @@ final class KrAmountLeadersClient
             default => 0.0,
         };
 
+        $name = (string) ($item['name'] ?? $code);
+        if (self::excludedFromAmountRank($name)) {
+            return null;
+        }
+
         $price = isset($item['tradePrice']) && is_numeric($item['tradePrice'])
             ? (float) $item['tradePrice']
             : null;
@@ -200,7 +235,7 @@ final class KrAmountLeadersClient
         return [
             'rank' => 0,
             'code' => $code,
-            'name' => (string) ($item['name'] ?? $code),
+            'name' => $name,
             'market' => $market,
             'yahoo' => $code . $yahooSuffix,
             'price' => $price,
@@ -249,6 +284,9 @@ final class KrAmountLeadersClient
         foreach ($matches as $m) {
             $code = $m[2];
             $name = html_entity_decode(trim($m[3]), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            if (self::excludedFromAmountRank($name)) {
+                continue;
+            }
             $nums = $this->extractNumbers($m[4]);
             $price = isset($nums[0]) ? (float) $nums[0] : null;
             $volume = isset($nums[1]) ? (int) $nums[1] : null;

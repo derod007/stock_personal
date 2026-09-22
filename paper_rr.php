@@ -93,7 +93,7 @@ $q = 'account=' . rawurlencode($id) . '&mode=' . rawurlencode($mode);
 <?php if ($error): ?><p class="paper-alert"><?= rh($error) ?></p><?php endif ?>
 <?php if ($note !== ''): ?><p class="paper-note"><?= rh($note) ?></p><?php endif ?>
 <?php if (!$bundle && !$error): ?>
-<p class="paper-note">아직 이 계좌의 감사 로그가 없습니다. 한국 모의는 다음 20:20 실행부터 <span class="mono">rr-audit/<?= rh($id) ?></span>에 저장됩니다.</p>
+<p class="paper-note">아직 이 계좌의 탈락 로그가 없습니다. 한국 모의는 다음 20:20 실행부터 이 화면에 쌓입니다.</p>
 <p><a class="btn-scan" href="paper_rr.php?<?= rh($q) ?>&amp;preview=1">오늘 스캔 캐시로 미리보기</a></p>
 <?php elseif ($bundle): ?>
 <p class="paper-lede"><?= rh((string) ($bundle['fetched_at'] ?? rkst(isset($bundle['recorded_at']) ? (int) $bundle['recorded_at'] : null))) ?> · 종목 <?= rh((string) ($bundle['summary']['symbols'] ?? count($rows))) ?> · 확인 후 손익비 탈락 <?= rh((string) ($bundle['summary']['confirmed_rr_symbol_days'] ?? 0)) ?> · 연구 포함 <?= rh((string) ($bundle['summary']['added'] ?? 0)) ?></p>
@@ -105,9 +105,9 @@ $q = 'account=' . rawurlencode($id) . '&mode=' . rawurlencode($mode);
 <?php foreach ($rows as $row): ?>
 <tr>
   <td><?= rh($row['name']) ?></td>
-  <td><?= rh($row['pattern']) ?></td>
-  <td><?= rh($row['raw_status']) ?></td>
-  <td><?= rh($row['final_status']) ?></td>
+  <td><?= rh(paper_ko($row['pattern'])) ?></td>
+  <td><?= rh(paper_ko($row['raw_status'])) ?></td>
+  <td><?= rh(paper_ko($row['final_status'])) ?></td>
   <td><?= rh($row['missing'] !== '' ? $row['missing'] : '—') ?></td>
   <td><?= rh($row['blockers'] !== '' ? $row['blockers'] : ($row['included'] ? '없음' : '—')) ?></td>
   <td class="mono"><?= rh(rnum($row['entry'])) ?></td>
@@ -146,10 +146,10 @@ $q = 'account=' . rawurlencode($id) . '&mode=' . rawurlencode($mode);
 <tbody>
 <?php foreach ($perf['rows'] as $row): ?>
 <tr>
-  <td><?= rh($row['kind']) ?></td>
+  <td><?= rh(paper_ko($row['kind'])) ?></td>
   <td><?= rh($row['name']) ?></td>
   <td class="mono"><?= rh(rnum($row['entry'])) ?></td>
-  <td><?= rh($row['status']) ?><?= !empty($row['entry_bar_stop_touch']) ? ' · 체결봉 손절 접촉' : '' ?></td>
+  <td><?= rh(paper_ko($row['status'])) ?><?= !empty($row['entry_bar_stop_touch']) ? ' · 체결봉 손절 접촉' : '' ?></td>
   <td><?= !empty($row['hit_stop']) ? '예' : '—' ?></td>
   <td><?= !empty($row['hit_target']) ? '예' : '—' ?></td>
   <td class="mono"><?= rh(is_numeric($row['net_return_pct']) ? sprintf('%+.3f%%', $row['net_return_pct']) : '—') ?></td>

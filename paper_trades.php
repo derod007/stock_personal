@@ -15,16 +15,16 @@ try {$d=(new PaperJournal($dir.'/'.$id.'-'.$mode.'.json'))->read();if($d && $d['
 catch(Throwable $e){$error='기록 읽기 또는 분석 오류입니다. 원본 계좌 기록을 확인하세요.';}
 paper_open(['title'=>'거래별 성과 분석','page'=>'trades','account'=>$id,'mode'=>$mode]);
 ?>
-<form class="paper-filter"><label>계좌 ID <input name="account" value="<?= th($id) ?>"></label><select name="mode"><option value="forward" <?= $mode==='forward'?'selected':'' ?>>앞으로 기록</option><option value="replay" <?= $mode==='replay'?'selected':'' ?>>과거 재현</option></select><button>조회</button></form>
+<form class="paper-filter"><?php paper_account_field($id); ?><label>기록 종류 <select name="mode"><option value="forward" <?= $mode==='forward'?'selected':'' ?>>앞으로 기록</option><option value="replay" <?= $mode==='replay'?'selected':'' ?>>과거 재현</option></select></label><button>조회</button></form>
 <p class="paper-lede">모의 계좌에 저장된 체결·청산과 당시 진입 조건을 분석합니다. 현재 전략으로 과거 매매를 다시 계산하지 않습니다.</p>
 <?php if($error): ?><section class="panel panel--error"><p><?= th($error) ?></p></section>
 <?php elseif(!$r): ?><section class="panel panel--idle"><p>아직 계좌 기록이 없습니다. 일일 수집·모의 계좌 갱신 이후 확인하세요.</p></section>
 <?php else: ?>
 <section class="panel">
-<p class="paper-lede"><?= th($id) ?> · <?= th($r['currency']) ?> · 마지막 평가 <?= th(tt($r['last_session'])) ?> KST</p>
+<p class="paper-lede"><?= th(paper_account_name($id)) ?> · <?= th(paper_ko((string) $r['currency'])) ?> · 마지막 평가 <?= th(tt($r['last_session'])) ?></p>
 <?php if($r['halted']): ?><p class="paper-alert">중단된 계좌입니다. 아래 결과는 마지막으로 보존된 기록까지만 분석합니다.</p><?php endif ?>
-<?php if($r['issues']): ?><p class="paper-alert">거래 연결 또는 계좌 손익 대사 오류: <?= th(implode(', ',$r['issues'])) ?>. 집계로 전략을 판단하기 전에 원본을 확인하세요.</p><?php endif ?>
-<p class="paper-note">완료 거래 <?= th($r['closed']) ?>건 · 기록된 순손익 <?= th(tn($r['net_pnl'])) ?> <?= th($r['currency']) ?>. 거래 수가 적은 그룹은 탐색용입니다. 그룹 평균 수익률은 거래별 단순 평균이며 계좌 수익률이 아닙니다.</p>
+<?php if($r['issues']): ?><p class="paper-alert">거래 연결 또는 계좌 손익 대사 오류: <?= th(paper_ko_join($r['issues'])) ?>. 집계로 전략을 판단하기 전에 원본을 확인하세요.</p><?php endif ?>
+<p class="paper-note">완료 거래 <?= th($r['closed']) ?>건 · 기록된 순손익 <?= th(tn($r['net_pnl'])) ?> <?= th(paper_ko((string) $r['currency'])) ?>. 거래 수가 적은 그룹은 탐색용입니다. 그룹 평균 수익률은 거래별 단순 평균이며 계좌 수익률이 아닙니다.</p>
 <h2 class="paper-section-title">청산 사유·진입 패턴별 성과</h2>
 <div class="scan-table-wrap"><table class="scan-table"><thead><tr><th>기록 종류</th><th>구분 / 조건</th><th>완료 / 이익 건수</th><th>순손익</th><th>평균 순수익률</th><th>평균 R</th></tr></thead><tbody>
 <?php foreach($r['groups'] as $g): ?><tr><td><?= th(tl($g['origin'])) ?></td><td><?= $g['kind']==='pattern'?'진입 패턴':'청산 사유' ?> / <?= th(tl($g['label'])) ?></td><td class="mono"><?= th($g['count'].' / '.$g['wins']) ?></td><td class="mono"><?= th(tn($g['net_pnl'])) ?></td><td class="mono"><?= th(tn($g['mean_return_pct'])) ?>%</td><td class="mono"><?= th(tn($g['mean_r'])) ?></td></tr><?php endforeach ?></tbody></table></div>
@@ -35,8 +35,8 @@ paper_open(['title'=>'거래별 성과 분석','page'=>'trades','account'=>$id,'
 <?php if(!$r['trades']): ?><p class="paper-empty">체결된 거래가 없습니다. 주문 제외·만료는 실행·추천 진단에서 확인하세요.</p><?php endif ?>
 <p class="paper-note">확인 구간 상승·하락은 체결 가격, 청산 가격, 온전히 보유한 중간 일봉, 보유가 이어진 날의 종가를 사용합니다. 경계일 포함 범위는 진입·청산 당일 전체 고저가까지 포함합니다. 일봉의 체결 전후 순서를 알 수 없어 실제 최대 상승·하락은 확정하지 않습니다. 두 수치는 비용 차감 전 가격 변동이며, 청산 가격에는 기존 모형의 슬리피지가 반영돼 있습니다.</p>
 <?php foreach(array_reverse($r['trades']) as $t): $f=$t['fill'];$x=$t['exit']; ?>
-<details class="paper-trade"><summary>#<?= th($t['id']) ?> <?= th($t['symbol']) ?> · <?= th(tl($t['origin'])) ?> · <?= th(tl($t['status'])) ?> · 순손익 <?= th(tn($t['net_pnl'])) ?> <?= th($r['currency']) ?></summary>
-<p>추천 <?= th(tt($t['signal_session'])) ?> / 실제 기록 <?= th(tt($t['signal_recorded_at']??0)) ?> KST<br>진입 패턴 <?= th($t['pattern']) ?> · <?= th($t['signal_reason']) ?></p>
+<details class="paper-trade"><summary>#<?= th($t['id']) ?> <?= th($t['symbol']) ?> · <?= th(tl($t['origin'])) ?> · <?= th(tl($t['status'])) ?> · 순손익 <?= th(tn($t['net_pnl'])) ?> <?= th(paper_ko((string) $r['currency'])) ?></summary>
+<p>추천 <?= th(tt($t['signal_session'])) ?> / 실제 기록 <?= th(tt($t['signal_recorded_at']??0)) ?><br>진입 패턴 <?= th(paper_ko((string) $t['pattern'])) ?> · <?= th(paper_ko((string) $t['signal_reason'])) ?></p>
 <div class="scan-table-wrap"><table class="scan-table paper-kv"><tbody>
 <tr><th>진입 / 청산 거래일 (KST)</th><td><?= th(tt($f['session']).' / '.tt($x['session']??0)) ?></td></tr>
 <tr><th>수량 / 진입가 / 청산가</th><td><?= th($f['quantity'].' / '.tn($f['price'],4).' / '.tn($x['price']??null,4)) ?></td></tr>

@@ -16,7 +16,7 @@ $s=$d['state']??null;
 paper_open(['title'=>'모의 계좌 기록','page'=>'account','account'=>$id,'mode'=>$mode]);
 ?>
 <form class="paper-filter" method="get">
-  <label>계좌 ID <input name="account" value="<?= ph($id) ?>"></label>
+  <?php paper_account_field($id); ?>
   <label>기록 종류 <select name="mode"><option value="forward" <?= $mode==='forward'?'selected':'' ?>>앞으로 기록한 추천</option><option value="replay" <?= $mode==='replay'?'selected':'' ?>>과거 재현</option></select></label>
   <button>조회</button>
 </form>
@@ -28,8 +28,13 @@ paper_open(['title'=>'모의 계좌 기록','page'=>'account','account'=>$id,'mo
 <section class="panel panel--idle">
   <h2>아직 기록이 없습니다</h2>
   <p>프로젝트 폴더에서 아래 명령으로 수집·기록한 뒤 다시 조회하세요.</p>
-  <pre class="paper-pre">python3 bin/paper_daily.py --config=config/paper-us.json</pre>
-  <p class="paper-note">한국 계좌는 config/paper-kr.json을 사용하세요. 화면 조회만으로 주문이나 수집이 실행되지는 않습니다.</p>
+  <pre class="paper-pre">python bin/paper_daily.py --config=<?= ph(match ($id) {
+    'paper-kr' => 'config/paper-kr.json',
+    'research-kr-v1' => 'config/paper-research-kr-v1.json',
+    'research-us-v1' => 'config/paper-research-us-v1.json',
+    default => 'config/paper-us.json',
+  }) ?></pre>
+  <p class="paper-note">이 명령은 화면 밖에서 실행합니다. 조회만으로 주문이나 수집이 실행되지는 않습니다.</p>
 </section>
 <?php else:
 $equity=PaperPortfolio::equity($s);$reserve=PaperPortfolio::reserved($s);$last=$s['equity']===[]?null:end($s['equity']);
@@ -38,8 +43,8 @@ $unreal=$equity-$s['config']['initial_cash']-$s['realized'];
 <section class="panel panel--result">
   <div class="result__head">
     <div class="result__identity">
-      <h2><?= ph($id) ?></h2>
-      <p class="result__meta"><?= ph($s['config']['currency']) ?> · <?= $mode==='forward'?'앞으로 기록한 추천':'과거 재현' ?> · 마지막 평가 <?= ph(pt($s['last_session'])) ?> KST · 전략 <?= ph(substr($s['version'],0,12)) ?></p>
+      <h2><?= ph(paper_account_name($id)) ?></h2>
+      <p class="result__meta"><?= ph($s['config']['currency'] === 'KRW' ? '원' : ($s['config']['currency'] === 'USD' ? '달러' : $s['config']['currency'])) ?> · <?= $mode==='forward'?'앞으로 기록한 추천':'과거 재현' ?> · 마지막 평가 <?= ph(pt($s['last_session'])) ?> · 전략 <?= ph(substr($s['version'],0,12)) ?></p>
     </div>
   </div>
   <?php if(!empty($s['halted'])): ?><p class="paper-alert"><?= ($s['halt_reason']??'historical_revision')==='unpriced_position'?'보유 종목의 가격 경로를 확인할 수 없어 계좌 처리를 중단했습니다. 누락 기간의 체결을 추측하지 않습니다.':'과거 가격 변경이 발견되어 계좌 처리를 중단했습니다. 이전 추천은 보존됐습니다.' ?></p><?php endif ?>
@@ -62,23 +67,24 @@ $unreal=$equity-$s['config']['initial_cash']-$s['realized'];
 </section>
 <section class="panel">
   <h2 class="paper-section-title">최근 추천과 데이터 품질</h2>
-  <p class="paper-note">warning은 보정 방식 등이 미확인인 연구용 데이터, blocked는 이번 모의 주문에 사용할 수 없는 데이터입니다.</p>
+  <p class="paper-note">확인 필요는 보정 방식이 아직 확인되지 않은 연구용 데이터입니다. 매수 금지는 이번 모의 주문에 쓸 수 없는 데이터입니다.</p>
   <div class="scan-table-wrap"><table class="scan-table"><thead><tr><th>종목</th><th>판단 시점 / 실제 기록 시점 (KST)</th><th>기록 종류</th><th>신호</th><th>품질·출처</th></tr></thead><tbody>
   <?php foreach($s['last_snapshots'] as $symbol=>$x):
     $planStatus=(string)($x['plan']['status']??'');
     $rowClass=$planStatus==='risk_blocked'?'is-top-risk':($x['plan']['ready']??false?'is-recommend':'');
   ?>
-  <tr class="<?= ph($rowClass) ?>"><td class="mono"><?= ph($symbol) ?></td><td class="mono"><?= ph(pt($x['session']).' / '.pt($x['recorded_at'])) ?></td><td><?= ph($x['origin']) ?></td><td><?= ph($x['plan']['reason']??$x['plan']['status']) ?></td><td><?= ph($x['quality']['status'].' · '.implode(', ',array_merge($x['quality']['reasons'],$x['quality']['warnings']))) ?><br><span class="scan-code"><?= ph($x['quality']['source']['price_basis']??$x['quality']['source']['source']??'출처 없음') ?></span></td></tr>
+  <tr class="<?= ph($rowClass) ?>"><td class="mono"><?= ph($symbol) ?></td><td class="mono"><?= ph(pt($x['session']).' / '.pt($x['recorded_at'])) ?></td><td><?= ph(paper_ko((string) $x['origin'])) ?></td><td><?= ph($x['plan']['reason']??paper_ko((string) ($x['plan']['status'] ?? ''))) ?></td><td><?= ph(paper_ko((string) $x['quality']['status']).' · '.paper_ko_join(array_merge($x['quality']['reasons'],$x['quality']['warnings']))) ?><br><span class="scan-code"><?= ph(paper_ko((string) ($x['quality']['source']['price_basis']??$x['quality']['source']['source']??'출처 없음'))) ?></span></td></tr>
   <?php endforeach ?>
   </tbody></table></div>
 </section>
 <section class="panel">
   <h2 class="paper-section-title">최근 기록 80건</h2>
-  <p class="paper-note">snapshot은 당시 판단, decision은 주문 허용/제외 결과입니다. 전체 기록은 계좌 파일에 보존됩니다.</p>
+  <p class="paper-note">당시 판단은 그 시각의 평가이고, 주문 제외는 주문을 넣지 않은 이유입니다. 전체 기록은 계좌 파일에 보존됩니다.</p>
   <div class="scan-table-wrap"><table class="scan-table"><thead><tr><th>번호 / 실제 기록 시각 (KST)</th><th>종류</th><th>내용</th></tr></thead><tbody>
   <?php foreach(array_reverse(array_slice($d['events'],-80)) as $e): $p=$e['payload']; ?>
-  <tr><td class="mono"><?= ph($e['id'].' / '.pt($e['recorded_at'])) ?></td><td><span class="badge"><?= ph($e['type']) ?></span></td><td><?php
-  if($e['type']==='snapshot') echo ph(($p['symbol']??'').' · '.($p['plan']['status']??'').' · '.$p['origin']);
+  <tr><td class="mono"><?= ph($e['id'].' / '.pt($e['recorded_at'])) ?></td><td><span class="badge"><?= ph(paper_ko((string) $e['type'])) ?></span></td><td><?php
+  if($e['type']==='snapshot') echo ph(($p['symbol']??'').' · '.paper_ko((string) ($p['plan']['status']??'')).' · '.paper_ko((string) ($p['origin']??'')));
+  elseif(isset($p['symbol'])) echo ph((string) $p['symbol'].(isset($p['reason']) ? ' · '.paper_ko((string) $p['reason']) : ''));
   else echo ph(PaperJournal::encode($p));
   ?></td></tr><?php endforeach ?>
   </tbody></table></div>

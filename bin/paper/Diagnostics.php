@@ -76,6 +76,6 @@ final class PaperDiagnostics
             'snapshot'=>'추천 평가', 'decision'=>'신규 주문 제외', 'order'=>'주문 생성', 'fill'=>'체결',
             'exit'=>'청산', 'order_cancelled'=>'주문 취소/만료', 'account_halted'=>'계좌 중단',
             'forward'=>'당시 기록', 'catchup'=>'놓친 기간 사후 기록', 'replay'=>'과거 재현', 'execution'=>'주문 실행 결과',
-        ][$code]??$code;
+        ][$code] ?? (function_exists('paper_ko') ? paper_ko($code) : $code);
     }
 }

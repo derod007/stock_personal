@@ -11,7 +11,7 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 ## YYYY-MM-DD HH:MM · 누가 · 상태
 - 한 일:
 - 파일:
-- 커밋: 안 함 | (해시 또는 메시지)
+- 커밋: a2790c5 (구현), 작업 기록은 후속 커밋 | (해시 또는 메시지)
 - 롤백: 없음 | 무엇을 되돌렸는지
 ```
 
@@ -22,9 +22,9 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 
 ---
 
-## 2026-09-26 13:52 · Astra · 진행
-- 한 일: 고점 재시도 파동 및 고정 L2 종가 이탈 기반 보유 축소 후보 표시 개발
-- 파일: 고점판독 v2 모듈·보유 화면·CLI·테스트·문서
+## 2026-09-26 13:52 · Astra · 끝
+- 한 일: 고점 재시도 횟수·고정 L2 종가 이탈 기반 보유 축소 후보, 회복 관찰·경고 해제 및 근거 표시. 신규 23개 검사와 전략 지문·주간 요약 회귀 CI 통과. PR #19
+- 파일: `src/TopWaveReview.php`, `bin/paper/TopWavePanel.php`, `bin/paper_top_wave.php`, `paper.php`, `tests/top_wave.php`, `.github/workflows/top-wave.yml`, `docs/top-wave-review.md`, `docs/work-log.md`
 - 커밋: 안 함
 - 롤백: 없음
 

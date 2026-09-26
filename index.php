@@ -786,7 +786,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
           <?php endif; ?>
           </div>
           <div class="scan-table-wrap">
-            <table class="scan-table">
+            <table class="scan-table" id="scan-results">
               <thead>
                 <tr>
                   <th>대금순위</th>
@@ -1680,7 +1680,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
 
     (function () {
       const sortBar = document.getElementById('scan-sort');
-      const tbody = document.querySelector('.scan-table tbody');
+      const tbody = document.querySelector('#scan-results tbody');
       if (!sortBar || !tbody) return;
       const rows = Array.from(tbody.querySelectorAll('tr'));
       const entryTier = (tr) => {

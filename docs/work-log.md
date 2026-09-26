@@ -22,6 +22,18 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 
 ---
 
+## 2026-09-26 13:42 · Cursor · 끝
+- 한 일: 에펨코리아 고점판독 글과 댓글, 차트 3장을 HTML로 저장
+- 파일: docs/fmkorea-10376812980/index.html, docs/fmkorea-10376812980/chart-1.webp, docs/fmkorea-10376812980/chart-2.webp, docs/fmkorea-10376812980/chart-3.webp
+- 커밋: 안 함
+- 롤백: 없음
+
+## 2026-09-23 12:16 · Cursor · 끝
+- 한 일: 거래대금 스캔 점수순이 어제 스캔 표를 정렬하던 것을 본 목록으로 고침
+- 파일: index.php
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-09-23 01:25 · Cursor · 끝
 - 한 일: 탈락 후속 추적 화면에 실행 시각, 추적·완료 수, 가격 실패, 기간별 표본, 재실행 안내를 표시
 - 파일: `bin/paper/Followup.php`, `bin/paper/FollowupPanel.php`, `paper_rr.php`, `paper_weekly.php`, `tests/followup.php`, `docs/rejection-followup.md`, `docs/work-log.md`

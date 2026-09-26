@@ -22,6 +22,12 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 
 ---
 
+## 2026-09-26 13:52 · Astra · 진행
+- 한 일: 고점 재시도 파동 및 고정 L2 종가 이탈 기반 보유 축소 후보 표시 개발
+- 파일: 고점판독 v2 모듈·보유 화면·CLI·테스트·문서
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-09-23 01:25 · Cursor · 끝
 - 한 일: 탈락 후속 추적 화면에 실행 시각, 추적·완료 수, 가격 실패, 기간별 표본, 재실행 안내를 표시
 - 파일: `bin/paper/Followup.php`, `bin/paper/FollowupPanel.php`, `paper_rr.php`, `paper_weekly.php`, `tests/followup.php`, `docs/rejection-followup.md`, `docs/work-log.md`
@@ -173,4 +179,5 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 - 파일: `docs/work-log.md`, `.cursor/rules/work-log.mdc`
 - 커밋: 안 함
 - 롤백: 없음
+
 

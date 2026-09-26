@@ -5,7 +5,7 @@ namespace ChartEntryLab;
 /** Display-only, chronological replay. Never participates in operational signals. */
 final class TopWaveReview
 {
-    public const VERSION='top_wave_review_v1';
+    public const VERSION='top_wave_review_v2';
     public const RULES=['pivot_right_bars'=>2,'min_pivot_gap'=>3,'min_swing_pct'=>3.0,
         'min_swing_atr'=>1.0,'min_high_growth_pct'=>0.5,'min_rising_highs'=>3,
         'retest_min_ratio'=>0.97,'retest_max_ratio'=>1.02,'max_pattern_bars'=>120];
@@ -15,6 +15,7 @@ final class TopWaveReview
         $bars=CandleClock::completed($raw,$symbol,$asOf);
         $out=['version'=>self::VERSION,'rules'=>self::RULES,'status'=>'none','reduce_candidate'=>false,
             'basis'=>'completed_daily_close','as_of'=>$asOf,'data_asof'=>$bars?end($bars)['available_at']:null,
+            'freshness'=>['status'=>'unverified','calendar_verified'=>false],
             'setup'=>null,'events'=>[],'pivots'=>[],'price_hash'=>hash('sha256',PaperJournal::encode($raw))];
         if(count($bars)<60){$out['status']='insufficient_history';return $out;}
         $session=end($bars)['available_at'];
@@ -59,6 +60,13 @@ final class TopWaveReview
                     $setup=['high_count'=>$count,'higher_high_breaks'=>$count-1,'H1'=>$h1,'L1'=>$l1,'H2'=>$h2,'L2'=>$l2,'H3'=>$h3,'L3'=>$l3,'retry'=>$retry,
                         'floor'=>$l2['price'],'peak'=>$h3['price'],'release_peak'=>max($h3['price'],$retry['price']),
                         'failure_confirmed_at'=>$bar['available_at']];
+                    $priorBreach=null;
+                    for($k=$l2['index']+1;$k<=$i;$k++){
+                        if($bars[$k]['close']<$l2['price']){$priorBreach=$bars[$k]['available_at'];break;}
+                    }
+                    $setup['prior_breach_at']=$priorBreach;
+                    $setup['ineligible_reason']=$l3['price']<$l2['price']?'invalid_structure':
+                        ($priorBreach!==null?($priorBreach===$bar['available_at']?'same_day_breach':'preexisting_breach'):null);
                     $everBroken=false;$breakout=null;
                     $emit('retry_failed',$bar['available_at'],['floor'=>$setup['floor'],'high_count'=>$count]);
                 }
@@ -70,7 +78,7 @@ final class TopWaveReview
                 $lows=array_values(array_filter($pivots,fn($p)=>$p['kind']==='L'));
                 $lastLow=$lows?end($lows):$setup['L3'];
                 $breakout=['index'=>$i,'at'=>$bar['available_at'],'reference_low'=>$lastLow];
-                $events[]=['status'=>'peak_reclaimed','confirmed_at'=>$bar['available_at'],'reference_low'=>$lastLow['price']];
+                // Current phase is emitted below after higher-priority breach checks.
             }
             if($breakout && $new && $new['kind']==='L' && $new['index']>$breakout['index']
                 && $new['price']>$breakout['reference_low']['price'] && $close>=$setup['floor']){
@@ -80,15 +88,17 @@ final class TopWaveReview
                 $pivots=[$new];continue;
             }
             if($breakout && $close<$breakout['reference_low']['price'])$breakout=null;
-            if($close<$setup['floor']){$everBroken=true;$emit('reduce_candidate',$bar['available_at'],['close'=>$close,'floor'=>$setup['floor']]);}
+            if($setup['ineligible_reason']!==null){$emit($setup['ineligible_reason'],$bar['available_at']);continue;}
+            if($close<$setup['floor'] && $bar['available_at']>$setup['failure_confirmed_at']){$everBroken=true;$emit('reduce_candidate',$bar['available_at'],['close'=>$close,'floor'=>$setup['floor']]);}
+            elseif($breakout)$emit('peak_reclaimed',$bar['available_at'],['reference_low'=>$breakout['reference_low']['price']]);
             elseif($everBroken)$emit('recovery_watch',$bar['available_at']);
             elseif($bar['low']<=$setup['floor'])$emit('support_test',$bar['available_at']);
             else $emit('retry_failed',$bar['available_at']);
         }
         $out['status']=$phase;$out['reduce_candidate']=$phase==='reduce_candidate';$out['setup']=$setup??$out['setup'];
         $out['events']=$events;$out['pivots']=$pivots;
-        // Do not present an old holding evaluation as a live reduction candidate.
-        if($asOf-$session>4*86400){$out['historical_status']=$out['status'];$out['status']='stale_data';$out['reduce_candidate']=false;}
+        // This is the chart verdict at data_asof, not a claim of live freshness.
+        $out['freshness']['age_seconds']=max(0,$asOf-$session);
         return $out;
     }
     private function atr(array $bars,int $end):float

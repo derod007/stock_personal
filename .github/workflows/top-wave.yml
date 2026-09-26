@@ -1,0 +1,17 @@
+name: Holding top wave review
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  review:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          php -l src/TopWaveReview.php
+          php -l bin/paper/TopWavePanel.php
+          php -l bin/paper_top_wave.php
+          php -l paper.php
+          php tests/top_wave.php
+          php tests/v12.php
+          php tests/weekly.php

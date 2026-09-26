@@ -22,6 +22,7 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 
 ---
 
+<<<<<<< HEAD
 ## 2026-09-26 13:42 · Cursor · 끝
 - 한 일: 에펨코리아 고점판독 글과 댓글, 차트 3장을 HTML로 저장
 - 파일: docs/fmkorea-10376812980/index.html, docs/fmkorea-10376812980/chart-1.webp, docs/fmkorea-10376812980/chart-2.webp, docs/fmkorea-10376812980/chart-3.webp
@@ -32,6 +33,12 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 - 한 일: 거래대금 스캔 점수순이 어제 스캔 표를 정렬하던 것을 본 목록으로 고침
 - 파일: index.php
 - 커밋: 안 함
+=======
+## 2026-09-26 13:52 · Astra · 끝
+- 한 일: 고점 재시도 횟수·고정 L2 종가 이탈 기반 보유 축소 후보, 회복 관찰·경고 해제 및 근거 표시. 신규 23개 검사와 전략 지문·주간 요약 회귀 CI 통과. PR #19
+- 파일: `src/TopWaveReview.php`, `bin/paper/TopWavePanel.php`, `bin/paper_top_wave.php`, `paper.php`, `tests/top_wave.php`, `.github/workflows/top-wave.yml`, `docs/top-wave-review.md`, `docs/work-log.md`
+- 커밋: a2790c5 (구현), PR #19
+>>>>>>> 136952ab88a4c4a4666ce0f9772c3f0d8a732dcb
 - 롤백: 없음
 
 ## 2026-09-23 01:25 · Cursor · 끝
@@ -185,4 +192,5 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 - 파일: `docs/work-log.md`, `.cursor/rules/work-log.mdc`
 - 커밋: 안 함
 - 롤백: 없음
+
 

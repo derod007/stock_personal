@@ -2,6 +2,7 @@
 declare(strict_types=1);
 require __DIR__.'/bin/bootstrap.php';
 require_once __DIR__.'/bin/paper/Chrome.php';
+require_once __DIR__.'/bin/paper/TopWavePanel.php';
 use ChartEntryLab\PaperJournal;
 use ChartEntryLab\PaperPortfolio;
 function ph(mixed $v): string {return paper_esc($v);}
@@ -89,5 +90,8 @@ $unreal=$equity-$s['config']['initial_cash']-$s['realized'];
   ?></td></tr><?php endforeach ?>
   </tbody></table></div>
 </section>
-<?php endif;
+<?php
+paper_top_wave_panel($s, $mode==='replay' ? (int)$s['last_session'] : time());
+endif;
 paper_close();
+

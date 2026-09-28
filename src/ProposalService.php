@@ -89,9 +89,10 @@ final class ProposalService
                 maxAgeSeconds: $cacheMaxAgeSeconds,
             );
             $shared = new ChartPlanEngine();
+            $liveDaily=$includeInProgress ? (new CurrentQuoteClient())->daily($symbol) : null;
             $asOf=time();
             $analysis = $includeInProgress
-                ? (new IntradayAnalysis())->analyze($bars,$symbol,$asOf,$profileId,(new CurrentQuoteClient())->daily($symbol,$asOf))
+                ? (new IntradayAnalysis())->analyze($bars,$symbol,$asOf,$profileId,$liveDaily)
                 : $shared->analyze($bars, $symbol, $asOf, $profileId);
             $features = $analysis['features'];
             $decision = $analysis['decision'];

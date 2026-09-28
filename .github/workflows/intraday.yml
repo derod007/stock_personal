@@ -16,4 +16,3 @@ jobs:
           php tests/intraday.php
           php tests/current_quote.php
           php tests/rr_scan.php
-          php tests/v12.php

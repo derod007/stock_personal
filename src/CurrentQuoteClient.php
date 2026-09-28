@@ -35,7 +35,7 @@ final class CurrentQuoteClient
         }catch(\Throwable){return $base;}
     }
     /** Fresh regular-session OHLCV. Missing fields/dates never become synthetic candles. */
-    public function daily(string $symbol,int $asOf):?array
+    public function daily(string $symbol,?int $asOf=null):?array
     {
         $kr=NaverDailyQuotes::codeOf($symbol);
         if($kr!==null){
@@ -48,7 +48,7 @@ final class CurrentQuoteClient
                 $bar=['time'=>$at,'open'=>$d['openingPrice']??null,'high'=>$d['highPrice']??null,
                     'low'=>$d['lowPrice']??null,'close'=>$d['tradePrice']??null,'volume'=>$d['accTradeVolume']??null,
                     'observed_at'=>$at,'source'=>'Daum'];
-                if(IntradayAnalysis::validBar($bar,$symbol,$asOf))return $bar;
+                if(IntradayAnalysis::validBar($bar,$symbol,$asOf??time()))return $bar;
             }catch(\Throwable){}
         }
         try{
@@ -59,7 +59,7 @@ final class CurrentQuoteClient
             if(!$ts)return null;$i=array_key_last($ts);
             $bar=['time'=>$ts[$i],'observed_at'=>$m['regularMarketTime']??null,'source'=>'Yahoo'];
             foreach(['open','high','low','close','volume'] as $key)$bar[$key]=$q[$key][$i]??null;
-            return IntradayAnalysis::validBar($bar,$symbol,$asOf)?$bar:null;
+            return IntradayAnalysis::validBar($bar,$symbol,$asOf??time())?$bar:null;
         }catch(\Throwable){return null;}
     }
 

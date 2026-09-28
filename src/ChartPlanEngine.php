@@ -44,8 +44,8 @@ final class ChartPlanEngine
         $plan['asof'] = $asOf;
         $plan['data_asof'] = $latest;
         // Conservative guard; not a full exchange holiday/suspension calendar.
-        if ($asOf - $latest > 4 * 86400) {
-            $plan = array_replace($plan, ['ready' => false, 'status' => 'stale_data', 'reason' => '완료 일봉이 4일 넘게 오래되어 신규 추천 보류']);
+        if ($asOf - $latest > 144 * 3600) {
+            $plan = array_replace($plan, ['ready' => false, 'status' => 'stale_data', 'reason' => '완료 일봉이 6일 넘게 오래되어 신규 추천 보류']);
         } elseif ($decision['action'] === 'blocked') {
             $plan = array_replace($plan, ['ready' => false, 'status' => 'blocked', 'reason' => $decision['reason']]);
         } elseif (($features['spike_dump_status'] ?? 'none') !== 'none'

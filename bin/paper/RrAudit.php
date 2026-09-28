@@ -75,7 +75,7 @@ final class PaperRrAudit
         // Preserve every independently observable blocker, including those hidden by final status.
         $blockers = [];
         if (empty($quality['can_simulate'])) $blockers[] = 'data_quality_blocked';
-        if (($plan['asof'] ?? 0) - ($plan['data_asof'] ?? 0) > 4 * 86400) $blockers[] = 'stale_data';
+        if (($plan['asof'] ?? 0) - ($plan['data_asof'] ?? 0) > 144 * 3600) $blockers[] = 'stale_data';
         if (($analysis['decision']['action'] ?? '') === 'blocked') $blockers[] = 'blocked';
         if (($features['spike_dump_status'] ?? 'none') !== 'none') $blockers[] = 'spike_dump';
         if (in_array($features['top_pattern_status'] ?? 'none', ['warning','confirmed'], true)

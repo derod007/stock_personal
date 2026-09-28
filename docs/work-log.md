@@ -22,6 +22,12 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 
 ---
 
+## 2026-09-28 11:06 · Cursor · 끝
+- 한 일: 신규 추천 보류 기준을 완료 일봉 96시간에서 144시간으로 늘림
+- 파일: src/ChartPlanEngine.php, src/LegacyChartPlanEngine.php, bin/paper/RrAudit.php, tests/run.php, docs/retest-upgrade.md, docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-09-28 10:50 · Cursor · 끝
 - 한 일: 거래대금 스캔 현재가 칸에서 조회 시각을 뺌
 - 파일: index.php, docs/current-quote.md, docs/work-log.md

@@ -5,6 +5,7 @@ declare(strict_types=1);
 require __DIR__ . '/bin/bootstrap.php';
 
 use ChartEntryLab\AccountProfile;
+use ChartEntryLab\CurrentQuoteClient;
 use ChartEntryLab\AlphaEntries;
 use ChartEntryLab\EntryRepository;
 use ChartEntryLab\KrAmountLeadersClient;
@@ -48,7 +49,9 @@ $service = new ProposalService(
 );
 
 $input = isset($_GET['symbol']) ? trim((string) $_GET['symbol']) : '';
-$result = $input !== '' ? $service->propose($input, useCache: true) : null;
+$result = $input !== '' ? $service->propose($input, useCache: true, cacheMaxAgeSeconds: 600) : null;
+$currentQuote = is_array($result) && !empty($result['symbol'])
+    ? (new CurrentQuoteClient())->fetch((string)$result['symbol']) : null;
 
 $scanType = isset($_GET['scan']) ? (string) $_GET['scan'] : '';
 $scanMode = in_array($scanType, ['kr_amount', 'kr_amount_kospi'], true)
@@ -80,6 +83,7 @@ if ($scanMode) {
         useYahooCache: !$scanRefresh,
         yahooMaxAgeSeconds: $scanRefresh ? 0 : 600,
         market: $scanMarket,
+        interactive: true,
     );
     if (isset($_GET['format']) && (string) $_GET['format'] === 'json') {
         header('Content-Type: application/json; charset=utf-8');
@@ -828,7 +832,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
                     $amtEok = is_numeric($sr['amount_million'] ?? null)
                         ? number_format((float) $sr['amount_million'] / 100, 0) . '억'
                         : '—';
-                    $scanPx = $sr['price'] ?? $sr['naver_price'] ?? null;
+                    $scanPx = $sr['price'] ?? null;
                     $scanPxDec = is_numeric($scanPx) && (float) $scanPx >= 100 ? 0 : 2;
                     $srBucket = (string) ($sr['sector_bucket'] ?? 'other');
                     $srLabel = (string) ($sr['sector_label'] ?? SectorMap::BUCKETS[$srBucket] ?? '기타');
@@ -870,7 +874,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
                       <span class="scan-code mono"><?= h($sym) ?></span>
                     </td>
                     <td><span class="sector-badge sector-badge--<?= h($srBucket) ?>"><?= h($srLabel) ?></span></td>
-                    <td class="mono"><?= h(fmtNum($scanPx, $scanPxDec)) ?></td>
+                    <td class="mono"><?= h(fmtNum($scanPx, $scanPxDec)) ?><small><?= h(is_numeric($scanPx) ? '조회 '.(string)($sr['quote_fetched_at'] ?? '') : '현재가 조회 실패') ?></small></td>
                     <td class="mono<?= is_numeric($sr['change_pct'] ?? null) ? (((float) $sr['change_pct'] >= 0) ? ' is-up' : ' is-down') : '' ?>">
                       <?= h(is_numeric($sr['change_pct'] ?? null) ? sprintf('%+.1f%%', (float) $sr['change_pct']) : '—') ?>
                     </td>
@@ -965,7 +969,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
         } else {
             $oneLine = (string) ($proposal['reason'] ?? '');
         }
-        $px = $proposal['price'] ?? null;
+        $px = $currentQuote['price'] ?? null;
         $pxDec = is_numeric($px) && (float) $px >= 100 ? 0 : 2;
         $stopTight = $proposal['invalidation_tight'] ?? null;
         $stopWide = $proposal['invalidation_wide'] ?? $proposal['invalidation'] ?? null;
@@ -1002,7 +1006,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
         $memoTime = $memoNow->format('H:i');
         $memoCurrent = is_numeric($px) ? fmtNum($px, $pxDec) . '원' : '—';
         if (isset($proposal['score']) && is_numeric($proposal['score'])) {
-            $memoCurrent .= ' (현재 ' . (int) $proposal['score'] . '점)';
+            $memoCurrent .= ' (완료 일봉 분석 ' . (int) $proposal['score'] . '점)';
         }
         $memoEntry = is_numeric($liveEntryMid)
             ? fmtNum($liveEntryMid, $pxDec) . '원'
@@ -1046,7 +1050,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
             );
         } else {
             $memoText = sprintf(
-                "%s일 (%s) 완료 종가 %s\n%s 관심 진입 후보\n%s 손절 후보%s\n%s 목표 후보%s",
+                "%s일 (%s) 현재가 %s\n%s 관심 진입 후보\n%s 손절 후보%s\n%s 목표 후보%s",
                 $memoDate,
                 $memoTime,
                 $memoCurrent,
@@ -1217,9 +1221,11 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
         <?php endif; ?>
         <div class="metric-grid" aria-label="핵심 가격 요약">
           <article class="metric">
-            <span class="metric__label"><?= isset($proposal['trade_plan']) ? '최근 완료 일봉 종가' : '현재가' ?></span>
+            <span class="metric__label">현재가</span>
             <strong class="metric__value mono"><?= h(fmtNum($px, $pxDec)) ?></strong>
-            <small><?= h((string) ($proposal['asof_kst'] ?? '')) ?></small>
+            <small><?= h(($currentQuote['status'] ?? '') === 'available' ? (string)$currentQuote['source'].' · 조회 '.(string)$currentQuote['fetched_at'] : '현재가 조회 실패') ?></small>
+            <?php if (!empty($currentQuote['quoted_at'])): ?><small>시세 시각 <?= h((string)$currentQuote['quoted_at']) ?></small><?php endif; ?>
+            <small>분석 기준 종가 <?= h(fmtNum($proposal['price'] ?? null, $pxDec)) ?> · <?= h((string)($proposal['asof_kst'] ?? '')) ?></small>
           </article>
           <article class="metric metric--accent">
             <span class="metric__label">관심 진입 구간</span>

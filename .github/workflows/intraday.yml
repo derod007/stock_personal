@@ -1,0 +1,18 @@
+name: Manual intraday score checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          php -l src/IntradayAnalysis.php
+          php -l src/CurrentQuoteClient.php
+          php -l src/ProposalService.php
+          php -l src/KrAmountScanner.php
+          php -l index.php
+          php tests/intraday.php
+          php tests/current_quote.php
+          php tests/rr_scan.php

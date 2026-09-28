@@ -34,6 +34,35 @@ final class CurrentQuoteClient
             return array_replace($base,['price'=>$price,'source'=>'Yahoo '.$session.' 시세(지연 가능)','quoted_at'=>date(DATE_ATOM,$at),'status'=>'available']);
         }catch(\Throwable){return $base;}
     }
+    /** Fresh regular-session OHLCV. Missing fields/dates never become synthetic candles. */
+    public function daily(string $symbol,?int $asOf=null):?array
+    {
+        $kr=NaverDailyQuotes::codeOf($symbol);
+        if($kr!==null){
+            try{
+                $d=$this->get('https://finance.daum.net/api/quotes/A'.$kr);
+                if(!in_array((string)($d['symbolCode']??$d['code']??''),[$kr,'A'.$kr],true))throw new \RuntimeException('Wrong symbol');
+                if(!preg_match('/^\d{4}-\d{2}-\d{2}$/',(string)($d['date']??''))
+                    ||!preg_match('/^\d{2}:\d{2}:\d{2}$/',(string)($d['time']??'')))throw new \RuntimeException('Missing quote date/time');
+                $at=(new \DateTimeImmutable($d['date'].' '.$d['time'],new \DateTimeZone('Asia/Seoul')))->getTimestamp();
+                $bar=['time'=>$at,'open'=>$d['openingPrice']??null,'high'=>$d['highPrice']??null,
+                    'low'=>$d['lowPrice']??null,'close'=>$d['tradePrice']??null,'volume'=>$d['accTradeVolume']??null,
+                    'observed_at'=>$at,'source'=>'Daum'];
+                if(IntradayAnalysis::validBar($bar,$symbol,$asOf??time()))return $bar;
+            }catch(\Throwable){}
+        }
+        try{
+            $d=$this->get('https://query1.finance.yahoo.com/v8/finance/chart/'.rawurlencode($symbol).'?interval=1d&range=5d');
+            $r=$d['chart']['result'][0]??[];$m=$r['meta']??[];
+            if(strtoupper((string)($m['symbol']??''))!==strtoupper($symbol))return null;
+            $ts=$r['timestamp']??[];$q=$r['indicators']['quote'][0]??[];
+            if(!$ts)return null;$i=array_key_last($ts);
+            $bar=['time'=>$ts[$i],'observed_at'=>$m['regularMarketTime']??null,'source'=>'Yahoo'];
+            foreach(['open','high','low','close','volume'] as $key)$bar[$key]=$q[$key][$i]??null;
+            return IntradayAnalysis::validBar($bar,$symbol,$asOf??time())?$bar:null;
+        }catch(\Throwable){return null;}
+    }
+
     private function positive(mixed $v):?float
     {
         return is_numeric($v)&&is_finite((float)$v)&&(float)$v>0?(float)$v:null;

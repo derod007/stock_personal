@@ -17,8 +17,10 @@ namespace ChartEntryLab {
         public function save(array $a,bool $overwrite):void{$this->saved[]=$a;}
     }
     final class ProposalService {
+        public static array $liveModes=[];
         public function profile():object{return (object)['id'=>'account1'];}
-        public function propose(string $s,bool $useCache,?int $cacheMaxAgeSeconds,bool $captureResearch=false):array {
+        public function propose(string $s,bool $useCache,?int $cacheMaxAgeSeconds,bool $captureResearch=false,bool $includeInProgress=false):array {
+            self::$liveModes[]=$includeInProgress;
             return ['ok'=>true,'features'=>[],'proposal'=>['price'=>900,'action'=>'wait','new_entry'=>['order_ready'=>false,'buy_now'=>false]],
                 'research_input'=>$captureResearch?['bars'=>[['close'=>123]],'analysis'=>['sentinel'=>'exact']]:null];
         }
@@ -42,6 +44,7 @@ namespace {
     if($manual['rows'][0]['price']!==1100 || $manual['rows'][0]['analysis_price']!==900)throw new RuntimeException('live price overwritten by close');
     if($plain['rows'][0]['price']!==900)throw new RuntimeException('recording price changed');
     if(count($snap->saved)!==$savedCount || hash_file('sha256',$file)!==$hash)throw new RuntimeException('manual scan changed recording/cache');
+    if(ChartEntryLab\ProposalService::$liveModes!==[false,false,true])throw new RuntimeException('manual mode not separated from recording');
     echo "OK manual live price, uncached ranking, separate analysis, recording unchanged\n";
     foreach($snap->saved as $s)if(isset($s['rows'][0]['research_input']))throw new RuntimeException('widget snapshot polluted');
     foreach(glob($tmp.'/*')as $f)unlink($f);rmdir($tmp);

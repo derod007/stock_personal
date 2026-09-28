@@ -49,7 +49,7 @@ $service = new ProposalService(
 );
 
 $input = isset($_GET['symbol']) ? trim((string) $_GET['symbol']) : '';
-$result = $input !== '' ? $service->propose($input, useCache: true, cacheMaxAgeSeconds: 600) : null;
+$result = $input !== '' ? $service->propose($input, useCache: true, cacheMaxAgeSeconds: 600, includeInProgress: true) : null;
 $currentQuote = is_array($result) && !empty($result['symbol'])
     ? (new CurrentQuoteClient())->fetch((string)$result['symbol']) : null;
 
@@ -198,6 +198,7 @@ if (!function_exists('tip')) {
 }
 
 $proposal = is_array($result) ? ($result['proposal'] ?? null) : null;
+$analysisLabel = ($proposal['analysis_mode'] ?? '') === 'intraday' ? '장중 잠정' : '완료 일봉';
 $perspective = is_array($result) ? ($result['perspective'] ?? null) : null;
 if ($perspective === null && is_array($proposal)) {
     $perspective = is_array($proposal['perspective'] ?? null) ? $proposal['perspective'] : null;
@@ -879,7 +880,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
                       <?= h(is_numeric($sr['change_pct'] ?? null) ? sprintf('%+.1f%%', (float) $sr['change_pct']) : '—') ?>
                     </td>
                     <td class="mono"><?= h($amtEok) ?></td>
-                    <td class="mono score-cell"><?= h(isset($sr['score']) ? (string) $sr['score'] : '—') ?></td>
+                    <td class="mono score-cell" title="<?= h((string)($sr['analysis_note'] ?? '')) ?>"><?= h(isset($sr['score']) ? (string) $sr['score'] : '—') ?><small><?= h(($sr['analysis_mode'] ?? '') === 'intraday' ? '장중 잠정' : '완료 일봉') ?></small></td>
                     <td>
                       <?php if (!empty($sr['ok']) && $rec): ?>
                         <span class="badge badge--ok">추천</span>
@@ -1006,7 +1007,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
         $memoTime = $memoNow->format('H:i');
         $memoCurrent = is_numeric($px) ? fmtNum($px, $pxDec) . '원' : '—';
         if (isset($proposal['score']) && is_numeric($proposal['score'])) {
-            $memoCurrent .= ' (완료 일봉 분석 ' . (int) $proposal['score'] . '점)';
+            $memoCurrent .= ' (' . $analysisLabel . ' 분석 ' . (int) $proposal['score'] . '점)';
         }
         $memoEntry = is_numeric($liveEntryMid)
             ? fmtNum($liveEntryMid, $pxDec) . '원'
@@ -1146,7 +1147,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
           </div>
           <p class="score" data-action="<?= h((string) $proposal['action']) ?>" title="구조 점수">
             <span class="score__num"><?= h((string) ($proposal['score'] ?? '—')) ?></span>
-            <span class="score__label">점수<?= tip("일봉 구조 점수 0~100. 불법과외1·가로 매물대·고점 붕괴/역저점·급등후급락 가감 포함.") ?></span>
+            <span class="score__label"><?= h($analysisLabel) ?> 점수<?= tip("일봉 구조 점수 0~100. 불법과외1·가로 매물대·고점 붕괴/역저점·급등후급락 가감 포함.") ?></span>
           </p>
         </div>
 
@@ -1184,7 +1185,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
         <?php endif; ?>
         <?php if ($liveEntryMid !== null && $entryAvailable): ?>
           <p class="entry-rec">
-            추천 진입
+            관심 진입 후보
             <span class="mono"><?= h(fmtNum($liveEntryMid, $pxDec)) ?></span>
             <?php if ($liveEntry2nd !== null && abs($liveEntry2nd - $liveEntryMid) / max($liveEntryMid, 0.0001) > 0.008): ?>
               <span class="entry-rec__split">1차 <?= h(fmtNum($liveEntryMid, $pxDec)) ?> · 2차 <?= h(fmtNum($liveEntry2nd, $pxDec)) ?></span>
@@ -1201,6 +1202,8 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
           <?php $tp = $proposal['trade_plan']; $pc = $proposal['price_candidate'] ?? null; ?>
           <article class="info-card">
             <h3>진입 확인 · 큰 추세</h3>
+            <p><?= h((string)($proposal['analysis_note'] ?? '완료 일봉 점수')) ?></p>
+            <?php if (($proposal['analysis_mode'] ?? '') === 'intraday'): ?><p>큰 추세·종가 확정 조건은 완료 일봉 기준입니다.</p><?php endif; ?>
             <p><?= h((string) ($tp['context']['label'] ?? '추세 자료 없음')) ?> · <?= h((string) ($tp['context']['warning'] ?? '')) ?></p>
             <p><?= !empty($tp['ready']) ? '패턴 확인 완료 · 다음 거래봉 지정가 검토' : '진입 확인 전 · 표시 가격은 관심 후보' ?></p>
             <p><?= h((string) ($tp['reason'] ?? '')) ?></p>
@@ -1225,7 +1228,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
             <strong class="metric__value mono"><?= h(fmtNum($px, $pxDec)) ?></strong>
             <small><?= h(($currentQuote['status'] ?? '') === 'available' ? (string)$currentQuote['source'].' · 조회 '.(string)$currentQuote['fetched_at'] : '현재가 조회 실패') ?></small>
             <?php if (!empty($currentQuote['quoted_at'])): ?><small>시세 시각 <?= h((string)$currentQuote['quoted_at']) ?></small><?php endif; ?>
-            <small>분석 기준 종가 <?= h(fmtNum($proposal['price'] ?? null, $pxDec)) ?> · <?= h((string)($proposal['asof_kst'] ?? '')) ?></small>
+            <small><?= h($analysisLabel) ?> 분석 기준가 <?= h(fmtNum($proposal['price'] ?? null, $pxDec)) ?> · <?= h((string)($proposal['asof_kst'] ?? '')) ?></small>
           </article>
           <article class="metric metric--accent">
             <span class="metric__label">관심 진입 구간</span>
@@ -1286,7 +1289,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
                 <dd class="mono"><?= h(fmtNum($px, $pxDec)) ?></dd>
               </div>
               <div>
-                <dt>추천 진입<?= tip(isset($proposal['trade_plan']) ? (string) ($explain['entry_zone_note'] ?? '') : "최근 고점·저점의 중간(절반 되돌림).
+                <dt>관심 진입 후보<?= tip(isset($proposal['trade_plan']) ? (string) ($explain['entry_zone_note'] ?? '') : "최근 고점·저점의 중간(절반 되돌림).
 글에 숫자가 없어도 이 규칙을 씁니다.
 1차=중간, 2차=관심구간 하단 또는 가로 지지.
 손절선을 이미 깨면 이 숫자는 추천이 아닙니다.") ?></dt>

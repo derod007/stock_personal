@@ -59,7 +59,7 @@ final class ProposalService
      *   tradingview_url:?string
      * }
      */
-    public function propose(string $input, bool $useCache = true, ?int $cacheMaxAgeSeconds = null, bool $captureResearch = false): array
+    public function propose(string $input, bool $useCache = true, ?int $cacheMaxAgeSeconds = null, bool $captureResearch = false, bool $includeInProgress = false): array
     {
         $input = trim($input);
         $profileId = $this->playbook->profile()->id;
@@ -89,7 +89,11 @@ final class ProposalService
                 maxAgeSeconds: $cacheMaxAgeSeconds,
             );
             $shared = new ChartPlanEngine();
-            $analysis = $shared->analyze($bars, $symbol, time(), $profileId);
+            $liveDaily=$includeInProgress ? (new CurrentQuoteClient())->daily($symbol) : null;
+            $asOf=time();
+            $analysis = $includeInProgress
+                ? (new IntradayAnalysis())->analyze($bars,$symbol,$asOf,$profileId,$liveDaily)
+                : $shared->analyze($bars, $symbol, $asOf, $profileId);
             $features = $analysis['features'];
             $decision = $analysis['decision'];
             $tv = SymbolMap::tradingViewUrl($symbol);
@@ -263,6 +267,14 @@ final class ProposalService
             $proposal = $this->applyStructureBrokenHardFilter($proposal);
             // Author opinions remain reference material; final levels/action come from the replayable engine.
             $proposal = $shared->apply($proposal, $analysis['plan']);
+            $proposal['analysis_mode']=$analysis['mode']??'completed';
+            $proposal['analysis_note']=$analysis['live_note']??'완료 일봉 점수';
+            if(($analysis['mode']??'')==='intraday'){
+                $proposal['rules']=['진행 중인 당일 OHLCV 포함 · 잠정 점수','종가 확인 전 주문 확정 없음','거래량은 누적값'];
+                $proposal['size_hint']='장중 잠정 관심 후보 · 종가 확인 전';
+                $proposal['completed_trade_plan']=$analysis['completed_plan'];
+                $proposal['session_ohlcv']=$analysis['daily'];
+            }
             $proposal['explain'] = (new ProposalExplain())->build($proposal, $features);
             $decision = array_replace($decision, array_intersect_key($proposal, array_flip([
                 'action', 'entry_zone', 'invalidation', 'target_hint', 'size_hint', 'reason', 'rules',

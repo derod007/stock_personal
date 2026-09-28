@@ -874,7 +874,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
                       <span class="scan-code mono"><?= h($sym) ?></span>
                     </td>
                     <td><span class="sector-badge sector-badge--<?= h($srBucket) ?>"><?= h($srLabel) ?></span></td>
-                    <td class="mono"><?= h(fmtNum($scanPx, $scanPxDec)) ?><small><?= h(is_numeric($scanPx) ? '조회 '.(string)($sr['quote_fetched_at'] ?? '') : '현재가 조회 실패') ?></small></td>
+                    <td class="mono"><?php if (is_numeric($scanPx)): ?><?= h(fmtNum($scanPx, $scanPxDec)) ?><?php else: ?><small>현재가 조회 실패</small><?php endif; ?></td>
                     <td class="mono<?= is_numeric($sr['change_pct'] ?? null) ? (((float) $sr['change_pct'] >= 0) ? ' is-up' : ' is-down') : '' ?>">
                       <?= h(is_numeric($sr['change_pct'] ?? null) ? sprintf('%+.1f%%', (float) $sr['change_pct']) : '—') ?>
                     </td>

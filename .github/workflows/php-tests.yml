@@ -25,6 +25,7 @@ jobs:
           php tests/followup.php
           php tests/rr_audit.php
           php tests/rr_scan.php
+          php tests/current_quote.php
           php tests/weekly.php
           php tests/amount_exclude.php
       - name: Operational logging tests

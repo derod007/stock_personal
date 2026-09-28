@@ -54,7 +54,9 @@ final class KrAmountScanner
         /** all=코스피+코스닥, kospi=코스피만 */
         string $market = 'all',
         ?callable $onResearch = null,
+        bool $interactive = false,
     ): array {
+        if ($interactive) $useCache = false; // manual scan must fetch current ranking quotes
         $limit = max(1, min(200, $limit));
         $market = strtolower($market);
         if (!in_array($market, ['all', 'kospi'], true)) {
@@ -99,6 +101,7 @@ final class KrAmountScanner
             ];
         }
 
+        $quoteFetchedAt = $this->nowKst();
         $rows = [];
         $scored = 0;
         $recommend = 0;
@@ -164,6 +167,12 @@ final class KrAmountScanner
                 'reason' => null,
                 'tradingview_url' => $result['tradingview_url'] ?? null,
             ];
+
+            if ($interactive) {
+                $row['quote_fetched_at'] = $quoteFetchedAt;
+                $row['price_basis'] = 'ranking_current_quote';
+                $row['analysis_price'] = $result['proposal']['price'] ?? null;
+            }
 
             if (!$result['ok']) {
                 // Yahoo 실패해도 네이버 현재가는 표에 남긴다
@@ -237,7 +246,7 @@ final class KrAmountScanner
                 ? null
                 : ($proposal['spike_dump_note'] ?? $features['spike_dump_note'] ?? null);
             $row['new_entry_sentence'] = isset($newEntry['sentence']) ? (string) $newEntry['sentence'] : null;
-            $row['price'] = $proposal['price'] ?? $leader['price'];
+            $row['price'] = $interactive ? $leader['price'] : ($proposal['price'] ?? $leader['price']);
             $row['reason'] = isset($proposal['reason']) ? (string) $proposal['reason'] : null;
             $scored++;
             if ($entryRecommend) {
@@ -287,11 +296,13 @@ final class KrAmountScanner
             ],
         ];
 
+        if (!$interactive) {
         file_put_contents(
             $cacheFile,
             json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
         );
         $this->snapshots->save($payload, overwrite: true);
+        }
 
         return $payload;
     }

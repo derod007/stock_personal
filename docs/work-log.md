@@ -22,6 +22,12 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 
 ---
 
+## 2026-09-28 10:36 · Astra · 끝
+- 한 일: 수동 스캔·종목 검색 현재가와 완료 일봉 분석가 분리. 수동 조회는 기록을 덮어쓰지 않음. 현재가 경계 검사·기존 회귀 CI 통과
+- 파일: index.php, 현재가 클라이언트, 스캐너, 테스트
+- 커밋: PR #21 — fix: show current quotes for manual scans and symbol lookup
+- 롤백: 없음
+
 ## 2026-09-26 14:22 · Cursor · 끝
 - 한 일: 작업 이력 병합 충돌을 없애고 14:14·14:13 기록을 시간순으로 다시 둠
 - 파일: docs/work-log.md

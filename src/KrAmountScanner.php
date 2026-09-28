@@ -122,6 +122,7 @@ final class KrAmountScanner
                 useCache: $useYahooCache,
                 cacheMaxAgeSeconds: $yahooAge,
                 captureResearch: $onResearch !== null,
+                includeInProgress: $interactive,
             );
             // Observer receives the exact analysis input, never a later Yahoo-cache approximation.
             // A cached scan has no callback; the caller must record missing evidence explicitly.
@@ -172,6 +173,8 @@ final class KrAmountScanner
                 $row['quote_fetched_at'] = $quoteFetchedAt;
                 $row['price_basis'] = 'ranking_current_quote';
                 $row['analysis_price'] = $result['proposal']['price'] ?? null;
+                $row['analysis_mode'] = $result['proposal']['analysis_mode'] ?? 'unavailable';
+                $row['analysis_note'] = $result['proposal']['analysis_note'] ?? '분석 불가';
             }
 
             if (!$result['ok']) {
@@ -246,7 +249,9 @@ final class KrAmountScanner
                 ? null
                 : ($proposal['spike_dump_note'] ?? $features['spike_dump_note'] ?? null);
             $row['new_entry_sentence'] = isset($newEntry['sentence']) ? (string) $newEntry['sentence'] : null;
-            $row['price'] = $interactive ? $leader['price'] : ($proposal['price'] ?? $leader['price']);
+            $row['price'] = $interactive
+                ? (($proposal['analysis_mode'] ?? '') === 'intraday' ? $proposal['price'] : $leader['price'])
+                : ($proposal['price'] ?? $leader['price']);
             $row['reason'] = isset($proposal['reason']) ? (string) $proposal['reason'] : null;
             $scored++;
             if ($entryRecommend) {

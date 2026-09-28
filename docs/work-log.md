@@ -22,6 +22,12 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 
 ---
 
+## 2026-09-28 11:41 · Astra · 진행
+- 한 일: 수동 조회의 당일 OHLCV 잠정 점수와 예약 실행 완료 일봉 분리
+- 파일: ProposalService, KrAmountScanner, CurrentQuoteClient, IntradayAnalysis, index.php, 테스트·문서
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-09-28 11:06 · Cursor · 끝
 - 한 일: 신규 추천 보류 기준을 완료 일봉 96시간에서 144시간으로 늘림
 - 파일: src/ChartPlanEngine.php, src/LegacyChartPlanEngine.php, bin/paper/RrAudit.php, tests/run.php, docs/retest-upgrade.md, docs/work-log.md

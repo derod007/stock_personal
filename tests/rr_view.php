@@ -42,6 +42,7 @@ foreach ($rows as $row) {
     }
 }
 ck(is_array($pull) && $pull['raw_status'] === 'rejected_rr' && $pull['included'] === true, 'view shows confirmed RR rejection');
+ck(($pull['why'] ?? '') !== '' && array_key_exists('final_reason', $pull), 'view keeps the rejection sentence');
 ck(is_numeric($pull['limit']) && (float) $pull['limit'] < (float) $pull['entry'] && (float) $pull['limit_rr'] >= 1.5, 'view shows lower limit that meets 1.5');
 ck($pull['blockers'] === '', 'no extra blocker on the eligible case');
 ck(!isset($pull['bars']), 'view row does not carry candle history');

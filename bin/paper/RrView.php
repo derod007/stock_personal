@@ -57,6 +57,7 @@ final class PaperRrView
                     'limit_rr' => null,
                     'included' => false,
                     'why' => (string) ($record['detail'] ?? $record['reason'] ?? ''),
+                    'final_reason' => '',
                 ];
                 continue;
             }
@@ -84,6 +85,7 @@ final class PaperRrView
                     'limit_rr' => $limit['reward_risk'] ?? null,
                     'included' => ($p['status'] ?? '') === 'added',
                     'why' => (string) (($p['addition_reason'] ?? '') !== '' ? $p['addition_reason'] : ($p['raw_reason'] ?? '')),
+                    'final_reason' => (string) ($p['final_reason'] ?? ''),
                     'measurements' => $record['measurements'] ?? [],
                 ];
             }
@@ -169,7 +171,7 @@ final class PaperRrView
         return [
             'pattern' => '—', 'raw_status' => '—', 'final_status' => '—', 'missing' => '',
             'blockers' => '', 'entry' => null, 'rr' => null, 'limit' => null, 'limit_rr' => null,
-            'included' => false, 'why' => $why,
+            'included' => false, 'why' => $why, 'final_reason' => '',
         ];
     }
 }

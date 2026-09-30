@@ -101,7 +101,7 @@ $q = 'account=' . rawurlencode($id) . '&mode=' . rawurlencode($mode);
 <section class="panel">
 <h2 class="paper-section-title">종목별 탈락</h2>
 <div class="scan-table-wrap"><table class="scan-table">
-<thead><tr><th>종목</th><th>패턴</th><th>원래 상태</th><th>최종 상태</th><th>미충족</th><th>다른 차단</th><th>확인가</th><th>손익비</th><th>RR 1.5 지정가</th><th>지정가 손익비</th></tr></thead>
+<thead><tr><th>종목</th><th>패턴</th><th>원래 상태</th><th>최종 상태</th><th>탈락 사유</th><th>미충족</th><th>다른 차단</th><th>확인가</th><th>손익비</th><th>RR 1.5 지정가</th><th>지정가 손익비</th></tr></thead>
 <tbody>
 <?php foreach ($rows as $row): ?>
 <tr>
@@ -109,6 +109,16 @@ $q = 'account=' . rawurlencode($id) . '&mode=' . rawurlencode($mode);
   <td><?= rh(paper_ko($row['pattern'])) ?></td>
   <td><?= rh(paper_ko($row['raw_status'])) ?></td>
   <td><?= rh(paper_ko($row['final_status'])) ?></td>
+  <td><?php
+    $why = trim((string) ($row['why'] ?? ''));
+    $finalReason = trim((string) ($row['final_reason'] ?? ''));
+    if ($finalReason !== '' && ($why === '' || str_contains($finalReason, $why))) {
+        $why = $finalReason;
+    } elseif ($finalReason !== '' && !str_contains($why, $finalReason)) {
+        $why .= ' · ' . $finalReason;
+    }
+    echo rh($why !== '' ? $why : '—');
+  ?></td>
   <td><?= rh($row['missing'] !== '' ? $row['missing'] : '—') ?></td>
   <td><?= rh($row['blockers'] !== '' ? $row['blockers'] : ($row['included'] ? '없음' : '—')) ?></td>
   <td class="mono"><?= rh(rnum($row['entry'])) ?></td>

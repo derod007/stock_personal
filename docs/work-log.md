@@ -22,6 +22,12 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 
 ---
 
+## 2026-09-30 21:15 · Cursor · 끝
+- 한 일: 탈락 로그 표에 패턴 사유와 최종 보류 문장을 표시
+- 파일: `paper_rr.php`, `bin/paper/RrView.php`, `tests/rr_view.php`, `docs/work-log.md`
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-09-28 11:41 · Astra · 끝
 - 한 일: 수동 조회의 당일 OHLCV 잠정 점수와 예약 실행 완료 일봉 분리. 당일 봉·지연·누락·미래 시세·마감 처리 검사 통과. main부터 존재한 v12 호환성 실패는 PR에 별도 명시
 - 파일: ProposalService, KrAmountScanner, CurrentQuoteClient, IntradayAnalysis, index.php, 테스트·문서

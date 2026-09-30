@@ -1,0 +1,2487 @@
+{
+    "kind": "paper_rr_recent_5_record_days",
+    "one_time": true,
+    "account": "paper-kr",
+    "generated_at": "2026-10-01T04:28:07+09:00",
+    "followup_as_of": "2026-10-01T04:02:43+09:00",
+    "dates": [
+        "2026-09-22",
+        "2026-09-23",
+        "2026-09-28",
+        "2026-09-29",
+        "2026-09-30"
+    ],
+    "rows": 500,
+    "same_day_duplicates_excluded": 0,
+    "selection_to_final": [
+        {
+            "code": "await_confirmation → await_confirmation",
+            "count": 87
+        },
+        {
+            "code": "no_setup → no_setup",
+            "count": 41
+        },
+        {
+            "code": "no_setup → context_wait",
+            "count": 75
+        },
+        {
+            "code": "await_confirmation → context_wait",
+            "count": 48
+        },
+        {
+            "code": "no_setup → risk_blocked",
+            "count": 84
+        },
+        {
+            "code": "rejected_rr → risk_blocked",
+            "count": 8
+        },
+        {
+            "code": "rejected_rr → rejected_rr",
+            "count": 15
+        },
+        {
+            "code": "wait_pullback → wait_pullback",
+            "count": 8
+        },
+        {
+            "code": "await_retest → risk_blocked",
+            "count": 6
+        },
+        {
+            "code": "await_confirmation → risk_blocked",
+            "count": 59
+        },
+        {
+            "code": "invalidated → invalidated",
+            "count": 5
+        },
+        {
+            "code": "rejected_rr → context_wait",
+            "count": 6
+        },
+        {
+            "code": "ready → risk_blocked",
+            "count": 1
+        },
+        {
+            "code": "await_retest → await_retest",
+            "count": 2
+        },
+        {
+            "code": "wait_pullback → risk_blocked",
+            "count": 12
+        },
+        {
+            "code": "expired → risk_blocked",
+            "count": 2
+        },
+        {
+            "code": "invalidated → risk_blocked",
+            "count": 3
+        },
+        {
+            "code": "await_retest → context_wait",
+            "count": 3
+        },
+        {
+            "code": "wait_pullback → context_wait",
+            "count": 1
+        },
+        {
+            "code": "expired → expired",
+            "count": 1
+        }
+    ],
+    "independent_blockers": [
+        {
+            "code": "context_wait",
+            "count": 246
+        },
+        {
+            "code": "top_collapse",
+            "count": 101
+        },
+        {
+            "code": "risk_blocked",
+            "count": 175
+        },
+        {
+            "code": "spike_dump",
+            "count": 77
+        },
+        {
+            "code": "data_quality_blocked",
+            "count": 3
+        }
+    ],
+    "unavailable": [
+        {
+            "code": "HTTP 404",
+            "count": 23
+        },
+        {
+            "code": "일봉 40개 미만",
+            "count": 10
+        }
+    ],
+    "single_condition": {
+        "same_symbol_session_duplicates_excluded": 14,
+        "statuses": {
+            "multiple_or_unresolved": 371,
+            "single_unverified": 100,
+            "single_verified": 15
+        },
+        "groups": [
+            {
+                "heading": "단독 미충족 · 나머지 미확인 / 상위 추세·추가 손익비 · 79건",
+                "status": "single_unverified",
+                "condition": "context_wait",
+                "condition_label": "상위 추세·추가 손익비",
+                "signals": 79,
+                "strategy_version": null,
+                "pattern": "breakout_retest",
+                "context_applied": "사용",
+                "linked": 79,
+                "horizons": [
+                    {
+                        "bars": 1,
+                        "completed": 62,
+                        "signals": 79,
+                        "up_ratio_pct": 30.65,
+                        "mean_return_pct": -0.73,
+                        "mean_max_up_pct": 2.05,
+                        "mean_max_down_pct": -2.51
+                    },
+                    {
+                        "bars": 3,
+                        "completed": 20,
+                        "signals": 79,
+                        "up_ratio_pct": 40,
+                        "mean_return_pct": -0.9,
+                        "mean_max_up_pct": 3.74,
+                        "mean_max_down_pct": -4.13
+                    },
+                    {
+                        "bars": 5,
+                        "completed": 0,
+                        "signals": 79,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 10,
+                        "completed": 0,
+                        "signals": 79,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 20,
+                        "completed": 0,
+                        "signals": 79,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    }
+                ],
+                "rows": [
+                    {
+                        "date": "2026-09-22",
+                        "symbol": "114800.KS",
+                        "name": "KODEX 인버스",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-22",
+                        "symbol": "252670.KS",
+                        "name": "KODEX 200선물인버스2X",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-22",
+                        "symbol": "488080.KS",
+                        "name": "TIGER 반도체TOP10레버리지",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-22",
+                        "symbol": "005380.KS",
+                        "name": "현대차",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-22",
+                        "symbol": "011070.KS",
+                        "name": "LG이노텍",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-22",
+                        "symbol": "028260.KS",
+                        "name": "삼성물산",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-22",
+                        "symbol": "012450.KS",
+                        "name": "한화에어로스페이스",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-22",
+                        "symbol": "000990.KS",
+                        "name": "DB하이텍",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-22",
+                        "symbol": "329180.KS",
+                        "name": "HD현대중공업",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-23",
+                        "symbol": "005380.KS",
+                        "name": "현대차",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-23",
+                        "symbol": "012450.KS",
+                        "name": "한화에어로스페이스",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-23",
+                        "symbol": "028260.KS",
+                        "name": "삼성물산",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-23",
+                        "symbol": "042660.KS",
+                        "name": "한화오션",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-23",
+                        "symbol": "032830.KS",
+                        "name": "삼성생명",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-23",
+                        "symbol": "089970.KQ",
+                        "name": "브이엠",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-23",
+                        "symbol": "011070.KS",
+                        "name": "LG이노텍",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-23",
+                        "symbol": "267260.KS",
+                        "name": "HD현대일렉트릭",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-23",
+                        "symbol": "033780.KS",
+                        "name": "KT&G",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-23",
+                        "symbol": "010140.KS",
+                        "name": "삼성중공업",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-23",
+                        "symbol": "015760.KS",
+                        "name": "한국전력",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "009830.KS",
+                        "name": "한화솔루션",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "011070.KS",
+                        "name": "LG이노텍",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "005380.KS",
+                        "name": "현대차",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "028260.KS",
+                        "name": "삼성물산",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "000270.KS",
+                        "name": "기아",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "012450.KS",
+                        "name": "한화에어로스페이스",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "178320.KQ",
+                        "name": "서진시스템",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "032830.KS",
+                        "name": "삼성생명",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "267260.KS",
+                        "name": "HD현대일렉트릭",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "247540.KQ",
+                        "name": "에코프로비엠",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "322000.KS",
+                        "name": "HD현대에너지솔루션",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "066970.KS",
+                        "name": "엘앤에프",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "086520.KQ",
+                        "name": "에코프로",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "064350.KS",
+                        "name": "현대로템",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "352820.KS",
+                        "name": "하이브",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "000810.KS",
+                        "name": "삼성화재",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "475150.KS",
+                        "name": "SK이터닉스",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "010140.KS",
+                        "name": "삼성중공업",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "042660.KS",
+                        "name": "한화오션",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "005380.KS",
+                        "name": "현대차",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "011070.KS",
+                        "name": "LG이노텍",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "010140.KS",
+                        "name": "삼성중공업",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "000270.KS",
+                        "name": "기아",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "012450.KS",
+                        "name": "한화에어로스페이스",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "028260.KS",
+                        "name": "삼성물산",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "373220.KS",
+                        "name": "LG에너지솔루션",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "267260.KS",
+                        "name": "HD현대일렉트릭",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "298040.KS",
+                        "name": "효성중공업",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "042660.KS",
+                        "name": "한화오션",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "178320.KQ",
+                        "name": "서진시스템",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "032830.KS",
+                        "name": "삼성생명",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "047920.KQ",
+                        "name": "HLB제약",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "033780.KS",
+                        "name": "KT&G",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "323280.KQ",
+                        "name": "태성",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "000810.KS",
+                        "name": "삼성화재",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "010120.KS",
+                        "name": "LS ELECTRIC",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "064350.KS",
+                        "name": "현대로템",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "006360.KS",
+                        "name": "GS건설",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "247540.KQ",
+                        "name": "에코프로비엠",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "066970.KS",
+                        "name": "엘앤에프",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "015760.KS",
+                        "name": "한국전력",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "089030.KQ",
+                        "name": "테크윙",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "267260.KS",
+                        "name": "HD현대일렉트릭",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "no_future_bars"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "009830.KS",
+                        "name": "한화솔루션",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "no_future_bars"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "000270.KS",
+                        "name": "기아",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "no_future_bars"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "178320.KQ",
+                        "name": "서진시스템",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "no_future_bars"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "028260.KS",
+                        "name": "삼성물산",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "no_future_bars"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "018880.KS",
+                        "name": "한온시스템",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "no_future_bars"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "298040.KS",
+                        "name": "효성중공업",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "no_future_bars"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "032830.KS",
+                        "name": "삼성생명",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "no_future_bars"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "010140.KS",
+                        "name": "삼성중공업",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "no_future_bars"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "373220.KS",
+                        "name": "LG에너지솔루션",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "no_future_bars"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "064350.KS",
+                        "name": "현대로템",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "no_future_bars"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "042660.KS",
+                        "name": "한화오션",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "no_future_bars"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "010120.KS",
+                        "name": "LS ELECTRIC",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "no_future_bars"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "033780.KS",
+                        "name": "KT&G",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "no_future_bars"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "322000.KS",
+                        "name": "HD현대에너지솔루션",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "no_future_bars"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "000810.KS",
+                        "name": "삼성화재",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "no_future_bars"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "086520.KQ",
+                        "name": "에코프로",
+                        "final": "context_wait",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "no_future_bars"
+                    }
+                ]
+            },
+            {
+                "heading": "단일 탈락 확인 / 손익비 · 14건",
+                "status": "single_verified",
+                "condition": "rr",
+                "condition_label": "손익비",
+                "signals": 14,
+                "strategy_version": null,
+                "pattern": "trend_pullback",
+                "context_applied": "사용",
+                "linked": 14,
+                "horizons": [
+                    {
+                        "bars": 1,
+                        "completed": 11,
+                        "signals": 14,
+                        "up_ratio_pct": 45.45,
+                        "mean_return_pct": 0.49,
+                        "mean_max_up_pct": 4.29,
+                        "mean_max_down_pct": -3.23
+                    },
+                    {
+                        "bars": 3,
+                        "completed": 7,
+                        "signals": 14,
+                        "up_ratio_pct": 28.57,
+                        "mean_return_pct": -3.31,
+                        "mean_max_up_pct": 4.98,
+                        "mean_max_down_pct": -6.65
+                    },
+                    {
+                        "bars": 5,
+                        "completed": 0,
+                        "signals": 14,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 10,
+                        "completed": 0,
+                        "signals": 14,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 20,
+                        "completed": 0,
+                        "signals": 14,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    }
+                ],
+                "rows": [
+                    {
+                        "date": "2026-09-22",
+                        "symbol": "052690.KS",
+                        "name": "한전기술",
+                        "final": "rejected_rr",
+                        "unknown": [],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-22",
+                        "symbol": "003490.KS",
+                        "name": "대한항공",
+                        "final": "rejected_rr",
+                        "unknown": [],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-23",
+                        "symbol": "030530.KQ",
+                        "name": "원익홀딩스",
+                        "final": "rejected_rr",
+                        "unknown": [],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-23",
+                        "symbol": "096770.KS",
+                        "name": "SK이노베이션",
+                        "final": "rejected_rr",
+                        "unknown": [],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-23",
+                        "symbol": "319660.KQ",
+                        "name": "피에스케이",
+                        "final": "rejected_rr",
+                        "unknown": [],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-23",
+                        "symbol": "396300.KQ",
+                        "name": "HT로보틱스",
+                        "final": "rejected_rr",
+                        "unknown": [],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-23",
+                        "symbol": "095610.KQ",
+                        "name": "테스",
+                        "final": "rejected_rr",
+                        "unknown": [],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "403870.KQ",
+                        "name": "HPSP",
+                        "final": "rejected_rr",
+                        "unknown": [],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "036930.KQ",
+                        "name": "주성엔지니어링",
+                        "final": "rejected_rr",
+                        "unknown": [],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "095610.KQ",
+                        "name": "테스",
+                        "final": "rejected_rr",
+                        "unknown": [],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "039030.KQ",
+                        "name": "이오테크닉스",
+                        "final": "rejected_rr",
+                        "unknown": [],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "067310.KQ",
+                        "name": "하나마이크론",
+                        "final": "rejected_rr",
+                        "unknown": [],
+                        "followup_status": "no_future_bars"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "062040.KS",
+                        "name": "산일전기",
+                        "final": "rejected_rr",
+                        "unknown": [],
+                        "followup_status": "no_future_bars"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "071090.KS",
+                        "name": "하이스틸",
+                        "final": "rejected_rr",
+                        "unknown": [],
+                        "followup_status": "no_future_bars"
+                    }
+                ]
+            },
+            {
+                "heading": "단독 미충족 · 나머지 미확인 / 급등 후 급락 · 6건",
+                "status": "single_unverified",
+                "condition": "spike_dump",
+                "condition_label": "급등 후 급락",
+                "signals": 6,
+                "strategy_version": null,
+                "pattern": "breakout_retest",
+                "context_applied": "사용",
+                "linked": 6,
+                "horizons": [
+                    {
+                        "bars": 1,
+                        "completed": 6,
+                        "signals": 6,
+                        "up_ratio_pct": 33.33,
+                        "mean_return_pct": -1.39,
+                        "mean_max_up_pct": 2.49,
+                        "mean_max_down_pct": -3.52
+                    },
+                    {
+                        "bars": 3,
+                        "completed": 3,
+                        "signals": 6,
+                        "up_ratio_pct": 33.33,
+                        "mean_return_pct": -2.56,
+                        "mean_max_up_pct": 3.19,
+                        "mean_max_down_pct": -6.22
+                    },
+                    {
+                        "bars": 5,
+                        "completed": 0,
+                        "signals": 6,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 10,
+                        "completed": 0,
+                        "signals": 6,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 20,
+                        "completed": 0,
+                        "signals": 6,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    }
+                ],
+                "rows": [
+                    {
+                        "date": "2026-09-22",
+                        "symbol": "041190.KQ",
+                        "name": "우리기술투자",
+                        "final": "risk_blocked",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-23",
+                        "symbol": "046970.KQ",
+                        "name": "우리로",
+                        "final": "risk_blocked",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-23",
+                        "symbol": "069540.KQ",
+                        "name": "빛과전자",
+                        "final": "risk_blocked",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "012210.KQ",
+                        "name": "삼미금속",
+                        "final": "risk_blocked",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "452190.KQ",
+                        "name": "한빛레이저",
+                        "final": "risk_blocked",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "356680.KQ",
+                        "name": "엑스게이트",
+                        "final": "risk_blocked",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    }
+                ]
+            },
+            {
+                "heading": "단독 미충족 · 나머지 미확인 / 직전 고점 회복 · 5건",
+                "status": "single_unverified",
+                "condition": "recovery_close",
+                "condition_label": "직전 고점 회복",
+                "signals": 5,
+                "strategy_version": null,
+                "pattern": "trend_pullback",
+                "context_applied": "사용",
+                "linked": 5,
+                "horizons": [
+                    {
+                        "bars": 1,
+                        "completed": 4,
+                        "signals": 5,
+                        "up_ratio_pct": 75,
+                        "mean_return_pct": 2.49,
+                        "mean_max_up_pct": 4.24,
+                        "mean_max_down_pct": -1.05
+                    },
+                    {
+                        "bars": 3,
+                        "completed": 2,
+                        "signals": 5,
+                        "up_ratio_pct": 100,
+                        "mean_return_pct": 8.52,
+                        "mean_max_up_pct": 12.86,
+                        "mean_max_down_pct": -0.99
+                    },
+                    {
+                        "bars": 5,
+                        "completed": 0,
+                        "signals": 5,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 10,
+                        "completed": 0,
+                        "signals": 5,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 20,
+                        "completed": 0,
+                        "signals": 5,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    }
+                ],
+                "rows": [
+                    {
+                        "date": "2026-09-22",
+                        "symbol": "010950.KS",
+                        "name": "S-Oil",
+                        "final": "await_confirmation",
+                        "unknown": [
+                            "손익비"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-23",
+                        "symbol": "403870.KQ",
+                        "name": "HPSP",
+                        "final": "await_confirmation",
+                        "unknown": [
+                            "손익비"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "055550.KS",
+                        "name": "신한지주",
+                        "final": "await_confirmation",
+                        "unknown": [
+                            "손익비"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "403870.KQ",
+                        "name": "HPSP",
+                        "final": "await_confirmation",
+                        "unknown": [
+                            "손익비"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "010950.KS",
+                        "name": "S-Oil",
+                        "final": "await_confirmation",
+                        "unknown": [
+                            "손익비"
+                        ],
+                        "followup_status": "no_future_bars"
+                    }
+                ]
+            },
+            {
+                "heading": "단독 미충족 · 나머지 미확인 / 눌림 거래량 · 4건",
+                "status": "single_unverified",
+                "condition": "volume_contracted",
+                "condition_label": "눌림 거래량",
+                "signals": 4,
+                "strategy_version": null,
+                "pattern": "trend_pullback",
+                "context_applied": "사용",
+                "linked": 4,
+                "horizons": [
+                    {
+                        "bars": 1,
+                        "completed": 2,
+                        "signals": 4,
+                        "up_ratio_pct": 0,
+                        "mean_return_pct": -1.4,
+                        "mean_max_up_pct": 5.83,
+                        "mean_max_down_pct": -4.22
+                    },
+                    {
+                        "bars": 3,
+                        "completed": 1,
+                        "signals": 4,
+                        "up_ratio_pct": 0,
+                        "mean_return_pct": -3.22,
+                        "mean_max_up_pct": 10.07,
+                        "mean_max_down_pct": -7.67
+                    },
+                    {
+                        "bars": 5,
+                        "completed": 0,
+                        "signals": 4,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 10,
+                        "completed": 0,
+                        "signals": 4,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 20,
+                        "completed": 0,
+                        "signals": 4,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    }
+                ],
+                "rows": [
+                    {
+                        "date": "2026-09-23",
+                        "symbol": "115440.KQ",
+                        "name": "우리넷",
+                        "final": "await_confirmation",
+                        "unknown": [
+                            "손익비"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "010950.KS",
+                        "name": "S-Oil",
+                        "final": "await_confirmation",
+                        "unknown": [
+                            "손익비"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "093370.KS",
+                        "name": "후성",
+                        "final": "await_confirmation",
+                        "unknown": [
+                            "손익비"
+                        ],
+                        "followup_status": "no_future_bars"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "003490.KS",
+                        "name": "대한항공",
+                        "final": "await_confirmation",
+                        "unknown": [
+                            "손익비"
+                        ],
+                        "followup_status": "no_future_bars"
+                    }
+                ]
+            },
+            {
+                "heading": "단독 미충족 · 나머지 미확인 / 새 확인 신호 · 2건",
+                "status": "single_unverified",
+                "condition": "fresh_confirmation",
+                "condition_label": "새 확인 신호",
+                "signals": 2,
+                "strategy_version": null,
+                "pattern": "trend_pullback",
+                "context_applied": "사용",
+                "linked": 2,
+                "horizons": [
+                    {
+                        "bars": 1,
+                        "completed": 1,
+                        "signals": 2,
+                        "up_ratio_pct": 0,
+                        "mean_return_pct": -7.77,
+                        "mean_max_up_pct": 0,
+                        "mean_max_down_pct": -8.91
+                    },
+                    {
+                        "bars": 3,
+                        "completed": 0,
+                        "signals": 2,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 5,
+                        "completed": 0,
+                        "signals": 2,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 10,
+                        "completed": 0,
+                        "signals": 2,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 20,
+                        "completed": 0,
+                        "signals": 2,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    }
+                ],
+                "rows": [
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "096770.KS",
+                        "name": "SK이노베이션",
+                        "final": "await_confirmation",
+                        "unknown": [
+                            "손익비"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "036930.KQ",
+                        "name": "주성엔지니어링",
+                        "final": "await_confirmation",
+                        "unknown": [
+                            "손익비"
+                        ],
+                        "followup_status": "no_future_bars"
+                    }
+                ]
+            },
+            {
+                "heading": "단독 미충족 · 나머지 미확인 / 양봉 · 1건",
+                "status": "single_unverified",
+                "condition": "bullish_candle",
+                "condition_label": "양봉",
+                "signals": 1,
+                "strategy_version": null,
+                "pattern": "trend_pullback",
+                "context_applied": "사용",
+                "linked": 1,
+                "horizons": [
+                    {
+                        "bars": 1,
+                        "completed": 1,
+                        "signals": 1,
+                        "up_ratio_pct": 0,
+                        "mean_return_pct": 0,
+                        "mean_max_up_pct": 0.27,
+                        "mean_max_down_pct": -1.79
+                    },
+                    {
+                        "bars": 3,
+                        "completed": 0,
+                        "signals": 1,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 5,
+                        "completed": 0,
+                        "signals": 1,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 10,
+                        "completed": 0,
+                        "signals": 1,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 20,
+                        "completed": 0,
+                        "signals": 1,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    }
+                ],
+                "rows": [
+                    {
+                        "date": "2026-09-28",
+                        "symbol": "316140.KS",
+                        "name": "우리금융지주",
+                        "final": "await_confirmation",
+                        "unknown": [
+                            "손익비"
+                        ],
+                        "followup_status": "pending"
+                    }
+                ]
+            },
+            {
+                "heading": "단독 미충족 · 나머지 미확인 / 고점 붕괴 · 2건",
+                "status": "single_unverified",
+                "condition": "top_collapse",
+                "condition_label": "고점 붕괴",
+                "signals": 2,
+                "strategy_version": null,
+                "pattern": "breakout_retest",
+                "context_applied": "사용",
+                "linked": 2,
+                "horizons": [
+                    {
+                        "bars": 1,
+                        "completed": 1,
+                        "signals": 2,
+                        "up_ratio_pct": 100,
+                        "mean_return_pct": 1.88,
+                        "mean_max_up_pct": 4.03,
+                        "mean_max_down_pct": 0
+                    },
+                    {
+                        "bars": 3,
+                        "completed": 0,
+                        "signals": 2,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 5,
+                        "completed": 0,
+                        "signals": 2,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 10,
+                        "completed": 0,
+                        "signals": 2,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 20,
+                        "completed": 0,
+                        "signals": 2,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    }
+                ],
+                "rows": [
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "402340.KS",
+                        "name": "SK스퀘어",
+                        "final": "risk_blocked",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "pending"
+                    },
+                    {
+                        "date": "2026-09-30",
+                        "symbol": "402340.KS",
+                        "name": "SK스퀘어",
+                        "final": "risk_blocked",
+                        "unknown": [
+                            "패턴 확인",
+                            "손익비",
+                            "detailed_gates"
+                        ],
+                        "followup_status": "no_future_bars"
+                    }
+                ]
+            },
+            {
+                "heading": "단독 미충족 · 나머지 미확인 / MA20 눌림 · 1건",
+                "status": "single_unverified",
+                "condition": "near_ma20",
+                "condition_label": "MA20 눌림",
+                "signals": 1,
+                "strategy_version": null,
+                "pattern": "trend_pullback",
+                "context_applied": "사용",
+                "linked": 1,
+                "horizons": [
+                    {
+                        "bars": 1,
+                        "completed": 1,
+                        "signals": 1,
+                        "up_ratio_pct": 0,
+                        "mean_return_pct": -2.29,
+                        "mean_max_up_pct": 0.93,
+                        "mean_max_down_pct": -4.01
+                    },
+                    {
+                        "bars": 3,
+                        "completed": 0,
+                        "signals": 1,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 5,
+                        "completed": 0,
+                        "signals": 1,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 10,
+                        "completed": 0,
+                        "signals": 1,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 20,
+                        "completed": 0,
+                        "signals": 1,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    }
+                ],
+                "rows": [
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "000990.KS",
+                        "name": "DB하이텍",
+                        "final": "wait_pullback",
+                        "unknown": [
+                            "손익비"
+                        ],
+                        "followup_status": "pending"
+                    }
+                ]
+            },
+            {
+                "heading": "단일 탈락 확인 / 손익비 · 1건",
+                "status": "single_verified",
+                "condition": "rr",
+                "condition_label": "손익비",
+                "signals": 1,
+                "strategy_version": null,
+                "pattern": "breakout_retest",
+                "context_applied": "사용",
+                "linked": 1,
+                "horizons": [
+                    {
+                        "bars": 1,
+                        "completed": 1,
+                        "signals": 1,
+                        "up_ratio_pct": 0,
+                        "mean_return_pct": -0.2,
+                        "mean_max_up_pct": 3.02,
+                        "mean_max_down_pct": -1.88
+                    },
+                    {
+                        "bars": 3,
+                        "completed": 0,
+                        "signals": 1,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 5,
+                        "completed": 0,
+                        "signals": 1,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 10,
+                        "completed": 0,
+                        "signals": 1,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    },
+                    {
+                        "bars": 20,
+                        "completed": 0,
+                        "signals": 1,
+                        "up_ratio_pct": null,
+                        "mean_return_pct": null,
+                        "mean_max_up_pct": null,
+                        "mean_max_down_pct": null
+                    }
+                ],
+                "rows": [
+                    {
+                        "date": "2026-09-29",
+                        "symbol": "319660.KQ",
+                        "name": "피에스케이",
+                        "final": "rejected_rr",
+                        "unknown": [],
+                        "followup_status": "pending"
+                    }
+                ]
+            }
+        ]
+    },
+    "volume_only": [
+        {
+            "date": "2026-09-22",
+            "symbol": "001440.KS",
+            "name": "대한전선",
+            "pullback_volume_ratio_pct": 326.05,
+            "required_volume_ratio_lt_pct": 85,
+            "final": "context_wait",
+            "blockers": [
+                "context_wait"
+            ],
+            "not_evaluated": []
+        },
+        {
+            "date": "2026-09-23",
+            "symbol": "072950.KQ",
+            "name": "빛샘전자",
+            "pullback_volume_ratio_pct": 328.26,
+            "required_volume_ratio_lt_pct": 85,
+            "final": "risk_blocked",
+            "blockers": [
+                "spike_dump",
+                "risk_blocked"
+            ],
+            "not_evaluated": []
+        },
+        {
+            "date": "2026-09-23",
+            "symbol": "103590.KS",
+            "name": "일진전기",
+            "pullback_volume_ratio_pct": 271.14,
+            "required_volume_ratio_lt_pct": 85,
+            "final": "context_wait",
+            "blockers": [
+                "context_wait"
+            ],
+            "not_evaluated": []
+        },
+        {
+            "date": "2026-09-23",
+            "symbol": "115440.KQ",
+            "name": "우리넷",
+            "pullback_volume_ratio_pct": 204.61,
+            "required_volume_ratio_lt_pct": 85,
+            "final": "await_confirmation",
+            "blockers": [],
+            "not_evaluated": []
+        },
+        {
+            "date": "2026-09-23",
+            "symbol": "092870.KQ",
+            "name": "엑시콘",
+            "pullback_volume_ratio_pct": 92.35,
+            "required_volume_ratio_lt_pct": 85,
+            "final": "risk_blocked",
+            "blockers": [
+                "spike_dump",
+                "risk_blocked"
+            ],
+            "not_evaluated": []
+        },
+        {
+            "date": "2026-09-28",
+            "symbol": "303810.KQ",
+            "name": "동국생명과학",
+            "pullback_volume_ratio_pct": 24756.25,
+            "required_volume_ratio_lt_pct": 85,
+            "final": "risk_blocked",
+            "blockers": [
+                "spike_dump",
+                "risk_blocked"
+            ],
+            "not_evaluated": []
+        },
+        {
+            "date": "2026-09-28",
+            "symbol": "010950.KS",
+            "name": "S-Oil",
+            "pullback_volume_ratio_pct": 88.63,
+            "required_volume_ratio_lt_pct": 85,
+            "final": "await_confirmation",
+            "blockers": [],
+            "not_evaluated": []
+        },
+        {
+            "date": "2026-09-28",
+            "symbol": "456010.KQ",
+            "name": "아이씨티케이",
+            "pullback_volume_ratio_pct": 189.97,
+            "required_volume_ratio_lt_pct": 85,
+            "final": "risk_blocked",
+            "blockers": [
+                "spike_dump",
+                "risk_blocked"
+            ],
+            "not_evaluated": []
+        },
+        {
+            "date": "2026-09-28",
+            "symbol": "014280.KS",
+            "name": "금강공업",
+            "pullback_volume_ratio_pct": 147.16,
+            "required_volume_ratio_lt_pct": 85,
+            "final": "risk_blocked",
+            "blockers": [
+                "spike_dump",
+                "risk_blocked"
+            ],
+            "not_evaluated": []
+        },
+        {
+            "date": "2026-09-30",
+            "symbol": "093370.KS",
+            "name": "후성",
+            "pullback_volume_ratio_pct": 123.53,
+            "required_volume_ratio_lt_pct": 85,
+            "final": "await_confirmation",
+            "blockers": [],
+            "not_evaluated": []
+        },
+        {
+            "date": "2026-09-30",
+            "symbol": "003490.KS",
+            "name": "대한항공",
+            "pullback_volume_ratio_pct": 97.9,
+            "required_volume_ratio_lt_pct": 85,
+            "final": "await_confirmation",
+            "blockers": [],
+            "not_evaluated": []
+        },
+        {
+            "date": "2026-09-30",
+            "symbol": "417200.KQ",
+            "name": "LS머트리얼즈",
+            "pullback_volume_ratio_pct": 88.39,
+            "required_volume_ratio_lt_pct": 85,
+            "final": "context_wait",
+            "blockers": [
+                "context_wait"
+            ],
+            "not_evaluated": []
+        }
+    ],
+    "rejected_rr": [
+        {
+            "date": "2026-09-22",
+            "symbol": "052690.KS",
+            "name": "한전기술",
+            "followup_status": "pending",
+            "return_pct": {
+                "1": -5.58,
+                "3": -12.31,
+                "5": null,
+                "10": null,
+                "20": null
+            },
+            "limit_trades": [
+                {
+                    "status": "closed",
+                    "net_return_pct": -9.65
+                }
+            ],
+            "limit_candidate": null
+        },
+        {
+            "date": "2026-09-22",
+            "symbol": "003490.KS",
+            "name": "대한항공",
+            "followup_status": "pending",
+            "return_pct": {
+                "1": 0.32,
+                "3": 0,
+                "5": null,
+                "10": null,
+                "20": null
+            },
+            "limit_trades": [
+                {
+                    "status": "cancelled_before_entry",
+                    "net_return_pct": null
+                }
+            ],
+            "limit_candidate": null
+        },
+        {
+            "date": "2026-09-23",
+            "symbol": "030530.KQ",
+            "name": "원익홀딩스",
+            "followup_status": "pending",
+            "return_pct": {
+                "1": -3.71,
+                "3": -6.71,
+                "5": null,
+                "10": null,
+                "20": null
+            },
+            "limit_trades": [
+                {
+                    "status": "cancelled_before_entry",
+                    "net_return_pct": null
+                }
+            ],
+            "limit_candidate": null
+        },
+        {
+            "date": "2026-09-23",
+            "symbol": "096770.KS",
+            "name": "SK이노베이션",
+            "followup_status": "pending",
+            "return_pct": {
+                "1": 6.03,
+                "3": -0.27,
+                "5": null,
+                "10": null,
+                "20": null
+            },
+            "limit_trades": [
+                {
+                    "status": "incomplete",
+                    "net_return_pct": null
+                }
+            ],
+            "limit_candidate": null
+        },
+        {
+            "date": "2026-09-23",
+            "symbol": "319660.KQ",
+            "name": "피에스케이",
+            "followup_status": "pending",
+            "return_pct": {
+                "1": -2.62,
+                "3": 2.56,
+                "5": null,
+                "10": null,
+                "20": null
+            },
+            "limit_trades": [
+                {
+                    "status": "cancelled_before_entry",
+                    "net_return_pct": null
+                }
+            ],
+            "limit_candidate": null
+        },
+        {
+            "date": "2026-09-23",
+            "symbol": "396300.KQ",
+            "name": "HT로보틱스",
+            "followup_status": "pending",
+            "return_pct": {
+                "1": -1.33,
+                "3": -9.98,
+                "5": null,
+                "10": null,
+                "20": null
+            },
+            "limit_trades": [
+                {
+                    "status": "cancelled_before_entry",
+                    "net_return_pct": null
+                }
+            ],
+            "limit_candidate": null
+        },
+        {
+            "date": "2026-09-23",
+            "symbol": "095610.KQ",
+            "name": "테스",
+            "followup_status": "pending",
+            "return_pct": {
+                "1": 0,
+                "3": 3.58,
+                "5": null,
+                "10": null,
+                "20": null
+            },
+            "limit_trades": [
+                {
+                    "status": "cancelled_before_entry",
+                    "net_return_pct": null
+                }
+            ],
+            "limit_candidate": null
+        },
+        {
+            "date": "2026-09-29",
+            "symbol": "403870.KQ",
+            "name": "HPSP",
+            "followup_status": "pending",
+            "return_pct": {
+                "1": 4.43,
+                "3": null,
+                "5": null,
+                "10": null,
+                "20": null
+            },
+            "limit_trades": [
+                {
+                    "status": "cancelled_before_entry",
+                    "net_return_pct": null
+                }
+            ],
+            "limit_candidate": null
+        },
+        {
+            "date": "2026-09-29",
+            "symbol": "036930.KQ",
+            "name": "주성엔지니어링",
+            "followup_status": "pending",
+            "return_pct": {
+                "1": 4.73,
+                "3": null,
+                "5": null,
+                "10": null,
+                "20": null
+            },
+            "limit_trades": [
+                {
+                    "status": "pending",
+                    "net_return_pct": null
+                }
+            ],
+            "limit_candidate": null
+        },
+        {
+            "date": "2026-09-29",
+            "symbol": "095610.KQ",
+            "name": "테스",
+            "followup_status": "pending",
+            "return_pct": {
+                "1": -1.81,
+                "3": null,
+                "5": null,
+                "10": null,
+                "20": null
+            },
+            "limit_trades": [
+                {
+                    "status": "cancelled_before_entry",
+                    "net_return_pct": null
+                }
+            ],
+            "limit_candidate": null
+        },
+        {
+            "date": "2026-09-29",
+            "symbol": "039030.KQ",
+            "name": "이오테크닉스",
+            "followup_status": "pending",
+            "return_pct": {
+                "1": 4.94,
+                "3": null,
+                "5": null,
+                "10": null,
+                "20": null
+            },
+            "limit_trades": [
+                {
+                    "status": "cancelled_before_entry",
+                    "net_return_pct": null
+                }
+            ],
+            "limit_candidate": null
+        },
+        {
+            "date": "2026-09-29",
+            "symbol": "319660.KQ",
+            "name": "피에스케이",
+            "followup_status": "pending",
+            "return_pct": {
+                "1": -0.2,
+                "3": null,
+                "5": null,
+                "10": null,
+                "20": null
+            },
+            "limit_trades": [
+                {
+                    "status": "cancelled_before_entry",
+                    "net_return_pct": null
+                }
+            ],
+            "limit_candidate": null
+        },
+        {
+            "date": "2026-09-30",
+            "symbol": "067310.KQ",
+            "name": "하나마이크론",
+            "followup_status": "no_future_bars",
+            "return_pct": {
+                "1": null,
+                "3": null,
+                "5": null,
+                "10": null,
+                "20": null
+            },
+            "limit_trades": [
+                {
+                    "status": "no_future_bars",
+                    "net_return_pct": null
+                }
+            ],
+            "limit_candidate": null
+        },
+        {
+            "date": "2026-09-30",
+            "symbol": "062040.KS",
+            "name": "산일전기",
+            "followup_status": "no_future_bars",
+            "return_pct": {
+                "1": null,
+                "3": null,
+                "5": null,
+                "10": null,
+                "20": null
+            },
+            "limit_trades": [
+                {
+                    "status": "no_future_bars",
+                    "net_return_pct": null
+                }
+            ],
+            "limit_candidate": null
+        },
+        {
+            "date": "2026-09-30",
+            "symbol": "071090.KS",
+            "name": "하이스틸",
+            "followup_status": "no_future_bars",
+            "return_pct": {
+                "1": null,
+                "3": null,
+                "5": null,
+                "10": null,
+                "20": null
+            },
+            "limit_trades": [
+                {
+                    "status": "no_future_bars",
+                    "net_return_pct": null
+                }
+            ],
+            "limit_candidate": null
+        }
+    ],
+    "rejected_rr_completed_samples": {
+        "1": 12,
+        "3": 7,
+        "5": 0,
+        "10": 0,
+        "20": 0
+    },
+    "read_errors": []
+}

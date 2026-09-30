@@ -29,7 +29,7 @@ with tempfile.TemporaryDirectory() as tmp:
     for legacy, record in mapping['versions'].items():
         if legacy==current or record['compatible_strategy']==current:
             continue
-        php="require 'bin/bootstrap.php'; (new ChartEntryLab\\\\PaperJournal(getenv('PAPER_STATE_DIR').'/fixture-replay.json'))->transact(function(&$s,$emit){$s['version']='"+legacy+"';unset($s['strategy_fingerprint']);});"
+        php="require 'bin/bootstrap.php'; (new ChartEntryLab\\PaperJournal(getenv('PAPER_STATE_DIR').'/fixture-replay.json'))->transact(function(&$s,$emit){$s['version']='"+legacy+"';unset($s['strategy_fingerprint']);});"
         subprocess.run(['php','-r',php],env=env,check=True,capture_output=True)
         same=path.read_bytes()
         p=subprocess.run(cmd,env=env,capture_output=True)

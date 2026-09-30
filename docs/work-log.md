@@ -30,6 +30,12 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 
 ---
 
+## 2026-09-30 23:59 · Cursor · 끝
+- 한 일: 과거 재현 탈락 로그에도 최근 5개 기록일 진단 링크를 표시
+- 파일: `paper_rr.php`, `docs/work-log.md`
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-09-30 21:36 · Cursor · 끝
 - 한 일: 5거래일 탈락 로그에서 일봉을 빼고 요약 파일을 만듦
 - 파일: `docs/paper-kr-rejection-5d.json`, `docs/work-log.md`

@@ -22,6 +22,12 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 
 ---
 
+## 2026-09-30 21:36 · Cursor · 끝
+- 한 일: 5거래일 탈락 로그에서 일봉을 빼고 요약 파일을 만듦
+- 파일: `docs/paper-kr-rejection-5d.json`, `docs/work-log.md`
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-09-30 21:15 · Cursor · 끝
 - 한 일: 탈락 로그 표에 패턴 사유와 최종 보류 문장을 표시
 - 파일: `paper_rr.php`, `bin/paper/RrView.php`, `tests/rr_view.php`, `docs/work-log.md`

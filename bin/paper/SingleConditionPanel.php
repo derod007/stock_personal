@@ -19,7 +19,7 @@ function paper_single_condition_panel(array $review):void
         echo '<p>전략: '.$e($scope['strategy_version']??'미기록 · 관찰용').' / 패턴: '.$e($scope['pattern']??'미기록').' / 추세 적용: '.($scope['context_applied']===true?'사용':($scope['context_applied']===false?'미사용':'미기록')).' / 추적 연결 '.$g['linked'].'건</p>';
         echo '<table><thead><tr><th>완료봉</th><th>완료 표본 / 대상</th><th>상승 비율</th><th>평균 종가 수익률</th><th>평균 최대 상승폭</th><th>평균 최대 하락폭</th></tr></thead><tbody>';
         foreach($g['horizons'] as $n=>$h)echo '<tr><td>'.$n.'</td><td>'.$h['n'].' / '.$g['signals'].'</td><td>'.$num($h['n']?$h['up']/$h['n']*100:null).'</td><td>'.$num($h['mean_return_pct']).'</td><td>'.$num($h['mean_max_up_pct']).'</td><td>'.$num($h['mean_max_down_pct']).'</td></tr>';
-        echo '</tbody></table><details><summary>종목과 미확인 조건</summary><table><thead><tr><th>기록일·종목</th><th>최종 판정</th><th>미확인 조건</th><th>추적 상태</th></tr></thead><tbody>';
+        echo '</tbody></table><details open><summary>종목과 미확인 조건</summary><table><thead><tr><th>기록일·종목</th><th>최종 판정</th><th>미확인 조건</th><th>추적 상태</th></tr></thead><tbody>';
         foreach($g['rows'] as $r)echo '<tr><td>'.$e($r['date'].' '.$r['name']).'</td><td>'.$e($r['final']).'</td><td>'.$e(implode(', ',array_map([PaperSingleConditionReview::class,'label'],$r['single_condition']['unknown']))).'</td><td>'.$e($r['followup_status']).'</td></tr>';
         echo '</tbody></table></details></details>';
     }

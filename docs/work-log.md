@@ -65,6 +65,12 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 
 ---
 
+## 2026-10-01 04:24 · Cursor · 끝
+- 한 일: 최근 5개 기록일 진단의 종목과 미확인 조건을 기본으로 펼침
+- 파일: bin/paper/SingleConditionPanel.php, docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-01 04:05 · Cursor · 끝
 - 한 일: paper-kr 후속 추적을 가격 갱신으로 실행. 467건, 오류 0, 상태 partial
 - 파일: docs/work-log.md

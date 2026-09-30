@@ -65,6 +65,12 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 
 ---
 
+## 2026-10-01 04:37 · Cursor · 끝
+- 한 일: paper-kr 최근 5개 기록일 원본 감사 로그·후속 추적·evidence를 ZIP으로 묶음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-01 04:29 · Cursor · 끝
 - 한 일: 현재 paper-kr 최근 5개 기록일 진단을 1회 스냅샷으로 저장
 - 파일: docs/paper-kr-diagnosis-5d.json, docs/work-log.md

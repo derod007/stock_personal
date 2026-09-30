@@ -1,3 +1,8 @@
+## 2026-09-30 · Codex · 진행
+- 한 일: 최근 5개 기록일의 선택 패턴·최종 판정 분리, 거래량 단독 미충족 수치 표시, 기존 손익비 후속 추적 연결. 매매 기준 변경 없음
+- 파일: `bin/paper/RejectionReview.php`, `bin/paper/RejectionReviewPanel.php`, `paper_rr.php`, `tests/rejection_review.php`
+- 검증: PR CI 예정
+
 # 작업 이력
 
 Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여기만 본다.  

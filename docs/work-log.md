@@ -1,7 +1,10 @@
-## 2026-09-30 · Codex · 진행
+## 2026-09-30 · Codex · 끝
 - 한 일: 최근 5개 기록일의 선택 패턴·최종 판정 분리, 거래량 단독 미충족 수치 표시, 기존 손익비 후속 추적 연결. 매매 기준 변경 없음
 - 파일: `bin/paper/RejectionReview.php`, `bin/paper/RejectionReviewPanel.php`, `paper_rr.php`, `tests/rejection_review.php`
-- 검증: PR CI 예정
+- 검증: 신규 15개 검사 및 PHP 회귀 통과. main에서도 실패 중인 전략 버전 호환성 관련 CI 2개는 이번 범위에서 변경하지 않음
+- PR: #23 (병합 안 함)
+- 제한: 운영 상태 파일은 미보유. 실제 후속 연결은 배포 후 확인 필요
+- 롤백: PR 커밋 revert
 
 # 작업 이력
 

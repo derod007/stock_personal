@@ -7,6 +7,7 @@ require __DIR__ . '/bin/paper/RrView.php';
 require_once __DIR__ . '/bin/paper/Chrome.php';
 require_once __DIR__ . '/bin/paper/FollowupPanel.php';
 require_once __DIR__ . '/bin/paper/RejectionReviewPanel.php';
+require_once __DIR__ . '/bin/paper/RediagnosisPanel.php';
 
 use ChartEntryLab\ChartPlanEngine;
 use ChartEntryLab\YahooChartClient;
@@ -41,6 +42,16 @@ $wantOutcomes = isset($_GET['outcomes']) && (string) $_GET['outcomes'] === '1';
 $preview = isset($_GET['preview']) && (string) $_GET['preview'] === '1';
 
 $dir = (getenv('PAPER_STATE_DIR') ?: dirname(__DIR__) . '/stock-personal-paper') . '/rr-audit/' . $id;
+if (($_GET['rediagnosis'] ?? '') === 'json') {
+    try {
+        $report = paper_rediagnosis_load(dirname($dir, 2), $id);
+        if ($report === null) { http_response_code(404); exit('재진단 결과 없음'); }
+        header('Content-Type: application/json; charset=utf-8');
+        header('Content-Disposition: attachment; filename="'.$id.'-rediagnosis.json"');
+        echo json_encode($report, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+    } catch (Throwable $e) { http_response_code(500); echo '재진단 파일 읽기 실패'; }
+    exit;
+}
 $files = is_dir($dir) ? PaperRrView::files($dir) : [];
 $error = null;
 $bundle = null;
@@ -83,6 +94,13 @@ paper_open(['title' => '탈락 로그·지정가 비교', 'page' => 'rr', 'accou
 $q = 'account=' . rawurlencode($id) . '&mode=' . rawurlencode($mode);
 ?>
 <p class="paper-note">운영 매수에는 넣지 않습니다. 확인 후 손익비 1.5 미만인 종목만 연구 지정가 후보고, 위험·추세 차단이 있으면 제외합니다. 지정가 접촉은 체결 보장이 아니고, 아래 수익률은 계좌 한도를 적용하지 않은 개별 거래입니다.</p>
+<?php if ($mode === 'forward' && !$preview): ?>
+<p><a href="?<?= rh($q) ?>&amp;rediagnosis=1">기존 감사 로그 일괄 재진단 결과 보기</a></p>
+<?php if (($_GET['rediagnosis'] ?? '') === '1') {
+    try { paper_rediagnosis_panel(paper_rediagnosis_load(dirname($dir, 2), $id), $id); }
+    catch (Throwable $e) { echo '<p>재진단 결과 읽기 실패: '.rh($e->getMessage()).'</p>'; }
+} ?>
+<?php endif; ?>
 <?php if (!$preview): ?>
 <p><a href="?<?= rh($q) ?>&amp;review=1">최근 5개 기록일 진단 보기</a></p>
 <?php endif; ?>

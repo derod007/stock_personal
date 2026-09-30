@@ -50,6 +50,12 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 
 ---
 
+## 2026-10-01 00:59 · Cursor · 끝
+- 한 일: paper-kr 후속 추적을 저장 evidence로 재계산. 467건, 오류 0, 상태 partial
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-01 00:36 · Cursor · 끝
 - 한 일: paper-kr 기존 감사 로그 일괄 재진단 실행. 500건, 오류 0
 - 파일: docs/work-log.md

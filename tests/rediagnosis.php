@@ -29,7 +29,7 @@ $changed=$bars;$changed[0]['volume']++;
 $x=PaperRediagnosis::evaluate($r,$changed,$at,'test');
 $d=$x['history']['differences'][0];
 rdcheck($d['field']==='volume'&&$d['saved']===1000&&$d['tracking']===1001&&$d['session']===$bars[0]['available_at'],'precise changed field and timestamp');
-rdcheck($x['followup']['status']==='historical_revision_or_missing','revision guard not bypassed');
+rdcheck($x['followup']['status']==='no_future_bars'&&count($x['followup']['reconciliation']['volume_differences'])===1,'volume difference logged with original signal frozen');
 $missing=$bars;array_shift($missing);
 rdcheck(PaperRediagnosis::compareHistory($bars,$missing,'005930.KS',$at)['differences'][0]['kind']==='missing','missing historical bar distinguished');
 $tamper=$r;$tamper['bars'][0]['volume']++;

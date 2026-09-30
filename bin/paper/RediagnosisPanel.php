@@ -14,7 +14,7 @@ function paper_rediagnosis_panel(?array $report,string $id):void
     $date=static fn($t)=>$t?(new DateTimeImmutable('@'.$t))->setTimezone(new DateTimeZone('Asia/Seoul'))->format('Y-m-d H:i'):'—';
     echo '<section class="paper-card"><h2>기존 감사 로그 일괄 재진단</h2>';
     echo '<p>프로젝트 폴더에서 실행: <code>php bin/paper_rediagnose.php --account='.$e($id).'</code></p>';
-    echo '<p>당시 저장 판정과 현재 코드 재계산을 비교합니다. 당시 코드 버전 재현은 검증되지 않았습니다. 원본·운영 계좌·기존 후속 추적은 보존합니다. 일봉 불일치는 자동 보정하지 않습니다.</p>';
+    echo '<p>당시 저장 판정과 현재 코드 재계산을 비교합니다. 당시 코드 버전 재현은 검증되지 않았습니다. 원본·운영 계좌·기존 후속 추적은 보존합니다. 원본 차이는 그대로 표시합니다. 후속 추적은 오래된 앞쪽 봉 보존·거래량 차이 기록을 허용하며 가격/종목 불일치는 차단합니다.</p>';
     if($report===null){echo '<p>아직 재진단 결과가 없습니다. 명령 실행 후 이 화면을 새로고침하세요.</p></section>';return;}
     echo '<p>생성 '.$e($date($report['generated_at'])).' · '.$report['count'].'개 원본 기록 (재실행 포함, 독립 표본 수 아님) · <a href="?account='.rawurlencode($id).'&amp;rediagnosis=json">재진단 JSON 내려받기</a></p>';
     $counts=[];foreach($report['rows'] as $r){$s=$r['history']['status']??$r['status'];$counts[$s]=($counts[$s]??0)+1;}
@@ -23,7 +23,7 @@ function paper_rediagnosis_panel(?array $report,string $id):void
     foreach($report['rows'] as $r){
         $old=$r['original']['analysis']['plan']['status']??$r['original']['status'];
         $new=$r['replay']['analysis']['plan']['status']??'재계산 없음';
-        echo '<details><summary>'.$e($date($r['session']).' '.$r['name'].' · '.$old.' → '.$new.' · '.$r['replay']['status'].' · '.$r['history']['status']).'</summary>';
+        echo '<details><summary>'.$e($date($r['session']).' '.$r['name'].' · '.$old.' → '.$new.' · '.$r['replay']['status'].' · 원본 차이 '.$r['history']['status'].' · 추적 '.($r['followup']['status']??'없음')).'</summary>';
         $v=$r['reconstructed_metrics']['volume']??[];
         echo '<p>거래량 기준 평균 '.$e($v['baseline_mean']??'—').' / 눌림 평균 '.$e($v['pullback_mean']??'—').' / 비율 '.$e(isset($v['ratio'])?round($v['ratio']*100,2).'%':'—').' / 기준 구간 0 거래량 '.$e($v['baseline_zero_bars']??'—').'봉</p>';
         if(!empty($r['history']['differences'])){

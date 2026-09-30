@@ -3,8 +3,9 @@ declare(strict_types=1);
 require __DIR__.'/bootstrap.php';
 require __DIR__.'/paper/Followup.php';
 use ChartEntryLab\YahooChartClient;
-$o=getopt('',['account:','prices:','as-of:']);$id=$o['account']??'paper-kr';
+$o=getopt('',['account:','prices:','as-of:','saved-evidence']);$id=$o['account']??'paper-kr';
 if(!preg_match('/^[a-z0-9_-]{1,64}$/',$id))throw new InvalidArgumentException('Invalid account');
+if(isset($o['saved-evidence'],$o['prices']))throw new InvalidArgumentException('Use saved-evidence or prices, not both');
 $asOf=isset($o['as-of'])?strtotime($o['as-of']):time();
 if(!$asOf || $asOf>time())throw new InvalidArgumentException('Invalid/future as-of');
 $dir=getenv('PAPER_STATE_DIR')?:dirname(__DIR__,2).'/stock-personal-paper';
@@ -12,14 +13,30 @@ $folder=$dir.'/followup/'.$id;if(!is_dir($folder))mkdir($folder,0770,true);
 $lock=fopen($folder.'/update.lock','c');if(!$lock||!flock($lock,LOCK_EX|LOCK_NB))throw new RuntimeException('Followup already running');
 try{
     $obs=PaperFollowup::observations($dir.'/rr-audit/'.$id);$previous=PaperFollowup::load($dir,$id);
+    if(isset($o['saved-evidence'])){
+        if($previous===null)throw new RuntimeException('No saved followup report; run regular followup first');
+        $asOf=min($asOf,(int)$previous['as_of']);
+    }
     $rows=[];$prices=[];$errors=$obs['errors'];$client=null;
     foreach($obs['records'] as $key=>$r){
         $old=$previous['rows'][$key]??null;
-        if($old && !empty($old['complete']) && $old['observation_hash']===$r['observation_hash'] && $old['as_of']<=$asOf){$rows[$key]=$old;continue;}
+        if($old && ($old['tracking_policy']??null)===PaperTrackingInput::POLICY && !empty($old['complete']) && $old['observation_hash']===$r['observation_hash'] && $old['as_of']<=$asOf){$rows[$key]=$old;continue;}
         $symbol=$r['symbol'];
         try{
-            if(!array_key_exists($symbol,$prices)){
-                try{
+            $rowAsOf=$asOf;$source='provider_or_local_prices';
+            if(isset($o['saved-evidence'])){
+                if(!$old||($old['observation_hash']??null)!==$r['observation_hash']
+                    ||($old['source_file']??null)!==$r['source_file']||($old['symbol']??null)!==$symbol
+                    ||($old['session']??null)!==$r['session']||!preg_match('/^[a-f0-9]{64}$/',$old['price_hash']??''))
+                    throw new RuntimeException('Matching saved price evidence unavailable');
+                $evidencePath=$folder.'/evidence/'.$old['price_hash'].'.json';
+                if(!is_file($evidencePath))throw new RuntimeException('Saved price evidence missing');
+                $raw=json_decode(file_get_contents($evidencePath),true,512,JSON_THROW_ON_ERROR);
+                if(!is_array($raw)||!array_is_list($raw))throw new RuntimeException('Invalid saved prices');
+                if(!hash_equals($old['price_hash'],hash('sha256',PaperRrAudit::encode($raw))))throw new RuntimeException('Saved price evidence hash mismatch');
+                $rowAsOf=min($asOf,(int)$old['as_of']);$source='original_followup_evidence';
+            }else{
+                if(!array_key_exists($symbol,$prices)){
                     if(isset($o['prices'])){
                         $file=$o['prices'].'/'.$symbol.'.json';if(!is_file($file))$file=$o['prices'].'/'.$symbol.'_2y_1d_closed_v2.json';
                         if(!is_file($file))throw new RuntimeException('Price file missing');
@@ -28,11 +45,11 @@ try{
                         $client??=new YahooChartClient($folder.'/prices');
                         $prices[$symbol]=$client->fetch($symbol,'2y','1d',useCache:true,maxAgeSeconds:3600);
                     }
-                    if(!is_array($prices[$symbol]))throw new RuntimeException('Invalid prices');
-                }catch(Throwable $e){$prices[$symbol]=null;$errors[]=['symbol'=>$symbol,'error'=>$e->getMessage()];}
+                }
+                $raw=$prices[$symbol];
+                if(!is_array($raw)||!array_is_list($raw))throw new RuntimeException('Invalid prices');
             }
-            if($prices[$symbol]===null)throw new RuntimeException('Price unavailable');
-            $priceJson=PaperRrAudit::encode($prices[$symbol]);$priceHash=hash('sha256',$priceJson);
+            $priceJson=PaperRrAudit::encode($raw);$priceHash=hash('sha256',$priceJson);
             $evidence=$folder.'/evidence';if(!is_dir($evidence))mkdir($evidence,0770,true);
             $evidencePath=$evidence.'/'.$priceHash.'.json';
             if(!is_file($evidencePath)){
@@ -40,8 +57,9 @@ try{
                 try{if(file_put_contents($temp,$priceJson)!==strlen($priceJson)||!rename($temp,$evidencePath))throw new RuntimeException('Price evidence write failed');}
                 finally{if(is_file($temp))unlink($temp);}
             }
-            $rows[$key]=PaperFollowup::evaluate($r,$prices[$symbol],$asOf);
+            $rows[$key]=PaperFollowup::evaluate($r,$raw,$rowAsOf);
             $rows[$key]['price_hash']=$priceHash;
+            $rows[$key]['price_source']=$source;
         }catch(Throwable $e){
             $rows[$key]=['symbol'=>$symbol,'name'=>$r['name']??$symbol,'session'=>$r['session'],'captured_at'=>$r['captured_at'],
                 'source_file'=>$r['source_file'],'observation_hash'=>$r['observation_hash'],'as_of'=>$asOf,'complete'=>false,

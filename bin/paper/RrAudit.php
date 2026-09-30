@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+require_once __DIR__.'/TrackingInput.php';
 
 use ChartEntryLab\CandleClock;
 use ChartEntryLab\PaperQuality;
@@ -49,6 +50,7 @@ final class PaperRrAudit
         $quality = PaperQuality::inspect($bars, $symbol, $session, $source);
         return ['symbol'=>$symbol, 'name'=>$leader['name'] ?? $symbol, 'amount_rank'=>$leader['rank'] ?? null,
             'session'=>$session, 'asof'=>$analysis['plan']['asof'], 'status'=>'evaluated',
+            'analysis_symbol'=>$result['symbol']??null,
             'input_hash'=>$source['sha256'], 'bars'=>$bars, 'analysis'=>$analysis, 'quality'=>$quality,
             'measurements'=>self::measurements(CandleClock::completed($bars, $symbol, $session)),
             'patterns'=>self::evaluate($analysis, $quality)];
@@ -182,17 +184,10 @@ final class PaperRrAudit
     public static function outcome(array $record, array $candidate, array $raw, int $asOf): array
     {
         $symbol=$record['symbol']; $session=(int)$record['session'];
-        if (hash('sha256',self::encode($record['bars']))!==$record['input_hash']) return ['status'=>'input_hash_mismatch'];
-        $old=CandleClock::completed($record['bars'],$symbol,$session);
-        $new=CandleClock::completed($raw,$symbol,$session);
-        $index=[];
-        foreach($new as $b) $index[$b['available_at']]=$b;
-        foreach($old as $b) {
-            $n=$index[$b['available_at']]??null;
-            foreach(['open','high','low','close','volume'] as $k) {
-                if($n===null || (float)($n[$k]??-1)!==(float)($b[$k]??-1)) return ['status'=>'historical_revision_or_missing'];
-            }
-        }
+        $prepared=PaperTrackingInput::prepare($record,$raw,$asOf);
+        $reconciliation=$prepared['audit'];
+        if($prepared['status']!=='ok')return ['status'=>$prepared['status'],'reconciliation'=>$reconciliation];
+        $raw=$prepared['raw'];
         $completed=CandleClock::completed($raw,$symbol,$asOf);
         $future=array_values(array_filter($completed,static fn($b)=>$b['available_at']>$session));
         $observedSession=$session;
@@ -203,8 +198,8 @@ final class PaperRrAudit
         // Check raw input before a simulator can silently skip duplicate or invalid bars.
         $quality=PaperQuality::inspect($raw,$symbol,$observedSession,
             ['sha256'=>hash('sha256',self::encode($raw))]);
-        if(empty($quality['can_simulate'])) return ['status'=>'future_quality_blocked','quality'=>$quality];
-        if($future===[]) return ['status'=>'no_future_bars','complete'=>false];
+        if(empty($quality['can_simulate'])) return ['status'=>'future_quality_blocked','quality'=>$quality,'reconciliation'=>$reconciliation];
+        if($future===[]) return ['status'=>'no_future_bars','complete'=>false,'reconciliation'=>$reconciliation];
         $result=(new TradeSimulator())->simulate($candidate,$future,20);
         $result['entry_bar_stop_touch']=false;
         foreach($future as $b) {
@@ -212,6 +207,7 @@ final class PaperRrAudit
         }
         $result['observed_future_bars']=count($future);
         $result['basis']='independent_trade_not_portfolio';
+        $result['reconciliation']=$reconciliation;
         return $result;
     }
 }

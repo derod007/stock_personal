@@ -51,11 +51,12 @@ final class PaperFollowup
         $row=['symbol'=>$symbol,'name'=>$r['name']??$symbol,'session'=>$session,'captured_at'=>$r['captured_at'],
             'source_file'=>$r['source_file'],'observation_hash'=>$r['observation_hash'],
             'rejected'=>empty($plan['ready']),'reasons'=>self::reasons($r),'final_status'=>$plan['status']??'unknown',
-            'as_of'=>$asOf,'status'=>'pending','complete'=>false,'horizons'=>[],'trades'=>[]];
+            'tracking_policy'=>PaperTrackingInput::POLICY,'as_of'=>$asOf,'status'=>'pending','complete'=>false,'horizons'=>[],'trades'=>[]];
         if($session>$asOf || $r['captured_at']>$asOf){$row['status']='not_yet_observed';return $row;}
-        // Reuse the original audit's hash, historical revision and future quality guards.
+        // Frozen-signal price tracking retains original levels and logs permitted input differences.
         $probe=PaperRrAudit::outcome($r,['ready'=>false],$raw,$asOf);
-        if(in_array($probe['status']??'', ['input_hash_mismatch','historical_revision_or_missing','future_quality_blocked'],true)){
+        $row['reconciliation']=$probe['reconciliation']??null;
+        if(in_array($probe['status']??'', ['input_hash_mismatch','analysis_symbol_mismatch','historical_revision_or_missing','future_quality_blocked'],true)){
             $row['status']=$probe['status'];return $row;
         }
         $old=CandleClock::completed($r['bars'],$symbol,$session);

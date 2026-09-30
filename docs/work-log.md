@@ -1,3 +1,9 @@
+## 2026-10-01 00:05 · Codex · 진행
+- 한 일: 기존 감사 로그 일괄 재진단, 현재 코드 재평가와 당시 저장 판정 비교, 추적 일봉 불일치 상세 기록
+- 파일: 재진단 CLI·모듈·화면·테스트·문서
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-09-30 · Codex · 끝
 - 한 일: 최근 5개 기록일의 선택 패턴·최종 판정 분리, 거래량 단독 미충족 수치 표시, 기존 손익비 후속 추적 연결. 매매 기준 변경 없음
 - 파일: `bin/paper/RejectionReview.php`, `bin/paper/RejectionReviewPanel.php`, `paper_rr.php`, `tests/rejection_review.php`

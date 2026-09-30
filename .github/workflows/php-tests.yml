@@ -21,6 +21,7 @@ jobs:
           php tests/v9.php
           php tests/v13.php
           php tests/v14.php
+          php tests/rediagnosis.php
           php tests/rejection_review.php
           php tests/rr_view.php
           php tests/followup.php

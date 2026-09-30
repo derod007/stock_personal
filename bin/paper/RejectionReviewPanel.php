@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require_once __DIR__.'/RejectionReview.php';
+require_once __DIR__.'/SingleConditionPanel.php';
 
 function paper_rejection_review_panel(array $report):void
 {
@@ -14,6 +15,7 @@ function paper_rejection_review_panel(array $report):void
         foreach($report[$key] as $code=>$n)echo '<tr><td>'.$e($code).'</td><td>'.$n.'</td></tr>';
         echo '</tbody></table></details>';
     }
+    paper_single_condition_panel($report['single_condition_review']);
     echo '<h3>눌림 거래량만 미충족한 선택 패턴</h3><p>다른 조건이 미평가되었거나 추세·위험 차단이 남아 있으면 거래량 기준을 완화해도 추천된다고 볼 수 없습니다. RR 재판정도 필요합니다. 비율은 저장된 당시 측정값입니다.</p><table><thead><tr><th>기록일·종목</th><th>거래량 비율 / 기준</th><th>최종 판정·차단</th><th>미평가 조건</th></tr></thead><tbody>';
     foreach($report['volume_only'] as $r){$m=$r['measurements'];
         echo '<tr><td>'.$e($r['date'].' '.$r['name']).'</td><td>'.$num(isset($m['pullback_volume_ratio'])?$m['pullback_volume_ratio']*100:null).'% / &lt; '.$num(isset($m['required_volume_ratio_lt'])?$m['required_volume_ratio_lt']*100:null).'%</td><td>'.$e($r['final'].' · '.implode(', ',$r['blockers'])).'</td><td>'.$e(implode(', ',$r['not_evaluated'])).'</td></tr>';

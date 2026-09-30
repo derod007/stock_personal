@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require_once __DIR__.'/Followup.php';
+require_once __DIR__.'/SingleConditionReview.php';
 
 /** Saved evidence only: no strategy replay, orders, or threshold changes. */
 final class PaperRejectionReview
@@ -68,6 +69,8 @@ final class PaperRejectionReview
                     'not_evaluated'=>$selected['not_evaluated']??[],
                     'measurements'=>$r['measurements']??[],
                     'strategy_version'=>$r['analysis']['strategy_version']??null,
+                    'context_applied'=>$plan['context_applied']??null,
+                    'single_condition'=>PaperSingleConditionReview::assess($r,$selected),
                     'followup'=>$f,'followup_status'=>$f['status']??'unmatched',
                     'limit_status'=>$selected['status']??null];
                 $out['rows'][]=$row;self::inc($out['final'],$final);
@@ -85,6 +88,7 @@ final class PaperRejectionReview
             }
         }
         $out['rr_summary']=PaperFollowup::summarize(array_values(array_filter(array_column($out['rr'],'followup'))));
+        $out['single_condition_review']=PaperSingleConditionReview::summarize($out['rows']);
         return $out;
     }
     private static function inc(array &$counts,string $key):void{$counts[$key]=($counts[$key]??0)+1;}

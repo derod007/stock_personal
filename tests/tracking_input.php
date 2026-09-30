@@ -53,6 +53,34 @@ ti(PaperFollowup::evaluate($r,$tracking,$session)['status']==='not_yet_observed'
 $captureAnalysis=['plan'=>['data_asof'=>$session,'asof'=>$session,'status'=>'no_setup','diagnostics'=>['patterns'=>[]]],'features'=>[]];
 $captured=PaperRrAudit::capture(['yahoo'=>'122630.KS'],['ok'=>true,'symbol'=>'005930.KS','research_input'=>['bars'=>$old,'analysis'=>$captureAnalysis]]);
 ti($captured['analysis_symbol']==='005930.KS'&&PaperTrackingInput::identity($captured)['status']==='analysis_symbol_mismatch','capture records resolved ticker');
+// Old invalid OHLC already excluded from the frozen input must not veto price-only observation.
+$withOldError=$r;$withOldError['bars'][10]['high']=0;
+$withOldError['input_hash']=hash('sha256',PaperRrAudit::encode($withOldError['bars']));
+$withOldErrorPrices=$bars;$withOldErrorPrices[10]['high']=0;
+$originalBytes=PaperRrAudit::encode($withOldError);$trackingBytes=PaperRrAudit::encode($withOldErrorPrices);
+$restored=PaperFollowup::evaluate($withOldError,$withOldErrorPrices,$now);
+ti($restored['horizons']===$baseline['horizons'],'previously excluded old OHLC does not suppress future returns');
+ti($restored['trades'][0]['outcome']['net_return_pct']===$baseline['trades'][0]['outcome']['net_return_pct'],'old error exclusion preserves frozen costed trade');
+$excluded=$restored['reconciliation']['excluded_old_invalid_bars'];
+ti(count($excluded)===1&&$excluded[0]['session']===$old[10]['available_at']&&$excluded[0]['saved']['high']===0&&$excluded[0]['tracking']['high']===0,'excluded old error has both original values and timestamp');
+ti(PaperRrAudit::encode($withOldError)===$originalBytes&&PaperRrAudit::encode($withOldErrorPrices)===$trackingBytes,'old invalid inputs remain immutable');
+$bad=$bars;$bad[10]['high']=0;
+$forged=$r;$forged['quality']=['can_simulate'=>true,'invalid_bars'=>[$old[10]['available_at']]];
+ti(PaperFollowup::evaluate($forged,$bad,$now)['status']==='future_quality_blocked','newly invalid old bar cannot use forged quality metadata');
+$bad=$withOldErrorPrices;$bad[]=$bad[10];
+ti(PaperFollowup::evaluate($withOldError,$bad,$now)['status']==='future_quality_blocked','duplicate on an excluded date still blocked');
+$recent=$r;$recent['bars'][130]['high']=0;$recent['input_hash']=hash('sha256',PaperRrAudit::encode($recent['bars']));
+$bad=$bars;$bad[130]['high']=0;
+ti(PaperFollowup::evaluate($recent,$bad,$now)['status']==='future_quality_blocked','recent original and tracking errors remain blocked');
+$bad=$withOldErrorPrices;$bad[142]['high']=0;
+ti(PaperFollowup::evaluate($withOldError,$bad,$now)['status']==='future_quality_blocked','future error never inherits old exclusion');
+$volumeOnly=$r;$volumeOnly['bars'][10]['volume']=-1;$volumeOnly['input_hash']=hash('sha256',PaperRrAudit::encode($volumeOnly['bars']));
+$bad=$bars;$bad[10]['volume']=-1;
+ti(PaperFollowup::evaluate($volumeOnly,$bad,$now)['status']==='future_quality_blocked','valid OHLC with bad volume was not an excluded candle');
+$bad=$withOldErrorPrices;$bad[100]['close']=99;
+ti(PaperFollowup::evaluate($withOldError,$bad,$now)['status']==='historical_revision_or_missing','old exclusion does not hide a price revision elsewhere');
+// Use the actual regression shape for the offline CLI fixture below.
+$r=$withOldError;$tracking=$withOldErrorPrices;
 // Offline recovery uses immutable provider evidence and upgrades old completed caches exactly once.
 $root=sys_get_temp_dir().'/tracking-recovery-'.bin2hex(random_bytes(5));mkdir($root);
 $prior=getenv('PAPER_STATE_DIR');putenv('PAPER_STATE_DIR='.$root);
@@ -63,7 +91,7 @@ try{
  $path=$root.'/rr-audit/test/'.$file;file_put_contents($path,PaperRrAudit::encode($bundle));$savedHash=hash_file('sha256',$path);
  $obs=PaperFollowup::observations($root.'/rr-audit/test')['records'];$key=array_key_first($obs);$record=$obs[$key];
  $priceHash=hash('sha256',PaperRrAudit::encode($tracking));$evidence=$root.'/followup/test/evidence/'.$priceHash.'.json';file_put_contents($evidence,PaperRrAudit::encode($tracking));
- $legacy=PaperFollowup::evaluate($record,$tracking,$now);unset($legacy['tracking_policy']);
+ $legacy=PaperFollowup::evaluate($record,$tracking,$now);$legacy['tracking_policy']='frozen_signal_price_tracking_v2';
  $legacy['complete']=true;$legacy['status']='historical_revision_or_missing';$legacy['horizons']=[];$legacy['trades']=[];$legacy['price_hash']=$priceHash;
  $previous=['schema'=>1,'account'=>'test','as_of'=>$now,'rows'=>[$key=>$legacy]];
  file_put_contents($root.'/followup/test/latest.json',PaperRrAudit::encode($previous));

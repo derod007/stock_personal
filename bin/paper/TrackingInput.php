@@ -6,7 +6,7 @@ use ChartEntryLab\PaperQuality;
 /** Reconciliation for frozen-signal price observation only, never strategy replay. */
 final class PaperTrackingInput
 {
-    public const POLICY='frozen_signal_price_tracking_v2';
+    public const POLICY='frozen_signal_price_tracking_v3';
     public static function identity(array $r):array
     {
         $expected=(string)($r['symbol']??'');$evidence=[];
@@ -23,25 +23,39 @@ final class PaperTrackingInput
         $symbol=$r['symbol'];$session=(int)$r['session'];
         $audit=['policy'=>self::POLICY,'basis'=>'original_signal_and_levels_frozen',
             'original_input_hash'=>$r['input_hash']??null,'tracking_input_hash'=>hash('sha256',PaperRrAudit::encode($raw)),
-            'identity'=>self::identity($r),'prefix_preserved'=>[],'volume_differences'=>[],'blocking_differences'=>[]];
+            'identity'=>self::identity($r),'excluded_old_invalid_bars'=>[],'prefix_preserved'=>[],'volume_differences'=>[],'blocking_differences'=>[]];
         $result=['status'=>'ok','audit'=>$audit,'raw'=>[]];
         $a=&$result['audit'];
         if(!isset($r['input_hash'])||!hash_equals($r['input_hash'],hash('sha256',PaperRrAudit::encode($r['bars'])))){
             $result['status']='input_hash_mismatch';return $result;
         }
         if($a['identity']['status']==='analysis_symbol_mismatch'){$result['status']='analysis_symbol_mismatch';return $result;}
-        // Inspect unnormalized input first: no duplicate, invalid value or future bar may disappear in a merge.
+        // Derive exclusions from hash-verified original bars, never from editable cached quality metadata.
+        $q=PaperQuality::inspect($r['bars'],$symbol,$session,['sha256'=>$r['input_hash']]);
+        if(empty($q['can_simulate'])){$result['status']='future_quality_blocked';$a['original_quality']=$q;return $result;}
+        $originalExcluded=[];
+        foreach($r['bars'] as $bar){
+            $t=CandleClock::closeTime($bar,$symbol);
+            if($session-$t>90*86400&&in_array($t,$q['invalid_bars'],true)
+                &&CandleClock::completed([$bar],$symbol,$session)===[])$originalExcluded[$t]=$bar;
+        }
+        // Inspect raw input before merging. Only previously excluded old OHLC errors are repeatable exclusions.
+
         $seen=[];$invalid=[];
         foreach($raw as $bar){
             $t=CandleClock::closeTime($bar,$symbol);
             if($t>$asOf||!empty($bar['synthetic'])||($bar['is_complete']??true)===false)continue;
             if(isset($seen[$t]))$invalid[]=['session'=>$t,'reason'=>'duplicate_session'];$seen[$t]=true;
             if(CandleClock::completed([$bar],$symbol,$asOf)===[]||!is_numeric($bar['volume']??null)
-                ||!is_finite((float)$bar['volume'])||$bar['volume']<0)$invalid[]=['session'=>$t,'reason'=>'invalid_ohlcv'];
+                ||!is_finite((float)$bar['volume'])||$bar['volume']<0){
+                if(isset($originalExcluded[$t])&&CandleClock::completed([$bar],$symbol,$asOf)===[]){
+                    $a['excluded_old_invalid_bars'][]=['session'=>$t,'reason'=>'already_excluded_in_original',
+                        'saved'=>$originalExcluded[$t],'tracking'=>$bar];
+                }else $invalid[]=['session'=>$t,'reason'=>'invalid_ohlcv'];
+            }
+
         }
         if($invalid){$result['status']='future_quality_blocked';$a['invalid_tracking_bars']=$invalid;return $result;}
-        $q=PaperQuality::inspect($r['bars'],$symbol,$session,['sha256'=>$r['input_hash']]);
-        if(empty($q['can_simulate'])){$result['status']='future_quality_blocked';$a['original_quality']=$q;return $result;}
         $old=CandleClock::completed($r['bars'],$symbol,$session);
         $tracking=CandleClock::completed($raw,$symbol,min($session,$asOf));$index=[];
         foreach($tracking as $b)$index[$b['available_at']]=$b;
@@ -67,7 +81,7 @@ final class PaperTrackingInput
         $future=array_values(array_filter($raw,fn($b)=>CandleClock::closeTime($b,$symbol)>$session));
         $result['raw']=array_merge($old,$future);
         $a['reconciled_input_hash']=hash('sha256',PaperRrAudit::encode($result['raw']));
-        $a['status']=$a['prefix_preserved']||$a['volume_differences']?'reconciled':'matched';
+        $a['status']=$a['prefix_preserved']||$a['volume_differences']||$a['excluded_old_invalid_bars']?'reconciled':'matched';
         return $result;
     }
 }

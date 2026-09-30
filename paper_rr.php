@@ -6,6 +6,7 @@ require __DIR__ . '/bin/bootstrap.php';
 require __DIR__ . '/bin/paper/RrView.php';
 require_once __DIR__ . '/bin/paper/Chrome.php';
 require_once __DIR__ . '/bin/paper/FollowupPanel.php';
+require_once __DIR__ . '/bin/paper/RejectionReviewPanel.php';
 
 use ChartEntryLab\ChartPlanEngine;
 use ChartEntryLab\YahooChartClient;
@@ -82,6 +83,17 @@ paper_open(['title' => '탈락 로그·지정가 비교', 'page' => 'rr', 'accou
 $q = 'account=' . rawurlencode($id) . '&mode=' . rawurlencode($mode);
 ?>
 <p class="paper-note">운영 매수에는 넣지 않습니다. 확인 후 손익비 1.5 미만인 종목만 연구 지정가 후보고, 위험·추세 차단이 있으면 제외합니다. 지정가 접촉은 체결 보장이 아니고, 아래 수익률은 계좌 한도를 적용하지 않은 개별 거래입니다.</p>
+<?php if ($mode === 'forward' && !$preview): ?>
+<p><a href="?<?= rh($q) ?>&amp;review=1">최근 5개 기록일 진단 보기</a></p>
+<?php endif; ?>
+<?php if ($mode === 'forward' && !$preview && ($_GET['review'] ?? '') === '1'): ?>
+<details open><summary>최근 5개 기록일 진단 보기</summary>
+<?php
+try { paper_rejection_review_panel(PaperRejectionReview::load($dir, PaperFollowup::load(dirname($dir, 2), $id))); }
+catch (Throwable $e) { echo '<p>최근 진단을 읽지 못했습니다: '.rh($e->getMessage()).'</p>'; }
+?>
+</details>
+<?php endif; ?>
 <?php if ($files !== []): ?>
 <form class="paper-filter" method="get">
   <input type="hidden" name="account" value="<?= rh($id) ?>">

@@ -1,4 +1,4 @@
-"""Actual account CLI migration preserves history, balances and legacy version identity."""
+"""Account scope adoption preserves state; incompatible historical strategies remain blocked."""
 import datetime, hashlib, json, os, pathlib, subprocess, tempfile
 with tempfile.TemporaryDirectory() as tmp:
     root=pathlib.Path(tmp);data=root/'data';data.mkdir();state=root/'state'
@@ -10,8 +10,9 @@ with tempfile.TemporaryDirectory() as tmp:
     env=dict(os.environ,PAPER_STATE_DIR=str(state))
     cmd=['php','bin/paper_account.php','--config='+str(cfg),'--data='+str(data),'--mode=replay']
     subprocess.run(cmd,env=env,check=True,capture_output=True)
-    # Build a hash-valid pre-scope fixture using an explicitly verified historical version.
-    php="require 'bin/bootstrap.php'; $p=getenv('PAPER_STATE_DIR').'/fixture-replay.json'; $m=json_decode(file_get_contents('config/paper-legacy-versions.json'),true); (new ChartEntryLab\\PaperJournal($p))->transact(function(&$s,$emit)use($m){$s['version']=array_key_first($m['versions']);unset($s['strategy_fingerprint']);});"
+    # Model a current-strategy account that predates the scope metadata field.
+    # Production historical exemptions are pinned targets, not permission to adopt every new strategy.
+    php="require 'bin/bootstrap.php'; $p=getenv('PAPER_STATE_DIR').'/fixture-replay.json'; (new ChartEntryLab\\PaperJournal($p))->transact(function(&$s,$emit){unset($s['strategy_fingerprint']);});"
     subprocess.run(['php','-r',php],env=env,check=True,capture_output=True)
     path=state/'fixture-replay.json';before=json.loads(path.read_bytes())
     subprocess.run(cmd,env=env,check=True,capture_output=True)
@@ -22,8 +23,20 @@ with tempfile.TemporaryDirectory() as tmp:
     for key in ['cash','active','realized','frozen','history','equity','last_session']:
         assert after['state'][key]==before['state'][key],key
     same=path.read_bytes();subprocess.run(cmd,env=env,check=True,capture_output=True);assert path.read_bytes()==same
+    # Real historical versions with another verified target must also fail without rewriting.
+    current=after['state']['strategy_fingerprint']
+    mapping=json.loads(pathlib.Path('config/paper-legacy-versions.json').read_text())
+    for legacy, record in mapping['versions'].items():
+        if legacy==current or record['compatible_strategy']==current:
+            continue
+        php="require 'bin/bootstrap.php'; (new ChartEntryLab\\\\PaperJournal(getenv('PAPER_STATE_DIR').'/fixture-replay.json'))->transact(function(&$s,$emit){$s['version']='"+legacy+"';unset($s['strategy_fingerprint']);});"
+        subprocess.run(['php','-r',php],env=env,check=True,capture_output=True)
+        same=path.read_bytes()
+        p=subprocess.run(cmd,env=env,capture_output=True)
+        assert p.returncode!=0 and path.read_bytes()==same
+        assert b'Pinned strategy changed or unverified legacy version' in p.stderr
     # Unknown versions must fail without rewriting the journal.
     php="require 'bin/bootstrap.php'; (new ChartEntryLab\\PaperJournal(getenv('PAPER_STATE_DIR').'/fixture-replay.json'))->transact(function(&$s,$emit){$s['version']=str_repeat('0',64);unset($s['strategy_fingerprint']);});"
     subprocess.run(['php','-r',php],env=env,check=True,capture_output=True)
     same=path.read_bytes();p=subprocess.run(cmd,env=env,capture_output=True);assert p.returncode!=0 and path.read_bytes()==same
-    print('VERSION_INTEGRATION_PASS: preserved history, identity, balances; repeat unchanged; unknown blocked')
+    print('VERSION_INTEGRATION_PASS: preserved history, identity, balances; repeat unchanged; incompatible legacy and unknown blocked')

@@ -6,13 +6,36 @@ use ChartEntryLab\ScanSnapshot;
 function vc(bool $ok,string $name):void{if(!$ok)throw new RuntimeException($name);echo "OK $name\n";}
 function rm12(string $p):void{if(is_dir($p)){foreach(scandir($p) as $f)if($f!=='.'&&$f!=='..')rm12($p.'/'.$f);rmdir($p);}elseif(file_exists($p))unlink($p);}
 $root=dirname(__DIR__);$current=PaperStrategyVersion::current();$map=json_decode(file_get_contents($root.'/config/paper-legacy-versions.json'),true);
-foreach($map['versions'] as $old=>$record)vc(PaperStrategyVersion::compatible($old,$current),'verified legacy maps to current');
+// A historical exemption pins one verified target, not every future strategy.
+foreach($map['versions'] as $old=>$record){
+ $target=$record['compatible_strategy'];
+ vc(PaperStrategyVersion::compatible($old,$target),'legacy maps to its verified target');
+ vc(PaperStrategyVersion::compatible($old,$current)===($old===$current || $target===$current),'legacy compatibility follows pinned target');
+}
+vc(PaperStrategyVersion::compatible($current,$current),'current strategy accepts itself');
+$verified=$map['versions'][array_key_first($map['versions'])]['compatible_strategy'];
 vc(!PaperStrategyVersion::compatible(str_repeat('0',64),$current),'unknown version rejected');
 $s=['version'=>array_key_first($map['versions']),'cash'=>123,'frozen'=>['a'=>1]];$original=$s;$events=[];
-PaperStrategyVersion::adopt($s,$current,function($t,$p)use(&$events){$events[]=[$t,$p];});
+PaperStrategyVersion::adopt($s,$verified,function($t,$p)use(&$events){$events[]=[$t,$p];});
 vc($s['version']===$original['version'] && $s['cash']===123 && $s['frozen']===$original['frozen'],'adoption preserves original identity and finances');
-PaperStrategyVersion::adopt($s,$current,function($t,$p)use(&$events){$events[]=[$t,$p];});vc(count($events)===1,'adoption recorded once');
-$halt=$original;$halt['halted']=true;try{PaperStrategyVersion::adopt($halt,$current,fn()=>null);vc(false,'halt');}catch(RuntimeException $e){vc(!isset($halt['strategy_fingerprint']),'halted account not migrated');}
+PaperStrategyVersion::adopt($s,$verified,function($t,$p)use(&$events){$events[]=[$t,$p];});vc(count($events)===1,'adoption recorded once');
+$halt=$original;$halt['halted']=true;try{PaperStrategyVersion::adopt($halt,$verified,fn()=>null);vc(false,'halt');}catch(RuntimeException $e){vc(!isset($halt['strategy_fingerprint']),'halted account not migrated');}
+// A real strategy change must reject old accounts without mutating them.
+$rejected=$original;$rejectBefore=$rejected;$rejectEvents=[];
+try {
+ PaperStrategyVersion::adopt($rejected,str_repeat('f',64),function($t,$p)use(&$rejectEvents){$rejectEvents[]=[$t,$p];});
+ vc(false,'changed strategy must reject adoption');
+}catch(RuntimeException $e){
+ vc($rejected===$rejectBefore && $rejectEvents===[],'rejected adoption preserves state and emits no event');
+}
+if(!PaperStrategyVersion::compatible($original['version'],$current)){
+ $oldAccount=$original;$blocked=false;
+ try{PaperStrategyVersion::verify($oldAccount,$current);}catch(RuntimeException $e){$blocked=true;}
+ vc($blocked && $oldAccount===$original,'historical account cannot silently adopt current strategy');
+}
+$badFingerprint=['version'=>$current,'strategy_fingerprint'=>str_repeat('0',64)];$blocked=false;
+try{PaperStrategyVersion::verify($badFingerprint,$current);}catch(RuntimeException $e){$blocked=true;}
+vc($blocked,'mismatched account fingerprint rejected');
 $dir=sys_get_temp_dir().'/scope-'.bin2hex(random_bytes(5));mkdir($dir);
 try {
  $paths=json_decode(file_get_contents($root.'/config/paper-strategy-files.json'),true);

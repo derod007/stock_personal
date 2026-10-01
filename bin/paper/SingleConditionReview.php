@@ -90,8 +90,10 @@ final class PaperSingleConditionReview
 
     public static function summarize(array $rows):array
     {
-        $out=['statuses'=>[],'groups'=>[],'duplicates'=>0];$seen=[];
+        $out=['statuses'=>[],'groups'=>[],'duplicates'=>0,'unavailable'=>0,'missing_session'=>0];$seen=[];
         foreach($rows as $row){
+            if(($row['final']??'')==='unavailable'){$out['unavailable']++;continue;}
+            if(!is_numeric($row['session']??null)||(int)$row['session']<=0){$out['missing_session']++;continue;}
             // One symbol/decision candle across recorded days, matching the tracker.
             $key=$row['symbol'].'@'.($row['session']??'');
             if(isset($seen[$key])){$out['duplicates']++;continue;}$seen[$key]=true;
@@ -103,9 +105,10 @@ final class PaperSingleConditionReview
             $groupKey=json_encode([$scope,$status,$a['condition']],JSON_THROW_ON_ERROR);
             if(!isset($out['groups'][$groupKey]))$out['groups'][$groupKey]=[
                 'scope'=>$scope,'version_known'=>is_string($version)&&$version!=='',
-                'status'=>$status,'condition'=>$a['condition'],'signals'=>0,'linked'=>0,
+                'status'=>$status,'condition'=>$a['condition'],'signals'=>0,'linked'=>0,'pattern_stages'=>[],
                 'tracking_statuses'=>[],'horizons'=>[],'rows'=>[]];
             $g=&$out['groups'][$groupKey];$g['signals']++;$g['rows'][]=$row;
+            $stage=$row['raw']??'unknown';$g['pattern_stages'][$stage]=($g['pattern_stages'][$stage]??0)+1;
             $f=$row['followup'];$tracking=$row['followup_status'];
             $g['tracking_statuses'][$tracking]=($g['tracking_statuses'][$tracking]??0)+1;
             if($f!==null)$g['linked']++;

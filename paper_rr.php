@@ -8,6 +8,7 @@ require_once __DIR__ . '/bin/paper/Chrome.php';
 require_once __DIR__ . '/bin/paper/FollowupPanel.php';
 require_once __DIR__ . '/bin/paper/RejectionReviewPanel.php';
 require_once __DIR__ . '/bin/paper/RediagnosisPanel.php';
+require_once __DIR__ . '/bin/paper/ConditionResearchPanel.php';
 
 use ChartEntryLab\ChartPlanEngine;
 use ChartEntryLab\YahooChartClient;
@@ -95,6 +96,11 @@ $q = 'account=' . rawurlencode($id) . '&mode=' . rawurlencode($mode);
 ?>
 <p class="paper-note">운영 매수에는 넣지 않습니다. 확인 후 손익비 1.5 미만인 종목만 연구 지정가 후보고, 위험·추세 차단이 있으면 제외합니다. 지정가 접촉은 체결 보장이 아니고, 아래 수익률은 계좌 한도를 적용하지 않은 개별 거래입니다.</p>
 <?php if ($mode === 'forward' && !$preview): ?>
+<p><a href="?<?= rh($q) ?>&amp;condition_research=1">단일 조건 가정 손익비·체결 연구 보기</a></p>
+<?php if (($_GET['condition_research'] ?? '') === '1') {
+    try { paper_condition_research_panel(dirname($dir, 2), $id); }
+    catch (Throwable $e) { echo '<p>연구 결과 읽기 실패: '.rh($e->getMessage()).'</p>'; }
+} ?>
 <p><a href="?<?= rh($q) ?>&amp;rediagnosis=1">기존 감사 로그 일괄 재진단 결과 보기</a></p>
 <?php if (($_GET['rediagnosis'] ?? '') === '1') {
     try { paper_rediagnosis_panel(paper_rediagnosis_load(dirname($dir, 2), $id), $id); }

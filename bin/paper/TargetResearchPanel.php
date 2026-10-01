@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
-function paper_target_chart(array $r):string
+function paper_target_chart(array $r,?int $recent=80):string
 {
     $bars=$r['bars']??[];if(!$bars)return '';
+    if($recent!==null)$bars=array_slice($bars,-$recent);
     $e=static fn($s)=>htmlspecialchars((string)$s,ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8');
     $date=static fn($t)=>(new DateTimeImmutable('@'.$t))->setTimezone(new DateTimeZone('Asia/Seoul'))->format('Y-m-d');
     $levels=['진입'=>$r['entry'],'손절'=>$r['stop'],'기존 목표'=>$r['target']];
@@ -40,13 +41,17 @@ function paper_target_research_panel(string $state,string $id):void
     foreach(['confirmed'=>'패턴 확인 완료','single_gate_hypothesis'=>'단일 조건 제거 가정'] as $cohort=>$title){
         $s=$r['summary'][$cohort]??null;if(!$s)continue;
         echo '<h3>'.$title.'</h3><p>대상 '.$s['records'].'건 · 진단 '.$s['diagnosed'].'건 · 목표 공식 불일치 '.$s['formula_mismatch'].'건 · 저장 가격 불일치 '.$s['stored_levels_mismatch'].'건</p>';
+        echo '<table><thead><tr><th>진단 항목</th><th>건수</th></tr></thead><tbody>';
+        foreach(['relations','target_vs_entry','upper_resistance'] as $category)foreach($s[$category] as $key=>$count)echo '<tr><td>'.$e($labels[$key]??$key).'</td><td>'.$count.'</td></tr>';
+        echo '</tbody></table>';
         foreach($r['rows'] as $row){if($row['cohort']!==$cohort)continue;
             echo '<details><summary>'.$e($row['date'].' '.$row['name'].' · '.($labels[$row['decision_relation']??'']??$row['status'])).'</summary>';
             if($row['status']!=='diagnosed'){echo '<p>'.$e($row['status']).'</p></details>';continue;}
             echo '<p>진입 '.$n($row['entry']).' / 손절 '.$n($row['stop']).' / 목표 '.$n($row['target']).' · '.$e($labels[$row['target_vs_entry']]).'</p>';
             echo '<p>목표 산정 구간 '.$e($date($row['target_window']['start']).' ~ '.$date($row['target_window']['end'])).' / 최고가 발생일 '.$e(implode(', ',array_map($date,$row['target_sessions']))).'</p>';
             echo '<p>공식 대조 '.($row['target_matches_formula']?'일치':'불일치').' / 저장 가격 대조 '.($row['original_levels_match']===null?'가정 사례로 해당 없음':($row['original_levels_match']?'일치':'불일치')).'. 기존 차단을 해제한 진단이 아닙니다.</p>';
-            echo '<div style="overflow-x:auto">'.paper_target_chart($row).'</div>';
+            echo '<p>최근 최대 80봉 · 마지막 봉이 판정봉입니다.</p><div style="overflow-x:auto">'.paper_target_chart($row).'</div>';
+            echo '<details><summary>저장된 전체 일봉 차트</summary><div style="overflow-x:auto">'.paper_target_chart($row,null).'</div></details>';
             echo '<p>저장 범위 '.$e($date($row['history']['start']).' ~ '.$date($row['history']['end'])).' · '.$row['history']['bars'].'봉 / '.$e($labels[$row['upper_resistance_status']]).'</p>';
             if($row['upper_resistance_candidates']){
                 echo '<table><thead><tr><th>상단 후보 가격</th><th>고점 날짜</th><th>이후 고가 접촉 날짜</th><th>기존 손절 기준 RR</th></tr></thead><tbody>';

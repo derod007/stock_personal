@@ -2,6 +2,7 @@
 declare(strict_types=1);
 use ChartEntryLab\PaperJournal;
 require_once __DIR__.'/Followup.php';
+require_once __DIR__.'/TargetTracking.php';
 final class PaperWeekly
 {
     public static function window(?string $week=null):array
@@ -76,6 +77,8 @@ final class PaperWeekly
         $d=(new PaperJournal($dir.'/'.$id.'-'.$mode.'.json'))->read();
         $out=['account'=>$id,'mode'=>$mode,'window'=>$window,'summary'=>null,'operations'=>null,'comparisons_current'=>[],'comparison_read_errors'=>0];
         if($mode==='forward')$out['operations']=self::runs($dir.'/runs/'.$id.'-forward',$window,$now);
+        $out['target_tracking']=null;$out['target_tracking_error']=null;
+        if($mode==='forward'){try{$ledger=PaperTargetTracking::load($dir,$id);if($ledger)$out['target_tracking']=['generated_at'=>$ledger['generated_at'],'status'=>$ledger['status'],'summary'=>PaperTargetTracking::summarize($ledger['rows'],$window)];}catch(Throwable $e){$out['target_tracking_error']='누적 목표 연구 읽기 실패';}}
         $out['followup']=null;$out['followup_error']=null;
         if($mode==='forward'){try{$out['followup']=PaperFollowup::load($dir,$id,$window);}catch(Throwable $e){$out['followup_error']='후속 추적 파일을 읽지 못했습니다.';}}
         if(!$d || !$d['state'])return $out;

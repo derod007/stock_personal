@@ -65,7 +65,7 @@ final class PaperRejectionReview
                 if($f && (($f['source_file']??null)!==$b['source_file']||($f['session']??null)!==($r['session']??null)||($f['symbol']??null)!==$symbol))$f=null;
                 $row=['date'=>$date,'symbol'=>$symbol,'name'=>$r['name']??$symbol,'source_file'=>$b['source_file'],
                     'session'=>$r['session']??null,'final'=>$final,'raw'=>$raw,'blockers'=>$blockers,
-                    'pattern'=>$selected['pattern']??null,'missing'=>$selected['missing_conditions']??[],
+                    'pattern'=>$selected['pattern']??null,'raw_reason'=>$selected['raw_reason']??null,'missing'=>$selected['missing_conditions']??[],
                     'not_evaluated'=>$selected['not_evaluated']??[],
                     'measurements'=>$r['measurements']??[],
                     'strategy_version'=>$r['analysis']['strategy_version']??null,

@@ -3,6 +3,7 @@ declare(strict_types=1);
 require __DIR__.'/bin/bootstrap.php';require_once __DIR__.'/bin/paper/Experiment.php';require_once __DIR__.'/bin/paper/Weekly.php';require_once __DIR__.'/bin/paper/Diagnostics.php';
 require_once __DIR__.'/bin/paper/Chrome.php';
 require_once __DIR__.'/bin/paper/FollowupPanel.php';
+require_once __DIR__.'/bin/paper/TargetTrackingPanel.php';
 use ChartEntryLab\PaperJournal;
 function wh(mixed $x):string{return paper_esc($x);}
 function wt(?int $t):string{return $t?(new DateTimeImmutable('@'.$t))->setTimezone(new DateTimeZone('Asia/Seoul'))->format('Y-m-d H:i'):'—';}
@@ -58,6 +59,7 @@ paper_open(['title'=>'주간 모의 계좌 요약','page'=>'weekly','account'=>$
 if($mode==='forward'){
     if($r['followup_error'])echo '<p class="paper-alert">'.wh($r['followup_error']).'</p>';
     paper_followup_panel($r['followup'], $r['window'], $dir.'/runs/'.$id.'-forward');
+    paper_target_tracking_panel($dir, $id, $r['window']);
 }
 endif;
 paper_close();

@@ -11,8 +11,9 @@ function paper_condition_research_panel(string $state,string $id):void
     if(!is_file($path)){echo '<p>연구 결과 없음. 로컬에서 <code>php bin/paper_condition_research.php --account='.$e($id).'</code> 실행 후 확인하세요.</p></section>';return;}
     $r=json_decode(file_get_contents($path),true,512,JSON_THROW_ON_ERROR);
     if(($r['kind']??'')!=='single_gate_close_entry_v1'||($r['account']??'')!==$id)throw new RuntimeException('Invalid research report');
+    echo '<p>기록일: '.$e(implode(' · ',$r['dates'])).' / 평가 기준: '.$e((new DateTimeImmutable('@'.$r['as_of']))->setTimezone(new DateTimeZone('Asia/Seoul'))->format('Y-m-d H:i:s')).' KST</p>';
     echo '<p>원본 일봉 해시 확인 '.(int)$r['input_validation']['input_hashes_verified'].'건 · 가격 증거 해시 확인 '.(int)$r['input_validation']['evidence_hashes_verified'].'개 · 대상 '.(int)$r['target_count'].'건 · 오류 '.count($r['errors']).'건</p>';
-    echo '<table><thead><tr><th>날짜·종목 / 제거 가정 조건</th><th>가정 진입 / 손절 / 목표</th><th>손익비</th><th>연구 판정</th><th>체결 결과 / 비용 반영 손익</th></tr></thead><tbody>';
+    echo '<table><thead><tr><th>날짜·종목 / 제거 가정 조건</th><th>가정 진입 / 손절 / 목표</th><th>손익비</th><th>연구 판정</th><th>체결 결과 / 비용 반영 손익(%)</th></tr></thead><tbody>';
     foreach($r['rows'] as $row){$p=$row['hypothesis']??[];$t=$row['outcome']??[];
         echo '<tr><td>'.$e($row['date'].' '.$row['name'].' / '.PaperSingleConditionReview::label($row['gate'])).'</td><td>'.$n($p['entry']??null).' / '.$n($p['stop']??null).' / '.$n($p['target']??null).'</td><td>'.$n($p['reward_risk']??null).'</td><td>'.$e($row['status']).'</td><td>'.$e($t['status']??'체결 검증 대상 아님').' / '.$n($t['net_return_pct']??null).'</td></tr>';
     }

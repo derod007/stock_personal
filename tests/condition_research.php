@@ -34,6 +34,7 @@ $s=PaperSingleConditionReview::summarize([['symbol'=>'X','final'=>'no_setup','se
 check($s['missing_session']===1&&$s['duplicates']===0,'missing candle never deduplicated');
 // Full frozen evidence fixture: hash all original and referenced price payloads.
 $root=dirname(__DIR__).'/docs/paper-kr-5d-source';
+$before=[];foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root,FilesystemIterator::SKIP_DOTS)) as $file)if($file->isFile())$before[$file->getPathname()]=hash_file('sha256',$file->getPathname());
 $r=PaperConditionResearch::run($root,'paper-kr');
 check($r['input_validation']['input_hashes_verified']===467,'all 467 original hashes verified');
 check($r['input_validation']['evidence_hashes_verified']===173,'all 173 price hashes verified');
@@ -51,5 +52,17 @@ check(PaperConditionResearch::evaluate($copy,$prices,$row['as_of'],$row['gate'],
 check(PaperConditionResearch::evaluate($record,$prices,$record['captured_at']-1,$row['gate'],$r['strategy_fingerprint'])['status']==='not_yet_observed','no future observation leakage');
 $copy=$record;$copy['analysis']['plan']['status']='invented';
 check(PaperConditionResearch::evaluate($copy,$prices,$row['as_of'],$row['gate'],$r['strategy_fingerprint'])['status']==='baseline_replay_mismatch','changed baseline blocks experiment');
+// Exercise CLI persistence in a separate directory and confirm source bytes are unchanged.
+$temp=sys_get_temp_dir().'/condition-research-'.bin2hex(random_bytes(6));
+try{
+    $cmd=escapeshellarg(PHP_BINARY).' '.escapeshellarg(dirname(__DIR__).'/bin/paper_condition_research.php')
+        .' --source-dir='.escapeshellarg($root).' --output-dir='.escapeshellarg($temp).' --account=paper-kr';
+    exec($cmd,$lines,$exit);
+    check($exit===0&&is_file($temp.'/latest.json'),'CLI writes separate report');
+    $saved=json_decode(file_get_contents($temp.'/latest.json'),true,512,JSON_THROW_ON_ERROR);
+    check($saved['status_counts']===$r['status_counts'],'CLI matches direct research results');
+    foreach($before as $path=>$hash)if(hash_file('sha256',$path)!==$hash)throw new RuntimeException('Source mutated: '.$path);
+    check(true,'original audit and followup evidence bytes preserved');
+}finally{foreach(glob($temp.'/*')?:[] as $path)unlink($path);if(is_dir($temp))rmdir($temp);}
 $report=$r;foreach($report['rows'] as &$x)unset($x['measurements']);unset($x);
 echo 'RESEARCH_REPORT='.PaperRrAudit::encode($report)."\n";

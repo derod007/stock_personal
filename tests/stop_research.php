@@ -50,7 +50,9 @@ try{
     $cmd=escapeshellarg(PHP_BINARY).' '.escapeshellarg(dirname(__DIR__).'/bin/paper_stop_research.php').' --source-dir='.escapeshellarg($root).' --output-dir='.escapeshellarg($temp.'/stop-research/paper-kr');
     exec($cmd,$lines,$exit);check($exit===0,'CLI success');
     $saved=json_decode(file_get_contents($temp.'/stop-research/paper-kr/latest.json'),true);
-    check($saved['summary']===$r['summary'],'CLI results match');
+    // JSON persistence normalizes integral floats (e.g. 0.0) to integers.
+    $expected=json_decode(PaperRrAudit::encode($r['summary']),true,512,JSON_THROW_ON_ERROR);
+    check($saved['summary']===$expected,'CLI results match after JSON round trip');
     $saved['rows'][0]['name']='<script>bad</script>';file_put_contents($temp.'/stop-research/paper-kr/latest.json',json_encode($saved));
     ob_start();paper_stop_research_panel($temp,'paper-kr');$html=ob_get_clean();
     check(!str_contains($html,'<script>')&&str_contains($html,'&lt;script&gt;'),'safe UI labels');

@@ -11,6 +11,7 @@ require_once __DIR__ . '/bin/paper/RediagnosisPanel.php';
 require_once __DIR__ . '/bin/paper/ConditionResearchPanel.php';
 require_once __DIR__ . '/bin/paper/StopResearchPanel.php';
 require_once __DIR__ . '/bin/paper/TargetResearchPanel.php';
+require_once __DIR__ . '/bin/paper/TargetComparisonPanel.php';
 
 use ChartEntryLab\ChartPlanEngine;
 use ChartEntryLab\YahooChartClient;
@@ -98,6 +99,11 @@ $q = 'account=' . rawurlencode($id) . '&mode=' . rawurlencode($mode);
 ?>
 <p class="paper-note">운영 매수에는 넣지 않습니다. 확인 후 손익비 1.5 미만인 종목만 연구 지정가 후보고, 위험·추세 차단이 있으면 제외합니다. 지정가 접촉은 체결 보장이 아니고, 아래 수익률은 계좌 한도를 적용하지 않은 개별 거래입니다.</p>
 <?php if ($mode === 'forward' && !$preview): ?>
+<p><a href="?<?= rh($q) ?>&amp;target_comparison=1">돌파 종목 목표가 모의 비교 보기</a></p>
+<?php if (($_GET['target_comparison'] ?? '') === '1') {
+    try { paper_target_comparison_panel(dirname($dir, 2), $id); }
+    catch (Throwable $e) { echo '<p>목표 비교 읽기 실패: '.rh($e->getMessage()).'</p>'; }
+} ?>
 <p><a href="?<?= rh($q) ?>&amp;target_research=1">목표가 산정 근거 진단 보기</a></p>
 <?php if (($_GET['target_research'] ?? '') === '1') {
     try { paper_target_research_panel(dirname($dir, 2), $id); }

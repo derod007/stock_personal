@@ -27,5 +27,15 @@ function paper_target_comparison_panel(string $state,string $id):void
             echo '<td>'.$n($p['target']??($arm==='alternative'?($row['nearest_upper_resistance']['price']??null):($row['fixed_levels']['target']??null))).' / '.$n($p['reward_risk']??null).' / '.$e($labels[$status]??$status).' / '.$n($t['net_return_pct']??null).'</td>';
         }echo '</tr>';
     }echo '</tbody></table><p>3봉 주문 유효기간·20봉 보유 한도와 기존 일봉 체결 규칙을 사용합니다. 목표와 지정가가 같은 봉에 닿으면 기존의 보수적 진입 전 취소 규칙을 유지합니다. 현재 공식 연구이며 과거 코드 버전 검증은 아닙니다.</p>';
+    $date=static fn($v)=>$v?(new DateTimeImmutable('@'.$v))->setTimezone(new DateTimeZone('Asia/Seoul'))->format('Y-m-d'):'—';
+    $reasons=['open_at_or_below_stop'=>'시가가 손절가 이하','open_at_or_above_target'=>'시가가 목표가 이상','target_reached_without_limit_touch'=>'지정가 미접촉 상태에서 목표 도달','target_and_limit_same_bar_order_unknown'=>'같은 봉에서 목표·지정가 접촉, 순서 미확인'];
+    foreach($r['rows'] as $row){
+        foreach(['baseline','alternative'] as $arm){$v=$row[$arm]??[];$t=$v['outcome']??null;if($t===null)continue;
+            echo '<details><summary>'.$e($row['date'].' '.$row['name'].' · '.($arm==='baseline'?'기존':'대안').' 체결 근거').'</summary>';
+            echo '<p>후속 완료봉 '.($t['observed_future_bars']??0).'개 / 체결 '.$e($date($t['entry_at']??null)).' · '.$n($t['entry_fill']??null).' / 청산 '.$e($date($t['exit_at']??null)).' · '.$n($t['exit_fill']??null).'</p>';
+            $reason=$v['cancellation']['reason']??null;if($reason!==null)echo '<p>취소 근거: '.$e($reasons[$reason]??$reason).'</p>';
+            echo '<p>일봉 내 순서 불명확: '.(!empty($t['ambiguous_bar'])?'있음':'없음').'</p></details>';
+        }
+    }
     foreach($r['errors'] as $err)echo '<p>'.$e(json_encode($err,JSON_UNESCAPED_UNICODE)).'</p>';echo '</section>';
 }

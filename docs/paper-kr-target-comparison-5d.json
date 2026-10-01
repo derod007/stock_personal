@@ -1,0 +1,760 @@
+{
+  "schema": 1,
+  "kind": "nearest_resistance_target_comparison_v1",
+  "account": "paper-kr",
+  "generated_at": 1790844716,
+  "as_of": 1790794963,
+  "dates": [
+    "2026-09-22",
+    "2026-09-23",
+    "2026-09-28",
+    "2026-09-29",
+    "2026-09-30"
+  ],
+  "input_validation": {
+    "records": 500,
+    "unavailable": 33,
+    "input_hashes_verified": 467,
+    "evidence_hashes_verified": 173
+  },
+  "strategy_fingerprint": "3145512caa890edf36426afefcd73ee17162fdffda874294e1cad123a7b7c54d",
+  "historical_code_verified": false,
+  "selection": "all confirmed close breakouts; no hypothesis-gate removals",
+  "rows": [
+    {
+      "symbol": "012210.KQ",
+      "name": "삼미금속",
+      "session": 1790058600,
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "b1d040aed8d7b215488291aa0eaf40006b229dd153ba70118be023b9b6b501a6",
+      "input_hash": "81103078461818ad862b2de94d9fc941c4dba63e5919e61865f15f5a5f92e7fd",
+      "date": "2026-09-22",
+      "original_final_status": "risk_blocked",
+      "nearest_upper_resistance": {
+        "price": 13970,
+        "peak_sessions": [
+          1779345000
+        ],
+        "rr_at_original_stop": 0.1138771186440678,
+        "test_sessions": [
+          1780036200,
+          1790058600
+        ]
+      },
+      "status": "independent_blockers",
+      "price_hash": "aded26a461e722987fad78876c07998e96cefbbe79daa86e0d8a5390d8e2fff1",
+      "as_of": 1790794963,
+      "blockers": [
+        "spike_dump"
+      ],
+      "unknown": [],
+      "fixed_levels": {
+        "entry": 13540,
+        "stop": 9764,
+        "target": 13240,
+        "signal_at": 1790058600,
+        "order_valid_bars": 3
+      }
+    },
+    {
+      "symbol": "222800.KQ",
+      "name": "심텍",
+      "session": 1790058600,
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "2b91186bb0857ef84c62c8762f13eee77f738279a618c718ab104adab5776cc4",
+      "input_hash": "3d9bbd3f445d64e2cdd96e420f78c00f682ed566ef65e690b8c73cbec7858934",
+      "date": "2026-09-22",
+      "original_final_status": "risk_blocked",
+      "nearest_upper_resistance": {
+        "price": 164200,
+        "peak_sessions": [
+          1782887400
+        ],
+        "rr_at_original_stop": 0.5801801801801801,
+        "test_sessions": []
+      },
+      "status": "independent_blockers",
+      "price_hash": "56392a73bfb8e116647a1f93e27bd566ec35e85c9c8384313f069223c20b4874",
+      "as_of": 1790794963,
+      "blockers": [
+        "spike_dump"
+      ],
+      "unknown": [],
+      "fixed_levels": {
+        "entry": 148100,
+        "stop": 120350,
+        "target": 138300,
+        "signal_at": 1790058600,
+        "order_valid_bars": 3
+      }
+    },
+    {
+      "symbol": "003490.KS",
+      "name": "대한항공",
+      "session": 1790058600,
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "b12e60abfbc950c22f377f2ca28f6a68de572f74dde7178b661ccc2697c6ac13",
+      "input_hash": "c09a769aa126b9463be2d4b7c3888deff332a9884bd7d39e06607a3849654a95",
+      "date": "2026-09-22",
+      "original_final_status": "rejected_rr",
+      "nearest_upper_resistance": null,
+      "status": "no_upper_candidate",
+      "price_hash": "9f7259e95de28479aee02c12cf10e8dffe88f1610a9720d9ffeeda56fc1fef96",
+      "as_of": 1790794963,
+      "fixed_levels": {
+        "entry": 31400,
+        "stop": 28180,
+        "target": 30900,
+        "signal_at": 1790058600,
+        "order_valid_bars": 3
+      }
+    },
+    {
+      "symbol": "058470.KQ",
+      "name": "리노공업",
+      "session": 1790058600,
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "d4bdec4ffba16d0a807b2ebfa306b0a75b2208e7b37db947797238f572c3ab5c",
+      "input_hash": "c5f66d52fedd57edb39382a0e04c4dca2c2478fa31c281c32440e363a93f0139",
+      "date": "2026-09-22",
+      "original_final_status": "context_wait",
+      "nearest_upper_resistance": {
+        "price": 75500,
+        "peak_sessions": [
+          1784701800
+        ],
+        "rr_at_original_stop": 0.03983111606787222,
+        "test_sessions": [
+          1790058600
+        ]
+      },
+      "status": "compared",
+      "price_hash": "7cce780facb17547cc8331dec7dcfa05efe7fd4d027742fcaf40363adde8bd35",
+      "as_of": 1790794963,
+      "baseline": {
+        "plan": {
+          "entry": 75000,
+          "stop": 62447,
+          "target": 73400,
+          "signal_at": 1790058600,
+          "order_valid_bars": 3,
+          "ready": false,
+          "reward_risk": -0.1274595714171911,
+          "status": "context_wait"
+        },
+        "outcome": null,
+        "cancellation": null
+      },
+      "alternative": {
+        "plan": {
+          "entry": 75000,
+          "stop": 62447,
+          "target": 75500,
+          "signal_at": 1790058600,
+          "order_valid_bars": 3,
+          "ready": false,
+          "reward_risk": 0.03983111606787222,
+          "status": "context_wait"
+        },
+        "outcome": null,
+        "cancellation": null
+      },
+      "fixed_levels": {
+        "entry": 75000,
+        "stop": 62447,
+        "target": 73400,
+        "signal_at": 1790058600,
+        "order_valid_bars": 3
+      },
+      "added_eligible": false,
+      "paired_closed": false,
+      "paired_net_difference_pct": null
+    },
+    {
+      "symbol": "356860.KQ",
+      "name": "티엘비",
+      "session": 1790058600,
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "764e8e359bfc63cd4c88a1c1ca203256e781080b18d0761963554e5b57c4b96c",
+      "input_hash": "c367107897ce28407eea426c95e7eb90fc0d9b6068a53d21cdccdca40bd388a8",
+      "date": "2026-09-22",
+      "original_final_status": "risk_blocked",
+      "nearest_upper_resistance": {
+        "price": 56650,
+        "peak_sessions": [
+          1781245800
+        ],
+        "rr_at_original_stop": 1.2678701867891058,
+        "test_sessions": []
+      },
+      "status": "independent_blockers",
+      "price_hash": "796c565069594c4c0c66410cc78d3b3e8c759a7513a206e80a4f0f4836a0ca58",
+      "as_of": 1790794963,
+      "blockers": [
+        "spike_dump"
+      ],
+      "unknown": [],
+      "fixed_levels": {
+        "entry": 44500,
+        "stop": 34917,
+        "target": 42700,
+        "signal_at": 1790058600,
+        "order_valid_bars": 3
+      }
+    },
+    {
+      "symbol": "030530.KQ",
+      "name": "원익홀딩스",
+      "session": 1790145000,
+      "source_file": "20260923-112437-c2025840f050.json",
+      "observation_hash": "e86d6514c796e1eca481b8fa7ddae9548db7c4ed88176e5fdea48792e0428e47",
+      "input_hash": "238d1fe301d4c80946fae354b5afca50b4c872e4ec5e38ab0062af6a1075ce98",
+      "date": "2026-09-23",
+      "original_final_status": "rejected_rr",
+      "nearest_upper_resistance": {
+        "price": 32600,
+        "peak_sessions": [
+          1781245800
+        ],
+        "rr_at_original_stop": 0.5753278030505753,
+        "test_sessions": []
+      },
+      "status": "compared",
+      "price_hash": "8fdfee8e178d7cf02630fc983056d50eea63f59ef4df48ec06e9996ae4e03374",
+      "as_of": 1790794963,
+      "baseline": {
+        "plan": {
+          "entry": 28300,
+          "stop": 20826,
+          "target": 27850,
+          "signal_at": 1790145000,
+          "order_valid_bars": 3,
+          "ready": false,
+          "reward_risk": -0.060208723575060207,
+          "status": "invalid_levels"
+        },
+        "outcome": null,
+        "cancellation": null
+      },
+      "alternative": {
+        "plan": {
+          "entry": 28300,
+          "stop": 20826,
+          "target": 32600,
+          "signal_at": 1790145000,
+          "order_valid_bars": 3,
+          "ready": false,
+          "reward_risk": 0.5753278030505753,
+          "status": "rejected_rr"
+        },
+        "outcome": null,
+        "cancellation": null
+      },
+      "fixed_levels": {
+        "entry": 28300,
+        "stop": 20826,
+        "target": 27850,
+        "signal_at": 1790145000,
+        "order_valid_bars": 3
+      },
+      "added_eligible": false,
+      "paired_closed": false,
+      "paired_net_difference_pct": null
+    },
+    {
+      "symbol": "319660.KQ",
+      "name": "피에스케이",
+      "session": 1790145000,
+      "source_file": "20260923-112437-c2025840f050.json",
+      "observation_hash": "b7e81f66e164fb8b102d4d5ed4850e9ba279e3015e8c25abc780b710efdfbdf0",
+      "input_hash": "4646a5bbd4298266ec0cb1448a9e7b4965090c07cb6cbc5f5de941744ee29222",
+      "date": "2026-09-23",
+      "original_final_status": "rejected_rr",
+      "nearest_upper_resistance": {
+        "price": 212000,
+        "peak_sessions": [
+          1784097000
+        ],
+        "rr_at_original_stop": 2.1178695241096754,
+        "test_sessions": []
+      },
+      "status": "compared",
+      "price_hash": "76b34a46a548b5e1cdd0e88ed3a92f0be40049d6116622b61f9f850bac8c9c27",
+      "as_of": 1790794963,
+      "baseline": {
+        "plan": {
+          "entry": 144800,
+          "stop": 113070,
+          "target": 140900,
+          "signal_at": 1790145000,
+          "order_valid_bars": 3,
+          "ready": false,
+          "reward_risk": -0.1229120705956508,
+          "status": "invalid_levels"
+        },
+        "outcome": null,
+        "cancellation": null
+      },
+      "alternative": {
+        "plan": {
+          "entry": 144800,
+          "stop": 113070,
+          "target": 212000,
+          "signal_at": 1790145000,
+          "order_valid_bars": 3,
+          "ready": true,
+          "reward_risk": 2.1178695241096754,
+          "status": "eligible"
+        },
+        "outcome": {
+          "status": "incomplete",
+          "complete": false,
+          "bars": 3,
+          "filled": true,
+          "entry_fill": 139369.65,
+          "entry_at": 1790577000,
+          "exit_fill": null,
+          "exit_at": null,
+          "first_exit": null,
+          "net_return_pct": null,
+          "ret_close_pct": null,
+          "hit_stop": false,
+          "hit_target": false,
+          "ambiguous_bar": false,
+          "fee_bps_per_side": 10,
+          "slippage_bps": 5,
+          "entry_bar_stop_touch": false,
+          "observed_future_bars": 3,
+          "basis": "independent_trade_not_portfolio"
+        },
+        "cancellation": null
+      },
+      "fixed_levels": {
+        "entry": 144800,
+        "stop": 113070,
+        "target": 140900,
+        "signal_at": 1790145000,
+        "order_valid_bars": 3
+      },
+      "added_eligible": true,
+      "paired_closed": false,
+      "paired_net_difference_pct": null
+    },
+    {
+      "symbol": "256840.KQ",
+      "name": "한국비엔씨",
+      "session": 1790577000,
+      "source_file": "20260928-112325-ff67a60e9c4f.json",
+      "observation_hash": "934a662f754b3ca7f23d6df3b4319b63534c32d7e58ff04f897862f7a5743ab7",
+      "input_hash": "1400454da64e9ef61ae0e2002eca8139354545d5fef3b8b58470676794562570",
+      "date": "2026-09-28",
+      "original_final_status": "context_wait",
+      "nearest_upper_resistance": {
+        "price": 3555,
+        "peak_sessions": [
+          1779777000
+        ],
+        "rr_at_original_stop": 0.13626834381551362,
+        "test_sessions": []
+      },
+      "status": "compared",
+      "price_hash": "36a61d1b20bb98b29b84209dfe8bf5ff7c4633dcbc49109818a6c82adbd926ef",
+      "as_of": 1790794963,
+      "baseline": {
+        "plan": {
+          "entry": 3425,
+          "stop": 2471,
+          "target": 3150,
+          "signal_at": 1790577000,
+          "order_valid_bars": 3,
+          "ready": false,
+          "reward_risk": -0.2882599580712788,
+          "status": "context_wait"
+        },
+        "outcome": null,
+        "cancellation": null
+      },
+      "alternative": {
+        "plan": {
+          "entry": 3425,
+          "stop": 2471,
+          "target": 3555,
+          "signal_at": 1790577000,
+          "order_valid_bars": 3,
+          "ready": false,
+          "reward_risk": 0.13626834381551362,
+          "status": "context_wait"
+        },
+        "outcome": null,
+        "cancellation": null
+      },
+      "fixed_levels": {
+        "entry": 3425,
+        "stop": 2471,
+        "target": 3150,
+        "signal_at": 1790577000,
+        "order_valid_bars": 3
+      },
+      "added_eligible": false,
+      "paired_closed": false,
+      "paired_net_difference_pct": null
+    },
+    {
+      "symbol": "403870.KQ",
+      "name": "HPSP",
+      "session": 1790663400,
+      "source_file": "20260929-112312-216e11a86886.json",
+      "observation_hash": "51d02b86728dae96f4c9011f8593dd505f3e36fbd43197405b8066f0e524ef22",
+      "input_hash": "85977ff71ed914427988d05779277bb06e34be5b6aa392083d6124dc86d8c8f6",
+      "date": "2026-09-29",
+      "original_final_status": "rejected_rr",
+      "nearest_upper_resistance": {
+        "price": 92000,
+        "peak_sessions": [
+          1781505000
+        ],
+        "rr_at_original_stop": 2.787268476892645,
+        "test_sessions": []
+      },
+      "status": "compared",
+      "price_hash": "542618b57592cff432097c33749297d08f835753a445999cbb1fcf352521f23b",
+      "as_of": 1790794963,
+      "baseline": {
+        "plan": {
+          "entry": 61000,
+          "stop": 49878,
+          "target": 60300,
+          "signal_at": 1790663400,
+          "order_valid_bars": 3,
+          "ready": false,
+          "reward_risk": -0.06293832044596295,
+          "status": "invalid_levels"
+        },
+        "outcome": null,
+        "cancellation": null
+      },
+      "alternative": {
+        "plan": {
+          "entry": 61000,
+          "stop": 49878,
+          "target": 92000,
+          "signal_at": 1790663400,
+          "order_valid_bars": 3,
+          "ready": true,
+          "reward_risk": 2.787268476892645,
+          "status": "eligible"
+        },
+        "outcome": {
+          "status": "incomplete",
+          "complete": false,
+          "bars": 1,
+          "filled": true,
+          "entry_fill": 61000,
+          "entry_at": 1790749800,
+          "exit_fill": null,
+          "exit_at": null,
+          "first_exit": null,
+          "net_return_pct": null,
+          "ret_close_pct": null,
+          "hit_stop": false,
+          "hit_target": false,
+          "ambiguous_bar": false,
+          "fee_bps_per_side": 10,
+          "slippage_bps": 5,
+          "entry_bar_stop_touch": false,
+          "observed_future_bars": 1,
+          "basis": "independent_trade_not_portfolio"
+        },
+        "cancellation": null
+      },
+      "fixed_levels": {
+        "entry": 61000,
+        "stop": 49878,
+        "target": 60300,
+        "signal_at": 1790663400,
+        "order_valid_bars": 3
+      },
+      "added_eligible": true,
+      "paired_closed": false,
+      "paired_net_difference_pct": null
+    },
+    {
+      "symbol": "095610.KQ",
+      "name": "테스",
+      "session": 1790663400,
+      "source_file": "20260929-112312-216e11a86886.json",
+      "observation_hash": "99335a2501f558fa73d762a425063a92fa602b040e65558f9048b253bd8f2427",
+      "input_hash": "381dd4cfa828c710593dbd67973f0b3f6b1880c9cda5722fbba333077ea66748",
+      "date": "2026-09-29",
+      "original_final_status": "rejected_rr",
+      "nearest_upper_resistance": {
+        "price": 231500,
+        "peak_sessions": [
+          1784097000
+        ],
+        "rr_at_original_stop": 1.317703245414089,
+        "test_sessions": []
+      },
+      "status": "compared",
+      "price_hash": "3cd4c24cb112a94309510cce73279b6f781cae55699e240a1f69eb0fdf9cf1d8",
+      "as_of": 1790794963,
+      "baseline": {
+        "plan": {
+          "entry": 170800,
+          "stop": 124735,
+          "target": 166300,
+          "signal_at": 1790663400,
+          "order_valid_bars": 3,
+          "ready": false,
+          "reward_risk": -0.09768804949527841,
+          "status": "invalid_levels"
+        },
+        "outcome": null,
+        "cancellation": null
+      },
+      "alternative": {
+        "plan": {
+          "entry": 170800,
+          "stop": 124735,
+          "target": 231500,
+          "signal_at": 1790663400,
+          "order_valid_bars": 3,
+          "ready": false,
+          "reward_risk": 1.317703245414089,
+          "status": "rejected_rr"
+        },
+        "outcome": null,
+        "cancellation": null
+      },
+      "fixed_levels": {
+        "entry": 170800,
+        "stop": 124735,
+        "target": 166300,
+        "signal_at": 1790663400,
+        "order_valid_bars": 3
+      },
+      "added_eligible": false,
+      "paired_closed": false,
+      "paired_net_difference_pct": null
+    },
+    {
+      "symbol": "039030.KQ",
+      "name": "이오테크닉스",
+      "session": 1790663400,
+      "source_file": "20260929-112312-216e11a86886.json",
+      "observation_hash": "98c619c3eeab63d1b9835ff6b5d39a5fd03cb0cf0b35e2828aea38548c6c14dd",
+      "input_hash": "0030f18df371e9b8fd8832181d25ece53c1bce6689a8fdf1b88b76b7b8505841",
+      "date": "2026-09-29",
+      "original_final_status": "rejected_rr",
+      "nearest_upper_resistance": {
+        "price": 525000,
+        "peak_sessions": [
+          1782887400
+        ],
+        "rr_at_original_stop": 0.39517749497655724,
+        "test_sessions": []
+      },
+      "status": "compared",
+      "price_hash": "a5338a95e21e0b1c66ee53641beaed404833e2271845832d8b41c1ffa02e4fc4",
+      "as_of": 1790794963,
+      "baseline": {
+        "plan": {
+          "entry": 495500,
+          "stop": 420850,
+          "target": 494500,
+          "signal_at": 1790663400,
+          "order_valid_bars": 3,
+          "ready": false,
+          "reward_risk": -0.013395847287340924,
+          "status": "invalid_levels"
+        },
+        "outcome": null,
+        "cancellation": null
+      },
+      "alternative": {
+        "plan": {
+          "entry": 495500,
+          "stop": 420850,
+          "target": 525000,
+          "signal_at": 1790663400,
+          "order_valid_bars": 3,
+          "ready": false,
+          "reward_risk": 0.39517749497655724,
+          "status": "rejected_rr"
+        },
+        "outcome": null,
+        "cancellation": null
+      },
+      "fixed_levels": {
+        "entry": 495500,
+        "stop": 420850,
+        "target": 494500,
+        "signal_at": 1790663400,
+        "order_valid_bars": 3
+      },
+      "added_eligible": false,
+      "paired_closed": false,
+      "paired_net_difference_pct": null
+    },
+    {
+      "symbol": "002710.KS",
+      "name": "TCC스틸",
+      "session": 1790749800,
+      "source_file": "20260930-112310-0e41236359f1.json",
+      "observation_hash": "19f758351e9d387da31300bd92c7a45ac86cd1accfd160176b3ff70b1f9c3acc",
+      "input_hash": "fa23fe3d39bb9c177fc182db5bd85c8b4a4354d5fb2276277c35d5fe1f6c91f8",
+      "date": "2026-09-30",
+      "original_final_status": "context_wait",
+      "nearest_upper_resistance": {
+        "price": 14450,
+        "peak_sessions": [
+          1781677800
+        ],
+        "rr_at_original_stop": 0.13929381276320052,
+        "test_sessions": []
+      },
+      "status": "compared",
+      "price_hash": "21b0d8aa3f8ef7911f0b7a816eb1bca5b24e8b560861ac3328386257159b8388",
+      "as_of": 1790794963,
+      "baseline": {
+        "plan": {
+          "entry": 14020,
+          "stop": 10933,
+          "target": 13770,
+          "signal_at": 1790749800,
+          "order_valid_bars": 3,
+          "ready": false,
+          "reward_risk": -0.08098477486232589,
+          "status": "context_wait"
+        },
+        "outcome": null,
+        "cancellation": null
+      },
+      "alternative": {
+        "plan": {
+          "entry": 14020,
+          "stop": 10933,
+          "target": 14450,
+          "signal_at": 1790749800,
+          "order_valid_bars": 3,
+          "ready": false,
+          "reward_risk": 0.13929381276320052,
+          "status": "context_wait"
+        },
+        "outcome": null,
+        "cancellation": null
+      },
+      "fixed_levels": {
+        "entry": 14020,
+        "stop": 10933,
+        "target": 13770,
+        "signal_at": 1790749800,
+        "order_valid_bars": 3
+      },
+      "added_eligible": false,
+      "paired_closed": false,
+      "paired_net_difference_pct": null
+    },
+    {
+      "symbol": "071090.KS",
+      "name": "하이스틸",
+      "session": 1790749800,
+      "source_file": "20260930-112310-0e41236359f1.json",
+      "observation_hash": "4d04854bd80e8d5f17916ec111e8b7567c4cf6e7aa949372f58a7256b1511a0b",
+      "input_hash": "5505b55a919314489abb25458baa590c5f8bc06de83ec39fb52a69f204260025",
+      "date": "2026-09-30",
+      "original_final_status": "rejected_rr",
+      "nearest_upper_resistance": {
+        "price": 3980,
+        "peak_sessions": [
+          1779777000
+        ],
+        "rr_at_original_stop": 0.06993006993006994,
+        "test_sessions": [
+          1781677800,
+          1790749800
+        ]
+      },
+      "status": "compared",
+      "price_hash": "6fe0a1065376130faed793f1c7750b75ac15dbeb06c4d52ecb1b8fb2ce521f02",
+      "as_of": 1790794963,
+      "baseline": {
+        "plan": {
+          "entry": 3920,
+          "stop": 3062,
+          "target": 3785,
+          "signal_at": 1790749800,
+          "order_valid_bars": 3,
+          "ready": false,
+          "reward_risk": -0.15734265734265734,
+          "status": "invalid_levels"
+        },
+        "outcome": null,
+        "cancellation": null
+      },
+      "alternative": {
+        "plan": {
+          "entry": 3920,
+          "stop": 3062,
+          "target": 3980,
+          "signal_at": 1790749800,
+          "order_valid_bars": 3,
+          "ready": false,
+          "reward_risk": 0.06993006993006994,
+          "status": "rejected_rr"
+        },
+        "outcome": null,
+        "cancellation": null
+      },
+      "fixed_levels": {
+        "entry": 3920,
+        "stop": 3062,
+        "target": 3785,
+        "signal_at": 1790749800,
+        "order_valid_bars": 3
+      },
+      "added_eligible": false,
+      "paired_closed": false,
+      "paired_net_difference_pct": null
+    }
+  ],
+  "errors": [],
+  "summary": {
+    "records": 13,
+    "statuses": {
+      "independent_blockers": 3,
+      "no_upper_candidate": 1,
+      "compared": 9
+    },
+    "added_eligible": 2,
+    "paired_closed": 0,
+    "paired_mean_difference_pct": null,
+    "arms": {
+      "baseline": {
+        "eligible": 0,
+        "filled": 0,
+        "closed": 0,
+        "stops": 0,
+        "targets": 0,
+        "mean_net_pct": null,
+        "statuses": {
+          "context_wait": 3,
+          "invalid_levels": 6
+        }
+      },
+      "alternative": {
+        "eligible": 2,
+        "filled": 2,
+        "closed": 0,
+        "stops": 0,
+        "targets": 0,
+        "mean_net_pct": null,
+        "statuses": {
+          "context_wait": 3,
+          "rejected_rr": 4,
+          "incomplete": 2
+        }
+      }
+    }
+  }
+}

@@ -23,6 +23,7 @@ jobs:
           php tests/v14.php
           php tests/tracking_input.php
           php tests/rediagnosis.php
+          php tests/target_research.php
           php tests/stop_research.php
           php tests/condition_research.php
           php tests/single_condition.php

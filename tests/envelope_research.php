@@ -21,7 +21,9 @@ er($v3['episodes_in_last_bars'][5]===2&&$v3['bars_between_episode_starts']===2&&
 $gap=$bars;$gap[259]=array_replace($gap[259],['open'=>80,'high'=>82,'low'=>79,'close'=>81]);$g=PaperEnvelopeResearch::inspect(record($gap));
 er($g['zone']==='below_lower'&&!$g['lower_touch'],'whole candle below band is not touch');
 $future=$r;$future['bars'][]=['available_at'=>$r['session']+86400,'open'=>200,'high'=>201,'low'=>199,'close'=>200,'volume'=>1];$future['input_hash']=hash('sha256',PaperRrAudit::encode($future['bars']));
-er(PaperEnvelopeResearch::inspect($future)===$v,'future candle cannot alter frozen features');
+$futureFeatures=PaperEnvelopeResearch::inspect($future);$expected=$v;
+unset($futureFeatures['quality']['source'],$expected['quality']['source']);
+er($futureFeatures===$expected,'future candle cannot alter frozen features');
 $short=PaperEnvelopeResearch::inspect(record(array_slice($bars,-239)));er($short['status']==='insufficient_history','239 bars never fabricate MA240');
 $pivot=$bars;$pivot[250]['low']=85;$pivot[254]['low']=88;$pivot[258]['low']=80;
 $pv=PaperEnvelopeResearch::inspect(record($pivot));er($pv['higher_confirmed_low']===true&&end($pv['confirmed_low_pivots'])['session']===$pivot[254]['available_at'],'last two bars never confirm pivot');

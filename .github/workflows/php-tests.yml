@@ -24,6 +24,7 @@ jobs:
           php tests/tracking_input.php
           php tests/rediagnosis.php
           php tests/target_tracking.php
+          php tests/envelope_research.php
           php tests/target_comparison.php
           php tests/target_research.php
           php tests/stop_research.php

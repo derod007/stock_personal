@@ -139,6 +139,23 @@ def update(config_path, state_dir, runner=subprocess.run):
                 record["target_tracking"].update(status="failed", error_type=type(exc).__name__)
                 print("Target tracking failed: " + type(exc).__name__, file=sys.stderr)
             record["target_tracking"]["finished_at"] = int(time.time())
+        # Research ledger updates independently, including zero recommendations and scan failures.
+        # It retains its own original snapshots and fetches prices for every unfinished research trade.
+        if universe == "kr_amount_scan":
+            record["envelope_research"] = {"status": "running", "started_at": int(time.time())}
+            save_record(log, record)
+            try:
+                tracking = runner(["php", str(ROOT / "bin/paper_envelope_research.php"), "--account=" + account],
+                                  cwd=ROOT, env=env, check=True, timeout=2400,
+                                  capture_output=True, text=True, encoding="utf-8", errors="replace")
+                result = json.loads(tracking.stdout)
+                if not isinstance(result, dict) or result.get("status") not in ("saved", "partial", "no_observations"):
+                    raise ValueError("Invalid envelope research summary")
+                record["envelope_research"].update(result)
+            except Exception as exc:
+                record["envelope_research"].update(status="failed", error_type=type(exc).__name__)
+                print("Envelope research failed: " + type(exc).__name__, file=sys.stderr)
+            record["envelope_research"]["finished_at"] = int(time.time())
         record["finished_at"] = int(time.time())
         save_record(log, record)
 

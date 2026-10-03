@@ -15,7 +15,7 @@ function paper_envelope_research_panel(string $state,string $id):void
         if(isset($labels[$v]))return $labels[$v];
         $parts=explode(':',$v,2);if(count($parts)!==2)return $v;
         [$axis,$value]=$parts;
-        $axes=['zone'=>'일별 상태','ordered'=>'정배열','higher_low'=>'확정 저점 상향',
+        $axes=['zone'=>'일별 상태','center_close_held'=>'중심선 접촉 후 종가 지지','close_reclaimed_lower'=>'하단 접촉 후 종가 복귀','ordered'=>'정배열','higher_low'=>'확정 저점 상향',
             'breakout_retest_proxy'=>'돌파 후 재지지 대용 조건','ordered_higher_retest'=>'정배열·저점 상향·재지지 조합',
             'repeat_within_5'=>'5봉 내 재진입','repeat_within_10'=>'10봉 내 재진입','repeat_within_20'=>'20봉 내 재진입'];
         return ($axes[$axis]??$axis).' / '.($labels[$value]??(['yes'=>'예','no'=>'아니오','unknown'=>'미확인'][$value]??$value));

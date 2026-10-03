@@ -137,7 +137,9 @@ final class PaperEnvelopeResearch
             $stratum=['policy'=>$f['policy'],'execution_version'=>$f['execution_version'],
                 'strategy_version'=>$f['stored_strategy_version'],'patterns'=>$f['selected_patterns'],'final_status'=>$f['final_status']];
             $cohorts=['zone:'.$v['zone']];
+            if($v['zone']==='center_touch')$cohorts[]='center_close_held:'.($v['center_close_held']?'yes':'no');
             if($v['zone']==='lower_touch'&&$v['episode']==='new_episode'){
+                $cohorts[]='close_reclaimed_lower:'.($v['close_reclaimed_lower']?'yes':'no');
                 $cohorts[]=$v['first_in_saved_range']?'first_in_saved_range':'repeat_episode';
                 $cohorts[]='ordered:'.($v['ordered_ma20_60_240']?'yes':'no');
                 $cohorts[]='higher_low:'.($v['higher_confirmed_low']===null?'unknown':($v['higher_confirmed_low']?'yes':'no'));

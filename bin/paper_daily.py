@@ -139,8 +139,7 @@ def update(config_path, state_dir, runner=subprocess.run):
                 record["target_tracking"].update(status="failed", error_type=type(exc).__name__)
                 print("Target tracking failed: " + type(exc).__name__, file=sys.stderr)
             record["target_tracking"]["finished_at"] = int(time.time())
-        # Research ledger updates independently, including zero recommendations and scan failures.
-        # It retains its own original snapshots and fetches prices for every unfinished research trade.
+        # Envelope observations keep their own snapshots and observe unfinished 20-bar horizons.
         if universe == "kr_amount_scan":
             record["envelope_research"] = {"status": "running", "started_at": int(time.time())}
             save_record(log, record)

@@ -54,12 +54,12 @@ er($first['horizons'][3]['n']===1&&$first['horizons'][5]['n']===0,'cohort counts
 // Frozen real sources exercise identity/quality failures, partial histories and evidence joins.
 $root=dirname(__DIR__).'/docs/paper-kr-5d-source';$tmp=sys_get_temp_dir().'/envelope-'.bin2hex(random_bytes(5));mkdir($tmp);putenv('PAPER_STATE_DIR='.$tmp);
 try{
-    $cmd=escapeshellarg(PHP_BINARY).' '.escapeshellarg(dirname(__DIR__).'/bin/paper_envelope_research.php').' --account=paper-kr --source-dir='.escapeshellarg($root).' --saved-evidence --as-of=2026-10-01T04:02:43+09:00';
-    exec($cmd,$lines,$exit);er($exit===0,'offline CLI');$saved=PaperEnvelopeResearch::load($tmp,'paper-kr');
+    $cmd=escapeshellarg(PHP_BINARY).' -d memory_limit=512M '.escapeshellarg(dirname(__DIR__).'/bin/paper_envelope_research.php').' --account=paper-kr --source-dir='.escapeshellarg($root).' --saved-evidence --as-of=2026-10-01T04:02:43+09:00';
+    exec($cmd,$lines,$exit);er($exit===0,'offline CLI');$saved=PaperEnvelopeStore::load($tmp,'paper-kr');
     er(count($saved['rows'])>400,'full evaluated scan cohort not selected 13');
     er(count(array_filter($saved['rows'],fn($x)=>isset($x['latest_session'])))>0,'saved prices yield actual latest bars');
-    $cmd=escapeshellarg(PHP_BINARY).' '.escapeshellarg(dirname(__DIR__).'/bin/paper_envelope_research.php').' --account=paper-kr --saved-evidence --as-of=2026-10-01T04:02:43+09:00';
-    exec($cmd,$more,$exit);er($exit===0,'refresh without source archive');$again=PaperEnvelopeResearch::load($tmp,'paper-kr');
+    $cmd=escapeshellarg(PHP_BINARY).' -d memory_limit=512M '.escapeshellarg(dirname(__DIR__).'/bin/paper_envelope_research.php').' --account=paper-kr --saved-evidence --as-of=2026-10-01T04:02:43+09:00';
+    exec($cmd,$more,$exit);er($exit===0,'refresh without source archive');$again=PaperEnvelopeStore::load($tmp,'paper-kr');
     er(array_column($again['rows'],'frozen_hash')===array_column($saved['rows'],'frozen_hash'),'archive-free retention and fixed evidence');
     $lock=fopen($tmp.'/envelope-research/paper-kr/update.lock','c');flock($lock,LOCK_EX);exec($cmd.' 2>/dev/null',$ignore,$exit);flock($lock,LOCK_UN);fclose($lock);er($exit!==0,'concurrent writer blocked');
     ob_start();paper_envelope_research_panel($tmp,'paper-kr');$html=ob_get_clean();er(str_contains($html,'엔벨로프 눌림 관찰 연구')&&str_contains($html,'완료봉'),'research panel');

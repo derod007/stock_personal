@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-require __DIR__.'/bootstrap.php';require __DIR__.'/paper/EnvelopeResearch.php';
+require __DIR__.'/bootstrap.php';require __DIR__.'/paper/EnvelopeStore.php';
 $o=getopt('',['account:','source-dir:','prices:','as-of:','saved-evidence']);$id=$o['account']??'paper-kr';
 if(!preg_match('/^[a-z0-9_-]{1,64}$/',$id))throw new InvalidArgumentException('Invalid account');
 if(isset($o['prices'],$o['saved-evidence']))throw new InvalidArgumentException('Choose prices or saved evidence');
@@ -9,16 +9,15 @@ $state=getenv('PAPER_STATE_DIR')?:dirname(__DIR__,2).'/stock-personal-paper';$so
 $folder=$state.'/envelope-research/'.$id;if(!is_dir($folder)&&!mkdir($folder,0770,true)&&!is_dir($folder))throw new RuntimeException('Cannot create ledger');
 $lock=fopen($folder.'/update.lock','c');if(!$lock||!flock($lock,LOCK_EX|LOCK_NB))throw new RuntimeException('Envelope research already running');
 try{
-    $report=PaperEnvelopeResearch::load($state,$id)??['schema'=>1,'kind'=>PaperEnvelopeResearch::KIND,'account'=>$id,'rows'=>[]];
+    $report=PaperEnvelopeStore::load($state,$id,true)??['schema'=>1,'kind'=>PaperEnvelopeResearch::KIND,'account'=>$id,'rows'=>[]];
     if(($report['as_of']??0)>$now)throw new RuntimeException('Refuse older ledger update');
     $report['generated_at']=time();$report['as_of']=$now;$report['errors']=[];$report['added']=0;
     $execution=PaperEnvelopeResearch::executionVersion();
-    $obs=PaperFollowup::observations($source.'/rr-audit/'.$id);
-    $report=PaperEnvelopeResearch::register($report,$obs,$now,$execution);
+    $report=PaperEnvelopeStore::register($report,$folder,$source.'/rr-audit/'.$id,$now,$execution);
+    $report['storage_format']='frozen_files_v1';
     $saved=[];
     if(isset($o['saved-evidence'])){
-        $followup=PaperFollowup::load($source,$id);
-        foreach($followup['rows']??[] as $r)$saved[$r['observation_hash']]=$r;
+        $saved=PaperEnvelopeStore::savedIndex($source.'/followup/'.$id.'/latest.json');
     }
     $cache=[];$client=null;
     $provider=function(array $r,array $row)use(&$cache,&$client,$o,$saved,$source,$folder,$id,$now,$state):array{
@@ -35,6 +34,7 @@ try{
             if(!hash_equals($hash,hash('sha256',PaperRrAudit::encode($raw))))throw new RuntimeException('Saved evidence checksum mismatch');
         }else{
             if(!isset($cache[$symbol])){
+                if(count($cache)>=8)$cache=[];
                 if(isset($o['prices'])){
                     $path=$o['prices'].'/'.$symbol.'.json';if(!is_file($path))$path=$o['prices'].'/'.$symbol.'_2y_1d_closed_v2.json';
                     $cache[$symbol]=json_decode(file_get_contents($path),true,512,JSON_THROW_ON_ERROR);
@@ -51,9 +51,9 @@ try{
         if(!is_file($path)){$temp=tempnam($dir,'write-');try{if(file_put_contents($temp,$bytes)!==strlen($bytes)||!rename($temp,$path))throw new RuntimeException('Evidence write failed');}finally{if(is_file($temp))unlink($temp);}}
         return ['raw'=>$raw,'as_of'=>$cutoff,'price_hash'=>$hash];
     };
-    foreach($report['rows'] as $key=>$row)$report['rows'][$key]=PaperEnvelopeResearch::refresh($row,$provider,$execution,$now);
+    foreach($report['rows'] as $key=>$row)$report['rows'][$key]=PaperEnvelopeStore::refresh($folder,$row,$provider,$execution,$now);
     $report['summary']=PaperEnvelopeResearch::summarize($report['rows']);
     $report['status']=$report['errors']||($report['summary']['statuses']['update_error']??0)?'partial':($report['rows']?'saved':'no_observations');
-    PaperFollowup::save($folder,$report);
-    echo PaperRrAudit::encode(['status'=>$report['status'],'added'=>$report['added'],'summary'=>$report['summary'],'errors'=>count($report['errors'])])."\n";
+    PaperEnvelopeStore::save($folder,$report);
+    echo PaperRrAudit::encode(['status'=>$report['status'],'added'=>$report['added'],'summary'=>$report['summary'],'errors'=>count($report['errors']),'peak_memory_bytes'=>memory_get_peak_usage(true)])."\n";
 }finally{flock($lock,LOCK_UN);fclose($lock);}

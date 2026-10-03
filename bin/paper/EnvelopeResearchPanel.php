@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-require_once __DIR__.'/EnvelopeResearch.php';
+require_once __DIR__.'/EnvelopeStore.php';
 function paper_envelope_research_panel(string $state,string $id):void
 {
     $e=fn($v)=>htmlspecialchars((string)$v,ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8');
@@ -21,7 +21,7 @@ function paper_envelope_research_panel(string $state,string $id):void
         return ($axes[$axis]??$axis).' / '.($labels[$value]??(['yes'=>'예','no'=>'아니오','unknown'=>'미확인'][$value]??$value));
     };
     echo '<section><h2>엔벨로프 눌림 관찰 연구</h2><p>20:20 KR 예약 작업 뒤에 갱신합니다. 운영 추천·점수·주문에는 반영하지 않습니다. 당시 완료 일봉의 SMA20 ±9%, SMA20 &gt; SMA60 &gt; SMA240을 연구 가정으로 사용합니다. 이격 과다·강한 상승·첫 박스는 확정 판정하지 않습니다.</p>';
-    try{$report=PaperEnvelopeResearch::load($state,$id);}catch(Throwable $ex){echo '<p>연구 읽기 실패: '.$e($ex->getMessage()).'</p></section>';return;}
+    try{$report=PaperEnvelopeStore::load($state,$id);}catch(Throwable $ex){echo '<p>연구 읽기 실패: '.$e($ex->getMessage()).'</p></section>';return;}
     $latest=null;foreach(PaperFollowup::readRuns($state.'/runs/'.$id.'-forward') as $run){$r=$run['envelope_research']??null;if($r&&($latest===null||$r['started_at']>$latest['started_at']))$latest=$r;}
     if($latest)echo '<p>최근 예약 연구 실행 '.$e($date($latest['started_at'])).' / '.$e($latest['status']).' '.$e($latest['error_type']??'').'</p>';
     if(!$report){echo '<p>저장 결과가 없습니다. <code>php bin/paper_envelope_research.php --account='.$e($id).'</code></p></section>';return;}

@@ -24,7 +24,8 @@ jobs:
           php tests/tracking_input.php
           php tests/rediagnosis.php
           php tests/target_tracking.php
-          php tests/envelope_research.php
+          php -d memory_limit=512M tests/envelope_research.php
+          php -d memory_limit=512M tests/envelope_memory.php
           php tests/target_comparison.php
           php tests/target_research.php
           php tests/stop_research.php

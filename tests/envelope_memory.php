@@ -46,6 +46,17 @@ try{
     // Missing prices are expected here; the test never fetches or fabricates prices.
     em(($out['summary']['statuses']['update_error']??0)===2000,'missing evidence stays an explicit update error');
     $s=PaperEnvelopeStore::load($stress,'paper-kr');em(count($s['rows'])===2000,'compact full ledger read');
+    // Exercise the ordinary --prices path across more symbols than the eight-entry cache.
+    $normal=$tmp.'/normal';mkdir($normal.'/rr-audit/paper-kr',0770,true);mkdir($normal.'/prices');$records=[];
+    for($i=0;$i<20;$i++){
+        $item=$r;$item['symbol']=sprintf('%06d.KS',$i+1);unset($item['observation_hash'],$item['captured_at'],$item['source_file']);$records[]=$item;
+        file_put_contents($normal.'/prices/'.$item['symbol'].'.json',PaperRrAudit::encode($bars));
+    }
+    file_put_contents($normal.'/rr-audit/paper-kr/20260922-112300-000000000001.json',PaperRrAudit::encode(['version'=>PaperRrAudit::VERSION,'membership'=>'observed_scan_only','recorded_at'=>$r['captured_at'],'records'=>$records]));
+    putenv('PAPER_STATE_DIR='.$normal);
+    $normalCmd=escapeshellarg(PHP_BINARY).' -d memory_limit=512M '.escapeshellarg(dirname(__DIR__).'/bin/paper_envelope_research.php').' --account=paper-kr --prices='.escapeshellarg($normal.'/prices').' --as-of=2026-10-01T04:02:43+09:00';
+    exec($normalCmd,$normalLines,$normalExit);$normalOut=json_decode(implode("\n",$normalLines),true,512,JSON_THROW_ON_ERROR);
+    em($normalExit===0&&($normalOut['summary']['statuses']['no_future_bars']??0)===20,'ordinary price path crosses bounded cache without losing rows');
     echo 'ENVELOPE_MEMORY_PEAK_BYTES='.$out['peak_memory_bytes']."\n";
 }finally{
     putenv('PAPER_STATE_DIR');$it=new RecursiveIteratorIterator(new RecursiveDirectoryIterator($tmp,FilesystemIterator::SKIP_DOTS),RecursiveIteratorIterator::CHILD_FIRST);

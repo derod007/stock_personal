@@ -18,7 +18,7 @@ class DailyTests(unittest.TestCase):
             calls=[]
             def runner(cmd, **kw):
                 calls.append((cmd,kw))
-                if str(cmd[1]).endswith(('paper_followup.php', 'paper_target_tracking.php')):
+                if str(cmd[1]).endswith(('paper_followup.php', 'paper_target_tracking.php', 'paper_envelope_research.php')):
                     return SimpleNamespace(stdout=json.dumps({'status':'saved'}))
                 script=' '.join(str(part) for part in cmd)
                 stage='collect' if 'fetch_comparison_data.py' in script else (
@@ -74,7 +74,7 @@ class DailyTests(unittest.TestCase):
             calls=[]
             def runner(cmd, **kw):
                 calls.append((cmd,kw))
-                if str(cmd[1]).endswith(('paper_followup.php', 'paper_target_tracking.php')):
+                if str(cmd[1]).endswith(('paper_followup.php', 'paper_target_tracking.php', 'paper_envelope_research.php')):
                     return SimpleNamespace(stdout=json.dumps({'status':'saved'}))
                 script=' '.join(str(part) for part in cmd)
                 if 'paper_scan_universe.php' in script:
@@ -86,7 +86,7 @@ class DailyTests(unittest.TestCase):
                 return SimpleNamespace(returncode=0)
             code=daily.update(config,root/'state',runner)
             self.assertEqual(code,0)
-            self.assertEqual(len(calls),6)
+            self.assertEqual(len(calls),7)
             self.assertTrue(str(calls[0][0][1]).endswith('paper_scan_universe.php'))
             self.assertIn('--years=2', calls[1][0])
             self.assertTrue(any('005930.KS' in str(part) for part in calls[1][0]))
@@ -101,12 +101,12 @@ class DailyTests(unittest.TestCase):
             calls=[]
             def runner(cmd, **kw):
                 calls.append(cmd)
-                if str(cmd[1]).endswith(('paper_followup.php', 'paper_target_tracking.php')):
+                if str(cmd[1]).endswith(('paper_followup.php', 'paper_target_tracking.php', 'paper_envelope_research.php')):
                     return SimpleNamespace(stdout=json.dumps({'status':'saved'}))
                 return SimpleNamespace(stdout=json.dumps({'ok':True,'symbols':{},'held':[],'candidates':[]}))
             code=daily.update(config,root/'state',runner)
             self.assertEqual(code,0)
-            self.assertEqual(len(calls),3)
+            self.assertEqual(len(calls),4)
             record=json.loads(next((root/'state/runs/test-forward').glob('*.json')).read_text())
             self.assertTrue(record['summary']['empty_universe'])
     def test_scan_once_keeps_holding_without_recommendations(self):
@@ -116,7 +116,7 @@ class DailyTests(unittest.TestCase):
             before=config.read_bytes();calls=[]
             def runner(cmd, **kw):
                 calls.append(cmd)
-                if str(cmd[1]).endswith(('paper_followup.php', 'paper_target_tracking.php')):
+                if str(cmd[1]).endswith(('paper_followup.php', 'paper_target_tracking.php', 'paper_envelope_research.php')):
                     return SimpleNamespace(stdout=json.dumps({'status':'saved'}))
                 if str(cmd[1]).endswith('paper_scan_universe.php'):
                     self.assertIn('--limit=100',cmd)
@@ -149,7 +149,7 @@ class DailyTests(unittest.TestCase):
                 config.write_text(json.dumps({'id':'paper-kr','universe':'kr_amount_scan','symbols':{}}))
                 audit={'status':status,'path':'rr-audit/paper-kr/run.json'}
                 def runner(cmd, **kw):
-                    if str(cmd[1]).endswith(('paper_followup.php', 'paper_target_tracking.php')):
+                    if str(cmd[1]).endswith(('paper_followup.php', 'paper_target_tracking.php', 'paper_envelope_research.php')):
                         return SimpleNamespace(stdout=json.dumps({'status':'saved'}))
                     self.assertTrue(str(cmd[1]).endswith('paper_scan_universe.php'))
                     return SimpleNamespace(stdout=json.dumps({'ok':True,'symbols':{},'rr_audit':audit}))

@@ -21,7 +21,7 @@ class FollowupDailyTest(unittest.TestCase):
                     return SimpleNamespace(stdout=json.dumps({'ok':True,'symbols':{'005930.KS':'semi'} if account_fail else {}}))
                 if cmd[1].endswith('paper_account.php'):
                     raise subprocess.CalledProcessError(1,cmd)
-                if cmd[1].endswith(('paper_followup.php', 'paper_target_tracking.php')):
+                if cmd[1].endswith(('paper_followup.php', 'paper_target_tracking.php', 'paper_envelope_research.php')):
                     if fail: raise subprocess.TimeoutExpired(cmd,2400)
                     return SimpleNamespace(stdout=json.dumps({'status':'saved','observations':100}))
                 return SimpleNamespace(returncode=0)

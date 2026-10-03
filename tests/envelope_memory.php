@@ -14,7 +14,7 @@ try{
     PaperFollowup::save($folder,$legacy);$bytes=file_get_contents($folder.'/latest.json');
     $read=PaperEnvelopeStore::load($tmp,'paper-kr');em(!is_dir($folder.'/frozen'),'legacy dashboard read never writes');
     $migrated=PaperEnvelopeStore::load($tmp,'paper-kr',true);$full=PaperEnvelopeStore::hydrate($folder,$migrated['rows'][$key]);
-    em($full===$legacy['rows'][$key],'legacy migration retains exact frozen hash version and results');
+    em(PaperRrAudit::encode($full)===PaperRrAudit::encode($legacy['rows'][$key]),'legacy migration retains exact frozen hash version and results');
     em(file_get_contents($folder.'/latest.json')===$bytes,'migration prepares without overwriting legacy latest');
     PaperEnvelopeStore::save($folder,$migrated);$loaded=PaperEnvelopeStore::load($tmp,'paper-kr');
     em($loaded['rows']===$migrated['rows'],'compact round trip');

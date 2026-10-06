@@ -192,51 +192,7 @@ final class YahooChartClient
             return $rows;
         }
 
-        $patchFrom = max(0, count($rows) - self::NAVER_PATCH_BARS);
-        $seen = [];
-        $lastDay = '';
-        for ($i = 0, $n = count($rows); $i < $n; $i++) {
-            $day = $this->dayKst((int) $rows[$i]['time']);
-            $seen[$day] = true;
-            if ($day > $lastDay) {
-                $lastDay = $day;
-            }
-            if ($i < $patchFrom || !isset($quotes[$day])) {
-                continue;
-            }
-            $q = $quotes[$day];
-            // Do not replace an already completed Yahoo candle with a potentially stale Naver cache.
-            if (!empty($rows[$i]['is_complete']) && empty($rows[$i]['synthetic'])) {
-                continue;
-            }
-            $rows[$i]['open'] = (float) $q['open'];
-            $rows[$i]['high'] = (float) $q['high'];
-            $rows[$i]['low'] = (float) $q['low'];
-            $rows[$i]['close'] = (float) $q['close'];
-            $rows[$i]['synthetic'] = false;
-            if ((int) $q['volume'] > 0) {
-                $rows[$i]['volume'] = (int) $q['volume'];
-            }
-        }
-
-        // Yahoo에 아직 없는 최신 거래일이 네이버에만 있으면 봉을 만들어 붙인다
-        foreach (array_reverse($quotes) as $day => $q) {
-            if (isset($seen[$day]) || $day <= $lastDay) {
-                continue;
-            }
-            $rows[] = [
-                'time' => $this->closeTsKst($day),
-                'time_kst' => $day . ' 15:30:00',
-                'open' => (float) $q['open'],
-                'high' => (float) $q['high'],
-                'low' => (float) $q['low'],
-                'close' => (float) $q['close'],
-                'volume' => (int) $q['volume'],
-                'is_complete' => false, // provisional until a fresh primary-source fetch confirms it
-            ];
-        }
-
-        return $this->sortByTime($rows);
+        return DailyEvidenceMerge::merge($rows, $quotes, $symbol, $this->naverDaily->evidenceFetchedAt(), time());
     }
 
     /** 해당 KST 거래일의 정규장 마감(15:30) 타임스탬프 */

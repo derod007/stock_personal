@@ -89,7 +89,7 @@ final class ProposalService
                 maxAgeSeconds: $cacheMaxAgeSeconds,
             );
             $shared = new ChartPlanEngine();
-            $liveClient=$includeInProgress ? new CurrentQuoteClient() : null;
+            $liveClient=$includeInProgress && IntradayAnalysis::isRegularSession($symbol,time()) ? new CurrentQuoteClient() : null;
             $liveDaily=$liveClient?->daily($symbol);
             $asOf=time();
             $analysis = $includeInProgress
@@ -270,6 +270,7 @@ final class ProposalService
             $proposal = $shared->apply($proposal, $analysis['plan']);
             $proposal['analysis_mode']=$analysis['mode']??'completed';
             $proposal['analysis_note']=$analysis['live_note']??'완료 일봉 점수';
+            if(($analysis['mode']??'')==='completed')$proposal['analysis_note'].=' · 분석 기준 '.($features['asof_kst']??'미확인');
             if(($analysis['mode']??'')==='completed_fallback'){
                 $proposal['analysis_note'].=' · '.$liveClient->dailyFailureReason().' · 분석 기준 '.($features['asof_kst']??'미확인');
             }

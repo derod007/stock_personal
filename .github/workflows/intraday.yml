@@ -14,5 +14,6 @@ jobs:
           php -l src/KrAmountScanner.php
           php -l index.php
           php tests/intraday.php
+          php tests/scan_entry_view.php
           php tests/current_quote.php
           php tests/rr_scan.php

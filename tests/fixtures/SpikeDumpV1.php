@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
+// Test-only baseline copied byte-for-byte in behavior from b8392d5 src/SpikeDump.php.
+// Historical research fixtures must retain their original risk rule. Never loaded by production.
 namespace ChartEntryLab;
 
 /**
- * 1~3일 급등 뒤 종가 되돌림과 사전 지지 종가 이탈을 함께 확인.
+ * 1~3일 급등 뒤 급락. 점수가 눌림처럼 보여도 중간가는 허공인 자리.
  * 리스트에서 지우지 않고 경고·감점·신규진입 보류로 다룬다.
  */
 final class SpikeDump
@@ -63,8 +65,7 @@ final class SpikeDump
 
                 $afterLow = $peakHigh;
                 for ($i = $peak; $i < $n; $i++) {
-                    // Daily lows do not establish a high -> low sequence, especially on the peak bar.
-                    $afterLow = min($afterLow, (float) $candles[$i]['close']);
+                    $afterLow = min($afterLow, (float) $candles[$i]['low']);
                 }
                 $range = $peakHigh - $pre;
                 if ($range <= 0) {
@@ -81,12 +82,6 @@ final class SpikeDump
                     continue;
                 }
 
-                $support = $this->supportBeforeBurst($candles, $start, $peak);
-                // Touches, lower wicks and closes holding/reclaiming support do not block entry.
-                if ($support === null || $lastClose >= $support['price']) {
-                    continue;
-                }
-
                 $score = $spikePct + ($retrace * 20);
                 if ($best !== null && $score <= $best['score']) {
                     continue;
@@ -95,8 +90,6 @@ final class SpikeDump
                 $closeLoc = ($lastClose - $pre) / $range;
                 $confirmed = $retrace >= self::CONFIRMED_RETRACE || $closeLoc <= 0.30;
                 $best = [
-                    'support' => $support,
-                    'last_close' => $lastClose,
                     'score' => $score,
                     'confirmed' => $confirmed,
                     'spike_pct' => $spikePct,
@@ -115,21 +108,14 @@ final class SpikeDump
         $status = $best['confirmed'] ? 'confirmed' : 'warning';
 
         return [
-            'rule_version' => 'close_support_v2',
-            'retrace_basis' => 'close',
-            'support_price' => $best['support']['price'],
-            'support_source' => $best['support']['source'],
-            'support_index' => $best['support']['index'],
-            'last_close' => $best['last_close'],
             'status' => $status,
             'label' => $status === 'confirmed' ? '급등후급락(확정)' : '급등후급락',
             'note' => sprintf(
-                '최근 %d일 급등 %+.1f%% 뒤 종가 기준 고가 대비 %.1f%% 반납(되돌림 %.0f%%). %s %.3f를 종가 %.3f로 이탈.',
+                '최근 %d일 급등 %+.1f%% 뒤 고가 대비 %.1f%% 반납(되돌림 %.0f%%). 중간 반등은 허공. 급등 전 가로가 지지되는지 보기.',
                 (int) $best['burst'],
                 (float) $best['spike_pct'],
                 (float) $best['drop_pct'],
-                (float) $best['retrace'] * 100,
-                $best['support']['label'], $best['support']['price'], $best['last_close']
+                (float) $best['retrace'] * 100
             ),
             'score_adjustment' => $status === 'confirmed' ? self::CONFIRMED_PENALTY : self::WARNING_PENALTY,
             'spike_pct' => round((float) $best['spike_pct'], 2),
@@ -138,34 +124,6 @@ final class SpikeDump
             'burst_bars' => (int) $best['burst'],
             'peak_bars_ago' => (int) $best['ago'],
         ];
-    }
-
-    /** Freeze support using only bars preceding this burst; no future pivots. */
-    private function supportBeforeBurst(array $candles, int $start, int $peak): ?array
-    {
-        $from = max(0, $start - 20);
-        $prior = array_slice($candles, $from, $start - $from);
-        if (count($prior) >= 5) {
-            $high = max(array_column($prior, 'high'));
-            // A wick above resistance is not a confirmed breakout.
-            for ($i = $start; $i <= $peak; $i++) {
-                if ((float) $candles[$i]['close'] > $high) {
-                    return ['price' => (float) $high, 'source' => 'pre_burst_20bar_high',
-                        'index' => $from + array_search($high, array_column($prior, 'high'), true), 'label' => '급등 전 돌파 가격'];
-                }
-            }
-        }
-        // Last strict pivot whose two right-hand bars were already complete before the burst.
-        for ($i = $start - 3; $i >= max(2, $start - 20); $i--) {
-            $low = (float) $candles[$i]['low'];
-            if ($low > 0 && $low < min((float)$candles[$i-2]['low'], (float)$candles[$i-1]['low'],
-                    (float)$candles[$i+1]['low'], (float)$candles[$i+2]['low'])) {
-                return ['price' => $low, 'source' => 'pre_burst_confirmed_low', 'index' => $i, 'label' => '급등 전 확인 저점'];
-            }
-        }
-        $low = (float) $candles[$start-1]['low'];
-        return $low > 0 ? ['price' => $low, 'source' => 'pre_burst_previous_low',
-            'index' => $start-1, 'label' => '급등 직전 봉 저점'] : null;
     }
 
     /**

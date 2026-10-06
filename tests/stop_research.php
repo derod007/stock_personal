@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+require __DIR__.'/fixtures/SpikeDumpV1.php'; // Frozen historical research baseline.
 require __DIR__.'/../bin/bootstrap.php';
 require __DIR__.'/../bin/paper/StopResearch.php';
 require __DIR__.'/../bin/paper/StopResearchPanel.php';
@@ -47,7 +48,7 @@ foreach($r['rows'] as $row){
 }
 $temp=sys_get_temp_dir().'/stop-research-'.bin2hex(random_bytes(6));mkdir($temp);
 try{
-    $cmd=escapeshellarg(PHP_BINARY).' '.escapeshellarg(dirname(__DIR__).'/bin/paper_stop_research.php').' --source-dir='.escapeshellarg($root).' --output-dir='.escapeshellarg($temp.'/stop-research/paper-kr');
+    $cmd=escapeshellarg(PHP_BINARY).' -d auto_prepend_file='.escapeshellarg(__DIR__.'/fixtures/SpikeDumpV1.php').' '.escapeshellarg(dirname(__DIR__).'/bin/paper_stop_research.php').' --source-dir='.escapeshellarg($root).' --output-dir='.escapeshellarg($temp.'/stop-research/paper-kr');
     exec($cmd,$lines,$exit);check($exit===0,'CLI success');
     $saved=json_decode(file_get_contents($temp.'/stop-research/paper-kr/latest.json'),true);
     // JSON persistence normalizes integral floats (e.g. 0.0) to integers.

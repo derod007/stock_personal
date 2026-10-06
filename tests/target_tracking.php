@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+require __DIR__.'/fixtures/SpikeDumpV1.php'; // Frozen historical research baseline.
 require __DIR__.'/../bin/bootstrap.php';require __DIR__.'/../bin/paper/TargetTrackingPanel.php';
 function tt(bool $ok,string $label):void{if(!$ok)throw new RuntimeException($label);echo "PASS $label\n";}
 $root=dirname(__DIR__).'/docs/paper-kr-5d-source';$now=1790794963;
@@ -44,10 +45,10 @@ tt($weekly['candidates']===0&&$weekly['groups'][0]['arms']['alternative']['close
 $before=[];foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root,FilesystemIterator::SKIP_DOTS)) as $file)if($file->isFile())$before[$file->getPathname()]=hash_file('sha256',$file->getPathname());
 $tmp=sys_get_temp_dir().'/target-ledger-'.bin2hex(random_bytes(5));mkdir($tmp);putenv('PAPER_STATE_DIR='.$tmp);
 try{
-    $cmd=escapeshellarg(PHP_BINARY).' '.escapeshellarg(dirname(__DIR__).'/bin/paper_target_tracking.php').' --account=paper-kr --source-dir='.escapeshellarg($root).' --saved-evidence --as-of=2026-10-01T04:02:43+09:00';
+    $cmd=escapeshellarg(PHP_BINARY).' -d auto_prepend_file='.escapeshellarg(__DIR__.'/fixtures/SpikeDumpV1.php').' '.escapeshellarg(dirname(__DIR__).'/bin/paper_target_tracking.php').' --account=paper-kr --source-dir='.escapeshellarg($root).' --saved-evidence --as-of=2026-10-01T04:02:43+09:00';
     exec($cmd,$lines,$exit);tt($exit===0,'offline bootstrap CLI success');$saved=PaperTargetTracking::load($tmp,'paper-kr');
     tt(count($saved['rows'])===13&&$saved['summary']['currently_tracking']===2,'CLI persists original candidates and fills');
-    $cmd=escapeshellarg(PHP_BINARY).' '.escapeshellarg(dirname(__DIR__).'/bin/paper_target_tracking.php').' --account=paper-kr --saved-evidence --as-of=2026-10-01T04:02:43+09:00';
+    $cmd=escapeshellarg(PHP_BINARY).' -d auto_prepend_file='.escapeshellarg(__DIR__.'/fixtures/SpikeDumpV1.php').' '.escapeshellarg(dirname(__DIR__).'/bin/paper_target_tracking.php').' --account=paper-kr --saved-evidence --as-of=2026-10-01T04:02:43+09:00';
     exec($cmd,$lines2,$exit);tt($exit===0,'archive-free refresh CLI success');$again=PaperTargetTracking::load($tmp,'paper-kr');
     tt($again['added']===0&&$again['rows']===$saved['rows'],'own snapshots survive source removal');
     // Locking must reject concurrent writers without replacing the ledger.

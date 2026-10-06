@@ -18,6 +18,8 @@ jobs:
           php -l paper_rr.php
       - name: Regression
         run: |
+          php tests/spike_dump.php
+          php tests/spike_dump_replay.php
           php tests/v9.php
           php tests/v13.php
           php tests/v14.php

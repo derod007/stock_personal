@@ -15,6 +15,7 @@ use ChartEntryLab\NaverDailyQuotes;
 use ChartEntryLab\PriceCandidate;
 use ChartEntryLab\ProposalService;
 use ChartEntryLab\ScanSnapshot;
+use ChartEntryLab\ScanEntryView;
 use ChartEntryLab\SymbolMap;
 use ChartEntryLab\SectorMap;
 use ChartEntryLab\YahooChartClient;
@@ -198,7 +199,7 @@ if (!function_exists('tip')) {
 }
 
 $proposal = is_array($result) ? ($result['proposal'] ?? null) : null;
-$analysisLabel = ($proposal['analysis_mode'] ?? '') === 'intraday' ? '장중 잠정' : '완료 일봉';
+$analysisLabel = ScanEntryView::modeLabel((string)($proposal['analysis_mode'] ?? ''));
 $perspective = is_array($result) ? ($result['perspective'] ?? null) : null;
 if ($perspective === null && is_array($proposal)) {
     $perspective = is_array($proposal['perspective'] ?? null) ? $proposal['perspective'] : null;
@@ -333,7 +334,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
             </div>
             <div>
               <dt>점수</dt>
-              <dd>저점 상승·거래량·추세·관심구간 거리 등에 패턴 가감점을 더한 0~100 구조 점수입니다. 수익 확률 자체는 아닙니다. 스캔 기본 정렬은 지금 진입순입니다.</dd>
+              <dd>저점 상승·거래량·추세·관심구간 거리 등에 패턴 가감점을 더한 0~100 구조 점수입니다. 수익 확률 자체는 아닙니다. 스캔 기본 정렬은 진입 확인·관찰순입니다.</dd>
             </div>
           </dl>
         </section>
@@ -353,8 +354,8 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
               <dd>코스닥을 제외하고 코스피 거래대금 상위 종목만 점수·진입·패턴 조건으로 분석합니다. 스팩, ETF, ETN, 단일종목 레버리지는 순위에서 빠집니다.</dd>
             </div>
             <div>
-              <dt>지금 진입순</dt>
-              <dd>관심 구간에 들어와 나눠 사기를 검토하는 종목을 위로 올립니다. 스캔 기본 정렬입니다. 이미 구간 위에서 쫓아 사는 자리와 손절선이 깨진 그림은 아래로 둡니다. 같은 단계면 점수 순입니다.</dd>
+              <dt>진입 확인·관찰순</dt>
+              <dd>확인된 지정가 계획, 관심 구간 안, 구간 밖 대기, 목표 초과, 평가 보류 순입니다. 같은 단계에서는 관심 구간까지 가까운 종목, 구조 점수 순입니다. 관찰 종목은 매수 추천이 아닙니다.</dd>
             </div>
             <div>
               <dt>오늘 돈 몰린 곳</dt>
@@ -482,13 +483,13 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
       <?php if (is_array($scanReport)): ?>
         <?php
           $scanSummary = is_array($scanReport['summary'] ?? null) ? $scanReport['summary'] : [];
-          $scanRows = is_array($scanReport['rows'] ?? null) ? $scanReport['rows'] : [];
+          $scanRows = ScanEntryView::rows(is_array($scanReport['rows'] ?? null) ? $scanReport['rows'] : []);
           $scanBucketsUsed = [];
           $scanBuyNowCount = 0;
           foreach ($scanRows as $srRow) {
               $b = (string) ($srRow['sector_bucket'] ?? 'other');
               $scanBucketsUsed[$b] = SectorMap::BUCKETS[$b] ?? '기타';
-              if (!empty($srRow['buy_now'])) {
+              if (!empty($srRow['entry_view']['confirmed'])) {
                   $scanBuyNowCount++;
               }
           }
@@ -767,10 +768,11 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
               </div>
             </div>
           <?php endif; ?>
+          <p><strong>진입 확인 <?= (int) $scanBuyNowCount ?>건</strong> · 관찰·보류 <?= count($scanRows) - $scanBuyNowCount ?>건. 확인 0건이면 아래 첫 종목도 매수 추천이 아닙니다.</p>
           <div class="scan-toolbar">
             <div class="scan-sort" id="scan-sort" role="group" aria-label="정렬">
               <button type="button" class="sector-chip" data-sort="score" aria-pressed="false">점수순</button>
-              <button type="button" class="sector-chip is-active" data-sort="entry" aria-pressed="true">지금 진입순<?php if ($scanBuyNowCount > 0): ?> (<?= (int) $scanBuyNowCount ?>)<?php endif; ?></button>
+              <button type="button" class="sector-chip is-active" data-sort="entry" aria-pressed="true">진입 확인·관찰순<?php if ($scanBuyNowCount > 0): ?> (<?= (int) $scanBuyNowCount ?>)<?php endif; ?></button>
             </div>
           <?php if ($scanBucketsUsed !== [] || (int) ($scanSummary['smell'] ?? 0) > 0 || (int) ($scanSummary['lagging'] ?? 0) > 0 || (int) ($scanSummary['spike_dump'] ?? 0) > 0): ?>
             <div class="sector-filters" id="sector-filters" role="group" aria-label="업종 필터">
@@ -800,7 +802,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
                   <th>현재가</th>
                   <th>등락</th>
                   <th>대금</th>
-                  <th>점수</th>
+                  <th>구조 점수</th>
                   <th>진입</th>
                   <th class="scan-col-action">행동</th>
                   <th class="scan-col-entry">신규진입</th>
@@ -810,7 +812,8 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
                 <?php foreach ($scanRows as $si => $sr): ?>
                   <?php
                     $sym = (string) ($sr['yahoo'] ?? '');
-                    $rec = !empty($sr['entry_recommend']);
+                    $view = $sr['entry_view'];
+                    $rec = !empty($view['confirmed']);
                     $l1 = !empty($sr['lesson1_hit']);
                     $topRiskStatus = (string) ($sr['top_pattern_status'] ?? 'none');
                     $topRisk = in_array($topRiskStatus, ['warning', 'confirmed'], true);
@@ -848,7 +851,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
                     $l1Title = (string) ($sr['lesson1_note'] ?? '불법과외1 패턴');
                     $topRiskTitle = (string) ($sr['top_pattern_note'] ?? '고점 붕괴 경고');
                   ?>
-                  <tr class="<?= h($trClass) ?>" data-sector="<?= h($srBucket) ?>" data-smell="<?= $smellHit ? '1' : '0' ?>" data-lagging="<?= $laggingTheme ? '1' : '0' ?>" data-spike-dump="<?= $spikeDumpHit ? '1' : '0' ?>" data-score="<?= isset($sr['score']) && is_numeric($sr['score']) ? (int) $sr['score'] : -1 ?>" data-buy-now="<?= !empty($sr['buy_now']) ? '1' : '0' ?>" data-entry-status="<?= h((string) ($sr['entry_status'] ?? '')) ?>" data-entry-rec="<?= $rec ? '1' : '0' ?>" data-orig="<?= (int) $si ?>">
+                  <tr class="<?= h($trClass) ?>" data-sector="<?= h($srBucket) ?>" data-smell="<?= $smellHit ? '1' : '0' ?>" data-lagging="<?= $laggingTheme ? '1' : '0' ?>" data-spike-dump="<?= $spikeDumpHit ? '1' : '0' ?>" data-score="<?= isset($sr['score']) && is_numeric($sr['score']) ? (int) $sr['score'] : -1 ?>" data-buy-now="<?= !empty($sr['buy_now']) ? '1' : '0' ?>" data-entry-status="<?= h((string) ($sr['entry_status'] ?? '')) ?>" data-entry-rec="<?= $rec ? '1' : '0' ?>" data-orig="<?= (int) $si ?>" data-entry-order="<?= (int) $view['sort_order'] ?>">
                     <td class="mono"><?= (int) ($sr['amount_rank'] ?? 0) ?></td>
                     <td>
                       <a href="?<?= h($qsProfile) ?>&symbol=<?= rawurlencode($sym) ?>">
@@ -880,25 +883,25 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
                       <?= h(is_numeric($sr['change_pct'] ?? null) ? sprintf('%+.1f%%', (float) $sr['change_pct']) : '—') ?>
                     </td>
                     <td class="mono"><?= h($amtEok) ?></td>
-                    <td class="mono score-cell" title="<?= h((string)($sr['analysis_note'] ?? '')) ?>"><?= h(isset($sr['score']) ? (string) $sr['score'] : '—') ?><small><?= h(($sr['analysis_mode'] ?? '') === 'intraday' ? '장중 잠정' : '완료 일봉') ?></small></td>
+                    <td class="mono score-cell" title="<?= h((string)($sr['analysis_note'] ?? '')) ?>"><?= h(isset($sr['score']) ? (string) $sr['score'] : '—') ?><small><?= h(ScanEntryView::modeLabel((string)($sr['analysis_mode'] ?? ''))) ?></small></td>
                     <td>
                       <?php if (!empty($sr['ok']) && $rec): ?>
-                        <span class="badge badge--ok">추천</span>
+                        <span class="badge badge--ok">진입 확인</span>
                       <?php elseif (!empty($sr['ok'])): ?>
-                        <span class="badge">보류</span>
+                        <span class="badge"><?= h($view['group']) ?></span>
                       <?php else: ?>
                         <span class="badge badge--err">오류</span>
                       <?php endif; ?>
                     </td>
                     <td class="scan-col-action"><?= h((string) ($sr['action_label'] ?? $sr['action'] ?? '—')) ?></td>
-                    <td class="scan-entry scan-col-entry"><?= h($entryText) ?></td>
+                    <td class="scan-entry scan-col-entry"><?= h($entryText) ?><br><strong><?= h($view['note']) ?></strong><?php if (($sr['analysis_mode'] ?? '') === 'completed_fallback'): ?><br><small><?= h($sr['analysis_note'] ?? '장중 자료 확인 실패') ?></small><?php endif; ?></td>
                   </tr>
                 <?php endforeach; ?>
               </tbody>
             </table>
           </div>
           <p class="scan__note">
-            기본은 <strong>지금 진입순</strong>입니다. «점수순»은 구조 점수만으로 다시 정렬합니다.
+            기본은 <strong>진입 확인·관찰순</strong>입니다. «점수순»은 구조 점수만으로 다시 정렬합니다.
             종목 클릭 → 티커 분석. 빨간 «불법과외» = 불법과외1 패턴.
             어제 스캔이 있으면 위에 «어제 스캔 → 오늘»로 직전 스캔가 대비 등락을 보여 줍니다.
           </p>
@@ -1692,21 +1695,10 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
       const tbody = document.querySelector('#scan-results tbody');
       if (!sortBar || !tbody) return;
       const rows = Array.from(tbody.querySelectorAll('tr'));
-      const entryTier = (tr) => {
-        if (tr.getAttribute('data-buy-now') === '1') return 5;
-        if (tr.getAttribute('data-entry-rec') === '1') return 4;
-        const st = tr.getAttribute('data-entry-status') || '';
-        if (st === 'in_zone') return 3;
-        if (st === 'below_half_wait_recover') return 2;
-        if (st === 'wait_pullback') return 1;
-        return 0;
-      };
       const applySort = (mode) => {
         const sorted = rows.slice().sort((a, b) => {
           if (mode === 'entry') {
-            const ta = entryTier(a);
-            const tb = entryTier(b);
-            if (ta !== tb) return tb - ta;
+            return Number(a.getAttribute('data-entry-order')) - Number(b.getAttribute('data-entry-order'));
           }
           const sa = Number(a.getAttribute('data-score') || -1);
           const sb = Number(b.getAttribute('data-score') || -1);

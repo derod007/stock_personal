@@ -5,6 +5,8 @@ namespace ChartEntryLab;
 /** Request-time quote, separate from historical OHLC and replay inputs. No disk cache fallback. */
 final class CurrentQuoteClient
 {
+    private array $dailyErrors=[];
+    public function dailyFailureReason():string{return implode(' / ',$this->dailyErrors);}
     public function __construct(private readonly ?\Closure $transport=null) {}
 
     public function fetch(string $symbol):array
@@ -37,6 +39,7 @@ final class CurrentQuoteClient
     /** Fresh regular-session OHLCV. Missing fields/dates never become synthetic candles. */
     public function daily(string $symbol,?int $asOf=null):?array
     {
+        $this->dailyErrors=[];
         $kr=NaverDailyQuotes::codeOf($symbol);
         if($kr!==null){
             try{
@@ -49,18 +52,20 @@ final class CurrentQuoteClient
                     'low'=>$d['lowPrice']??null,'close'=>$d['tradePrice']??null,'volume'=>$d['accTradeVolume']??null,
                     'observed_at'=>$at,'source'=>'Daum'];
                 if(IntradayAnalysis::validBar($bar,$symbol,$asOf??time()))return $bar;
-            }catch(\Throwable){}
+                throw new \RuntimeException('OHLCV/date/freshness validation failed');
+            }catch(\Throwable $e){$this->dailyErrors[]='Daum: '.$e->getMessage();}
         }
         try{
             $d=$this->get('https://query1.finance.yahoo.com/v8/finance/chart/'.rawurlencode($symbol).'?interval=1d&range=5d');
             $r=$d['chart']['result'][0]??[];$m=$r['meta']??[];
-            if(strtoupper((string)($m['symbol']??''))!==strtoupper($symbol))return null;
+            if(strtoupper((string)($m['symbol']??''))!==strtoupper($symbol))throw new \RuntimeException('Wrong symbol');
             $ts=$r['timestamp']??[];$q=$r['indicators']['quote'][0]??[];
-            if(!$ts)return null;$i=array_key_last($ts);
+            if(!$ts)throw new \RuntimeException('Missing daily candle');$i=array_key_last($ts);
             $bar=['time'=>$ts[$i],'observed_at'=>$m['regularMarketTime']??null,'source'=>'Yahoo'];
             foreach(['open','high','low','close','volume'] as $key)$bar[$key]=$q[$key][$i]??null;
-            return IntradayAnalysis::validBar($bar,$symbol,$asOf??time())?$bar:null;
-        }catch(\Throwable){return null;}
+            if(IntradayAnalysis::validBar($bar,$symbol,$asOf??time()))return $bar;
+            throw new \RuntimeException('OHLCV/date/freshness validation failed');
+        }catch(\Throwable $e){$this->dailyErrors[]='Yahoo: '.$e->getMessage();return null;}
     }
 
     private function positive(mixed $v):?float

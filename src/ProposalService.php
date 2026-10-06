@@ -89,7 +89,8 @@ final class ProposalService
                 maxAgeSeconds: $cacheMaxAgeSeconds,
             );
             $shared = new ChartPlanEngine();
-            $liveDaily=$includeInProgress ? (new CurrentQuoteClient())->daily($symbol) : null;
+            $liveClient=$includeInProgress ? new CurrentQuoteClient() : null;
+            $liveDaily=$liveClient?->daily($symbol);
             $asOf=time();
             $analysis = $includeInProgress
                 ? (new IntradayAnalysis())->analyze($bars,$symbol,$asOf,$profileId,$liveDaily)
@@ -269,6 +270,9 @@ final class ProposalService
             $proposal = $shared->apply($proposal, $analysis['plan']);
             $proposal['analysis_mode']=$analysis['mode']??'completed';
             $proposal['analysis_note']=$analysis['live_note']??'완료 일봉 점수';
+            if(($analysis['mode']??'')==='completed_fallback'){
+                $proposal['analysis_note'].=' · '.$liveClient->dailyFailureReason().' · 분석 기준 '.($features['asof_kst']??'미확인');
+            }
             if(($analysis['mode']??'')==='intraday'){
                 $proposal['rules']=['진행 중인 당일 OHLCV 포함 · 잠정 점수','종가 확인 전 주문 확정 없음','거래량은 누적값'];
                 $proposal['size_hint']='장중 잠정 관심 후보 · 종가 확인 전';

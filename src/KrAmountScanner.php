@@ -175,6 +175,8 @@ final class KrAmountScanner
                 $row['analysis_price'] = $result['proposal']['price'] ?? null;
                 $row['analysis_mode'] = $result['proposal']['analysis_mode'] ?? 'unavailable';
                 $row['analysis_note'] = $result['proposal']['analysis_note'] ?? '분석 불가';
+                $row['entry_candidate'] = $result['proposal']['price_candidate'] ?? null;
+                $row['order_ready'] = !empty($result['proposal']['new_entry']['order_ready']);
             }
 
             if (!$result['ok']) {
@@ -309,6 +311,7 @@ final class KrAmountScanner
         $this->snapshots->save($payload, overwrite: true);
         }
 
+        if ($interactive) $payload['rows'] = ScanEntryView::rows($payload['rows']);
         return $payload;
     }
 

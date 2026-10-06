@@ -13,6 +13,7 @@ jobs:
           php -l src/ProposalService.php
           php -l src/KrAmountScanner.php
           php -l index.php
+          php tests/yahoo_missing_close.php
           php tests/midnight_daily.php
           php tests/intraday.php
           php tests/scan_entry_view.php

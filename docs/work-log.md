@@ -131,6 +131,12 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 
 ---
 
+## 2026-10-07 00:20 · Cursor · 끝
+- 한 일: 10월 6일 20:23 감사 로그와 새 코드 거래대금 스캔의 급등후급락 행을 모아 깃에 올림
+- 파일: docs/spike-dump-20261006, docs/work-log.md
+- 커밋: 함
+- 롤백: 없음
+
 ## 2026-10-01 04:40 · Cursor · 끝
 - 한 일: 5개 기록일 감사 로그·후속 추적·evidence를 docs/paper-kr-5d-source에 풀어 깃에 올림
 - 파일: docs/paper-kr-5d-source, docs/work-log.md

@@ -1,0 +1,54 @@
+{
+    "kind": "paper_kr_rr_audit_spike_dump_extract",
+    "source_file": "rr-audit/paper-kr/20261006-112313-911c0ed1e914.json",
+    "source_bytes": 8586802,
+    "source_sha256": "fbb0fbecbe7378b72589b0649b8e1491abf36cabcfca650285cd91124dc925b9",
+    "recorded_at_kst": "2026-10-06 20:23:13",
+    "fetched_at": "2026-10-06 20:23:13",
+    "membership": "observed_scan_only",
+    "scan_summary": {
+        "total": 100,
+        "scored": 97,
+        "recommend": 1,
+        "smell": 29,
+        "lagging": 0,
+        "spike_dump": 1,
+        "errors": 3
+    },
+    "spike_dump_count": 1,
+    "rows": [
+        {
+            "symbol": "387690.KQ",
+            "name": "레메디",
+            "amount_rank": 91,
+            "score": 60,
+            "action": "wait",
+            "reason": "387690.KQ [account1]: 급등 후 급락(warning, 점수 60). 최근 2일 급등 +57.9% 뒤 종가 기준 고가 대비 22.6% 반납(되돌림 62%). 급등 전 돌파 가격 19600.000를 종가 19550.000로 이탈.",
+            "plan_status": "risk_blocked",
+            "plan_reason": "급등 후 급락 또는 고점 붕괴 경고로 신규 진입 보류",
+            "spike_dump_status": "warning",
+            "spike_dump_label": "급등후급락",
+            "spike_dump_note": "최근 2일 급등 +57.9% 뒤 종가 기준 고가 대비 22.6% 반납(되돌림 62%). 급등 전 돌파 가격 19600.000를 종가 19550.000로 이탈.",
+            "spike_dump": {
+                "rule_version": "close_support_v2",
+                "retrace_basis": "close",
+                "support_price": 19600,
+                "support_source": "pre_burst_20bar_high",
+                "support_index": 39,
+                "last_close": 19550,
+                "status": "warning",
+                "label": "급등후급락",
+                "note": "최근 2일 급등 +57.9% 뒤 종가 기준 고가 대비 22.6% 반납(되돌림 62%). 급등 전 돌파 가격 19600.000를 종가 19550.000로 이탈.",
+                "score_adjustment": -10,
+                "spike_pct": 57.86,
+                "retrace": 0.616,
+                "drop_from_peak_pct": 22.57,
+                "burst_bars": 2,
+                "peak_bars_ago": 5
+            },
+            "bar_count": 57,
+            "data_asof_kst": "2026-10-06 15:30:00"
+        }
+    ],
+    "note": "20:23 예약 스캔의 저장 감사 로그에서 급등후급락만 뽑음. 일봉 원본은 같은 폴더의 evening-rr-audit json에 있음."
+}

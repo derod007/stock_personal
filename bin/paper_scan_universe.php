@@ -40,6 +40,7 @@ $auditRecords = [];
 $auditErrors = [];
 $report = $scanner->scan(
     limit: $limit,
+    interactive: false, // Scheduled evidence and orders use completed daily bars only.
     useCache: $useCache,
     useYahooCache: $useCache,
     yahooMaxAgeSeconds: $useCache ? 600 : 0,

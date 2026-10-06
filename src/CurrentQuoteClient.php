@@ -45,9 +45,7 @@ final class CurrentQuoteClient
             try{
                 $d=$this->get('https://finance.daum.net/api/quotes/A'.$kr);
                 if(!in_array((string)($d['symbolCode']??$d['code']??''),[$kr,'A'.$kr],true))throw new \RuntimeException('Wrong symbol');
-                if(!preg_match('/^\d{4}-\d{2}-\d{2}$/',(string)($d['date']??''))
-                    ||!preg_match('/^\d{2}:\d{2}:\d{2}$/',(string)($d['time']??'')))throw new \RuntimeException('Missing quote date/time');
-                $at=(new \DateTimeImmutable($d['date'].' '.$d['time'],new \DateTimeZone('Asia/Seoul')))->getTimestamp();
+                $at=$this->daumTradeTime($d);
                 $bar=['time'=>$at,'open'=>$d['openingPrice']??null,'high'=>$d['highPrice']??null,
                     'low'=>$d['lowPrice']??null,'close'=>$d['tradePrice']??null,'volume'=>$d['accTradeVolume']??null,
                     'observed_at'=>$at,'source'=>'Daum'];
@@ -66,6 +64,24 @@ final class CurrentQuoteClient
             if(IntradayAnalysis::validBar($bar,$symbol,$asOf??time()))return $bar;
             throw new \RuntimeException('OHLCV/date/freshness validation failed');
         }catch(\Throwable $e){$this->dailyErrors[]='Yahoo: '.$e->getMessage();return null;}
+    }
+
+    /** Use the exchange trade clock, never the request time or generic update timestamp. */
+    private function daumTradeTime(array $d):int
+    {
+        if(isset($d['tradeDate'])||isset($d['tradeTime'])){
+            $date=(string)($d['tradeDate']??'');$time=(string)($d['tradeTime']??'');
+            if(!preg_match('/^\d{8}$/',$date)||!preg_match('/^\d{6}$/',$time))throw new \RuntimeException('Invalid tradeDate/tradeTime');
+            $value=$date.' '.$time;$format='Ymd His';
+        }else{
+            $date=(string)($d['date']??'');$time=(string)($d['time']??'');
+            if(!preg_match('/^\d{4}-\d{2}-\d{2}$/',$date)||!preg_match('/^\d{2}:\d{2}:\d{2}$/',$time))throw new \RuntimeException('Missing quote date/time');
+            $value=$date.' '.$time;$format='Y-m-d H:i:s';
+        }
+        $at=\DateTimeImmutable::createFromFormat('!'.$format,$value,new \DateTimeZone('Asia/Seoul'));
+        if($at===false||$at->format($format)!==$value)throw new \RuntimeException('Invalid exchange trade clock');
+        if(isset($d['date'])&&(string)$d['date']!==$at->format('Y-m-d'))throw new \RuntimeException('Conflicting quote dates');
+        return $at->getTimestamp();
     }
 
     private function positive(mixed $v):?float

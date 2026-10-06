@@ -33,7 +33,7 @@ namespace {
     $leaders=new ChartEntryLab\KrAmountLeadersClient();$snap=new ChartEntryLab\ScanSnapshot();
     $scanner=new ChartEntryLab\KrAmountScanner($leaders,new ChartEntryLab\ProposalService(),$tmp,300,new ChartEntryLab\SectorMap(),$snap);
     $plain=$scanner->scan(useCache:false);$observed=[];
-    $audited=$scanner->scan(useCache:false,onResearch:static function($leader,$result)use(&$observed){$observed[]=[$leader,$result];});
+    $audited=$scanner->scan(useCache:false,interactive:false,onResearch:static function($leader,$result)use(&$observed){$observed[]=[$leader,$result];});
     unset($plain['fetched_at'],$audited['fetched_at']);
     if($plain!==$audited || count($observed)!==1 || $leaders->calls!==2)throw new RuntimeException('observer changed scan / doubled leaders fetch');
     if($observed[0][1]['research_input']['analysis']['sentinel']!=='exact')throw new RuntimeException('missing exact evidence');

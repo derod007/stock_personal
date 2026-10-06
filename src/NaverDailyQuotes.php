@@ -17,6 +17,9 @@ namespace ChartEntryLab;
  */
 final class NaverDailyQuotes
 {
+    private ?int $evidenceFetchedAt = null;
+    public function evidenceFetchedAt(): ?int { return $this->evidenceFetchedAt; }
+
     private const URL = 'https://finance.naver.com/item/sise_day.naver?code=%s&page=%d';
 
     private const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
@@ -50,6 +53,7 @@ final class NaverDailyQuotes
      */
     public function recent(string $symbol, int $pages = 1, bool $useCache = true): array
     {
+        $this->evidenceFetchedAt = null;
         $code = self::codeOf($symbol);
         if ($code === null) {
             return [];
@@ -65,6 +69,7 @@ final class NaverDailyQuotes
             /** @var array<string, array{date:string,open:float,high:float,low:float,close:float,volume:int}> $cached */
             $cached = json_decode((string) file_get_contents($cacheFile), true, 512, JSON_THROW_ON_ERROR);
             if (is_array($cached)) {
+                $this->evidenceFetchedAt = (int) filemtime($cacheFile);
                 return $cached;
             }
         }
@@ -79,12 +84,14 @@ final class NaverDailyQuotes
             }
         } catch (\Throwable) {
             // 네이버가 막히면 Yahoo 데이터를 그대로 쓴다
+            $this->evidenceFetchedAt = is_file($cacheFile) ? (int) filemtime($cacheFile) : null;
             return is_file($cacheFile)
                 ? (array) json_decode((string) file_get_contents($cacheFile), true)
                 : [];
         }
 
         if ($out !== []) {
+            $this->evidenceFetchedAt = time();
             krsort($out);
             file_put_contents($cacheFile, json_encode($out, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
         }

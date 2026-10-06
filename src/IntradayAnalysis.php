@@ -5,6 +5,13 @@ namespace ChartEntryLab;
 /** UI-only preview. Never changes CandleClock or the replay/confirmed engine. */
 final class IntradayAnalysis
 {
+    public static function isRegularSession(string $symbol,int $asOf):bool
+    {
+        $now=(new \DateTimeImmutable('@'.$asOf))->setTimezone(self::zone($symbol));
+        if((int)$now->format('N')>5)return false;
+        $clock=$now->format('H:i:s');
+        return $clock>=(self::kr($symbol)?'09:00:00':'09:30:00') && $clock<(self::kr($symbol)?'15:30:00':'16:00:00');
+    }
     public static function validBar(array $b,string $symbol,int $asOf):bool
     {
         foreach(['open','high','low','close','volume','time','observed_at'] as $k){
@@ -26,6 +33,11 @@ final class IntradayAnalysis
     {
         $engine=new ChartPlanEngine();$closed=CandleClock::completed($raw,$symbol,$asOf);
         $base=$engine->analyze($raw,$symbol,$asOf,$profile);
+        if(!self::isRegularSession($symbol,$asOf) && $daily===null){
+            $base['mode']='completed';
+            $base['live_note']='장외 분석 · 수집된 완료 일봉 기준 (거래일은 분석 기준 시각 확인)';
+            return $base;
+        }
         $base['mode']='completed_fallback';$base['live_note']='당일 OHLCV 확인 불가 · 완료 일봉 점수';
         if($daily===null||!self::validBar($daily,$symbol,$asOf))return $base;
         $date=(new \DateTimeImmutable('@'.(int)$daily['time']))->setTimezone(self::zone($symbol))->format('Y-m-d');

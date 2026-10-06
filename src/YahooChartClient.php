@@ -19,12 +19,16 @@ final class YahooChartClient
     public function __construct(
         private readonly string $cacheDir,
         ?NaverDailyQuotes $naverDaily = null,
+        private readonly ?\Closure $chartTransport = null,
+        private readonly ?\Closure $clock = null,
     ) {
         if (!is_dir($this->cacheDir)) {
             mkdir($this->cacheDir, 0777, true);
         }
         $this->naverDaily = $naverDaily ?? new NaverDailyQuotes($this->cacheDir . '/naver');
     }
+
+    private function now(): int { return $this->clock !== null ? ($this->clock)() : time(); }
 
     /**
      * @param ?int $maxAgeSeconds null이면 기본 TTL. 0이면 항상 재조회(실패 시 캐시 폴백).
@@ -47,7 +51,7 @@ final class YahooChartClient
             $cached = json_decode((string) file_get_contents($cacheFile), true, 512, JSON_THROW_ON_ERROR);
             if ($useCache && is_array($cached) && $cached !== []) {
                 $maxAge = $maxAgeSeconds ?? self::CACHE_MAX_AGE_SECONDS;
-                $age = time() - (int) filemtime($cacheFile);
+                $age = $this->now() - (int) filemtime($cacheFile);
                 if ($maxAge > 0 && $age < $maxAge) {
                     // 일봉 캐시가 살아 있어도 당일 고저는 장중 계속 바뀐다
                     return $this->mergeNaverDaily($cached, $symbol, $interval, $useNaverCache);
@@ -83,7 +87,11 @@ final class YahooChartClient
         $body = null;
         $code = 0;
         $lastErr = '';
-        for ($attempt = 1; $attempt <= 3; $attempt++) {
+        if ($this->chartTransport !== null) {
+            $body = json_encode(($this->chartTransport)($url), JSON_THROW_ON_ERROR);
+            $code = 200;
+        }
+        for ($attempt = 1; $this->chartTransport === null && $attempt <= 3; $attempt++) {
             $ch = curl_init($url);
             curl_setopt_array($ch, [
                 CURLOPT_RETURNTRANSFER => true,
@@ -134,18 +142,24 @@ final class YahooChartClient
 
         $rows = [];
         foreach ($timestamps as $i => $ts) {
-            if (!isset($quote['close'][$i]) || $quote['close'][$i] === null) {
-                continue;
+            $close = $quote['close'][$i] ?? null;
+            $repaired = false;
+            if ($close === null && $interval === '1d') {
+                $close = $this->confirmedMissingClose($quote, $i, (int)$ts, $result['meta'] ?? [], $symbol);
+                $repaired = $close !== null;
             }
+            if ($close === null) continue;
             $rows[] = [
                 'time' => (int) $ts,
                 'time_kst' => $this->formatKst((int) $ts),
-                'open' => (float) ($quote['open'][$i] ?? $quote['close'][$i]),
-                'high' => (float) ($quote['high'][$i] ?? $quote['close'][$i]),
-                'low' => (float) ($quote['low'][$i] ?? $quote['close'][$i]),
-                'close' => (float) $quote['close'][$i],
+                'open' => (float) ($quote['open'][$i] ?? $close),
+                'high' => (float) ($quote['high'][$i] ?? $close),
+                'low' => (float) ($quote['low'][$i] ?? $close),
+                'close' => (float) $close,
                 'volume' => (int) ($quote['volume'][$i] ?? 0),
                 'synthetic' => !isset($quote['open'][$i], $quote['high'][$i], $quote['low'][$i]),
+                'close_source' => $repaired ? 'yahoo_regular_market_final' : 'yahoo_daily',
+                'close_observed_at' => $repaired ? (int)$result['meta']['regularMarketTime'] : null,
             ];
         }
 
@@ -153,7 +167,7 @@ final class YahooChartClient
         if ($interval === '1d') {
             $rows = $this->mergeRegularMarketPrice($rows, $result);
             foreach ($rows as &$row) {
-                $row['is_complete'] = CandleClock::closeTime($row, $symbol) <= time();
+                $row['is_complete'] = CandleClock::closeTime($row, $symbol) <= $this->now();
             }
             unset($row);
         }
@@ -163,6 +177,25 @@ final class YahooChartClient
         }
 
         return $rows;
+    }
+
+    /** Fill only a missing close using same-session, post-close regular metadata and real OHLCV. */
+    private function confirmedMissingClose(array $quote,int $i,int $ts,array $meta,string $symbol): ?float
+    {
+        if(strtoupper((string)($meta['symbol']??''))!==strtoupper($symbol))return null;
+        $at=$meta['regularMarketTime']??null;$price=$meta['regularMarketPrice']??null;
+        if(!is_numeric($at)||!is_numeric($price)||!is_finite((float)$price)||$price<=0)return null;
+        $close=CandleClock::closeTime(['time'=>$ts],$symbol);
+        if($at<$close||$at>$this->now()||$this->now()<$close)return null;
+        $tz=new \DateTimeZone(preg_match('/\.(KS|KQ)$/i',$symbol)?'Asia/Seoul':'America/New_York');
+        $day=static fn(int $t)=>(new \DateTimeImmutable('@'.$t))->setTimezone($tz)->format('Y-m-d');
+        if($day((int)$at)!==$day($ts))return null;
+        foreach(['open','high','low','volume'] as $k){
+            $v=$quote[$k][$i]??null;
+            if(!is_numeric($v)||!is_finite((float)$v)||($k==='volume'?$v<0:$v<=0))return null;
+        }
+        if($quote['low'][$i]>min($quote['open'][$i],$price)||$quote['high'][$i]<max($quote['open'][$i],$price))return null;
+        return (float)$price;
     }
 
     /**
@@ -192,7 +225,7 @@ final class YahooChartClient
             return $rows;
         }
 
-        return DailyEvidenceMerge::merge($rows, $quotes, $symbol, $this->naverDaily->evidenceFetchedAt(), time());
+        return DailyEvidenceMerge::merge($rows, $quotes, $symbol, $this->naverDaily->evidenceFetchedAt(), $this->now());
     }
 
     /** 해당 KST 거래일의 정규장 마감(15:30) 타임스탬프 */
@@ -222,7 +255,7 @@ final class YahooChartClient
 
         $ts = is_numeric($meta['regularMarketTime'] ?? null)
             ? (int) $meta['regularMarketTime']
-            : time();
+            : $this->now();
         $liveDay = $this->dayKst($ts);
 
         if ($rows === []) {

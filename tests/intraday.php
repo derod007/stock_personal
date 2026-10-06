@@ -36,4 +36,27 @@ $fallback=new CurrentQuoteClient(function($u)use($now){if(str_contains($u,'daum'
 ck($fallback->daily('005930.KS',$now)['source']==='Yahoo','missing primary OHLCV falls back to actual dated candle');
 $noDate=new CurrentQuoteClient(fn($u)=>['symbolCode'=>'A005930','tradePrice'=>123]);
 ck($noDate->daily('005930.KS',$now)===null,'price alone cannot create daily candle');
+// Actual Daum A067310 response fields observed 2026-10-06 13:13 KST: no `time` key.
+$actual=['symbolCode'=>'A067310','date'=>'2026-10-06','tradeDate'=>'20261006','tradeTime'=>'131300',
+    'timestamp'=>1791259980000,'exchangeDate'=>'2026-10-06 13:13:00',
+    'openingPrice'=>52300.0,'highPrice'=>54500.0,'lowPrice'=>51500.0,'tradePrice'=>53000.0,'accTradeVolume'=>1859170];
+$actualNow=(new DateTimeImmutable('2026-10-06 13:14:00',$tz))->getTimestamp();
+$calls=[];$realClient=new CurrentQuoteClient(function($url)use($actual,&$calls){$calls[]=$url;return $actual;});
+$realBar=$realClient->daily('067310.KQ',$actualNow);
+ck($realBar!==null&&$realBar['close']===53000.0&&$realBar['observed_at']===$actualNow-60,'actual Daum trade clock and OHLCV decoded');
+ck(count($calls)===1&&$realClient->dailyFailureReason()==='','valid Daum response does not fall through to Yahoo');
+$preview=(new IntradayAnalysis())->analyze($raw,'067310.KQ',$actualNow,'account1',$realBar);
+ck($preview['mode']==='intraday'&&$preview['features']['price']===53000.0,'actual response reaches manual in-progress score');
+foreach(['tradeTime'=>'256100','tradeDate'=>'20260230','date'=>'2026-10-05'] as $key=>$value){
+    $bad=array_replace($actual,[$key=>$value]);$client=new CurrentQuoteClient(fn($url)=>str_contains($url,'daum')?$bad:[]);
+    ck($client->daily('067310.KQ',$actualNow)===null,'invalid or conflicting actual clock rejected: '.$key);
+}
+$client=new CurrentQuoteClient(fn($url)=>str_contains($url,'daum')?$actual:[]);
+ck($client->daily('067310.KQ',$actualNow+1201)===null,'actual trade clock freshness remains enforced');
+$finalBar=$realBar;$finalBar['observed_at']=(new DateTimeImmutable('2026-10-06 15:30:00',$tz))->getTimestamp();
+$scheduledAt=(new DateTimeImmutable('2026-10-06 20:20:00',$tz))->getTimestamp();
+$intradayClosed=$engine->analyze([...$raw,$realBar],'067310.KQ',$actualNow);
+ck($intradayClosed['features']['price']!==53000.0,'completed engine excludes running daily bar');
+$scheduled=$engine->analyze([...$raw,$finalBar],'067310.KQ',$scheduledAt);
+ck($scheduled['features']['price']===53000.0,'20:20 completed engine includes that day final candle');
 echo "INTRADAY_PASS\n";

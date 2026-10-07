@@ -11,6 +11,9 @@ jobs:
           php -l bin/paper/EntryJourney.php
           php -l paper_journey.php
           php tests/entry_journey.php
+          php -l bin/paper/YahooSessionEvidence.php
+          php -l paper_diagnostics.php
+          php tests/naver_fallback.php
           php -l bin/paper/DailyChanges.php
           php -l paper_changes.php
           php tests/daily_changes.php

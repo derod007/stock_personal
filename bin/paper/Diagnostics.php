@@ -51,7 +51,9 @@ final class PaperDiagnostics
         foreach($runs as &$r) {
             $r['outcome']=$r['status'];
             if($r['status']==='success') {
+                if(!empty($r['summary']['empty_universe'])){$r['outcome']='success_empty_universe';continue;}
                 $session=$r['summary']['last_session']??null;
+                if(!is_numeric($session)||$session<=0){$r['outcome']='success_session_unknown';continue;}
                 $r['outcome']=$previous===null?'success_first_observed':($session>$previous?'success_advanced':'success_no_new_session');
                 $previous=max($previous??0,$session??0);
             } elseif($r['status']==='running' && $now-$r['started_at']>3700) $r['outcome']='unfinished';
@@ -65,7 +67,7 @@ final class PaperDiagnostics
     {
         return [
             'success_first_observed'=>'정상 · 첫 실행 관측', 'success_advanced'=>'정상 · 새 거래일 갱신',
-            'success_no_new_session'=>'정상 · 새 거래일 없음', 'failed'=>'실패', 'halted'=>'계좌 중단',
+            'success_no_new_session'=>'정상 · 새 거래일 없음', 'success_empty_universe'=>'평가 대상 없음 · 계좌 처리 생략', 'success_session_unknown'=>'실행 완료 · 계좌 거래일 미기록', 'failed'=>'실패', 'halted'=>'계좌 중단',
             'running'=>'실행 중', 'unfinished'=>'완료 기록 없음 · 강제 종료 가능',
             'decision:signal_not_confirmed'=>'진입 조건 미충족', 'decision:data_quality'=>'데이터 품질로 제외',
             'decision:retrospective_signal'=>'사후 기록 · 신규 주문 제외', 'decision:already_active'=>'이미 보유/주문 중',

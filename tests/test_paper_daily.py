@@ -45,7 +45,7 @@ class DailyTests(unittest.TestCase):
         self.assertEqual(code,1);self.assertEqual(r['stage'],'collect');self.assertEqual(r['status'],'failed');self.assertEqual(len(calls),1)
     def test_account_failure(self):
         code,r,_=self.exercise('account')
-        self.assertEqual(code,1);self.assertEqual(r['stage'],'account');self.assertEqual(r['exit_code'],3)
+        self.assertEqual(code,1);self.assertEqual(r['stage'],'account');self.assertEqual(r['exit_code'],3);self.assertEqual(r['error_detail'],'test failure')
     def test_halt_is_not_success(self):
         code,r,_=self.exercise(halted=True)
         self.assertEqual(code,2);self.assertEqual(r['status'],'halted')
@@ -66,6 +66,24 @@ class DailyTests(unittest.TestCase):
             self.assertTrue(str(calls[1][1]).endswith('paper_patch_naver_daily.php'))
             self.assertTrue(str(calls[2][1]).endswith('paper_account.php'))
             self.assertIn('--years=2', calls[0])
+    def test_naver_failure_stores_detail_and_never_reaches_account(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            config = root / 'config.json'
+            config.write_text(json.dumps({'id':'test','symbols':{'028050.KS':'other'}}))
+            calls = []
+            def runner(cmd, **kw):
+                calls.append(cmd)
+                if str(cmd[1]).endswith('paper_patch_naver_daily.php'):
+                    self.assertTrue(kw['capture_output'])
+                    raise subprocess.CalledProcessError(1, cmd, stderr='Naver unavailable; Yahoo fallback rejected: missing close')
+                return SimpleNamespace(returncode=0)
+            self.assertEqual(daily.update(config, root/'state', runner), 1)
+            record = json.loads(next((root/'state/runs/test-forward').glob('*.json')).read_text())
+            self.assertEqual(record['stage'], 'naver_session')
+            self.assertIn('missing close', record['error_detail'])
+            self.assertFalse(any(str(c[1]).endswith('paper_account.php') for c in calls))
+
     def test_scan_universe_buys_from_recommendations(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=pathlib.Path(tmp)

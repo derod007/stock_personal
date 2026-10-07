@@ -259,6 +259,7 @@ function paper_open(array $opts): void
         'account' => 'paper.php',
         'diagnostics' => 'paper_diagnostics.php',
         'trades' => 'paper_trades.php',
+        'journey' => 'paper_journey.php',
         'weekly' => 'paper_weekly.php',
         'compare' => 'paper_compare.php',
         'revisions' => 'paper_revisions.php',
@@ -306,6 +307,7 @@ function paper_open(array $opts): void
     <nav class="tabs paper-tabs" aria-label="모의 계좌 화면">
       <a class="tabs__link<?= $on('account') ?>" href="paper.php?<?= paper_esc($q) ?>"<?= $now('account') ?>>기록</a>
       <a class="tabs__link<?= $on('diagnostics') ?>" href="paper_diagnostics.php?<?= paper_esc($q) ?>"<?= $now('diagnostics') ?>>실행·추천</a>
+      <a class="tabs__link<?= $on('journey') ?>" href="paper_journey.php?<?= paper_esc($q) ?>"<?= $now('journey') ?>>진입 → 결과</a>
       <a class="tabs__link<?= $on('trades') ?>" href="paper_trades.php?<?= paper_esc($q) ?>"<?= $now('trades') ?>>거래</a>
       <a class="tabs__link<?= $on('weekly') ?>" href="paper_weekly.php?<?= paper_esc($q) ?>"<?= $now('weekly') ?>>주간</a>
       <a class="tabs__link<?= $on('compare') ?>" href="paper_compare.php?experiment=<?= paper_esc($isKr ? 'kr-identity' : 'us-identity') ?>&amp;mode=<?= paper_esc($mode) ?>"<?= $now('compare') ?>>비교</a>

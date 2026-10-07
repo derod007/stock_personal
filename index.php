@@ -286,8 +286,8 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
               <dd>레버리지·인버스 상품은 직접 매매가를 제안하지 않습니다. 연결된 본주 차트로 방향과 가격대를 다시 확인합니다.</dd>
             </div>
             <div>
-              <dt>진입 추천</dt>
-              <dd>행동 조건과 새로 살 가격이 모두 있는 종목입니다. 추천 진입 가격에 도달했는지는 별도로 확인해야 합니다.</dd>
+              <dt>지정가 계획 검토</dt>
+              <dd>완료봉 기준 주문 계획이 확인된 종목입니다. 관심 구간과 실제 지정가는 다를 수 있으며 현재가 위치·실제 주문 상태는 별도로 확인해야 합니다.</dd>
             </div>
           </dl>
         </section>
@@ -334,7 +334,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
             </div>
             <div>
               <dt>점수</dt>
-              <dd>저점 상승·거래량·추세·관심구간 거리 등에 패턴 가감점을 더한 0~100 구조 점수입니다. 수익 확률 자체는 아닙니다. 스캔 기본 정렬은 진입 확인·관찰순입니다.</dd>
+              <dd>저점 상승·거래량·추세·관심구간 거리 등에 패턴 가감점을 더한 0~100 구조 점수입니다. 수익 확률 자체는 아닙니다. 스캔 기본 정렬은 지정가 계획·관찰순입니다.</dd>
             </div>
           </dl>
         </section>
@@ -354,8 +354,8 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
               <dd>코스닥을 제외하고 코스피 거래대금 상위 종목만 점수·진입·패턴 조건으로 분석합니다. 스팩, ETF, ETN, 단일종목 레버리지는 순위에서 빠집니다.</dd>
             </div>
             <div>
-              <dt>진입 확인·관찰순</dt>
-              <dd>확인된 지정가 계획, 관심 구간 안, 구간 밖 대기, 목표 초과, 평가 보류 순입니다. 같은 단계에서는 관심 구간까지 가까운 종목, 구조 점수 순입니다. 관찰 종목은 매수 추천이 아닙니다.</dd>
+              <dt>지정가 계획·관찰순</dt>
+              <dd>확인된 지정가 계획을 먼저 표시하며 실제 지정가까지의 거리로 정렬합니다. 그 외 관찰 종목은 관심 구간 안/밖, 목표 초과, 평가 보류 순이며 같은 단계에서 관심 구간 거리와 구조 점수로 정렬합니다. 관찰 종목은 매수 추천이 아닙니다.</dd>
             </div>
             <div>
               <dt>오늘 돈 몰린 곳</dt>
@@ -466,7 +466,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
                 . "
 상단 «오늘 돈 몰린 곳»은 네이버 테마 등락 + 대금 TOP 급등(ETF 제외).
 «테마 냄새»는 테마가 아직 안 올라도 대금이 한 번 찔러 본 곳. 구경·내려오면이지 추격이 아닙니다.
-진입 추천 = 내려올 때 나눠서/관심 + 새로 살 가격 있음.
+지정가 계획 검토 = 완료봉 패턴과 실제 지정가 계획 확인. 관심 구간 도달이나 주문 체결을 뜻하지 않습니다.
 결과는 약 5분 캐시. «새로고침»은 시세를 다시 받습니다.") ?>
           </h2>
           <p class="scan__meta">
@@ -567,8 +567,8 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
               <strong class="mono"><?= (int) ($scanSummary['scored'] ?? 0) ?></strong>
             </div>
             <div class="scan-stat scan-stat--accent">
-              <span>진입 추천</span>
-              <strong class="mono"><?= (int) ($scanSummary['recommend'] ?? 0) ?></strong>
+              <span>지정가 계획 검토</span>
+              <strong class="mono"><?= (int) $scanBuyNowCount ?></strong>
             </div>
             <div class="scan-stat">
               <span>테마냄새</span>
@@ -768,11 +768,11 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
               </div>
             </div>
           <?php endif; ?>
-          <p><strong>진입 확인 <?= (int) $scanBuyNowCount ?>건</strong> · 관찰·보류 <?= count($scanRows) - $scanBuyNowCount ?>건. 확인 0건이면 아래 첫 종목도 매수 추천이 아닙니다.</p>
+          <p><strong>지정가 계획 검토 <?= (int) $scanBuyNowCount ?>건</strong> · 관찰·보류 <?= count($scanRows) - $scanBuyNowCount ?>건. 분석상 계획 수이며 현재 매수·주문 접수·체결을 뜻하지 않습니다.</p>
           <div class="scan-toolbar">
             <div class="scan-sort" id="scan-sort" role="group" aria-label="정렬">
               <button type="button" class="sector-chip" data-sort="score" aria-pressed="false">점수순</button>
-              <button type="button" class="sector-chip is-active" data-sort="entry" aria-pressed="true">진입 확인·관찰순<?php if ($scanBuyNowCount > 0): ?> (<?= (int) $scanBuyNowCount ?>)<?php endif; ?></button>
+              <button type="button" class="sector-chip is-active" data-sort="entry" aria-pressed="true">지정가 계획·관찰순<?php if ($scanBuyNowCount > 0): ?> (<?= (int) $scanBuyNowCount ?>)<?php endif; ?></button>
             </div>
           <?php if ($scanBucketsUsed !== [] || (int) ($scanSummary['smell'] ?? 0) > 0 || (int) ($scanSummary['lagging'] ?? 0) > 0 || (int) ($scanSummary['spike_dump'] ?? 0) > 0): ?>
             <div class="sector-filters" id="sector-filters" role="group" aria-label="업종 필터">
@@ -886,7 +886,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
                     <td class="mono score-cell" title="<?= h((string)($sr['analysis_note'] ?? '')) ?>"><?= h(isset($sr['score']) ? (string) $sr['score'] : '—') ?><small><?= h(ScanEntryView::modeLabel((string)($sr['analysis_mode'] ?? ''))) ?></small></td>
                     <td>
                       <?php if (!empty($sr['ok']) && $rec): ?>
-                        <span class="badge badge--ok">진입 확인</span>
+                        <span class="badge badge--ok">패턴 확인 · 지정가 계획</span>
                       <?php elseif (!empty($sr['ok'])): ?>
                         <span class="badge"><?= h($view['group']) ?></span>
                       <?php else: ?>
@@ -894,14 +894,14 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
                       <?php endif; ?>
                     </td>
                     <td class="scan-col-action"><?= h((string) ($sr['action_label'] ?? $sr['action'] ?? '—')) ?></td>
-                    <td class="scan-entry scan-col-entry"><?= h($entryText) ?><br><strong><?= h($view['note']) ?></strong><?php if (($sr['analysis_mode'] ?? '') === 'completed_fallback'): ?><br><small><?= h($sr['analysis_note'] ?? '장중 자료 확인 실패') ?></small><?php endif; ?></td>
+                    <td class="scan-entry scan-col-entry"><?= h($entryText) ?><br><strong><?= h($view['note']) ?></strong><br><small><?= h($view['pattern_label']) ?></small><br><span><?= h($view['order_note']) ?></span><?php if (($sr['analysis_mode'] ?? '') === 'completed_fallback'): ?><br><small><?= h($sr['analysis_note'] ?? '장중 자료 확인 실패') ?></small><?php endif; ?></td>
                   </tr>
                 <?php endforeach; ?>
               </tbody>
             </table>
           </div>
           <p class="scan__note">
-            기본은 <strong>진입 확인·관찰순</strong>입니다. «점수순»은 구조 점수만으로 다시 정렬합니다.
+            기본은 <strong>지정가 계획·관찰순</strong>입니다. «점수순»은 구조 점수만으로 다시 정렬합니다.
             종목 클릭 → 티커 분석. 빨간 «불법과외» = 불법과외1 패턴.
             어제 스캔이 있으면 위에 «어제 스캔 → 오늘»로 직전 스캔가 대비 등락을 보여 줍니다.
           </p>

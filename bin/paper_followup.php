@@ -12,14 +12,15 @@ $dir=getenv('PAPER_STATE_DIR')?:dirname(__DIR__,2).'/stock-personal-paper';
 $folder=$dir.'/followup/'.$id;if(!is_dir($folder))mkdir($folder,0770,true);
 $lock=fopen($folder.'/update.lock','c');if(!$lock||!flock($lock,LOCK_EX|LOCK_NB))throw new RuntimeException('Followup already running');
 try{
-    $obs=PaperFollowup::observations($dir.'/rr-audit/'.$id);$previous=PaperFollowup::load($dir,$id);
+    $observations=PaperFollowup::observationStream($dir.'/rr-audit/'.$id);$previous=PaperFollowup::load($dir,$id);
     if(isset($o['saved-evidence'])){
         if($previous===null)throw new RuntimeException('No saved followup report; run regular followup first');
         $asOf=min($asOf,(int)$previous['as_of']);
     }
-    $rows=[];$prices=[];$errors=$obs['errors'];$client=null;
-    foreach($obs['records'] as $key=>$r){
+    $rows=[];$prices=[];$client=null;
+    foreach($observations as $key=>$r){
         $old=$previous['rows'][$key]??null;
+        unset($previous['rows'][$key]);
         if($old && ($old['tracking_policy']??null)===PaperTrackingInput::POLICY && !empty($old['complete']) && $old['observation_hash']===$r['observation_hash'] && $old['as_of']<=$asOf){$rows[$key]=$old;continue;}
         $symbol=$r['symbol'];
         try{
@@ -40,23 +41,28 @@ try{
                     if(isset($o['prices'])){
                         $file=$o['prices'].'/'.$symbol.'.json';if(!is_file($file))$file=$o['prices'].'/'.$symbol.'_2y_1d_closed_v2.json';
                         if(!is_file($file))throw new RuntimeException('Price file missing');
-                        $prices[$symbol]=json_decode(file_get_contents($file),true,512,JSON_THROW_ON_ERROR);
+                        $raw=json_decode(file_get_contents($file),true,512,JSON_THROW_ON_ERROR);
                     }else{
                         $client??=new YahooChartClient($folder.'/prices');
-                        $prices[$symbol]=$client->fetch($symbol,'2y','1d',useCache:true,maxAgeSeconds:3600);
+                        $raw=$client->fetch($symbol,'2y','1d',useCache:true,maxAgeSeconds:3600);
                     }
+                }else{
+                    // The run pins each symbol's first fetched evidence on disk, not in RAM.
+                    $raw=json_decode(file_get_contents($prices[$symbol]),true,512,JSON_THROW_ON_ERROR);
                 }
-                $raw=$prices[$symbol];
                 if(!is_array($raw)||!array_is_list($raw))throw new RuntimeException('Invalid prices');
             }
             $priceJson=PaperRrAudit::encode($raw);$priceHash=hash('sha256',$priceJson);
+            if(!isset($o['saved-evidence'])&&isset($prices[$symbol])&&!hash_equals(basename($prices[$symbol],'.json'),$priceHash))throw new RuntimeException('Pinned run price evidence changed');
             $evidence=$folder.'/evidence';if(!is_dir($evidence))mkdir($evidence,0770,true);
             $evidencePath=$evidence.'/'.$priceHash.'.json';
+            if(is_file($evidencePath)&&!hash_equals($priceHash,hash_file('sha256',$evidencePath)))throw new RuntimeException('Price evidence checksum mismatch');
             if(!is_file($evidencePath)){
                 $temp=tempnam($evidence,'write-');
                 try{if(file_put_contents($temp,$priceJson)!==strlen($priceJson)||!rename($temp,$evidencePath))throw new RuntimeException('Price evidence write failed');}
                 finally{if(is_file($temp))unlink($temp);}
             }
+            if(!isset($o['saved-evidence']))$prices[$symbol]=$evidencePath;
             $rows[$key]=PaperFollowup::evaluate($r,$raw,$rowAsOf);
             $rows[$key]['price_hash']=$priceHash;
             $rows[$key]['price_source']=$source;
@@ -65,8 +71,10 @@ try{
                 'source_file'=>$r['source_file'],'observation_hash'=>$r['observation_hash'],'as_of'=>$asOf,'complete'=>false,
                 'rejected'=>empty($r['analysis']['plan']['ready']),'reasons'=>PaperFollowup::reasons($r),
                 'status'=>'price_or_evaluation_error','error'=>$e->getMessage(),'horizons'=>[],'trades'=>[]];
-        }
+        }finally{unset($raw,$priceJson,$old);}
     }
+    $obs=$observations->getReturn();$errors=$obs['errors'];
+    unset($r,$observations,$prices);
     $report=['schema'=>1,'account'=>$id,'generated_at'=>time(),'as_of'=>$asOf,'duplicates'=>$obs['duplicates'],
         'unavailable_observations'=>$obs['unavailable'],'errors'=>$errors,'rows'=>$rows];
     $report['summary']=PaperFollowup::summarize($rows);
@@ -75,5 +83,5 @@ try{
     // Historical offline runs do not replace the current report.
     if($previous && $previous['as_of']>$asOf)throw new RuntimeException('Refuse to replace newer followup report');
     PaperFollowup::save($folder,$report);
-    echo PaperRrAudit::encode(['status'=>$report['status'],'observations'=>count($rows),'errors'=>count($errors),'summary'=>$report['summary']])."\n";
+    echo PaperRrAudit::encode(['status'=>$report['status'],'observations'=>count($rows),'errors'=>count($errors),'peak_memory_bytes'=>memory_get_peak_usage(true),'summary'=>$report['summary']])."\n";
 }finally{flock($lock,LOCK_UN);fclose($lock);}

@@ -9,7 +9,13 @@ final class PaperFollowup
     public const HORIZONS=[1,3,5,10,20];
     public static function observations(string $dir):array
     {
-        $out=[];$errors=[];$duplicates=0;$unavailable=0;
+        $stream=self::observationStream($dir);$records=iterator_to_array($stream);
+        return ['records'=>$records]+$stream->getReturn();
+    }
+    /** One audit bundle at a time; keep only deduplication keys across runs. */
+    public static function observationStream(string $dir):Generator
+    {
+        $seen=[];$errors=[];$duplicates=0;$unavailable=0;
         $files=PaperRrView::files($dir);sort($files,SORT_STRING);
         foreach($files as $file){
             try{
@@ -19,14 +25,15 @@ final class PaperFollowup
                     if(($r['status']??'')!=='evaluated'){$unavailable++;continue;}
                     if(!preg_match('/^[A-Za-z0-9.^=_-]{1,40}$/',$r['symbol']??'') || !isset($r['session'],$r['bars'],$r['input_hash']))throw new RuntimeException('Invalid observation');
                     $key=$r['symbol'].'@'.$r['session'];
-                    // Earliest captured signal per symbol/session. Reruns must not multiply samples.
-                    if(isset($out[$key])){$duplicates++;continue;}
+                    if(isset($seen[$key])){$duplicates++;continue;}$seen[$key]=true;
                     $r['source_file']=$file;$r['captured_at']=(int)($b['recorded_at']??$r['session']);
-                    $r['observation_hash']=hash('sha256',PaperRrAudit::encode($r));$out[$key]=$r;
+                    $r['observation_hash']=hash('sha256',PaperRrAudit::encode($r));
+                    yield $key=>$r;
                 }
             }catch(Throwable $e){$errors[]=['file'=>$file,'error'=>$e->getMessage()];}
+            finally{unset($b,$r);}
         }
-        return ['records'=>$out,'errors'=>$errors,'duplicates'=>$duplicates,'unavailable'=>$unavailable];
+        return ['errors'=>$errors,'duplicates'=>$duplicates,'unavailable'=>$unavailable];
     }
     public static function reasons(array $r):array
     {

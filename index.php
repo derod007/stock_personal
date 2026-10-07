@@ -488,7 +488,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
         </div>
       </div>
       <?php if (is_array($scanReport)): ?>
-        <p><a href="paper_journey.php?account=paper-kr&amp;profile=<?= h($profileId) ?>">진입 확인 → 결과 보기</a>
+        <p><a href="paper_journey.php?account=paper-kr&amp;profile=<?= h($profileId) ?>">진입 확인 → 결과 보기</a> · <a href="paper_changes.php?account=paper-kr&amp;profile=<?= h($profileId) ?>">오늘 달라진 종목</a>
         · <?= !empty($scanReport['entry_journey']['saved']) ? '수동 관찰 기록 보존됨' : h($scanReport['entry_journey']['error'] ?? '수동 관찰 기록 없음') ?></p>
         <?php
           $scanSummary = is_array($scanReport['summary'] ?? null) ? $scanReport['summary'] : [];

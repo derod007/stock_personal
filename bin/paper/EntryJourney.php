@@ -5,6 +5,15 @@ require_once __DIR__.'/Followup.php';
 /** Read-only links to frozen audit outcomes; manual observations never become orders. */
 final class PaperEntryJourney
 {
+    public static function scanTime(string $value): int
+    {
+        if(!preg_match('/^\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}:\d{2}(?: ?[+-]\d{2}:\d{2})?$/',$value))throw new RuntimeException('수동 스캔 시각 형식 오류');
+        $date=new DateTimeImmutable($value,new DateTimeZone('Asia/Seoul'));
+        $errors=DateTimeImmutable::getLastErrors();
+        if($errors&&($errors['warning_count']||$errors['error_count']))throw new RuntimeException('수동 스캔 시각 오류');
+        return $date->getTimestamp();
+    }
+
     public static function manualBundle(array $report): array
     {
         $rows=[];
@@ -22,7 +31,8 @@ final class PaperEntryJourney
     {
         if(empty($report['ok']))return ['status'=>'scan_failed','saved'=>false];
         $bundle=self::manualBundle($report);
-        if(!is_string($bundle['fetched_at'])||strtotime($bundle['fetched_at'])===false)throw new RuntimeException('수동 스캔 시각 없음');
+        if(!is_string($bundle['fetched_at']))throw new RuntimeException('수동 스캔 시각 없음');
+        self::scanTime($bundle['fetched_at']);
         $json=PaperRrAudit::encode($bundle);$id=hash('sha256',$json);
         if(!is_dir($dir)&&!@mkdir($dir,0770,true)&&!is_dir($dir))throw new RuntimeException('진입 기록 폴더 생성 실패');
         $lock=fopen($dir.'/write.lock','c');
@@ -92,7 +102,7 @@ final class PaperEntryJourney
                 $b=json_decode($json,true,512,JSON_THROW_ON_ERROR);
                 if(($b['schema']??0)!==1||($b['execution']??'')!=='manual_scan')throw new RuntimeException('지원하지 않는 수동 기록');
                 if(($b['profile']??null)!==$profile)continue;
-                $at=strtotime($b['fetched_at']);
+                $at=self::scanTime($b['fetched_at']);
                 foreach($b['rows'] as $r){
                     $p=$r['order_plan']??[];
                     $live=($r['analysis_mode']??'')==='intraday'&&($r['entry_status']??'')==='intraday_preview'&&!empty($r['entry_candidate']);

@@ -7,15 +7,16 @@ $dir=sys_get_temp_dir().'/journey-'.bin2hex(random_bytes(5));mkdir($dir,0700,tru
 function cleanJourney(string $dir):void{foreach(scandir($dir) as $f){if($f==='.'||$f==='..')continue;$p=$dir.'/'.$f;is_dir($p)?cleanJourney($p):unlink($p);}rmdir($dir);}
 try{
     $plan=['ready'=>true,'status'=>'ready','confirmation_status'=>'confirmed','entry'=>100,'stop'=>90,'target'=>120,'reward_risk'=>2,'signal_at'=>strtotime('2026-10-06 15:30:00 +0900'),'order_valid_bars'=>3];
-    $scan=['ok'=>true,'profile'=>'account1','market'=>'all','fetched_at'=>'2026-10-07 10:00:00 +09:00','rows'=>[
+    $scan=['ok'=>true,'profile'=>'account1','market'=>'all','fetched_at'=>'2026-10-07 10:00:00','rows'=>[
         ['yahoo'=>'123456.KS','name'=>'test','analysis_mode'=>'completed','order_plan'=>$plan,'entry_status'=>'ready'],
         ['yahoo'=>'654321.KQ','name'=>'live','analysis_mode'=>'intraday','order_plan'=>['ready'=>false,'status'=>'intraday_preview'],
             'entry_status'=>'intraday_preview','entry_candidate'=>['low'=>90,'high'=>100]],
     ]];
+    ej(PaperEntryJourney::scanTime($scan['fetched_at'])===strtotime('2026-10-07 10:00:00 +0900'),'scanner timestamp is KST regardless of PHP default timezone');
     $folder=$dir.'/entry-observations/manual';
     $a=PaperEntryJourney::saveManual($folder,$scan);$b=PaperEntryJourney::saveManual($folder,$scan);
     ej($a['status']==='saved'&&$b['status']==='existing'&&count(glob($folder.'/*.json'))===1,'cached rerun does not duplicate observation');
-    $scan['fetched_at']='2026-10-07 11:00:00 +09:00';$scan['rows'][0]['order_plan']['entry']=101;
+    $scan['fetched_at']='2026-10-07 11:00:00';$scan['rows'][0]['order_plan']['entry']=101;
     PaperEntryJourney::saveManual($folder,$scan);
     $r=PaperEntryJourney::read($dir,'paper-kr','account1');ej(count($r['rows'])===4,'new observation retained with intraday provisional candidate');
     $first=array_values(array_filter($r['rows'],fn($x)=>($x['plan']['entry']??null)===100));ej(count($first)===1,'original plan remains frozen after new scan');

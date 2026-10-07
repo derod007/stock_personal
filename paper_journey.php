@@ -27,6 +27,8 @@ paper_open(['title'=>'진입 확인 → 결과','page'=>'journey','account'=>$id
 <?php foreach(array_slice($rows,($page-1)*50,50) as $row): $p=$row['plan'];$o=$row['outcome']??[]; ?>
 <details class="paper-trade"><summary><?= paper_esc($row['name'].' · '.jt($row['recorded_at']).' · '.($row['source']==='manual_scan'?'수동 스캔':'완료봉 기록').' · '.jl($o['status']??$row['link'])) ?></summary>
 <div class="scan-table-wrap"><table class="scan-table paper-kv"><tbody>
+<tr><th><?= $row['source']==='manual_scan'?'스캔 생성 시각 (캐시 재조회 포함)':'감사 기록 저장 시각' ?></th><td><?= paper_esc(jt($row['recorded_at'])) ?></td></tr>
+<tr><th>당시 최종 판정</th><td><?= paper_esc(($row['status']??'')==='intraday_preview'?'장중 잠정 · 종가 확인 전':paper_ko($row['status']??'unknown')) ?></td></tr>
 <tr><th>판정 근거</th><td><?= paper_esc($row['reason']) ?></td></tr>
 <tr><th>분석 기준 / 신호봉</th><td><?= paper_esc(ScanEntryView::modeLabel($row['mode']).' / '.jt($row['session'])) ?><br><?= paper_esc($row['note']) ?></td></tr>
 <?php if(!empty($row['candidate'])&&$row['mode']==='intraday'): $c=$row['candidate']; ?><tr><th>장중 관심 구간 (주문 계획 아님)</th><td><?= paper_esc(jn($c['low']??null).' ~ '.jn($c['high']??null)) ?></td></tr><?php endif ?>

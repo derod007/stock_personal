@@ -57,7 +57,8 @@ final class PaperEntryJourney
     public static function read(string $stateDir,string $account,string $profile): array
     {
         $rows=[];$errors=[];$closeRecords=[];
-        $followup=PaperFollowup::load($stateDir,$account);
+        $followup=null;
+        try{$followup=PaperFollowup::load($stateDir,$account);}catch(Throwable $e){$errors[]='후속 기록 읽기 실패: '.$e->getMessage();}
         $dir=$stateDir.'/rr-audit/'.$account;
         $files=PaperRrView::files($dir);sort($files,SORT_STRING);
         foreach($files as $file){
@@ -77,7 +78,7 @@ final class PaperEntryJourney
                     $linked=self::linkedOutcome($r,$followup['rows'][$key]??null);
                     $rows[]=['source'=>'completed_audit','mode'=>'completed','name'=>$r['name']??$r['symbol'],
                         'symbol'=>$r['symbol'],'recorded_at'=>$r['captured_at'],'session'=>$r['session'],
-                        'plan'=>$p,'reason'=>$p['reason']??'기록 없음','note'=>'완료봉 감사 기록 · 예약/수동 CLI 실행 구분 미기록',
+                        'plan'=>$p,'status'=>$p['status']??'unknown','reason'=>$p['reason']??'기록 없음','note'=>'완료봉 감사 기록 · 예약/수동 CLI 실행 구분 미기록',
                         'link'=>$linked['link'],'outcome'=>$linked['outcome'],'evaluated_at'=>$linked['link']==='linked'?($followup['rows'][$key]['as_of']??null):null,
                         'source_file'=>$file,'close_comparison'=>null];
                 }
@@ -99,7 +100,7 @@ final class PaperEntryJourney
                     $symbol=$r['yahoo']??'';
                     $rows[]=['source'=>'manual_scan','mode'=>$r['analysis_mode']??'unknown','name'=>$r['name']??$symbol,
                         'symbol'=>$symbol,'recorded_at'=>$at,'session'=>$live?null:($p['signal_at']??null),'plan'=>$p,'candidate'=>$r['entry_candidate']??null,
-                        'reason'=>$r['new_entry_sentence']??$r['reason']??'기록 없음','note'=>$r['analysis_note']??'분석 기준 미기록',
+                        'status'=>$r['entry_status']??'unknown','reason'=>$r['new_entry_sentence']??$r['reason']??'기록 없음','note'=>$r['analysis_note']??'분석 기준 미기록',
                         'link'=>'manual_observation_only','outcome'=>null,'evaluated_at'=>null,'source_file'=>$hash.'.json',
                         'close_comparison'=>self::closeComparison($at,$r['analysis_mode']??'', $closeRecords[$symbol]??[])];
                 }

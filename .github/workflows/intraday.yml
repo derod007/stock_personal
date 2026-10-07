@@ -8,6 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
+          node tests/scan_sort.cjs
           php -l src/IntradayAnalysis.php
           php -l src/CurrentQuoteClient.php
           php -l src/ProposalService.php

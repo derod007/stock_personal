@@ -769,6 +769,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
             </div>
           <?php endif; ?>
           <p><strong>지정가 계획 검토 <?= (int) $scanBuyNowCount ?>건</strong> · 관찰·보류 <?= count($scanRows) - $scanBuyNowCount ?>건. 분석상 계획 수이며 현재 매수·주문 접수·체결을 뜻하지 않습니다.</p>
+          <p id="scan-sort-status" role="status" aria-live="polite">현재 정렬: 지정가 계획·관찰순</p>
           <div class="scan-toolbar">
             <div class="scan-sort" id="scan-sort" role="group" aria-label="정렬">
               <button type="button" class="sector-chip" data-sort="score" aria-pressed="false">점수순</button>
@@ -1584,6 +1585,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
       <p>개인 연구용 · 최종 매매 결정은 본인 책임 · <a href="docs/roadmap-2026-07-18.md">로드맵</a></p>
     </footer>
   </main>
+  <script src="assets/scan-sort.js?v=1"></script>
   <script>
     document.querySelector('.search')?.addEventListener('submit', () => {
       document.body.classList.add('is-loading');
@@ -1617,19 +1619,20 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
       const KEY = 'chart_ui_mode';
       const params = new URLSearchParams(location.search);
       if (!params.has('mode')) {
-        const saved = localStorage.getItem(KEY);
+        let saved = null;
+        try { saved = localStorage.getItem(KEY); } catch { /* Storage may be blocked. */ }
         if (saved === 'simple' || saved === 'analyze') {
           params.set('mode', saved);
           location.replace(location.pathname + '?' + params.toString() + location.hash);
           return;
         }
       } else {
-        localStorage.setItem(KEY, params.get('mode'));
+        try { localStorage.setItem(KEY, params.get('mode')); } catch { /* UI remains usable. */ }
       }
       document.querySelectorAll('.mode-toggle__link').forEach((a) => {
         a.addEventListener('click', () => {
           const m = a.getAttribute('data-mode');
-          if (m) localStorage.setItem(KEY, m);
+          if (m) { try { localStorage.setItem(KEY, m); } catch { /* Optional preference only. */ } }
         });
       });
     })();
@@ -1690,37 +1693,6 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
       });
     })();
 
-    (function () {
-      const sortBar = document.getElementById('scan-sort');
-      const tbody = document.querySelector('#scan-results tbody');
-      if (!sortBar || !tbody) return;
-      const rows = Array.from(tbody.querySelectorAll('tr'));
-      const applySort = (mode) => {
-        const sorted = rows.slice().sort((a, b) => {
-          if (mode === 'entry') {
-            return Number(a.getAttribute('data-entry-order')) - Number(b.getAttribute('data-entry-order'));
-          }
-          const sa = Number(a.getAttribute('data-score') || -1);
-          const sb = Number(b.getAttribute('data-score') || -1);
-          if (sa !== sb) return sb - sa;
-          return Number(a.getAttribute('data-orig') || 0) - Number(b.getAttribute('data-orig') || 0);
-        });
-        sorted.forEach((tr) => tbody.appendChild(tr));
-      };
-      applySort('entry');
-      sortBar.addEventListener('click', (e) => {
-        const btn = e.target.closest('[data-sort]');
-        if (!btn) return;
-        const mode = btn.getAttribute('data-sort') || 'score';
-        sortBar.querySelectorAll('[data-sort]').forEach((c) => {
-          c.classList.remove('is-active');
-          c.setAttribute('aria-pressed', 'false');
-        });
-        btn.classList.add('is-active');
-        btn.setAttribute('aria-pressed', 'true');
-        applySort(mode);
-      });
-    })();
 
     (function () {
       const closeAll = (except) => {

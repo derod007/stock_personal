@@ -11,6 +11,9 @@ jobs:
           php -l bin/paper/EntryJourney.php
           php -l paper_journey.php
           php tests/entry_journey.php
+          php -l bin/paper/DailyChanges.php
+          php -l paper_changes.php
+          php tests/daily_changes.php
           node tests/scan_sort.cjs
           php -l src/IntradayAnalysis.php
           php -l src/CurrentQuoteClient.php

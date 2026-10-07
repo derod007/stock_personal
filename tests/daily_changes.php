@@ -40,6 +40,8 @@ try{
     ck(!$r['errors']&&count($r['research'])===3,'fill/exit plus first terminal observation only, latest duplicate ignored');
     ck(count(array_filter($r['research'],fn($e)=>$e['kind']==='unfilled'&&$e['symbol']==='C'))===1,'old expiry not reannounced today');
     ck(count($r['account_events'])===1,'account ledger separate from independent outcome');
+    $fill=array_values(array_filter($r['research'],fn($e)=>$e['kind']==='fill'))[0];
+    ck($fill['exit']===null&&$fill['reason']===null&&$fill['net_return_pct']===null,'later exit cannot appear as fill-day outcome');
     // Today audit summary is read, not supplied by UI or inferred from fills.
     file_put_contents($dir.'/rr-audit/paper-kr/20261007-112314-abcdef012345.json',json_encode(['version'=>PaperRrAudit::VERSION,'membership'=>'observed_scan_only','recorded_at'=>$t,'records'=>$records,'summary'=>['confirmed_rr_symbol_days'=>2,'added'=>2]]));
     putenv('PAPER_STATE_DIR='.$dir);$_GET=['account'=>'paper-kr','day'=>$day];ob_start();require __DIR__.'/../paper_changes.php';$html=ob_get_clean();

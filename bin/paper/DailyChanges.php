@@ -132,8 +132,8 @@ final class PaperDailyChanges
     private static function tradeEvent(array $v,string $kind,int $at,string $basis):array
     {
         $o=$v['outcome'];return ['kind'=>$kind,'at'=>$at,'basis'=>$basis,'symbol'=>$v['record']['symbol'],
-            'name'=>$v['record']['name']??$v['record']['symbol'],'reason'=>$o['first_exit']??null,
-            'entry'=>$o['entry_fill']??null,'exit'=>$o['exit_fill']??null,'net_return_pct'=>$kind==='exit'?($o['net_return_pct']??null):null,
-            'reference'=>$v['record']['source_file'],'ambiguous'=>!empty($o['ambiguous_bar'])];
+            'name'=>$v['record']['name']??$v['record']['symbol'],'reason'=>$kind==='exit'?($o['first_exit']??null):null,
+            'entry'=>$o['entry_fill']??null,'exit'=>$kind==='exit'?($o['exit_fill']??null):null,'net_return_pct'=>$kind==='exit'?($o['net_return_pct']??null):null,
+            'reference'=>$v['record']['source_file'],'ambiguous'=>in_array($kind,['exit','cancelled_before_entry'],true)&&!empty($o['ambiguous_bar'])];
     }
 }

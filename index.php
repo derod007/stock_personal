@@ -86,6 +86,13 @@ if ($scanMode) {
         market: $scanMarket,
         interactive: true,
     );
+    require_once __DIR__ . '/bin/paper/EntryJourney.php';
+    try {
+        $stateDir = getenv('PAPER_STATE_DIR') ?: dirname(__DIR__) . '/stock-personal-paper';
+        $scanReport['entry_journey'] = PaperEntryJourney::saveManual($stateDir . '/entry-observations/manual', $scanReport);
+    } catch (Throwable $e) {
+        $scanReport['entry_journey'] = ['status'=>'error', 'saved'=>false, 'error'=>'진입 관찰 기록 저장 실패 · 폴더 권한/디스크 확인'];
+    }
     if (isset($_GET['format']) && (string) $_GET['format'] === 'json') {
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($scanReport, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
@@ -481,6 +488,8 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
         </div>
       </div>
       <?php if (is_array($scanReport)): ?>
+        <p><a href="paper_journey.php?account=paper-kr&amp;profile=<?= h($profileId) ?>">진입 확인 → 결과 보기</a>
+        · <?= !empty($scanReport['entry_journey']['saved']) ? '수동 관찰 기록 보존됨' : h($scanReport['entry_journey']['error'] ?? '수동 관찰 기록 없음') ?></p>
         <?php
           $scanSummary = is_array($scanReport['summary'] ?? null) ? $scanReport['summary'] : [];
           $scanRows = ScanEntryView::rows(is_array($scanReport['rows'] ?? null) ? $scanReport['rows'] : []);

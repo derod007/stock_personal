@@ -8,6 +8,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
+          php -l bin/paper/EntryJourney.php
+          php -l paper_journey.php
+          php tests/entry_journey.php
           node tests/scan_sort.cjs
           php -l src/IntradayAnalysis.php
           php -l src/CurrentQuoteClient.php

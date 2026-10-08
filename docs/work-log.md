@@ -1,3 +1,13 @@
+## 2026-10-08 · Codex · 끝
+- 점검: main의 회복형 계좌 연결 및 23:35 실행 요약 확인. 예약 실행 자체·후속 완료봉 누적은 로컬 실행 원본이 없어 미확인
+- 품질 보류: EnvelopeResearch의 일반 품질 차단 또는 MA240 범위 내 invalid_bars 조건. 실제 11종목·원인은 frozen 원본 필요; latest.json에는 quality 상세를 제거해 저장함
+- 동결 원칙: 품질 보류 관측은 이후 refresh에서 재평가하지 않음. 신규 관측과 구분 필요
+- 추가 자료: PAPER_STATE_DIR 아래 envelope-research/paper-kr-recovery-v1/latest.json 및 해당 frozen/*.json, 다음 실행 후 runs/paper-kr-recovery-v1-forward의 최신 JSON과 followup/paper-kr-recovery-v1/latest.json
+- 검증: 관련 저장·판정·예약 연결 소스 대조, 문서만 변경하여 실행 테스트 생략. 운영 코드·전략·장부 변경 없음
+
+## 2026-10-08 · Codex · 진행
+- 작업: 회복형 계좌 실행 자료 및 엔벨로프 품질 보류 조건·추가 확인 자료 점검
+
 ## 2026-10-08 23:25 · Codex · 끝
 - 작업: 회복형 새 모의계좌·20:20 실행 설정 연결, 무추천 시에도 계좌 버전 사전 검사, 탈락 표의 패턴 자체 판정과 최종 판정 분리
 - 기존 계좌/장부/과거 연구 이관 없음. 새 계좌 설정·기존 실행 파일 연결·읽기 전용 사전 검사와 실제 페이지 출력 회귀 추가. Python 회귀 통과, 전체 검증은 PR checks 참조

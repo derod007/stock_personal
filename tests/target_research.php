@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-require __DIR__.'/fixtures/SpikeDumpV1.php'; // Frozen historical research baseline.
+require __DIR__.'/fixtures/HistoricalResearchBaseline.php'; // Frozen historical research baseline.
 require __DIR__.'/../bin/bootstrap.php';
 require __DIR__.'/../bin/paper/TargetResearch.php';
 require __DIR__.'/../bin/paper/TargetResearchPanel.php';
@@ -41,7 +41,7 @@ foreach($report['rows'] as $row){
 }
 $temp=sys_get_temp_dir().'/target-study-'.bin2hex(random_bytes(5));mkdir($temp);
 try{
-    $cmd=escapeshellarg(PHP_BINARY).' -d auto_prepend_file='.escapeshellarg(__DIR__.'/fixtures/SpikeDumpV1.php').' '.escapeshellarg(dirname(__DIR__).'/bin/paper_target_research.php').' --source-dir='.escapeshellarg($root).' --output-dir='.escapeshellarg($temp.'/target-research/paper-kr');
+    $cmd=escapeshellarg(PHP_BINARY).' -d auto_prepend_file='.escapeshellarg(__DIR__.'/fixtures/HistoricalResearchBaseline.php').' '.escapeshellarg(dirname(__DIR__).'/bin/paper_target_research.php').' --source-dir='.escapeshellarg($root).' --output-dir='.escapeshellarg($temp.'/target-research/paper-kr');
     exec($cmd,$lines,$exit);target_check($exit===0,'CLI success');
     $saved=json_decode(file_get_contents($temp.'/target-research/paper-kr/latest.json'),true);
     target_check($saved['summary']===json_decode(PaperRrAudit::encode($report['summary']),true),'saved CLI summary matches');

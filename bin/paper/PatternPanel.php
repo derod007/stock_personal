@@ -17,13 +17,14 @@ final class PaperPatternView
         $selected=$plan['pattern']??$plan['diagnostics']['selected_pattern']??null;
         if(in_array($plan['status']??'',self::COMMON,true))$blockers[]=$plan['status'];
         foreach($audits??[] as $audit)foreach($audit['exclusion_reasons']??[] as $code)if(in_array($code,self::COMMON,true))$blockers[]=$code;
-        foreach(['breakout_retest','trend_pullback'] as $name){
+        foreach(['breakout_retest','trend_pullback','trend_recovery'] as $name){
             $raw=$patterns[$name]??null;
             $record=null;foreach($audits??[] as $audit)if(($audit['pattern']??'')===$name){$record=$audit;break;}
             if(!is_array($raw)&&$record){$raw=['status'=>$record['raw_status']??'unknown','reason'=>$record['raw_reason']??'',
-                'gates'=>$record['gates']??[]]+($record['original']??[]);}
+                'gates'=>$record['gates']??[], 'evidence'=>$record['evidence']??[]]+($record['original']??[]);}
             $known=is_array($raw);$raw=$known?$raw:[];$gates=[];
-            if($name==='trend_pullback')foreach(self::GATES as $key=>$label){
+            $labels=$name==='trend_pullback'?self::GATES:($name==='trend_recovery'?\ChartEntryLab\TrendRecovery::GATES:[]);
+            foreach($labels as $key=>$label){
                 $v=$raw['gates'][$key]??null;
                 $gates[]=['label'=>$label,'state'=>$v===true?'통과':($v===false?'미충족':'미평가·미기록')];
             }
@@ -31,7 +32,7 @@ final class PaperPatternView
             // Missing selection evidence is unknown, never an inferred selection.
             $isSelected=$selected===null?null:($selected===$version||$selected===$name);
             $rows[]=['pattern'=>$name,'known'=>$known,'status'=>$raw['status']??'unknown','reason'=>$raw['reason']??'',
-                'selected'=>$isSelected,'rr'=>$raw['reward_risk']??null,'gates'=>$gates];
+                'selected'=>$isSelected,'rr'=>$raw['reward_risk']??null,'gates'=>$gates,'evidence'=>$raw['evidence']??[]];
         }
         return ['rows'=>$rows,'selected'=>$selected,'final'=>$plan['status']??'unknown','reason'=>$plan['reason']??'',
             'blockers'=>array_values(array_unique($blockers)),'complete_blocker_record'=>$audits!==null,'has_plan'=>$plan!==[],'at'=>$plan['data_asof']??null];
@@ -44,7 +45,7 @@ function paper_pattern_panel(array $evidence,?array $audits=null):void
     $basis=$evidence['basis']??'unknown';$at=$v['at'];
     $date=is_numeric($at)?(new DateTimeImmutable('@'.(int)$at))->setTimezone(new DateTimeZone('Asia/Seoul'))->format('Y-m-d H:i'):'기준 시각 미기록';
     echo '<article class="info-card pattern-review"><h3>패턴별 판정과 공통 차단</h3>';
-    echo '<p class="paper-note">두 패턴을 모두 만족할 필요는 없습니다. 아래는 각각의 원래 판정이며, 선택된 패턴에 공통 차단을 적용한 결과가 최종 판정입니다.</p>';
+    echo '<p class="paper-note">모든 패턴을 함께 만족할 필요는 없습니다. 아래는 각각의 원래 판정이며, 선택된 패턴에 공통 차단을 적용한 결과가 최종 판정입니다.</p>';
     echo '<p class="pattern-basis">'.paper_esc($date).' · '.paper_esc(match($basis){
         'completed_reference'=>'마지막 완료봉 참고 · 현재 장중 판정 아님',
         'completed_fallback'=>'장중 자료 실패 · 완료봉 참고',
@@ -59,6 +60,17 @@ function paper_pattern_panel(array $evidence,?array $audits=null):void
             foreach($r['gates'] as $g)echo '<div><dt>'.paper_esc($g['label']).'</dt><dd>'.paper_esc($g['state']).'</dd></div>';
             echo '</dl></details>';
         }else echo '<p class="paper-note">세부 조건별 통과 여부는 개별 기록되지 않습니다. 패턴 상태와 근거를 확인하세요.</p>';
+        if($r['pattern']==='trend_recovery'&&$r['known']){
+            echo '<p class="paper-note">이탈한 직전 저점을 저항으로 고정한 회복형입니다. 좌우 2봉으로 저점을 확정하며, 주봉 하락 때 손익비 2 이상을 요구합니다.</p>';
+            echo '<dl class="pattern-gates">';
+            foreach(['resistance'=>'고정 저항','reference_low'=>'이탈 후 기준 저점','higher_low'=>'돌파 후 높은 저점','target_source'=>'목표 저항'] as $key=>$label){
+                $point=$r['evidence'][$key]??null;
+                if(!is_array($point))continue;
+                $knownAt=is_numeric($point['confirmed_at']??null)?(new DateTimeImmutable('@'.(int)$point['confirmed_at']))->setTimezone(new DateTimeZone('Asia/Seoul'))->format('m-d H:i'):'미기록';
+                echo '<div><dt>'.paper_esc($label).'</dt><dd>'.paper_esc(paper_number($point['price']??null)).' · 확정 '.paper_esc($knownAt).'</dd></div>';
+            }
+            echo '</dl>';
+        }
         echo '</td></tr>';
     }
     echo '</tbody></table></div><div class="pattern-final"><p><strong>선택 이후 최종 판정</strong> '.paper_esc(paper_ko($v['final'])).'</p><p>'.paper_esc($v['reason']).'</p>';

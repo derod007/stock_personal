@@ -20,5 +20,6 @@
   "src/ThemeSmell.php",
   "src/TradeSimulator.php",
   "src/TrendContext.php",
-  "src/TrendPullback.php"
+  "src/TrendPullback.php",
+  "src/TrendRecovery.php"
 ]

@@ -102,6 +102,7 @@ function paper_ko(string $code): string
         'mismatch' => '결과가 다름',
         'not_identity' => '같은 전략 검증이 아님',
         'identity_mismatch' => '같은 전략인데 결과가 다름',
+        'account_preflight' => '계좌 전략·설정 사전 검사',
         'collect' => '시세 수집',
         'scan' => '거래대금 스캔',
         'naver_session' => '네이버 시세',
@@ -239,7 +240,7 @@ function paper_change_kind(string $kind): string
 
 function paper_account_field(string $id, string $label = '계좌', ?array $only = null): void
 {
-    $known = $only ?? ['paper-kr', 'paper-us', 'research-kr-v1', 'research-us-v1'];
+    $known = $only ?? ['paper-kr-recovery-v1', 'paper-kr', 'paper-us', 'research-kr-v1', 'research-us-v1'];
     if (!in_array($id, $known, true)) {
         $known[] = $id;
     }
@@ -253,7 +254,8 @@ function paper_account_field(string $id, string $label = '계좌', ?array $only 
 function paper_account_name(string $id): string
 {
     return match ($id) {
-        'paper-kr' => '한국 모의',
+        'paper-kr-recovery-v1' => '한국 모의 · 회복형 포함',
+        'paper-kr' => '한국 모의 · 이전 기록',
         'paper-us' => '미국 모의',
         'research-kr-v1' => '한국 연구 10종목',
         'research-us-v1' => '미국 연구 10종목',

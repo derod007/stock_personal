@@ -40,6 +40,16 @@ def update(config_path, state_dir, runner=subprocess.run):
     eval_symbols = dict(config.get("symbols") or {})
     universe = config.get("universe")
     try:
+        if config.get("require_account_preflight"):
+            record["stage"] = "account_preflight"
+            save_record(log, record)
+            check = runner(["php", str(ROOT / "bin/paper_account_preflight.php"),
+                            "--config=" + str(config_path)], cwd=ROOT, env=env, check=True,
+                           timeout=60, capture_output=True, text=True, encoding="utf-8", errors="replace")
+            record["account_preflight"] = json.loads(check.stdout)
+            if record["account_preflight"].get("account") != account or record["account_preflight"].get("status") not in ("new_account", "compatible"):
+                raise ValueError("Invalid account preflight result")
+            save_record(log, record)
         # Concurrent scheduler invocations never share mutable collection files.
         with tempfile.TemporaryDirectory(prefix="paper-input-") as tmp:
             if universe == "kr_amount_scan":

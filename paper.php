@@ -30,6 +30,7 @@ paper_open(['title'=>'모의 계좌 기록','page'=>'account','account'=>$id,'mo
   <h2>아직 기록이 없습니다</h2>
   <p>프로젝트 폴더에서 아래 명령으로 수집·기록한 뒤 다시 조회하세요.</p>
   <pre class="paper-pre">python bin/paper_daily.py --config=<?= ph(match ($id) {
+    'paper-kr-recovery-v1' => 'config/paper-kr-recovery-v1.json',
     'paper-kr' => 'config/paper-kr.json',
     'research-kr-v1' => 'config/paper-research-kr-v1.json',
     'research-us-v1' => 'config/paper-research-us-v1.json',

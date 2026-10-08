@@ -18,6 +18,8 @@ jobs:
           php -l paper_rr.php
       - name: Regression
         run: |
+          php tests/account_rollout.php
+          php tests/rr_pattern_labels.php
           php tests/trend_recovery.php
           php tests/spike_dump.php
           php tests/spike_dump_replay.php

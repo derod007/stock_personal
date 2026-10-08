@@ -153,22 +153,19 @@ endif;
 <section class="panel">
 <h2 class="paper-section-title">종목별 탈락·지정가 연구</h2>
 <div class="scan-table-wrap"><table class="scan-table">
-<thead><tr><th>종목·패턴</th><th>최종 판정</th><th>탈락 이유·상세 근거</th><th>당시 확인 가격</th><th>연구 지정가</th></tr></thead>
+<thead><tr><th>종목·패턴</th><th>패턴 자체 판정</th><th>판정 이유·연구 포함 여부</th><th>당시 확인 가격</th><th>연구 지정가</th></tr></thead>
 <tbody>
-<?php foreach ($rows as $row): ?>
+<?php $shownSymbols=[]; foreach ($rows as $row): ?>
+<?php if (!isset($shownSymbols[$row['symbol']])): $shownSymbols[$row['symbol']]=true; ?>
+<tr class="rr-symbol-summary"><td colspan="5"><strong><?= rh($row['name']) ?> · 종목 최종 판정: <?= rh(paper_ko($row['final_status'])) ?></strong><p><?= rh($row['final_reason'] ?? '') ?></p></td></tr>
+<?php endif ?>
 <tr>
   <td><strong><?= rh($row['name']) ?></strong><span class="scan-code"><?= rh(paper_ko($row['pattern'])) ?></span></td>
-  <td><?= rh(paper_ko($row['final_status'])) ?></td>
+  <td><?= rh(paper_ko($row['raw_status'])) ?></td>
   <td><?php
     $why = trim((string) ($row['why'] ?? ''));
-    $finalReason = trim((string) ($row['final_reason'] ?? ''));
-    if ($finalReason !== '' && ($why === '' || str_contains($finalReason, $why))) {
-        $why = $finalReason;
-    } elseif ($finalReason !== '' && !str_contains($why, $finalReason)) {
-        $why .= ' · ' . $finalReason;
-    }
     echo rh($why !== '' ? $why : '—');
-  ?><details class="inline-details"><summary>미충족 조건·추가 차단 보기</summary>
+  ?><p><strong><?= $row['included'] ? '연구 포함 · 운영 추천 아님' : '연구 제외' ?></strong></p><details class="inline-details"><summary>미충족 조건·추가 차단 보기</summary>
   <p>패턴 판정: <?= rh(paper_ko($row['raw_status'])) ?></p>
   <p>미충족: <?= rh($row['missing'] !== '' ? $row['missing'] : '—') ?></p>
   <p>추가 차단: <?= rh($row['blockers'] !== '' ? $row['blockers'] : ($row['included'] ? '없음' : '—')) ?></p>

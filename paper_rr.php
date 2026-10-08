@@ -5,6 +5,7 @@ declare(strict_types=1);
 require __DIR__ . '/bin/bootstrap.php';
 require __DIR__ . '/bin/paper/RrView.php';
 require_once __DIR__ . '/bin/paper/Chrome.php';
+require_once __DIR__ . '/bin/paper/PatternPanel.php';
 require_once __DIR__ . '/bin/paper/FollowupPanel.php';
 require_once __DIR__ . '/bin/paper/RejectionReviewPanel.php';
 require_once __DIR__ . '/bin/paper/RediagnosisPanel.php';
@@ -147,9 +148,10 @@ endif;
 <p class="paper-note">아직 이 계좌의 탈락 로그가 없습니다. 한국 모의는 다음 20:20 실행부터 이 화면에 쌓입니다.</p>
 <p><a class="btn-scan" href="paper_rr.php?<?= rh($q) ?>&amp;preview=1">오늘 스캔 캐시로 미리보기</a></p>
 <?php elseif ($bundle): ?>
+<?php paper_pattern_audit_panel($bundle['records']??[]); ?>
 <p class="paper-lede"><?= rh((string) ($bundle['fetched_at'] ?? rkst(isset($bundle['recorded_at']) ? (int) $bundle['recorded_at'] : null))) ?> · 종목 <?= rh((string) ($bundle['summary']['symbols'] ?? count($rows))) ?> · 확인 후 손익비 탈락 <?= rh((string) ($bundle['summary']['confirmed_rr_symbol_days'] ?? 0)) ?> · 연구 포함 <?= rh((string) ($bundle['summary']['added'] ?? 0)) ?></p>
 <section class="panel">
-<h2 class="paper-section-title">종목별 탈락</h2>
+<h2 class="paper-section-title">종목별 탈락·지정가 연구</h2>
 <div class="scan-table-wrap"><table class="scan-table">
 <thead><tr><th>종목·패턴</th><th>최종 판정</th><th>탈락 이유·상세 근거</th><th>당시 확인 가격</th><th>연구 지정가</th></tr></thead>
 <tbody>

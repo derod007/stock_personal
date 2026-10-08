@@ -3,6 +3,7 @@ declare(strict_types=1);
 require __DIR__.'/bin/bootstrap.php';
 require_once __DIR__.'/bin/paper/EntryJourney.php';
 require_once __DIR__.'/bin/paper/Chrome.php';
+require_once __DIR__.'/bin/paper/PatternPanel.php';
 use ChartEntryLab\ScanEntryView;
 $id=$_GET['account']??'paper-kr';$profile=$_GET['profile']??'account1';$source=$_GET['source']??'all';
 if(!is_string($id)||!preg_match('/^[a-z0-9_-]{1,64}$/',$id)||!in_array($profile,['account1','custom','isa'],true)||!in_array($source,['all','manual_scan','completed_audit'],true)){http_response_code(400);exit('잘못된 조회');}
@@ -41,7 +42,7 @@ paper_open(['title'=>'진입 확인 → 결과','page'=>'journey','account'=>$id
 <tr><th>체결·취소 해석</th><td><?= ($o['status']??'')==='unfilled'?'유효 기간 내 지정가 미체결':(($o['status']??'')==='cancelled_before_entry'?'기존 모형의 진입 전 가격 조건으로 취소 (세부 취소 사유는 저장되지 않음)':($o?'저장된 기존 모형 결과':'결과 없음 · 체결 여부 미확인')) ?><?= !empty($o['ambiguous_bar'])?' · 같은 봉 내 도달 순서 불명, 기존 모형 우선순위 적용':'' ?></td></tr>
 <?php if($row['source']==='manual_scan'&&$row['mode']==='intraday'): $c=$row['close_comparison']; ?><tr><th>당일 마감 관찰</th><td><?= $c?paper_esc(jt($c['session']).' · '.paper_ko($c['status']).' · '.($c['ready']?'마감 판정도 진입 확인':'마감 판정은 진입 미확인')):'연결할 이후 완료봉 판정 없음' ?></td></tr><?php endif ?>
 <tr><th>원본 기록</th><td><?= paper_esc($row['symbol'].' / '.$row['source_file']) ?></td></tr>
-</tbody></table></div></details>
+</tbody></table></div><?php if(is_array($row['pattern_evidence']??null))paper_pattern_panel($row['pattern_evidence']); ?></details>
 <?php endforeach ?>
 <?php foreach(['이전'=>$page-1,'다음'=>$page+1] as $label=>$n): if($n<1||$n>$pages)continue; ?><a href="?<?= paper_esc(http_build_query(['account'=>$id,'profile'=>$profile,'source'=>$source,'p'=>$n])) ?>"><?= paper_esc($label) ?></a> <?php endforeach ?>
 <p class="paper-note">완료봉 후속 갱신: <code>php bin/paper_followup.php --account=<?= paper_esc($id) ?></code>. 기존 예약 실행에서도 갱신합니다. 연결이 없거나 가격 품질 검사를 통과하지 못하면 손익을 추정하지 않습니다.</p></section>

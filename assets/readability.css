@@ -104,3 +104,17 @@ a, button, summary, select, input { touch-action: manipulation; }
   #scan-results .scan-col-entry { display: table-cell; }
   .scan-table-wrap { margin-left: 0; margin-right: 0; }
 }
+
+/* Recorded pattern evidence and scoring have separate visual groups. */
+.pattern-review, #score-breakdown { margin: 1.1rem 0; padding: 1.2rem; }
+.pattern-review h3, #score-breakdown h3 { margin-top: 0; }
+.pattern-table { min-width: 780px; }
+.pattern-basis { color: var(--accent-ink); font-weight: 600; }
+.pattern-final { margin: 1rem 0; padding: .7rem 1rem; background: var(--surface-2); border-left: 3px solid var(--accent); }
+.pattern-final p { margin: .3rem 0; }
+.pattern-gates { min-width: 240px; }
+.pattern-gates > div { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--border-default); padding: .3rem 0; }
+.pattern-gates dd { margin: 0; white-space: nowrap; }
+#score-breakdown .score-detail__list { grid-template-columns: repeat(auto-fit, minmax(min(100%, 245px), 1fr)); }
+#score-breakdown .score-detail__formula { display: flex; flex-wrap: wrap; gap: .5rem 1rem; }
+#score-breakdown .score-detail__formula span { white-space: nowrap; }

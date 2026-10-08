@@ -15,6 +15,8 @@ const fs = require('node:fs');
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'page has no horizontal overflow');
     assert.notEqual(await page.locator('#scan-results .scan-col-entry').first().evaluate(e=>getComputedStyle(e).display),'none','price plan stays accessible on mobile');
     assert.equal(await page.locator('.paper-kv .price-plan dd').allTextContents().then(x=>x.join('/')),'48,050/46,260/55,200');
+    assert(await page.locator('#score-breakdown').isVisible(),'score breakdown is visible');
+    assert((await page.locator('.pattern-basis').textContent()).includes('현재 장중 판정 아님'),'completed reference cannot look like an intraday confirmation');
     await page.screenshot({path:`/tmp/ui-screens/${name}.png`,fullPage:true});
   }
   const guide=page.locator('.reading-guide summary').first();

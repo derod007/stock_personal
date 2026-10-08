@@ -21,7 +21,7 @@ final class PaperEntryJourney
             if(!is_array($row))continue;
             // Preserve all final statuses so a later close comparison can include a lost signal.
             $rows[]=array_intersect_key($row,array_flip(['yahoo','name','score','price','entry_status','order_ready',
-                'order_plan','entry_candidate','analysis_mode','analysis_note','quote_fetched_at','reason','new_entry_sentence']));
+                'order_plan','pattern_evidence','entry_candidate','analysis_mode','analysis_note','quote_fetched_at','reason','new_entry_sentence']));
         }
         return ['schema'=>1,'execution'=>'manual_scan','fetched_at'=>$report['fetched_at']??null,
             'profile'=>$report['profile']??null,'market'=>$report['market']??null,'rows'=>$rows];
@@ -112,6 +112,7 @@ final class PaperEntryJourney
                         'symbol'=>$symbol,'recorded_at'=>$at,'session'=>$live?null:($p['signal_at']??null),'plan'=>$p,'candidate'=>$r['entry_candidate']??null,
                         'status'=>$r['entry_status']??'unknown','reason'=>$r['new_entry_sentence']??$r['reason']??'기록 없음','note'=>$r['analysis_note']??'분석 기준 미기록',
                         'link'=>'manual_observation_only','outcome'=>null,'evaluated_at'=>null,'source_file'=>$hash.'.json',
+                        'pattern_evidence'=>is_array($r['pattern_evidence']??null)?$r['pattern_evidence']:null,
                         'close_comparison'=>self::closeComparison($at,$r['analysis_mode']??'', $closeRecords[$symbol]??[])];
                 }
             }catch(Throwable $e){$errors[]=basename($path).': '.$e->getMessage();}

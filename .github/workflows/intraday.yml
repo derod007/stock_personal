@@ -8,6 +8,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
+          php tests/pattern_view.php
+          php -l bin/paper/ScorePanel.php
+          php -l bin/paper/PatternPanel.php
           php tests/ui_readability.php
           node --check assets/readability.js
           php -l paper_rr.php

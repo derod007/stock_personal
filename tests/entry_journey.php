@@ -8,7 +8,7 @@ function cleanJourney(string $dir):void{foreach(scandir($dir) as $f){if($f==='.'
 try{
     $plan=['ready'=>true,'status'=>'ready','confirmation_status'=>'confirmed','entry'=>100,'stop'=>90,'target'=>120,'reward_risk'=>2,'signal_at'=>strtotime('2026-10-06 15:30:00 +0900'),'order_valid_bars'=>3];
     $scan=['ok'=>true,'profile'=>'account1','market'=>'all','fetched_at'=>'2026-10-07 10:00:00','rows'=>[
-        ['yahoo'=>'123456.KS','name'=>'test','analysis_mode'=>'completed','order_plan'=>$plan,'entry_status'=>'ready'],
+        ['yahoo'=>'123456.KS','name'=>'test','analysis_mode'=>'completed','order_plan'=>$plan,'entry_status'=>'ready','pattern_evidence'=>['schema'=>1,'basis'=>'completed','plan'=>$plan]],
         ['yahoo'=>'654321.KQ','name'=>'live','analysis_mode'=>'intraday','order_plan'=>['ready'=>false,'status'=>'intraday_preview'],
             'entry_status'=>'intraday_preview','entry_candidate'=>['low'=>90,'high'=>100]],
     ]];
@@ -20,6 +20,7 @@ try{
     PaperEntryJourney::saveManual($folder,$scan);
     $r=PaperEntryJourney::read($dir,'paper-kr','account1');ej(count($r['rows'])===4,'new observation retained with intraday provisional candidate');
     $first=array_values(array_filter($r['rows'],fn($x)=>($x['plan']['entry']??null)===100));ej(count($first)===1,'original plan remains frozen after new scan');
+    ej($first[0]['pattern_evidence']===$scan['rows'][0]['pattern_evidence'],'saved pattern evidence survives read without recomputation');
     foreach($r['rows'] as $row)ej($row['outcome']===null&&$row['link']==='manual_observation_only','manual never inherits completed simulation');
     ej(count(PaperEntryJourney::read($dir,'paper-kr','isa')['rows'])===0,'manual profiles isolated');
     $record=['symbol'=>'123456.KS','session'=>$plan['signal_at'],'source_file'=>'exact.json','observation_hash'=>str_repeat('a',64)];

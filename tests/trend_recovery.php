@@ -9,7 +9,7 @@ require __DIR__.'/../bin/paper/StrategyVersion.php';
 use ChartEntryLab\{TrendRecovery, ChartPlanEngine, TradeSimulator, PatternEvidence};
 function rc(bool $ok, string $why): void { if (!$ok) throw new RuntimeException($why); echo "PASS $why\n"; }
 $bars=recovery_bars(); $engine=new TrendRecovery(); $p=$engine->analyze($bars);
-rc($p['ready']&&$p['status']==='ready', 'complete recovery is an independent ready setup: '.json_encode($p,JSON_UNESCAPED_UNICODE));
+rc($p['ready']&&$p['status']==='ready', 'complete recovery is an independent ready setup');
 rc($p['entry']===106.0&&$p['stop']===98.0&&$p['target']===130.0&&$p['reward_risk']===3.0, 'fixed confirmation entry, confirmed higher-low stop and nearest target');
 rc($p['evidence']['resistance']['index']===53&&$p['evidence']['reference_low']['index']===61&&$p['evidence']['higher_low']['index']===67, 'chronological pivot identities');
 rc($p['evidence']['higher_low']['confirmed_at']===$bars[69]['available_at']&&$p['signal_at']===$bars[69]['available_at'], 'signal not backdated to the low');
@@ -31,7 +31,16 @@ $future=$bars;$next=end($bars);$next['available_at']+=86400;$next['time']=$next[
 rc($engine->analyze($future)['status']==='expired','old confirmation never becomes a new recommendation');
 $last=$bars[69]['available_at'];$main=new ChartPlanEngine();$a=$main->analyze($bars,'005930.KS',$last,'account1',false);
 rc($a['plan']['diagnostics']['patterns']['trend_recovery']===$p,'main path retains complete independent evidence');
-rc($a['plan']['pattern']===TrendRecovery::VERSION,'main engine selects recovery when other patterns are not ready');
+rc($a['plan']['pattern']===TrendRecovery::VERSION&&$a['plan']['ready'],'main engine selects a ready recovery when other patterns are not ready');
+$proposal=$main->apply([], $a['plan']);
+rc($proposal['new_entry']['order_ready']&&$proposal['invalidation_rule']==='confirmed_post_breakout_low','operational projection exposes the recovery plan and correct stop rule');
+$universe=ChartEntryLab\PaperScanUniverse::symbols(['rows'=>[['yahoo'=>'005930.KS','entry_recommend'=>$proposal['new_entry']['order_ready']]]]);
+rc(isset($universe['005930.KS']),'independent ready pattern reaches operational scan universe');
+$riskBars=$bars;$riskBars[48]['high']=125.0;
+$risk=$main->analyze($riskBars,'005930.KS',$last,'account1',false);
+rc($risk['plan']['diagnostics']['patterns']['trend_recovery']['ready']&&!$risk['plan']['ready']&&$risk['plan']['status']==='risk_blocked','actual top-collapse guard overrides a ready recovery');
+$blocked=$main->analyze($bars,'SOXL',$last,'account1',false);
+rc(!$blocked['plan']['ready']&&$blocked['plan']['status']==='blocked','profile leverage prohibition remains common');
 rc($main->analyze($future,'005930.KS',$last,'account1',false)===$a,'future appended daily bar cannot alter earlier analysis');
 // Production guard outcomes must survive an otherwise complete new pattern.
 $stale=$main->analyze($bars,'005930.KS',$last+145*3600,'account1',false);

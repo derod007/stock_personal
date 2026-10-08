@@ -1,5 +1,7 @@
 <?php
 // Static examples for layout checks; no account reads or writes.
+require __DIR__.'/../bin/bootstrap.php';
+require __DIR__.'/fixtures/trend_recovery_bars.php';
 require __DIR__.'/../bin/paper/Chrome.php';
 require __DIR__.'/../bin/paper/PatternPanel.php';
 require __DIR__.'/../bin/paper/ScorePanel.php';
@@ -22,6 +24,7 @@ paper_score_panel(['final_score'=>24,'base_score'=>24,'items'=>[
 ]],'표시 검사용 예시 · 실제 추천 아님');
 paper_pattern_panel(['basis'=>'completed_reference','plan'=>['pattern'=>'trend_pullback_v1','status'=>'context_wait','reason'=>'상위 추세 추가 확인 필요','diagnostics'=>['patterns'=>[
  'trend_pullback'=>['version'=>'trend_pullback_v1','status'=>'ready','reward_risk'=>2,'reason'=>'패턴 확인','gates'=>['rising_structure'=>true]],
+ 'trend_recovery'=>(new ChartEntryLab\TrendRecovery())->analyze(recovery_bars()),
  'breakout_retest'=>['version'=>'breakout_retest_v1','status'=>'await_retest','reason'=>'재지지 대기'],
 ]]]]);
 paper_close(); ?>

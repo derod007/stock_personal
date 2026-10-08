@@ -63,9 +63,9 @@ final class KrAmountScanner
             throw new \InvalidArgumentException('지원하지 않는 스캔 시장: ' . $market);
         }
         $profileId = $this->service->profile()->id;
-        // v18: completed-bar confirmed-retest plans (invalidate legacy buy-zone cache).
+        // v20: independent recovery pattern; old cached decisions cannot stand in for new rules.
         $cacheFile = sprintf(
-            '%s/kr_amount_scan_v19_%s_%s_%d.json',
+            '%s/kr_amount_scan_v20_%s_%s_%d.json',
             $this->cacheDir,
             $market,
             $profileId,

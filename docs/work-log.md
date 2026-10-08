@@ -179,6 +179,12 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 
 ---
 
+## 2026-10-08 09:55 · Cursor · 끝
+- 한 일: 샌디 글 차트를 저장소 이미지로 따로 올림
+- 파일: docs/fmkorea-10423117635-chart.png, docs/fmkorea-10423117635.html, docs/work-log.md
+- 커밋: 함
+- 롤백: 없음
+
 ## 2026-10-08 09:52 · Cursor · 끝
 - 한 일: 샌디 글 본문·차트·댓글을 HTML로 정리
 - 파일: docs/fmkorea-10423117635.html, docs/work-log.md

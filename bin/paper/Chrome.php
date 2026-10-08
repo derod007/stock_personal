@@ -64,7 +64,7 @@ function paper_ko(string $code): string
         'invalid_levels' => '가격이 맞지 않음',
         'cancelled_before_entry' => '진입 전 취소',
         'historical_revision' => '과거 가격이 바뀜',
-        'historical_revision_or_missing' => '과거 일봉이 바뀜',
+        'historical_revision_or_missing' => '과거 자료 변경 또는 누락',
         'future_quality_blocked' => '이후 봉 품질 차단',
         'input_hash_mismatch' => '원본이 다름',
         'unpriced_position' => '보유 가격 확인 불가',
@@ -125,6 +125,25 @@ function paper_ko(string $code): string
         'failed' => '실패',
         'running' => '실행 중',
         'halted' => '계좌 중단',
+        'saved' => '저장 완료',
+        'partial' => '일부 결과만 확인',
+        'eligible' => '연구 조건 통과',
+        'compared' => '비교 완료',
+        'excluded' => '추적 대상 제외',
+        'tracking' => '후속 추적 중',
+        'independent_blockers' => '다른 조건에서 차단',
+        'no_upper_candidate' => '위쪽 저항 후보 없음',
+        'analysis_symbol_mismatch' => '분석 종목 불일치',
+        'data_quality_blocked' => '가격 자료 확인 필요',
+        'top_collapse' => '고점 구조 붕괴',
+        'spike_dump' => '급등 후 급락',
+        'detailed_gates' => '세부 조건 기록 없음',
+        'nearest_resistance_target_comparison_v1' => '가장 가까운 저항 가격과 기존 목표 비교',
+        'intraday_preview' => '장중 관찰 · 마감 전',
+        'completed_audit' => '마감 분석 기록',
+        'manual_scan' => '수동 스캔',
+        'reward_risk' => '손익비',
+
     ];
     if (isset($map[$code])) {
         return $map[$code];
@@ -139,6 +158,27 @@ function paper_ko(string $code): string
     }
 
     return $code;
+}
+
+/** Display only: preserve stored precision up to three decimals, omit trailing zeroes. */
+function paper_number(mixed $value): string
+{
+    return is_numeric($value) ? rtrim(rtrim(number_format((float) $value, 3, '.', ','), '0'), '.') : '—';
+}
+
+function paper_prices(array $plan): string
+{
+    $html = '<dl class="price-plan">';
+    foreach (['entry'=>'진입가', 'stop'=>'손절가', 'target'=>'목표가'] as $key=>$label) {
+        $html .= '<div><dt>'.$label.'</dt><dd>'.paper_esc(paper_number($plan[$key] ?? null)).'</dd></div>';
+    }
+    return $html.'</dl>';
+}
+
+/** Translate compound status headings without changing the underlying records. */
+function paper_status_text(string $text): string
+{
+    return implode(' → ', array_map('paper_ko', explode(' → ', $text)));
 }
 
 /** @param array<int|string, mixed> $codes */
@@ -287,8 +327,10 @@ function paper_open(array $opts): void
   <meta name="color-scheme" content="dark">
   <title><?= paper_esc($title) ?></title>
   <link rel="stylesheet" href="assets/app.css">
+  <link rel="stylesheet" href="assets/readability.css?v=20261008">
+  <script src="assets/readability.js?v=20261008" defer></script>
 </head>
-<body>
+<body class="paper-app">
   <div class="bg" aria-hidden="true"></div>
   <main class="shell shell--wide">
     <header class="brand">
@@ -305,18 +347,27 @@ function paper_open(array $opts): void
         <a class="mode-toggle__link<?= $isKr ? ' is-active' : '' ?>" href="<?= paper_esc((string) $krHref) ?>"<?= $isKr ? ' aria-current="page"' : '' ?>>한국</a>
       </nav>
     </div>
-    <nav class="tabs paper-tabs" aria-label="모의 계좌 화면">
-      <a class="tabs__link<?= $on('account') ?>" href="paper.php?<?= paper_esc($q) ?>"<?= $now('account') ?>>기록</a>
-      <a class="tabs__link<?= $on('diagnostics') ?>" href="paper_diagnostics.php?<?= paper_esc($q) ?>"<?= $now('diagnostics') ?>>실행·추천</a>
-      <a class="tabs__link<?= $on('changes') ?>" href="paper_changes.php?<?= paper_esc($q) ?>"<?= $now('changes') ?>>오늘 변화</a>
-      <a class="tabs__link<?= $on('journey') ?>" href="paper_journey.php?<?= paper_esc($q) ?>"<?= $now('journey') ?>>진입 → 결과</a>
-      <a class="tabs__link<?= $on('trades') ?>" href="paper_trades.php?<?= paper_esc($q) ?>"<?= $now('trades') ?>>거래</a>
-      <a class="tabs__link<?= $on('weekly') ?>" href="paper_weekly.php?<?= paper_esc($q) ?>"<?= $now('weekly') ?>>주간</a>
-      <a class="tabs__link<?= $on('compare') ?>" href="paper_compare.php?experiment=<?= paper_esc($isKr ? 'kr-identity' : 'us-identity') ?>&amp;mode=<?= paper_esc($mode) ?>"<?= $now('compare') ?>>비교</a>
-      <a class="tabs__link<?= $on('entry') ?>" href="paper_entry.php?<?= paper_esc($q) ?>"<?= $now('entry') ?>>진입 조건</a>
-      <a class="tabs__link<?= $on('rr') ?>" href="paper_rr.php?<?= paper_esc($q) ?>"<?= $now('rr') ?>>탈락 로그</a>
-      <a class="tabs__link<?= $on('revisions') ?>" href="paper_revisions.php?<?= paper_esc($q) ?>"<?= $now('revisions') ?>>데이터 변경</a>
+    <nav class="paper-navigation" aria-label="모의 계좌 화면">
+      <?php foreach ([
+          '매일 확인'=>['account'=>'계좌 현황', 'changes'=>'오늘 변화', 'journey'=>'진입 확인 → 결과', 'trades'=>'계좌 거래', 'diagnostics'=>'실행 상태'],
+          '분석·연구'=>['weekly'=>'주간 요약', 'rr'=>'탈락 이유·연구', 'entry'=>'진입 조건 비교', 'compare'=>'전략 비교', 'revisions'=>'가격 자료 변경'],
+      ] as $group=>$items): ?>
+      <div class="paper-nav-group"><span><?= paper_esc($group) ?></span><div class="tabs paper-tabs">
+        <?php foreach ($items as $key=>$label): $href=$scripts[$key].'?'.($key==='compare'?'experiment='.rawurlencode($isKr?'kr-identity':'us-identity').'&mode='.rawurlencode($mode):$q); ?>
+        <a class="tabs__link<?= $on($key) ?>" href="<?= paper_esc($href) ?>"<?= $now($key) ?>><?= paper_esc($label) ?></a>
+        <?php endforeach ?>
+      </div></div>
+      <?php endforeach ?>
     </nav>
+    <header class="page-heading"><div><p class="page-eyebrow"><?= paper_esc(paper_account_name($account)) ?></p><h1><?= paper_esc($title) ?></h1></div>
+      <details class="reading-guide"><summary>화면 읽는 법</summary><dl>
+        <dt>진입 확인</dt><dd>분석 조건을 통과했다는 뜻입니다. 실제 주문이나 체결과 다릅니다.</dd>
+        <dt>개별 추천 모의 결과 / 계좌 거래</dt><dd>전자는 추천마다 따로 계산한 결과, 후자는 현금·보유 한도를 적용한 계좌 장부입니다.</dd>
+        <dt>손익비</dt><dd>손절까지의 손실에 비해 목표까지의 이익이 얼마나 큰지 나타냅니다. 1.5는 예상 이익이 예상 손실의 1.5배라는 뜻입니다.</dd>
+        <dt>완료봉 / 이후 5봉</dt><dd>장이 끝난 하루 가격 / 판정 다음 완료 일봉 5개입니다. 기록일 5일과 다릅니다.</dd>
+        <dt>—</dt><dd>자료가 없거나 아직 평가할 수 없습니다. 0원이나 0%가 아닙니다.</dd>
+      </dl></details>
+    </header>
 <?php
 }
 

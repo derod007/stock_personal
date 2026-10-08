@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 require __DIR__ . '/bin/bootstrap.php';
+require_once __DIR__ . '/bin/paper/Chrome.php';
 
 use ChartEntryLab\AccountProfile;
 use ChartEntryLab\CurrentQuoteClient;
@@ -250,6 +251,8 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
   <meta name="color-scheme" content="dark">
   <title><?= h($pageTitle) ?></title>
   <link rel="stylesheet" href="assets/app.css">
+  <link rel="stylesheet" href="assets/readability.css?v=20261008">
+  <script src="assets/readability.js?v=20261008" defer></script>
 </head>
 <body class="ui-mode-<?= h($uiMode) ?>" aria-busy="false">
   <div class="bg" aria-hidden="true"></div>
@@ -385,7 +388,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
               <dd>최근 1~3일 +20% 이상 급등한 뒤 고가를 절반 이상 반납한 자리입니다. 점수가 눌림처럼 보여도 중간 반등은 허공입니다. 리스트에서 지우지 않고 경고·감점하며, 신규 매수는 보류합니다.</dd>
             </div>
             <div>
-              <dt>테마냄새</dt>
+              <dt>테마 움직임 관찰</dt>
               <dd>테마가 아직 안 올라도 거래량이 터지고 장중 고가를 찍은 자리입니다. 시초가 추격이 아니라 구경·내려오면 관심입니다.</dd>
             </div>
             <div>
@@ -580,11 +583,11 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
               <strong class="mono"><?= (int) $scanBuyNowCount ?></strong>
             </div>
             <div class="scan-stat">
-              <span>테마냄새</span>
+              <span>테마 움직임 관찰</span>
               <strong class="mono"><?= (int) ($scanSummary['smell'] ?? 0) ?></strong>
             </div>
             <div class="scan-stat">
-              <span>구경만</span>
+              <span>관찰 전용</span>
               <strong class="mono"><?= (int) ($scanSummary['lagging'] ?? 0) ?></strong>
             </div>
             <div class="scan-stat">
@@ -759,7 +762,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
                             <?= h((string) ($rv['name'] ?? $rvYahoo)) ?>
                           </a>
                           <?php if (!empty($rv['lagging_theme'])): ?>
-                            <span class="badge badge--smell">구경만</span>
+                            <span class="badge badge--smell">관찰 전용</span>
                           <?php endif; ?>
                           <?php if (($rv['spike_dump_status'] ?? 'none') !== 'none'): ?>
                             <span class="badge badge--top-risk">급등후급락</span>
@@ -788,10 +791,10 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
             <div class="sector-filters" id="sector-filters" role="group" aria-label="업종 필터">
               <button type="button" class="sector-chip is-active" data-sector="all" aria-pressed="true">전체</button>
               <?php if ((int) ($scanSummary['lagging'] ?? 0) > 0): ?>
-                <button type="button" class="sector-chip sector-chip--smell" data-filter="lagging" aria-pressed="false">구경만 (<?= (int) $scanSummary['lagging'] ?>)</button>
+                <button type="button" class="sector-chip sector-chip--smell" data-filter="lagging" aria-pressed="false">관찰 전용 (<?= (int) $scanSummary['lagging'] ?>)</button>
               <?php endif; ?>
               <?php if ((int) ($scanSummary['smell'] ?? 0) > 0): ?>
-                <button type="button" class="sector-chip sector-chip--smell" data-filter="smell" aria-pressed="false">테마냄새 (<?= (int) $scanSummary['smell'] ?>)</button>
+                <button type="button" class="sector-chip sector-chip--smell" data-filter="smell" aria-pressed="false">테마 관찰 (<?= (int) $scanSummary['smell'] ?>)</button>
               <?php endif; ?>
               <?php if ((int) ($scanSummary['spike_dump'] ?? 0) > 0): ?>
                 <button type="button" class="sector-chip sector-chip--top-risk" data-filter="spike-dump" aria-pressed="false">급등후급락 (<?= (int) $scanSummary['spike_dump'] ?>)</button>
@@ -806,16 +809,16 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
             <table class="scan-table" id="scan-results">
               <thead>
                 <tr>
-                  <th>대금순위</th>
+                  <th>거래대금 순위</th>
                   <th>종목</th>
                   <th>업종</th>
                   <th>현재가</th>
                   <th>등락</th>
                   <th>대금</th>
                   <th>구조 점수</th>
-                  <th>진입</th>
-                  <th class="scan-col-action">행동</th>
-                  <th class="scan-col-entry">신규진입</th>
+                  <th>분석 상태</th>
+                  <th class="scan-col-action">판단 요약</th>
+                  <th class="scan-col-entry">가격 계획·확인할 내용</th>
                 </tr>
               </thead>
               <tbody>
@@ -904,7 +907,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
                       <?php endif; ?>
                     </td>
                     <td class="scan-col-action"><?= h((string) ($sr['action_label'] ?? $sr['action'] ?? '—')) ?></td>
-                    <td class="scan-entry scan-col-entry"><?= h($entryText) ?><br><strong><?= h($view['note']) ?></strong><br><small><?= h($view['pattern_label']) ?></small><br><span><?= h($view['order_note']) ?></span><?php if (($sr['analysis_mode'] ?? '') === 'completed_fallback'): ?><br><small><?= h($sr['analysis_note'] ?? '장중 자료 확인 실패') ?></small><?php endif; ?></td>
+                    <td class="scan-entry scan-col-entry"><strong class="scan-next"><?= h($view['note']) ?></strong><?php if ($rec): ?><?= paper_prices($sr['order_plan']) ?><p class="scan-plan-note">손익비 <?= h(paper_number($sr['order_plan']['reward_risk']??null)) ?> · 실제 주문·체결 아님</p><?php else: ?><p class="scan-plan-note"><?= h($view['order_note']) ?></p><?php endif; ?><?php if (($sr['analysis_mode'] ?? '') === 'completed_fallback'): ?><p class="scan-data-warning"><?= h($sr['analysis_note'] ?? '장중 자료 확인 실패') ?></p><?php endif; ?><details class="inline-details"><summary>가격·판정 근거</summary><p><?= h($entryText) ?></p><p><?= h($view['pattern_label']) ?></p><?php if ($rec): ?><p><?= h($view['order_note']) ?></p><?php endif; ?></details></td>
                   </tr>
                 <?php endforeach; ?>
               </tbody>

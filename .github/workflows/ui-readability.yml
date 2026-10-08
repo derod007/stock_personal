@@ -1,0 +1,23 @@
+name: UI readability checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  display:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          php tests/ui_readability.php
+          php tests/ui_preview.php > /tmp/ui-preview.html
+          php -S 127.0.0.1:8099 > /tmp/ui-server.log 2>&1 &
+      - run: npm install --prefix "$RUNNER_TEMP/ui-check" playwright@1.58.2
+      - run: |
+          export NODE_PATH="$RUNNER_TEMP/ui-check/node_modules"
+          export CHROME_BIN="$(command -v google-chrome)"
+          node tests/ui_readability.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ui-desktop-mobile
+          path: /tmp/ui-screens

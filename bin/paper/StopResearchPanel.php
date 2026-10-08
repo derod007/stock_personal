@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
+require_once __DIR__.'/Chrome.php';
 function paper_stop_research_panel(string $state,string $id):void
 {
     if(!preg_match('/^[a-z0-9_-]{1,64}$/',$id))throw new InvalidArgumentException('Invalid account');
-    $e=static fn($v)=>htmlspecialchars((string)$v,ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8');
+    $e=static fn($v)=>htmlspecialchars(paper_status_text((string)$v),ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8');
     $n=static fn($v)=>is_numeric($v)?number_format((float)$v,3):'—';
     echo '<section class="paper-card"><h2>눌림 저점 손절 비교 연구</h2><p>운영 조건은 그대로입니다. 진입가·목표가·유효기간을 고정하고 손절만 비교합니다. 확인 완료 사례와 단일 조건 제거 가정은 합산하지 않습니다. 현재 공식 연구이며 과거 코드 버전 검증은 아닙니다.</p>';
     $file=$state.'/stop-research/'.$id.'/latest.json';

@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
+require_once __DIR__.'/Chrome.php';
 function paper_target_comparison_panel(string $state,string $id):void
 {
     if(!preg_match('/^[a-z0-9_-]{1,64}$/',$id))throw new InvalidArgumentException('Invalid account');
-    $e=static fn($s)=>htmlspecialchars((string)$s,ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8');
+    $e=static fn($s)=>htmlspecialchars(paper_status_text((string)$s),ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8');
     $n=static fn($v)=>is_numeric($v)?number_format((float)$v,3):'—';
     $labels=['compared'=>'비교 완료','independent_blockers'=>'기존 조건 차단','no_upper_candidate'=>'상단 후보 없음','invalid_levels'=>'가격 관계 부적합',
         'rejected_rr'=>'손익비 미달','context_wait'=>'상위 추세 보류','context_unavailable'=>'추세 근거 부족','eligible'=>'모의 진입 조건 통과',

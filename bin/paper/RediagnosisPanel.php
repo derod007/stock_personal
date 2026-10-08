@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+require_once __DIR__.'/Chrome.php';
 function paper_rediagnosis_load(string $state,string $id):?array
 {
     if(!preg_match('/^[a-z0-9_-]{1,64}$/',$id))throw new InvalidArgumentException('Invalid account');
@@ -10,7 +11,7 @@ function paper_rediagnosis_load(string $state,string $id):?array
 }
 function paper_rediagnosis_panel(?array $report,string $id):void
 {
-    $e=static fn($v)=>htmlspecialchars((string)$v,ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8');
+    $e=static fn($v)=>htmlspecialchars(paper_status_text((string)$v),ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8');
     $date=static fn($t)=>$t?(new DateTimeImmutable('@'.$t))->setTimezone(new DateTimeZone('Asia/Seoul'))->format('Y-m-d H:i'):'—';
     echo '<section class="paper-card"><h2>기존 감사 로그 일괄 재진단</h2>';
     echo '<p>프로젝트 폴더에서 실행: <code>php bin/paper_rediagnose.php --account='.$e($id).'</code></p>';

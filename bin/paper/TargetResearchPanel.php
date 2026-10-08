@@ -1,10 +1,11 @@
 <?php
 declare(strict_types=1);
+require_once __DIR__.'/Chrome.php';
 function paper_target_chart(array $r,?int $recent=80):string
 {
     $bars=$r['bars']??[];if(!$bars)return '';
     if($recent!==null)$bars=array_slice($bars,-$recent);
-    $e=static fn($s)=>htmlspecialchars((string)$s,ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8');
+    $e=static fn($s)=>htmlspecialchars(paper_status_text((string)$s),ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8');
     $date=static fn($t)=>(new DateTimeImmutable('@'.$t))->setTimezone(new DateTimeZone('Asia/Seoul'))->format('Y-m-d');
     $levels=['진입'=>$r['entry'],'손절'=>$r['stop'],'기존 목표'=>$r['target']];
     if($r['nearest_upper_resistance'])$levels['가장 가까운 상단 후보']=$r['nearest_upper_resistance']['price'];
@@ -25,7 +26,7 @@ function paper_target_chart(array $r,?int $recent=80):string
 function paper_target_research_panel(string $state,string $id):void
 {
     if(!preg_match('/^[a-z0-9_-]{1,64}$/',$id))throw new InvalidArgumentException('Invalid account');
-    $e=static fn($v)=>htmlspecialchars((string)$v,ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8');
+    $e=static fn($v)=>htmlspecialchars(paper_status_text((string)$v),ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8');
     $n=static fn($v)=>is_numeric($v)?number_format((float)$v,3):'—';
     $date=static fn($t)=>(new DateTimeImmutable('@'.$t))->setTimezone(new DateTimeZone('Asia/Seoul'))->format('Y-m-d');
     $labels=['closed_above'=>'종가 돌파','closed_at'=>'종가 일치','wick_above_close_below'=>'장중 돌파·종가 미회복','touched_close_below'=>'고가 접촉·종가 미회복','below'=>'고점 아래',

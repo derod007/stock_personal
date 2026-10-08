@@ -23,6 +23,11 @@ $lower=$bars;$lower[67]['low']=88.0;$lower[67]['close']=89.0;
 rc($engine->analyze($lower)['status']==='invalidated','close below reference low invalidates after breakout');
 $pre=$bars;$pre[64]['close']=99.0;$pre[65]['close']=99.0;$pre[65]['low']=98.0;$pre[66]['close']=99.0;$pre[66]['low']=98.0;$pre[67]['close']=99.0;$pre[68]['close']=99.0;$pre[68]['low']=98.0;
 rc(!$engine->analyze($pre)['ready'],'higher low preceding breakout does not complete the pattern');
+$pending=$bars;$pending[69]['close']=103.0;
+$touch=$pending[69];$touch['available_at']+=86400;$touch['time']=$touch['available_at'];$touch['open']=103.0;$touch['high']=111.0;$touch['low']=98.0;$touch['close']=110.0;
+rc(!$engine->analyze([...$pending,$touch])['ready'],'touching an already confirmed higher low requires a new pivot before entry');
+$broken=$bars;$broken[40]['close']=131.0;$broken[40]['high']=132.0;
+rc($engine->analyze($broken)['target']===132.0,'a previously close-broken overhead pivot is not recycled as target');
 $noTarget=recovery_bars(110);
 rc($engine->analyze($noTarget)['status']==='no_upper_target','no confirmed upper resistance means no invented target');
 $rr=$engine->analyze(recovery_bars(116));
@@ -39,7 +44,7 @@ rc(isset($universe['005930.KS']),'independent ready pattern reaches operational 
 $riskBars=$bars;$riskBars[48]['high']=125.0;
 $risk=$main->analyze($riskBars,'005930.KS',$last,'account1',false);
 rc($risk['plan']['diagnostics']['patterns']['trend_recovery']['ready']&&!$risk['plan']['ready']&&$risk['plan']['status']==='risk_blocked','actual top-collapse guard overrides a ready recovery');
-$blocked=$main->analyze($bars,'SOXL',$last,'account1',false);
+$blocked=$main->analyze($bars,'SOXS',$last,'account1',false);
 rc(!$blocked['plan']['ready']&&$blocked['plan']['status']==='blocked','profile leverage prohibition remains common');
 rc($main->analyze($future,'005930.KS',$last,'account1',false)===$a,'future appended daily bar cannot alter earlier analysis');
 // Production guard outcomes must survive an otherwise complete new pattern.

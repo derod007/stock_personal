@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use ChartEntryLab\NaverDailyQuotes;
 use ChartEntryLab\PaperJournal;
+require_once __DIR__.'/YahooSessionEvidence.php';
 
 /**
  * Yahoo 일봉의 한국 종목을 네이버 정규장(일별 시세) 시/고/저/종·거래량으로 덮는다.
@@ -43,7 +44,7 @@ final class PaperNaverSessionPatch
     /**
      * @return array{patched:int,skipped:int,overlayed:int}
      */
-    public static function applyDirectory(string $dir, NaverDailyQuotes $naver): array
+    public static function applyDirectory(string $dir, NaverDailyQuotes $naver, ?callable $fetchQuotes = null, ?int $now = null): array
     {
         $sourcesFile = $dir . '/sources.json';
         if (!is_file($sourcesFile)) {
@@ -51,6 +52,8 @@ final class PaperNaverSessionPatch
         }
         /** @var list<array<string,mixed>> $sources */
         $sources = json_decode((string) file_get_contents($sourcesFile), true, 512, JSON_THROW_ON_ERROR);
+        $now ??= time();
+        $fallbacks = [];
         $patched = 0;
         $skipped = 0;
         $overlayed = 0;
@@ -65,10 +68,22 @@ final class PaperNaverSessionPatch
                 throw new RuntimeException('Korean history file missing for ' . $symbol);
             }
             /** @var list<array<string,mixed>> $bars */
-            $bars = json_decode((string) file_get_contents($file), true, 512, JSON_THROW_ON_ERROR);
-            $quotes = $naver->recent($symbol, 1, false);
+            $bytes = (string) file_get_contents($file);
+            if(!hash_equals($source['sha256']??'',hash('sha256',$bytes)))throw new RuntimeException('Collected history hash mismatch: '.$symbol);
+            $bars = json_decode($bytes, true, 512, JSON_THROW_ON_ERROR);
+            $quotes = $fetchQuotes ? $fetchQuotes($symbol) : $naver->recent($symbol, 1, false);
             if ($quotes === []) {
-                throw new RuntimeException('Naver regular-session quotes unavailable for ' . $symbol);
+                try {
+                    $provider=$source['provider_file']??'';
+                    if(!is_file($provider))throw new RuntimeException('Yahoo provider evidence missing');
+                    $session=PaperYahooSessionEvidence::verify($source,$bars,(string)file_get_contents($provider),$now);
+                } catch (Throwable $e) {
+                    throw new RuntimeException('Naver regular-session quotes unavailable for '.$symbol.'; Yahoo fallback rejected: '.$e->getMessage(),0,$e);
+                }
+                // Preserve bytes, source hash and original OHLCV; no price is synthesized.
+                $source['naver_patch']=['status'=>'verified_yahoo_preserved','reason'=>'naver_quotes_unavailable','session'=>$session];
+                $fallbacks[]=['symbol'=>$symbol,'session'=>$session,'reason'=>'naver_quotes_unavailable'];
+                continue;
             }
             krsort($quotes);
             $quotes = array_slice($quotes, 0, 2, true);
@@ -87,7 +102,7 @@ final class PaperNaverSessionPatch
         unset($source);
         file_put_contents($sourcesFile, json_encode($sources, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 
-        return ['patched' => $patched, 'skipped' => $skipped, 'overlayed' => $overlayed];
+        return ['patched' => $patched, 'skipped' => $skipped, 'overlayed' => $overlayed, 'fallbacks'=>$fallbacks];
     }
 
     /**

@@ -76,8 +76,12 @@ def update(config_path, state_dir, runner=subprocess.run):
             if any(re.fullmatch(r"\d{6}(?:\.(?:KS|KQ))?", str(symbol), re.I) for symbol in names):
                 record["stage"] = "naver_session"
                 save_record(log, record)
-                runner(["php", str(ROOT / "bin/paper_patch_naver_daily.php"), "--dir=" + tmp],
-                       cwd=ROOT, env=env, check=True, timeout=300)
+                patch = runner(["php", str(ROOT / "bin/paper_patch_naver_daily.php"), "--dir=" + tmp],
+                               cwd=ROOT, env=env, check=True, timeout=300,
+                               capture_output=True, text=True, encoding="utf-8", errors="replace")
+                if getattr(patch, "stdout", None):
+                    record["naver_session"] = json.loads(patch.stdout)
+                    save_record(log, record)
             extra = []
             if universe == "kr_amount_scan":
                 symbols_file = pathlib.Path(tmp) / "runtime-symbols.json"
@@ -102,6 +106,7 @@ def update(config_path, state_dir, runner=subprocess.run):
         if isinstance(exc, subprocess.CalledProcessError):
             record["exit_code"] = exc.returncode
             if exc.stderr:
+                record["error_detail"] = str(exc.stderr)[-4000:]
                 print(exc.stderr, file=sys.stderr)
         print("Paper update failed at " + record["stage"] + ": " + type(exc).__name__, file=sys.stderr)
         return 1

@@ -21,7 +21,7 @@ final class PaperEntryJourney
             if(!is_array($row))continue;
             // Preserve all final statuses so a later close comparison can include a lost signal.
             $rows[]=array_intersect_key($row,array_flip(['yahoo','name','score','price','entry_status','order_ready',
-                'order_plan','entry_candidate','analysis_mode','analysis_note','quote_fetched_at','reason','new_entry_sentence']));
+                'order_plan','pattern_evidence','entry_candidate','analysis_mode','analysis_note','quote_fetched_at','reason','new_entry_sentence']));
         }
         return ['schema'=>1,'execution'=>'manual_scan','fetched_at'=>$report['fetched_at']??null,
             'profile'=>$report['profile']??null,'market'=>$report['market']??null,'rows'=>$rows];

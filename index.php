@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 require __DIR__ . '/bin/bootstrap.php';
 require_once __DIR__ . '/bin/paper/Chrome.php';
+require_once __DIR__ . '/bin/paper/PatternPanel.php';
+require_once __DIR__ . '/bin/paper/ScorePanel.php';
 
 use ChartEntryLab\AccountProfile;
 use ChartEntryLab\CurrentQuoteClient;
@@ -251,7 +253,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
   <meta name="color-scheme" content="dark">
   <title><?= h($pageTitle) ?></title>
   <link rel="stylesheet" href="assets/app.css">
-  <link rel="stylesheet" href="assets/readability.css?v=20261008">
+  <link rel="stylesheet" href="assets/readability.css?v=20261008b">
   <script src="assets/readability.js?v=20261008" defer></script>
 </head>
 <body class="ui-mode-<?= h($uiMode) ?>" aria-busy="false">
@@ -1173,6 +1175,9 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
             <code class="action__code"><?= h((string) $proposal['action']) ?></code>
           <?php endif; ?>
         </p>
+        <?php paper_score_panel($scoreBreakdown, (string) ($proposal['analysis_note'] ?? $analysisLabel)); ?>
+        <?php paper_pattern_panel(\ChartEntryLab\PatternEvidence::capture($proposal)); ?>
+
         <?php
           $smellStatusUi = (string) ($proposal['theme_smell_status'] ?? 'none');
           $smellLabelUi = (string) ($proposal['theme_smell_label'] ?? '');
@@ -1453,62 +1458,6 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
           </article>
 
           <?php if ($isAnalyze): ?>
-            <?php if ($scoreBreakdown !== null && $scoreItems !== []): ?>
-              <article class="info-card score-detail-card">
-                <div class="score-detail__head">
-                  <h3 class="info-card__title">점수 상세</h3>
-                  <strong class="score-detail__total">
-                    <?= h((string) ($scoreBreakdown['final_score'] ?? $proposal['score'] ?? '—')) ?> / 100
-                  </strong>
-                </div>
-                <p class="score-detail__formula">
-                  기본 <?= h((string) ($scoreBreakdown['base_score'] ?? 0)) ?> / <?= h((string) ($scoreBreakdown['base_max'] ?? 100)) ?>
-                  <span>+</span>
-                  불법과외 <?= h(sprintf('%+d', (int) ($scoreBreakdown['lesson_bonus'] ?? 0))) ?>
-                  <span>+</span>
-                  가로 지지 <?= h(sprintf('%+d', (int) ($scoreBreakdown['level_bonus'] ?? 0))) ?>
-                  <span>+</span>
-                  고점판독 <?= h(sprintf('%+d', (int) ($scoreBreakdown['top_pattern_adjustment'] ?? 0))) ?>
-                  <span>+</span>
-                  급등후급락 <?= h(sprintf('%+d', (int) ($scoreBreakdown['spike_dump_adjustment'] ?? 0))) ?>
-                  <?php if ((int) ($scoreBreakdown['cap_adjustment'] ?? 0) !== 0): ?>
-                    <span>→ 100점 상한 <?= h(sprintf('%+d', (int) $scoreBreakdown['cap_adjustment'])) ?></span>
-                  <?php endif; ?>
-                </p>
-                <div class="score-detail__list">
-                  <?php foreach ($scoreItems as $item): ?>
-                    <?php
-                      $earned = (int) ($item['earned'] ?? 0);
-                      $max = (int) ($item['max'] ?? 0);
-                      $isAdjustment = array_key_exists('min', $item)
-                          || in_array((string) ($item['key'] ?? ''), ['lesson1', 'horizontal_support', 'top_pattern', 'spike_dump'], true);
-                      $scoreText = $isAdjustment
-                          ? sprintf('%+d점', $earned)
-                          : sprintf('%d / %d점', $earned, $max);
-                      if (($item['key'] ?? '') === 'lesson1') {
-                          $scoreText .= sprintf(' (범위 %+d~+%d)', (int) ($item['min'] ?? -15), $max);
-                      } elseif (($item['key'] ?? '') === 'horizontal_support') {
-                          $scoreText .= ' (최대 +8)';
-                      } elseif (($item['key'] ?? '') === 'top_pattern') {
-                          $scoreText .= sprintf(' (범위 %+d~+%d)', (int) ($item['min'] ?? -22), $max);
-                      } elseif (($item['key'] ?? '') === 'spike_dump') {
-                          $scoreText .= sprintf(' (범위 %+d~+%d)', (int) ($item['min'] ?? -16), $max);
-                      }
-                    ?>
-                    <div class="score-detail__item" data-status="<?= h((string) ($item['status'] ?? 'neutral')) ?>">
-                      <div class="score-detail__item-head">
-                        <strong><?= h((string) ($item['label'] ?? '')) ?></strong>
-                        <span class="mono"><?= h($scoreText) ?></span>
-                      </div>
-                      <p><?= h((string) ($item['detail'] ?? '')) ?></p>
-                    </div>
-                  <?php endforeach; ?>
-                </div>
-                <p class="info-card__foot">
-                  기본 점수는 100점 만점입니다. 불법과외·가로 지지·고점판독 가감 후 최종 점수는 0~100으로 제한됩니다.
-                </p>
-              </article>
-            <?php endif; ?>
 
             <article class="info-card">
               <h3 class="info-card__title">패턴 · 보조</h3>

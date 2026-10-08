@@ -178,6 +178,7 @@ final class KrAmountScanner
                 $row['entry_candidate'] = $result['proposal']['price_candidate'] ?? null;
                 $row['order_ready'] = !empty($result['proposal']['new_entry']['order_ready']);
                 $row['order_plan'] = array_intersect_key($result['proposal']['trade_plan'] ?? [], array_flip(['status','ready','confirmation_status','entry','stop','target','reward_risk','signal_at','order_valid_bars']));
+                $row['pattern_evidence'] = PatternEvidence::capture($result['proposal'] ?? []);
             }
 
             if (!$result['ok']) {

@@ -327,7 +327,7 @@ function paper_open(array $opts): void
   <meta name="color-scheme" content="dark">
   <title><?= paper_esc($title) ?></title>
   <link rel="stylesheet" href="assets/app.css">
-  <link rel="stylesheet" href="assets/readability.css?v=20261008">
+  <link rel="stylesheet" href="assets/readability.css?v=20261008b">
   <script src="assets/readability.js?v=20261008" defer></script>
 </head>
 <body class="paper-app">

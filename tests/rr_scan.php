@@ -28,6 +28,7 @@ namespace ChartEntryLab {
 }
 namespace {
     require __DIR__.'/../src/ScanEntryView.php';
+    require __DIR__.'/../src/PatternEvidence.php';
     require __DIR__.'/../src/KrAmountScanner.php';
     $tmp=sys_get_temp_dir().'/rr-scan-'.bin2hex(random_bytes(4));
     $leaders=new ChartEntryLab\KrAmountLeadersClient();$snap=new ChartEntryLab\ScanSnapshot();

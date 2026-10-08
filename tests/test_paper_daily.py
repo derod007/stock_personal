@@ -153,7 +153,7 @@ class DailyTests(unittest.TestCase):
         root=pathlib.Path(__file__).resolve().parents[1]
         script=(root/'bin/run_paper_daily.cmd').read_text()
         block=script.rsplit('if "!RUN_KR!"=="1" (',1)[1]
-        self.assertIn('bin\\paper_daily.py --config=config\\paper-kr.json',block)
+        self.assertIn('bin\\paper_daily.py --config=config\\paper-kr-recovery-v1.json',block)
         self.assertNotIn('paper_compare_daily.py',block)
         self.assertNotIn('paper_research_daily.py',script)
         self.assertNotIn('paper_entry_daily.py',script)

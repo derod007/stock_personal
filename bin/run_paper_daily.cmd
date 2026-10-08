@@ -76,7 +76,7 @@ if "!RUN_US!"=="1" (
   set "US_EC=!ERRORLEVEL!"
 )
 if "!RUN_KR!"=="1" (
-  "%PYTHON%" bin\paper_daily.py --config=config\paper-kr.json >> "%LOG%" 2>&1
+  "%PYTHON%" bin\paper_daily.py --config=config\paper-kr-recovery-v1.json >> "%LOG%" 2>&1
   set "KR_EC=!ERRORLEVEL!"
 )
 echo ===== paper compare daily end US=!US_EC! KR=!KR_EC! %DATE% %TIME% =====>> "%LOG%"

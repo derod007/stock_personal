@@ -8,6 +8,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
+          php tests/ui_readability.php
+          node --check assets/readability.js
+          php -l paper_rr.php
+          php -l paper.php
           php -l bin/paper/EntryJourney.php
           php -l paper_journey.php
           php tests/entry_journey.php

@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
+require_once __DIR__.'/Chrome.php';
 require_once __DIR__.'/EnvelopeStore.php';
 function paper_envelope_research_panel(string $state,string $id):void
 {
-    $e=fn($v)=>htmlspecialchars((string)$v,ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8');
+    $e=fn($v)=>htmlspecialchars(paper_status_text((string)$v),ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8');
     $num=fn($v)=>is_numeric($v)?number_format((float)$v,2):'—';
     $date=fn($v)=>$v?(new DateTimeImmutable('@'.$v))->setTimezone(new DateTimeZone('Asia/Seoul'))->format('Y-m-d H:i'):'—';
     $labels=['evaluated'=>'관찰 가능','insufficient_history'=>'240봉 미만','quality_blocked'=>'일봉 품질 보류',

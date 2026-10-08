@@ -100,48 +100,38 @@ paper_open(['title' => '탈락 로그·지정가 비교', 'page' => 'rr', 'accou
 $q = 'account=' . rawurlencode($id) . '&mode=' . rawurlencode($mode);
 ?>
 <p class="paper-note">운영 매수에는 넣지 않습니다. 확인 후 손익비 1.5 미만인 종목만 연구 지정가 후보고, 위험·추세 차단이 있으면 제외합니다. 지정가 접촉은 체결 보장이 아니고, 아래 수익률은 계좌 한도를 적용하지 않은 개별 거래입니다.</p>
-<?php if ($mode === 'forward' && !$preview): ?>
-<p><a href="?<?= rh($q) ?>&amp;envelope_research=1">엔벨로프 눌림 관찰 연구 보기</a></p>
-<?php if (($_GET['envelope_research'] ?? '') === '1') paper_envelope_research_panel(dirname($dir, 2), $id); ?>
-<p><a href="?<?= rh($q) ?>&amp;target_tracking=1">누적 목표가 비교 연구 보기</a></p>
-<?php if (($_GET['target_tracking'] ?? '') === '1') paper_target_tracking_panel(dirname($dir, 2), $id); ?>
-<p><a href="?<?= rh($q) ?>&amp;target_comparison=1">돌파 종목 목표가 모의 비교 보기</a></p>
-<?php if (($_GET['target_comparison'] ?? '') === '1') {
-    try { paper_target_comparison_panel(dirname($dir, 2), $id); }
-    catch (Throwable $e) { echo '<p>목표 비교 읽기 실패: '.rh($e->getMessage()).'</p>'; }
-} ?>
-<p><a href="?<?= rh($q) ?>&amp;target_research=1">목표가 산정 근거 진단 보기</a></p>
-<?php if (($_GET['target_research'] ?? '') === '1') {
-    try { paper_target_research_panel(dirname($dir, 2), $id); }
-    catch (Throwable $e) { echo '<p>목표가 진단 읽기 실패: '.rh($e->getMessage()).'</p>'; }
-} ?>
-<p><a href="?<?= rh($q) ?>&amp;stop_research=1">눌림 저점 손절 비교 연구 보기</a></p>
-<?php if (($_GET['stop_research'] ?? '') === '1') {
-    try { paper_stop_research_panel(dirname($dir, 2), $id); }
-    catch (Throwable $e) { echo '<p>손절 연구 읽기 실패: '.rh($e->getMessage()).'</p>'; }
-} ?>
-<p><a href="?<?= rh($q) ?>&amp;condition_research=1">단일 조건 가정 손익비·체결 연구 보기</a></p>
-<?php if (($_GET['condition_research'] ?? '') === '1') {
-    try { paper_condition_research_panel(dirname($dir, 2), $id); }
-    catch (Throwable $e) { echo '<p>연구 결과 읽기 실패: '.rh($e->getMessage()).'</p>'; }
-} ?>
-<p><a href="?<?= rh($q) ?>&amp;rediagnosis=1">기존 감사 로그 일괄 재진단 결과 보기</a></p>
-<?php if (($_GET['rediagnosis'] ?? '') === '1') {
-    try { paper_rediagnosis_panel(paper_rediagnosis_load(dirname($dir, 2), $id), $id); }
-    catch (Throwable $e) { echo '<p>재진단 결과 읽기 실패: '.rh($e->getMessage()).'</p>'; }
-} ?>
-<?php endif; ?>
 <?php if (!$preview): ?>
-<p><a href="?<?= rh($q) ?>&amp;review=1">최근 5개 기록일 진단 보기</a></p>
-<?php endif; ?>
-<?php if (!$preview && ($_GET['review'] ?? '') === '1'): ?>
-<details open><summary>최근 5개 기록일 진단 보기</summary>
+<nav class="paper-research-menu" aria-label="탈락 분석과 연구 선택"><h2 class="paper-section-title">어떤 내용을 확인할까요?</h2><div class="paper-research-links">
+<?php foreach ([
+    'review'=>'최근 5개 기록일 진단', 'target_tracking'=>'누적 목표가 비교',
+    'target_comparison'=>'돌파 종목 목표 비교', 'target_research'=>'목표가 산정 근거',
+    'stop_research'=>'손절 가격 비교', 'condition_research'=>'조건 하나를 바꾼 연구',
+    'envelope_research'=>'엔벨로프 눌림 연구', 'rediagnosis'=>'과거 기록 재진단',
+] as $key=>$label): if ($mode !== 'forward' && $key !== 'review') continue; ?>
+<a href="?<?= rh($q) ?>&amp;<?= rh($key) ?>=1"<?= ($_GET[$key]??'')==='1'?' aria-current="page"':'' ?>><?= rh($label) ?></a>
+<?php endforeach ?></div></nav>
 <?php
-try { paper_rejection_review_panel(PaperRejectionReview::load($dir, PaperFollowup::load(dirname($dir, 2), $id))); }
-catch (Throwable $e) { echo '<p>최근 진단을 읽지 못했습니다: '.rh($e->getMessage()).'</p>'; }
+if (($_GET['review']??'') === '1') {
+    try { paper_rejection_review_panel(PaperRejectionReview::load($dir, PaperFollowup::load(dirname($dir, 2), $id))); }
+    catch (Throwable $e) { echo '<p role="alert">최근 진단을 읽지 못했습니다: '.rh($e->getMessage()).'</p>'; }
+}
+if ($mode === 'forward') {
+    foreach ([
+        'envelope_research'=>'paper_envelope_research_panel', 'target_tracking'=>'paper_target_tracking_panel',
+        'target_comparison'=>'paper_target_comparison_panel', 'target_research'=>'paper_target_research_panel',
+        'stop_research'=>'paper_stop_research_panel', 'condition_research'=>'paper_condition_research_panel',
+    ] as $key=>$render) {
+        if (($_GET[$key]??'') !== '1') continue;
+        try { $render(dirname($dir, 2), $id); }
+        catch (Throwable $e) { echo '<p role="alert">연구 결과 읽기 실패: '.rh($e->getMessage()).'</p>'; }
+    }
+    if (($_GET['rediagnosis']??'') === '1') {
+        try { paper_rediagnosis_panel(paper_rediagnosis_load(dirname($dir, 2), $id), $id); }
+        catch (Throwable $e) { echo '<p role="alert">재진단 결과 읽기 실패: '.rh($e->getMessage()).'</p>'; }
+    }
+}
+endif;
 ?>
-</details>
-<?php endif; ?>
 <?php if ($files !== []): ?>
 <form class="paper-filter" method="get">
   <input type="hidden" name="account" value="<?= rh($id) ?>">
@@ -161,13 +151,11 @@ catch (Throwable $e) { echo '<p>최근 진단을 읽지 못했습니다: '.rh($e
 <section class="panel">
 <h2 class="paper-section-title">종목별 탈락</h2>
 <div class="scan-table-wrap"><table class="scan-table">
-<thead><tr><th>종목</th><th>패턴</th><th>원래 상태</th><th>최종 상태</th><th>탈락 사유</th><th>미충족</th><th>다른 차단</th><th>확인가</th><th>손익비</th><th>RR 1.5 지정가</th><th>지정가 손익비</th></tr></thead>
+<thead><tr><th>종목·패턴</th><th>최종 판정</th><th>탈락 이유·상세 근거</th><th>당시 확인 가격</th><th>연구 지정가</th></tr></thead>
 <tbody>
 <?php foreach ($rows as $row): ?>
 <tr>
-  <td><?= rh($row['name']) ?></td>
-  <td><?= rh(paper_ko($row['pattern'])) ?></td>
-  <td><?= rh(paper_ko($row['raw_status'])) ?></td>
+  <td><strong><?= rh($row['name']) ?></strong><span class="scan-code"><?= rh(paper_ko($row['pattern'])) ?></span></td>
   <td><?= rh(paper_ko($row['final_status'])) ?></td>
   <td><?php
     $why = trim((string) ($row['why'] ?? ''));
@@ -178,13 +166,13 @@ catch (Throwable $e) { echo '<p>최근 진단을 읽지 못했습니다: '.rh($e
         $why .= ' · ' . $finalReason;
     }
     echo rh($why !== '' ? $why : '—');
-  ?></td>
-  <td><?= rh($row['missing'] !== '' ? $row['missing'] : '—') ?></td>
-  <td><?= rh($row['blockers'] !== '' ? $row['blockers'] : ($row['included'] ? '없음' : '—')) ?></td>
-  <td class="mono"><?= rh(rnum($row['entry'])) ?></td>
-  <td class="mono"><?= rh(is_numeric($row['rr']) ? (string) $row['rr'] : '—') ?></td>
-  <td class="mono"><?= rh(rnum($row['limit'])) ?></td>
-  <td class="mono"><?= rh(is_numeric($row['limit_rr']) ? number_format((float) $row['limit_rr'], 3) : '—') ?></td>
+  ?><details class="inline-details"><summary>미충족 조건·추가 차단 보기</summary>
+  <p>패턴 판정: <?= rh(paper_ko($row['raw_status'])) ?></p>
+  <p>미충족: <?= rh($row['missing'] !== '' ? $row['missing'] : '—') ?></p>
+  <p>추가 차단: <?= rh($row['blockers'] !== '' ? $row['blockers'] : ($row['included'] ? '없음' : '—')) ?></p>
+  </details></td>
+  <td class="mono"><?= rh(rnum($row['entry'])) ?><span class="scan-code">손익비 <?= rh(paper_number($row['rr'])) ?></span></td>
+  <td class="mono"><?= rh(rnum($row['limit'])) ?><span class="scan-code">손익비 <?= rh(paper_number($row['limit_rr'])) ?> · 기준 1.5</span></td>
 </tr>
 <?php endforeach ?>
 </tbody></table></div>

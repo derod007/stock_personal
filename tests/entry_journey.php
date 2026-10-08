@@ -45,7 +45,7 @@ try{
     $read=PaperEntryJourney::read($dir,'paper-kr','isa');ej(count($read['rows'])===1&&$read['rows'][0]['link']==='linked'&&$read['rows'][0]['outcome']['entry_fill']===99,'real file path links frozen plan through saved followup');
     // Render the page with the fixture to catch template/runtime errors, not just syntax.
     putenv('PAPER_STATE_DIR='.$dir);$_GET=['account'=>'paper-kr','profile'=>'isa'];ob_start();require __DIR__.'/../paper_journey.php';$html=ob_get_clean();
-    ej(str_contains($html,'99.000')&&str_contains($html,'후속 결과 연결됨'),'page renders linked fill and status');
+    ej(str_contains($html,' / 99</td>')&&str_contains($html,'후속 결과 연결됨'),'page renders linked fill and status');
     file_put_contents($dir.'/followup/paper-kr/latest.json','{broken');
     $partial=PaperEntryJourney::read($dir,'paper-kr','account1');
     ej(count($partial['rows'])===3&&count($partial['errors'])===2,'broken followup keeps observations visible with explicit error');

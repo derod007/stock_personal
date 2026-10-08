@@ -51,10 +51,10 @@ $unreal=$equity-$s['config']['initial_cash']-$s['realized'];
   <?php if(!empty($s['halted'])): ?><p class="paper-alert"><?= ($s['halt_reason']??'historical_revision')==='unpriced_position'?'보유 종목의 가격 경로를 확인할 수 없어 계좌 처리를 중단했습니다. 누락 기간의 체결을 추측하지 않습니다.':'과거 가격 변경이 발견되어 계좌 처리를 중단했습니다. 이전 추천은 보존됐습니다.' ?></p><?php endif ?>
   <?php if(!empty($last['stale_positions'])): ?><p class="paper-alert">최신 가격을 확인하지 못한 보유 종목: <?= ph(implode(', ',$last['stale_positions'])) ?>. 자산은 마지막 유효 가격 기준 추정치입니다.</p><?php endif ?>
   <div class="metric-grid">
-    <div class="metric"><span class="metric__label">현금 / 예약금</span><strong class="metric__value mono"><?= ph(number_format($s['cash'],0)) ?></strong><small><?= ph(number_format($reserve,0)) ?></small></div>
+    <div class="metric"><span class="metric__label">보유 현금</span><strong class="metric__value mono"><?= ph(number_format($s['cash'],0)) ?></strong><small>주문 예약금 <?= ph(number_format($reserve,0)) ?></small></div>
     <div class="metric metric--accent"><span class="metric__label">주문 가능 현금</span><strong class="metric__value mono"><?= ph(number_format($s['cash']-$reserve,0)) ?></strong></div>
     <div class="metric metric--success"><span class="metric__label">평가 자산</span><strong class="metric__value mono"><?= ph(number_format($equity,0)) ?></strong></div>
-    <div class="metric"><span class="metric__label">실현 / 미실현</span><strong class="metric__value mono"><?= ph(number_format($s['realized'],0)) ?></strong><small><?= ph(number_format($unreal,0)) ?></small></div>
+    <div class="metric"><span class="metric__label">확정 손익</span><strong class="metric__value mono"><?= ph(number_format($s['realized'],0)) ?></strong><small>보유 중 평가손익 <?= ph(number_format($unreal,0)) ?></small></div>
     <div class="metric metric--danger"><span class="metric__label">최대 낙폭</span><strong class="metric__value mono"><?= ph(round($s['max_drawdown']*100,2)) ?>%</strong></div>
     <div class="metric"><span class="metric__label">완료 거래</span><strong class="metric__value"><?= ph($s['closed_trades']) ?></strong><small>이익 <?= ph($s['wins']) ?> · 손실 <?= ph($s['losses']) ?></small></div>
   </div>
@@ -63,7 +63,7 @@ $unreal=$equity-$s['config']['initial_cash']-$s['realized'];
   <h2 class="paper-section-title">보유 종목과 대기 주문</h2>
   <?php if(!$s['active']): ?><p class="paper-empty">보유·대기 주문 없음</p>
   <?php else: ?><div class="scan-table-wrap"><table class="scan-table"><thead><tr><th>종목</th><th>상태</th><th>수량</th><th>계획 진입 / 손절 / 목표</th><th>계획 위험</th></tr></thead><tbody>
-  <?php foreach($s['active'] as $symbol=>$o): ?><tr><td class="mono"><?= ph($symbol) ?></td><td><?= $o['filled']?'보유':'지정가 대기' ?></td><td class="mono"><?= ph($o['quantity']) ?></td><td class="mono"><?= ph($o['plan']['entry'].' / '.$o['plan']['stop'].' / '.$o['plan']['target']) ?></td><td class="mono"><?= ph(round($o['planned_risk'],2)) ?></td></tr><?php endforeach ?>
+  <?php foreach($s['active'] as $symbol=>$o): ?><tr><td class="mono"><?= ph($symbol) ?></td><td><?= $o['filled']?'보유':'지정가 대기' ?></td><td class="mono"><?= ph($o['quantity']) ?></td><td class="mono"><?= paper_prices($o['plan']) ?></td><td class="mono"><?= ph(round($o['planned_risk'],2)) ?></td></tr><?php endforeach ?>
   </tbody></table></div><?php endif ?>
 </section>
 <section class="panel">

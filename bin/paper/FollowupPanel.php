@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+require_once __DIR__.'/Chrome.php';
 require_once __DIR__.'/Followup.php';
 require_once __DIR__.'/Chrome.php';
 function paper_followup_panel(?array $report,?array $window=null,?string $runsDir=null):void

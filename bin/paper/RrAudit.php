@@ -6,6 +6,7 @@ use ChartEntryLab\CandleClock;
 use ChartEntryLab\PaperQuality;
 use ChartEntryLab\PriceCandidate;
 use ChartEntryLab\TradeSimulator;
+use ChartEntryLab\TrendRecovery;
 
 /** Read-only research. Never returns an operational scan recommendation. */
 final class PaperRrAudit
@@ -86,16 +87,19 @@ final class PaperRrAudit
         if (in_array($plan['status'] ?? '', ['context_wait','stale_data','blocked','risk_blocked'], true)) {
             $blockers[] = $plan['status'];
         }
-        if (!empty($plan['context_applied']) && (($context['daily'] ?? '') === 'down'
+        $recoveryContext = ($plan['pattern'] ?? '') === TrendRecovery::VERSION;
+        if (!empty($plan['context_applied']) && ($recoveryContext
+            ? TrendRecovery::contextBlocked($context, $plan['reward_risk'] ?? null)
+            : (($context['daily'] ?? '') === 'down'
             || (($context['weekly'] ?? '') === 'down'
-                && (($context['daily'] ?? '') !== 'up' || ($plan['reward_risk'] ?? 0) < 2)))) $blockers[] = 'context_wait';
+                && (($context['daily'] ?? '') !== 'up' || ($plan['reward_risk'] ?? 0) < 2))))) $blockers[] = 'context_wait';
         $out = [];
         foreach ($plan['diagnostics']['patterns'] ?? [] as $name=>$raw) {
             $status = $raw['status'] ?? 'unknown';
             $failed = []; $unknown = [];
-            if ($name === 'trend_pullback') {
-                foreach (self::GATES as $gate=>$label) {
-                    if (!array_key_exists($gate, $raw['gates'] ?? [])) $unknown[$gate] = $label;
+            if (in_array($name, ['trend_pullback','trend_recovery'], true)) {
+                foreach (($name === 'trend_recovery' ? TrendRecovery::GATES : self::GATES) as $gate=>$label) {
+                    if (!is_bool($raw['gates'][$gate] ?? null)) $unknown[$gate] = $label;
                     elseif ($raw['gates'][$gate] === false) $failed[$gate] = $label;
                 }
             } else {
@@ -118,7 +122,7 @@ final class PaperRrAudit
                     $rr = ($target - $limit) / ($limit - $stop);
                     if ($rr < 1.5) $reasons[] = 'rr_below_threshold';
                     if (!empty($plan['context_applied']) && ($context['weekly'] ?? '') === 'down'
-                        && (($context['daily'] ?? '') !== 'up' || $rr < 2)) $reasons[] = 'context_wait';
+                        && (($name !== 'trend_recovery' && ($context['daily'] ?? '') !== 'up') || $rr < 2)) $reasons[] = 'context_wait';
                     $candidate = ['ready'=>true, 'status'=>'research_limit', 'entry'=>$limit,
                         'stop'=>$raw['stop'], 'target'=>$raw['target'], 'reward_risk'=>$rr,
                         'rr_basis'=>'before_costs', 'signal_at'=>$raw['signal_at'], 'order_valid_bars'=>3];
@@ -130,7 +134,7 @@ final class PaperRrAudit
                 'final_status'=>$plan['status'], 'final_reason'=>$plan['reason'] ?? null,
                 'confirmed_rr_rejection'=>$confirmedRr, 'original'=>array_intersect_key($raw,
                     array_flip(['entry','stop','target','reward_risk','signal_at','target_rule'])),
-                'gates'=>$raw['gates'] ?? [], 'missing_conditions'=>$failed, 'not_evaluated'=>$unknown,
+                'gates'=>$raw['gates'] ?? [], 'evidence'=>$raw['evidence'] ?? [], 'missing_conditions'=>$failed, 'not_evaluated'=>$unknown,
                 'context'=>$context, 'quality_reasons'=>$quality['reasons'] ?? [],
                 'status'=>$accepted ? 'added' : 'excluded', 'exclusion_reasons'=>$reasons,
                 'exclusion_reason_labels'=>array_map(static fn($r)=>self::REASONS[$r]??$r,$reasons),

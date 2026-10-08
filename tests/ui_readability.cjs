@@ -17,6 +17,7 @@ const fs = require('node:fs');
     assert.equal(await page.locator('.paper-kv .price-plan dd').allTextContents().then(x=>x.join('/')),'48,050/46,260/55,200');
     assert(await page.locator('#score-breakdown').isVisible(),'score breakdown is visible');
     assert((await page.locator('.pattern-basis').textContent()).includes('현재 장중 판정 아님'),'completed reference cannot look like an intraday confirmation');
+    assert((await page.locator('.pattern-table tbody tr').allTextContents()).some(t=>t.includes('추세 이탈 후 회복')&&t.includes('고정 저항')),'recovery evidence remains visible');
     await page.screenshot({path:`/tmp/ui-screens/${name}.png`,fullPage:true});
   }
   const guide=page.locator('.reading-guide summary').first();

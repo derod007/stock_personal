@@ -52,7 +52,11 @@ final class PaperSingleConditionReview
         elseif(($plan['context_applied']??null)===true){
             $d=$plan['context']['daily']??null;$w=$plan['context']['weekly']??null;
             if(is_string($d)&&is_string($w)){
-                if($d==='down')$contextPass=false;
+                if(($plan['context_policy']??null)==='recovery_structure_weekly_rr2') {
+                    if($w!=='down')$contextPass=true;
+                    elseif(is_numeric($plan['reward_risk']??null))$contextPass=(float)$plan['reward_risk']>=2;
+                }
+                elseif($d==='down')$contextPass=false;
                 elseif($w!=='down')$contextPass=true;
                 elseif($d!=='up')$contextPass=false;
                 elseif(is_numeric($plan['reward_risk']??null))$contextPass=(float)$plan['reward_risk']>=2;

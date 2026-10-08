@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-require __DIR__.'/fixtures/SpikeDumpV1.php'; // Frozen historical research baseline.
+require __DIR__.'/fixtures/HistoricalResearchBaseline.php'; // Frozen historical research baseline.
 require __DIR__.'/../bin/bootstrap.php';require __DIR__.'/../bin/paper/EnvelopeResearchPanel.php';
 function er(bool $ok,string $label):void{if(!$ok)throw new RuntimeException($label);echo "PASS $label\n";}
 function record(array $bars):array{
@@ -55,11 +55,11 @@ er($first['horizons'][3]['n']===1&&$first['horizons'][5]['n']===0,'cohort counts
 // Frozen real sources exercise identity/quality failures, partial histories and evidence joins.
 $root=dirname(__DIR__).'/docs/paper-kr-5d-source';$tmp=sys_get_temp_dir().'/envelope-'.bin2hex(random_bytes(5));mkdir($tmp);putenv('PAPER_STATE_DIR='.$tmp);
 try{
-    $cmd=escapeshellarg(PHP_BINARY).' -d auto_prepend_file='.escapeshellarg(__DIR__.'/fixtures/SpikeDumpV1.php').' -d memory_limit=512M '.escapeshellarg(dirname(__DIR__).'/bin/paper_envelope_research.php').' --account=paper-kr --source-dir='.escapeshellarg($root).' --saved-evidence --as-of=2026-10-01T04:02:43+09:00';
+    $cmd=escapeshellarg(PHP_BINARY).' -d auto_prepend_file='.escapeshellarg(__DIR__.'/fixtures/HistoricalResearchBaseline.php').' -d memory_limit=512M '.escapeshellarg(dirname(__DIR__).'/bin/paper_envelope_research.php').' --account=paper-kr --source-dir='.escapeshellarg($root).' --saved-evidence --as-of=2026-10-01T04:02:43+09:00';
     exec($cmd,$lines,$exit);er($exit===0,'offline CLI');$saved=PaperEnvelopeStore::load($tmp,'paper-kr');
     er(count($saved['rows'])>400,'full evaluated scan cohort not selected 13');
     er(count(array_filter($saved['rows'],fn($x)=>isset($x['latest_session'])))>0,'saved prices yield actual latest bars');
-    $cmd=escapeshellarg(PHP_BINARY).' -d auto_prepend_file='.escapeshellarg(__DIR__.'/fixtures/SpikeDumpV1.php').' -d memory_limit=512M '.escapeshellarg(dirname(__DIR__).'/bin/paper_envelope_research.php').' --account=paper-kr --saved-evidence --as-of=2026-10-01T04:02:43+09:00';
+    $cmd=escapeshellarg(PHP_BINARY).' -d auto_prepend_file='.escapeshellarg(__DIR__.'/fixtures/HistoricalResearchBaseline.php').' -d memory_limit=512M '.escapeshellarg(dirname(__DIR__).'/bin/paper_envelope_research.php').' --account=paper-kr --saved-evidence --as-of=2026-10-01T04:02:43+09:00';
     exec($cmd,$more,$exit);er($exit===0,'refresh without source archive');$again=PaperEnvelopeStore::load($tmp,'paper-kr');
     er(array_column($again['rows'],'frozen_hash')===array_column($saved['rows'],'frozen_hash'),'archive-free retention and fixed evidence');
     $lock=fopen($tmp.'/envelope-research/paper-kr/update.lock','c');flock($lock,LOCK_EX);exec($cmd.' 2>/dev/null',$ignore,$exit);flock($lock,LOCK_UN);fclose($lock);er($exit!==0,'concurrent writer blocked');

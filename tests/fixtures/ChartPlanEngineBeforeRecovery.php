@@ -17,19 +17,9 @@ final class ChartPlanEngine
         $decision = AccountPlaybook::forProfile($profile)->decide($features, $symbol);
         $retest = (new BreakoutRetest())->analyze($bars);
         $pullback = (new TrendPullback())->analyze($bars, $features);
-        $recovery = (new TrendRecovery())->analyze($bars);
         $context = (new TrendContext())->analyze($bars, $symbol, $asOf);
         $plan = !empty($retest['ready']) ? $retest
             : (!empty($pullback['ready']) || $pullback['candidate'] !== null ? $pullback : $retest);
-        // Keep an eligible legacy recommendation first; recovery is an independent alternative.
-        $legacyContextBlocked = $useContext && ($context['daily'] === 'down' || ($context['weekly'] === 'down'
-            && ($context['daily'] !== 'up' || (float)($plan['reward_risk'] ?? 0) < 2.0)));
-        if ((empty($plan['ready']) && in_array($recovery['status'], ['ready','rejected_rr','no_upper_target','invalid_levels'], true))
-            || ($legacyContextBlocked && !empty($recovery['ready'])
-                && !TrendRecovery::contextBlocked($context, $recovery['reward_risk']))) {
-            $plan = $recovery;
-        }
-        $isRecovery = $plan['version'] === TrendRecovery::VERSION;
         $plan['pattern'] = $plan['version'];
         $plan['context'] = $context;
         $plan['context_applied'] = $useContext;
@@ -38,16 +28,16 @@ final class ChartPlanEngine
             $candidate = PriceCandidate::build((float) $plan['entry'], (float) $plan['entry'],
                 (float) $plan['stop'], (float) $plan['target'], $plan['version']);
         }
-        if (!$isRecovery) $candidate ??= (new PriceCandidate())->fromStructure($features);
+        $candidate ??= (new PriceCandidate())->fromStructure($features);
         $plan['candidate'] = $candidate;
         if ($candidate !== null && empty($plan['ready'])) {
             $plan['reason'] .= ' · 관심 가격 후보 있음, 진입 확인 전';
         }
-        $contextBlocked = $isRecovery ? TrendRecovery::contextBlocked($context, $plan['reward_risk']) : $legacyContextBlocked;
-        if ($useContext && $contextBlocked) {
+        if ($useContext && ($context['daily'] === 'down' || ($context['weekly'] === 'down'
+            && ($context['daily'] !== 'up' || (float) ($plan['reward_risk'] ?? 0) < 2.0)))) {
             $plan['ready'] = false;
             $plan['status'] = 'context_wait';
-            $plan['reason'] = $context['label'] . ($isRecovery ? ': 회복형은 주봉 하락 시 손익비 2 이상 필요' : ': 상위 추세·손익비 추가 확인 필요');
+            $plan['reason'] = $context['label'] . ': 상위 추세·손익비 추가 확인 필요';
         }
         $latest = $bars[array_key_last($bars)]['available_at'];
         $features['asof_kst'] = (new \DateTimeImmutable('@' . $latest))->setTimezone(new \DateTimeZone('Asia/Seoul'))->format('Y-m-d H:i:s');
@@ -69,7 +59,7 @@ final class ChartPlanEngine
         $plan['candidate_available'] = $plan['candidate'] !== null;
         $plan['confirmation_status'] = $plan['ready'] ? 'confirmed' : 'waiting';
         $plan['diagnostics'] = [
-            'patterns' => ['breakout_retest' => $retest, 'trend_pullback' => $pullback, 'trend_recovery' => $recovery],
+            'patterns' => ['breakout_retest' => $retest, 'trend_pullback' => $pullback],
             'selected_pattern' => $plan['pattern'],
             'final_status' => $plan['status'],
             'candidate_available' => $plan['candidate_available'],
@@ -102,7 +92,7 @@ final class ChartPlanEngine
         $proposal['target_wide'] = null;
         $proposal['target_wide_rule'] = 'none';
         $proposal['eta'] = null;
-        $proposal['invalidation_rule'] = $plan['stop_rule'] ?? 'candidate_structure_atr_buffer';
+        $proposal['invalidation_rule'] = 'candidate_structure_atr_buffer';
         $proposal['level_method'] = 'multi_pattern_v2';
         $proposal['level_method_label'] = '가격 후보 / 진입 확인 / 큰 추세 분리';
         $proposal['reason'] = $plan['reason'];

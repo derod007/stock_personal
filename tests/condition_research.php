@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-require __DIR__.'/fixtures/SpikeDumpV1.php'; // Frozen historical research baseline.
+require __DIR__.'/fixtures/HistoricalResearchBaseline.php'; // Frozen historical research baseline.
 require __DIR__.'/../bin/bootstrap.php';
 require __DIR__.'/../bin/paper/ConditionResearch.php';
 use ChartEntryLab\TradeSimulator;
@@ -56,7 +56,7 @@ check(PaperConditionResearch::evaluate($copy,$prices,$row['as_of'],$row['gate'],
 // Exercise CLI persistence in a separate directory and confirm source bytes are unchanged.
 $temp=sys_get_temp_dir().'/condition-research-'.bin2hex(random_bytes(6));
 try{
-    $cmd=escapeshellarg(PHP_BINARY).' -d auto_prepend_file='.escapeshellarg(__DIR__.'/fixtures/SpikeDumpV1.php').' '.escapeshellarg(dirname(__DIR__).'/bin/paper_condition_research.php')
+    $cmd=escapeshellarg(PHP_BINARY).' -d auto_prepend_file='.escapeshellarg(__DIR__.'/fixtures/HistoricalResearchBaseline.php').' '.escapeshellarg(dirname(__DIR__).'/bin/paper_condition_research.php')
         .' --source-dir='.escapeshellarg($root).' --output-dir='.escapeshellarg($temp).' --account=paper-kr';
     exec($cmd,$lines,$exit);
     check($exit===0&&is_file($temp.'/latest.json'),'CLI writes separate report');

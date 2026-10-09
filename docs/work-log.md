@@ -1,3 +1,9 @@
+## 2026-10-10 00:10 · Cursor · 끝
+- 한 일: 저장 스캔 한국 종목 고정(192개 코드 중 수집 대상 156, 상품 제외 35, 식별 보류 1)·기준일 2026-10-08 약 2년 일봉 수집(151 성공, 5 Yahoo 404 실패)·품질 점검·해시 manifest·재개 가능 CLI 추가. 원본은 상태 폴더 history-research에만 저장, 전략·점수·계좌 파일 변경 없음
+- 파일: bin/paper/HistoryResearch.php, bin/paper_history_prepare.php, tests/history_research.php, docs/history-data-prep.md, docs/history-data-20261008/, .github/workflows/history-research.yml, docs/work-log.md
+- 커밋: 브랜치 cursor/history-data-prep, PR 대기(병합 안 함)
+- 롤백: 없음
+
 ## 2026-10-09 · Codex · 끝
 - 작업: 현재 3개 추천 패턴의 저장 원본 재평가·저장 후속 증거 전용 CLI와 별도 연구 보고서 추가. 운영 상태 쓰기·네트워크·계좌 변경 없음
 - 실측: 500건 중 입력 없음 33, 상품 제외 25, 종목 식별 불일치 1을 빼고 441건. 최종 추천 0, 손익비 지정가 연구 21(진입 전 취소 12·손절 종료 1·대기 8)

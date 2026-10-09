@@ -1,3 +1,13 @@
+## 2026-10-10 · Codex · 끝
+- 작업: PR #58의 ‘불일치’를 ‘15% 초과 비교 표본 없음·10~15% 표본 부족’으로 정정. 아래 Cursor 완료 기록의 ‘반복되지 않음’도 반증으로 해석하지 않음
+- 연구: 저장된 상승 눌림 종료 137건의 중간 완료봉에서 3% 상승 이후 다음 세션 되돌림 비교. 최종 수익 거래도 이전 14/23·최근 7/24건이 이후 진입가 이하를 관측
+- 검증: 기존 첨부 일봉 verify·출처 해시 확인, 137건 보유 구간/기존 최대 상승률 일치, 경로 계산 6개 검사·PHP 구문·diff 통과. 두 번째 원본의 공유 OHLCV 전체 비교는 재실행하지 않음
+- 판단: 본전 이동은 큰 수익 기회도 바꿀 수 있음. 대체 청산 수익률은 계산하지 않았으며 전략·운영 계좌 변경 없음
+- 파일: docs/pattern-compare-20251002.md, docs/pullback-paths-20261010.md/json, docs/research/pullback-paths.php
+
+## 2026-10-10 · Codex · 진행
+- 작업: PR #58의 표본 부재 해석 정정 및 두 기간 상승 눌림의 수익/손절 거래 경로 비교. 운영 조건 유지
+
 ## 2026-10-10 05:50 · Cursor · 끝
 - 한 일: 같은 전략으로 2024-10-08~2025-10-02 재현(평가 137종목·33,058 종목일). 상승 눌림 종료 67건과 PR #56 70건의 손절 폭 구간을 비교. 15% 초과는 0건이라 기존 후반의 넓은 손절 부진은 반복되지 않음. 전략·손절·목표·계좌 변경 없음
 - 파일: bin/paper_pattern_replay.php, bin/paper/PullbackCompare.php, docs/research/prior-period-compare.php, tests/pullback_compare.php, tests/history_research.php, docs/pattern-compare-20251002.md, docs/pattern-compare-20251002.json, docs/pattern-history-replay.md, .github/workflows/pattern-replay.yml, docs/work-log.md

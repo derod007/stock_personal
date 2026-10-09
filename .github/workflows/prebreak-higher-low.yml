@@ -1,0 +1,17 @@
+name: Prebreak higher-low observation checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  observation:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          php -l src/PrebreakHigherLow.php
+          php -l bin/paper/HigherLowResearch.php
+          php -l bin/paper/HigherLowPanel.php
+          php -l bin/paper_higher_low.php
+          php -l paper_rr.php
+          php tests/prebreak_higher_low.php
+          python3 -m unittest discover -s tests -p 'test_*daily.py'

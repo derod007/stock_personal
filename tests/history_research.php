@@ -187,6 +187,40 @@ check($s['insufficient_history']===1&&$s['history_short_for_240']===2&&$s['quali
 check($m['quality_hold'][0]['symbol']==='300002.KQ'&&$m['excluded_instruments'][0]['kind']==='etf_or_fund_brand'&&count($m['identity_hold'])===4,'held, excluded and conflicting symbols are all listed');
 check(str_contains($m['universe_note'],'neither the whole market'),'manifest states that the set is not the market or a point-in-time top 100');
 check(PaperHistoryResearch::verify($dir)===[],'verify passes on untouched files');
+// ---- second dataset: same symbols, explicit past analysis date, 5y as the primary range -------------------
+$dir2=PaperHistoryResearch::datasetDir($tmp,'t2');
+$d2=PaperHistoryResearch::copyUniverse($dir,$dir2,'t2');
+check(file_get_contents($dir2.'/universe.json')===file_get_contents($dir.'/universe.json')&&$d2['universe_source']['dataset']==='t1','same symbols: universe.json is copied byte for byte');
+$t1Rows=PaperHistoryResearch::readJson($dir.'/bars/005930.KS.json')['rows'];
+$pastDay='2026-06-30';
+$asPast=PaperHistoryResearch::asOfOnOrBefore($t1Rows,'005930.KS',$pastDay,$now);
+check($asPast!==null&&$asPast['day']===$pastDay&&$asPast['close_ts']===CandleClock::closeTime(['time'=>(new DateTimeImmutable($pastDay.' 09:00:00',$kst))->getTimestamp()],'005930.KS'),'an explicit analysis date resolves to that session\'s close');
+$wk=PaperHistoryResearch::asOfOnOrBefore($t1Rows,'005930.KS','2026-06-27',$now);
+check($wk['day']==='2026-06-26'&&$wk['requested_day']==='2026-06-27','a non-session request resolves to the session before it and keeps the requested day');
+check(PaperHistoryResearch::asOfOnOrBefore($t1Rows,'005930.KS','2026-10-20',$now)['day']==='2026-10-08'&&PaperHistoryResearch::asOfOnOrBefore($t1Rows,'005930.KS','2000-01-03',$now)===null,'a later request cannot pass the last completed session; one before all data finds none');
+$badDate=false;try{PaperHistoryResearch::asOfOnOrBefore($t1Rows,'005930.KS','2026/06/30',$now);}catch(InvalidArgumentException){$badDate=true;}
+check($badDate,'malformed analysis dates are rejected');
+$ds2=PaperHistoryResearch::fixAsOf($dir2,$asPast,'test explicit date','5y','2026-07-04');
+$as2=$ds2['as_of']+['primary_range'=>$ds2['primary_range'],'evaluation_start_day'=>PaperHistoryResearch::evalStartOf($ds2)];
+check($ds2['primary_range']==='5y'&&$as2['evaluation_start_day']==='2025-07-04'&&$as2['day']===$pastDay,'the evaluation window starts twelve months before the requested day, not before the resolved session');
+$cases['300009.KQ']=['5y'=>body('300009.KQ',$days(120),['first'=>$first(120)])];
+$cases['300010.KQ']=['5y'=>body('300010.KQ',$days(700),['mutate'=>[660=>function(&$o,&$h,&$l,&$c,&$v){$o*=2;$h*=2;$l*=2;$c*=2;}]])];
+$cacheRoot=$dir2;$deps2=PaperHistoryResearch::makeClient($dir2,$http,fn()=>$now,$factory);$before=count($calls);
+$r=PaperHistoryResearch::collectSymbol($dir2,$uRow('005930.KS','삼성전자'),$as2,$deps2);$q=$r['status']['quality'];
+check($r['action']==='collected'&&array_slice($calls,$before)===['005930.KS:5y']&&$r['status']['extension']==='not_needed','5y is requested directly, with no 2y request and no extension');
+check($q['last_completed']===$pastDay&&$q['evaluation_start_day']==='2025-07-04'&&$q['preparation_start_day']==='2024-07-04'&&$q['preparation_window_bars']>=240&&$q['bars_before_preparation_window']>0&&$q['excluded_from_evaluation']['after_as_of']>0&&$q['bars_through_evaluation_start']>=240&&$q['status']==='ok_with_warnings','bars after the analysis date are kept only as outcome bars');
+check(count(PaperHistoryResearch::readJson($dir2.'/bars/005930.KS.json')['rows'])===1200,'the bars file keeps the provider response whole');
+$r=PaperHistoryResearch::collectSymbol($dir2,$uRow('300009.KQ','신규'),$as2,$deps2);
+check($r['status']['extension']==='skipped_provider_history_exhausted'&&in_array('history_short_for_240',$r['status']['quality']['warnings'],true),'a recent listing under a 5y primary range is not filled or extended');
+$r=PaperHistoryResearch::collectSymbol($dir2,$uRow('300010.KQ','후속분할'),$as2,$deps2);
+check($r['status']['quality']['hold_reasons']===[]&&in_array('price_jump_in_outcome_bars',$r['status']['quality']['warnings'],true)&&$r['status']['quality']['outcome_price_jumps']!==[],'an unadjusted jump after the analysis date is flagged for outcome measurement');
+$mm=PaperHistoryResearch::compare($dir,$dir2);
+check($mm['summary']['symbols_in_both']===1&&$mm['summary']['mismatch_days']>0&&$mm['mismatches'][0]['symbol']==='005930.KS','compare reports shared days whose prices differ between datasets');
+$same=PaperHistoryResearch::compare($dir,$dir);
+check($same['summary']['mismatch_days']===0&&$same['summary']['overlap_days']>0,'compare is clean for identical data');
+$again2=false;try{PaperHistoryResearch::copyUniverse($dir,$dir2,'t2');}catch(RuntimeException){$again2=true;}
+check($again2,'a dataset that already has a fixed analysis date cannot take another universe');
+check(PaperHistoryResearch::verify($dir2)===[],'verify passes for the second dataset');
 $bars=$dir.'/bars/005930.KS.json';file_put_contents($bars,file_get_contents($bars).' ');
 check(count(PaperHistoryResearch::verify($dir))===1,'verify detects a changed bars file');
 

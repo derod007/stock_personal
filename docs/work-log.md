@@ -1,3 +1,9 @@
+## 2026-10-10 06:10 · Cursor · 끝
+- 한 일: 같은 고정 종목군(156개, universe.json 바이트 복사)의 과거 1년 구간 일봉을 5y로 확보(요청일 2025-10-08은 휴장이라 기준일 2025-10-02, 평가 시작 2024-10-08, 준비 시작 2023-10-08). 151 성공·5 Yahoo 404, 보류 14. 첫 데이터셋과 공유 69,888 종목·날짜 OHLCV 불일치 0. 기준일 지정·종목군 복사·기준일 이후 가격 급변 경고·데이터셋 비교 기능 추가
+- 파일: bin/paper/HistoryResearch.php, bin/paper_history_prepare.php, tests/history_research.php, docs/history-data-prep.md, docs/history-data-20251008/, docs/work-log.md
+- 커밋: 브랜치 cursor/history-data-prep-2, PR 대기(병합 안 함)
+- 롤백: 없음
+
 ## 2026-10-10 · Codex · 끝
 - 작업: PR #55 상승 눌림 종료 70건의 전후반·승패·손절 경로·거래량·중복 노출 복기 보고서와 읽기 전용 재현 스크립트 추가
 - 관찰: 후반 평균 -4.91%, 신호 손절 폭 중앙값 8.77%→15.26%. 손절 44건 중 갭 7건, 중간 완료봉에서 3% 이상 상승 후 손절 24건(분류 중복 가능)

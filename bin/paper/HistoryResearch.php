@@ -88,6 +88,28 @@ final class PaperHistoryResearch
         return (new DateTimeImmutable($asOfDay,new DateTimeZone('Asia/Seoul')))->modify('-'.self::EVAL_MONTHS.' months')->format('Y-m-d');
     }
 
+    /**
+     * The last completed regular session on or before a requested calendar day (a holiday request resolves to the
+     * session before it). The requested day is kept, because it defines the 12 month evaluation window.
+     */
+    public static function asOfOnOrBefore(array $rows,string $symbol,string $day,int $now):?array
+    {
+        if(!preg_match('/^\d{4}-\d{2}-\d{2}$/D',$day))throw new InvalidArgumentException('Invalid as-of day '.$day);
+        $best=null;
+        foreach($rows as $r){
+            if(!empty($r['synthetic'])||($r['is_complete']??true)===false)continue;
+            $close=CandleClock::closeTime($r,$symbol);
+            if($close>$now||self::day($close)>$day)continue;
+            if($best===null||$close>$best['close_ts'])$best=['day'=>self::day($close),'close_ts'=>$close,'requested_day'=>$day];
+        }
+        return $best;
+    }
+
+    /** Evaluation start of a dataset: the explicit one when the analysis date was requested, else 12 months before as_of. */
+    public static function evalStartOf(array $ds):string
+    {
+        return (string)($ds['evaluation_start_day']??self::evalStartDay($ds['as_of']['day']));
+    }
     /** Latest completed regular session in the rows, judged by the existing candle clock. */
     public static function asOfFromRows(array $rows,string $symbol,int $now):?array
     {
@@ -204,11 +226,40 @@ final class PaperHistoryResearch
         return $ds;
     }
 
+    /**
+     * A second dataset over the very same symbols: universe.json is copied byte for byte, so the set is not re-extracted
+     * and its hash is the one of the source dataset. Nothing from the source dataset's bars is reused.
+     */
+    public static function copyUniverse(string $srcDir,string $dir,string $dataset):array
+    {
+        self::assertResearchDir($srcDir);self::assertResearchDir($dir);
+        $srcDs=self::readJson($srcDir.'/dataset.json')??throw new RuntimeException('Source dataset.json missing');
+        $bytes=(string)@file_get_contents($srcDir.'/universe.json');
+        $sha=hash('sha256',$bytes);
+        if($bytes===''||!hash_equals((string)($srcDs['universe_sha256']??''),$sha))throw new RuntimeException('Source universe.json does not match its dataset.json hash');
+        if(is_file($dir.'/dataset.json')){
+            $ds=self::readJson($dir.'/dataset.json');
+            if(!is_array($ds)||is_array($ds['as_of']??null)||is_dir($dir.'/status')||is_dir($dir.'/raw'))
+                throw new RuntimeException('Dataset already has a fixed universe; use a new --dataset id');
+        }elseif(is_dir($dir)&&(glob($dir.'/*')?:[])!==[])throw new RuntimeException('Refusing to write into a non-empty folder without dataset.json');
+        self::writeFile($dir.'/universe.json',$bytes);
+        $ds=['schema'=>self::SCHEMA,'policy'=>self::POLICY,'dataset'=>$dataset,'created_at'=>time(),
+            'universe_sha256'=>$sha,'universe_source'=>['dataset'=>(string)($srcDs['dataset']??''),'universe_sha256'=>$sha,'copied'=>'byte_for_byte'],
+            'as_of'=>null,'as_of_basis'=>null];
+        self::writeFile($dir.'/dataset.json',self::encode($ds,true));
+        return $ds;
+    }
+
     /** The analysis date is written once and reused by every resumed run. */
-    public static function fixAsOf(string $dir,array $as,string $basis):array
+    public static function fixAsOf(string $dir,array $as,string $basis,?string $primaryRange=null,?string $requestedDay=null):array
     {
         $ds=self::readJson($dir.'/dataset.json')??throw new RuntimeException('dataset.json missing');
         if(is_array($ds['as_of']))return $ds;
+        if($primaryRange!==null){
+            if(!in_array($primaryRange,[self::PRIMARY_RANGE,self::EXTENDED_RANGE],true))throw new InvalidArgumentException('Unsupported range '.$primaryRange);
+            $ds['primary_range']=$primaryRange;
+        }
+        if($requestedDay!==null){$ds['requested_as_of']=$requestedDay;$ds['evaluation_start_day']=self::evalStartDay($requestedDay);}
         $ds['as_of']=['day'=>$as['day'],'close_ts'=>$as['close_ts'],'fixed_at'=>time()];$ds['as_of_basis']=$basis;
         self::writeFile($dir.'/dataset.json',self::encode($ds,true));
         return $ds;
@@ -288,6 +339,8 @@ final class PaperHistoryResearch
         }
         $evalBars=$firstEval===null?0:$n-$firstEval;
         if($firstEval!==null)$through=$firstEval+1; // bars up to and including the first evaluation day
+        $prepStart=self::evalStartDay($evalStartDay);$prepBars=0;$beforePrep=0;
+        foreach($completed as $b){$d=self::day($b['available_at']);if($d<$prepStart)$beforePrep++;elseif($d<$evalStartDay)$prepBars++;}
         $jumps=[];$gaps=[];
         for($i=1;$i<$n;$i++){
             $a=$completed[$i-1];$b=$completed[$i];$days=(int)round(($b['available_at']-$a['available_at'])/86400);
@@ -295,6 +348,19 @@ final class PaperHistoryResearch
             elseif($a['close']>0&&abs($b['close']/$a['close']-1)>self::JUMP_LIMIT)
                 $jumps[]=['date'=>self::day($b['available_at']),'previous_close'=>$a['close'],'close'=>$b['close'],
                     'change_pct'=>round(($b['close']/$a['close']-1)*100,2)];
+        }
+        // Bars after the analysis date are outcome-only, but an unadjusted split there would corrupt follow-up measurement.
+        $outcome=[];$outcomeJumps=[];$prev=$n?$completed[$n-1]:null;
+        foreach($rows as $r){
+            if(!empty($r['synthetic'])||($r['is_complete']??true)===false||CandleClock::closeTime($r,$symbol)<=$asOfClose)continue;
+            $outcome[]=$r;
+        }
+        usort($outcome,fn($a,$b)=>CandleClock::closeTime($a,$symbol)<=>CandleClock::closeTime($b,$symbol));
+        foreach($outcome as $r){
+            if($prev!==null&&($prev['close']??0)>0&&is_numeric($r['close']??null)&&abs($r['close']/$prev['close']-1)>self::JUMP_LIMIT)
+                $outcomeJumps[]=['date'=>self::day(CandleClock::closeTime($r,$symbol)),'previous_close'=>$prev['close'],'close'=>$r['close'],
+                    'change_pct'=>round(($r['close']/$prev['close']-1)*100,2)];
+            $prev=$r;
         }
         $hold=$raw['hold_reasons']??[];
         if($duplicates)$hold[]='duplicate_session';
@@ -312,6 +378,7 @@ final class PaperHistoryResearch
         if($synthetic||$incomplete||$after)$warn[]='non_evaluation_bars_present';
         if($gaps)$warn[]='long_calendar_gap';
         if($zero)$warn[]='zero_volume_days';
+        if($outcomeJumps)$warn[]='price_jump_in_outcome_bars';
         if(($raw['null_close_count']??0)>0)$warn[]='provider_rows_without_close';
         $cap=fn(array $v)=>array_slice($v,0,self::LIST_CAP);
         $quality=PaperQuality::inspect($rows,$symbol,$asOfClose,['sha256'=>$raw['sha256']??null,'price_basis'=>self::PRICE_BASIS]);
@@ -319,14 +386,14 @@ final class PaperHistoryResearch
         return ['status'=>$hold?'hold':($warn?'ok_with_warnings':'ok'),'hold_reasons'=>$hold,'warnings'=>$warn,
             'rows'=>count($rows),'completed_bars'=>$n,'first_completed'=>$first,'last_completed'=>$last,
             'as_of_day'=>$asOfDay,'evaluation_start_day'=>$evalStartDay,
-            'evaluation_bars'=>$evalBars,'bars_through_evaluation_start'=>$through,
+            'evaluation_bars'=>$evalBars,'bars_through_evaluation_start'=>$through,'preparation_start_day'=>$prepStart,'preparation_window_bars'=>$prepBars,'bars_before_preparation_window'=>$beforePrep,
             'eligible_from_60'=>$n>=60?self::day($completed[59]['available_at']):null,
             'eligible_from_240'=>$n>=self::PREP_BARS?self::day($completed[self::PREP_BARS-1]['available_at']):null,
             'excluded_from_evaluation'=>['synthetic'=>count($synthetic),'incomplete'=>count($incomplete),'after_as_of'=>count($after),
                 'incomplete_days'=>$cap($incomplete),'after_as_of_days'=>$cap($after)],
             'duplicate_days'=>$cap($duplicates),'invalid_ohlcv_days'=>$cap($invalid),'invalid_volume_days'=>$cap($invalidVolume),
             'negative_volume_days'=>$cap($negative),'zero_volume_count'=>count($zero),
-            'price_jumps'=>$cap($jumps),'calendar_gaps'=>$cap($gaps),
+            'price_jumps'=>$cap($jumps),'outcome_price_jumps'=>$cap($outcomeJumps),'calendar_gaps'=>$cap($gaps),
             'corrections'=>['count'=>count($corrections),'items'=>$cap($corrections)],
             'paper_quality_at_as_of'=>['status'=>$quality['status'],'reasons'=>$quality['reasons'],'warnings'=>$quality['warnings'],
                 'invalid_bar_count'=>count($quality['invalid_bars'])]];
@@ -428,13 +495,15 @@ final class PaperHistoryResearch
         $st['attempts']=($st['attempts']??0)+1;$st['state']='running';
         self::writeFile($dir.'/status/'.$symbol.'.json',self::encode($st,true));
         try{
-            $evalStart=self::evalStartDay($as['day']);
-            $res=self::fetchRange($dir,$symbol,self::PRIMARY_RANGE,$deps);
+            $evalStart=(string)($as['evaluation_start_day']??self::evalStartDay($as['day']));
+            $primary=(string)($as['primary_range']??self::PRIMARY_RANGE);
+            $res=self::fetchRange($dir,$symbol,$primary,$deps);
             $info=self::inspectRows($res['rows'],$symbol,$as['close_ts'],$evalStart,$res['raw']);
             $requests=[$res['request']];$extension='not_needed';
             if($info['bars_through_evaluation_start']<self::PREP_BARS&&$info['completed_bars']>0&&!array_diff($info['hold_reasons'],['insufficient_history','no_evaluation_bars'])
                 &&$info['evaluation_bars']>0){
                 if(self::providerExhausted($res['raw']))$extension='skipped_provider_history_exhausted';
+                elseif($primary===self::EXTENDED_RANGE)$extension='range_limit_reached';
                 else{
                     // A different range is a different response. Use it whole, never stitched to the 2y response.
                     $ext=self::fetchRange($dir,$symbol,self::EXTENDED_RANGE,$deps);
@@ -498,7 +567,7 @@ final class PaperHistoryResearch
             $symbols[]=$row+['quality'=>$q['status'],'hold_reasons'=>$q['hold_reasons'],'warnings'=>$q['warnings'],
                 'range'=>$st['final_range'],'extension'=>$st['extension'],'rows'=>$q['rows'],'completed_bars'=>$q['completed_bars'],
                 'first_completed'=>$q['first_completed'],'last_completed'=>$q['last_completed'],
-                'evaluation_bars'=>$q['evaluation_bars'],'bars_through_evaluation_start'=>$q['bars_through_evaluation_start'],
+                'evaluation_bars'=>$q['evaluation_bars'],'bars_through_evaluation_start'=>$q['bars_through_evaluation_start'],'preparation_window_bars'=>$q['preparation_window_bars'],'bars_before_preparation_window'=>$q['bars_before_preparation_window'],
                 'eligible_from_60'=>$q['eligible_from_60'],'eligible_from_240'=>$q['eligible_from_240'],
                 'fetched_at'=>$st['requests'][array_key_last($st['requests'])]['fetched_at'],
                 'raw_sha256'=>$st['requests'][array_key_last($st['requests'])]['raw_sha256'],
@@ -514,8 +583,8 @@ final class PaperHistoryResearch
             'membership'=>self::MEMBERSHIP,
             'universe_note'=>'Symbols seen in saved scans. This is neither the whole market nor the top 100 of the day each bar was evaluated.',
             'as_of'=>$ds['as_of']+['basis'=>$ds['as_of_basis']],
-            'window'=>['evaluation_months'=>self::EVAL_MONTHS,'evaluation_start_day'=>self::evalStartDay($ds['as_of']['day']),
-                'preparation_bars_target'=>self::PREP_BARS,'minimum_bars'=>self::MIN_BARS,'primary_range'=>self::PRIMARY_RANGE,
+            'window'=>['evaluation_months'=>self::EVAL_MONTHS,'requested_as_of'=>$ds['requested_as_of']??null,'evaluation_start_day'=>self::evalStartOf($ds),'preparation_start_day'=>self::evalStartDay(self::evalStartOf($ds)),
+                'preparation_bars_target'=>self::PREP_BARS,'minimum_bars'=>self::MIN_BARS,'primary_range'=>$ds['primary_range']??self::PRIMARY_RANGE,
                 'extended_range'=>self::EXTENDED_RANGE],
             'provider'=>['name'=>self::PROVIDER,'price_basis'=>self::PRICE_BASIS,'interval'=>'1d'],
             'caveats'=>[
@@ -524,9 +593,48 @@ final class PaperHistoryResearch
                 'Recent listings keep only the bars the provider has; nothing is generated or filled.',
                 'Only completed sessions up to as_of are evaluation bars; provisional bars are flagged and excluded.'],
             'files'=>['dataset.json'=>hash_file('sha256',$dir.'/dataset.json'),'universe.json'=>hash_file('sha256',$dir.'/universe.json')],
+            'universe_source'=>$ds['universe_source']??null,
             'universe'=>['sources'=>$uni['sources'],'source_errors'=>$uni['source_errors'],'counts'=>$uni['counts']],
             'summary'=>$sum,'hold_reason_counts'=>$holdBy,'warning_counts'=>$warnBy,
             'excluded_instruments'=>$excluded,'identity_hold'=>$conflict,'failed'=>$failed,'quality_hold'=>$held,'symbols'=>$symbols];
+    }
+
+    /**
+     * Read-only check that two datasets of the same symbols agree on the days they share. It does not merge anything:
+     * a mismatch means the provider price basis moved between the two requests and the sets must stay separate.
+     * @return array<string,mixed>
+     */
+    public static function compare(string $dirA,string $dirB):array
+    {
+        self::assertResearchDir($dirA);self::assertResearchDir($dirB);
+        $uni=self::readJson($dirB.'/universe.json')??throw new RuntimeException('universe.json missing');
+        $load=function(string $dir,string $symbol):?array{
+            $st=self::readStatus($dir,$symbol);
+            if(!$st||($st['state']??'')!=='done'||!self::barsIntact($dir,$st))return null;
+            $bars=self::readJson($dir.'/'.$st['bars_path']);$map=[];
+            foreach($bars['rows']??[] as $r){
+                if(!empty($r['synthetic'])||($r['is_complete']??true)===false)continue;
+                $map[self::day(CandleClock::closeTime($r,$symbol))]=$r;
+            }
+            return $map;
+        };
+        $sum=['symbols_in_both'=>0,'symbols_only_in_one'=>0,'overlap_days'=>0,'mismatch_days'=>0,'symbols_with_mismatch'=>0];$bad=[];
+        foreach($uni['rows'] as $u){
+            if($u['status']!=='included')continue;
+            $a=$load($dirA,$u['symbol']);$b=$load($dirB,$u['symbol']);
+            if($a===null||$b===null){if($a!==null||$b!==null)$sum['symbols_only_in_one']++;continue;}
+            $sum['symbols_in_both']++;$mis=[];$common=array_intersect_key($a,$b);
+            foreach($common as $day=>$_){
+                foreach(['open','high','low','close','volume']as $k){
+                    $x=(float)($a[$day][$k]??NAN);$y=(float)($b[$day][$k]??NAN);
+                    if(!(abs($x-$y)<=1e-9*max(1.0,abs($x)))){$mis[]=$day;break;}
+                }
+            }
+            $sum['overlap_days']+=count($common);$sum['mismatch_days']+=count($mis);
+            if($mis){$sum['symbols_with_mismatch']++;$bad[]=['symbol'=>$u['symbol'],'name'=>$u['name'],'overlap_days'=>count($common),'mismatch_days'=>count($mis),
+                'first_mismatch_days'=>array_slice($mis,0,5)];}
+        }
+        return ['dataset_a'=>basename($dirA),'dataset_b'=>basename($dirB),'summary'=>$sum,'mismatches'=>$bad];
     }
 
     /** Recompute hashes and quality from the stored files. Returns problems; empty means the dataset is intact. */
@@ -537,7 +645,7 @@ final class PaperHistoryResearch
         if(!$ds||!$uni)return ['dataset.json or universe.json missing'];
         if(!is_array($ds['as_of']))return ['analysis date is not fixed yet'];
         if(($ds['universe_sha256']??'')!==hash_file('sha256',$dir.'/universe.json'))$problems[]='universe.json hash changed';
-        $evalStart=self::evalStartDay($ds['as_of']['day']);
+        $evalStart=self::evalStartOf($ds);
         foreach($uni['rows'] as $u){
             if($u['status']!=='included')continue;
             $st=self::readStatus($dir,$u['symbol']);

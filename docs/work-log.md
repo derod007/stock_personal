@@ -217,6 +217,12 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 
 ---
 
+## 2026-10-09 15:40 · Cursor · 끝
+- 한 일: 프네푸 SQQQ·복기 글을 HTML로 정리하고 복기 차트를 파일로 넣음
+- 파일: docs/fmkorea-10425804725.html, docs/fmkorea-10426879241, docs/work-log.md
+- 커밋: 함
+- 롤백: 없음
+
 ## 2026-10-08 23:45 · Cursor · 끝
 - 한 일: paper-kr-recovery-v1 23:35 실행 결과를 HTML로 정리
 - 파일: docs/paper-kr-recovery-v1-20261008.html, docs/work-log.md

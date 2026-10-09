@@ -1,0 +1,13 @@
+name: Fixed universe pattern replay checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  replay:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          php -l bin/paper/PatternReplay.php
+          php -l bin/paper_pattern_replay.php
+          php tests/pattern_replay.php

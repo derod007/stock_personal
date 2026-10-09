@@ -10,4 +10,7 @@ jobs:
       - run: |
           php -l bin/paper/PatternReplay.php
           php -l bin/paper_pattern_replay.php
+          php -l bin/paper/PullbackCompare.php
+          php -l docs/research/prior-period-compare.php
           php tests/pattern_replay.php
+          php tests/pullback_compare.php

@@ -1,3 +1,9 @@
+## 2026-10-10 05:50 · Cursor · 끝
+- 한 일: 같은 전략으로 2024-10-08~2025-10-02 재현(평가 137종목·33,058 종목일). 상승 눌림 종료 67건과 PR #56 70건의 손절 폭 구간을 비교. 15% 초과는 0건이라 기존 후반의 넓은 손절 부진은 반복되지 않음. 전략·손절·목표·계좌 변경 없음
+- 파일: bin/paper_pattern_replay.php, bin/paper/PullbackCompare.php, docs/research/prior-period-compare.php, tests/pullback_compare.php, tests/history_research.php, docs/pattern-compare-20251002.md, docs/pattern-compare-20251002.json, docs/pattern-history-replay.md, .github/workflows/pattern-replay.yml, docs/work-log.md
+- 커밋: 브랜치 cursor/prior-year-replay, PR 대기(병합 안 함)
+- 롤백: 없음
+
 ## 2026-10-10 06:10 · Cursor · 끝
 - 한 일: 같은 고정 종목군(156개, universe.json 바이트 복사)의 과거 1년 구간 일봉을 5y로 확보(요청일 2025-10-08은 휴장이라 기준일 2025-10-02, 평가 시작 2024-10-08, 준비 시작 2023-10-08). 151 성공·5 Yahoo 404, 보류 14. 첫 데이터셋과 공유 69,888 종목·날짜 OHLCV 불일치 0. 기준일 지정·종목군 복사·기준일 이후 가격 급변 경고·데이터셋 비교 기능 추가
 - 파일: bin/paper/HistoryResearch.php, bin/paper_history_prepare.php, tests/history_research.php, docs/history-data-prep.md, docs/history-data-20251008/, docs/work-log.md

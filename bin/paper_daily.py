@@ -170,6 +170,22 @@ def update(config_path, state_dir, runner=subprocess.run):
                 record["envelope_research"].update(status="failed", error_type=type(exc).__name__)
                 print("Envelope research failed: " + type(exc).__name__, file=sys.stderr)
             record["envelope_research"]["finished_at"] = int(time.time())
+        # Independent prebreak higher-low observations; never create portfolio orders.
+        if universe == "kr_amount_scan":
+            record["higher_low_research"] = {"status": "running", "started_at": int(time.time())}
+            save_record(log, record)
+            try:
+                tracking = runner(["php", str(ROOT / "bin/paper_higher_low.php"), "--account=" + account],
+                                  cwd=ROOT, env=env, check=True, timeout=2400,
+                                  capture_output=True, text=True, encoding="utf-8", errors="replace")
+                result = json.loads(tracking.stdout)
+                if not isinstance(result, dict) or result.get("status") not in ("saved", "partial", "no_observations"):
+                    raise ValueError("Invalid higher-low research summary")
+                record["higher_low_research"].update(result)
+            except Exception as exc:
+                record["higher_low_research"].update(status="failed", error_type=type(exc).__name__)
+                print("Higher-low research failed: " + type(exc).__name__, file=sys.stderr)
+            record["higher_low_research"]["finished_at"] = int(time.time())
         record["finished_at"] = int(time.time())
         save_record(log, record)
 

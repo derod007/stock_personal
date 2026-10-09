@@ -15,6 +15,7 @@ require_once __DIR__ . '/bin/paper/TargetResearchPanel.php';
 require_once __DIR__ . '/bin/paper/TargetComparisonPanel.php';
 require_once __DIR__ . '/bin/paper/TargetTrackingPanel.php';
 require_once __DIR__ . '/bin/paper/EnvelopeResearchPanel.php';
+require_once __DIR__ . '/bin/paper/HigherLowPanel.php';
 
 use ChartEntryLab\ChartPlanEngine;
 use ChartEntryLab\YahooChartClient;
@@ -107,7 +108,7 @@ $q = 'account=' . rawurlencode($id) . '&mode=' . rawurlencode($mode);
     'review'=>'최근 5개 기록일 진단', 'target_tracking'=>'누적 목표가 비교',
     'target_comparison'=>'돌파 종목 목표 비교', 'target_research'=>'목표가 산정 근거',
     'stop_research'=>'손절 가격 비교', 'condition_research'=>'조건 하나를 바꾼 연구',
-    'envelope_research'=>'엔벨로프 눌림 연구', 'rediagnosis'=>'과거 기록 재진단',
+    'higher_low_research'=>'돌파 전 높은 저점형', 'envelope_research'=>'엔벨로프 눌림 연구', 'rediagnosis'=>'과거 기록 재진단',
 ] as $key=>$label): if ($mode !== 'forward' && $key !== 'review') continue; ?>
 <a href="?<?= rh($q) ?>&amp;<?= rh($key) ?>=1"<?= ($_GET[$key]??'')==='1'?' aria-current="page"':'' ?>><?= rh($label) ?></a>
 <?php endforeach ?></div></nav>
@@ -118,7 +119,7 @@ if (($_GET['review']??'') === '1') {
 }
 if ($mode === 'forward') {
     foreach ([
-        'envelope_research'=>'paper_envelope_research_panel', 'target_tracking'=>'paper_target_tracking_panel',
+        'higher_low_research'=>'paper_higher_low_panel', 'envelope_research'=>'paper_envelope_research_panel', 'target_tracking'=>'paper_target_tracking_panel',
         'target_comparison'=>'paper_target_comparison_panel', 'target_research'=>'paper_target_research_panel',
         'stop_research'=>'paper_stop_research_panel', 'condition_research'=>'paper_condition_research_panel',
     ] as $key=>$render) {

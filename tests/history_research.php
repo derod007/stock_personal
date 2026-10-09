@@ -203,6 +203,7 @@ check($badDate,'malformed analysis dates are rejected');
 $ds2=PaperHistoryResearch::fixAsOf($dir2,$asPast,'test explicit date','5y','2026-07-04');
 $as2=$ds2['as_of']+['primary_range'=>$ds2['primary_range'],'evaluation_start_day'=>PaperHistoryResearch::evalStartOf($ds2)];
 check($ds2['primary_range']==='5y'&&$as2['evaluation_start_day']==='2025-07-04'&&$as2['day']===$pastDay,'the evaluation window starts twelve months before the requested day, not before the resolved session');
+check(PaperHistoryResearch::evalStartOf(['as_of'=>['day'=>'2026-10-08']])==='2025-10-08','a dataset without a recorded start keeps the twelve months before its session');
 $cases['300009.KQ']=['5y'=>body('300009.KQ',$days(120),['first'=>$first(120)])];
 $cases['300010.KQ']=['5y'=>body('300010.KQ',$days(700),['mutate'=>[660=>function(&$o,&$h,&$l,&$c,&$v){$o*=2;$h*=2;$l*=2;$c*=2;}]])];
 $cacheRoot=$dir2;$deps2=PaperHistoryResearch::makeClient($dir2,$http,fn()=>$now,$factory);$before=count($calls);

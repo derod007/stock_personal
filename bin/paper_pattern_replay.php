@@ -5,7 +5,8 @@ $o=getopt('',['dataset-dir:','profile:']);$dir=rtrim($o['dataset-dir']??'','/\\'
 if(!is_dir($dir)||!in_array($profile,['account1','custom','isa'],true))throw new InvalidArgumentException('Required --dataset-dir; optional --profile=account1|custom|isa');
 $problems=PaperHistoryResearch::verify($dir);if($problems)throw new RuntimeException(implode('; ',$problems));
 $manifest=PaperHistoryResearch::manifest($dir);$ds=PaperHistoryResearch::readJson($dir.'/dataset.json');
-$start=PaperHistoryResearch::evalStartDay($ds['as_of']['day']);$end=(int)$ds['as_of']['close_ts'];
+// A requested holiday resolves to the previous session, but the recorded evaluation start stays on the requested day.
+$start=PaperHistoryResearch::evalStartOf($ds);$end=(int)$ds['as_of']['close_ts'];
 $files=[];foreach(['bin/paper/PatternReplay.php','bin/paper_pattern_replay.php','bin/paper/HistoryResearch.php',
     'bin/paper/HigherLowResearch.php','bin/paper/RrAudit.php','bin/paper/Followup.php','src/PrebreakHigherLow.php',
     'src/TradeSimulator.php','src/PaperQuality.php','src/CandleClock.php'] as $p)$files[$p]=PaperStrategyVersion::fileHash(dirname(__DIR__).'/'.$p);

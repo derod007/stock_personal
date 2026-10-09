@@ -10,7 +10,7 @@ PR #54 데이터 준비가 끝난 데이터셋 폴더를 지정한다. 아래 Wi
 php -d memory_limit=512M bin/paper_pattern_replay.php --dataset-dir="C:\Users\acdun\Desktop\dev\stock-personal-paper\history-research\kr-saved-scan-20261009" --profile=account1 > pattern-replay-20261008.json
 ```
 
-진행 상황은 표준 오류에 종목당 한 줄로 나오고, 결과 JSON만 표준 출력으로 나온다. 원본 `verify` 실패 시 중단한다. 기본 프로필은 `account1`, 상위 추세 적용은 활성화다. `custom` 또는 `isa`는 별도 실행으로만 비교한다. 이번 데이터의 기준일과 평가 시작일은 dataset.json에서 각각 2026-10-08, 2025-10-08로 고정된다.
+진행 상황은 표준 오류에 종목당 한 줄로 나오고, 결과 JSON만 표준 출력으로 나온다. 원본 `verify` 실패 시 중단한다. 기본 프로필은 `account1`, 상위 추세 적용은 활성화다. `custom` 또는 `isa`는 별도 실행으로만 비교한다. 평가 시작일은 dataset.json에 기록된 평가 시작일을 쓰고, 그 기록이 없으면 기준일의 12개월 전이다. 기준일 이후 봉은 넣지 않는다. 첫 데이터셋은 2025-10-08~2026-10-08이다.
 
 ## 신호와 품질
 

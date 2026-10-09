@@ -4,7 +4,10 @@ declare(strict_types=1);
  * Prepare fixed-universe daily history for a later pattern study (data only, no strategy evaluation).
  *
  *   universe  freeze the symbol set from saved scans            --source-dir=DIR (repeatable) --dataset=ID
+ *             or reuse the exact set of another dataset         --from-dataset=ID --dataset=ID
  *   collect   resumable download + quality check               --dataset=ID [--retry-failed] [--max-attempts=3] [--delay-ms=300]
+ *             explicit past analysis date (first collect only)  --as-of=YYYY-MM-DD --primary-range=5y
+ *   compare   shared days of two datasets (read only)           --dataset=B --against=A
  *   report    write manifest.json and print the summary         --dataset=ID [--copy-to=DIR]
  *   verify    recompute hashes and quality from stored files    --dataset=ID
  *
@@ -27,6 +30,14 @@ $say=static fn(string $s)=>fwrite(STDERR,$s."\n");
 $out=static function(array $v):void{echo PaperHistoryResearch::encode($v,true)."\n";};
 
 if($cmd==='universe'){
+    if(isset($opt['from-dataset'])){
+        // Same symbols as an existing dataset: universe.json is copied byte for byte, not extracted again.
+        $srcDir=PaperHistoryResearch::datasetDir($state,(string)$opt['from-dataset']);
+        $ds=PaperHistoryResearch::copyUniverse($srcDir,$dir,$dataset);
+        $uni=PaperHistoryResearch::readJson($dir.'/universe.json');
+        $out(['dataset'=>$dataset,'path'=>$dir,'universe_source'=>$ds['universe_source'],'counts'=>$uni['counts']]);
+        exit(0);
+    }
     $sources=(array)($opt['source-dir']??['docs/paper-kr-5d-source/rr-audit/paper-kr']);
     $uni=PaperHistoryResearch::universe($sources);
     PaperHistoryResearch::initDataset($dir,$uni,$dataset);
@@ -45,11 +56,25 @@ if($cmd==='collect'){
         // The calendar reference only decides the last completed regular session. It is not added to the dataset.
         $probe=PaperHistoryResearch::makeClient($dir.'/probe',$http);
         $probe['context']['symbol']='005930.KS';
-        $rows=$probe['client']->fetch('005930.KS','5d','1d',false,0);
-        $as=PaperHistoryResearch::asOfFromRows($rows,'005930.KS',time())??throw new RuntimeException('No completed session found');
-        $ds=PaperHistoryResearch::fixAsOf($dir,$as,'last completed regular session of reference symbol 005930.KS at first collect');
+        if(isset($opt['as-of'])){
+            // A requested calendar day. It resolves to the last completed session on or before it; the requested day
+            // keeps defining the 12 month evaluation window.
+            $want=(string)$opt['as-of'];
+            $rows=$probe['client']->fetch('005930.KS','5y','1d',false,0);
+            $as=PaperHistoryResearch::asOfOnOrBefore($rows,'005930.KS',$want,time())??throw new RuntimeException('No completed regular session on or before '.$want.' in the reference symbol');
+            $basis='analysis date requested as '.$want.'; last completed regular session on or before it in reference symbol 005930.KS is '.$as['day'];
+            $requested=$want;
+        }else{
+            $rows=$probe['client']->fetch('005930.KS','5d','1d',false,0);
+            $as=PaperHistoryResearch::asOfFromRows($rows,'005930.KS',time())??throw new RuntimeException('No completed session found');
+            $basis='last completed regular session of reference symbol 005930.KS at first collect';
+            $requested=null;
+        }
+        $ds=PaperHistoryResearch::fixAsOf($dir,$as,$basis,isset($opt['primary-range'])?(string)$opt['primary-range']:null,$requested);
+    }elseif(isset($opt['as-of'])&&$opt['as-of']!==($ds['requested_as_of']??$ds['as_of']['day'])){
+        throw new RuntimeException('Analysis date is already fixed to '.($ds['requested_as_of']??$ds['as_of']['day']).'; use a new --dataset id for another date');
     }
-    $as=$ds['as_of'];
+    $as=$ds['as_of']+['primary_range'=>$ds['primary_range']??PaperHistoryResearch::PRIMARY_RANGE,'evaluation_start_day'=>PaperHistoryResearch::evalStartOf($ds)];
     $deps=PaperHistoryResearch::makeClient($dir,$http);
     $included=array_values(array_filter($uni['rows'],fn($u)=>$u['status']==='included'));
     $count=['reused'=>0,'collected'=>0,'failed'=>0,'skipped_attempt_limit'=>0];$consecutive=0;$aborted=false;
@@ -89,6 +114,13 @@ if($cmd==='report'){
     $out(['dataset'=>$dataset,'manifest'=>$dir.'/manifest.json','summary'=>$manifest['summary'],'hold_reason_counts'=>$manifest['hold_reason_counts'],
         'warning_counts'=>$manifest['warning_counts']]);
     exit(0);
+}
+
+if($cmd==='compare'){
+    $against=PaperHistoryResearch::datasetDir($state,(string)($opt['against']??throw new InvalidArgumentException('--against=DATASET is required')));
+    $res=PaperHistoryResearch::compare($against,$dir);
+    $out($res);
+    exit($res['summary']['mismatch_days']>0?1:0);
 }
 
 if($cmd==='verify'){

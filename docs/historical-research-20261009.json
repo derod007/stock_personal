@@ -1,0 +1,2511 @@
+{
+  "schema": 1,
+  "kind": "current_rule_historical_research",
+  "as_of": 1790794963,
+  "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+  "research_files": {
+    "bin/paper_historical_research.php": "03d6bb22fa4fcf4e2a5c1c97730eb1c0b97de7637b4e91924e5baf7c7476ea65",
+    "bin/paper/HistoricalResearch.php": "388bec53a12e289464556bf446dbf8700f78e5dcc7d73ccd1dcf8e1ae014e79f",
+    "bin/paper/Rediagnosis.php": "56a1d8b09d96ab396feafa687dba7a7b673ff6ff19c7f36c0a350fb7710a0e41",
+    "bin/paper/Followup.php": "a74757669db9215d4757acbb174618c9a7a3cb76751b4dffa9218eb31ead6828",
+    "bin/paper/RrAudit.php": "482bb66fd12cad20042b9fa13ae877376d55a12cf4f5e8d21b9412cd9222f3ee",
+    "bin/paper/TrackingInput.php": "56fc7b137fd8c9922852e1cd67c6a6cbe7f593304ec2ce5876d158bd29225587",
+    "bin/paper/EnvelopeStore.php": "72bad01ee978bcb3c56243ae66c9087c4b794886f7adff90dcf75da690cc3f43",
+    "src/KrAmountLeadersClient.php": "8de0f63934fc2e3494708cd5bd37d0b1c21a9eb8cbd9f34325be2ad8f24f26d7",
+    "src/CandleClock.php": "fa4eeaf906a4a9219211b855b9dd9f3202f603c4db263a6044319240a9e0431d",
+    "src/PaperQuality.php": "dac9a2ed7614ea00862656b9d0d9e5b2a6494e015f333cc397e9190bf5ddd82c",
+    "src/TradeSimulator.php": "9024b31c25bdb45b5262e8aea4494a777378df47958bbec7de3af6c46fdfcc08"
+  },
+  "execution_version": "7eba6f75d5123b579da9aae0cadc3918e94f57dafe97401577755226273e4ee7",
+  "source_summary": {
+    "errors": [],
+    "duplicates": 0,
+    "unavailable": 33
+  },
+  "summary": {
+    "rows": 467,
+    "statuses": {
+      "evaluated": 441,
+      "excluded_instrument": 25,
+      "analysis_symbol_mismatch": 1
+    },
+    "final_statuses": {
+      "await_confirmation": 111,
+      "no_setup": 28,
+      "risk_blocked": 105,
+      "rejected_rr": 22,
+      "context_wait": 148,
+      "wait_pullback": 16,
+      "invalidated": 5,
+      "await_retest": 3,
+      "expired": 3
+    },
+    "patterns": {
+      "breakout_retest": {
+        "no_setup": 266,
+        "await_retest": 81,
+        "expired": 8,
+        "invalidated": 53,
+        "await_confirmation": 31,
+        "rejected_rr": 2
+      },
+      "trend_pullback": {
+        "await_confirmation": 187,
+        "no_setup": 205,
+        "rejected_rr": 28,
+        "wait_pullback": 20,
+        "ready": 1
+      },
+      "trend_recovery": {
+        "await_recovery": 121,
+        "expired": 190,
+        "invalidated": 91,
+        "await_confirmation": 9,
+        "await_higher_low": 22,
+        "no_setup": 3,
+        "rejected_rr": 5
+      }
+    },
+    "tracking": {
+      "pending": 344,
+      "future_quality_blocked": 3,
+      "no_future_bars": 94
+    },
+    "horizons": {
+      "1": {
+        "n": 344,
+        "up": 156,
+        "mean_return_pct": -0.35372064293181493
+      },
+      "3": {
+        "n": 156,
+        "up": 55,
+        "mean_return_pct": -0.9512599222998523
+      }
+    },
+    "groups": {
+      "breakout_retest:no_setup:await_confirmation": {
+        "observations": 36,
+        "horizons": {
+          "1": {
+            "n": 28,
+            "up": 16,
+            "mean_return_pct": -0.5759419442166016
+          },
+          "3": {
+            "n": 11,
+            "up": 3,
+            "mean_return_pct": -0.06646170805105811
+          }
+        }
+      },
+      "trend_pullback:await_confirmation:await_confirmation": {
+        "observations": 110,
+        "horizons": {
+          "1": {
+            "n": 86,
+            "up": 41,
+            "mean_return_pct": -0.5888181083281172
+          },
+          "3": {
+            "n": 35,
+            "up": 10,
+            "mean_return_pct": -0.9260971815553253
+          }
+        }
+      },
+      "trend_recovery:await_recovery:await_confirmation": {
+        "observations": 29,
+        "horizons": {
+          "1": {
+            "n": 22,
+            "up": 12,
+            "mean_return_pct": -1.0289647517805207
+          },
+          "3": {
+            "n": 9,
+            "up": 4,
+            "mean_return_pct": 0.16654832899931493
+          }
+        }
+      },
+      "breakout_retest:no_setup:no_setup": {
+        "observations": 28,
+        "horizons": {
+          "1": {
+            "n": 23,
+            "up": 13,
+            "mean_return_pct": 0.3191631293773862
+          },
+          "3": {
+            "n": 14,
+            "up": 5,
+            "mean_return_pct": -1.344904136715936
+          }
+        }
+      },
+      "trend_pullback:no_setup:no_setup": {
+        "observations": 28,
+        "horizons": {
+          "1": {
+            "n": 23,
+            "up": 13,
+            "mean_return_pct": 0.3191631293773862
+          },
+          "3": {
+            "n": 14,
+            "up": 5,
+            "mean_return_pct": -1.344904136715936
+          }
+        }
+      },
+      "trend_recovery:expired:no_setup": {
+        "observations": 11,
+        "horizons": {
+          "1": {
+            "n": 8,
+            "up": 7,
+            "mean_return_pct": 1.7554545905951124
+          },
+          "3": {
+            "n": 3,
+            "up": 0,
+            "mean_return_pct": -2.3520958988576015
+          }
+        }
+      },
+      "trend_recovery:await_recovery:no_setup": {
+        "observations": 11,
+        "horizons": {
+          "1": {
+            "n": 10,
+            "up": 5,
+            "mean_return_pct": 0.15427293935634354
+          },
+          "3": {
+            "n": 8,
+            "up": 4,
+            "mean_return_pct": -0.884742671019273
+          }
+        }
+      },
+      "breakout_retest:await_retest:await_confirmation": {
+        "observations": 30,
+        "horizons": {
+          "1": {
+            "n": 24,
+            "up": 7,
+            "mean_return_pct": -1.8301920831139766
+          },
+          "3": {
+            "n": 12,
+            "up": 3,
+            "mean_return_pct": -1.6046627295769291
+          }
+        }
+      },
+      "trend_recovery:expired:await_confirmation": {
+        "observations": 57,
+        "horizons": {
+          "1": {
+            "n": 45,
+            "up": 19,
+            "mean_return_pct": -0.3987450434575536
+          },
+          "3": {
+            "n": 19,
+            "up": 5,
+            "mean_return_pct": -0.21851009770035149
+          }
+        }
+      },
+      "trend_recovery:invalidated:no_setup": {
+        "observations": 6,
+        "horizons": {
+          "1": {
+            "n": 5,
+            "up": 1,
+            "mean_return_pct": -1.6491228285288906
+          },
+          "3": {
+            "n": 3,
+            "up": 1,
+            "mean_return_pct": -1.564809616432039
+          }
+        }
+      },
+      "breakout_retest:no_setup:risk_blocked": {
+        "observations": 91,
+        "horizons": {
+          "1": {
+            "n": 68,
+            "up": 37,
+            "mean_return_pct": 0.21333254293295173
+          },
+          "3": {
+            "n": 30,
+            "up": 11,
+            "mean_return_pct": 0.7061348959070994
+          }
+        }
+      },
+      "trend_pullback:no_setup:risk_blocked": {
+        "observations": 82,
+        "horizons": {
+          "1": {
+            "n": 60,
+            "up": 32,
+            "mean_return_pct": 0.20826035353539105
+          },
+          "3": {
+            "n": 26,
+            "up": 12,
+            "mean_return_pct": 1.9792002327768838
+          }
+        }
+      },
+      "trend_recovery:await_confirmation:risk_blocked": {
+        "observations": 3,
+        "horizons": {
+          "1": {
+            "n": 3,
+            "up": 3,
+            "mean_return_pct": 5.061596520066962
+          },
+          "3": {
+            "n": 2,
+            "up": 2,
+            "mean_return_pct": 13.45548609774906
+          }
+        }
+      },
+      "breakout_retest:await_retest:rejected_rr": {
+        "observations": 8,
+        "horizons": {
+          "1": {
+            "n": 7,
+            "up": 3,
+            "mean_return_pct": -2.005495250108407
+          },
+          "3": {
+            "n": 5,
+            "up": 2,
+            "mean_return_pct": -3.3208625553651667
+          }
+        }
+      },
+      "trend_pullback:rejected_rr:rejected_rr": {
+        "observations": 20,
+        "horizons": {
+          "1": {
+            "n": 14,
+            "up": 6,
+            "mean_return_pct": -1.215277258992048
+          },
+          "3": {
+            "n": 9,
+            "up": 3,
+            "mean_return_pct": -3.953692488493324
+          }
+        }
+      },
+      "trend_recovery:expired:rejected_rr": {
+        "observations": 13,
+        "horizons": {
+          "1": {
+            "n": 9,
+            "up": 4,
+            "mean_return_pct": -0.5340056860130528
+          },
+          "3": {
+            "n": 5,
+            "up": 1,
+            "mean_return_pct": -6.1310846330999045
+          }
+        }
+      },
+      "breakout_retest:no_setup:context_wait": {
+        "observations": 106,
+        "horizons": {
+          "1": {
+            "n": 84,
+            "up": 29,
+            "mean_return_pct": -0.8357376443751177
+          },
+          "3": {
+            "n": 32,
+            "up": 8,
+            "mean_return_pct": -1.9159251514461466
+          }
+        }
+      },
+      "trend_pullback:await_confirmation:context_wait": {
+        "observations": 57,
+        "horizons": {
+          "1": {
+            "n": 48,
+            "up": 23,
+            "mean_return_pct": -0.37368306729203316
+          },
+          "3": {
+            "n": 30,
+            "up": 11,
+            "mean_return_pct": -1.7539052299898565
+          }
+        }
+      },
+      "trend_recovery:invalidated:context_wait": {
+        "observations": 31,
+        "horizons": {
+          "1": {
+            "n": 25,
+            "up": 11,
+            "mean_return_pct": -0.7329167520655543
+          },
+          "3": {
+            "n": 12,
+            "up": 3,
+            "mean_return_pct": -2.282870784183756
+          }
+        }
+      },
+      "trend_recovery:invalidated:rejected_rr": {
+        "observations": 4,
+        "horizons": {
+          "1": {
+            "n": 3,
+            "up": 1,
+            "mean_return_pct": -0.6268716902143109
+          },
+          "3": {
+            "n": 2,
+            "up": 2,
+            "mean_return_pct": 2.6618241743483817
+          }
+        }
+      },
+      "breakout_retest:expired:rejected_rr": {
+        "observations": 2,
+        "horizons": {
+          "1": {
+            "n": 1,
+            "up": 0,
+            "mean_return_pct": -5.575669804489502
+          },
+          "3": {
+            "n": 1,
+            "up": 0,
+            "mean_return_pct": -12.309920347574222
+          }
+        }
+      },
+      "trend_recovery:expired:context_wait": {
+        "observations": 60,
+        "horizons": {
+          "1": {
+            "n": 45,
+            "up": 17,
+            "mean_return_pct": -0.35948543179282566
+          },
+          "3": {
+            "n": 23,
+            "up": 11,
+            "mean_return_pct": -0.6760304603026712
+          }
+        }
+      },
+      "breakout_retest:await_retest:wait_pullback": {
+        "observations": 10,
+        "horizons": {
+          "1": {
+            "n": 8,
+            "up": 2,
+            "mean_return_pct": -0.521852632761366
+          },
+          "3": {
+            "n": 4,
+            "up": 3,
+            "mean_return_pct": 2.5736948874464396
+          }
+        }
+      },
+      "trend_pullback:wait_pullback:wait_pullback": {
+        "observations": 16,
+        "horizons": {
+          "1": {
+            "n": 13,
+            "up": 4,
+            "mean_return_pct": -0.15977747295470057
+          },
+          "3": {
+            "n": 5,
+            "up": 3,
+            "mean_return_pct": 1.5213215013550017
+          }
+        }
+      },
+      "trend_recovery:await_confirmation:wait_pullback": {
+        "observations": 3,
+        "horizons": {
+          "1": {
+            "n": 3,
+            "up": 0,
+            "mean_return_pct": -1.8227914486820225
+          },
+          "3": {
+            "n": 2,
+            "up": 2,
+            "mean_return_pct": 4.208897033490877
+          }
+        }
+      },
+      "breakout_retest:await_retest:risk_blocked": {
+        "observations": 4,
+        "horizons": {
+          "1": {
+            "n": 4,
+            "up": 3,
+            "mean_return_pct": 2.0223080822825534
+          },
+          "3": {
+            "n": 2,
+            "up": 1,
+            "mean_return_pct": 2.4975519238998096
+          }
+        }
+      },
+      "trend_recovery:expired:risk_blocked": {
+        "observations": 31,
+        "horizons": {
+          "1": {
+            "n": 24,
+            "up": 10,
+            "mean_return_pct": -0.9512822449955393
+          },
+          "3": {
+            "n": 12,
+            "up": 1,
+            "mean_return_pct": -2.6473285533725908
+          }
+        }
+      },
+      "breakout_retest:invalidated:invalidated": {
+        "observations": 5,
+        "horizons": {
+          "1": {
+            "n": 4,
+            "up": 3,
+            "mean_return_pct": 2.0555104507378577
+          },
+          "3": {
+            "n": 2,
+            "up": 2,
+            "mean_return_pct": 6.283043197936811
+          }
+        }
+      },
+      "trend_pullback:no_setup:invalidated": {
+        "observations": 5,
+        "horizons": {
+          "1": {
+            "n": 4,
+            "up": 3,
+            "mean_return_pct": 2.0555104507378577
+          },
+          "3": {
+            "n": 2,
+            "up": 2,
+            "mean_return_pct": 6.283043197936811
+          }
+        }
+      },
+      "trend_recovery:expired:invalidated": {
+        "observations": 4,
+        "horizons": {
+          "1": {
+            "n": 3,
+            "up": 2,
+            "mean_return_pct": 0.8021463220239999
+          },
+          "3": {
+            "n": 1,
+            "up": 1,
+            "mean_return_pct": 9.090909090909083
+          }
+        }
+      },
+      "breakout_retest:await_confirmation:context_wait": {
+        "observations": 9,
+        "horizons": {
+          "1": {
+            "n": 7,
+            "up": 3,
+            "mean_return_pct": -0.11937053687246224
+          },
+          "3": {
+            "n": 6,
+            "up": 3,
+            "mean_return_pct": 1.679959179306482
+          }
+        }
+      },
+      "breakout_retest:await_retest:context_wait": {
+        "observations": 26,
+        "horizons": {
+          "1": {
+            "n": 22,
+            "up": 11,
+            "mean_return_pct": -0.0671691308120265
+          },
+          "3": {
+            "n": 12,
+            "up": 7,
+            "mean_return_pct": -2.1812508138598314
+          }
+        }
+      },
+      "trend_pullback:await_confirmation:risk_blocked": {
+        "observations": 20,
+        "horizons": {
+          "1": {
+            "n": 17,
+            "up": 8,
+            "mean_return_pct": -0.21037795030593215
+          },
+          "3": {
+            "n": 9,
+            "up": 1,
+            "mean_return_pct": -3.1232108476589997
+          }
+        }
+      },
+      "trend_pullback:no_setup:context_wait": {
+        "observations": 81,
+        "horizons": {
+          "1": {
+            "n": 62,
+            "up": 21,
+            "mean_return_pct": -0.6130514033873165
+          },
+          "3": {
+            "n": 17,
+            "up": 5,
+            "mean_return_pct": -1.340732406723219
+          }
+        }
+      },
+      "trend_recovery:invalidated:await_confirmation": {
+        "observations": 19,
+        "horizons": {
+          "1": {
+            "n": 15,
+            "up": 9,
+            "mean_return_pct": 0.7181234342630094
+          },
+          "3": {
+            "n": 6,
+            "up": 1,
+            "mean_return_pct": -3.9184407431872557
+          }
+        }
+      },
+      "trend_pullback:rejected_rr:context_wait": {
+        "observations": 7,
+        "horizons": {
+          "1": {
+            "n": 6,
+            "up": 2,
+            "mean_return_pct": -2.3473810671299407
+          },
+          "3": {
+            "n": 3,
+            "up": 1,
+            "mean_return_pct": -3.54796603255831
+          }
+        }
+      },
+      "breakout_retest:invalidated:await_confirmation": {
+        "observations": 27,
+        "horizons": {
+          "1": {
+            "n": 20,
+            "up": 10,
+            "mean_return_pct": -0.0047110381457955985
+          },
+          "3": {
+            "n": 9,
+            "up": 3,
+            "mean_return_pct": -0.7510102072141522
+          }
+        }
+      },
+      "trend_recovery:await_recovery:context_wait": {
+        "observations": 41,
+        "horizons": {
+          "1": {
+            "n": 35,
+            "up": 13,
+            "mean_return_pct": -0.7872680606509179
+          },
+          "3": {
+            "n": 14,
+            "up": 4,
+            "mean_return_pct": -1.5368120983559694
+          }
+        }
+      },
+      "breakout_retest:invalidated:risk_blocked": {
+        "observations": 10,
+        "horizons": {
+          "1": {
+            "n": 7,
+            "up": 1,
+            "mean_return_pct": -2.1716216717316335
+          },
+          "3": {
+            "n": 5,
+            "up": 1,
+            "mean_return_pct": -3.113694275890027
+          }
+        }
+      },
+      "trend_recovery:invalidated:risk_blocked": {
+        "observations": 29,
+        "horizons": {
+          "1": {
+            "n": 22,
+            "up": 8,
+            "mean_return_pct": -0.07701664103870182
+          },
+          "3": {
+            "n": 11,
+            "up": 1,
+            "mean_return_pct": 0.029952947337283126
+          }
+        }
+      },
+      "trend_recovery:await_recovery:invalidated": {
+        "observations": 1,
+        "horizons": {
+          "1": {
+            "n": 1,
+            "up": 1,
+            "mean_return_pct": 5.81560283687943
+          },
+          "3": {
+            "n": 1,
+            "up": 1,
+            "mean_return_pct": 3.4751773049645385
+          }
+        }
+      },
+      "trend_recovery:await_recovery:risk_blocked": {
+        "observations": 36,
+        "horizons": {
+          "1": {
+            "n": 25,
+            "up": 18,
+            "mean_return_pct": 0.4690744116850716
+          },
+          "3": {
+            "n": 10,
+            "up": 8,
+            "mean_return_pct": 0.7321447790317737
+          }
+        }
+      },
+      "trend_pullback:ready:risk_blocked": {
+        "observations": 1,
+        "horizons": {
+          "1": {
+            "n": 1,
+            "up": 0,
+            "mean_return_pct": -2.3344191096634104
+          },
+          "3": {
+            "n": 1,
+            "up": 0,
+            "mean_return_pct": -4.777415852334421
+          }
+        }
+      },
+      "breakout_retest:await_retest:await_retest": {
+        "observations": 3,
+        "horizons": {
+          "1": {
+            "n": 3,
+            "up": 1,
+            "mean_return_pct": -1.545279596461972
+          },
+          "3": {
+            "n": 1,
+            "up": 0,
+            "mean_return_pct": -5.954465849387036
+          }
+        }
+      },
+      "trend_pullback:no_setup:await_retest": {
+        "observations": 3,
+        "horizons": {
+          "1": {
+            "n": 3,
+            "up": 1,
+            "mean_return_pct": -1.545279596461972
+          },
+          "3": {
+            "n": 1,
+            "up": 0,
+            "mean_return_pct": -5.954465849387036
+          }
+        }
+      },
+      "trend_recovery:expired:await_retest": {
+        "observations": 2,
+        "horizons": {
+          "1": {
+            "n": 2,
+            "up": 0,
+            "mean_return_pct": -3.4415149003109384
+          },
+          "3": {
+            "n": 1,
+            "up": 0,
+            "mean_return_pct": -5.954465849387036
+          }
+        }
+      },
+      "trend_recovery:await_higher_low:wait_pullback": {
+        "observations": 1,
+        "horizons": {
+          "1": {
+            "n": 1,
+            "up": 1,
+            "mean_return_pct": 1.591657519209666
+          },
+          "3": {
+            "n": 1,
+            "up": 0,
+            "mean_return_pct": -0.1097694840834218
+          }
+        }
+      },
+      "breakout_retest:invalidated:rejected_rr": {
+        "observations": 5,
+        "horizons": {
+          "1": {
+            "n": 4,
+            "up": 2,
+            "mean_return_pct": -1.4497746386560841
+          },
+          "3": {
+            "n": 2,
+            "up": 0,
+            "mean_return_pct": -5.125728789818578
+          }
+        }
+      },
+      "trend_recovery:await_recovery:rejected_rr": {
+        "observations": 2,
+        "horizons": {
+          "1": {
+            "n": 2,
+            "up": 1,
+            "mean_return_pct": 2.3505283865585924
+          },
+          "3": {
+            "n": 2,
+            "up": 0,
+            "mean_return_pct": -5.125728789818578
+          }
+        }
+      },
+      "trend_recovery:no_setup:rejected_rr": {
+        "observations": 1,
+        "horizons": []
+      },
+      "breakout_retest:await_confirmation:await_confirmation": {
+        "observations": 17,
+        "horizons": {
+          "1": {
+            "n": 13,
+            "up": 8,
+            "mean_return_pct": 0.9790543673233568
+          },
+          "3": {
+            "n": 2,
+            "up": 1,
+            "mean_return_pct": 0.15715857300015457
+          }
+        }
+      },
+      "breakout_retest:expired:expired": {
+        "observations": 3,
+        "horizons": {
+          "1": {
+            "n": 2,
+            "up": 0,
+            "mean_return_pct": -1.4487455264763416
+          },
+          "3": {
+            "n": 2,
+            "up": 1,
+            "mean_return_pct": -1.915753092942368
+          }
+        }
+      },
+      "trend_pullback:no_setup:expired": {
+        "observations": 3,
+        "horizons": {
+          "1": {
+            "n": 2,
+            "up": 0,
+            "mean_return_pct": -1.4487455264763416
+          },
+          "3": {
+            "n": 2,
+            "up": 1,
+            "mean_return_pct": -1.915753092942368
+          }
+        }
+      },
+      "trend_recovery:expired:expired": {
+        "observations": 3,
+        "horizons": {
+          "1": {
+            "n": 2,
+            "up": 0,
+            "mean_return_pct": -1.4487455264763416
+          },
+          "3": {
+            "n": 2,
+            "up": 1,
+            "mean_return_pct": -1.915753092942368
+          }
+        }
+      },
+      "trend_recovery:await_higher_low:risk_blocked": {
+        "observations": 5,
+        "horizons": {
+          "1": {
+            "n": 4,
+            "up": 2,
+            "mean_return_pct": 2.564906203680448
+          },
+          "3": {
+            "n": 2,
+            "up": 1,
+            "mean_return_pct": 3.9083597897537956
+          }
+        }
+      },
+      "trend_pullback:wait_pullback:risk_blocked": {
+        "observations": 1,
+        "horizons": {
+          "1": {
+            "n": 1,
+            "up": 1,
+            "mean_return_pct": 0.809716599190291
+          },
+          "3": {
+            "n": 1,
+            "up": 0,
+            "mean_return_pct": -7.9622132253711175
+          }
+        }
+      },
+      "trend_recovery:await_higher_low:await_confirmation": {
+        "observations": 3,
+        "horizons": {
+          "1": {
+            "n": 3,
+            "up": 0,
+            "mean_return_pct": -9.816715663524755
+          },
+          "3": {
+            "n": 1,
+            "up": 0,
+            "mean_return_pct": -6.25
+          }
+        }
+      },
+      "trend_recovery:expired:wait_pullback": {
+        "observations": 9,
+        "horizons": {
+          "1": {
+            "n": 7,
+            "up": 3,
+            "mean_return_pct": 0.8132096315735131
+          },
+          "3": {
+            "n": 2,
+            "up": 1,
+            "mean_return_pct": -0.35070853806166147
+          }
+        }
+      },
+      "breakout_retest:expired:await_confirmation": {
+        "observations": 1,
+        "horizons": {
+          "1": {
+            "n": 1,
+            "up": 0,
+            "mean_return_pct": -3.220858895705525
+          },
+          "3": {
+            "n": 1,
+            "up": 0,
+            "mean_return_pct": -5.981595092024539
+          }
+        }
+      },
+      "trend_recovery:await_higher_low:context_wait": {
+        "observations": 13,
+        "horizons": {
+          "1": {
+            "n": 10,
+            "up": 4,
+            "mean_return_pct": -0.8837648311661348
+          },
+          "3": {
+            "n": 1,
+            "up": 0,
+            "mean_return_pct": -15.394088669950733
+          }
+        }
+      },
+      "breakout_retest:no_setup:rejected_rr": {
+        "observations": 5,
+        "horizons": {
+          "1": {
+            "n": 3,
+            "up": 1,
+            "mean_return_pct": 1.043170738047583
+          },
+          "3": {
+            "n": 1,
+            "up": 1,
+            "mean_return_pct": 3.5824583075972916
+          }
+        }
+      },
+      "trend_pullback:wait_pullback:context_wait": {
+        "observations": 3,
+        "horizons": {
+          "1": {
+            "n": 2,
+            "up": 1,
+            "mean_return_pct": 4.063601127554617
+          },
+          "3": {
+            "n": 1,
+            "up": 1,
+            "mean_return_pct": 3.4848484848484906
+          }
+        }
+      },
+      "breakout_retest:invalidated:context_wait": {
+        "observations": 4,
+        "horizons": {
+          "1": {
+            "n": 3,
+            "up": 2,
+            "mean_return_pct": 1.3830840394311004
+          },
+          "3": {
+            "n": 1,
+            "up": 0,
+            "mean_return_pct": -5.163797890061073
+          }
+        }
+      },
+      "trend_recovery:await_confirmation:context_wait": {
+        "observations": 1,
+        "horizons": {
+          "1": {
+            "n": 1,
+            "up": 0,
+            "mean_return_pct": -0.7407407407407418
+          },
+          "3": {
+            "n": 1,
+            "up": 0,
+            "mean_return_pct": -2.716049382716046
+          }
+        }
+      },
+      "breakout_retest:await_confirmation:wait_pullback": {
+        "observations": 4,
+        "horizons": {
+          "1": {
+            "n": 3,
+            "up": 2,
+            "mean_return_pct": 1.9968572187563716
+          },
+          "3": {
+            "n": 1,
+            "up": 0,
+            "mean_return_pct": -2.6881720430107503
+          }
+        }
+      },
+      "trend_recovery:no_setup:await_confirmation": {
+        "observations": 2,
+        "horizons": []
+      },
+      "trend_recovery:rejected_rr:risk_blocked": {
+        "observations": 1,
+        "horizons": {
+          "1": {
+            "n": 1,
+            "up": 0,
+            "mean_return_pct": -5.251641137855579
+          }
+        }
+      },
+      "breakout_retest:invalidated:wait_pullback": {
+        "observations": 2,
+        "horizons": {
+          "1": {
+            "n": 2,
+            "up": 0,
+            "mean_return_pct": -1.9464288712946476
+          }
+        }
+      },
+      "trend_recovery:invalidated:wait_pullback": {
+        "observations": 2,
+        "horizons": {
+          "1": {
+            "n": 2,
+            "up": 0,
+            "mean_return_pct": -1.9464288712946476
+          }
+        }
+      },
+      "trend_recovery:rejected_rr:rejected_rr": {
+        "observations": 2,
+        "horizons": {
+          "1": {
+            "n": 2,
+            "up": 0,
+            "mean_return_pct": -10.249863163656265
+          }
+        }
+      },
+      "trend_recovery:await_confirmation:await_confirmation": {
+        "observations": 1,
+        "horizons": {
+          "1": {
+            "n": 1,
+            "up": 1,
+            "mean_return_pct": 8.62068965517242
+          }
+        }
+      },
+      "trend_pullback:no_setup:rejected_rr": {
+        "observations": 2,
+        "horizons": {
+          "1": {
+            "n": 2,
+            "up": 0,
+            "mean_return_pct": -2.73572708653354
+          }
+        }
+      },
+      "trend_recovery:rejected_rr:context_wait": {
+        "observations": 2,
+        "horizons": {
+          "1": {
+            "n": 2,
+            "up": 2,
+            "mean_return_pct": 4.864738009899305
+          }
+        }
+      },
+      "breakout_retest:expired:context_wait": {
+        "observations": 2,
+        "horizons": {
+          "1": {
+            "n": 2,
+            "up": 2,
+            "mean_return_pct": 3.2314831287433954
+          }
+        }
+      },
+      "trend_recovery:await_confirmation:await_retest": {
+        "observations": 1,
+        "horizons": {
+          "1": {
+            "n": 1,
+            "up": 1,
+            "mean_return_pct": 2.2471910112359605
+          }
+        }
+      },
+      "breakout_retest:rejected_rr:rejected_rr": {
+        "observations": 1,
+        "horizons": {
+          "1": {
+            "n": 1,
+            "up": 0,
+            "mean_return_pct": -0.20161290322581182
+          }
+        }
+      },
+      "trend_recovery:await_recovery:wait_pullback": {
+        "observations": 1,
+        "horizons": []
+      },
+      "breakout_retest:rejected_rr:context_wait": {
+        "observations": 1,
+        "horizons": []
+      },
+      "breakout_retest:await_confirmation:rejected_rr": {
+        "observations": 1,
+        "horizons": []
+      },
+      "trend_pullback:no_setup:await_confirmation": {
+        "observations": 1,
+        "horizons": []
+      },
+      "trend_pullback:rejected_rr:risk_blocked": {
+        "observations": 1,
+        "horizons": []
+      }
+    },
+    "trades": {
+      "limit:trend_pullback_v1:cancelled_before_entry": 10,
+      "limit:trend_pullback_v1:closed": 1,
+      "limit:trend_pullback_v1:incomplete": 1,
+      "limit:trend_recovery_v1:incomplete": 1,
+      "limit:trend_pullback_v1:pending": 1,
+      "limit:trend_recovery_v1:cancelled_before_entry": 1,
+      "limit:breakout_retest_v1:cancelled_before_entry": 1,
+      "limit:trend_pullback_v1:no_future_bars": 5
+    }
+  },
+  "evidence_errors": [],
+  "source_manifest": {
+    "followup/paper-kr/evidence/014049a15d57610c2762d9176480d872c666c6acef325427bd20de437307f459.json": "014049a15d57610c2762d9176480d872c666c6acef325427bd20de437307f459",
+    "followup/paper-kr/evidence/02bc1b7509d2429f453e6cb816f864bc281959d8bc12f09d2152424a84431239.json": "02bc1b7509d2429f453e6cb816f864bc281959d8bc12f09d2152424a84431239",
+    "followup/paper-kr/evidence/037f13d7eee521cc2e1aebb77cbdce438dc94a3baa56a502470610cd84f550ea.json": "037f13d7eee521cc2e1aebb77cbdce438dc94a3baa56a502470610cd84f550ea",
+    "followup/paper-kr/evidence/03fcebf7f7f4d71e7fc3d7c2fdaf300eff2382013bd6e7b07f1b4d52012cf223.json": "03fcebf7f7f4d71e7fc3d7c2fdaf300eff2382013bd6e7b07f1b4d52012cf223",
+    "followup/paper-kr/evidence/05072d5c9631df3a9dfbc71ccdb97d8c145147815457626daf4c78d6ba8d1167.json": "05072d5c9631df3a9dfbc71ccdb97d8c145147815457626daf4c78d6ba8d1167",
+    "followup/paper-kr/evidence/0a9742d7f65106d07c1516a7726b7b9adafee223dbb5246d3eacfd2f16da1e64.json": "0a9742d7f65106d07c1516a7726b7b9adafee223dbb5246d3eacfd2f16da1e64",
+    "followup/paper-kr/evidence/0e10f84c768dc35d6ef039fdc958556a3b0ca8a9a885505a9e5b7b1bb7b56059.json": "0e10f84c768dc35d6ef039fdc958556a3b0ca8a9a885505a9e5b7b1bb7b56059",
+    "followup/paper-kr/evidence/0e6f49f3ff7647d5bbe2f16164b07701f6ab1c795ac59ea455598e6347a6847a.json": "0e6f49f3ff7647d5bbe2f16164b07701f6ab1c795ac59ea455598e6347a6847a",
+    "followup/paper-kr/evidence/11cb43c61fcc92bd5a883de1b6c936ad54c919b2f027f7fd32901ed84e4ea335.json": "11cb43c61fcc92bd5a883de1b6c936ad54c919b2f027f7fd32901ed84e4ea335",
+    "followup/paper-kr/evidence/12003c893e7534d4b9bf94df9b58da11ea4ce9fa78e04402b63872ac9032c555.json": "12003c893e7534d4b9bf94df9b58da11ea4ce9fa78e04402b63872ac9032c555",
+    "followup/paper-kr/evidence/134a0c02bbef57671172765711f3de74739114b678a5dfdaa563b20b7d87a936.json": "134a0c02bbef57671172765711f3de74739114b678a5dfdaa563b20b7d87a936",
+    "followup/paper-kr/evidence/1381397be2dbc6dba5440f0957f2358d5a1434aebaf1276a70431c8c0b94cb4b.json": "1381397be2dbc6dba5440f0957f2358d5a1434aebaf1276a70431c8c0b94cb4b",
+    "followup/paper-kr/evidence/1466bcff0ef895a2b973c03675bdd8e0165d277b846841fcf13c3ac79094dec7.json": "1466bcff0ef895a2b973c03675bdd8e0165d277b846841fcf13c3ac79094dec7",
+    "followup/paper-kr/evidence/153210757ecaa3b46ebb24b60fa77854bf512a6725c25f0930184d4266358667.json": "153210757ecaa3b46ebb24b60fa77854bf512a6725c25f0930184d4266358667",
+    "followup/paper-kr/evidence/182ab89764699cdb9a60050e30f103bb3b9beed821e284e0cb3376fac25c4a67.json": "182ab89764699cdb9a60050e30f103bb3b9beed821e284e0cb3376fac25c4a67",
+    "followup/paper-kr/evidence/18e19aa3bf5e1c7de3ed52c2e2ae7f4a32c84ca7ce9a949937b31084687a85fd.json": "18e19aa3bf5e1c7de3ed52c2e2ae7f4a32c84ca7ce9a949937b31084687a85fd",
+    "followup/paper-kr/evidence/1a1884a7924200ea49a2a553dd1609872e28b91ec2b347ab0ab1af4e90d7fc6e.json": "1a1884a7924200ea49a2a553dd1609872e28b91ec2b347ab0ab1af4e90d7fc6e",
+    "followup/paper-kr/evidence/1c4a80f77dab323faa85e7ffc839e847681ac66ba1303d49c6a8a4451a11d264.json": "1c4a80f77dab323faa85e7ffc839e847681ac66ba1303d49c6a8a4451a11d264",
+    "followup/paper-kr/evidence/1f71ce9ab7d06fff8eb8f7fff6eeae4dec7c25b8dc39b2fc2e98b15a1e471bfc.json": "1f71ce9ab7d06fff8eb8f7fff6eeae4dec7c25b8dc39b2fc2e98b15a1e471bfc",
+    "followup/paper-kr/evidence/215127c2a7f0b3155931bb7ad2f1553772869961497655d6ad7e57e3d7871914.json": "215127c2a7f0b3155931bb7ad2f1553772869961497655d6ad7e57e3d7871914",
+    "followup/paper-kr/evidence/21b0d8aa3f8ef7911f0b7a816eb1bca5b24e8b560861ac3328386257159b8388.json": "21b0d8aa3f8ef7911f0b7a816eb1bca5b24e8b560861ac3328386257159b8388",
+    "followup/paper-kr/evidence/231897943523332d658b3c3629ab14aab2810440c235650dd2c06720a7f7b89d.json": "231897943523332d658b3c3629ab14aab2810440c235650dd2c06720a7f7b89d",
+    "followup/paper-kr/evidence/2650706d867b8c2e87e1f9f845b50b6f86619d5c5592ecced7d51094e4e4b08b.json": "2650706d867b8c2e87e1f9f845b50b6f86619d5c5592ecced7d51094e4e4b08b",
+    "followup/paper-kr/evidence/267e0ae1df1280270cd70855e3a50f4a93922171d1f6da2c212853891f09f54f.json": "267e0ae1df1280270cd70855e3a50f4a93922171d1f6da2c212853891f09f54f",
+    "followup/paper-kr/evidence/274c7307000499542f356e67d1b759abf9be5973d9de6a3dd4530ea108191c55.json": "274c7307000499542f356e67d1b759abf9be5973d9de6a3dd4530ea108191c55",
+    "followup/paper-kr/evidence/2b02a814dd3e64c64a75af2c9d1eaed48eb65c86349a9afb7829d48a209805a2.json": "2b02a814dd3e64c64a75af2c9d1eaed48eb65c86349a9afb7829d48a209805a2",
+    "followup/paper-kr/evidence/2b039128a91224a09a20bc2c64a7dc7df5b2608c00e757fd4cacf26f205b630b.json": "2b039128a91224a09a20bc2c64a7dc7df5b2608c00e757fd4cacf26f205b630b",
+    "followup/paper-kr/evidence/2ce41e1a05ddbed74c9c37f6e811bd5c43a5abdbc51cca800c4793f4e36caf9f.json": "2ce41e1a05ddbed74c9c37f6e811bd5c43a5abdbc51cca800c4793f4e36caf9f",
+    "followup/paper-kr/evidence/2f6b4036d98eba66d92037f6c17069161aa8e31e9abc257411bab1a49648b9d4.json": "2f6b4036d98eba66d92037f6c17069161aa8e31e9abc257411bab1a49648b9d4",
+    "followup/paper-kr/evidence/2f8ebe8431100e415839c3d96d7b19cfb56dce64b147e32a8d107e484514db1f.json": "2f8ebe8431100e415839c3d96d7b19cfb56dce64b147e32a8d107e484514db1f",
+    "followup/paper-kr/evidence/31beae94be32efbdd013206b852274d496c8d310ffa04f2c7abf3f719796d95d.json": "31beae94be32efbdd013206b852274d496c8d310ffa04f2c7abf3f719796d95d",
+    "followup/paper-kr/evidence/36a61d1b20bb98b29b84209dfe8bf5ff7c4633dcbc49109818a6c82adbd926ef.json": "36a61d1b20bb98b29b84209dfe8bf5ff7c4633dcbc49109818a6c82adbd926ef",
+    "followup/paper-kr/evidence/3bbe0045d079ed9acdfc8cadde2b355367210e15298970210cfea94e1613d7aa.json": "3bbe0045d079ed9acdfc8cadde2b355367210e15298970210cfea94e1613d7aa",
+    "followup/paper-kr/evidence/3be41a9133b0025698d31a0c2e04cc8948de1a32712c24a149cbcf9e843ae154.json": "3be41a9133b0025698d31a0c2e04cc8948de1a32712c24a149cbcf9e843ae154",
+    "followup/paper-kr/evidence/3ca6f1ee43456aec225ea057b00aad7bc814445295c3bb542cb3611fcbcd5544.json": "3ca6f1ee43456aec225ea057b00aad7bc814445295c3bb542cb3611fcbcd5544",
+    "followup/paper-kr/evidence/3cd4c24cb112a94309510cce73279b6f781cae55699e240a1f69eb0fdf9cf1d8.json": "3cd4c24cb112a94309510cce73279b6f781cae55699e240a1f69eb0fdf9cf1d8",
+    "followup/paper-kr/evidence/3e3ab2f6a9ed1535ac66b5c04e9dce0a9d9eba4eb9befc34a8dc23b7d39c81d8.json": "3e3ab2f6a9ed1535ac66b5c04e9dce0a9d9eba4eb9befc34a8dc23b7d39c81d8",
+    "followup/paper-kr/evidence/3fa54360b0231d917b3665b6527253ad22b28cd2f85ba6d2ecc11193c5a02bd6.json": "3fa54360b0231d917b3665b6527253ad22b28cd2f85ba6d2ecc11193c5a02bd6",
+    "followup/paper-kr/evidence/4118fa836497eb077a49ad55a0e4380a56322a22b94a214acf519eee7746f1d8.json": "4118fa836497eb077a49ad55a0e4380a56322a22b94a214acf519eee7746f1d8",
+    "followup/paper-kr/evidence/419c9091f0b8516af92d90419991a6040b92a554c818c971a80864a42566987b.json": "419c9091f0b8516af92d90419991a6040b92a554c818c971a80864a42566987b",
+    "followup/paper-kr/evidence/428e332f6f4a16eaeeb98f0161130fe13119bbbc71b914932a224c0e94ecce0a.json": "428e332f6f4a16eaeeb98f0161130fe13119bbbc71b914932a224c0e94ecce0a",
+    "followup/paper-kr/evidence/4475ee69c88279ede8dee356fa7ad6c8ab7e33f9036d309ce465b932aa515ee2.json": "4475ee69c88279ede8dee356fa7ad6c8ab7e33f9036d309ce465b932aa515ee2",
+    "followup/paper-kr/evidence/46f5aedf6704039fe78ad3c457ea6e65c072954521d5bbdc8b13b0edfb3142f7.json": "46f5aedf6704039fe78ad3c457ea6e65c072954521d5bbdc8b13b0edfb3142f7",
+    "followup/paper-kr/evidence/47a7bcc6aee549609a3c60090c2d2ad68e7571aaa59de6c83d414ecdf8c9ad14.json": "47a7bcc6aee549609a3c60090c2d2ad68e7571aaa59de6c83d414ecdf8c9ad14",
+    "followup/paper-kr/evidence/49817d4866663340d521718827dc5cd8ba6d33fa01492fcecc892f757460d741.json": "49817d4866663340d521718827dc5cd8ba6d33fa01492fcecc892f757460d741",
+    "followup/paper-kr/evidence/49cf13a14fc5a47cc10e83221961157e8bd9dd0ad588df890240633a08935ec6.json": "49cf13a14fc5a47cc10e83221961157e8bd9dd0ad588df890240633a08935ec6",
+    "followup/paper-kr/evidence/4c9223555b11bef0bf5c42ebb3abfc0a3a3b112b91aa0621d06f04a2ad47c9c1.json": "4c9223555b11bef0bf5c42ebb3abfc0a3a3b112b91aa0621d06f04a2ad47c9c1",
+    "followup/paper-kr/evidence/4e9c593ffa89406656996a409585fa99e4a8dc9f41481ef06d6c1ccaf121f6b0.json": "4e9c593ffa89406656996a409585fa99e4a8dc9f41481ef06d6c1ccaf121f6b0",
+    "followup/paper-kr/evidence/4f840f9e907a32bdb29e09b3e21f538e5c4e6b7dcdecfdf676389fb9b9ceb563.json": "4f840f9e907a32bdb29e09b3e21f538e5c4e6b7dcdecfdf676389fb9b9ceb563",
+    "followup/paper-kr/evidence/53a6963d3981d1aad3001ecd8cb7ff1b68bab70f5ca1921b65e1f50b593f1b38.json": "53a6963d3981d1aad3001ecd8cb7ff1b68bab70f5ca1921b65e1f50b593f1b38",
+    "followup/paper-kr/evidence/542618b57592cff432097c33749297d08f835753a445999cbb1fcf352521f23b.json": "542618b57592cff432097c33749297d08f835753a445999cbb1fcf352521f23b",
+    "followup/paper-kr/evidence/55192499b5b7158b5f923ab47be2226531b2eae9e94bfc0fa3860eda17bc7064.json": "55192499b5b7158b5f923ab47be2226531b2eae9e94bfc0fa3860eda17bc7064",
+    "followup/paper-kr/evidence/55823df01f54cce6480236993611a3a7661f823ed911310e3e52a4a19c8a19a6.json": "55823df01f54cce6480236993611a3a7661f823ed911310e3e52a4a19c8a19a6",
+    "followup/paper-kr/evidence/56392a73bfb8e116647a1f93e27bd566ec35e85c9c8384313f069223c20b4874.json": "56392a73bfb8e116647a1f93e27bd566ec35e85c9c8384313f069223c20b4874",
+    "followup/paper-kr/evidence/5690a6d3affa2cf3c8a466c96ea243c8171792ec6d8caeb461b4b3178741a244.json": "5690a6d3affa2cf3c8a466c96ea243c8171792ec6d8caeb461b4b3178741a244",
+    "followup/paper-kr/evidence/56a579fa79acbd26cd338406df0db14a73e204324181143331fa84fc7885cce4.json": "56a579fa79acbd26cd338406df0db14a73e204324181143331fa84fc7885cce4",
+    "followup/paper-kr/evidence/579d8b6389df5bb528491f454158c57b5f37a670d0de20402033a5d94b257af0.json": "579d8b6389df5bb528491f454158c57b5f37a670d0de20402033a5d94b257af0",
+    "followup/paper-kr/evidence/58265c164fd33af41a6ebe87b39a2ab805d4bc0179a53aa2fad54499bbd9201c.json": "58265c164fd33af41a6ebe87b39a2ab805d4bc0179a53aa2fad54499bbd9201c",
+    "followup/paper-kr/evidence/58cd53f926fe9b04fbf6a7a90928a16a210988d85d6a95210727ee43fa235876.json": "58cd53f926fe9b04fbf6a7a90928a16a210988d85d6a95210727ee43fa235876",
+    "followup/paper-kr/evidence/5a3a185f4c18e8d90f2f015d6f51bc5180ecd37815c48a600d5e96d09e114790.json": "5a3a185f4c18e8d90f2f015d6f51bc5180ecd37815c48a600d5e96d09e114790",
+    "followup/paper-kr/evidence/5a9e7db034eb4c5b8c46f83a73ae0c5de85e681191407e9858070c269fc7f2d1.json": "5a9e7db034eb4c5b8c46f83a73ae0c5de85e681191407e9858070c269fc7f2d1",
+    "followup/paper-kr/evidence/5b95a0d8e07ad052f1ddaf511b8e950ad717c624bec948ebd0f6d455d5a60ef2.json": "5b95a0d8e07ad052f1ddaf511b8e950ad717c624bec948ebd0f6d455d5a60ef2",
+    "followup/paper-kr/evidence/5c3014c7c9d23564bc6e0d8515cfbebd2c29a31fe4eb563673e6a279f7a8d80d.json": "5c3014c7c9d23564bc6e0d8515cfbebd2c29a31fe4eb563673e6a279f7a8d80d",
+    "followup/paper-kr/evidence/5c992211a2fe504d95a1a06636f227096a84259e9a5abf1ad64b6afaf9fab078.json": "5c992211a2fe504d95a1a06636f227096a84259e9a5abf1ad64b6afaf9fab078",
+    "followup/paper-kr/evidence/5f1066db5d0e402239a69a84cc6a90883a5101113b6f459153b1d0c71f54993e.json": "5f1066db5d0e402239a69a84cc6a90883a5101113b6f459153b1d0c71f54993e",
+    "followup/paper-kr/evidence/60ceb832b8ea03fc239e679b96edf4fb03bb88f8083496c2473038a7917d81ef.json": "60ceb832b8ea03fc239e679b96edf4fb03bb88f8083496c2473038a7917d81ef",
+    "followup/paper-kr/evidence/60f8e4b82fbc35c7992135f504d8a953f5b9f945ec6cea574e8172c21e28854b.json": "60f8e4b82fbc35c7992135f504d8a953f5b9f945ec6cea574e8172c21e28854b",
+    "followup/paper-kr/evidence/6113f8e5d9ca0933fef075a9b3960eb6dee7c95408ee77a748ccbf83e8858eb2.json": "6113f8e5d9ca0933fef075a9b3960eb6dee7c95408ee77a748ccbf83e8858eb2",
+    "followup/paper-kr/evidence/645716cd0c994734e6cca508863dd7bab77a5bae847c42a5d61fddc762eccfa5.json": "645716cd0c994734e6cca508863dd7bab77a5bae847c42a5d61fddc762eccfa5",
+    "followup/paper-kr/evidence/6531b90987d130dc5f19888b97f543a841cd124b721c83d43a2c3b4b90676632.json": "6531b90987d130dc5f19888b97f543a841cd124b721c83d43a2c3b4b90676632",
+    "followup/paper-kr/evidence/673b064566186870acf396ce5a9dddf71515f31250dac2361309464d02121b4f.json": "673b064566186870acf396ce5a9dddf71515f31250dac2361309464d02121b4f",
+    "followup/paper-kr/evidence/68374361efe1140df2c557c9e9023272ecd9a2eae9bff6dd907e6b53f6179888.json": "68374361efe1140df2c557c9e9023272ecd9a2eae9bff6dd907e6b53f6179888",
+    "followup/paper-kr/evidence/6aeed450a2dfccf808d1ed5e9efbeaa0e8195293225329a532cbdbc6bb380eb1.json": "6aeed450a2dfccf808d1ed5e9efbeaa0e8195293225329a532cbdbc6bb380eb1",
+    "followup/paper-kr/evidence/6b6a2e075b6e4e3297dbb96f7d885700dee157193839c3df1ff12c4e38031872.json": "6b6a2e075b6e4e3297dbb96f7d885700dee157193839c3df1ff12c4e38031872",
+    "followup/paper-kr/evidence/6cbfaa2fde7f6b83153f61e6581be9ed7523925d0aa13037fc4096d105729515.json": "6cbfaa2fde7f6b83153f61e6581be9ed7523925d0aa13037fc4096d105729515",
+    "followup/paper-kr/evidence/6de42a2eefb6e1ae348e976a58b8ca20ee6d782aa59302dff3fa248242c40dca.json": "6de42a2eefb6e1ae348e976a58b8ca20ee6d782aa59302dff3fa248242c40dca",
+    "followup/paper-kr/evidence/6f2a17455002b2334119a0a55773f1ff907431484c9ec72742324bfd43760d72.json": "6f2a17455002b2334119a0a55773f1ff907431484c9ec72742324bfd43760d72",
+    "followup/paper-kr/evidence/6fe0a1065376130faed793f1c7750b75ac15dbeb06c4d52ecb1b8fb2ce521f02.json": "6fe0a1065376130faed793f1c7750b75ac15dbeb06c4d52ecb1b8fb2ce521f02",
+    "followup/paper-kr/evidence/708bfa62febb7329846b4c5ceede3d1d16255f0e25be1b4d332433b4ab742b01.json": "708bfa62febb7329846b4c5ceede3d1d16255f0e25be1b4d332433b4ab742b01",
+    "followup/paper-kr/evidence/709f3507721275fca9623ef56d732cc7dd06ded72ee68124a4d75e04ff7481f0.json": "709f3507721275fca9623ef56d732cc7dd06ded72ee68124a4d75e04ff7481f0",
+    "followup/paper-kr/evidence/737f9c8ec9bc0a387486921d3990595141c86e8a6d25275bfe9a96b6a1e40166.json": "737f9c8ec9bc0a387486921d3990595141c86e8a6d25275bfe9a96b6a1e40166",
+    "followup/paper-kr/evidence/738d4d835ded62a17b28601ea54788945b3537acc481eee427805511098bac4d.json": "738d4d835ded62a17b28601ea54788945b3537acc481eee427805511098bac4d",
+    "followup/paper-kr/evidence/754e678bd2272a1061b3fe95b9634441b23ac849432136406076660d3df2dac0.json": "754e678bd2272a1061b3fe95b9634441b23ac849432136406076660d3df2dac0",
+    "followup/paper-kr/evidence/76b34a46a548b5e1cdd0e88ed3a92f0be40049d6116622b61f9f850bac8c9c27.json": "76b34a46a548b5e1cdd0e88ed3a92f0be40049d6116622b61f9f850bac8c9c27",
+    "followup/paper-kr/evidence/796c565069594c4c0c66410cc78d3b3e8c759a7513a206e80a4f0f4836a0ca58.json": "796c565069594c4c0c66410cc78d3b3e8c759a7513a206e80a4f0f4836a0ca58",
+    "followup/paper-kr/evidence/7b98768f4e48d09ed8aa1919eb95c0904ab50b120b8b0b3fde476812d4338fe9.json": "7b98768f4e48d09ed8aa1919eb95c0904ab50b120b8b0b3fde476812d4338fe9",
+    "followup/paper-kr/evidence/7cce780facb17547cc8331dec7dcfa05efe7fd4d027742fcaf40363adde8bd35.json": "7cce780facb17547cc8331dec7dcfa05efe7fd4d027742fcaf40363adde8bd35",
+    "followup/paper-kr/evidence/7e00434af254c9f21d1f44a40356bfab99c05c5998769acb99b5f61a135b7aef.json": "7e00434af254c9f21d1f44a40356bfab99c05c5998769acb99b5f61a135b7aef",
+    "followup/paper-kr/evidence/7e6a3725d20faa95fb2ade6584c4181d2df20bfc648bbbf451e25c2f7d07c1ef.json": "7e6a3725d20faa95fb2ade6584c4181d2df20bfc648bbbf451e25c2f7d07c1ef",
+    "followup/paper-kr/evidence/7f511e3a335ca0577d93edac4b120ade75584eb0d33255b7de0deb9ea4773796.json": "7f511e3a335ca0577d93edac4b120ade75584eb0d33255b7de0deb9ea4773796",
+    "followup/paper-kr/evidence/7ff7fd8e2f4da8017d434f52423a8d5accb457ee75d9f2f74f7f4aef6abe1f1a.json": "7ff7fd8e2f4da8017d434f52423a8d5accb457ee75d9f2f74f7f4aef6abe1f1a",
+    "followup/paper-kr/evidence/805c0d8b1050077a1257516360b9794667a9788ca09753525629ab6eeb5a90d0.json": "805c0d8b1050077a1257516360b9794667a9788ca09753525629ab6eeb5a90d0",
+    "followup/paper-kr/evidence/83aff5d272bc343e998836f1e915c3c95adccb134f5b6909b36a60c40caa7f5b.json": "83aff5d272bc343e998836f1e915c3c95adccb134f5b6909b36a60c40caa7f5b",
+    "followup/paper-kr/evidence/83b2d7b8dbc7da88c3c56a225376697b8460ab09a04833f4cbf6d41658ccb10f.json": "83b2d7b8dbc7da88c3c56a225376697b8460ab09a04833f4cbf6d41658ccb10f",
+    "followup/paper-kr/evidence/85e23c2d78fc38681baa6d57cc7931b036f4007ca9d88aab8da98278170e67b6.json": "85e23c2d78fc38681baa6d57cc7931b036f4007ca9d88aab8da98278170e67b6",
+    "followup/paper-kr/evidence/865cf3c72c9745c99163db8b4563e546a9cda35a8dee16a5664f3a902a573b8c.json": "865cf3c72c9745c99163db8b4563e546a9cda35a8dee16a5664f3a902a573b8c",
+    "followup/paper-kr/evidence/86b07fcebd72ae2e1382af6ff6438f7df16aefef7b941b9d4c2b0c2711a9b7fe.json": "86b07fcebd72ae2e1382af6ff6438f7df16aefef7b941b9d4c2b0c2711a9b7fe",
+    "followup/paper-kr/evidence/87bf752f54e0e681d4ba52eac884266e45341c9d34ce29ab77f5b671e6db56fe.json": "87bf752f54e0e681d4ba52eac884266e45341c9d34ce29ab77f5b671e6db56fe",
+    "followup/paper-kr/evidence/89a742cd3100299d5b133e33cc528db206962c6cf045b86aaf8d68e663f60fec.json": "89a742cd3100299d5b133e33cc528db206962c6cf045b86aaf8d68e663f60fec",
+    "followup/paper-kr/evidence/89caca78e39bb1dd32a4d4f2668234510486449fb1fbfd18bbb22a5432ffcfde.json": "89caca78e39bb1dd32a4d4f2668234510486449fb1fbfd18bbb22a5432ffcfde",
+    "followup/paper-kr/evidence/8fdfee8e178d7cf02630fc983056d50eea63f59ef4df48ec06e9996ae4e03374.json": "8fdfee8e178d7cf02630fc983056d50eea63f59ef4df48ec06e9996ae4e03374",
+    "followup/paper-kr/evidence/90c1c6adfb011806ad88c11935e459ca7a1cb8999c942e05e817911034261c59.json": "90c1c6adfb011806ad88c11935e459ca7a1cb8999c942e05e817911034261c59",
+    "followup/paper-kr/evidence/93034d857a79f1fa0c0b49d70dea03fecff4f6a32da488ff8019abb0d3424a9d.json": "93034d857a79f1fa0c0b49d70dea03fecff4f6a32da488ff8019abb0d3424a9d",
+    "followup/paper-kr/evidence/95af83b89e512e6c7f860e53aad9e6a4522a40ed54f48c0c7caab963fdc37bcf.json": "95af83b89e512e6c7f860e53aad9e6a4522a40ed54f48c0c7caab963fdc37bcf",
+    "followup/paper-kr/evidence/961e3c1aa1c46477c92db595a9db2ac6fdc18ca29ee5778c7246d3d1313db266.json": "961e3c1aa1c46477c92db595a9db2ac6fdc18ca29ee5778c7246d3d1313db266",
+    "followup/paper-kr/evidence/98786c258f653fd3307e84bf0252b4fc7d09732a504cb284c6d3a26a9a3848a1.json": "98786c258f653fd3307e84bf0252b4fc7d09732a504cb284c6d3a26a9a3848a1",
+    "followup/paper-kr/evidence/9a385ddef5706977159bbf9acd06c30254de94b36ed4ee94f2bc8619dbb40812.json": "9a385ddef5706977159bbf9acd06c30254de94b36ed4ee94f2bc8619dbb40812",
+    "followup/paper-kr/evidence/9d1f1a2ee8985e9b7352111160695ea682c846c79ac4bd668ab0ca3a6fcd7048.json": "9d1f1a2ee8985e9b7352111160695ea682c846c79ac4bd668ab0ca3a6fcd7048",
+    "followup/paper-kr/evidence/9eff8a045c58398baa6533fae35507fff238eb3d30e53c51c234beb91902f1ad.json": "9eff8a045c58398baa6533fae35507fff238eb3d30e53c51c234beb91902f1ad",
+    "followup/paper-kr/evidence/9f7259e95de28479aee02c12cf10e8dffe88f1610a9720d9ffeeda56fc1fef96.json": "9f7259e95de28479aee02c12cf10e8dffe88f1610a9720d9ffeeda56fc1fef96",
+    "followup/paper-kr/evidence/a22e5845ca88e7901fe5aaaf547bf2ba9d827dc19f995875bd29cffc27b56cae.json": "a22e5845ca88e7901fe5aaaf547bf2ba9d827dc19f995875bd29cffc27b56cae",
+    "followup/paper-kr/evidence/a2b51f70fae7186f359e1aad29aa4fbad009191a8828b0f3f7940c34ec43959e.json": "a2b51f70fae7186f359e1aad29aa4fbad009191a8828b0f3f7940c34ec43959e",
+    "followup/paper-kr/evidence/a5338a95e21e0b1c66ee53641beaed404833e2271845832d8b41c1ffa02e4fc4.json": "a5338a95e21e0b1c66ee53641beaed404833e2271845832d8b41c1ffa02e4fc4",
+    "followup/paper-kr/evidence/a744bf49d3ec6068ff63fdfa0302998adb858f8bd5221445f25f72a24146bbe8.json": "a744bf49d3ec6068ff63fdfa0302998adb858f8bd5221445f25f72a24146bbe8",
+    "followup/paper-kr/evidence/a932a79c3349580a3f450e9fcdb8d3a48d0cef4be6078659d24525d72ee36a9b.json": "a932a79c3349580a3f450e9fcdb8d3a48d0cef4be6078659d24525d72ee36a9b",
+    "followup/paper-kr/evidence/a96bb189e059cbe7eab3fad1656ce4502cc72d11bc1d3b939be69d5c1f433488.json": "a96bb189e059cbe7eab3fad1656ce4502cc72d11bc1d3b939be69d5c1f433488",
+    "followup/paper-kr/evidence/aa40c7bc8471009f9e03d9c3c3f1baf34556aeed9be989949693555f88b7a288.json": "aa40c7bc8471009f9e03d9c3c3f1baf34556aeed9be989949693555f88b7a288",
+    "followup/paper-kr/evidence/aa7423e5daa4adb3dd26d61f6fd9cce8d78dfb26d1b0a66711dbf756e8bfbab2.json": "aa7423e5daa4adb3dd26d61f6fd9cce8d78dfb26d1b0a66711dbf756e8bfbab2",
+    "followup/paper-kr/evidence/ab8a141f0a0f01d9d32028170b3ce4dc36ce02a515a5d94f4f53fd5d0a0b66b2.json": "ab8a141f0a0f01d9d32028170b3ce4dc36ce02a515a5d94f4f53fd5d0a0b66b2",
+    "followup/paper-kr/evidence/ad9cdf349bbaf380ead07424f36cbdd12d3183a8dff227db8a9fa23cea1136f7.json": "ad9cdf349bbaf380ead07424f36cbdd12d3183a8dff227db8a9fa23cea1136f7",
+    "followup/paper-kr/evidence/adb46b32b3e109892f6d8ac54a9e061377ee84e1884df0d0c11a58acd1a2b4da.json": "adb46b32b3e109892f6d8ac54a9e061377ee84e1884df0d0c11a58acd1a2b4da",
+    "followup/paper-kr/evidence/aded26a461e722987fad78876c07998e96cefbbe79daa86e0d8a5390d8e2fff1.json": "aded26a461e722987fad78876c07998e96cefbbe79daa86e0d8a5390d8e2fff1",
+    "followup/paper-kr/evidence/ae797fd75a866a02b66e699446f5b2ce9f6e8f44d9f9eae40c7c9a7f929cf11c.json": "ae797fd75a866a02b66e699446f5b2ce9f6e8f44d9f9eae40c7c9a7f929cf11c",
+    "followup/paper-kr/evidence/af0d63cec1c3ebd06d55a59bf2f66f4c9381aa2a5b9f1eb5168a2ec7d5956b88.json": "af0d63cec1c3ebd06d55a59bf2f66f4c9381aa2a5b9f1eb5168a2ec7d5956b88",
+    "followup/paper-kr/evidence/b23a2a810f30e0691f4eeb661003ae353c08c547df82faf9950bb4b6f26aa193.json": "b23a2a810f30e0691f4eeb661003ae353c08c547df82faf9950bb4b6f26aa193",
+    "followup/paper-kr/evidence/b615a0695725d3e138bd8a0205f2222e0a301867163ebcd86a1ff8e6b8a76b04.json": "b615a0695725d3e138bd8a0205f2222e0a301867163ebcd86a1ff8e6b8a76b04",
+    "followup/paper-kr/evidence/bb085cf80517f0a9165a1065ba8a16d5879afadf7800032f7785888f9fc37d8e.json": "bb085cf80517f0a9165a1065ba8a16d5879afadf7800032f7785888f9fc37d8e",
+    "followup/paper-kr/evidence/bb3a2575dc3637023d9c6a5e8bbbb5f40dc81cfc4d45d119fb6aa32ec88d1fc0.json": "bb3a2575dc3637023d9c6a5e8bbbb5f40dc81cfc4d45d119fb6aa32ec88d1fc0",
+    "followup/paper-kr/evidence/bd1e398be794327b7f6a60adb9868712043ac6472101647a4626f89831def120.json": "bd1e398be794327b7f6a60adb9868712043ac6472101647a4626f89831def120",
+    "followup/paper-kr/evidence/be099db60c43100d07cc622b90b376c64ac6f4410dc8fbeefe103b41f4722b92.json": "be099db60c43100d07cc622b90b376c64ac6f4410dc8fbeefe103b41f4722b92",
+    "followup/paper-kr/evidence/bec2ad97bc679ef6efb636f747cac8cbe3022e6be77fb215575d9f3c36a2afe4.json": "bec2ad97bc679ef6efb636f747cac8cbe3022e6be77fb215575d9f3c36a2afe4",
+    "followup/paper-kr/evidence/c041f0f70b957e918b169155100ff5406580ca36c4c2aedf829d64cb4fef4343.json": "c041f0f70b957e918b169155100ff5406580ca36c4c2aedf829d64cb4fef4343",
+    "followup/paper-kr/evidence/c1297e621af39a1f3ac5526dd0cf75f761d0dfdc1925c16c035d1fc9b49b9177.json": "c1297e621af39a1f3ac5526dd0cf75f761d0dfdc1925c16c035d1fc9b49b9177",
+    "followup/paper-kr/evidence/c71f9c5d9a5ff35ad35e180965ec619923d6fdb94630a19f9374702fb90e7920.json": "c71f9c5d9a5ff35ad35e180965ec619923d6fdb94630a19f9374702fb90e7920",
+    "followup/paper-kr/evidence/c8098b1be610313ce722cab4f82121cc38dd7afbb58a9ff5e071b90dfdc2a2ed.json": "c8098b1be610313ce722cab4f82121cc38dd7afbb58a9ff5e071b90dfdc2a2ed",
+    "followup/paper-kr/evidence/c81f843200eec35da57d3967277354428579271bf14e9f679d12b6e9583b8ef2.json": "c81f843200eec35da57d3967277354428579271bf14e9f679d12b6e9583b8ef2",
+    "followup/paper-kr/evidence/c87c8ab5ddeea5181ced131cec001c71168e28dc5a294ec85962bb44a24fac7e.json": "c87c8ab5ddeea5181ced131cec001c71168e28dc5a294ec85962bb44a24fac7e",
+    "followup/paper-kr/evidence/c8cd858e069043a0cfe442f697dfb8cd0290cefef489a12363eeae3fd378e920.json": "c8cd858e069043a0cfe442f697dfb8cd0290cefef489a12363eeae3fd378e920",
+    "followup/paper-kr/evidence/caea8ef6b2f1a316676683238bdf46a21e85c865ebbc14dde641c1974185ecad.json": "caea8ef6b2f1a316676683238bdf46a21e85c865ebbc14dde641c1974185ecad",
+    "followup/paper-kr/evidence/cc4393bc5315288f6361a86da2f153fdaec5cfe4e3126784162bc539cbc97f2d.json": "cc4393bc5315288f6361a86da2f153fdaec5cfe4e3126784162bc539cbc97f2d",
+    "followup/paper-kr/evidence/cf4cb598645ad49c60e9224f40a9ee436788f2da206afa258408de270570bf60.json": "cf4cb598645ad49c60e9224f40a9ee436788f2da206afa258408de270570bf60",
+    "followup/paper-kr/evidence/cf5fabbb68eaa909a69f1013bc12d7a1a180ce92ddb7b0c86b932e53acf658fd.json": "cf5fabbb68eaa909a69f1013bc12d7a1a180ce92ddb7b0c86b932e53acf658fd",
+    "followup/paper-kr/evidence/cf607debcf5d5fb6925350138f096a319fa2c6993f0a69029dafd3c852717578.json": "cf607debcf5d5fb6925350138f096a319fa2c6993f0a69029dafd3c852717578",
+    "followup/paper-kr/evidence/d028b4ba55b558c4218106fa808508a9848247a371bc877f1491391254542fd3.json": "d028b4ba55b558c4218106fa808508a9848247a371bc877f1491391254542fd3",
+    "followup/paper-kr/evidence/d11b4c7fe91673bfb65740cf2b49083d1b70fc52df34e84d6f541c3ceec1ea54.json": "d11b4c7fe91673bfb65740cf2b49083d1b70fc52df34e84d6f541c3ceec1ea54",
+    "followup/paper-kr/evidence/d140686facd9807296ff5ccb9358d818c75b24d61dfd9c48b840ea0a6abf6ec0.json": "d140686facd9807296ff5ccb9358d818c75b24d61dfd9c48b840ea0a6abf6ec0",
+    "followup/paper-kr/evidence/d1d9fc9acc0296ca3c158728b42a5deea89b494b20cccfb073568b762b9d9e33.json": "d1d9fc9acc0296ca3c158728b42a5deea89b494b20cccfb073568b762b9d9e33",
+    "followup/paper-kr/evidence/d26f0c2001e391d03639390072e93723421a13867bf0cc94b6492c5633a0c8e1.json": "d26f0c2001e391d03639390072e93723421a13867bf0cc94b6492c5633a0c8e1",
+    "followup/paper-kr/evidence/d29551e9c9520ca565e5fd479385e470af0aa4cb42616e58952a99e28c00819c.json": "d29551e9c9520ca565e5fd479385e470af0aa4cb42616e58952a99e28c00819c",
+    "followup/paper-kr/evidence/d3878b183d1c382128b1fb7180ebf5b2678bb7cdfcd23b07cbc54618969e539a.json": "d3878b183d1c382128b1fb7180ebf5b2678bb7cdfcd23b07cbc54618969e539a",
+    "followup/paper-kr/evidence/d84867b9c2b59902c1aece5bdc8bfea8cc01ad5429a4ba91938ccbf300408bf5.json": "d84867b9c2b59902c1aece5bdc8bfea8cc01ad5429a4ba91938ccbf300408bf5",
+    "followup/paper-kr/evidence/de630b2547ee25fad3f93f81d0890f6eb3d1a2075732930a7563cd1ba3a3daca.json": "de630b2547ee25fad3f93f81d0890f6eb3d1a2075732930a7563cd1ba3a3daca",
+    "followup/paper-kr/evidence/e021b1cdb6ba5589bbd0aa0ff3b2afb1d7bc29f77b6095598d8f46ffc46eb935.json": "e021b1cdb6ba5589bbd0aa0ff3b2afb1d7bc29f77b6095598d8f46ffc46eb935",
+    "followup/paper-kr/evidence/e12fb313586ab437cd02df1ea29bd1e8e72bf9b0c5aca1ce57f15674dd0d64a4.json": "e12fb313586ab437cd02df1ea29bd1e8e72bf9b0c5aca1ce57f15674dd0d64a4",
+    "followup/paper-kr/evidence/e25335ba2a1806b7350ec5ec44b42f5332652089636cc999df01a5853b4faea2.json": "e25335ba2a1806b7350ec5ec44b42f5332652089636cc999df01a5853b4faea2",
+    "followup/paper-kr/evidence/e282956cd3622ded9821908dc0fe7fba21c3d7d96e6bddc65489430160bb2da5.json": "e282956cd3622ded9821908dc0fe7fba21c3d7d96e6bddc65489430160bb2da5",
+    "followup/paper-kr/evidence/e5109cbfa636aa30bacf31f0ffd4b98868c3ee36111d7674c16e5e466dd7e60f.json": "e5109cbfa636aa30bacf31f0ffd4b98868c3ee36111d7674c16e5e466dd7e60f",
+    "followup/paper-kr/evidence/e56f0f2e11725e5535fec3156e7730bded96a39464e2263d59779207ee0ae3aa.json": "e56f0f2e11725e5535fec3156e7730bded96a39464e2263d59779207ee0ae3aa",
+    "followup/paper-kr/evidence/e7cb3707b0fcf97a47903f951194bfd4c08a9c9c78ae269d771d68447cdd0211.json": "e7cb3707b0fcf97a47903f951194bfd4c08a9c9c78ae269d771d68447cdd0211",
+    "followup/paper-kr/evidence/e8567eb327a1725a03bf851d03499041c49c92b4ae8cbaf420d49b6125b3bd98.json": "e8567eb327a1725a03bf851d03499041c49c92b4ae8cbaf420d49b6125b3bd98",
+    "followup/paper-kr/evidence/e87527b71d89ee8123deda7cb8f3b7b39b58c940d3ba3097063796b431762d51.json": "e87527b71d89ee8123deda7cb8f3b7b39b58c940d3ba3097063796b431762d51",
+    "followup/paper-kr/evidence/e8abf977fef6595253d855abbef03ec762813abbac465a37f868a13daed3c90c.json": "e8abf977fef6595253d855abbef03ec762813abbac465a37f868a13daed3c90c",
+    "followup/paper-kr/evidence/ed6b397ca5d3dd35f7aef1b263be038a07dc7a2ee22a2bd5a8cd301b99a210e4.json": "ed6b397ca5d3dd35f7aef1b263be038a07dc7a2ee22a2bd5a8cd301b99a210e4",
+    "followup/paper-kr/evidence/ede586e9675ed7f74a83ba896ffc6c659dc0fd7bf7e54053aa8e97229b341248.json": "ede586e9675ed7f74a83ba896ffc6c659dc0fd7bf7e54053aa8e97229b341248",
+    "followup/paper-kr/evidence/f16e7c7f97afaa0717c52c8af17ff108eac41b49e4ccdb0f0291cd6c0542bf19.json": "f16e7c7f97afaa0717c52c8af17ff108eac41b49e4ccdb0f0291cd6c0542bf19",
+    "followup/paper-kr/evidence/f2abdde75416db3031369ef9896ba2782833562ff4b3abdb39d112f258d6627d.json": "f2abdde75416db3031369ef9896ba2782833562ff4b3abdb39d112f258d6627d",
+    "followup/paper-kr/evidence/f3bed30e577efbb4681d93578c99116383045a6f1fce34cbb8d15e1b0a3b6e5b.json": "f3bed30e577efbb4681d93578c99116383045a6f1fce34cbb8d15e1b0a3b6e5b",
+    "followup/paper-kr/evidence/f5827cd50f4074b5f99de15e10df775a3181052c5e12a1a4c0c4a48f20fa5010.json": "f5827cd50f4074b5f99de15e10df775a3181052c5e12a1a4c0c4a48f20fa5010",
+    "followup/paper-kr/evidence/f7175668951365b5583e9d0ffc8bc67103cdc962b5d02a9386de320952e1a85a.json": "f7175668951365b5583e9d0ffc8bc67103cdc962b5d02a9386de320952e1a85a",
+    "followup/paper-kr/evidence/f7cc73d7a397e6059b529267849f6aa1d301ef4541a56848fa1766a273e624c7.json": "f7cc73d7a397e6059b529267849f6aa1d301ef4541a56848fa1766a273e624c7",
+    "followup/paper-kr/evidence/fd3b12e8d15fddc88ae768f2d0ec2cf033c69dd06262fce8946f28077c316acb.json": "fd3b12e8d15fddc88ae768f2d0ec2cf033c69dd06262fce8946f28077c316acb",
+    "followup/paper-kr/evidence/fe1cbfddfae2a4d1d3c363e2a8e67a00811b2a29c8780726c55426093641f74c.json": "fe1cbfddfae2a4d1d3c363e2a8e67a00811b2a29c8780726c55426093641f74c",
+    "followup/paper-kr/evidence/fe93ad5d36c7a919a76cbec1f1f534eeb27ec3f68ab67c211d0685df33656aa0.json": "fe93ad5d36c7a919a76cbec1f1f534eeb27ec3f68ab67c211d0685df33656aa0",
+    "followup/paper-kr/latest.json": "eb2ddd67b4a2111f395234e6545fd1dc5e0565cdbc066f4d890c5bcb3d7829f5",
+    "rr-audit/paper-kr/20260922-112311-4a580134809e.json": "09e74b64695b71f7dfedd579b6db35c90488982a564bae85335eb1bef6acd406",
+    "rr-audit/paper-kr/20260923-112437-c2025840f050.json": "fdb66b24a0344b5895a6a30599eb083ff343146ca90b4b2891f94cbfe3967788",
+    "rr-audit/paper-kr/20260928-112325-ff67a60e9c4f.json": "a5f701b35da2182999ae4aaf64e493dcc53f0fc87ca00943975f6c9d38a83f60",
+    "rr-audit/paper-kr/20260929-112312-216e11a86886.json": "43fb746e2487eb714c64fba243936ccc467b8b4d65cebc6c9315c59894eca39b",
+    "rr-audit/paper-kr/20260930-112310-0e41236359f1.json": "d763a9ac7fc43e5739cecc428fc68634d1ae66ddb8d91b217fa47ffc5a762704"
+  },
+  "exclusions": [
+    {
+      "symbol": "069500.KS",
+      "name": "KODEX 200",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "26d314285ed436b0c52d7b9c3e38f2bc0e8fa20b047930570181e020cd0d1423"
+    },
+    {
+      "symbol": "122630.KS",
+      "name": "KODEX 레버리지",
+      "session": 1790058600,
+      "status": "analysis_symbol_mismatch",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "e57c2b41398c12dfb54e9bfdde1f75147a676896872f6c8315b65362d3b40dca"
+    },
+    {
+      "symbol": "102110.KS",
+      "name": "TIGER 200",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "11af7bae74ead3e49cdf83fa970c5a0c1a6ed00d680677a00a473bbb18891258"
+    },
+    {
+      "symbol": "360750.KS",
+      "name": "TIGER 미국S&P500",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "f67f6f3044f343f2f61103c2e9c74ff0bc5337c91f953852884ee23c77fd65cb"
+    },
+    {
+      "symbol": "133690.KS",
+      "name": "TIGER 미국나스닥100",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "3d387db7ceec55c750d720096733e6c1b188bb60c5ef0b4a41d3cbacdb411d29"
+    },
+    {
+      "symbol": "459580.KS",
+      "name": "KODEX CD금리액티브(합성)",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "8cad788b4d11f214a6c193afae5a7217cc419ea9d5c59f0ba4634bc7c5f01cf4"
+    },
+    {
+      "symbol": "379810.KS",
+      "name": "KODEX 미국나스닥100",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "5ced20077cf850899bc77866f19fe503ec4caffdee4a805770f3dbb6981663d3"
+    },
+    {
+      "symbol": "379800.KS",
+      "name": "KODEX 미국S&P500",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "8f392df9d1ffb0d6e151d998674d2feb50b6d1655f9fef1778a10e82e4ba6ea6"
+    },
+    {
+      "symbol": "114800.KS",
+      "name": "KODEX 인버스",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "bc964ee80582ae48c42fd8fb4c5c9b643d419bd3a2bf8f11b371f03d936b6405"
+    },
+    {
+      "symbol": "396500.KS",
+      "name": "TIGER 반도체TOP10",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "8d8b1a07db28cb05c1b80787d428c8965bdf5235ebb47755823f7d9d7aac442a"
+    },
+    {
+      "symbol": "233740.KS",
+      "name": "KODEX 코스닥150레버리지",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "2cdb994b4f7838f8dd5a50e5369ce262eb61a45d85870f238e378cbed1b718b3"
+    },
+    {
+      "symbol": "494310.KS",
+      "name": "KODEX 반도체레버리지",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "ca0f1789c624957d141521f09e712de9abb1c9d33ce915962097e0cc2dac43ba"
+    },
+    {
+      "symbol": "252670.KS",
+      "name": "KODEX 200선물인버스2X",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "9d780438d9cca2366cd9892be3b22cfed445a34ef0dfd210e2235ca49a5ad264"
+    },
+    {
+      "symbol": "229200.KS",
+      "name": "KODEX 코스닥150",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "ff7c32164daebe2e2e16be819ee9e58617348310af67302c54436c6e6c7b4dcd"
+    },
+    {
+      "symbol": "488080.KS",
+      "name": "TIGER 반도체TOP10레버리지",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "325075779406f7a759c86bed98d47d028e7f38782f441f86f6918893bb3bf838"
+    },
+    {
+      "symbol": "395160.KS",
+      "name": "KODEX AI반도체TOP2플러스",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "0f13d04c4a95116d4b7eeaf3338e0c26c06cc4762e09a9e82423be8c40183ab4"
+    },
+    {
+      "symbol": "091160.KS",
+      "name": "KODEX 반도체",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "9d5ede7496f3c736472d1033de0a9a633fcaab774da7b3669e69b11f9fedc0c8"
+    },
+    {
+      "symbol": "487240.KS",
+      "name": "KODEX AI전력핵심설비",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "adf0b3a178a40e5b7e3a0f19926edb4d8bb8cb08d9aef7d092f533c27188f716"
+    },
+    {
+      "symbol": "475630.KS",
+      "name": "TIGER CD1년금리액티브(합성)",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "5dcaa45af25b54e9aaae094516fc171e89a0318eb8a11256b09e573c0d723547"
+    },
+    {
+      "symbol": "498400.KS",
+      "name": "KODEX 200타겟위클리커버드콜",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "ac1ddd8c5fb1d70e3cb9f43bb491e3c724c746beaf582af76d358810c91240d8"
+    },
+    {
+      "symbol": "232080.KS",
+      "name": "TIGER 코스닥150",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "a579f2c4e527fe84f70f48fed15c295790ed6c94038252481800d03a3eb3b9bc"
+    },
+    {
+      "symbol": "148020.KS",
+      "name": "RISE 200",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "ca61a9d9339fab6cef16deed324ad66b2c23a635f2be6fbf87755ae15f3bc84c"
+    },
+    {
+      "symbol": "472150.KS",
+      "name": "TIGER 배당커버드콜액티브",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "bb669b6224ba072ecf9352c4d45b1169a6cce5c604ede1559905eb8f4ecbd7b0"
+    },
+    {
+      "symbol": "488770.KS",
+      "name": "KODEX 머니마켓액티브",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "063c20dd917e3639802d8619d797ffd842e6d8a36bc645d8b23518169d2b8d04"
+    },
+    {
+      "symbol": "381180.KS",
+      "name": "TIGER 미국필라델피아반도체나스닥",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "fd08834793280a79c3f78f619e9399b5cb126444b830e90904eb705f8f425369"
+    },
+    {
+      "symbol": "395270.KS",
+      "name": "HANARO Fn K-반도체",
+      "session": 1790058600,
+      "status": "excluded_instrument",
+      "source_file": "20260922-112311-4a580134809e.json",
+      "observation_hash": "d87ac7a037d1a1490761f52e52ee3ef8a98ecb534dbcdfd8d00ffe69388ae2e6"
+    }
+  ],
+  "trades": [
+    {
+      "key": "012210.KQ@1790058600",
+      "name": "삼미금속",
+      "kind": "limit",
+      "pattern": "trend_pullback_v1",
+      "original_input_hash": "81103078461818ad862b2de94d9fc941c4dba63e5919e61865f15f5a5f92e7fd",
+      "price_hash": "aded26a461e722987fad78876c07998e96cefbbe79daa86e0d8a5390d8e2fff1",
+      "outcome": {
+        "status": "cancelled_before_entry",
+        "complete": true,
+        "bars": 0,
+        "filled": false,
+        "entry_fill": null,
+        "entry_at": null,
+        "exit_fill": null,
+        "exit_at": null,
+        "first_exit": null,
+        "net_return_pct": null,
+        "ret_close_pct": null,
+        "hit_stop": false,
+        "hit_target": false,
+        "ambiguous_bar": false,
+        "fee_bps_per_side": 10,
+        "slippage_bps": 5,
+        "entry_bar_stop_touch": false,
+        "observed_future_bars": 4,
+        "basis": "independent_trade_not_portfolio"
+      }
+    },
+    {
+      "key": "222800.KQ@1790058600",
+      "name": "심텍",
+      "kind": "limit",
+      "pattern": "trend_pullback_v1",
+      "original_input_hash": "3d9bbd3f445d64e2cdd96e420f78c00f682ed566ef65e690b8c73cbec7858934",
+      "price_hash": "56392a73bfb8e116647a1f93e27bd566ec35e85c9c8384313f069223c20b4874",
+      "outcome": {
+        "status": "cancelled_before_entry",
+        "complete": true,
+        "bars": 0,
+        "filled": false,
+        "entry_fill": null,
+        "entry_at": null,
+        "exit_fill": null,
+        "exit_at": null,
+        "first_exit": null,
+        "net_return_pct": null,
+        "ret_close_pct": null,
+        "hit_stop": false,
+        "hit_target": false,
+        "ambiguous_bar": false,
+        "fee_bps_per_side": 10,
+        "slippage_bps": 5,
+        "entry_bar_stop_touch": false,
+        "observed_future_bars": 4,
+        "basis": "independent_trade_not_portfolio"
+      }
+    },
+    {
+      "key": "052690.KS@1790058600",
+      "name": "한전기술",
+      "kind": "limit",
+      "pattern": "trend_pullback_v1",
+      "original_input_hash": "80ba3fe8063954f978a460f2cc8561196d101f89aa03abc2a1a4e501b44dbadb",
+      "price_hash": "55823df01f54cce6480236993611a3a7661f823ed911310e3e52a4a19c8a19a6",
+      "outcome": {
+        "status": "closed",
+        "complete": true,
+        "bars": 3,
+        "filled": true,
+        "entry_fill": 135472,
+        "entry_at": 1790145000,
+        "exit_fill": 122638.65,
+        "exit_at": 1790663400,
+        "first_exit": "stop",
+        "net_return_pct": -9.6539,
+        "ret_close_pct": -9.6539,
+        "hit_stop": true,
+        "hit_target": false,
+        "ambiguous_bar": false,
+        "fee_bps_per_side": 10,
+        "slippage_bps": 5,
+        "entry_bar_stop_touch": false,
+        "observed_future_bars": 4,
+        "basis": "independent_trade_not_portfolio"
+      }
+    },
+    {
+      "key": "003490.KS@1790058600",
+      "name": "대한항공",
+      "kind": "limit",
+      "pattern": "trend_pullback_v1",
+      "original_input_hash": "c09a769aa126b9463be2d4b7c3888deff332a9884bd7d39e06607a3849654a95",
+      "price_hash": "9f7259e95de28479aee02c12cf10e8dffe88f1610a9720d9ffeeda56fc1fef96",
+      "outcome": {
+        "status": "cancelled_before_entry",
+        "complete": true,
+        "bars": 0,
+        "filled": false,
+        "entry_fill": null,
+        "entry_at": null,
+        "exit_fill": null,
+        "exit_at": null,
+        "first_exit": null,
+        "net_return_pct": null,
+        "ret_close_pct": null,
+        "hit_stop": false,
+        "hit_target": false,
+        "ambiguous_bar": false,
+        "fee_bps_per_side": 10,
+        "slippage_bps": 5,
+        "entry_bar_stop_touch": false,
+        "observed_future_bars": 4,
+        "basis": "independent_trade_not_portfolio"
+      }
+    },
+    {
+      "key": "030530.KQ@1790145000",
+      "name": "원익홀딩스",
+      "kind": "limit",
+      "pattern": "trend_pullback_v1",
+      "original_input_hash": "238d1fe301d4c80946fae354b5afca50b4c872e4ec5e38ab0062af6a1075ce98",
+      "price_hash": "8fdfee8e178d7cf02630fc983056d50eea63f59ef4df48ec06e9996ae4e03374",
+      "outcome": {
+        "status": "cancelled_before_entry",
+        "complete": true,
+        "bars": 0,
+        "filled": false,
+        "entry_fill": null,
+        "entry_at": null,
+        "exit_fill": null,
+        "exit_at": null,
+        "first_exit": null,
+        "net_return_pct": null,
+        "ret_close_pct": null,
+        "hit_stop": false,
+        "hit_target": false,
+        "ambiguous_bar": false,
+        "fee_bps_per_side": 10,
+        "slippage_bps": 5,
+        "entry_bar_stop_touch": false,
+        "observed_future_bars": 3,
+        "basis": "independent_trade_not_portfolio"
+      }
+    },
+    {
+      "key": "096770.KS@1790145000",
+      "name": "SK이노베이션",
+      "kind": "limit",
+      "pattern": "trend_pullback_v1",
+      "original_input_hash": "c264b52354adbde120192615d61ee7560dc2bfea9beb245b44bec83d53c2624c",
+      "price_hash": "aa40c7bc8471009f9e03d9c3c3f1baf34556aeed9be989949693555f88b7a288",
+      "outcome": {
+        "status": "incomplete",
+        "complete": false,
+        "bars": 2,
+        "filled": true,
+        "entry_fill": 145311,
+        "entry_at": 1790663400,
+        "exit_fill": null,
+        "exit_at": null,
+        "first_exit": null,
+        "net_return_pct": null,
+        "ret_close_pct": null,
+        "hit_stop": false,
+        "hit_target": false,
+        "ambiguous_bar": false,
+        "fee_bps_per_side": 10,
+        "slippage_bps": 5,
+        "entry_bar_stop_touch": false,
+        "observed_future_bars": 3,
+        "basis": "independent_trade_not_portfolio"
+      }
+    },
+    {
+      "key": "319660.KQ@1790145000",
+      "name": "피에스케이",
+      "kind": "limit",
+      "pattern": "trend_pullback_v1",
+      "original_input_hash": "4646a5bbd4298266ec0cb1448a9e7b4965090c07cb6cbc5f5de941744ee29222",
+      "price_hash": "76b34a46a548b5e1cdd0e88ed3a92f0be40049d6116622b61f9f850bac8c9c27",
+      "outcome": {
+        "status": "cancelled_before_entry",
+        "complete": true,
+        "bars": 0,
+        "filled": false,
+        "entry_fill": null,
+        "entry_at": null,
+        "exit_fill": null,
+        "exit_at": null,
+        "first_exit": null,
+        "net_return_pct": null,
+        "ret_close_pct": null,
+        "hit_stop": false,
+        "hit_target": false,
+        "ambiguous_bar": false,
+        "fee_bps_per_side": 10,
+        "slippage_bps": 5,
+        "entry_bar_stop_touch": false,
+        "observed_future_bars": 3,
+        "basis": "independent_trade_not_portfolio"
+      }
+    },
+    {
+      "key": "396300.KQ@1790145000",
+      "name": "HT로보틱스",
+      "kind": "limit",
+      "pattern": "trend_pullback_v1",
+      "original_input_hash": "e04cd52e0e6610a25894f486049c6ade279bbbee6a077b9c1b040fd174c4cdb5",
+      "price_hash": "153210757ecaa3b46ebb24b60fa77854bf512a6725c25f0930184d4266358667",
+      "outcome": {
+        "status": "cancelled_before_entry",
+        "complete": true,
+        "bars": 0,
+        "filled": false,
+        "entry_fill": null,
+        "entry_at": null,
+        "exit_fill": null,
+        "exit_at": null,
+        "first_exit": null,
+        "net_return_pct": null,
+        "ret_close_pct": null,
+        "hit_stop": false,
+        "hit_target": false,
+        "ambiguous_bar": false,
+        "fee_bps_per_side": 10,
+        "slippage_bps": 5,
+        "entry_bar_stop_touch": false,
+        "observed_future_bars": 3,
+        "basis": "independent_trade_not_portfolio"
+      }
+    },
+    {
+      "key": "095610.KQ@1790145000",
+      "name": "테스",
+      "kind": "limit",
+      "pattern": "trend_pullback_v1",
+      "original_input_hash": "56fb5b45a26aa97926290e4f89064a6fdea7e82e375dc51941a054a128ec7c4b",
+      "price_hash": "3cd4c24cb112a94309510cce73279b6f781cae55699e240a1f69eb0fdf9cf1d8",
+      "outcome": {
+        "status": "cancelled_before_entry",
+        "complete": true,
+        "bars": 0,
+        "filled": false,
+        "entry_fill": null,
+        "entry_at": null,
+        "exit_fill": null,
+        "exit_at": null,
+        "first_exit": null,
+        "net_return_pct": null,
+        "ret_close_pct": null,
+        "hit_stop": false,
+        "hit_target": false,
+        "ambiguous_bar": false,
+        "fee_bps_per_side": 10,
+        "slippage_bps": 5,
+        "entry_bar_stop_touch": false,
+        "observed_future_bars": 3,
+        "basis": "independent_trade_not_portfolio"
+      }
+    },
+    {
+      "key": "014950.KQ@1790577000",
+      "name": "삼익제약",
+      "kind": "limit",
+      "pattern": "trend_recovery_v1",
+      "original_input_hash": "eada77d927a8246baace4bb4a1a41d4ccf4d5a25936b8cfbfbdf49b004bda9ba",
+      "price_hash": "ab8a141f0a0f01d9d32028170b3ce4dc36ce02a515a5d94f4f53fd5d0a0b66b2",
+      "outcome": {
+        "status": "incomplete",
+        "complete": false,
+        "bars": 2,
+        "filled": true,
+        "entry_fill": 9240,
+        "entry_at": 1790663400,
+        "exit_fill": null,
+        "exit_at": null,
+        "first_exit": null,
+        "net_return_pct": null,
+        "ret_close_pct": null,
+        "hit_stop": false,
+        "hit_target": false,
+        "ambiguous_bar": false,
+        "fee_bps_per_side": 10,
+        "slippage_bps": 5,
+        "entry_bar_stop_touch": false,
+        "observed_future_bars": 2,
+        "basis": "independent_trade_not_portfolio"
+      }
+    },
+    {
+      "key": "403870.KQ@1790663400",
+      "name": "HPSP",
+      "kind": "limit",
+      "pattern": "trend_pullback_v1",
+      "original_input_hash": "85977ff71ed914427988d05779277bb06e34be5b6aa392083d6124dc86d8c8f6",
+      "price_hash": "542618b57592cff432097c33749297d08f835753a445999cbb1fcf352521f23b",
+      "outcome": {
+        "status": "cancelled_before_entry",
+        "complete": true,
+        "bars": 0,
+        "filled": false,
+        "entry_fill": null,
+        "entry_at": null,
+        "exit_fill": null,
+        "exit_at": null,
+        "first_exit": null,
+        "net_return_pct": null,
+        "ret_close_pct": null,
+        "hit_stop": false,
+        "hit_target": false,
+        "ambiguous_bar": false,
+        "fee_bps_per_side": 10,
+        "slippage_bps": 5,
+        "entry_bar_stop_touch": false,
+        "observed_future_bars": 1,
+        "basis": "independent_trade_not_portfolio"
+      }
+    },
+    {
+      "key": "036930.KQ@1790663400",
+      "name": "주성엔지니어링",
+      "kind": "limit",
+      "pattern": "trend_pullback_v1",
+      "original_input_hash": "c1a6d3145e9dae7d418ef2df5d16b3e756bdbd787df30f5ba537319df649dffd",
+      "price_hash": "737f9c8ec9bc0a387486921d3990595141c86e8a6d25275bfe9a96b6a1e40166",
+      "outcome": {
+        "status": "pending",
+        "complete": false,
+        "bars": 0,
+        "filled": false,
+        "entry_fill": null,
+        "entry_at": null,
+        "exit_fill": null,
+        "exit_at": null,
+        "first_exit": null,
+        "net_return_pct": null,
+        "ret_close_pct": null,
+        "hit_stop": false,
+        "hit_target": false,
+        "ambiguous_bar": false,
+        "fee_bps_per_side": 10,
+        "slippage_bps": 5,
+        "entry_bar_stop_touch": false,
+        "observed_future_bars": 1,
+        "basis": "independent_trade_not_portfolio"
+      }
+    },
+    {
+      "key": "001820.KS@1790663400",
+      "name": "삼화콘덴서",
+      "kind": "limit",
+      "pattern": "trend_recovery_v1",
+      "original_input_hash": "b0c7e0623988a64f23c598483ac6990685292c5b56f94501107bcc17b563c1b9",
+      "price_hash": "49817d4866663340d521718827dc5cd8ba6d33fa01492fcecc892f757460d741",
+      "outcome": {
+        "status": "cancelled_before_entry",
+        "complete": true,
+        "bars": 0,
+        "filled": false,
+        "entry_fill": null,
+        "entry_at": null,
+        "exit_fill": null,
+        "exit_at": null,
+        "first_exit": null,
+        "net_return_pct": null,
+        "ret_close_pct": null,
+        "hit_stop": false,
+        "hit_target": false,
+        "ambiguous_bar": false,
+        "fee_bps_per_side": 10,
+        "slippage_bps": 5,
+        "entry_bar_stop_touch": false,
+        "observed_future_bars": 1,
+        "basis": "independent_trade_not_portfolio"
+      }
+    },
+    {
+      "key": "095610.KQ@1790663400",
+      "name": "테스",
+      "kind": "limit",
+      "pattern": "trend_pullback_v1",
+      "original_input_hash": "381dd4cfa828c710593dbd67973f0b3f6b1880c9cda5722fbba333077ea66748",
+      "price_hash": "3cd4c24cb112a94309510cce73279b6f781cae55699e240a1f69eb0fdf9cf1d8",
+      "outcome": {
+        "status": "cancelled_before_entry",
+        "complete": true,
+        "bars": 0,
+        "filled": false,
+        "entry_fill": null,
+        "entry_at": null,
+        "exit_fill": null,
+        "exit_at": null,
+        "first_exit": null,
+        "net_return_pct": null,
+        "ret_close_pct": null,
+        "hit_stop": false,
+        "hit_target": false,
+        "ambiguous_bar": false,
+        "fee_bps_per_side": 10,
+        "slippage_bps": 5,
+        "entry_bar_stop_touch": false,
+        "observed_future_bars": 1,
+        "basis": "independent_trade_not_portfolio"
+      }
+    },
+    {
+      "key": "039030.KQ@1790663400",
+      "name": "이오테크닉스",
+      "kind": "limit",
+      "pattern": "trend_pullback_v1",
+      "original_input_hash": "0030f18df371e9b8fd8832181d25ece53c1bce6689a8fdf1b88b76b7b8505841",
+      "price_hash": "a5338a95e21e0b1c66ee53641beaed404833e2271845832d8b41c1ffa02e4fc4",
+      "outcome": {
+        "status": "cancelled_before_entry",
+        "complete": true,
+        "bars": 0,
+        "filled": false,
+        "entry_fill": null,
+        "entry_at": null,
+        "exit_fill": null,
+        "exit_at": null,
+        "first_exit": null,
+        "net_return_pct": null,
+        "ret_close_pct": null,
+        "hit_stop": false,
+        "hit_target": false,
+        "ambiguous_bar": false,
+        "fee_bps_per_side": 10,
+        "slippage_bps": 5,
+        "entry_bar_stop_touch": false,
+        "observed_future_bars": 1,
+        "basis": "independent_trade_not_portfolio"
+      }
+    },
+    {
+      "key": "319660.KQ@1790663400",
+      "name": "피에스케이",
+      "kind": "limit",
+      "pattern": "breakout_retest_v1",
+      "original_input_hash": "6fd1ff6f4937c6b2f5439d40d859c7784b7039d0e7d3ca3904bb290c37e258b2",
+      "price_hash": "76b34a46a548b5e1cdd0e88ed3a92f0be40049d6116622b61f9f850bac8c9c27",
+      "outcome": {
+        "status": "cancelled_before_entry",
+        "complete": true,
+        "bars": 0,
+        "filled": false,
+        "entry_fill": null,
+        "entry_at": null,
+        "exit_fill": null,
+        "exit_at": null,
+        "first_exit": null,
+        "net_return_pct": null,
+        "ret_close_pct": null,
+        "hit_stop": false,
+        "hit_target": false,
+        "ambiguous_bar": false,
+        "fee_bps_per_side": 10,
+        "slippage_bps": 5,
+        "entry_bar_stop_touch": false,
+        "observed_future_bars": 1,
+        "basis": "independent_trade_not_portfolio"
+      }
+    },
+    {
+      "key": "053260.KQ@1790749800",
+      "name": "금강철강",
+      "kind": "limit",
+      "pattern": "trend_pullback_v1",
+      "original_input_hash": "3ed0cbf475d7e3047e5a336461ff6e8c7735ff6ad1fd1ca04c4f26fa1e7b9aa3",
+      "price_hash": "f2abdde75416db3031369ef9896ba2782833562ff4b3abdb39d112f258d6627d",
+      "outcome": {
+        "status": "no_future_bars",
+        "complete": false
+      }
+    },
+    {
+      "key": "067310.KQ@1790749800",
+      "name": "하나마이크론",
+      "kind": "limit",
+      "pattern": "trend_pullback_v1",
+      "original_input_hash": "93038832c4fbc02cab7aebbcc228f90fdd6bec4e9f96b40b4cbc8b42b01e4193",
+      "price_hash": "c87c8ab5ddeea5181ced131cec001c71168e28dc5a294ec85962bb44a24fac7e",
+      "outcome": {
+        "status": "no_future_bars",
+        "complete": false
+      }
+    },
+    {
+      "key": "062040.KS@1790749800",
+      "name": "산일전기",
+      "kind": "limit",
+      "pattern": "trend_pullback_v1",
+      "original_input_hash": "1fb6225ed5e69cb842506c9b1d96c92fe35f01b00d32cd039e8c250411531e54",
+      "price_hash": "46f5aedf6704039fe78ad3c457ea6e65c072954521d5bbdc8b13b0edfb3142f7",
+      "outcome": {
+        "status": "no_future_bars",
+        "complete": false
+      }
+    },
+    {
+      "key": "232140.KQ@1790749800",
+      "name": "와이씨",
+      "kind": "limit",
+      "pattern": "trend_pullback_v1",
+      "original_input_hash": "84a88049b4b569ceaacb6e0d2f104223ba893703f26361a3b3b4aa70284b6136",
+      "price_hash": "c8098b1be610313ce722cab4f82121cc38dd7afbb58a9ff5e071b90dfdc2a2ed",
+      "outcome": {
+        "status": "no_future_bars",
+        "complete": false
+      }
+    },
+    {
+      "key": "071090.KS@1790749800",
+      "name": "하이스틸",
+      "kind": "limit",
+      "pattern": "trend_pullback_v1",
+      "original_input_hash": "5505b55a919314489abb25458baa590c5f8bc06de83ec39fb52a69f204260025",
+      "price_hash": "6fe0a1065376130faed793f1c7750b75ac15dbeb06c4d52ecb1b8fb2ce521f02",
+      "outcome": {
+        "status": "no_future_bars",
+        "complete": false
+      }
+    }
+  ],
+  "higher_low_events": [
+    {
+      "key": "066570.KS@1790058600",
+      "name": "LG전자",
+      "stage": "watch",
+      "execution_version": "aeb203b4a06b7c39a2a060b5a32c2f868a5b62988e13ac254295c4ad6facb258",
+      "event_key": "da42da20b7b7e03f36abbc69deaaf3011809768b5649751f4e6e2083ef494723",
+      "frozen_hash": "2c45ce2d29a6890d5d3eb0f72b95be7eb2f0a6148e1eeaf13ed1d658f158b5aa",
+      "price_hash": "037f13d7eee521cc2e1aebb77cbdce438dc94a3baa56a502470610cd84f550ea",
+      "original_final_status": "no_setup",
+      "current_final_status": "no_setup",
+      "horizons": {
+        "1": {
+          "status": "complete",
+          "session": 1790145000,
+          "return_pct": -3.4642032332563466,
+          "max_up_pct": 0,
+          "max_down_pct": -4.387990762124716
+        },
+        "3": {
+          "status": "complete",
+          "session": 1790663400,
+          "return_pct": -1.385681293302543,
+          "max_up_pct": 1.616628175519641,
+          "max_down_pct": -4.387990762124716
+        },
+        "5": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "10": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "20": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        }
+      }
+    },
+    {
+      "key": "047040.KS@1790058600",
+      "name": "대우건설",
+      "stage": "watch",
+      "execution_version": "aeb203b4a06b7c39a2a060b5a32c2f868a5b62988e13ac254295c4ad6facb258",
+      "event_key": "373f2cc8ded5c85cbf56c01aebeeea6a2db28194368fb73ee50bce85d4cb8791",
+      "frozen_hash": "232612e7c6afaaf610264eef7cec862e5b485aeb01aaf9a0509f5fa596516b43",
+      "price_hash": "5f1066db5d0e402239a69a84cc6a90883a5101113b6f459153b1d0c71f54993e",
+      "original_final_status": "risk_blocked",
+      "current_final_status": "risk_blocked",
+      "horizons": {
+        "1": {
+          "status": "complete",
+          "session": 1790145000,
+          "return_pct": -7.234042553191489,
+          "max_up_pct": 0,
+          "max_down_pct": -7.978723404255317
+        },
+        "3": {
+          "status": "complete",
+          "session": 1790663400,
+          "return_pct": -7.606382978723403,
+          "max_up_pct": 2.3404255319148914,
+          "max_down_pct": -8.776595744680849
+        },
+        "5": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "10": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "20": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        }
+      }
+    },
+    {
+      "key": "010120.KS@1790058600",
+      "name": "LS ELECTRIC",
+      "stage": "watch",
+      "execution_version": "aeb203b4a06b7c39a2a060b5a32c2f868a5b62988e13ac254295c4ad6facb258",
+      "event_key": "9f4d640044310608bee4b2dc54fa7d0019a9c1e8df2e2e2b6977bd6c02dba890",
+      "frozen_hash": "92e7dbe0bc730c3de09019642c6749112c22473e331dfcbc7f29740ecd3db729",
+      "price_hash": "1466bcff0ef895a2b973c03675bdd8e0165d277b846841fcf13c3ac79094dec7",
+      "original_final_status": "context_wait",
+      "current_final_status": "context_wait",
+      "horizons": {
+        "1": {
+          "status": "complete",
+          "session": 1790145000,
+          "return_pct": -3.0660377358490587,
+          "max_up_pct": 1.1792452830188704,
+          "max_down_pct": -4.245283018867929
+        },
+        "3": {
+          "status": "complete",
+          "session": 1790663400,
+          "return_pct": -3.301886792452835,
+          "max_up_pct": 1.1792452830188704,
+          "max_down_pct": -5.188679245283023
+        },
+        "5": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "10": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "20": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        }
+      }
+    },
+    {
+      "key": "402340.KS@1790145000",
+      "name": "SK스퀘어",
+      "stage": "watch",
+      "execution_version": "aeb203b4a06b7c39a2a060b5a32c2f868a5b62988e13ac254295c4ad6facb258",
+      "event_key": "f0a0dafceae6d4584be768a8543beb7a81f1cd904fbccce099053ab042d55a10",
+      "frozen_hash": "1e3ae2fc97e15ca2e2ea2d1eeff35add2560290e7767591983596fc2bf69186c",
+      "price_hash": "caea8ef6b2f1a316676683238bdf46a21e85c865ebbc14dde641c1974185ecad",
+      "original_final_status": "no_setup",
+      "current_final_status": "no_setup",
+      "horizons": {
+        "1": {
+          "status": "complete",
+          "session": 1790577000,
+          "return_pct": -7.563025210084029,
+          "max_up_pct": 0.9243697478991564,
+          "max_down_pct": -8.151260504201685
+        },
+        "3": {
+          "status": "complete",
+          "session": 1790749800,
+          "return_pct": -4.285714285714281,
+          "max_up_pct": 0.9243697478991564,
+          "max_down_pct": -8.655462184873953
+        },
+        "5": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "10": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "20": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        }
+      }
+    },
+    {
+      "key": "267260.KS@1790145000",
+      "name": "HD현대일렉트릭",
+      "stage": "watch",
+      "execution_version": "aeb203b4a06b7c39a2a060b5a32c2f868a5b62988e13ac254295c4ad6facb258",
+      "event_key": "0bf92fe636cc9e837d800c33d11b52934adfca895eaebd925e650b92edc9a929",
+      "frozen_hash": "b4e7b18e004fc20e7c8aa6036e55b7eaeb09c835015fe60b4c6436457b4c656b",
+      "price_hash": "d1d9fc9acc0296ca3c158728b42a5deea89b494b20cccfb073568b762b9d9e33",
+      "original_final_status": "context_wait",
+      "current_final_status": "context_wait",
+      "horizons": {
+        "1": {
+          "status": "complete",
+          "session": 1790577000,
+          "return_pct": -2.1186440677966156,
+          "max_up_pct": 0.14124293785311437,
+          "max_down_pct": -2.68361581920904
+        },
+        "3": {
+          "status": "complete",
+          "session": 1790749800,
+          "return_pct": -6.4971751412429395,
+          "max_up_pct": 0.14124293785311437,
+          "max_down_pct": -7.062146892655363
+        },
+        "5": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "10": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "20": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        }
+      }
+    },
+    {
+      "key": "356680.KQ@1790577000",
+      "name": "엑스게이트",
+      "stage": "watch",
+      "execution_version": "aeb203b4a06b7c39a2a060b5a32c2f868a5b62988e13ac254295c4ad6facb258",
+      "event_key": "ef244c4967aa07454b1e8b2f0f08bf59599f08e34248ce5297a96f21ea5f2609",
+      "frozen_hash": "8e827bc89c589d56d408f2f82fd7b9f0550c945ecf3646745e31180b444ed7c3",
+      "price_hash": "c1297e621af39a1f3ac5526dd0cf75f761d0dfdc1925c16c035d1fc9b49b9177",
+      "original_final_status": "risk_blocked",
+      "current_final_status": "wait_pullback",
+      "horizons": {
+        "1": {
+          "status": "complete",
+          "session": 1790663400,
+          "return_pct": -3.8357644516477607,
+          "max_up_pct": 2.8633171258779067,
+          "max_down_pct": -6.428957320367368
+        },
+        "3": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "5": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "10": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "20": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        }
+      }
+    },
+    {
+      "key": "278470.KS@1790663400",
+      "name": "에이피알",
+      "stage": "watch",
+      "execution_version": "aeb203b4a06b7c39a2a060b5a32c2f868a5b62988e13ac254295c4ad6facb258",
+      "event_key": "9f18666c0ef29200473e3bf2128eea11ca8a0bb7e3b43bad1625df35c9156f7b",
+      "frozen_hash": "75c51d4d1136e0a9a78ca6a381c3828b4d73f8eccb7fb9e3c48ced2cde835af7",
+      "price_hash": "93034d857a79f1fa0c0b49d70dea03fecff4f6a32da488ff8019abb0d3424a9d",
+      "original_final_status": "risk_blocked",
+      "current_final_status": "risk_blocked",
+      "horizons": {
+        "1": {
+          "status": "complete",
+          "session": 1790749800,
+          "return_pct": 0.9655172413793212,
+          "max_up_pct": 2.8965517241379413,
+          "max_down_pct": -0.96551724137931
+        },
+        "3": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "5": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "10": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "20": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        }
+      }
+    },
+    {
+      "key": "323280.KQ@1790663400",
+      "name": "태성",
+      "stage": "breakout",
+      "execution_version": "aeb203b4a06b7c39a2a060b5a32c2f868a5b62988e13ac254295c4ad6facb258",
+      "event_key": "1a6fc47e31387e8bde828761c3626bec972ad37a0c3667da799995b8d8f302aa",
+      "frozen_hash": "5498ad05b994238d30e36b010fb2db66789d52f3d241a35c10727f7a41fbe0ad",
+      "price_hash": "4118fa836497eb077a49ad55a0e4380a56322a22b94a214acf519eee7746f1d8",
+      "original_final_status": "context_wait",
+      "current_final_status": "context_wait",
+      "horizons": {
+        "1": {
+          "status": "complete",
+          "session": 1790749800,
+          "return_pct": 7.962962962962972,
+          "max_up_pct": 8.888888888888879,
+          "max_down_pct": -1.1111111111111072
+        },
+        "3": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "5": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "10": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "20": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        }
+      }
+    }
+  ],
+  "higher_low_excluded_events": [
+    {
+      "key": "487240.KS@1790058600",
+      "name": "KODEX AI전력핵심설비",
+      "stage": "watch",
+      "execution_version": "aeb203b4a06b7c39a2a060b5a32c2f868a5b62988e13ac254295c4ad6facb258",
+      "event_key": "c62bb534e1e0e2ffe7267f8769faa071925c66f62716e14b94542e38245eb0f5",
+      "frozen_hash": "d97431c597a73723eacb6f98e1de67fc44bf693246c7cb10a980f0112aafe958",
+      "price_hash": "cc4393bc5315288f6361a86da2f153fdaec5cfe4e3126784162bc539cbc97f2d",
+      "original_final_status": "context_wait",
+      "current_final_status": null,
+      "horizons": {
+        "1": {
+          "status": "complete",
+          "session": 1790145000,
+          "return_pct": -0.5879208979155504,
+          "max_up_pct": 1.3629075360769738,
+          "max_down_pct": -1.830571886691612
+        },
+        "3": {
+          "status": "complete",
+          "session": 1790663400,
+          "return_pct": -3.006413682522713,
+          "max_up_pct": 1.3629075360769738,
+          "max_down_pct": -3.8081239978621007
+        },
+        "5": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "10": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        },
+        "20": {
+          "status": "pending",
+          "return_pct": null,
+          "max_up_pct": null,
+          "max_down_pct": null
+        }
+      }
+    }
+  ]
+}

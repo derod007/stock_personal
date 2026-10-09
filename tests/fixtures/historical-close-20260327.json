@@ -1,0 +1,684 @@
+[
+  {
+    "symbol": "000720.KS",
+    "bars": [
+      {
+        "time": 1774483200,
+        "open": 158000.0,
+        "high": 160300.0,
+        "low": 150100.0,
+        "close": 152400.0,
+        "volume": 664660,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774569600,
+        "open": 147400.0,
+        "high": 150600.0,
+        "low": 142600.0,
+        "close": 152400.0,
+        "volume": 1149192,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774828800,
+        "open": 140800.0,
+        "high": 149200.0,
+        "low": 139600.0,
+        "close": 148400.0,
+        "volume": 855222,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      }
+    ],
+    "quotes": {
+      "2026-03-26": {
+        "open": 158000.0,
+        "high": 160300.0,
+        "low": 150100.0,
+        "close": 152400.0,
+        "volume": 664660.0
+      },
+      "2026-03-27": {
+        "open": 147400.0,
+        "high": 150600.0,
+        "low": 142600.0,
+        "close": 149800.0,
+        "volume": 1149192.0
+      },
+      "2026-03-30": {
+        "open": 140800.0,
+        "high": 149200.0,
+        "low": 139600.0,
+        "close": 148400.0,
+        "volume": 855222.0
+      }
+    },
+    "expected_repair": true
+  },
+  {
+    "symbol": "002720.KS",
+    "bars": [
+      {
+        "time": 1774483200,
+        "open": 5090.0,
+        "high": 5440.0,
+        "low": 5020.0,
+        "close": 5230.0,
+        "volume": 1141301,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774569600,
+        "open": 5170.0,
+        "high": 5210.0,
+        "low": 5010.0,
+        "close": 5230.0,
+        "volume": 295553,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774828800,
+        "open": 5060.0,
+        "high": 5060.0,
+        "low": 4915.0,
+        "close": 4950.0,
+        "volume": 224133,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      }
+    ],
+    "quotes": {
+      "2026-03-26": {
+        "open": 5090.0,
+        "high": 5440.0,
+        "low": 5020.0,
+        "close": 5230.0,
+        "volume": 1141301.0
+      },
+      "2026-03-27": {
+        "open": 5170.0,
+        "high": 5210.0,
+        "low": 5010.0,
+        "close": 5130.0,
+        "volume": 295553.0
+      },
+      "2026-03-30": {
+        "open": 5060.0,
+        "high": 5060.0,
+        "low": 4915.0,
+        "close": 4950.0,
+        "volume": 224133.0
+      }
+    },
+    "expected_repair": true
+  },
+  {
+    "symbol": "007660.KS",
+    "bars": [
+      {
+        "time": 1774483200,
+        "open": 119400.0,
+        "high": 121000.0,
+        "low": 114900.0,
+        "close": 115000.0,
+        "volume": 700057,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774569600,
+        "open": 110100.0,
+        "high": 113000.0,
+        "low": 106800.0,
+        "close": 115000.0,
+        "volume": 878951,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774828800,
+        "open": 104100.0,
+        "high": 105300.0,
+        "low": 101900.0,
+        "close": 104500.0,
+        "volume": 616027,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      }
+    ],
+    "quotes": {
+      "2026-03-26": {
+        "open": 119400.0,
+        "high": 121000.0,
+        "low": 114900.0,
+        "close": 115000.0,
+        "volume": 700057.0
+      },
+      "2026-03-27": {
+        "open": 110100.0,
+        "high": 113000.0,
+        "low": 106800.0,
+        "close": 110500.0,
+        "volume": 878951.0
+      },
+      "2026-03-30": {
+        "open": 104100.0,
+        "high": 105300.0,
+        "low": 101900.0,
+        "close": 104500.0,
+        "volume": 616027.0
+      }
+    },
+    "expected_repair": true
+  },
+  {
+    "symbol": "009150.KS",
+    "bars": [
+      {
+        "time": 1774483200,
+        "open": 450500.0,
+        "high": 466000.0,
+        "low": 448000.0,
+        "close": 457000.0,
+        "volume": 486564,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774569600,
+        "open": 436500.0,
+        "high": 438500.0,
+        "low": 418000.0,
+        "close": 457000.0,
+        "volume": 700060,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774828800,
+        "open": 406000.0,
+        "high": 436500.0,
+        "low": 401000.0,
+        "close": 429000.0,
+        "volume": 541825,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      }
+    ],
+    "quotes": {
+      "2026-03-26": {
+        "open": 450500.0,
+        "high": 466000.0,
+        "low": 448000.0,
+        "close": 457000.0,
+        "volume": 486564.0
+      },
+      "2026-03-27": {
+        "open": 436500.0,
+        "high": 438500.0,
+        "low": 418000.0,
+        "close": 434000.0,
+        "volume": 700060.0
+      },
+      "2026-03-30": {
+        "open": 406000.0,
+        "high": 436500.0,
+        "low": 401000.0,
+        "close": 429000.0,
+        "volume": 541825.0
+      }
+    },
+    "expected_repair": true
+  },
+  {
+    "symbol": "009830.KS",
+    "bars": [
+      {
+        "time": 1774483200,
+        "open": 45350.0,
+        "high": 46450.0,
+        "low": 35450.0,
+        "close": 36800.0,
+        "volume": 10598663,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774569600,
+        "open": 34850.0,
+        "high": 35650.0,
+        "low": 33600.0,
+        "close": 36800.0,
+        "volume": 5559359,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774828800,
+        "open": 34000.0,
+        "high": 36850.0,
+        "low": 33650.0,
+        "close": 36600.0,
+        "volume": 6364860,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      }
+    ],
+    "quotes": {
+      "2026-03-26": {
+        "open": 42776.0,
+        "high": 43813.0,
+        "low": 33437.0,
+        "close": 34711.0,
+        "volume": 11236404.0
+      },
+      "2026-03-27": {
+        "open": 32872.0,
+        "high": 33626.0,
+        "low": 31692.0,
+        "close": 33626.0,
+        "volume": 5893876.0
+      },
+      "2026-03-30": {
+        "open": 32070.0,
+        "high": 34758.0,
+        "low": 31740.0,
+        "close": 34522.0,
+        "volume": 6747845.0
+      }
+    },
+    "expected_repair": false
+  },
+  {
+    "symbol": "010140.KS",
+    "bars": [
+      {
+        "time": 1774483200,
+        "open": 27350.0,
+        "high": 27500.0,
+        "low": 26300.0,
+        "close": 26350.0,
+        "volume": 2633814,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774569600,
+        "open": 25700.0,
+        "high": 26150.0,
+        "low": 25000.0,
+        "close": 26350.0,
+        "volume": 3215404,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774828800,
+        "open": 24550.0,
+        "high": 24900.0,
+        "low": 24200.0,
+        "close": 24500.0,
+        "volume": 6468387,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      }
+    ],
+    "quotes": {
+      "2026-03-26": {
+        "open": 27350.0,
+        "high": 27500.0,
+        "low": 26300.0,
+        "close": 26350.0,
+        "volume": 2633814.0
+      },
+      "2026-03-27": {
+        "open": 25700.0,
+        "high": 26150.0,
+        "low": 25000.0,
+        "close": 26000.0,
+        "volume": 3215404.0
+      },
+      "2026-03-30": {
+        "open": 24550.0,
+        "high": 24900.0,
+        "low": 24200.0,
+        "close": 24500.0,
+        "volume": 6468387.0
+      }
+    },
+    "expected_repair": true
+  },
+  {
+    "symbol": "012450.KS",
+    "bars": [
+      {
+        "time": 1774483200,
+        "open": 1425000.0,
+        "high": 1425000.0,
+        "low": 1351000.0,
+        "close": 1369000.0,
+        "volume": 158124,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774569600,
+        "open": 1349000.0,
+        "high": 1349000.0,
+        "low": 1287000.0,
+        "close": 1369000.0,
+        "volume": 205178,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774828800,
+        "open": 1276000.0,
+        "high": 1327000.0,
+        "low": 1256000.0,
+        "close": 1308000.0,
+        "volume": 160318,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      }
+    ],
+    "quotes": {
+      "2026-03-26": {
+        "open": 1425000.0,
+        "high": 1425000.0,
+        "low": 1351000.0,
+        "close": 1369000.0,
+        "volume": 158124.0
+      },
+      "2026-03-27": {
+        "open": 1349000.0,
+        "high": 1349000.0,
+        "low": 1287000.0,
+        "close": 1335000.0,
+        "volume": 205178.0
+      },
+      "2026-03-30": {
+        "open": 1276000.0,
+        "high": 1327000.0,
+        "low": 1256000.0,
+        "close": 1308000.0,
+        "volume": 160318.0
+      }
+    },
+    "expected_repair": true
+  },
+  {
+    "symbol": "017670.KS",
+    "bars": [
+      {
+        "time": 1774483200,
+        "open": 81000.0,
+        "high": 82100.0,
+        "low": 79800.0,
+        "close": 80000.0,
+        "volume": 830301,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774569600,
+        "open": 78500.0,
+        "high": 79900.0,
+        "low": 77500.0,
+        "close": 80000.0,
+        "volume": 823758,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774828800,
+        "open": 77600.0,
+        "high": 78500.0,
+        "low": 76300.0,
+        "close": 78300.0,
+        "volume": 842066,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      }
+    ],
+    "quotes": {
+      "2026-03-26": {
+        "open": 81000.0,
+        "high": 82100.0,
+        "low": 79800.0,
+        "close": 80000.0,
+        "volume": 830301.0
+      },
+      "2026-03-27": {
+        "open": 78500.0,
+        "high": 79900.0,
+        "low": 77500.0,
+        "close": 79900.0,
+        "volume": 823758.0
+      },
+      "2026-03-30": {
+        "open": 77600.0,
+        "high": 78500.0,
+        "low": 76300.0,
+        "close": 78300.0,
+        "volume": 842066.0
+      }
+    },
+    "expected_repair": true
+  },
+  {
+    "symbol": "034020.KS",
+    "bars": [
+      {
+        "time": 1774483200,
+        "open": 103000.0,
+        "high": 104200.0,
+        "low": 99600.0,
+        "close": 100900.0,
+        "volume": 2606678,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774569600,
+        "open": 97700.0,
+        "high": 99200.0,
+        "low": 95100.0,
+        "close": 100900.0,
+        "volume": 3549743,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774828800,
+        "open": 93000.0,
+        "high": 94500.0,
+        "low": 91400.0,
+        "close": 94200.0,
+        "volume": 2828606,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      }
+    ],
+    "quotes": {
+      "2026-03-26": {
+        "open": 103000.0,
+        "high": 104200.0,
+        "low": 99600.0,
+        "close": 100900.0,
+        "volume": 2606678.0
+      },
+      "2026-03-27": {
+        "open": 97700.0,
+        "high": 99200.0,
+        "low": 95100.0,
+        "close": 98100.0,
+        "volume": 3549743.0
+      },
+      "2026-03-30": {
+        "open": 93000.0,
+        "high": 94500.0,
+        "low": 91400.0,
+        "close": 94200.0,
+        "volume": 2828606.0
+      }
+    },
+    "expected_repair": true
+  },
+  {
+    "symbol": "036540.KQ",
+    "bars": [
+      {
+        "time": 1774483200,
+        "open": 7010.0,
+        "high": 7020.0,
+        "low": 6650.0,
+        "close": 6690.0,
+        "volume": 1726225,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774569600,
+        "open": 6400.0,
+        "high": 6640.0,
+        "low": 6250.0,
+        "close": 6690.0,
+        "volume": 1652330,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774828800,
+        "open": 6240.0,
+        "high": 6350.0,
+        "low": 6090.0,
+        "close": 6310.0,
+        "volume": 1016442,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      }
+    ],
+    "quotes": {
+      "2026-03-26": {
+        "open": 7010.0,
+        "high": 7020.0,
+        "low": 6650.0,
+        "close": 6690.0,
+        "volume": 1726225.0
+      },
+      "2026-03-27": {
+        "open": 6400.0,
+        "high": 6640.0,
+        "low": 6250.0,
+        "close": 6560.0,
+        "volume": 1652330.0
+      },
+      "2026-03-30": {
+        "open": 6240.0,
+        "high": 6350.0,
+        "low": 6090.0,
+        "close": 6310.0,
+        "volume": 1016442.0
+      }
+    },
+    "expected_repair": true
+  },
+  {
+    "symbol": "042660.KS",
+    "bars": [
+      {
+        "time": 1774483200,
+        "open": 129300.0,
+        "high": 130300.0,
+        "low": 124700.0,
+        "close": 125700.0,
+        "volume": 932327,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774569600,
+        "open": 120500.0,
+        "high": 123400.0,
+        "low": 117300.0,
+        "close": 125700.0,
+        "volume": 833837,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      },
+      {
+        "time": 1774828800,
+        "open": 117100.0,
+        "high": 120500.0,
+        "low": 115100.0,
+        "close": 118200.0,
+        "volume": 770279,
+        "synthetic": false,
+        "is_complete": true,
+        "close_source": "yahoo_daily"
+      }
+    ],
+    "quotes": {
+      "2026-03-26": {
+        "open": 129300.0,
+        "high": 130300.0,
+        "low": 124700.0,
+        "close": 125700.0,
+        "volume": 932327.0
+      },
+      "2026-03-27": {
+        "open": 120500.0,
+        "high": 123400.0,
+        "low": 117300.0,
+        "close": 123200.0,
+        "volume": 833837.0
+      },
+      "2026-03-30": {
+        "open": 117100.0,
+        "high": 120500.0,
+        "low": 115100.0,
+        "close": 118200.0,
+        "volume": 770279.0
+      }
+    },
+    "expected_repair": true
+  }
+]

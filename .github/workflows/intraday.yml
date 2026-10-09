@@ -30,6 +30,8 @@ jobs:
           php -l src/ProposalService.php
           php -l src/KrAmountScanner.php
           php -l index.php
+          php -l src/NaverHistoricalClose.php
+          php tests/historical_close.php
           php tests/yahoo_missing_close.php
           php tests/midnight_daily.php
           php tests/intraday.php

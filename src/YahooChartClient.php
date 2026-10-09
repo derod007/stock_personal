@@ -15,17 +15,20 @@ final class YahooChartClient
     private const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
 
     private readonly NaverDailyQuotes $naverDaily;
+    private readonly NaverHistoricalClose $historicalClose;
 
     public function __construct(
         private readonly string $cacheDir,
         ?NaverDailyQuotes $naverDaily = null,
         private readonly ?\Closure $chartTransport = null,
         private readonly ?\Closure $clock = null,
+        ?NaverHistoricalClose $historicalClose = null,
     ) {
         if (!is_dir($this->cacheDir)) {
             mkdir($this->cacheDir, 0777, true);
         }
         $this->naverDaily = $naverDaily ?? new NaverDailyQuotes($this->cacheDir . '/naver');
+        $this->historicalClose = $historicalClose ?? new NaverHistoricalClose($this->cacheDir . '/historical-close');
     }
 
     private function now(): int { return $this->clock !== null ? ($this->clock)() : time(); }
@@ -220,6 +223,7 @@ final class YahooChartClient
             return $rows;
         }
 
+        $rows = $this->historicalClose->repair($rows, $symbol, $interval, $this->now());
         $quotes = $this->naverDaily->recent($symbol, useCache: $useNaverCache);
         if ($quotes === []) {
             return $rows;

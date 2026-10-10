@@ -1,0 +1,5105 @@
+{
+  "kind": "pullback_structure_classification_v1",
+  "protocol_sha256": "2fdfb37104ee740b871d1439206dd9b1fba3837b48b0371b4f24c676e6f04e9f",
+  "script_sha256": "5c3e186971eb91c09034cc3188d821b72d3ddd553933d379df90475d9b9be64c",
+  "manifest_sha256": "0ac24de9335f74b8e6449d355a71d36e1e92093b792f3097baa75454bb69a0ca",
+  "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+  "rows": [
+    {
+      "case_id": "0113c218b3d355bf",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "005290.KQ",
+      "name": "동진쎄미켐",
+      "date": "2025-03-07",
+      "input_file_sha256": "fc36c71bdb5362178e24dbd861fb277ef99073d826ccb7eb7fcc39ebae38bb4d",
+      "ma20": 27120,
+      "close": 27850,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 96,
+        "date": "2025-02-03",
+        "confirmed_date": "2025-02-05",
+        "price": 20550
+      },
+      "L2": {
+        "index": 116,
+        "date": "2025-03-04",
+        "confirmed_date": "2025-03-06",
+        "price": 25600
+      },
+      "H": {
+        "index": 112,
+        "date": "2025-02-25",
+        "confirmed_date": "2025-02-27",
+        "price": 33600
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "04e0c02bd09dcbae",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "095610.KQ",
+      "name": "테스",
+      "date": "2025-03-10",
+      "input_file_sha256": "2a64d21b04ce61eaee33f21df7593c2c96a9bcdfeddfcc16595b5988c7955e8e",
+      "ma20": 21935,
+      "close": 21500,
+      "below_ma20": true,
+      "label": "U",
+      "reason": "no_confirmed_intervening_high",
+      "L1": {
+        "index": 110,
+        "date": "2025-02-24",
+        "confirmed_date": "2025-02-26",
+        "price": 21350
+      },
+      "L2": {
+        "index": 115,
+        "date": "2025-03-04",
+        "confirmed_date": "2025-03-06",
+        "price": 20250
+      },
+      "H": null,
+      "low_broken_after_L2": null,
+      "bullish_recovery": false
+    },
+    {
+      "case_id": "05bf13c82a01470e",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "203650.KQ",
+      "name": "드림시큐리티",
+      "date": "2024-10-10",
+      "input_file_sha256": "07bb4d2329f9dfba6f0105e8d01294bbfe1ff61d83d859bafaaaa3c7bc1ab297",
+      "ma20": 1554.25,
+      "close": 1590,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 78,
+        "date": "2024-08-05",
+        "confirmed_date": "2024-08-07",
+        "price": 1142.5
+      },
+      "L2": {
+        "index": 99,
+        "date": "2024-09-04",
+        "confirmed_date": "2024-09-06",
+        "price": 1447.5
+      },
+      "H": {
+        "index": 94,
+        "date": "2024-08-28",
+        "confirmed_date": "2024-08-30",
+        "price": 1615
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "073baaf1997f0bf4",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "475150.KS",
+      "name": "SK이터닉스",
+      "date": "2025-07-15",
+      "input_file_sha256": "35ac1c7bc2251d3b560bee08e1c4c7705913ffa762ebe2e20ef7ba785a4a933f",
+      "ma20": 24092.5,
+      "close": 22850,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 108,
+        "date": "2025-06-30",
+        "confirmed_date": "2025-07-02",
+        "price": 23400
+      },
+      "L2": {
+        "index": 113,
+        "date": "2025-07-07",
+        "confirmed_date": "2025-07-09",
+        "price": 23100
+      },
+      "H": {
+        "index": 112,
+        "date": "2025-07-04",
+        "confirmed_date": "2025-07-08",
+        "price": 25150
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "0a83cdcb9e547dad",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "356680.KQ",
+      "name": "엑스게이트",
+      "date": "2024-11-05",
+      "input_file_sha256": "03bf86aaa7a95b57cd8a0e019a19244e1b149c7fc3d44d650ca9106aa6bd43f7",
+      "ma20": 4929,
+      "close": 4970,
+      "below_ma20": false,
+      "label": "U",
+      "reason": "no_confirmed_intervening_high",
+      "L1": {
+        "index": 97,
+        "date": "2024-10-02",
+        "confirmed_date": "2024-10-07",
+        "price": 4190
+      },
+      "L2": {
+        "index": 103,
+        "date": "2024-10-14",
+        "confirmed_date": "2024-10-16",
+        "price": 4140
+      },
+      "H": null,
+      "low_broken_after_L2": null,
+      "bullish_recovery": false
+    },
+    {
+      "case_id": "0d5d5e3408d0815c",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "103590.KS",
+      "name": "일진전기",
+      "date": "2026-03-18",
+      "input_file_sha256": "82628cbbce59142dbf9b77dc9af28dfa3dd81624c52ed80faab3ead63114b37e",
+      "ma20": 79810,
+      "close": 82300,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 112,
+        "date": "2026-03-09",
+        "confirmed_date": "2026-03-11",
+        "price": 74500
+      },
+      "L2": {
+        "index": 117,
+        "date": "2026-03-16",
+        "confirmed_date": "2026-03-18",
+        "price": 75500
+      },
+      "H": {
+        "index": 114,
+        "date": "2026-03-11",
+        "confirmed_date": "2026-03-13",
+        "price": 82500
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "0d7c38a87a5c1ca7",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "108490.KQ",
+      "name": "로보티즈",
+      "date": "2025-11-24",
+      "input_file_sha256": "1929af42eb5421f61f5493bff37f779bf30314badbda8c3a3b02a83eaac5408b",
+      "ma20": 220610,
+      "close": 206500,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 83,
+        "date": "2025-09-26",
+        "confirmed_date": "2025-09-30",
+        "price": 140668.15625
+      },
+      "L2": {
+        "index": 108,
+        "date": "2025-11-07",
+        "confirmed_date": "2025-11-11",
+        "price": 204000
+      },
+      "H": {
+        "index": 105,
+        "date": "2025-11-04",
+        "confirmed_date": "2025-11-06",
+        "price": 294500
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "10649afd7a0f773f",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "028260.KS",
+      "name": "삼성물산",
+      "date": "2025-07-29",
+      "input_file_sha256": "d241e3d37dfc46eef0b2274c90a842b3c8dc577e35870519986b930bf469b217",
+      "ma20": 171765,
+      "close": 172900,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 104,
+        "date": "2025-07-08",
+        "confirmed_date": "2025-07-10",
+        "price": 159500
+      },
+      "L2": {
+        "index": 115,
+        "date": "2025-07-23",
+        "confirmed_date": "2025-07-25",
+        "price": 166300
+      },
+      "H": {
+        "index": 111,
+        "date": "2025-07-17",
+        "confirmed_date": "2025-07-21",
+        "price": 188900
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "1278e281bf04aa33",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "082740.KS",
+      "name": "한화엔진",
+      "date": "2025-06-30",
+      "input_file_sha256": "37c5323a508b69dcbe266411cd5898dd4477deeb9f033c94c1f310da4181ca2f",
+      "ma20": 28730,
+      "close": 28450,
+      "below_ma20": true,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 104,
+        "date": "2025-06-09",
+        "confirmed_date": "2025-06-11",
+        "price": 26250
+      },
+      "L2": {
+        "index": 117,
+        "date": "2025-06-26",
+        "confirmed_date": "2025-06-30",
+        "price": 26700
+      },
+      "H": {
+        "index": 111,
+        "date": "2025-06-18",
+        "confirmed_date": "2025-06-20",
+        "price": 32350
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "12a303630b46bb12",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "452190.KQ",
+      "name": "한빛레이저",
+      "date": "2025-03-28",
+      "input_file_sha256": "d791f47cddd479226cf0ca8839917e7ec13aff749948af1f4a586bc3f72292e6",
+      "ma20": 6451.5,
+      "close": 6050,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 100,
+        "date": "2025-02-28",
+        "confirmed_date": "2025-03-05",
+        "price": 5650
+      },
+      "L2": {
+        "index": 106,
+        "date": "2025-03-11",
+        "confirmed_date": "2025-03-13",
+        "price": 5970
+      },
+      "H": {
+        "index": 105,
+        "date": "2025-03-10",
+        "confirmed_date": "2025-03-12",
+        "price": 7040
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "13e1a4ba012ca824",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "011070.KS",
+      "name": "LG이노텍",
+      "date": "2026-03-18",
+      "input_file_sha256": "7d8e17f47cf26ec5b7d3348e21c6a5254c34a459f1ac7c7882f1d51072a2fdcb",
+      "ma20": 268325,
+      "close": 268500,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 112,
+        "date": "2026-03-09",
+        "confirmed_date": "2026-03-11",
+        "price": 240000
+      },
+      "L2": {
+        "index": 116,
+        "date": "2026-03-13",
+        "confirmed_date": "2026-03-17",
+        "price": 242500
+      },
+      "H": {
+        "index": 114,
+        "date": "2026-03-11",
+        "confirmed_date": "2026-03-13",
+        "price": 272500
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "1473dae8ba1699d4",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "201490.KQ",
+      "name": "미투온",
+      "date": "2026-05-06",
+      "input_file_sha256": "be7a4b1503a5ff4c4bef20a2fb81c03e4577e757b0e87ff49affa1134f67e161",
+      "ma20": 3233.25,
+      "close": 3370,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 97,
+        "date": "2026-04-02",
+        "confirmed_date": "2026-04-06",
+        "price": 2705
+      },
+      "L2": {
+        "index": 117,
+        "date": "2026-04-30",
+        "confirmed_date": "2026-05-06",
+        "price": 3140
+      },
+      "H": {
+        "index": 107,
+        "date": "2026-04-16",
+        "confirmed_date": "2026-04-20",
+        "price": 3925
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "1556a810b3dd47b3",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "036540.KQ",
+      "name": "SFA반도체",
+      "date": "2025-07-11",
+      "input_file_sha256": "1c9123ac13d1666eb6d5b31b349f0b87dd8d393dd0849b75c3bd63f3895e574d",
+      "ma20": 3180.5,
+      "close": 3135,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 105,
+        "date": "2025-06-23",
+        "confirmed_date": "2025-06-25",
+        "price": 3085
+      },
+      "L2": {
+        "index": 112,
+        "date": "2025-07-02",
+        "confirmed_date": "2025-07-04",
+        "price": 3060
+      },
+      "H": {
+        "index": 107,
+        "date": "2025-06-25",
+        "confirmed_date": "2025-06-27",
+        "price": 3490
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "15e280fb05b704e5",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "475150.KS",
+      "name": "SK이터닉스",
+      "date": "2026-08-13",
+      "input_file_sha256": "85faf0c0e0326aad6b4fd660dced53244dd05d436eedc3620950937e07892f41",
+      "ma20": 55077.5,
+      "close": 57100,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 108,
+        "date": "2026-07-29",
+        "confirmed_date": "2026-07-31",
+        "price": 41300
+      },
+      "L2": {
+        "index": 116,
+        "date": "2026-08-10",
+        "confirmed_date": "2026-08-12",
+        "price": 49600
+      },
+      "H": {
+        "index": 113,
+        "date": "2026-08-05",
+        "confirmed_date": "2026-08-07",
+        "price": 61800
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "18768e76c1585470",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "011070.KS",
+      "name": "LG이노텍",
+      "date": "2026-06-15",
+      "input_file_sha256": "628fc0e912f7611ed303a822dafe817e2bdb8ce3a7d4788cfb6f0668900d275e",
+      "ma20": 1060250,
+      "close": 1209000,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 101,
+        "date": "2026-05-18",
+        "confirmed_date": "2026-05-20",
+        "price": 673000
+      },
+      "L2": {
+        "index": 114,
+        "date": "2026-06-08",
+        "confirmed_date": "2026-06-10",
+        "price": 976000
+      },
+      "H": {
+        "index": 110,
+        "date": "2026-06-01",
+        "confirmed_date": "2026-06-04",
+        "price": 1788000
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "18e6095d66b3ea6a",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "373220.KS",
+      "name": "LG에너지솔루션",
+      "date": "2025-11-11",
+      "input_file_sha256": "94db39918e829317b7b4957bf9e6bb4e39d736a3b0792e3da2daf2212a681c2b",
+      "ma20": 463375,
+      "close": 473000,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 95,
+        "date": "2025-10-01",
+        "confirmed_date": "2025-10-10",
+        "price": 341000
+      },
+      "L2": {
+        "index": 115,
+        "date": "2025-11-05",
+        "confirmed_date": "2025-11-07",
+        "price": 452000
+      },
+      "H": {
+        "index": 110,
+        "date": "2025-10-29",
+        "confirmed_date": "2025-10-31",
+        "price": 527000
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "190fc16b8062f7d0",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "000270.KS",
+      "name": "기아",
+      "date": "2025-08-19",
+      "input_file_sha256": "02bedb5718d0d6c7887e701f613a7950b688154760332bf65a45aafddda2f3d6",
+      "ma20": 103195,
+      "close": 104000,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 109,
+        "date": "2025-08-04",
+        "confirmed_date": "2025-08-06",
+        "price": 100500
+      },
+      "L2": {
+        "index": 115,
+        "date": "2025-08-12",
+        "confirmed_date": "2025-08-14",
+        "price": 101000
+      },
+      "H": {
+        "index": 110,
+        "date": "2025-08-05",
+        "confirmed_date": "2025-08-07",
+        "price": 104200
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "19f9ea891800aab8",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "336260.KS",
+      "name": "두산퓨얼셀",
+      "date": "2025-09-10",
+      "input_file_sha256": "cb3419b88a5e23c97ee8dd4d4bfe3da21c6335a0888cb92cc6ddb33208fe1e6f",
+      "ma20": 26027.5,
+      "close": 26550,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 104,
+        "date": "2025-08-20",
+        "confirmed_date": "2025-08-22",
+        "price": 23700
+      },
+      "L2": {
+        "index": 116,
+        "date": "2025-09-05",
+        "confirmed_date": "2025-09-09",
+        "price": 24300
+      },
+      "H": {
+        "index": 109,
+        "date": "2025-08-27",
+        "confirmed_date": "2025-08-29",
+        "price": 31350
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "1abdef2dc6e95df5",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "457190.KS",
+      "name": "이수스페셜티케미컬",
+      "date": "2025-11-13",
+      "input_file_sha256": "776ac348b816d3a0e82561c9c26e95d470e72b32bd588d783f99f6d6e3f69d10",
+      "ma20": 55920,
+      "close": 55600,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 110,
+        "date": "2025-10-31",
+        "confirmed_date": "2025-11-04",
+        "price": 54400
+      },
+      "L2": {
+        "index": 113,
+        "date": "2025-11-05",
+        "confirmed_date": "2025-11-07",
+        "price": 51200
+      },
+      "H": {
+        "index": 112,
+        "date": "2025-11-04",
+        "confirmed_date": "2025-11-06",
+        "price": 58800
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "1ae35a1053eebc5d",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "161580.KQ",
+      "name": "필옵틱스",
+      "date": "2026-05-21",
+      "input_file_sha256": "5fca4607f49a17f73902b32edb1c0a29efd0fbac504d114c35a6945877a1475c",
+      "ma20": 51427.5,
+      "close": 49200,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 101,
+        "date": "2026-04-23",
+        "confirmed_date": "2026-04-27",
+        "price": 46650
+      },
+      "L2": {
+        "index": 106,
+        "date": "2026-04-30",
+        "confirmed_date": "2026-05-06",
+        "price": 47500
+      },
+      "H": {
+        "index": 103,
+        "date": "2026-04-27",
+        "confirmed_date": "2026-04-29",
+        "price": 53000
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "1d47bb540a2b1490",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "086790.KS",
+      "name": "하나금융지주",
+      "date": "2024-11-06",
+      "input_file_sha256": "934265db008120e569e0b4c08da0fcecd3ddee6e5f1a45e7c18ba6050204f71c",
+      "ma20": 63445,
+      "close": 61900,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 96,
+        "date": "2024-10-02",
+        "confirmed_date": "2024-10-07",
+        "price": 57400
+      },
+      "L2": {
+        "index": 108,
+        "date": "2024-10-22",
+        "confirmed_date": "2024-10-24",
+        "price": 63300
+      },
+      "H": {
+        "index": 105,
+        "date": "2024-10-17",
+        "confirmed_date": "2024-10-21",
+        "price": 67500
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "1d547958fb31581b",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "006400.KS",
+      "name": "삼성SDI",
+      "date": "2026-09-15",
+      "input_file_sha256": "3e171d6962293d9cada74e226a59170756d98cb2c1e0b329de63f7d87cb994e9",
+      "ma20": 537775,
+      "close": 547000,
+      "below_ma20": false,
+      "label": "U",
+      "reason": "no_confirmed_intervening_high",
+      "L1": {
+        "index": 111,
+        "date": "2026-09-03",
+        "confirmed_date": "2026-09-07",
+        "price": 525000
+      },
+      "L2": {
+        "index": 115,
+        "date": "2026-09-09",
+        "confirmed_date": "2026-09-11",
+        "price": 525000
+      },
+      "H": null,
+      "low_broken_after_L2": null,
+      "bullish_recovery": false
+    },
+    {
+      "case_id": "1f25541606ef0432",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "010140.KS",
+      "name": "삼성중공업",
+      "date": "2025-06-30",
+      "input_file_sha256": "e0be80d5fd16cb36b4709c0d88998164668779d71991638af39c87881d0b9a1a",
+      "ma20": 17069.5,
+      "close": 16760,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 102,
+        "date": "2025-06-04",
+        "confirmed_date": "2025-06-09",
+        "price": 16100
+      },
+      "L2": {
+        "index": 117,
+        "date": "2025-06-26",
+        "confirmed_date": "2025-06-30",
+        "price": 16050
+      },
+      "H": {
+        "index": 110,
+        "date": "2025-06-17",
+        "confirmed_date": "2025-06-19",
+        "price": 18550
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "1ff1d70d6b3a8774",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "080220.KQ",
+      "name": "제주반도체",
+      "date": "2025-11-03",
+      "input_file_sha256": "64b5928c3ddc4d94e575df29477f328681c3501dd213a8de022f62d544b9aac3",
+      "ma20": 21068,
+      "close": 21050,
+      "below_ma20": true,
+      "label": "U",
+      "reason": "no_confirmed_intervening_high",
+      "L1": {
+        "index": 101,
+        "date": "2025-10-01",
+        "confirmed_date": "2025-10-10",
+        "price": 17900
+      },
+      "L2": {
+        "index": 112,
+        "date": "2025-10-23",
+        "confirmed_date": "2025-10-27",
+        "price": 20000
+      },
+      "H": null,
+      "low_broken_after_L2": null,
+      "bullish_recovery": false
+    },
+    {
+      "case_id": "2032f201c0c38f7f",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "066570.KS",
+      "name": "LG전자",
+      "date": "2026-03-18",
+      "input_file_sha256": "dad855cc7fa2f1f7fd1cb2f894034e6d028b3c4ab20fd91130020b2ec54b9ad3",
+      "ma20": 122385,
+      "close": 120000,
+      "below_ma20": true,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 112,
+        "date": "2026-03-09",
+        "confirmed_date": "2026-03-11",
+        "price": 108000
+      },
+      "L2": {
+        "index": 116,
+        "date": "2026-03-13",
+        "confirmed_date": "2026-03-17",
+        "price": 109800
+      },
+      "H": {
+        "index": 114,
+        "date": "2026-03-11",
+        "confirmed_date": "2026-03-13",
+        "price": 122500
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "216595afbee6c4b5",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "001820.KS",
+      "name": "삼화콘덴서",
+      "date": "2026-03-10",
+      "input_file_sha256": "8c1745276a63b73e8b644177d703481800ab1cf6b97122a4e03a0aee98819649",
+      "ma20": 44410,
+      "close": 48100,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 106,
+        "date": "2026-02-13",
+        "confirmed_date": "2026-02-20",
+        "price": 35700
+      },
+      "L2": {
+        "index": 115,
+        "date": "2026-03-04",
+        "confirmed_date": "2026-03-06",
+        "price": 40000
+      },
+      "H": {
+        "index": 110,
+        "date": "2026-02-24",
+        "confirmed_date": "2026-02-26",
+        "price": 68400
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "21ea57e8b878fc85",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "203650.KQ",
+      "name": "드림시큐리티",
+      "date": "2025-01-31",
+      "input_file_sha256": "117514d8026fb73fc3bc6eb28445df1a2b0d89118fea1bb92fdb598b44bfbdd7",
+      "ma20": 1827.25,
+      "close": 1770,
+      "below_ma20": true,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 110,
+        "date": "2025-01-14",
+        "confirmed_date": "2025-01-16",
+        "price": 1617.5
+      },
+      "L2": {
+        "index": 115,
+        "date": "2025-01-21",
+        "confirmed_date": "2025-01-23",
+        "price": 1720
+      },
+      "H": {
+        "index": 112,
+        "date": "2025-01-16",
+        "confirmed_date": "2025-01-20",
+        "price": 1982.5
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "249b91b64e41a524",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "203650.KQ",
+      "name": "드림시큐리티",
+      "date": "2025-05-20",
+      "input_file_sha256": "b50d8402f9cd81a248698f31c2934e6451fe96e8dac487f6c7967f0344392c56",
+      "ma20": 1725.75,
+      "close": 1755,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 102,
+        "date": "2025-04-22",
+        "confirmed_date": "2025-04-24",
+        "price": 1602.5
+      },
+      "L2": {
+        "index": 109,
+        "date": "2025-05-02",
+        "confirmed_date": "2025-05-08",
+        "price": 1697.5
+      },
+      "H": {
+        "index": 107,
+        "date": "2025-04-29",
+        "confirmed_date": "2025-05-02",
+        "price": 2097.5
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "284171e508e3e7e0",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "000270.KS",
+      "name": "기아",
+      "date": "2025-08-14",
+      "input_file_sha256": "e131e916e33fbcdfbca8025ea6aec0df63ccfad8128cecb74e5a0e980c5729a6",
+      "ma20": 102840,
+      "close": 103700,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 111,
+        "date": "2025-08-04",
+        "confirmed_date": "2025-08-06",
+        "price": 100500
+      },
+      "L2": {
+        "index": 117,
+        "date": "2025-08-12",
+        "confirmed_date": "2025-08-14",
+        "price": 101000
+      },
+      "H": {
+        "index": 112,
+        "date": "2025-08-05",
+        "confirmed_date": "2025-08-07",
+        "price": 104200
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "2c425d7a45ab9368",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "005290.KQ",
+      "name": "동진쎄미켐",
+      "date": "2025-07-21",
+      "input_file_sha256": "b21ebf04e3e4681a045913fb32da2b4567e2c58654d601eae7675d76acb29fb2",
+      "ma20": 31787.5,
+      "close": 31900,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 106,
+        "date": "2025-07-02",
+        "confirmed_date": "2025-07-04",
+        "price": 31700
+      },
+      "L2": {
+        "index": 112,
+        "date": "2025-07-10",
+        "confirmed_date": "2025-07-14",
+        "price": 30400
+      },
+      "H": {
+        "index": 108,
+        "date": "2025-07-04",
+        "confirmed_date": "2025-07-08",
+        "price": 33400
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "2e8c9bc779c2669b",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "079550.KS",
+      "name": "LIG디펜스앤에어로스페이스",
+      "date": "2025-01-24",
+      "input_file_sha256": "c33da7508777a72a7f3e19fc0643ff5d56a6fde48d4419b7750338ccbc15547d",
+      "ma20": 227250,
+      "close": 230500,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 110,
+        "date": "2025-01-13",
+        "confirmed_date": "2025-01-15",
+        "price": 220000
+      },
+      "L2": {
+        "index": 115,
+        "date": "2025-01-20",
+        "confirmed_date": "2025-01-22",
+        "price": 208000
+      },
+      "H": {
+        "index": 112,
+        "date": "2025-01-15",
+        "confirmed_date": "2025-01-17",
+        "price": 232000
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "30416c78c22d1d0e",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "052690.KS",
+      "name": "한전기술",
+      "date": "2025-11-10",
+      "input_file_sha256": "bf79e8c3216f67408dfeae9edbcdac385dfcfda64f3b4f93654fe7652a65edab",
+      "ma20": 100855,
+      "close": 94300,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 85,
+        "date": "2025-09-15",
+        "confirmed_date": "2025-09-17",
+        "price": 86300
+      },
+      "L2": {
+        "index": 95,
+        "date": "2025-09-30",
+        "confirmed_date": "2025-10-02",
+        "price": 83100
+      },
+      "H": {
+        "index": 86,
+        "date": "2025-09-16",
+        "confirmed_date": "2025-09-18",
+        "price": 90100
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "327a2d45e2206b2b",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "041190.KQ",
+      "name": "우리기술투자",
+      "date": "2026-09-18",
+      "input_file_sha256": "129dde3065844e2f6252aff5ddae605f8212453c4ab91428c006bb0d4aa0d2d1",
+      "ma20": 5892.5,
+      "close": 5430,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 108,
+        "date": "2026-09-03",
+        "confirmed_date": "2026-09-07",
+        "price": 5610
+      },
+      "L2": {
+        "index": 117,
+        "date": "2026-09-16",
+        "confirmed_date": "2026-09-18",
+        "price": 5100
+      },
+      "H": {
+        "index": 109,
+        "date": "2026-09-04",
+        "confirmed_date": "2026-09-08",
+        "price": 6740
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "3355b3817283697d",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "007810.KS",
+      "name": "코리아써키트",
+      "date": "2025-03-12",
+      "input_file_sha256": "4b740d694f7b53a55f41fdce24c3468aeec116e7f8859c8d6957db8058135360",
+      "ma20": 12288.5,
+      "close": 11870,
+      "below_ma20": true,
+      "label": "U",
+      "reason": "no_confirmed_intervening_high",
+      "L1": {
+        "index": 112,
+        "date": "2025-02-28",
+        "confirmed_date": "2025-03-05",
+        "price": 11350
+      },
+      "L2": {
+        "index": 115,
+        "date": "2025-03-06",
+        "confirmed_date": "2025-03-10",
+        "price": 11200
+      },
+      "H": null,
+      "low_broken_after_L2": null,
+      "bullish_recovery": false
+    },
+    {
+      "case_id": "33dbb0388d9b89c7",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "417200.KQ",
+      "name": "LS머트리얼즈",
+      "date": "2026-04-01",
+      "input_file_sha256": "4976557f66e949d88a28314756a17b4a57387138d3faee469f9964e1f48295fd",
+      "ma20": 20113.5,
+      "close": 20850,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 90,
+        "date": "2026-02-13",
+        "confirmed_date": "2026-02-20",
+        "price": 15640
+      },
+      "L2": {
+        "index": 99,
+        "date": "2026-03-04",
+        "confirmed_date": "2026-03-06",
+        "price": 13100
+      },
+      "H": {
+        "index": 95,
+        "date": "2026-02-25",
+        "confirmed_date": "2026-02-27",
+        "price": 19340
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "3515d4e618a65e4a",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "009150.KS",
+      "name": "삼성전기",
+      "date": "2025-12-26",
+      "input_file_sha256": "d3c73831c0052c9dc29836bc8308c23048aef84f081b5160cf34f2f9998c7df2",
+      "ma20": 259300,
+      "close": 259000,
+      "below_ma20": true,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 93,
+        "date": "2025-11-19",
+        "confirmed_date": "2025-11-21",
+        "price": 201000
+      },
+      "L2": {
+        "index": 101,
+        "date": "2025-12-01",
+        "confirmed_date": "2025-12-03",
+        "price": 243500
+      },
+      "H": {
+        "index": 99,
+        "date": "2025-11-27",
+        "confirmed_date": "2025-12-01",
+        "price": 259250
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "363aa23b476cb130",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "006400.KS",
+      "name": "삼성SDI",
+      "date": "2026-03-18",
+      "input_file_sha256": "cacfe434d70c5624ae19b6ebc9e9e025365377d049e2cb7068a6fc0a6a7882b1",
+      "ma20": 403250,
+      "close": 405000,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 112,
+        "date": "2026-03-09",
+        "confirmed_date": "2026-03-11",
+        "price": 375500
+      },
+      "L2": {
+        "index": 117,
+        "date": "2026-03-16",
+        "confirmed_date": "2026-03-18",
+        "price": 380000
+      },
+      "H": {
+        "index": 114,
+        "date": "2026-03-11",
+        "confirmed_date": "2026-03-13",
+        "price": 419000
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "36eca79118235abc",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "457190.KS",
+      "name": "이수스페셜티케미컬",
+      "date": "2026-02-25",
+      "input_file_sha256": "95b3d5b1dfc55af4a0519fb7434a78f0551b99f900399d45b9d3aa543baac634",
+      "ma20": 103035,
+      "close": 104100,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 109,
+        "date": "2026-02-06",
+        "confirmed_date": "2026-02-10",
+        "price": 98100
+      },
+      "L2": {
+        "index": 115,
+        "date": "2026-02-19",
+        "confirmed_date": "2026-02-23",
+        "price": 95500
+      },
+      "H": {
+        "index": 111,
+        "date": "2026-02-10",
+        "confirmed_date": "2026-02-12",
+        "price": 105800
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "37e84aadd60596f8",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "108490.KQ",
+      "name": "로보티즈",
+      "date": "2026-10-01",
+      "input_file_sha256": "7fce4c999e4028eea18f5775e946c6e412b000fc2c227687f1d1f0c8b6e21cf1",
+      "ma20": 298650,
+      "close": 296500,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 105,
+        "date": "2026-09-09",
+        "confirmed_date": "2026-09-11",
+        "price": 280500
+      },
+      "L2": {
+        "index": 111,
+        "date": "2026-09-17",
+        "confirmed_date": "2026-09-21",
+        "price": 300000
+      },
+      "H": {
+        "index": 109,
+        "date": "2026-09-15",
+        "confirmed_date": "2026-09-17",
+        "price": 352000
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "3984b758d037c184",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "272210.KS",
+      "name": "한화시스템",
+      "date": "2026-03-25",
+      "input_file_sha256": "aae002a560beba851c0187584c0c744f87e9bf99ea9d8ae5bebfa0b27e6f8b44",
+      "ma20": 137745,
+      "close": 136600,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 99,
+        "date": "2026-02-24",
+        "confirmed_date": "2026-02-26",
+        "price": 106500
+      },
+      "L2": {
+        "index": 113,
+        "date": "2026-03-17",
+        "confirmed_date": "2026-03-19",
+        "price": 135700
+      },
+      "H": {
+        "index": 104,
+        "date": "2026-03-04",
+        "confirmed_date": "2026-03-06",
+        "price": 184000
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "3bd565c24ae64a75",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "247540.KQ",
+      "name": "에코프로비엠",
+      "date": "2026-02-19",
+      "input_file_sha256": "86a18b5614edc57f5de7e99a9c384c8d655de697f631c76e7ff822382182547d",
+      "ma20": 204385,
+      "close": 214000,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 99,
+        "date": "2026-01-19",
+        "confirmed_date": "2026-01-21",
+        "price": 143800
+      },
+      "L2": {
+        "index": 113,
+        "date": "2026-02-06",
+        "confirmed_date": "2026-02-10",
+        "price": 193300
+      },
+      "H": {
+        "index": 107,
+        "date": "2026-01-29",
+        "confirmed_date": "2026-02-02",
+        "price": 260000
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "3d1e21b5800b7a18",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "272210.KS",
+      "name": "한화시스템",
+      "date": "2025-07-08",
+      "input_file_sha256": "ddec92fab44801e6bda11c05dac4f8ae9bf972a55300b23704eb027d87f6f8bd",
+      "ma20": 59120,
+      "close": 53000,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 98,
+        "date": "2025-06-09",
+        "confirmed_date": "2025-06-11",
+        "price": 41550
+      },
+      "L2": {
+        "index": 111,
+        "date": "2025-06-26",
+        "confirmed_date": "2025-06-30",
+        "price": 57200
+      },
+      "H": {
+        "index": 105,
+        "date": "2025-06-18",
+        "confirmed_date": "2025-06-20",
+        "price": 70200
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "3e75773a737fcfea",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "079550.KS",
+      "name": "LIG디펜스앤에어로스페이스",
+      "date": "2025-07-08",
+      "input_file_sha256": "1bbeec048f85a577b8e10e046232fa59c987dc6faeaad1c6acb57aa860deeded",
+      "ma20": 536350,
+      "close": 524000,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 98,
+        "date": "2025-06-09",
+        "confirmed_date": "2025-06-11",
+        "price": 434000
+      },
+      "L2": {
+        "index": 111,
+        "date": "2025-06-26",
+        "confirmed_date": "2025-06-30",
+        "price": 514000
+      },
+      "H": {
+        "index": 108,
+        "date": "2025-06-23",
+        "confirmed_date": "2025-06-25",
+        "price": 650000
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "3fbe62c7d0af92f3",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "329180.KS",
+      "name": "HD현대중공업",
+      "date": "2025-09-24",
+      "input_file_sha256": "efd13dd0ec7aa2b8898c269e19b8dc4bfa84e059f54f0a58527de0fb6e6b3ed6",
+      "ma20": 507075,
+      "close": 501000,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 108,
+        "date": "2025-09-08",
+        "confirmed_date": "2025-09-10",
+        "price": 487000
+      },
+      "L2": {
+        "index": 113,
+        "date": "2025-09-15",
+        "confirmed_date": "2025-09-17",
+        "price": 497000
+      },
+      "H": {
+        "index": 111,
+        "date": "2025-09-11",
+        "confirmed_date": "2025-09-15",
+        "price": 517000
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "433ea121b8d5fb8e",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "267270.KS",
+      "name": "HD건설기계",
+      "date": "2025-02-26",
+      "input_file_sha256": "ad88019818b849936666e2a29454ac73c4cf4b220e452bc4014b0dddf83a8f81",
+      "ma20": 72885,
+      "close": 77400,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 102,
+        "date": "2025-02-03",
+        "confirmed_date": "2025-02-05",
+        "price": 63500
+      },
+      "L2": {
+        "index": 116,
+        "date": "2025-02-21",
+        "confirmed_date": "2025-02-25",
+        "price": 71100
+      },
+      "H": {
+        "index": 110,
+        "date": "2025-02-13",
+        "confirmed_date": "2025-02-17",
+        "price": 91500
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "4551d347c9dc1c0b",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "000720.KS",
+      "name": "현대건설",
+      "date": "2025-11-13",
+      "input_file_sha256": "a552141b88c29051b2466b5735b41d68dfd9ef4cba3b0b01c71e288fcdd089be",
+      "ma20": 64160,
+      "close": 65200,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 104,
+        "date": "2025-10-23",
+        "confirmed_date": "2025-10-27",
+        "price": 56800
+      },
+      "L2": {
+        "index": 115,
+        "date": "2025-11-07",
+        "confirmed_date": "2025-11-11",
+        "price": 60600
+      },
+      "H": {
+        "index": 108,
+        "date": "2025-10-29",
+        "confirmed_date": "2025-10-31",
+        "price": 76400
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "4751f46511958d4c",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "064350.KS",
+      "name": "현대로템",
+      "date": "2025-03-31",
+      "input_file_sha256": "5e2aaaf67eb9ea15e87040106e7db5c29412fd6a30ab1ae76bef584bb21bb0e8",
+      "ma20": 101335,
+      "close": 105000,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 99,
+        "date": "2025-02-28",
+        "confirmed_date": "2025-03-05",
+        "price": 78200
+      },
+      "L2": {
+        "index": 113,
+        "date": "2025-03-21",
+        "confirmed_date": "2025-03-25",
+        "price": 103500
+      },
+      "H": {
+        "index": 111,
+        "date": "2025-03-19",
+        "confirmed_date": "2025-03-21",
+        "price": 116800
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "478f941c37dc6b91",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "010170.KQ",
+      "name": "대한광통신",
+      "date": "2025-01-16",
+      "input_file_sha256": "74f1e5c51b996ea25fe4bc893cd0631b209df4ce38c258d3d9e9e98ec4d28058",
+      "ma20": 815.7745239257813,
+      "close": 828,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 106,
+        "date": "2024-12-26",
+        "confirmed_date": "2024-12-30",
+        "price": 724.260498046875
+      },
+      "L2": {
+        "index": 117,
+        "date": "2025-01-14",
+        "confirmed_date": "2025-01-16",
+        "price": 770
+      },
+      "H": {
+        "index": 107,
+        "date": "2024-12-27",
+        "confirmed_date": "2025-01-02",
+        "price": 980
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "47b4fd96c67d0902",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "267260.KS",
+      "name": "HD현대일렉트릭",
+      "date": "2024-12-03",
+      "input_file_sha256": "4a5adc050dee3d2579715db7b149c948c7b4cce09981d3e794e2a67176ad277b",
+      "ma20": 361400,
+      "close": 355000,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 105,
+        "date": "2024-11-13",
+        "confirmed_date": "2024-11-15",
+        "price": 350000
+      },
+      "L2": {
+        "index": 108,
+        "date": "2024-11-18",
+        "confirmed_date": "2024-11-20",
+        "price": 352000
+      },
+      "H": {
+        "index": 107,
+        "date": "2024-11-15",
+        "confirmed_date": "2024-11-19",
+        "price": 383000
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "498662c27bf32f60",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "046970.KQ",
+      "name": "우리로",
+      "date": "2025-05-27",
+      "input_file_sha256": "82360c50bf1f2b2da501f8b98457c2edf655afb31c766829e6bce94417546d3a",
+      "ma20": 1425,
+      "close": 1418,
+      "below_ma20": true,
+      "label": "U",
+      "reason": "no_confirmed_intervening_high",
+      "L1": {
+        "index": 113,
+        "date": "2025-05-19",
+        "confirmed_date": "2025-05-21",
+        "price": 1380
+      },
+      "L2": {
+        "index": 116,
+        "date": "2025-05-22",
+        "confirmed_date": "2025-05-26",
+        "price": 1365
+      },
+      "H": null,
+      "low_broken_after_L2": null,
+      "bullish_recovery": false
+    },
+    {
+      "case_id": "4ab3e0348d9fdc9a",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "082740.KS",
+      "name": "한화엔진",
+      "date": "2025-03-04",
+      "input_file_sha256": "9fc05b6557da2b7e8f4dc88ff0373d6707fe05696ce4c599e0bc649a2fd4bc92",
+      "ma20": 23605,
+      "close": 23650,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 104,
+        "date": "2025-02-10",
+        "confirmed_date": "2025-02-12",
+        "price": 21250
+      },
+      "L2": {
+        "index": 114,
+        "date": "2025-02-24",
+        "confirmed_date": "2025-02-26",
+        "price": 22100
+      },
+      "H": {
+        "index": 108,
+        "date": "2025-02-14",
+        "confirmed_date": "2025-02-18",
+        "price": 28750
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "4b03329b50e609b2",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "336260.KS",
+      "name": "두산퓨얼셀",
+      "date": "2025-07-08",
+      "input_file_sha256": "0d903ff47dd115808a8911556ccfa93b12c776bdf44a67a4205cdcb0482842a6",
+      "ma20": 21574.5,
+      "close": 22300,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 92,
+        "date": "2025-05-28",
+        "confirmed_date": "2025-05-30",
+        "price": 16090
+      },
+      "L2": {
+        "index": 113,
+        "date": "2025-06-30",
+        "confirmed_date": "2025-07-02",
+        "price": 22450
+      },
+      "H": {
+        "index": 108,
+        "date": "2025-06-23",
+        "confirmed_date": "2025-06-25",
+        "price": 25500
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "4be977d09d9d51fd",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "035420.KS",
+      "name": "NAVER",
+      "date": "2025-07-10",
+      "input_file_sha256": "06109749e618132de439dc4870fedac15ac1c6ded6dbe344898a18ff63ba89db",
+      "ma20": 253500,
+      "close": 259500,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 110,
+        "date": "2025-06-27",
+        "confirmed_date": "2025-07-01",
+        "price": 252000
+      },
+      "L2": {
+        "index": 115,
+        "date": "2025-07-04",
+        "confirmed_date": "2025-07-08",
+        "price": 247500
+      },
+      "H": {
+        "index": 112,
+        "date": "2025-07-01",
+        "confirmed_date": "2025-07-03",
+        "price": 269000
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "4e0674c2773eb5c5",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "010950.KS",
+      "name": "S-Oil",
+      "date": "2026-03-18",
+      "input_file_sha256": "916ff301881953b6f0a3a01031916bb23ad28fd8d23b19fe77b260bb773d5e68",
+      "ma20": 117195,
+      "close": 110600,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 107,
+        "date": "2026-02-27",
+        "confirmed_date": "2026-03-04",
+        "price": 108200
+      },
+      "L2": {
+        "index": 110,
+        "date": "2026-03-05",
+        "confirmed_date": "2026-03-09",
+        "price": 115000
+      },
+      "H": {
+        "index": 109,
+        "date": "2026-03-04",
+        "confirmed_date": "2026-03-06",
+        "price": 177100
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "4ea85b0443946c3c",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "128940.KS",
+      "name": "한미약품",
+      "date": "2026-09-14",
+      "input_file_sha256": "19a4928710d7234951d5b00853f8736dda7a2f48f9acf10a6b38f1160e894111",
+      "ma20": 471600,
+      "close": 474000,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 101,
+        "date": "2026-08-19",
+        "confirmed_date": "2026-08-21",
+        "price": 374000
+      },
+      "L2": {
+        "index": 112,
+        "date": "2026-09-03",
+        "confirmed_date": "2026-09-07",
+        "price": 451000
+      },
+      "H": {
+        "index": 106,
+        "date": "2026-08-26",
+        "confirmed_date": "2026-08-28",
+        "price": 564000
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "515558f267143cfb",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "006400.KS",
+      "name": "삼성SDI",
+      "date": "2026-03-24",
+      "input_file_sha256": "a5586de92badae2b47cdc35665ce2c59ca35e67feac58b1c28e55e957a60fa2b",
+      "ma20": 403300,
+      "close": 397500,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 108,
+        "date": "2026-03-09",
+        "confirmed_date": "2026-03-11",
+        "price": 375500
+      },
+      "L2": {
+        "index": 113,
+        "date": "2026-03-16",
+        "confirmed_date": "2026-03-18",
+        "price": 380000
+      },
+      "H": {
+        "index": 110,
+        "date": "2026-03-11",
+        "confirmed_date": "2026-03-13",
+        "price": 419000
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "5205e8dbd5c35226",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "010170.KQ",
+      "name": "대한광통신",
+      "date": "2026-04-27",
+      "input_file_sha256": "2cf58ae2ae4f31ac986dbcc30f1727d08b5becb4f22b0029bf7257bb2beecd6c",
+      "ma20": 14630.5,
+      "close": 16020,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 100,
+        "date": "2026-03-31",
+        "confirmed_date": "2026-04-02",
+        "price": 7150
+      },
+      "L2": {
+        "index": 115,
+        "date": "2026-04-21",
+        "confirmed_date": "2026-04-23",
+        "price": 14020
+      },
+      "H": {
+        "index": 110,
+        "date": "2026-04-14",
+        "confirmed_date": "2026-04-16",
+        "price": 22000
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "53cc2d6d5ea7f36d",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "456010.KQ",
+      "name": "아이씨티케이",
+      "date": "2025-10-21",
+      "input_file_sha256": "ae6246c93113afda10f21aa1822189de3326f6d574fd629ee34e75eade0fd2c4",
+      "ma20": 15441.5,
+      "close": 14800,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 89,
+        "date": "2025-09-01",
+        "confirmed_date": "2025-09-03",
+        "price": 11250
+      },
+      "L2": {
+        "index": 108,
+        "date": "2025-09-29",
+        "confirmed_date": "2025-10-01",
+        "price": 14580
+      },
+      "H": {
+        "index": 105,
+        "date": "2025-09-24",
+        "confirmed_date": "2025-09-26",
+        "price": 17380
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "5d5364541df7e4c2",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "068270.KS",
+      "name": "셀트리온",
+      "date": "2025-12-08",
+      "input_file_sha256": "b0e81d235807aa63f0796ea9d3bccf5cb5c5ce62bee7a5077a75bfc8a2c6fa8c",
+      "ma20": 176619.04765625,
+      "close": 178190.46875,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 106,
+        "date": "2025-11-19",
+        "confirmed_date": "2025-11-21",
+        "price": 171428.578125
+      },
+      "L2": {
+        "index": 109,
+        "date": "2025-11-24",
+        "confirmed_date": "2025-11-26",
+        "price": 173428.578125
+      },
+      "H": {
+        "index": 108,
+        "date": "2025-11-21",
+        "confirmed_date": "2025-11-25",
+        "price": 181714.28125
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "5dc441dbd6956640",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "015760.KS",
+      "name": "한국전력",
+      "date": "2025-07-21",
+      "input_file_sha256": "cdeead62d0d22cd1287791c3a1a82532dfad4ee40128f932575aa18f3aa7cb1d",
+      "ma20": 37255,
+      "close": 37150,
+      "below_ma20": true,
+      "label": "U",
+      "reason": "no_confirmed_intervening_high",
+      "L1": {
+        "index": 106,
+        "date": "2025-07-02",
+        "confirmed_date": "2025-07-04",
+        "price": 34800
+      },
+      "L2": {
+        "index": 114,
+        "date": "2025-07-14",
+        "confirmed_date": "2025-07-16",
+        "price": 35800
+      },
+      "H": null,
+      "low_broken_after_L2": null,
+      "bullish_recovery": false
+    },
+    {
+      "case_id": "5feafb62778b6bea",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "032820.KQ",
+      "name": "우리기술",
+      "date": "2024-10-15",
+      "input_file_sha256": "b9bd8d4ca2665a2a9ff7be99b06a5b46231ca6c9df89cd7f0ad9591280bea490",
+      "ma20": 2265.25,
+      "close": 2285,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 113,
+        "date": "2024-10-04",
+        "confirmed_date": "2024-10-08",
+        "price": 2140
+      },
+      "L2": {
+        "index": 117,
+        "date": "2024-10-11",
+        "confirmed_date": "2024-10-15",
+        "price": 2145
+      },
+      "H": {
+        "index": 114,
+        "date": "2024-10-07",
+        "confirmed_date": "2024-10-10",
+        "price": 2360
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "6089d9bdb2fd1956",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "036540.KQ",
+      "name": "SFA반도체",
+      "date": "2026-05-14",
+      "input_file_sha256": "1da4111ae4fd6c7a4221d84f0fbd2ffdb97d62b388298b70c1e5e0b54953943b",
+      "ma20": 8232,
+      "close": 8280,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 94,
+        "date": "2026-04-07",
+        "confirmed_date": "2026-04-09",
+        "price": 6160
+      },
+      "L2": {
+        "index": 111,
+        "date": "2026-04-30",
+        "confirmed_date": "2026-05-06",
+        "price": 8280
+      },
+      "H": {
+        "index": 108,
+        "date": "2026-04-27",
+        "confirmed_date": "2026-04-29",
+        "price": 10450
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "61360d26c3b1c05a",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "356680.KQ",
+      "name": "엑스게이트",
+      "date": "2026-09-04",
+      "input_file_sha256": "b9cbaff98ce79621370141093971fbb43320d9088dc6d939cc913bd87ce33a4b",
+      "ma20": 11772.5,
+      "close": 11430,
+      "below_ma20": true,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 94,
+        "date": "2026-07-30",
+        "confirmed_date": "2026-08-03",
+        "price": 8190
+      },
+      "L2": {
+        "index": 111,
+        "date": "2026-08-25",
+        "confirmed_date": "2026-08-27",
+        "price": 10500
+      },
+      "H": {
+        "index": 104,
+        "date": "2026-08-13",
+        "confirmed_date": "2026-08-18",
+        "price": 13400
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "64ffebd51b3f4d51",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "000270.KS",
+      "name": "기아",
+      "date": "2026-02-04",
+      "input_file_sha256": "7da24cd03ab2747aa4a9d6687472104617f580d8af6d73bfd014435e02855874",
+      "ma20": 151295,
+      "close": 156800,
+      "below_ma20": false,
+      "label": "U",
+      "reason": "no_confirmed_intervening_high",
+      "L1": {
+        "index": 113,
+        "date": "2026-01-27",
+        "confirmed_date": "2026-01-29",
+        "price": 145900
+      },
+      "L2": {
+        "index": 117,
+        "date": "2026-02-02",
+        "confirmed_date": "2026-02-04",
+        "price": 148200
+      },
+      "H": null,
+      "low_broken_after_L2": null,
+      "bullish_recovery": false
+    },
+    {
+      "case_id": "663a82bbea4cecea",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "066970.KS",
+      "name": "엘앤에프",
+      "date": "2025-11-11",
+      "input_file_sha256": "07fd39296129600209703951e8e0b380975040a9bcf61b5f954a63515100bb1c",
+      "ma20": 121800,
+      "close": 127100,
+      "below_ma20": false,
+      "label": "U",
+      "reason": "no_confirmed_intervening_high",
+      "L1": {
+        "index": 112,
+        "date": "2025-10-31",
+        "confirmed_date": "2025-11-04",
+        "price": 118800
+      },
+      "L2": {
+        "index": 115,
+        "date": "2025-11-05",
+        "confirmed_date": "2025-11-07",
+        "price": 115500
+      },
+      "H": null,
+      "low_broken_after_L2": null,
+      "bullish_recovery": false
+    },
+    {
+      "case_id": "6720e72eeff4d079",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "274090.KQ",
+      "name": "켄코아에어로스페이스",
+      "date": "2025-06-04",
+      "input_file_sha256": "0fed8b50259f5a9490bcc0ab6a1e2ac3e256e5692f4ce7b2d5f3b4a427404796",
+      "ma20": 13010.5,
+      "close": 12940,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 112,
+        "date": "2025-05-23",
+        "confirmed_date": "2025-05-27",
+        "price": 12500
+      },
+      "L2": {
+        "index": 117,
+        "date": "2025-05-30",
+        "confirmed_date": "2025-06-04",
+        "price": 12390
+      },
+      "H": {
+        "index": 115,
+        "date": "2025-05-28",
+        "confirmed_date": "2025-05-30",
+        "price": 13650
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "695892d49ca04f72",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "000270.KS",
+      "name": "기아",
+      "date": "2026-03-17",
+      "input_file_sha256": "0dcc2311ecbda0b85213b1e2c3afcce3c1a7c86078c6aff03c2f0f028556e188",
+      "ma20": 171795,
+      "close": 167300,
+      "below_ma20": true,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 113,
+        "date": "2026-03-09",
+        "confirmed_date": "2026-03-11",
+        "price": 150100
+      },
+      "L2": {
+        "index": 117,
+        "date": "2026-03-13",
+        "confirmed_date": "2026-03-17",
+        "price": 158700
+      },
+      "H": {
+        "index": 115,
+        "date": "2026-03-11",
+        "confirmed_date": "2026-03-13",
+        "price": 170400
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "6b70633922deee06",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "092870.KQ",
+      "name": "엑시콘",
+      "date": "2025-03-05",
+      "input_file_sha256": "9405f6ead948af889f3cddb3d3c1492791e8d895565af85a7a0c1fb17ffc018b",
+      "ma20": 13422,
+      "close": 12620,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 89,
+        "date": "2025-01-15",
+        "confirmed_date": "2025-01-17",
+        "price": 12550
+      },
+      "L2": {
+        "index": 98,
+        "date": "2025-02-03",
+        "confirmed_date": "2025-02-05",
+        "price": 11290
+      },
+      "H": {
+        "index": 93,
+        "date": "2025-01-21",
+        "confirmed_date": "2025-01-23",
+        "price": 14140
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "6e9d500e5e099da1",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "417200.KQ",
+      "name": "LS머트리얼즈",
+      "date": "2025-11-18",
+      "input_file_sha256": "548008c7f3106d39d526a2d7c002c1fff939fe1c19ebdda9e6bc442d901dbbaf",
+      "ma20": 12697.5,
+      "close": 12750,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 74,
+        "date": "2025-09-08",
+        "confirmed_date": "2025-09-10",
+        "price": 9820
+      },
+      "L2": {
+        "index": 93,
+        "date": "2025-10-13",
+        "confirmed_date": "2025-10-15",
+        "price": 9160
+      },
+      "H": {
+        "index": 77,
+        "date": "2025-09-11",
+        "confirmed_date": "2025-09-15",
+        "price": 10590
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "6f7eba9473b31ab9",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "078930.KS",
+      "name": "GS",
+      "date": "2025-12-02",
+      "input_file_sha256": "8b99d679a8290ca840c153554dbbace6e7831ff95b62e3bba6a3aa6fc6658f5e",
+      "ma20": 57222.5,
+      "close": 57600,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 100,
+        "date": "2025-11-05",
+        "confirmed_date": "2025-11-07",
+        "price": 46950
+      },
+      "L2": {
+        "index": 117,
+        "date": "2025-11-28",
+        "confirmed_date": "2025-12-02",
+        "price": 55300
+      },
+      "H": {
+        "index": 111,
+        "date": "2025-11-20",
+        "confirmed_date": "2025-11-24",
+        "price": 62400
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "7043a81aa87b8d05",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "030530.KQ",
+      "name": "원익홀딩스",
+      "date": "2025-07-28",
+      "input_file_sha256": "54d153f7c1420c1f526103080b1126ecdeea11b82cb9f2e82a6ff7ba2949282f",
+      "ma20": 5971,
+      "close": 5960,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 105,
+        "date": "2025-07-08",
+        "confirmed_date": "2025-07-10",
+        "price": 5650
+      },
+      "L2": {
+        "index": 113,
+        "date": "2025-07-18",
+        "confirmed_date": "2025-07-22",
+        "price": 5730
+      },
+      "H": {
+        "index": 111,
+        "date": "2025-07-16",
+        "confirmed_date": "2025-07-18",
+        "price": 6320
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "70835205ff43bc4d",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "356680.KQ",
+      "name": "엑스게이트",
+      "date": "2025-10-10",
+      "input_file_sha256": "075a650b3844a02162084610384db88f7522426720c10747ea329c8e659712a6",
+      "ma20": 7791,
+      "close": 8200,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 108,
+        "date": "2025-09-17",
+        "confirmed_date": "2025-09-22",
+        "price": 7320
+      },
+      "L2": {
+        "index": 117,
+        "date": "2025-10-01",
+        "confirmed_date": "2025-10-10",
+        "price": 7600
+      },
+      "H": {
+        "index": 109,
+        "date": "2025-09-18",
+        "confirmed_date": "2025-09-23",
+        "price": 9450
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "717232fa71dd38e6",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "092870.KQ",
+      "name": "엑시콘",
+      "date": "2025-10-20",
+      "input_file_sha256": "f2f29e96fa1f8a542e9c33e3d7b1f9a7e3536e9a5de8c20d99e70c5157e8fc2c",
+      "ma20": 15110,
+      "close": 15000,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 92,
+        "date": "2025-09-03",
+        "confirmed_date": "2025-09-05",
+        "price": 9690
+      },
+      "L2": {
+        "index": 115,
+        "date": "2025-10-14",
+        "confirmed_date": "2025-10-16",
+        "price": 14280
+      },
+      "H": {
+        "index": 104,
+        "date": "2025-09-22",
+        "confirmed_date": "2025-09-24",
+        "price": 18470
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "72ad4dfe57236735",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "080220.KQ",
+      "name": "제주반도체",
+      "date": "2025-07-15",
+      "input_file_sha256": "141cd912f86d3017973e456a22114c8bdfafea37724fcfad8ca512eb6d0c7602",
+      "ma20": 15352,
+      "close": 16100,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 110,
+        "date": "2025-07-02",
+        "confirmed_date": "2025-07-04",
+        "price": 14460
+      },
+      "L2": {
+        "index": 114,
+        "date": "2025-07-08",
+        "confirmed_date": "2025-07-10",
+        "price": 15070
+      },
+      "H": {
+        "index": 111,
+        "date": "2025-07-03",
+        "confirmed_date": "2025-07-07",
+        "price": 16890
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "72cd47d5810528d4",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "417200.KQ",
+      "name": "LS머트리얼즈",
+      "date": "2025-02-04",
+      "input_file_sha256": "b993cf0fe42d1896ad59935ca7c1f67b4779376e4cb9f8bd2ea49bc80aed1e8c",
+      "ma20": 12991.5,
+      "close": 13250,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 105,
+        "date": "2025-01-09",
+        "confirmed_date": "2025-01-13",
+        "price": 11700
+      },
+      "L2": {
+        "index": 109,
+        "date": "2025-01-15",
+        "confirmed_date": "2025-01-17",
+        "price": 12080
+      },
+      "H": {
+        "index": 106,
+        "date": "2025-01-10",
+        "confirmed_date": "2025-01-14",
+        "price": 12890
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "77bcbde825d44efd",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "203650.KQ",
+      "name": "드림시큐리티",
+      "date": "2026-05-19",
+      "input_file_sha256": "112fc2dc3dacdc08d8b0f7530104c0399756355309e2c8dda8d715b310f9728e",
+      "ma20": 3397,
+      "close": 3355,
+      "below_ma20": true,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 91,
+        "date": "2026-04-07",
+        "confirmed_date": "2026-04-09",
+        "price": 1557
+      },
+      "L2": {
+        "index": 108,
+        "date": "2026-04-30",
+        "confirmed_date": "2026-05-06",
+        "price": 2605
+      },
+      "H": {
+        "index": 101,
+        "date": "2026-04-21",
+        "confirmed_date": "2026-04-23",
+        "price": 4290
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "78eecedb44104872",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "161580.KQ",
+      "name": "필옵틱스",
+      "date": "2026-02-19",
+      "input_file_sha256": "54c5b3e7d685c8e0764baf78c69746098dda62a2d6ea54fbbf634b1d8cd8131d",
+      "ma20": 50255,
+      "close": 49900,
+      "below_ma20": true,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 101,
+        "date": "2026-01-21",
+        "confirmed_date": "2026-01-23",
+        "price": 40950
+      },
+      "L2": {
+        "index": 113,
+        "date": "2026-02-06",
+        "confirmed_date": "2026-02-10",
+        "price": 46900
+      },
+      "H": {
+        "index": 108,
+        "date": "2026-01-30",
+        "confirmed_date": "2026-02-03",
+        "price": 60300
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "79972e96e457098d",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "323280.KQ",
+      "name": "태성",
+      "date": "2025-02-17",
+      "input_file_sha256": "e97aec67e20eefdf943987e412508ec7643816dfc1230ad1b149c82527ce5399",
+      "ma20": 30057.5,
+      "close": 30300,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 102,
+        "date": "2025-01-17",
+        "confirmed_date": "2025-01-21",
+        "price": 25250
+      },
+      "L2": {
+        "index": 112,
+        "date": "2025-02-06",
+        "confirmed_date": "2025-02-10",
+        "price": 28250
+      },
+      "H": {
+        "index": 106,
+        "date": "2025-01-23",
+        "confirmed_date": "2025-01-31",
+        "price": 35750
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "79c9706b2a46d7f4",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "071090.KS",
+      "name": "하이스틸",
+      "date": "2025-08-12",
+      "input_file_sha256": "fc0ffa6a29a90d6e3690ed0f22b9cafdac1b39ab5252b3ec06542640430a2d7f",
+      "ma20": 5056.25,
+      "close": 4955,
+      "below_ma20": true,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 104,
+        "date": "2025-07-22",
+        "confirmed_date": "2025-07-24",
+        "price": 4365
+      },
+      "L2": {
+        "index": 112,
+        "date": "2025-08-01",
+        "confirmed_date": "2025-08-05",
+        "price": 4400
+      },
+      "H": {
+        "index": 109,
+        "date": "2025-07-29",
+        "confirmed_date": "2025-07-31",
+        "price": 6250
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "7aa2073f1236b8c8",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "035420.KS",
+      "name": "NAVER",
+      "date": "2026-02-26",
+      "input_file_sha256": "b3a7491782aa79a8f3fd39a209d9dd876cff55af5c638581d8bbcf3c7fdebe4c",
+      "ma20": 261475,
+      "close": 260500,
+      "below_ma20": true,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 108,
+        "date": "2026-02-06",
+        "confirmed_date": "2026-02-10",
+        "price": 244000
+      },
+      "L2": {
+        "index": 113,
+        "date": "2026-02-13",
+        "confirmed_date": "2026-02-20",
+        "price": 250000
+      },
+      "H": {
+        "index": 112,
+        "date": "2026-02-12",
+        "confirmed_date": "2026-02-19",
+        "price": 262000
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "7bdd95bc2617888f",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "000500.KS",
+      "name": "가온전선",
+      "date": "2026-06-01",
+      "input_file_sha256": "b3634f7e4fd08af1f778eedac48bfd80a8cf00a64b8c49357c39919519ea28f5",
+      "ma20": 216805.5578125,
+      "close": 204444.4375,
+      "below_ma20": true,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 87,
+        "date": "2026-04-13",
+        "confirmed_date": "2026-04-15",
+        "price": 56333.33203125
+      },
+      "L2": {
+        "index": 110,
+        "date": "2026-05-18",
+        "confirmed_date": "2026-05-20",
+        "price": 164166.671875
+      },
+      "H": {
+        "index": 107,
+        "date": "2026-05-13",
+        "confirmed_date": "2026-05-15",
+        "price": 352777.78125
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "7be84322e1250e80",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "036540.KQ",
+      "name": "SFA반도체",
+      "date": "2025-11-03",
+      "input_file_sha256": "7a2eb0f5c80427c982e40721c3f25eabca99f1a0522022e9eeefa0b3fd795941",
+      "ma20": 4368,
+      "close": 4350,
+      "below_ma20": true,
+      "label": "U",
+      "reason": "no_confirmed_intervening_high",
+      "L1": {
+        "index": 98,
+        "date": "2025-09-26",
+        "confirmed_date": "2025-09-30",
+        "price": 3875
+      },
+      "L2": {
+        "index": 112,
+        "date": "2025-10-23",
+        "confirmed_date": "2025-10-27",
+        "price": 4170
+      },
+      "H": null,
+      "low_broken_after_L2": null,
+      "bullish_recovery": false
+    },
+    {
+      "case_id": "7d910493928bc576",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "272210.KS",
+      "name": "한화시스템",
+      "date": "2025-04-01",
+      "input_file_sha256": "d6faeb1bc283664a979c50852ab7ea8e668f0cbf1ac2e39ef3b765c8bd1059eb",
+      "ma20": 36115,
+      "close": 33900,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 98,
+        "date": "2025-02-28",
+        "confirmed_date": "2025-03-05",
+        "price": 30350
+      },
+      "L2": {
+        "index": 105,
+        "date": "2025-03-12",
+        "confirmed_date": "2025-03-14",
+        "price": 34750
+      },
+      "H": {
+        "index": 103,
+        "date": "2025-03-10",
+        "confirmed_date": "2025-03-12",
+        "price": 40850
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "835772339b88fef1",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "046970.KQ",
+      "name": "우리로",
+      "date": "2025-05-21",
+      "input_file_sha256": "7bafa8cbdb650231dae36d18fc2e38453ca683b02bab5bb004a8cb638dd08b69",
+      "ma20": 1397.65,
+      "close": 1433,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 108,
+        "date": "2025-05-02",
+        "confirmed_date": "2025-05-08",
+        "price": 1348
+      },
+      "L2": {
+        "index": 117,
+        "date": "2025-05-19",
+        "confirmed_date": "2025-05-21",
+        "price": 1380
+      },
+      "H": {
+        "index": 111,
+        "date": "2025-05-09",
+        "confirmed_date": "2025-05-13",
+        "price": 1646
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "8451db6d28e8f907",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "327260.KQ",
+      "name": "RF머트리얼즈",
+      "date": "2025-08-25",
+      "input_file_sha256": "721187cea985fba0e573d9ba323c024ad569e4805ffd8c92e4458573d25db1d6",
+      "ma20": 3121.103649902344,
+      "close": 3073.116455078125,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 99,
+        "date": "2025-07-25",
+        "confirmed_date": "2025-07-29",
+        "price": 2738.66064453125
+      },
+      "L2": {
+        "index": 110,
+        "date": "2025-08-11",
+        "confirmed_date": "2025-08-13",
+        "price": 3029.49169921875
+      },
+      "H": {
+        "index": 100,
+        "date": "2025-07-28",
+        "confirmed_date": "2025-07-30",
+        "price": 3567.529541015625
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "84b8b25fdfe8e38c",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "005830.KS",
+      "name": "DB손해보험",
+      "date": "2025-08-05",
+      "input_file_sha256": "7911ccd62d2bf4a99c34584957d15782b811cc3c0b8e205cee343cadf3e98317",
+      "ma20": 133665,
+      "close": 125500,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 98,
+        "date": "2025-07-07",
+        "confirmed_date": "2025-07-09",
+        "price": 121400
+      },
+      "L2": {
+        "index": 114,
+        "date": "2025-07-29",
+        "confirmed_date": "2025-07-31",
+        "price": 125700
+      },
+      "H": {
+        "index": 103,
+        "date": "2025-07-14",
+        "confirmed_date": "2025-07-16",
+        "price": 148300
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "86a9eff569ddbadf",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "005290.KQ",
+      "name": "동진쎄미켐",
+      "date": "2025-03-05",
+      "input_file_sha256": "6f7485333aff8d33471cc4eb082c7390c7a1edbf9e44ed18ea3c0f5db3573b20",
+      "ma20": 26602.5,
+      "close": 27200,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 88,
+        "date": "2025-01-14",
+        "confirmed_date": "2025-01-16",
+        "price": 21950
+      },
+      "L2": {
+        "index": 98,
+        "date": "2025-02-03",
+        "confirmed_date": "2025-02-05",
+        "price": 20550
+      },
+      "H": {
+        "index": 95,
+        "date": "2025-01-23",
+        "confirmed_date": "2025-01-31",
+        "price": 23650
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "871d1a86b062ae8a",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "034020.KS",
+      "name": "두산에너빌리티",
+      "date": "2025-03-12",
+      "input_file_sha256": "9beeebdd8100ed6c03a7dce3647c8e514a3125b8f8ac8a9b57608bc5f60df779",
+      "ma20": 27102.5,
+      "close": 26250,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 97,
+        "date": "2025-02-07",
+        "confirmed_date": "2025-02-11",
+        "price": 22700
+      },
+      "L2": {
+        "index": 113,
+        "date": "2025-03-04",
+        "confirmed_date": "2025-03-06",
+        "price": 24700
+      },
+      "H": {
+        "index": 105,
+        "date": "2025-02-19",
+        "confirmed_date": "2025-02-21",
+        "price": 30900
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "87ce3ec898ee3b3d",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "396300.KQ",
+      "name": "HT로보틱스",
+      "date": "2025-05-28",
+      "input_file_sha256": "623c14c091f2eabd0fb9255617f1a517a1d31f90838918fbf23503d7455f8af6",
+      "ma20": 2355,
+      "close": 2480,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 93,
+        "date": "2025-04-17",
+        "confirmed_date": "2025-04-21",
+        "price": 2125
+      },
+      "L2": {
+        "index": 107,
+        "date": "2025-05-12",
+        "confirmed_date": "2025-05-14",
+        "price": 2170
+      },
+      "H": {
+        "index": 97,
+        "date": "2025-04-23",
+        "confirmed_date": "2025-04-25",
+        "price": 2295
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "88e910f784979d90",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "071050.KS",
+      "name": "한국금융지주",
+      "date": "2025-08-05",
+      "input_file_sha256": "155b882a98d3875c5eb124f9fceb4304f21df353c6e85dba29dfaf89e255faf0",
+      "ma20": 148395,
+      "close": 139300,
+      "below_ma20": true,
+      "label": "U",
+      "reason": "no_confirmed_intervening_high",
+      "L1": {
+        "index": 108,
+        "date": "2025-07-21",
+        "confirmed_date": "2025-07-23",
+        "price": 143300
+      },
+      "L2": {
+        "index": 114,
+        "date": "2025-07-29",
+        "confirmed_date": "2025-07-31",
+        "price": 138600
+      },
+      "H": null,
+      "low_broken_after_L2": null,
+      "bullish_recovery": false
+    },
+    {
+      "case_id": "8e56beae20ec3e86",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "072950.KQ",
+      "name": "빛샘전자",
+      "date": "2026-01-30",
+      "input_file_sha256": "1b003e7ee0105e017912f67b2f417f8285bd3e4b299c030c535837f2e73aebcc",
+      "ma20": 5643,
+      "close": 5590,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 104,
+        "date": "2026-01-09",
+        "confirmed_date": "2026-01-13",
+        "price": 5430
+      },
+      "L2": {
+        "index": 112,
+        "date": "2026-01-21",
+        "confirmed_date": "2026-01-23",
+        "price": 5360
+      },
+      "H": {
+        "index": 105,
+        "date": "2026-01-12",
+        "confirmed_date": "2026-01-14",
+        "price": 6380
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "8f43b7c8f9ba7fff",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "452190.KQ",
+      "name": "한빛레이저",
+      "date": "2026-05-21",
+      "input_file_sha256": "70277ecc3be8a761d5bf95d3773b368931dc939e599a97017650f335b889f021",
+      "ma20": 7853,
+      "close": 7580,
+      "below_ma20": true,
+      "label": "U",
+      "reason": "no_confirmed_intervening_high",
+      "L1": {
+        "index": 112,
+        "date": "2026-05-12",
+        "confirmed_date": "2026-05-14",
+        "price": 7400
+      },
+      "L2": {
+        "index": 116,
+        "date": "2026-05-18",
+        "confirmed_date": "2026-05-20",
+        "price": 6400
+      },
+      "H": null,
+      "low_broken_after_L2": null,
+      "bullish_recovery": false
+    },
+    {
+      "case_id": "8fe6a1c43f98ea55",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "066570.KS",
+      "name": "LG전자",
+      "date": "2026-01-05",
+      "input_file_sha256": "a43575bc25fac311fa7669ea55a68e5d413d3dd63ccdf9fb71240ab759a9eb56",
+      "ma20": 94195,
+      "close": 93000,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 110,
+        "date": "2025-12-18",
+        "confirmed_date": "2025-12-22",
+        "price": 91500
+      },
+      "L2": {
+        "index": 116,
+        "date": "2025-12-29",
+        "confirmed_date": "2026-01-02",
+        "price": 90300
+      },
+      "H": {
+        "index": 112,
+        "date": "2025-12-22",
+        "confirmed_date": "2025-12-24",
+        "price": 94900
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "9040c06b7d7edf56",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "096770.KS",
+      "name": "SK이노베이션",
+      "date": "2025-07-23",
+      "input_file_sha256": "6945589b713620604d4429f67abb30a71691cbf3d796130b9b2a97a258876922",
+      "ma20": 114640,
+      "close": 116300,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 107,
+        "date": "2025-07-07",
+        "confirmed_date": "2025-07-09",
+        "price": 111700
+      },
+      "L2": {
+        "index": 115,
+        "date": "2025-07-17",
+        "confirmed_date": "2025-07-21",
+        "price": 109800
+      },
+      "H": {
+        "index": 110,
+        "date": "2025-07-10",
+        "confirmed_date": "2025-07-14",
+        "price": 121000
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "907b3952ea96aafe",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "321370.KQ",
+      "name": "센서뷰",
+      "date": "2025-07-21",
+      "input_file_sha256": "8a82bf6325ff3db5b973db83b68dc28c7c1df8b84824bf1bb0e6c3f2fb4d0f97",
+      "ma20": 7227,
+      "close": 7435,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 113,
+        "date": "2025-07-11",
+        "confirmed_date": "2025-07-15",
+        "price": 7040
+      },
+      "L2": {
+        "index": 117,
+        "date": "2025-07-17",
+        "confirmed_date": "2025-07-21",
+        "price": 6975
+      },
+      "H": {
+        "index": 115,
+        "date": "2025-07-15",
+        "confirmed_date": "2025-07-17",
+        "price": 7360
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "97b91d9efe0dd0df",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "247540.KQ",
+      "name": "에코프로비엠",
+      "date": "2025-11-13",
+      "input_file_sha256": "88d665976e96c2636ddb4ddf157537d520fbf7e0cb3da529f39044fc1cfeb673",
+      "ma20": 161800,
+      "close": 160000,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 96,
+        "date": "2025-10-13",
+        "confirmed_date": "2025-10-15",
+        "price": 109500
+      },
+      "L2": {
+        "index": 110,
+        "date": "2025-10-31",
+        "confirmed_date": "2025-11-04",
+        "price": 158000
+      },
+      "H": {
+        "index": 106,
+        "date": "2025-10-27",
+        "confirmed_date": "2025-10-29",
+        "price": 180000
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "97f162d8f137b775",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "098460.KQ",
+      "name": "고영",
+      "date": "2025-06-02",
+      "input_file_sha256": "95d90cf1500871670d878ff2311f705f568d65e85abab56dfdf6b71dac2c2709",
+      "ma20": 16273,
+      "close": 15500,
+      "below_ma20": true,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 84,
+        "date": "2025-04-09",
+        "confirmed_date": "2025-04-11",
+        "price": 11930
+      },
+      "L2": {
+        "index": 97,
+        "date": "2025-04-28",
+        "confirmed_date": "2025-04-30",
+        "price": 12840
+      },
+      "H": {
+        "index": 89,
+        "date": "2025-04-16",
+        "confirmed_date": "2025-04-18",
+        "price": 14180
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "9999855dc15e46ad",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "066570.KS",
+      "name": "LG전자",
+      "date": "2025-10-02",
+      "input_file_sha256": "e0407ad63195e67564676da9d2c2f9180722d8a2669914ca35e59856496dfcfd",
+      "ma20": 76955,
+      "close": 76400,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 84,
+        "date": "2025-08-12",
+        "confirmed_date": "2025-08-14",
+        "price": 75900
+      },
+      "L2": {
+        "index": 91,
+        "date": "2025-08-22",
+        "confirmed_date": "2025-08-26",
+        "price": 75000
+      },
+      "H": {
+        "index": 85,
+        "date": "2025-08-13",
+        "confirmed_date": "2025-08-18",
+        "price": 78900
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "9eaaa99f96580073",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "069540.KQ",
+      "name": "빛과전자",
+      "date": "2026-05-14",
+      "input_file_sha256": "38265f434602a459a23f100d30d8c14628054692564d4a7b6fa8e4dc7ac71678",
+      "ma20": 5513.5,
+      "close": 5770,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 107,
+        "date": "2026-04-24",
+        "confirmed_date": "2026-04-28",
+        "price": 4895
+      },
+      "L2": {
+        "index": 114,
+        "date": "2026-05-07",
+        "confirmed_date": "2026-05-11",
+        "price": 4750
+      },
+      "H": {
+        "index": 108,
+        "date": "2026-04-27",
+        "confirmed_date": "2026-04-29",
+        "price": 5960
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "9edb43241f69181b",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "046970.KQ",
+      "name": "우리로",
+      "date": "2025-02-18",
+      "input_file_sha256": "6b2eadabfba8f2225510f36184e6c5fd164face4462ae88d3038fe3607440917",
+      "ma20": 1489.85,
+      "close": 1417,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 98,
+        "date": "2025-01-14",
+        "confirmed_date": "2025-01-16",
+        "price": 1182
+      },
+      "L2": {
+        "index": 108,
+        "date": "2025-02-03",
+        "confirmed_date": "2025-02-05",
+        "price": 1470
+      },
+      "H": {
+        "index": 105,
+        "date": "2025-01-23",
+        "confirmed_date": "2025-01-31",
+        "price": 1960
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "a20f8550913fcca9",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "014280.KS",
+      "name": "금강공업",
+      "date": "2025-11-14",
+      "input_file_sha256": "09126c9692b36d49b11af3f78f13743142b1e51ece946ebd63520240bb11023e",
+      "ma20": 5697,
+      "close": 5600,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 104,
+        "date": "2025-10-24",
+        "confirmed_date": "2025-10-28",
+        "price": 5740
+      },
+      "L2": {
+        "index": 114,
+        "date": "2025-11-07",
+        "confirmed_date": "2025-11-11",
+        "price": 5010
+      },
+      "H": {
+        "index": 105,
+        "date": "2025-10-27",
+        "confirmed_date": "2025-10-29",
+        "price": 6510
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "a40812ec5b458a5f",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "323280.KQ",
+      "name": "태성",
+      "date": "2025-07-10",
+      "input_file_sha256": "d25126a2379bd3c23c7b2cd6997402c2b52e3f075b2844745549e6ffe9c0e96e",
+      "ma20": 27480,
+      "close": 27100,
+      "below_ma20": true,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 110,
+        "date": "2025-06-27",
+        "confirmed_date": "2025-07-01",
+        "price": 24500
+      },
+      "L2": {
+        "index": 117,
+        "date": "2025-07-08",
+        "confirmed_date": "2025-07-10",
+        "price": 26150
+      },
+      "H": {
+        "index": 115,
+        "date": "2025-07-04",
+        "confirmed_date": "2025-07-08",
+        "price": 29300
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "a41018b97b22bf9c",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "232140.KQ",
+      "name": "와이씨",
+      "date": "2025-12-19",
+      "input_file_sha256": "e36b3615609137c07ca99e17b5205e75e0cd63a084e59f633c3f2a0967dafead",
+      "ma20": 13719,
+      "close": 13790,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 99,
+        "date": "2025-11-21",
+        "confirmed_date": "2025-11-25",
+        "price": 12080
+      },
+      "L2": {
+        "index": 116,
+        "date": "2025-12-16",
+        "confirmed_date": "2025-12-18",
+        "price": 13260
+      },
+      "H": {
+        "index": 111,
+        "date": "2025-12-09",
+        "confirmed_date": "2025-12-11",
+        "price": 15500
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "a61129dbb0c2ff60",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "071090.KS",
+      "name": "하이스틸",
+      "date": "2025-08-14",
+      "input_file_sha256": "ba73fac94a888f32ca5163fbd14c3527fc55d7d449453d3ec6f452f68083786a",
+      "ma20": 5070.75,
+      "close": 5040,
+      "below_ma20": true,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 102,
+        "date": "2025-07-22",
+        "confirmed_date": "2025-07-24",
+        "price": 4365
+      },
+      "L2": {
+        "index": 110,
+        "date": "2025-08-01",
+        "confirmed_date": "2025-08-05",
+        "price": 4400
+      },
+      "H": {
+        "index": 107,
+        "date": "2025-07-29",
+        "confirmed_date": "2025-07-31",
+        "price": 6250
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "a68f09dcfd78f572",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "067310.KQ",
+      "name": "하나마이크론",
+      "date": "2025-03-10",
+      "input_file_sha256": "e2f07e1644eafde989ad029e962a875444fa50f033d6d62b6c29bbf1de4e9b4d",
+      "ma20": 11450.5,
+      "close": 10880,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 95,
+        "date": "2025-02-03",
+        "confirmed_date": "2025-02-05",
+        "price": 9430
+      },
+      "L2": {
+        "index": 111,
+        "date": "2025-02-25",
+        "confirmed_date": "2025-02-27",
+        "price": 11380
+      },
+      "H": {
+        "index": 107,
+        "date": "2025-02-19",
+        "confirmed_date": "2025-02-21",
+        "price": 13300
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "a948c88fc71cfe97",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "010120.KS",
+      "name": "LS ELECTRIC",
+      "date": "2025-11-27",
+      "input_file_sha256": "bebcabb3426815eb0b729b6f91e5ff5cef5bf1bc78b94f8439dd8e133e06ec59",
+      "ma20": 92950,
+      "close": 93400,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 103,
+        "date": "2025-11-05",
+        "confirmed_date": "2025-11-07",
+        "price": 84100
+      },
+      "L2": {
+        "index": 110,
+        "date": "2025-11-14",
+        "confirmed_date": "2025-11-18",
+        "price": 90000
+      },
+      "H": {
+        "index": 108,
+        "date": "2025-11-12",
+        "confirmed_date": "2025-11-14",
+        "price": 102600
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "aadac8fe78f84723",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "201490.KQ",
+      "name": "미투온",
+      "date": "2025-05-13",
+      "input_file_sha256": "fde9518ec343cda440304c03b3d843b029fce775b2957999e6fb170e45178ed7",
+      "ma20": 1846.2,
+      "close": 1834,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 107,
+        "date": "2025-04-22",
+        "confirmed_date": "2025-04-24",
+        "price": 1850
+      },
+      "L2": {
+        "index": 112,
+        "date": "2025-04-29",
+        "confirmed_date": "2025-05-02",
+        "price": 1800
+      },
+      "H": {
+        "index": 109,
+        "date": "2025-04-24",
+        "confirmed_date": "2025-04-28",
+        "price": 1891
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "ab15c67219af00e1",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "036540.KQ",
+      "name": "SFA반도체",
+      "date": "2026-01-26",
+      "input_file_sha256": "762c5f275c6e66fa970b1481ac21b6ef07c815d9a7a16ed6a84caf9b41861770",
+      "ma20": 5300.75,
+      "close": 5480,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 112,
+        "date": "2026-01-15",
+        "confirmed_date": "2026-01-19",
+        "price": 5210
+      },
+      "L2": {
+        "index": 116,
+        "date": "2026-01-21",
+        "confirmed_date": "2026-01-23",
+        "price": 5050
+      },
+      "H": {
+        "index": 113,
+        "date": "2026-01-16",
+        "confirmed_date": "2026-01-20",
+        "price": 5800
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "aec04396c083156d",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "071090.KS",
+      "name": "하이스틸",
+      "date": "2026-09-18",
+      "input_file_sha256": "67b96674c0a5fcadeb7a9cac019c97fd7b9cc7b013749c6234f6ffbac285cba0",
+      "ma20": 3148,
+      "close": 3230,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 106,
+        "date": "2026-09-01",
+        "confirmed_date": "2026-09-03",
+        "price": 3005
+      },
+      "L2": {
+        "index": 117,
+        "date": "2026-09-16",
+        "confirmed_date": "2026-09-18",
+        "price": 3115
+      },
+      "H": {
+        "index": 113,
+        "date": "2026-09-10",
+        "confirmed_date": "2026-09-14",
+        "price": 3680
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "afbf88e0a6128329",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "042700.KS",
+      "name": "한미반도체",
+      "date": "2025-07-10",
+      "input_file_sha256": "b58acc835a351fa893dbdafb024d15a090cba323f32bcb636747e933f6261bde",
+      "ma20": 94310,
+      "close": 97500,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 93,
+        "date": "2025-06-02",
+        "confirmed_date": "2025-06-05",
+        "price": 79800
+      },
+      "L2": {
+        "index": 113,
+        "date": "2025-07-02",
+        "confirmed_date": "2025-07-04",
+        "price": 92700
+      },
+      "H": {
+        "index": 109,
+        "date": "2025-06-26",
+        "confirmed_date": "2025-06-30",
+        "price": 109000
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "b02c47fabed9d27a",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "034730.KS",
+      "name": "SK",
+      "date": "2026-03-10",
+      "input_file_sha256": "9548dc76e23bd022853359aed8c6061f525c4d3745ccc2f9889e2e4add466ebd",
+      "ma20": 359275,
+      "close": 351000,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 101,
+        "date": "2026-02-06",
+        "confirmed_date": "2026-02-10",
+        "price": 305000
+      },
+      "L2": {
+        "index": 115,
+        "date": "2026-03-04",
+        "confirmed_date": "2026-03-06",
+        "price": 320500
+      },
+      "H": {
+        "index": 112,
+        "date": "2026-02-26",
+        "confirmed_date": "2026-03-03",
+        "price": 424000
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "b38fcde9a02e7949",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "035420.KS",
+      "name": "NAVER",
+      "date": "2025-10-27",
+      "input_file_sha256": "aecdb47ad92784b24986ff76b5a23842a343759feffd2a5d15b2a21ecb9f30bc",
+      "ma20": 254550,
+      "close": 251000,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 101,
+        "date": "2025-09-24",
+        "confirmed_date": "2025-09-26",
+        "price": 224500
+      },
+      "L2": {
+        "index": 107,
+        "date": "2025-10-02",
+        "confirmed_date": "2025-10-13",
+        "price": 250500
+      },
+      "H": {
+        "index": 105,
+        "date": "2025-09-30",
+        "confirmed_date": "2025-10-02",
+        "price": 279500
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "b48492322c2280da",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "323280.KQ",
+      "name": "태성",
+      "date": "2026-02-26",
+      "input_file_sha256": "d23b2f5f89359d4033314e32023d8263293556e92a0d02f4875731d2cea89488",
+      "ma20": 71665,
+      "close": 70500,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 108,
+        "date": "2026-02-06",
+        "confirmed_date": "2026-02-10",
+        "price": 69800
+      },
+      "L2": {
+        "index": 114,
+        "date": "2026-02-19",
+        "confirmed_date": "2026-02-23",
+        "price": 66100
+      },
+      "H": {
+        "index": 110,
+        "date": "2026-02-10",
+        "confirmed_date": "2026-02-12",
+        "price": 86300
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "b578ac52fcd0f611",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "108490.KQ",
+      "name": "로보티즈",
+      "date": "2026-02-25",
+      "input_file_sha256": "6b4eb954b9827f2f333f96a9e7750ccbcd40c23d74e373c3b68ab5fae2f7b769",
+      "ma20": 292125,
+      "close": 288000,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 109,
+        "date": "2026-02-06",
+        "confirmed_date": "2026-02-10",
+        "price": 265500
+      },
+      "L2": {
+        "index": 115,
+        "date": "2026-02-19",
+        "confirmed_date": "2026-02-23",
+        "price": 262500
+      },
+      "H": {
+        "index": 111,
+        "date": "2026-02-10",
+        "confirmed_date": "2026-02-12",
+        "price": 299500
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "b62d222ec026fb3d",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "000500.KS",
+      "name": "가온전선",
+      "date": "2025-11-25",
+      "input_file_sha256": "0038215c40bcf4da0e976b6bde246ff25e00f4189b08cabdfd7fa86deaad1a47",
+      "ma20": 42383.3333984375,
+      "close": 38722.22265625,
+      "below_ma20": true,
+      "label": "U",
+      "reason": "no_confirmed_intervening_high",
+      "L1": {
+        "index": 108,
+        "date": "2025-11-10",
+        "confirmed_date": "2025-11-12",
+        "price": 40111.109375
+      },
+      "L2": {
+        "index": 115,
+        "date": "2025-11-19",
+        "confirmed_date": "2025-11-21",
+        "price": 35944.4453125
+      },
+      "H": null,
+      "low_broken_after_L2": null,
+      "bullish_recovery": false
+    },
+    {
+      "case_id": "b63028976de8f116",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "000500.KS",
+      "name": "가온전선",
+      "date": "2025-11-20",
+      "input_file_sha256": "5fa2909e8438d08c4a3e12fe946947c7fecba6145282cabea8362504c98b23ab",
+      "ma20": 41869.44453125,
+      "close": 39222.22265625,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 91,
+        "date": "2025-10-13",
+        "confirmed_date": "2025-10-15",
+        "price": 29222.22265625
+      },
+      "L2": {
+        "index": 111,
+        "date": "2025-11-10",
+        "confirmed_date": "2025-11-12",
+        "price": 40111.109375
+      },
+      "H": {
+        "index": 107,
+        "date": "2025-11-04",
+        "confirmed_date": "2025-11-06",
+        "price": 54777.77734375
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "b84c295627add42d",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "041190.KQ",
+      "name": "우리기술투자",
+      "date": "2025-08-04",
+      "input_file_sha256": "087e2137edab688f81692a62ec4179e612275b0e4345313a9c3fb505b977f6f4",
+      "ma20": 10188,
+      "close": 9590,
+      "below_ma20": true,
+      "label": "U",
+      "reason": "no_confirmed_intervening_high",
+      "L1": {
+        "index": 106,
+        "date": "2025-07-16",
+        "confirmed_date": "2025-07-18",
+        "price": 10310
+      },
+      "L2": {
+        "index": 112,
+        "date": "2025-07-24",
+        "confirmed_date": "2025-07-28",
+        "price": 9570
+      },
+      "H": null,
+      "low_broken_after_L2": null,
+      "bullish_recovery": false
+    },
+    {
+      "case_id": "ba106d0c385944e3",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "108490.KQ",
+      "name": "로보티즈",
+      "date": "2026-02-19",
+      "input_file_sha256": "5ec4ae6c837c66da8c8272b336d725b0785d58ffcfeb4ceb5cede3566001cae7",
+      "ma20": 286850,
+      "close": 284000,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 103,
+        "date": "2026-01-23",
+        "confirmed_date": "2026-01-27",
+        "price": 241000
+      },
+      "L2": {
+        "index": 113,
+        "date": "2026-02-06",
+        "confirmed_date": "2026-02-10",
+        "price": 265500
+      },
+      "H": {
+        "index": 108,
+        "date": "2026-01-30",
+        "confirmed_date": "2026-02-03",
+        "price": 364000
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "ba32a40dabfadf0c",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "003230.KS",
+      "name": "삼양식품",
+      "date": "2026-09-14",
+      "input_file_sha256": "bda4f503a316cfb68d962dfd838c1c313246720d385fd00f0457b91c36ae1740",
+      "ma20": 1392300,
+      "close": 1310000,
+      "below_ma20": true,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 91,
+        "date": "2026-08-04",
+        "confirmed_date": "2026-08-06",
+        "price": 1121000
+      },
+      "L2": {
+        "index": 117,
+        "date": "2026-09-10",
+        "confirmed_date": "2026-09-14",
+        "price": 1235000
+      },
+      "H": {
+        "index": 108,
+        "date": "2026-08-28",
+        "confirmed_date": "2026-09-01",
+        "price": 1557000
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "bcba37c7a4327d91",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "356860.KQ",
+      "name": "티엘비",
+      "date": "2025-03-12",
+      "input_file_sha256": "5900438e3697b05d796af8580feaca86a9d8ee2bc8b1036980aff6bde6f0a538",
+      "ma20": 8901.340454101562,
+      "close": 8594.8388671875,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 108,
+        "date": "2025-02-24",
+        "confirmed_date": "2025-02-26",
+        "price": 9311.455078125
+      },
+      "L2": {
+        "index": 113,
+        "date": "2025-03-04",
+        "confirmed_date": "2025-03-06",
+        "price": 8348.3583984375
+      },
+      "H": {
+        "index": 110,
+        "date": "2025-02-26",
+        "confirmed_date": "2025-02-28",
+        "price": 10201.5205078125
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "bf5bb82155913789",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "046970.KQ",
+      "name": "우리로",
+      "date": "2026-05-11",
+      "input_file_sha256": "78949e43d472718161560b9fb8cb12a1640a20b91957267f2ff76d9336167227",
+      "ma20": 10133,
+      "close": 9900,
+      "below_ma20": true,
+      "label": "U",
+      "reason": "no_confirmed_intervening_high",
+      "L1": {
+        "index": 110,
+        "date": "2026-04-24",
+        "confirmed_date": "2026-04-28",
+        "price": 8630
+      },
+      "L2": {
+        "index": 116,
+        "date": "2026-05-06",
+        "confirmed_date": "2026-05-08",
+        "price": 8120
+      },
+      "H": null,
+      "low_broken_after_L2": null,
+      "bullish_recovery": false
+    },
+    {
+      "case_id": "c16998d0c9999981",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "006340.KS",
+      "name": "대원전선",
+      "date": "2025-01-09",
+      "input_file_sha256": "30baa945d8c5b63ea2074716bd25a44ea4d421489b7446dcecf8a8df10d954be",
+      "ma20": 2979.5,
+      "close": 3155,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 108,
+        "date": "2024-12-20",
+        "confirmed_date": "2024-12-24",
+        "price": 2840
+      },
+      "L2": {
+        "index": 112,
+        "date": "2024-12-27",
+        "confirmed_date": "2025-01-02",
+        "price": 2920
+      },
+      "H": {
+        "index": 109,
+        "date": "2024-12-23",
+        "confirmed_date": "2024-12-26",
+        "price": 3390
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "c25fa327c8fd46aa",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "034730.KS",
+      "name": "SK",
+      "date": "2025-07-08",
+      "input_file_sha256": "40bff454d422a9f51a169b6696c0a532752b26557e361dfca637207b2536aec1",
+      "ma20": 200505,
+      "close": 209000,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 103,
+        "date": "2025-06-16",
+        "confirmed_date": "2025-06-18",
+        "price": 188000
+      },
+      "L2": {
+        "index": 108,
+        "date": "2025-06-23",
+        "confirmed_date": "2025-06-25",
+        "price": 188800
+      },
+      "H": {
+        "index": 104,
+        "date": "2025-06-17",
+        "confirmed_date": "2025-06-19",
+        "price": 205500
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "c4089f706fcacb74",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "006340.KS",
+      "name": "대원전선",
+      "date": "2025-02-13",
+      "input_file_sha256": "ed27ea87bb2b72447f5748286e2c5da253a76b3891f1a678e501370a8a34ec8f",
+      "ma20": 3647.25,
+      "close": 3455,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 111,
+        "date": "2025-02-03",
+        "confirmed_date": "2025-02-05",
+        "price": 3325
+      },
+      "L2": {
+        "index": 116,
+        "date": "2025-02-10",
+        "confirmed_date": "2025-02-12",
+        "price": 3295
+      },
+      "H": {
+        "index": 114,
+        "date": "2025-02-06",
+        "confirmed_date": "2025-02-10",
+        "price": 3555
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "c5613caac3c1147b",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "115440.KQ",
+      "name": "우리넷",
+      "date": "2026-04-27",
+      "input_file_sha256": "623a96caadfbbbed325573071ef2bbca0620a2849ce584b884a07995789325f4",
+      "ma20": 13594,
+      "close": 14380,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 105,
+        "date": "2026-04-07",
+        "confirmed_date": "2026-04-09",
+        "price": 10440
+      },
+      "L2": {
+        "index": 113,
+        "date": "2026-04-17",
+        "confirmed_date": "2026-04-21",
+        "price": 13680
+      },
+      "H": {
+        "index": 110,
+        "date": "2026-04-14",
+        "confirmed_date": "2026-04-16",
+        "price": 21350
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "c75118856f23d9a9",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "062040.KS",
+      "name": "산일전기",
+      "date": "2025-02-11",
+      "input_file_sha256": "5d7cfa0084451b9cae9b41bbc756b7215cc9a9c77ba1771b884de7a9759ad9d7",
+      "ma20": 72365,
+      "close": 71400,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 108,
+        "date": "2025-01-21",
+        "confirmed_date": "2025-01-23",
+        "price": 69100
+      },
+      "L2": {
+        "index": 112,
+        "date": "2025-01-31",
+        "confirmed_date": "2025-02-04",
+        "price": 64300
+      },
+      "H": {
+        "index": 110,
+        "date": "2025-01-23",
+        "confirmed_date": "2025-01-31",
+        "price": 75800
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "c819b8968d255d21",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "092870.KQ",
+      "name": "엑시콘",
+      "date": "2025-10-23",
+      "input_file_sha256": "8118ec7553cc63e2c0baad679200ad3f229a180acab875f601f6bbe8441535f3",
+      "ma20": 15219.5,
+      "close": 15230,
+      "below_ma20": false,
+      "label": "U",
+      "reason": "no_confirmed_intervening_high",
+      "L1": {
+        "index": 112,
+        "date": "2025-10-14",
+        "confirmed_date": "2025-10-16",
+        "price": 14280
+      },
+      "L2": {
+        "index": 115,
+        "date": "2025-10-17",
+        "confirmed_date": "2025-10-21",
+        "price": 14150
+      },
+      "H": null,
+      "low_broken_after_L2": null,
+      "bullish_recovery": false
+    },
+    {
+      "case_id": "c9533ac34f8109d8",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "007810.KS",
+      "name": "코리아써키트",
+      "date": "2026-02-12",
+      "input_file_sha256": "de19007738aa0d0fdbad6e0fad34575b5b0f50a0714efa3898bcf739226ea0b1",
+      "ma20": 61090,
+      "close": 58300,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 107,
+        "date": "2026-01-27",
+        "confirmed_date": "2026-01-29",
+        "price": 60300
+      },
+      "L2": {
+        "index": 115,
+        "date": "2026-02-06",
+        "confirmed_date": "2026-02-10",
+        "price": 50500
+      },
+      "H": {
+        "index": 110,
+        "date": "2026-01-30",
+        "confirmed_date": "2026-02-03",
+        "price": 75800
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "cbac1929dc464120",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "006340.KS",
+      "name": "대원전선",
+      "date": "2026-05-21",
+      "input_file_sha256": "161fdca2faad522970e789121fab10db62ad59c52658a49fe68bd7ed1bf377fb",
+      "ma20": 13920,
+      "close": 15220,
+      "below_ma20": false,
+      "label": "U",
+      "reason": "no_confirmed_intervening_high",
+      "L1": {
+        "index": 112,
+        "date": "2026-05-12",
+        "confirmed_date": "2026-05-14",
+        "price": 14150
+      },
+      "L2": {
+        "index": 116,
+        "date": "2026-05-18",
+        "confirmed_date": "2026-05-20",
+        "price": 12900
+      },
+      "H": null,
+      "low_broken_after_L2": null,
+      "bullish_recovery": false
+    },
+    {
+      "case_id": "d03b08ea7c0bb4c5",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "047920.KQ",
+      "name": "HLB제약",
+      "date": "2026-04-27",
+      "input_file_sha256": "ef3802120132596f52c0fa0dfa1501d900682b728b611a5af714239eac1a0cb8",
+      "ma20": 17402.5,
+      "close": 17650,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 98,
+        "date": "2026-03-27",
+        "confirmed_date": "2026-03-31",
+        "price": 15200
+      },
+      "L2": {
+        "index": 104,
+        "date": "2026-04-06",
+        "confirmed_date": "2026-04-08",
+        "price": 15340
+      },
+      "H": {
+        "index": 99,
+        "date": "2026-03-30",
+        "confirmed_date": "2026-04-01",
+        "price": 18090
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "d2a6b4fcf947221c",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "028050.KS",
+      "name": "삼성E&A",
+      "date": "2026-10-06",
+      "input_file_sha256": "5c2ee1b51d7e67cc68fcee090a16969f913cc336d533f4129f92bfa1dcf11f69",
+      "ma20": 49537.5,
+      "close": 48050,
+      "below_ma20": true,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 98,
+        "date": "2026-09-02",
+        "confirmed_date": "2026-09-04",
+        "price": 43500
+      },
+      "L2": {
+        "index": 117,
+        "date": "2026-10-01",
+        "confirmed_date": "2026-10-06",
+        "price": 46700
+      },
+      "H": {
+        "index": 110,
+        "date": "2026-09-18",
+        "confirmed_date": "2026-09-22",
+        "price": 55200
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "d426417427303c4d",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "032820.KQ",
+      "name": "우리기술",
+      "date": "2025-10-24",
+      "input_file_sha256": "09f829ee0e0c87db48b1207262c432ce496a41fd8bd1263f176430cf4bf7cf5e",
+      "ma20": 4247.25,
+      "close": 4420,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 99,
+        "date": "2025-09-18",
+        "confirmed_date": "2025-09-23",
+        "price": 3860
+      },
+      "L2": {
+        "index": 108,
+        "date": "2025-10-02",
+        "confirmed_date": "2025-10-13",
+        "price": 3950
+      },
+      "H": {
+        "index": 102,
+        "date": "2025-09-24",
+        "confirmed_date": "2025-09-26",
+        "price": 4950
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "d43719e0b9c68013",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "000500.KS",
+      "name": "가온전선",
+      "date": "2026-07-22",
+      "input_file_sha256": "61388b3c60fb680ab99b734d835a7298b0f7c25df101136f8d4966e9c7cd5de3",
+      "ma20": 225431.11171875,
+      "close": 209500,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 111,
+        "date": "2026-07-09",
+        "confirmed_date": "2026-07-13",
+        "price": 210500
+      },
+      "L2": {
+        "index": 117,
+        "date": "2026-07-20",
+        "confirmed_date": "2026-07-22",
+        "price": 170600
+      },
+      "H": {
+        "index": 112,
+        "date": "2026-07-10",
+        "confirmed_date": "2026-07-14",
+        "price": 283500
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "d5070c71e5f98361",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "356680.KQ",
+      "name": "엑스게이트",
+      "date": "2026-09-08",
+      "input_file_sha256": "21371b5360f93e6ac409019c8b57d474d22a31be27fa0f7effc7e06ba3c05715",
+      "ma20": 11764.5,
+      "close": 11600,
+      "below_ma20": true,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 109,
+        "date": "2026-08-25",
+        "confirmed_date": "2026-08-27",
+        "price": 10500
+      },
+      "L2": {
+        "index": 116,
+        "date": "2026-09-03",
+        "confirmed_date": "2026-09-07",
+        "price": 10630
+      },
+      "H": {
+        "index": 112,
+        "date": "2026-08-28",
+        "confirmed_date": "2026-09-01",
+        "price": 13280
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "d51f83ad23e7290e",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "000720.KS",
+      "name": "현대건설",
+      "date": "2026-05-06",
+      "input_file_sha256": "b21097d7ca5aaae55eb6f51c5f36d6d15a55c6ad55f630a59ef2449cd383816b",
+      "ma20": 172710,
+      "close": 163700,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 104,
+        "date": "2026-04-13",
+        "confirmed_date": "2026-04-15",
+        "price": 170200
+      },
+      "L2": {
+        "index": 111,
+        "date": "2026-04-22",
+        "confirmed_date": "2026-04-24",
+        "price": 166800
+      },
+      "H": {
+        "index": 106,
+        "date": "2026-04-15",
+        "confirmed_date": "2026-04-17",
+        "price": 186500
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "d721fc0a243735bc",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "161580.KQ",
+      "name": "필옵틱스",
+      "date": "2025-03-05",
+      "input_file_sha256": "e98ce1a671ba071f2aa9e778558d4877334b0af98aa9b8efa5acfef6e8f79b75",
+      "ma20": 43160,
+      "close": 39500,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 106,
+        "date": "2025-02-13",
+        "confirmed_date": "2025-02-17",
+        "price": 42400
+      },
+      "L2": {
+        "index": 113,
+        "date": "2025-02-24",
+        "confirmed_date": "2025-02-26",
+        "price": 41800
+      },
+      "H": {
+        "index": 110,
+        "date": "2025-02-19",
+        "confirmed_date": "2025-02-21",
+        "price": 53500
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "d7233484b550f2d9",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "034020.KS",
+      "name": "두산에너빌리티",
+      "date": "2025-03-05",
+      "input_file_sha256": "a46f7b3a30a4288b7186891325dd4a9e288f673c92af9cbde6714c35d5c9a505",
+      "ma20": 26442.5,
+      "close": 26900,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 98,
+        "date": "2025-02-03",
+        "confirmed_date": "2025-02-05",
+        "price": 23100
+      },
+      "L2": {
+        "index": 102,
+        "date": "2025-02-07",
+        "confirmed_date": "2025-02-11",
+        "price": 22700
+      },
+      "H": {
+        "index": 99,
+        "date": "2025-02-04",
+        "confirmed_date": "2025-02-06",
+        "price": 24750
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "d7e2c28eb4fbbcbe",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "322000.KS",
+      "name": "HD현대에너지솔루션",
+      "date": "2026-05-22",
+      "input_file_sha256": "cc5c27d47324c2218e0f7795115e9dd72cdb33bfc9d281314043f32cd8952b15",
+      "ma20": 202960,
+      "close": 203000,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 110,
+        "date": "2026-05-11",
+        "confirmed_date": "2026-05-13",
+        "price": 188000
+      },
+      "L2": {
+        "index": 117,
+        "date": "2026-05-20",
+        "confirmed_date": "2026-05-22",
+        "price": 176000
+      },
+      "H": {
+        "index": 113,
+        "date": "2026-05-14",
+        "confirmed_date": "2026-05-18",
+        "price": 256000
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "d8f50c05115e17b7",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "003670.KS",
+      "name": "포스코퓨처엠",
+      "date": "2025-11-13",
+      "input_file_sha256": "77cbc7fb8ea80013320071474475c302b22d05ae954348954fa108d7ac601c66",
+      "ma20": 216200,
+      "close": 220500,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 93,
+        "date": "2025-10-01",
+        "confirmed_date": "2025-10-10",
+        "price": 140700
+      },
+      "L2": {
+        "index": 116,
+        "date": "2025-11-10",
+        "confirmed_date": "2025-11-12",
+        "price": 199900
+      },
+      "H": {
+        "index": 106,
+        "date": "2025-10-27",
+        "confirmed_date": "2025-10-29",
+        "price": 260000
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "de38cb7d84161a99",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "028050.KS",
+      "name": "삼성E&A",
+      "date": "2026-09-03",
+      "input_file_sha256": "66755f5993cb1d57c3217e59c85ab60a37962159d0c3317e12d974847c22637d",
+      "ma20": 47672.5,
+      "close": 46100,
+      "below_ma20": true,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 94,
+        "date": "2026-07-29",
+        "confirmed_date": "2026-07-31",
+        "price": 38500
+      },
+      "L2": {
+        "index": 112,
+        "date": "2026-08-25",
+        "confirmed_date": "2026-08-27",
+        "price": 43450
+      },
+      "H": {
+        "index": 100,
+        "date": "2026-08-06",
+        "confirmed_date": "2026-08-10",
+        "price": 51400
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "e4e57e302ccc8b2e",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "071090.KS",
+      "name": "하이스틸",
+      "date": "2026-02-09",
+      "input_file_sha256": "861d010e2e2d9beabef0e52d000eda1e9d6e6a5b0da421d285e024691a88b7e1",
+      "ma20": 3615.75,
+      "close": 3720,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 104,
+        "date": "2026-01-19",
+        "confirmed_date": "2026-01-21",
+        "price": 3365
+      },
+      "L2": {
+        "index": 114,
+        "date": "2026-02-02",
+        "confirmed_date": "2026-02-04",
+        "price": 3520
+      },
+      "H": {
+        "index": 106,
+        "date": "2026-01-21",
+        "confirmed_date": "2026-01-23",
+        "price": 4455
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "e679930c101575f5",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "419050.KQ",
+      "name": "삼기에너지솔루션즈",
+      "date": "2025-06-25",
+      "input_file_sha256": "35ca9160affed45793d1c5fdba7d65e28f077ff471df7fdabd624f5f1f3c43ef",
+      "ma20": 1727.85,
+      "close": 1763,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 112,
+        "date": "2025-06-16",
+        "confirmed_date": "2025-06-18",
+        "price": 1692
+      },
+      "L2": {
+        "index": 117,
+        "date": "2025-06-23",
+        "confirmed_date": "2025-06-25",
+        "price": 1698
+      },
+      "H": {
+        "index": 113,
+        "date": "2025-06-17",
+        "confirmed_date": "2025-06-19",
+        "price": 1888
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "e789acda50155594",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "067310.KQ",
+      "name": "하나마이크론",
+      "date": "2025-08-25",
+      "input_file_sha256": "1fae0b500fab7493281b00f59409ac346c078a7db6601583956d5c37e36ec42b",
+      "ma20": 12004,
+      "close": 11930,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 107,
+        "date": "2025-08-06",
+        "confirmed_date": "2025-08-08",
+        "price": 11610
+      },
+      "L2": {
+        "index": 116,
+        "date": "2025-08-20",
+        "confirmed_date": "2025-08-22",
+        "price": 11410
+      },
+      "H": {
+        "index": 112,
+        "date": "2025-08-13",
+        "confirmed_date": "2025-08-18",
+        "price": 12640
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "e7f562ec7d52a65e",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "062040.KS",
+      "name": "산일전기",
+      "date": "2024-12-30",
+      "input_file_sha256": "389a1963abf9c01c5b0b797c762eba87118f88a8d725e7cd47d748e0a0918b9b",
+      "ma20": 65740,
+      "close": 68600,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 83,
+        "date": "2024-12-02",
+        "confirmed_date": "2024-12-04",
+        "price": 55400
+      },
+      "L2": {
+        "index": 88,
+        "date": "2024-12-09",
+        "confirmed_date": "2024-12-11",
+        "price": 54900
+      },
+      "H": {
+        "index": 86,
+        "date": "2024-12-05",
+        "confirmed_date": "2024-12-09",
+        "price": 66700
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "ea99b2d7e52071c8",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "001440.KS",
+      "name": "대한전선",
+      "date": "2025-11-20",
+      "input_file_sha256": "3a786133bbcd4f0b9489a087619bd0bcf51e1fcfd89376f14a7c30189caa8264",
+      "ma20": 23766.5,
+      "close": 24100,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 98,
+        "date": "2025-10-22",
+        "confirmed_date": "2025-10-24",
+        "price": 17210
+      },
+      "L2": {
+        "index": 110,
+        "date": "2025-11-07",
+        "confirmed_date": "2025-11-11",
+        "price": 23300
+      },
+      "H": {
+        "index": 107,
+        "date": "2025-11-04",
+        "confirmed_date": "2025-11-06",
+        "price": 28650
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "ecb969f381ff72cd",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "108490.KQ",
+      "name": "로보티즈",
+      "date": "2025-11-27",
+      "input_file_sha256": "68a5c8ba70acf73046ad223d2a1a9d0979dd7877989b9e49317af6e88bc6f82a",
+      "ma20": 220065,
+      "close": 212500,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 105,
+        "date": "2025-11-07",
+        "confirmed_date": "2025-11-11",
+        "price": 204000
+      },
+      "L2": {
+        "index": 115,
+        "date": "2025-11-21",
+        "confirmed_date": "2025-11-25",
+        "price": 188600
+      },
+      "H": {
+        "index": 107,
+        "date": "2025-11-11",
+        "confirmed_date": "2025-11-13",
+        "price": 244000
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "f0445c951f5182c2",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "000150.KS",
+      "name": "두산",
+      "date": "2026-03-10",
+      "input_file_sha256": "f6f9422a4bec4da9835168c9683c418f7f729fba5f9077ccab5a7daf841c1cb0",
+      "ma20": 1023850,
+      "close": 1053000,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 104,
+        "date": "2026-02-11",
+        "confirmed_date": "2026-02-13",
+        "price": 834000
+      },
+      "L2": {
+        "index": 115,
+        "date": "2026-03-04",
+        "confirmed_date": "2026-03-06",
+        "price": 937000
+      },
+      "H": {
+        "index": 113,
+        "date": "2026-02-27",
+        "confirmed_date": "2026-03-04",
+        "price": 1295000
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "f4e3602e66c9962d",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "353200.KS",
+      "name": "대덕전자",
+      "date": "2025-08-22",
+      "input_file_sha256": "115d4e0aa89b5912936ed83e122a5687c941838ca14af11101b0b4ece4bc412a",
+      "ma20": 22567.5,
+      "close": 22450,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 109,
+        "date": "2025-08-07",
+        "confirmed_date": "2025-08-11",
+        "price": 22000
+      },
+      "L2": {
+        "index": 117,
+        "date": "2025-08-20",
+        "confirmed_date": "2025-08-22",
+        "price": 21250
+      },
+      "H": {
+        "index": 113,
+        "date": "2025-08-13",
+        "confirmed_date": "2025-08-18",
+        "price": 24150
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "f604eded7d605644",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "066570.KS",
+      "name": "LG전자",
+      "date": "2025-08-05",
+      "input_file_sha256": "b74489c588f3962ec09805f9c0ba66dd0edb07acaf51ad82af09737181f96e8a",
+      "ma20": 76620,
+      "close": 76600,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 106,
+        "date": "2025-07-17",
+        "confirmed_date": "2025-07-21",
+        "price": 74600
+      },
+      "L2": {
+        "index": 114,
+        "date": "2025-07-29",
+        "confirmed_date": "2025-07-31",
+        "price": 76400
+      },
+      "H": {
+        "index": 110,
+        "date": "2025-07-23",
+        "confirmed_date": "2025-07-25",
+        "price": 79500
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "f60f08f1a73a7068",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "001440.KS",
+      "name": "대한전선",
+      "date": "2026-05-21",
+      "input_file_sha256": "5eb8d0aa71fb99bfac8740861263a5851a704b083fa6741739eaedaec485c463",
+      "ma20": 56795,
+      "close": 56000,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 100,
+        "date": "2026-04-22",
+        "confirmed_date": "2026-04-24",
+        "price": 38700
+      },
+      "L2": {
+        "index": 112,
+        "date": "2026-05-12",
+        "confirmed_date": "2026-05-14",
+        "price": 61300
+      },
+      "H": {
+        "index": 111,
+        "date": "2026-05-11",
+        "confirmed_date": "2026-05-13",
+        "price": 75900
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "f7114135b73426f7",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "322000.KS",
+      "name": "HD현대에너지솔루션",
+      "date": "2025-02-05",
+      "input_file_sha256": "caced4236e7c342d3fea130d7b9b96950ad12acf22dbe40c89902f8aa9ec5182",
+      "ma20": 24762.5,
+      "close": 24450,
+      "below_ma20": true,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 113,
+        "date": "2025-01-22",
+        "confirmed_date": "2025-01-24",
+        "price": 24100
+      },
+      "L2": {
+        "index": 117,
+        "date": "2025-02-03",
+        "confirmed_date": "2025-02-05",
+        "price": 23050
+      },
+      "H": {
+        "index": 115,
+        "date": "2025-01-24",
+        "confirmed_date": "2025-02-03",
+        "price": 25950
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "f7ad6018bb0e44f9",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "015760.KS",
+      "name": "한국전력",
+      "date": "2025-03-21",
+      "input_file_sha256": "f74e68c5d3a15095d98ce526a84fef6b0d96167e2339e23cc2123b10be80c101",
+      "ma20": 22240,
+      "close": 22100,
+      "below_ma20": true,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 93,
+        "date": "2025-02-12",
+        "confirmed_date": "2025-02-14",
+        "price": 20500
+      },
+      "L2": {
+        "index": 116,
+        "date": "2025-03-18",
+        "confirmed_date": "2025-03-20",
+        "price": 21600
+      },
+      "H": {
+        "index": 103,
+        "date": "2025-02-26",
+        "confirmed_date": "2025-02-28",
+        "price": 23700
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "fa3ef77a658ea36e",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "042700.KS",
+      "name": "한미반도체",
+      "date": "2026-01-27",
+      "input_file_sha256": "077b02b6f54648cde17c75a5f73aa61f3299fcff17d26c69da7457ef3396b569",
+      "ma20": 169325,
+      "close": 174800,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "higher_low_broken",
+      "L1": {
+        "index": 108,
+        "date": "2026-01-12",
+        "confirmed_date": "2026-01-14",
+        "price": 164800
+      },
+      "L2": {
+        "index": 115,
+        "date": "2026-01-21",
+        "confirmed_date": "2026-01-23",
+        "price": 165500
+      },
+      "H": {
+        "index": 110,
+        "date": "2026-01-14",
+        "confirmed_date": "2026-01-16",
+        "price": 185900
+      },
+      "low_broken_after_L2": true,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "face01720a02e739",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "396300.KQ",
+      "name": "HT로보틱스",
+      "date": "2025-06-11",
+      "input_file_sha256": "bdb83a218207e8c195e995a5b82eb3adfd8efa14266a65e020db4a30164d6137",
+      "ma20": 2453.75,
+      "close": 2560,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 99,
+        "date": "2025-05-12",
+        "confirmed_date": "2025-05-14",
+        "price": 2170
+      },
+      "L2": {
+        "index": 115,
+        "date": "2025-06-04",
+        "confirmed_date": "2025-06-09",
+        "price": 2365
+      },
+      "H": {
+        "index": 102,
+        "date": "2025-05-15",
+        "confirmed_date": "2025-05-19",
+        "price": 2975
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "fd7b243b20f00ee0",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "298040.KS",
+      "name": "효성중공업",
+      "date": "2025-10-01",
+      "input_file_sha256": "5223813664fc3889e0b5828b0ad0a9daa8831c4cbf6c3e067658bc8ad484e695",
+      "ma20": 1343400,
+      "close": 1375000,
+      "below_ma20": false,
+      "label": "D",
+      "reason": "lower_low",
+      "L1": {
+        "index": 110,
+        "date": "2025-09-17",
+        "confirmed_date": "2025-09-22",
+        "price": 1370000
+      },
+      "L2": {
+        "index": 117,
+        "date": "2025-09-29",
+        "confirmed_date": "2025-10-01",
+        "price": 1315000
+      },
+      "H": {
+        "index": 113,
+        "date": "2025-09-23",
+        "confirmed_date": "2025-09-25",
+        "price": 1498000
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "fe205c8f86a2d3e5",
+      "dataset": "kr-saved-scan-20251008",
+      "symbol": "080220.KQ",
+      "name": "제주반도체",
+      "date": "2025-07-08",
+      "input_file_sha256": "cf677693d346d4b782497d0a618771a16654ee400bf10c4aaadce847a7b8e9cd",
+      "ma20": 14805,
+      "close": 15730,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 108,
+        "date": "2025-06-23",
+        "confirmed_date": "2025-06-25",
+        "price": 13140
+      },
+      "L2": {
+        "index": 115,
+        "date": "2025-07-02",
+        "confirmed_date": "2025-07-04",
+        "price": 14460
+      },
+      "H": {
+        "index": 110,
+        "date": "2025-06-25",
+        "confirmed_date": "2025-06-27",
+        "price": 19030
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    },
+    {
+      "case_id": "ff8bd4ed851b8d3c",
+      "dataset": "kr-saved-scan-20261009",
+      "symbol": "316140.KS",
+      "name": "우리금융지주",
+      "date": "2025-12-19",
+      "input_file_sha256": "194c9f8464a09dbfd0b6d853ae8522f407b8a1d7c99fabc9d5bcf3fa0abf2530",
+      "ma20": 27417.5,
+      "close": 27750,
+      "below_ma20": false,
+      "label": "H",
+      "reason": "higher_low_held",
+      "L1": {
+        "index": 99,
+        "date": "2025-11-21",
+        "confirmed_date": "2025-11-25",
+        "price": 25600
+      },
+      "L2": {
+        "index": 117,
+        "date": "2025-12-17",
+        "confirmed_date": "2025-12-19",
+        "price": 27150
+      },
+      "H": {
+        "index": 106,
+        "date": "2025-12-02",
+        "confirmed_date": "2025-12-04",
+        "price": 29250
+      },
+      "low_broken_after_L2": false,
+      "bullish_recovery": true
+    }
+  ]
+}

@@ -1,0 +1,2777 @@
+{
+    "schema": 1,
+    "kind": "research_sector_map_v1",
+    "assumption": "현재 운영 섹터 캐시에 저장된 업종명을 SectorMap::bucketOf로 분류해 두 기간에 같이 적용한다. 당시 업종을 복원한 것이 아니다.",
+    "unclassified_bucket": "unclassified",
+    "unclassified_is_one_shared_bucket": true,
+    "rule": "ChartEntryLab\\SectorMap::bucketOf",
+    "cache_dir": "data/cache/sector",
+    "saved_scan_files": [
+        {
+            "path": "docs/paper-kr-5d-source/rr-audit/paper-kr/20260922-112311-4a580134809e.json",
+            "sha256": "09e74b64695b71f7dfedd579b6db35c90488982a564bae85335eb1bef6acd406"
+        },
+        {
+            "path": "docs/paper-kr-5d-source/rr-audit/paper-kr/20260923-112437-c2025840f050.json",
+            "sha256": "fdb66b24a0344b5895a6a30599eb083ff343146ca90b4b2891f94cbfe3967788"
+        },
+        {
+            "path": "docs/paper-kr-5d-source/rr-audit/paper-kr/20260928-112325-ff67a60e9c4f.json",
+            "sha256": "a5f701b35da2182999ae4aaf64e493dcc53f0fc87ca00943975f6c9d38a83f60"
+        },
+        {
+            "path": "docs/paper-kr-5d-source/rr-audit/paper-kr/20260929-112312-216e11a86886.json",
+            "sha256": "43fb746e2487eb714c64fba243936ccc467b8b4d65cebc6c9315c59894eca39b"
+        },
+        {
+            "path": "docs/paper-kr-5d-source/rr-audit/paper-kr/20260930-112310-0e41236359f1.json",
+            "sha256": "d763a9ac7fc43e5739cecc428fc68634d1ae66ddb8d91b217fa47ffc5a762704"
+        }
+    ],
+    "counts": {
+        "symbols": 144,
+        "secured": 0,
+        "unconfirmed": 144,
+        "bucket_rule_differs": 0
+    },
+    "bucket_counts": {
+        "unclassified": 144
+    },
+    "unconfirmed_reasons": {
+        "cache_placeholder": 144
+    },
+    "sectors": {
+        "000150.KS": "unclassified",
+        "000270.KS": "unclassified",
+        "000500.KS": "unclassified",
+        "000660.KS": "unclassified",
+        "000720.KS": "unclassified",
+        "000810.KS": "unclassified",
+        "000990.KS": "unclassified",
+        "001440.KS": "unclassified",
+        "001820.KS": "unclassified",
+        "002710.KS": "unclassified",
+        "003230.KS": "unclassified",
+        "003490.KS": "unclassified",
+        "003670.KS": "unclassified",
+        "005290.KQ": "unclassified",
+        "005380.KS": "unclassified",
+        "005490.KS": "unclassified",
+        "005830.KS": "unclassified",
+        "005930.KS": "unclassified",
+        "005935.KS": "unclassified",
+        "006340.KS": "unclassified",
+        "006360.KS": "unclassified",
+        "006400.KS": "unclassified",
+        "007660.KS": "unclassified",
+        "007810.KS": "unclassified",
+        "009150.KS": "unclassified",
+        "009540.KS": "unclassified",
+        "009830.KS": "unclassified",
+        "010060.KS": "unclassified",
+        "010120.KS": "unclassified",
+        "010140.KS": "unclassified",
+        "010170.KQ": "unclassified",
+        "010950.KS": "unclassified",
+        "011070.KS": "unclassified",
+        "012330.KS": "unclassified",
+        "012450.KS": "unclassified",
+        "014280.KS": "unclassified",
+        "014950.KQ": "unclassified",
+        "015760.KS": "unclassified",
+        "017670.KS": "unclassified",
+        "018880.KS": "unclassified",
+        "028050.KS": "unclassified",
+        "028260.KS": "unclassified",
+        "028300.KQ": "unclassified",
+        "030530.KQ": "unclassified",
+        "032820.KQ": "unclassified",
+        "032830.KS": "unclassified",
+        "033780.KS": "unclassified",
+        "034020.KS": "unclassified",
+        "034730.KS": "unclassified",
+        "035420.KS": "unclassified",
+        "035720.KS": "unclassified",
+        "036540.KQ": "unclassified",
+        "039030.KQ": "unclassified",
+        "041190.KQ": "unclassified",
+        "042660.KS": "unclassified",
+        "042700.KS": "unclassified",
+        "043260.KQ": "unclassified",
+        "046970.KQ": "unclassified",
+        "047040.KS": "unclassified",
+        "047920.KQ": "unclassified",
+        "051910.KS": "unclassified",
+        "052260.KQ": "unclassified",
+        "052690.KS": "unclassified",
+        "053260.KQ": "unclassified",
+        "055550.KS": "unclassified",
+        "058470.KQ": "unclassified",
+        "062040.KS": "unclassified",
+        "064350.KS": "unclassified",
+        "066570.KS": "unclassified",
+        "066970.KS": "unclassified",
+        "067310.KQ": "unclassified",
+        "068270.KS": "unclassified",
+        "069540.KQ": "unclassified",
+        "071050.KS": "unclassified",
+        "071090.KS": "unclassified",
+        "072950.KQ": "unclassified",
+        "078930.KS": "unclassified",
+        "079550.KS": "unclassified",
+        "080220.KQ": "unclassified",
+        "082740.KS": "unclassified",
+        "086520.KQ": "unclassified",
+        "086790.KS": "unclassified",
+        "089030.KQ": "unclassified",
+        "089970.KQ": "unclassified",
+        "092870.KQ": "unclassified",
+        "093370.KS": "unclassified",
+        "095610.KQ": "unclassified",
+        "096770.KS": "unclassified",
+        "098460.KQ": "unclassified",
+        "103590.KS": "unclassified",
+        "105560.KS": "unclassified",
+        "108490.KQ": "unclassified",
+        "115440.KQ": "unclassified",
+        "128940.KS": "unclassified",
+        "161580.KQ": "unclassified",
+        "161890.KS": "unclassified",
+        "178320.KQ": "unclassified",
+        "196170.KQ": "unclassified",
+        "201490.KQ": "unclassified",
+        "203650.KQ": "unclassified",
+        "207940.KS": "unclassified",
+        "222800.KQ": "unclassified",
+        "232140.KQ": "unclassified",
+        "240810.KQ": "unclassified",
+        "247540.KQ": "unclassified",
+        "256840.KQ": "unclassified",
+        "267260.KS": "unclassified",
+        "267270.KS": "unclassified",
+        "267320.KQ": "unclassified",
+        "272210.KS": "unclassified",
+        "274090.KQ": "unclassified",
+        "278470.KS": "unclassified",
+        "298040.KS": "unclassified",
+        "303810.KQ": "unclassified",
+        "316140.KS": "unclassified",
+        "319660.KQ": "unclassified",
+        "321370.KQ": "unclassified",
+        "322000.KS": "unclassified",
+        "323280.KQ": "unclassified",
+        "327260.KQ": "unclassified",
+        "328130.KQ": "unclassified",
+        "329180.KS": "unclassified",
+        "336260.KS": "unclassified",
+        "352820.KS": "unclassified",
+        "353200.KS": "unclassified",
+        "356680.KQ": "unclassified",
+        "356860.KQ": "unclassified",
+        "373220.KS": "unclassified",
+        "393210.KQ": "unclassified",
+        "396300.KQ": "unclassified",
+        "402340.KS": "unclassified",
+        "403870.KQ": "unclassified",
+        "417200.KQ": "unclassified",
+        "419050.KQ": "unclassified",
+        "425040.KQ": "unclassified",
+        "440110.KQ": "unclassified",
+        "452190.KQ": "unclassified",
+        "456010.KQ": "unclassified",
+        "457190.KS": "unclassified",
+        "457370.KQ": "unclassified",
+        "475150.KS": "unclassified",
+        "478340.KQ": "unclassified",
+        "486990.KQ": "unclassified",
+        "490470.KQ": "unclassified"
+    },
+    "symbols": {
+        "000150.KS": {
+            "symbol": "000150.KS",
+            "name": "두산",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_000150.json"
+        },
+        "000270.KS": {
+            "symbol": "000270.KS",
+            "name": "기아",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_000270.json"
+        },
+        "000500.KS": {
+            "symbol": "000500.KS",
+            "name": "가온전선",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_000500.json"
+        },
+        "000660.KS": {
+            "symbol": "000660.KS",
+            "name": "SK하이닉스",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_000660.json"
+        },
+        "000720.KS": {
+            "symbol": "000720.KS",
+            "name": "현대건설",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_000720.json"
+        },
+        "000810.KS": {
+            "symbol": "000810.KS",
+            "name": "삼성화재",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_000810.json"
+        },
+        "000990.KS": {
+            "symbol": "000990.KS",
+            "name": "DB하이텍",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_000990.json"
+        },
+        "001440.KS": {
+            "symbol": "001440.KS",
+            "name": "대한전선",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_001440.json"
+        },
+        "001820.KS": {
+            "symbol": "001820.KS",
+            "name": "삼화콘덴서",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_001820.json"
+        },
+        "002710.KS": {
+            "symbol": "002710.KS",
+            "name": "TCC스틸",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_002710.json"
+        },
+        "003230.KS": {
+            "symbol": "003230.KS",
+            "name": "삼양식품",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_003230.json"
+        },
+        "003490.KS": {
+            "symbol": "003490.KS",
+            "name": "대한항공",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_003490.json"
+        },
+        "003670.KS": {
+            "symbol": "003670.KS",
+            "name": "포스코퓨처엠",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_003670.json"
+        },
+        "005290.KQ": {
+            "symbol": "005290.KQ",
+            "name": "동진쎄미켐",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_005290.json"
+        },
+        "005380.KS": {
+            "symbol": "005380.KS",
+            "name": "현대차",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_005380.json"
+        },
+        "005490.KS": {
+            "symbol": "005490.KS",
+            "name": "POSCO홀딩스",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_005490.json"
+        },
+        "005830.KS": {
+            "symbol": "005830.KS",
+            "name": "DB손해보험",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_005830.json"
+        },
+        "005930.KS": {
+            "symbol": "005930.KS",
+            "name": "삼성전자",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_005930.json"
+        },
+        "005935.KS": {
+            "symbol": "005935.KS",
+            "name": "삼성전자우",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_005935.json"
+        },
+        "006340.KS": {
+            "symbol": "006340.KS",
+            "name": "대원전선",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_006340.json"
+        },
+        "006360.KS": {
+            "symbol": "006360.KS",
+            "name": "GS건설",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_006360.json"
+        },
+        "006400.KS": {
+            "symbol": "006400.KS",
+            "name": "삼성SDI",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_006400.json"
+        },
+        "007660.KS": {
+            "symbol": "007660.KS",
+            "name": "이수페타시스",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_007660.json"
+        },
+        "007810.KS": {
+            "symbol": "007810.KS",
+            "name": "코리아써키트",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_007810.json"
+        },
+        "009150.KS": {
+            "symbol": "009150.KS",
+            "name": "삼성전기",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_009150.json"
+        },
+        "009540.KS": {
+            "symbol": "009540.KS",
+            "name": "HD한국조선해양",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_009540.json"
+        },
+        "009830.KS": {
+            "symbol": "009830.KS",
+            "name": "한화솔루션",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_009830.json"
+        },
+        "010060.KS": {
+            "symbol": "010060.KS",
+            "name": "OCI홀딩스",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_010060.json"
+        },
+        "010120.KS": {
+            "symbol": "010120.KS",
+            "name": "LS ELECTRIC",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_010120.json"
+        },
+        "010140.KS": {
+            "symbol": "010140.KS",
+            "name": "삼성중공업",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_010140.json"
+        },
+        "010170.KQ": {
+            "symbol": "010170.KQ",
+            "name": "대한광통신",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_010170.json"
+        },
+        "010950.KS": {
+            "symbol": "010950.KS",
+            "name": "S-Oil",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_010950.json"
+        },
+        "011070.KS": {
+            "symbol": "011070.KS",
+            "name": "LG이노텍",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_011070.json"
+        },
+        "012330.KS": {
+            "symbol": "012330.KS",
+            "name": "현대모비스",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_012330.json"
+        },
+        "012450.KS": {
+            "symbol": "012450.KS",
+            "name": "한화에어로스페이스",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_012450.json"
+        },
+        "014280.KS": {
+            "symbol": "014280.KS",
+            "name": "금강공업",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_014280.json"
+        },
+        "014950.KQ": {
+            "symbol": "014950.KQ",
+            "name": "삼익제약",
+            "periods": [
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_014950.json"
+        },
+        "015760.KS": {
+            "symbol": "015760.KS",
+            "name": "한국전력",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_015760.json"
+        },
+        "017670.KS": {
+            "symbol": "017670.KS",
+            "name": "SK텔레콤",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_017670.json"
+        },
+        "018880.KS": {
+            "symbol": "018880.KS",
+            "name": "한온시스템",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_018880.json"
+        },
+        "028050.KS": {
+            "symbol": "028050.KS",
+            "name": "삼성E&A",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_028050.json"
+        },
+        "028260.KS": {
+            "symbol": "028260.KS",
+            "name": "삼성물산",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_028260.json"
+        },
+        "028300.KQ": {
+            "symbol": "028300.KQ",
+            "name": "HLB",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_028300.json"
+        },
+        "030530.KQ": {
+            "symbol": "030530.KQ",
+            "name": "원익홀딩스",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_030530.json"
+        },
+        "032820.KQ": {
+            "symbol": "032820.KQ",
+            "name": "우리기술",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_032820.json"
+        },
+        "032830.KS": {
+            "symbol": "032830.KS",
+            "name": "삼성생명",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_032830.json"
+        },
+        "033780.KS": {
+            "symbol": "033780.KS",
+            "name": "KT&G",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_033780.json"
+        },
+        "034020.KS": {
+            "symbol": "034020.KS",
+            "name": "두산에너빌리티",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_034020.json"
+        },
+        "034730.KS": {
+            "symbol": "034730.KS",
+            "name": "SK",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_034730.json"
+        },
+        "035420.KS": {
+            "symbol": "035420.KS",
+            "name": "NAVER",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_035420.json"
+        },
+        "035720.KS": {
+            "symbol": "035720.KS",
+            "name": "카카오",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_035720.json"
+        },
+        "036540.KQ": {
+            "symbol": "036540.KQ",
+            "name": "SFA반도체",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_036540.json"
+        },
+        "039030.KQ": {
+            "symbol": "039030.KQ",
+            "name": "이오테크닉스",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_039030.json"
+        },
+        "041190.KQ": {
+            "symbol": "041190.KQ",
+            "name": "우리기술투자",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_041190.json"
+        },
+        "042660.KS": {
+            "symbol": "042660.KS",
+            "name": "한화오션",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_042660.json"
+        },
+        "042700.KS": {
+            "symbol": "042700.KS",
+            "name": "한미반도체",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_042700.json"
+        },
+        "043260.KQ": {
+            "symbol": "043260.KQ",
+            "name": "성호전자",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_043260.json"
+        },
+        "046970.KQ": {
+            "symbol": "046970.KQ",
+            "name": "우리로",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_046970.json"
+        },
+        "047040.KS": {
+            "symbol": "047040.KS",
+            "name": "대우건설",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_047040.json"
+        },
+        "047920.KQ": {
+            "symbol": "047920.KQ",
+            "name": "HLB제약",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_047920.json"
+        },
+        "051910.KS": {
+            "symbol": "051910.KS",
+            "name": "LG화학",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_051910.json"
+        },
+        "052260.KQ": {
+            "symbol": "052260.KQ",
+            "name": "현대바이오랜드",
+            "periods": [
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_052260.json"
+        },
+        "052690.KS": {
+            "symbol": "052690.KS",
+            "name": "한전기술",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_052690.json"
+        },
+        "053260.KQ": {
+            "symbol": "053260.KQ",
+            "name": "금강철강",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_053260.json"
+        },
+        "055550.KS": {
+            "symbol": "055550.KS",
+            "name": "신한지주",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_055550.json"
+        },
+        "058470.KQ": {
+            "symbol": "058470.KQ",
+            "name": "리노공업",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_058470.json"
+        },
+        "062040.KS": {
+            "symbol": "062040.KS",
+            "name": "산일전기",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_062040.json"
+        },
+        "064350.KS": {
+            "symbol": "064350.KS",
+            "name": "현대로템",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_064350.json"
+        },
+        "066570.KS": {
+            "symbol": "066570.KS",
+            "name": "LG전자",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_066570.json"
+        },
+        "066970.KS": {
+            "symbol": "066970.KS",
+            "name": "엘앤에프",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_066970.json"
+        },
+        "067310.KQ": {
+            "symbol": "067310.KQ",
+            "name": "하나마이크론",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_067310.json"
+        },
+        "068270.KS": {
+            "symbol": "068270.KS",
+            "name": "셀트리온",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_068270.json"
+        },
+        "069540.KQ": {
+            "symbol": "069540.KQ",
+            "name": "빛과전자",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_069540.json"
+        },
+        "071050.KS": {
+            "symbol": "071050.KS",
+            "name": "한국금융지주",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_071050.json"
+        },
+        "071090.KS": {
+            "symbol": "071090.KS",
+            "name": "하이스틸",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_071090.json"
+        },
+        "072950.KQ": {
+            "symbol": "072950.KQ",
+            "name": "빛샘전자",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_072950.json"
+        },
+        "078930.KS": {
+            "symbol": "078930.KS",
+            "name": "GS",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_078930.json"
+        },
+        "079550.KS": {
+            "symbol": "079550.KS",
+            "name": "LIG디펜스앤에어로스페이스",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_079550.json"
+        },
+        "080220.KQ": {
+            "symbol": "080220.KQ",
+            "name": "제주반도체",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_080220.json"
+        },
+        "082740.KS": {
+            "symbol": "082740.KS",
+            "name": "한화엔진",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_082740.json"
+        },
+        "086520.KQ": {
+            "symbol": "086520.KQ",
+            "name": "에코프로",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_086520.json"
+        },
+        "086790.KS": {
+            "symbol": "086790.KS",
+            "name": "하나금융지주",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_086790.json"
+        },
+        "089030.KQ": {
+            "symbol": "089030.KQ",
+            "name": "테크윙",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_089030.json"
+        },
+        "089970.KQ": {
+            "symbol": "089970.KQ",
+            "name": "브이엠",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_089970.json"
+        },
+        "092870.KQ": {
+            "symbol": "092870.KQ",
+            "name": "엑시콘",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_092870.json"
+        },
+        "093370.KS": {
+            "symbol": "093370.KS",
+            "name": "후성",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_093370.json"
+        },
+        "095610.KQ": {
+            "symbol": "095610.KQ",
+            "name": "테스",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_095610.json"
+        },
+        "096770.KS": {
+            "symbol": "096770.KS",
+            "name": "SK이노베이션",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_096770.json"
+        },
+        "098460.KQ": {
+            "symbol": "098460.KQ",
+            "name": "고영",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_098460.json"
+        },
+        "103590.KS": {
+            "symbol": "103590.KS",
+            "name": "일진전기",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_103590.json"
+        },
+        "105560.KS": {
+            "symbol": "105560.KS",
+            "name": "KB금융",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_105560.json"
+        },
+        "108490.KQ": {
+            "symbol": "108490.KQ",
+            "name": "로보티즈",
+            "periods": [
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_108490.json"
+        },
+        "115440.KQ": {
+            "symbol": "115440.KQ",
+            "name": "우리넷",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_115440.json"
+        },
+        "128940.KS": {
+            "symbol": "128940.KS",
+            "name": "한미약품",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_128940.json"
+        },
+        "161580.KQ": {
+            "symbol": "161580.KQ",
+            "name": "필옵틱스",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_161580.json"
+        },
+        "161890.KS": {
+            "symbol": "161890.KS",
+            "name": "한국콜마",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_161890.json"
+        },
+        "178320.KQ": {
+            "symbol": "178320.KQ",
+            "name": "서진시스템",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_178320.json"
+        },
+        "196170.KQ": {
+            "symbol": "196170.KQ",
+            "name": "알테오젠",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_196170.json"
+        },
+        "201490.KQ": {
+            "symbol": "201490.KQ",
+            "name": "미투온",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_201490.json"
+        },
+        "203650.KQ": {
+            "symbol": "203650.KQ",
+            "name": "드림시큐리티",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_203650.json"
+        },
+        "207940.KS": {
+            "symbol": "207940.KS",
+            "name": "삼성바이오로직스",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_207940.json"
+        },
+        "222800.KQ": {
+            "symbol": "222800.KQ",
+            "name": "심텍",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_222800.json"
+        },
+        "232140.KQ": {
+            "symbol": "232140.KQ",
+            "name": "와이씨",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_232140.json"
+        },
+        "240810.KQ": {
+            "symbol": "240810.KQ",
+            "name": "원익IPS",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_240810.json"
+        },
+        "247540.KQ": {
+            "symbol": "247540.KQ",
+            "name": "에코프로비엠",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_247540.json"
+        },
+        "256840.KQ": {
+            "symbol": "256840.KQ",
+            "name": "한국비엔씨",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_256840.json"
+        },
+        "267260.KS": {
+            "symbol": "267260.KS",
+            "name": "HD현대일렉트릭",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_267260.json"
+        },
+        "267270.KS": {
+            "symbol": "267270.KS",
+            "name": "HD건설기계",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_267270.json"
+        },
+        "267320.KQ": {
+            "symbol": "267320.KQ",
+            "name": "나인테크",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_267320.json"
+        },
+        "272210.KS": {
+            "symbol": "272210.KS",
+            "name": "한화시스템",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_272210.json"
+        },
+        "274090.KQ": {
+            "symbol": "274090.KQ",
+            "name": "켄코아에어로스페이스",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_274090.json"
+        },
+        "278470.KS": {
+            "symbol": "278470.KS",
+            "name": "에이피알",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_278470.json"
+        },
+        "298040.KS": {
+            "symbol": "298040.KS",
+            "name": "효성중공업",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_298040.json"
+        },
+        "303810.KQ": {
+            "symbol": "303810.KQ",
+            "name": "동국생명과학",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_303810.json"
+        },
+        "316140.KS": {
+            "symbol": "316140.KS",
+            "name": "우리금융지주",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_316140.json"
+        },
+        "319660.KQ": {
+            "symbol": "319660.KQ",
+            "name": "피에스케이",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_319660.json"
+        },
+        "321370.KQ": {
+            "symbol": "321370.KQ",
+            "name": "센서뷰",
+            "periods": [
+                "prior"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_321370.json"
+        },
+        "322000.KS": {
+            "symbol": "322000.KS",
+            "name": "HD현대에너지솔루션",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_322000.json"
+        },
+        "323280.KQ": {
+            "symbol": "323280.KQ",
+            "name": "태성",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_323280.json"
+        },
+        "327260.KQ": {
+            "symbol": "327260.KQ",
+            "name": "RF머트리얼즈",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_327260.json"
+        },
+        "328130.KQ": {
+            "symbol": "328130.KQ",
+            "name": "루닛",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_328130.json"
+        },
+        "329180.KS": {
+            "symbol": "329180.KS",
+            "name": "HD현대중공업",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_329180.json"
+        },
+        "336260.KS": {
+            "symbol": "336260.KS",
+            "name": "두산퓨얼셀",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_336260.json"
+        },
+        "352820.KS": {
+            "symbol": "352820.KS",
+            "name": "하이브",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_352820.json"
+        },
+        "353200.KS": {
+            "symbol": "353200.KS",
+            "name": "대덕전자",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_353200.json"
+        },
+        "356680.KQ": {
+            "symbol": "356680.KQ",
+            "name": "엑스게이트",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_356680.json"
+        },
+        "356860.KQ": {
+            "symbol": "356860.KQ",
+            "name": "티엘비",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_356860.json"
+        },
+        "373220.KS": {
+            "symbol": "373220.KS",
+            "name": "LG에너지솔루션",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_373220.json"
+        },
+        "393210.KQ": {
+            "symbol": "393210.KQ",
+            "name": "토마토시스템",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_393210.json"
+        },
+        "396300.KQ": {
+            "symbol": "396300.KQ",
+            "name": "HT로보틱스",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_396300.json"
+        },
+        "402340.KS": {
+            "symbol": "402340.KS",
+            "name": "SK스퀘어",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_402340.json"
+        },
+        "403870.KQ": {
+            "symbol": "403870.KQ",
+            "name": "HPSP",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_403870.json"
+        },
+        "417200.KQ": {
+            "symbol": "417200.KQ",
+            "name": "LS머트리얼즈",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_417200.json"
+        },
+        "419050.KQ": {
+            "symbol": "419050.KQ",
+            "name": "삼기에너지솔루션즈",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_419050.json"
+        },
+        "425040.KQ": {
+            "symbol": "425040.KQ",
+            "name": "티이엠씨",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_425040.json"
+        },
+        "440110.KQ": {
+            "symbol": "440110.KQ",
+            "name": "파두",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_440110.json"
+        },
+        "452190.KQ": {
+            "symbol": "452190.KQ",
+            "name": "한빛레이저",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_452190.json"
+        },
+        "456010.KQ": {
+            "symbol": "456010.KQ",
+            "name": "아이씨티케이",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_456010.json"
+        },
+        "457190.KS": {
+            "symbol": "457190.KS",
+            "name": "이수스페셜티케미컬",
+            "periods": [
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_457190.json"
+        },
+        "457370.KQ": {
+            "symbol": "457370.KQ",
+            "name": "한켐",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_457370.json"
+        },
+        "475150.KS": {
+            "symbol": "475150.KS",
+            "name": "SK이터닉스",
+            "periods": [
+                "prior",
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_475150.json"
+        },
+        "478340.KQ": {
+            "symbol": "478340.KQ",
+            "name": "나라스페이스테크놀로지",
+            "periods": [
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_478340.json"
+        },
+        "486990.KQ": {
+            "symbol": "486990.KQ",
+            "name": "노타",
+            "periods": [
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_486990.json"
+        },
+        "490470.KQ": {
+            "symbol": "490470.KQ",
+            "name": "세미파이브",
+            "periods": [
+                "recent"
+            ],
+            "saved_scan_seen": true,
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "cache_placeholder",
+            "source": "data/cache/sector/sector_490470.json"
+        }
+    },
+    "unconfirmed": [
+        {
+            "symbol": "000150.KS",
+            "reason": "cache_placeholder",
+            "name": "두산"
+        },
+        {
+            "symbol": "000270.KS",
+            "reason": "cache_placeholder",
+            "name": "기아"
+        },
+        {
+            "symbol": "000500.KS",
+            "reason": "cache_placeholder",
+            "name": "가온전선"
+        },
+        {
+            "symbol": "000660.KS",
+            "reason": "cache_placeholder",
+            "name": "SK하이닉스"
+        },
+        {
+            "symbol": "000720.KS",
+            "reason": "cache_placeholder",
+            "name": "현대건설"
+        },
+        {
+            "symbol": "000810.KS",
+            "reason": "cache_placeholder",
+            "name": "삼성화재"
+        },
+        {
+            "symbol": "000990.KS",
+            "reason": "cache_placeholder",
+            "name": "DB하이텍"
+        },
+        {
+            "symbol": "001440.KS",
+            "reason": "cache_placeholder",
+            "name": "대한전선"
+        },
+        {
+            "symbol": "001820.KS",
+            "reason": "cache_placeholder",
+            "name": "삼화콘덴서"
+        },
+        {
+            "symbol": "002710.KS",
+            "reason": "cache_placeholder",
+            "name": "TCC스틸"
+        },
+        {
+            "symbol": "003230.KS",
+            "reason": "cache_placeholder",
+            "name": "삼양식품"
+        },
+        {
+            "symbol": "003490.KS",
+            "reason": "cache_placeholder",
+            "name": "대한항공"
+        },
+        {
+            "symbol": "003670.KS",
+            "reason": "cache_placeholder",
+            "name": "포스코퓨처엠"
+        },
+        {
+            "symbol": "005290.KQ",
+            "reason": "cache_placeholder",
+            "name": "동진쎄미켐"
+        },
+        {
+            "symbol": "005380.KS",
+            "reason": "cache_placeholder",
+            "name": "현대차"
+        },
+        {
+            "symbol": "005490.KS",
+            "reason": "cache_placeholder",
+            "name": "POSCO홀딩스"
+        },
+        {
+            "symbol": "005830.KS",
+            "reason": "cache_placeholder",
+            "name": "DB손해보험"
+        },
+        {
+            "symbol": "005930.KS",
+            "reason": "cache_placeholder",
+            "name": "삼성전자"
+        },
+        {
+            "symbol": "005935.KS",
+            "reason": "cache_placeholder",
+            "name": "삼성전자우"
+        },
+        {
+            "symbol": "006340.KS",
+            "reason": "cache_placeholder",
+            "name": "대원전선"
+        },
+        {
+            "symbol": "006360.KS",
+            "reason": "cache_placeholder",
+            "name": "GS건설"
+        },
+        {
+            "symbol": "006400.KS",
+            "reason": "cache_placeholder",
+            "name": "삼성SDI"
+        },
+        {
+            "symbol": "007660.KS",
+            "reason": "cache_placeholder",
+            "name": "이수페타시스"
+        },
+        {
+            "symbol": "007810.KS",
+            "reason": "cache_placeholder",
+            "name": "코리아써키트"
+        },
+        {
+            "symbol": "009150.KS",
+            "reason": "cache_placeholder",
+            "name": "삼성전기"
+        },
+        {
+            "symbol": "009540.KS",
+            "reason": "cache_placeholder",
+            "name": "HD한국조선해양"
+        },
+        {
+            "symbol": "009830.KS",
+            "reason": "cache_placeholder",
+            "name": "한화솔루션"
+        },
+        {
+            "symbol": "010060.KS",
+            "reason": "cache_placeholder",
+            "name": "OCI홀딩스"
+        },
+        {
+            "symbol": "010120.KS",
+            "reason": "cache_placeholder",
+            "name": "LS ELECTRIC"
+        },
+        {
+            "symbol": "010140.KS",
+            "reason": "cache_placeholder",
+            "name": "삼성중공업"
+        },
+        {
+            "symbol": "010170.KQ",
+            "reason": "cache_placeholder",
+            "name": "대한광통신"
+        },
+        {
+            "symbol": "010950.KS",
+            "reason": "cache_placeholder",
+            "name": "S-Oil"
+        },
+        {
+            "symbol": "011070.KS",
+            "reason": "cache_placeholder",
+            "name": "LG이노텍"
+        },
+        {
+            "symbol": "012330.KS",
+            "reason": "cache_placeholder",
+            "name": "현대모비스"
+        },
+        {
+            "symbol": "012450.KS",
+            "reason": "cache_placeholder",
+            "name": "한화에어로스페이스"
+        },
+        {
+            "symbol": "014280.KS",
+            "reason": "cache_placeholder",
+            "name": "금강공업"
+        },
+        {
+            "symbol": "014950.KQ",
+            "reason": "cache_placeholder",
+            "name": "삼익제약"
+        },
+        {
+            "symbol": "015760.KS",
+            "reason": "cache_placeholder",
+            "name": "한국전력"
+        },
+        {
+            "symbol": "017670.KS",
+            "reason": "cache_placeholder",
+            "name": "SK텔레콤"
+        },
+        {
+            "symbol": "018880.KS",
+            "reason": "cache_placeholder",
+            "name": "한온시스템"
+        },
+        {
+            "symbol": "028050.KS",
+            "reason": "cache_placeholder",
+            "name": "삼성E&A"
+        },
+        {
+            "symbol": "028260.KS",
+            "reason": "cache_placeholder",
+            "name": "삼성물산"
+        },
+        {
+            "symbol": "028300.KQ",
+            "reason": "cache_placeholder",
+            "name": "HLB"
+        },
+        {
+            "symbol": "030530.KQ",
+            "reason": "cache_placeholder",
+            "name": "원익홀딩스"
+        },
+        {
+            "symbol": "032820.KQ",
+            "reason": "cache_placeholder",
+            "name": "우리기술"
+        },
+        {
+            "symbol": "032830.KS",
+            "reason": "cache_placeholder",
+            "name": "삼성생명"
+        },
+        {
+            "symbol": "033780.KS",
+            "reason": "cache_placeholder",
+            "name": "KT&G"
+        },
+        {
+            "symbol": "034020.KS",
+            "reason": "cache_placeholder",
+            "name": "두산에너빌리티"
+        },
+        {
+            "symbol": "034730.KS",
+            "reason": "cache_placeholder",
+            "name": "SK"
+        },
+        {
+            "symbol": "035420.KS",
+            "reason": "cache_placeholder",
+            "name": "NAVER"
+        },
+        {
+            "symbol": "035720.KS",
+            "reason": "cache_placeholder",
+            "name": "카카오"
+        },
+        {
+            "symbol": "036540.KQ",
+            "reason": "cache_placeholder",
+            "name": "SFA반도체"
+        },
+        {
+            "symbol": "039030.KQ",
+            "reason": "cache_placeholder",
+            "name": "이오테크닉스"
+        },
+        {
+            "symbol": "041190.KQ",
+            "reason": "cache_placeholder",
+            "name": "우리기술투자"
+        },
+        {
+            "symbol": "042660.KS",
+            "reason": "cache_placeholder",
+            "name": "한화오션"
+        },
+        {
+            "symbol": "042700.KS",
+            "reason": "cache_placeholder",
+            "name": "한미반도체"
+        },
+        {
+            "symbol": "043260.KQ",
+            "reason": "cache_placeholder",
+            "name": "성호전자"
+        },
+        {
+            "symbol": "046970.KQ",
+            "reason": "cache_placeholder",
+            "name": "우리로"
+        },
+        {
+            "symbol": "047040.KS",
+            "reason": "cache_placeholder",
+            "name": "대우건설"
+        },
+        {
+            "symbol": "047920.KQ",
+            "reason": "cache_placeholder",
+            "name": "HLB제약"
+        },
+        {
+            "symbol": "051910.KS",
+            "reason": "cache_placeholder",
+            "name": "LG화학"
+        },
+        {
+            "symbol": "052260.KQ",
+            "reason": "cache_placeholder",
+            "name": "현대바이오랜드"
+        },
+        {
+            "symbol": "052690.KS",
+            "reason": "cache_placeholder",
+            "name": "한전기술"
+        },
+        {
+            "symbol": "053260.KQ",
+            "reason": "cache_placeholder",
+            "name": "금강철강"
+        },
+        {
+            "symbol": "055550.KS",
+            "reason": "cache_placeholder",
+            "name": "신한지주"
+        },
+        {
+            "symbol": "058470.KQ",
+            "reason": "cache_placeholder",
+            "name": "리노공업"
+        },
+        {
+            "symbol": "062040.KS",
+            "reason": "cache_placeholder",
+            "name": "산일전기"
+        },
+        {
+            "symbol": "064350.KS",
+            "reason": "cache_placeholder",
+            "name": "현대로템"
+        },
+        {
+            "symbol": "066570.KS",
+            "reason": "cache_placeholder",
+            "name": "LG전자"
+        },
+        {
+            "symbol": "066970.KS",
+            "reason": "cache_placeholder",
+            "name": "엘앤에프"
+        },
+        {
+            "symbol": "067310.KQ",
+            "reason": "cache_placeholder",
+            "name": "하나마이크론"
+        },
+        {
+            "symbol": "068270.KS",
+            "reason": "cache_placeholder",
+            "name": "셀트리온"
+        },
+        {
+            "symbol": "069540.KQ",
+            "reason": "cache_placeholder",
+            "name": "빛과전자"
+        },
+        {
+            "symbol": "071050.KS",
+            "reason": "cache_placeholder",
+            "name": "한국금융지주"
+        },
+        {
+            "symbol": "071090.KS",
+            "reason": "cache_placeholder",
+            "name": "하이스틸"
+        },
+        {
+            "symbol": "072950.KQ",
+            "reason": "cache_placeholder",
+            "name": "빛샘전자"
+        },
+        {
+            "symbol": "078930.KS",
+            "reason": "cache_placeholder",
+            "name": "GS"
+        },
+        {
+            "symbol": "079550.KS",
+            "reason": "cache_placeholder",
+            "name": "LIG디펜스앤에어로스페이스"
+        },
+        {
+            "symbol": "080220.KQ",
+            "reason": "cache_placeholder",
+            "name": "제주반도체"
+        },
+        {
+            "symbol": "082740.KS",
+            "reason": "cache_placeholder",
+            "name": "한화엔진"
+        },
+        {
+            "symbol": "086520.KQ",
+            "reason": "cache_placeholder",
+            "name": "에코프로"
+        },
+        {
+            "symbol": "086790.KS",
+            "reason": "cache_placeholder",
+            "name": "하나금융지주"
+        },
+        {
+            "symbol": "089030.KQ",
+            "reason": "cache_placeholder",
+            "name": "테크윙"
+        },
+        {
+            "symbol": "089970.KQ",
+            "reason": "cache_placeholder",
+            "name": "브이엠"
+        },
+        {
+            "symbol": "092870.KQ",
+            "reason": "cache_placeholder",
+            "name": "엑시콘"
+        },
+        {
+            "symbol": "093370.KS",
+            "reason": "cache_placeholder",
+            "name": "후성"
+        },
+        {
+            "symbol": "095610.KQ",
+            "reason": "cache_placeholder",
+            "name": "테스"
+        },
+        {
+            "symbol": "096770.KS",
+            "reason": "cache_placeholder",
+            "name": "SK이노베이션"
+        },
+        {
+            "symbol": "098460.KQ",
+            "reason": "cache_placeholder",
+            "name": "고영"
+        },
+        {
+            "symbol": "103590.KS",
+            "reason": "cache_placeholder",
+            "name": "일진전기"
+        },
+        {
+            "symbol": "105560.KS",
+            "reason": "cache_placeholder",
+            "name": "KB금융"
+        },
+        {
+            "symbol": "108490.KQ",
+            "reason": "cache_placeholder",
+            "name": "로보티즈"
+        },
+        {
+            "symbol": "115440.KQ",
+            "reason": "cache_placeholder",
+            "name": "우리넷"
+        },
+        {
+            "symbol": "128940.KS",
+            "reason": "cache_placeholder",
+            "name": "한미약품"
+        },
+        {
+            "symbol": "161580.KQ",
+            "reason": "cache_placeholder",
+            "name": "필옵틱스"
+        },
+        {
+            "symbol": "161890.KS",
+            "reason": "cache_placeholder",
+            "name": "한국콜마"
+        },
+        {
+            "symbol": "178320.KQ",
+            "reason": "cache_placeholder",
+            "name": "서진시스템"
+        },
+        {
+            "symbol": "196170.KQ",
+            "reason": "cache_placeholder",
+            "name": "알테오젠"
+        },
+        {
+            "symbol": "201490.KQ",
+            "reason": "cache_placeholder",
+            "name": "미투온"
+        },
+        {
+            "symbol": "203650.KQ",
+            "reason": "cache_placeholder",
+            "name": "드림시큐리티"
+        },
+        {
+            "symbol": "207940.KS",
+            "reason": "cache_placeholder",
+            "name": "삼성바이오로직스"
+        },
+        {
+            "symbol": "222800.KQ",
+            "reason": "cache_placeholder",
+            "name": "심텍"
+        },
+        {
+            "symbol": "232140.KQ",
+            "reason": "cache_placeholder",
+            "name": "와이씨"
+        },
+        {
+            "symbol": "240810.KQ",
+            "reason": "cache_placeholder",
+            "name": "원익IPS"
+        },
+        {
+            "symbol": "247540.KQ",
+            "reason": "cache_placeholder",
+            "name": "에코프로비엠"
+        },
+        {
+            "symbol": "256840.KQ",
+            "reason": "cache_placeholder",
+            "name": "한국비엔씨"
+        },
+        {
+            "symbol": "267260.KS",
+            "reason": "cache_placeholder",
+            "name": "HD현대일렉트릭"
+        },
+        {
+            "symbol": "267270.KS",
+            "reason": "cache_placeholder",
+            "name": "HD건설기계"
+        },
+        {
+            "symbol": "267320.KQ",
+            "reason": "cache_placeholder",
+            "name": "나인테크"
+        },
+        {
+            "symbol": "272210.KS",
+            "reason": "cache_placeholder",
+            "name": "한화시스템"
+        },
+        {
+            "symbol": "274090.KQ",
+            "reason": "cache_placeholder",
+            "name": "켄코아에어로스페이스"
+        },
+        {
+            "symbol": "278470.KS",
+            "reason": "cache_placeholder",
+            "name": "에이피알"
+        },
+        {
+            "symbol": "298040.KS",
+            "reason": "cache_placeholder",
+            "name": "효성중공업"
+        },
+        {
+            "symbol": "303810.KQ",
+            "reason": "cache_placeholder",
+            "name": "동국생명과학"
+        },
+        {
+            "symbol": "316140.KS",
+            "reason": "cache_placeholder",
+            "name": "우리금융지주"
+        },
+        {
+            "symbol": "319660.KQ",
+            "reason": "cache_placeholder",
+            "name": "피에스케이"
+        },
+        {
+            "symbol": "321370.KQ",
+            "reason": "cache_placeholder",
+            "name": "센서뷰"
+        },
+        {
+            "symbol": "322000.KS",
+            "reason": "cache_placeholder",
+            "name": "HD현대에너지솔루션"
+        },
+        {
+            "symbol": "323280.KQ",
+            "reason": "cache_placeholder",
+            "name": "태성"
+        },
+        {
+            "symbol": "327260.KQ",
+            "reason": "cache_placeholder",
+            "name": "RF머트리얼즈"
+        },
+        {
+            "symbol": "328130.KQ",
+            "reason": "cache_placeholder",
+            "name": "루닛"
+        },
+        {
+            "symbol": "329180.KS",
+            "reason": "cache_placeholder",
+            "name": "HD현대중공업"
+        },
+        {
+            "symbol": "336260.KS",
+            "reason": "cache_placeholder",
+            "name": "두산퓨얼셀"
+        },
+        {
+            "symbol": "352820.KS",
+            "reason": "cache_placeholder",
+            "name": "하이브"
+        },
+        {
+            "symbol": "353200.KS",
+            "reason": "cache_placeholder",
+            "name": "대덕전자"
+        },
+        {
+            "symbol": "356680.KQ",
+            "reason": "cache_placeholder",
+            "name": "엑스게이트"
+        },
+        {
+            "symbol": "356860.KQ",
+            "reason": "cache_placeholder",
+            "name": "티엘비"
+        },
+        {
+            "symbol": "373220.KS",
+            "reason": "cache_placeholder",
+            "name": "LG에너지솔루션"
+        },
+        {
+            "symbol": "393210.KQ",
+            "reason": "cache_placeholder",
+            "name": "토마토시스템"
+        },
+        {
+            "symbol": "396300.KQ",
+            "reason": "cache_placeholder",
+            "name": "HT로보틱스"
+        },
+        {
+            "symbol": "402340.KS",
+            "reason": "cache_placeholder",
+            "name": "SK스퀘어"
+        },
+        {
+            "symbol": "403870.KQ",
+            "reason": "cache_placeholder",
+            "name": "HPSP"
+        },
+        {
+            "symbol": "417200.KQ",
+            "reason": "cache_placeholder",
+            "name": "LS머트리얼즈"
+        },
+        {
+            "symbol": "419050.KQ",
+            "reason": "cache_placeholder",
+            "name": "삼기에너지솔루션즈"
+        },
+        {
+            "symbol": "425040.KQ",
+            "reason": "cache_placeholder",
+            "name": "티이엠씨"
+        },
+        {
+            "symbol": "440110.KQ",
+            "reason": "cache_placeholder",
+            "name": "파두"
+        },
+        {
+            "symbol": "452190.KQ",
+            "reason": "cache_placeholder",
+            "name": "한빛레이저"
+        },
+        {
+            "symbol": "456010.KQ",
+            "reason": "cache_placeholder",
+            "name": "아이씨티케이"
+        },
+        {
+            "symbol": "457190.KS",
+            "reason": "cache_placeholder",
+            "name": "이수스페셜티케미컬"
+        },
+        {
+            "symbol": "457370.KQ",
+            "reason": "cache_placeholder",
+            "name": "한켐"
+        },
+        {
+            "symbol": "475150.KS",
+            "reason": "cache_placeholder",
+            "name": "SK이터닉스"
+        },
+        {
+            "symbol": "478340.KQ",
+            "reason": "cache_placeholder",
+            "name": "나라스페이스테크놀로지"
+        },
+        {
+            "symbol": "486990.KQ",
+            "reason": "cache_placeholder",
+            "name": "노타"
+        },
+        {
+            "symbol": "490470.KQ",
+            "reason": "cache_placeholder",
+            "name": "세미파이브"
+        }
+    ]
+}

@@ -1,3 +1,34 @@
+## 2026-10-11 · Codex · 끝
+- PR #66: 고정 섹터 맵 v2로 최근 244세션 전체 연구 계좌 실행·내보내기 완료. 종료 56건, 보유 3건, 총자산 +18.1689%, 종가 최대 낙폭 5.3961%. 장부 10항목·67주문 재시뮬레이션·PR #65 최근 신호 82건 대조 통과. 재실행 0세션·저널 동일. 관련 테스트 3개 통과.
+- 이전 기간은 원본 kr-saved-scan-20251008 미제공으로 실행하지 않음. 필요한 ZIP과 한계를 full-v2/report.md에 기록. 전략·설정·운영 상태·원본·기존 연구 결과 불변. 병합 없음.
+
+## 2026-10-11 · Codex · 진행
+- PR #66 맵 v2 고정 전체 재현 실행 및 원본 가용성 확인 (직접 병합 없음)
+
+## 2026-10-11 02:10 · Cursor · 끝
+- 한 일: PR #66 섹터 업종명이 전부 기타인 원인 확인(대표 5종목 임시 폴더 실행: 구 사이트가 새 사이트로 302, 업종 링크 없음). 같은 사이트 JSON에서 현재 업종 144종목 확보(미확인 0)해 연구용 섹터 맵 v2 생성. 새 계좌 va·vb·vc 소규모 재검증과 재개·재실행 확인. 운영 캐시·계좌·전략·기존 결과 그대로. 전체 실행·병합 안 함
+- 파일: bin/paper_sector_collect.php, bin/paper_sector_diagnose.php, bin/paper/SectorFreeze.php, bin/paper_account_replay.php, tests/sector_freeze.php, docs/historical-account-replay/(sector-map-v2.json, sector-collection-v2.json, sector-collection-diagnosis.json, smoke-sector-v2/, followup.md, protocol.md), docs/research/account-replay-followup.py, docs/work-log.md
+- 커밋: 브랜치 cursor/historical-paper-replay, PR #66에 반영(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-11 01:36 · Cursor · 끝
+- 한 일: PR #66 섹터 경로 대조. 운영 스캐너 경로 data/raw/cache/sector와 data/cache/sector를 읽기만 확인. 대상 144종목 유효 업종명은 두 경로 모두 0건(자리표시자 144). 보완·충돌 없음. 맵과 소규모 계좌는 새로 만들지 않음
+- 파일: bin/paper/SectorFreeze.php, bin/paper_account_replay.php, tests/sector_freeze.php, docs/historical-account-replay/(sector-path-check.json, followup.md, protocol.md), docs/research/account-replay-followup.py, docs/work-log.md
+- 커밋: 브랜치 cursor/historical-paper-replay, PR #66에 반영(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-11 01:25 · Cursor · 끝
+- 한 일: PR #66 보완. 운영 섹터 캐시·저장 스캔을 읽기만 해 연구용 섹터 맵을 고정(확보 0, 미확인 144, 한 버킷), 완료봉에서 plan.ready·스캐너 후보·PaperScanUniverse 대응을 운영 함수로 검증, 고정 맵으로 소규모 3구간을 별도 계좌에서 재실행(장부·섹터 한도·재실행·이어 하기). 전부 미분류 결과는 유지. 전체 실행·병합 없음
+- 파일: bin/paper/SectorFreeze.php, bin/paper/AccountReplay.php, bin/paper_account_replay.php, src/KrAmountScanner.php, tests/sector_freeze.php, tests/selection_correspondence.php, tests/account_replay.php, docs/historical-account-replay/(sector-map.json, followup.md, protocol.md, selection-check.json, smoke-sector/), docs/research/account-replay-followup.py, .github/workflows/pattern-replay.yml, docs/work-log.md
+- 커밋: 브랜치 cursor/historical-paper-replay, PR #66에 반영(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-11 00:40 · Cursor · 끝
+- 한 일: 고정 종목군 과거 모의계좌 재현 준비. 운영 계좌 코드(PaperPortfolio·TradeSimulator·ChartPlanEngine·PaperQuality)를 수정 없이 replay 모드로 호출하는 연구용 CLI, 연구 계좌 설정(운영 설정에서 계좌 ID만 다름), 실행 순서·규칙 대응표, 실데이터 3구간 소규모 검증(장부 대조·독립 재시뮬레이션·이어 하기 동일·PR #65 신호 대조·파일 불변), 단위시험 추가. 전체 두 기간 실행·수익성 결론·전략 조정·운영 반영 없음
+- 파일: bin/paper/AccountReplay.php, bin/paper_account_replay.php, config/paper-history-kr-recovery-v1.json, tests/account_replay.php, docs/historical-account-replay/(protocol.md, report.md, quality-scan-prior.json, quality-scan-recent.json, smoke/{a,b,c}/), docs/research/account-replay-report.py, .github/workflows/pattern-replay.yml, docs/work-log.md
+- 커밋: 브랜치 cursor/historical-paper-replay, PR 제출(병합 안 함)
+- 롤백: 없음
+
 ## 2026-10-10 · Codex · 완료
 - PR #65 보고서·생성기에서 중앙값 차이(이전 +0.17%p, 최근 +0.71%p)와 거래별 변화량 중앙값(각 0.00%p)을 분리. 반올림 전 계산 명시
 - 사례별 재계산과 보고서 재생성 일치 확인. 거래 결과·고정 연구 코드·운영 변경 없음. 사용자 요청으로 수정 PR 병합 진행

@@ -28,3 +28,8 @@ jobs:
           php -l bin/paper/RedeclineStudy.php
           php -l bin/paper_recent_redecline_stop.php
           php tests/redecline_stop.php
+          php -l bin/paper/AccountReplay.php
+          php -l bin/paper_account_replay.php
+          php tests/account_replay.php
+          php tests/sector_freeze.php
+          php tests/selection_correspondence.php

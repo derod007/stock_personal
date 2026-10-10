@@ -1,0 +1,20 @@
+{
+    "window": [
+        "2025-10-10",
+        "2026-10-08"
+    ],
+    "population_pullbacks_in_window": 82,
+    "same_signal_and_levels": 82,
+    "levels_or_pattern_differ": [],
+    "missing_from_account_signals": [],
+    "outcome_of_matched_signals": {
+        "already_active": 5,
+        "cash_or_risk_or_sector_limit": 1,
+        "order": 49,
+        "position_limit": 27
+    },
+    "account_signals_not_in_population": {
+        "trend_pullback_repeat_or_unlisted": 1,
+        "other_patterns": 31
+    }
+}

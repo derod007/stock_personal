@@ -193,7 +193,8 @@ final class KrAmountScanner
             $features = is_array($result['features'] ?? null) ? $result['features'] : [];
             $explain = is_array($proposal['explain'] ?? null) ? $proposal['explain'] : [];
             $newEntry = is_array($proposal['new_entry'] ?? null) ? $proposal['new_entry'] : [];
-            $action = (string) ($proposal['action'] ?? '');
+            $candidate = self::candidateFromProposal($proposal);
+            $action = $candidate['action'];
             // 목록 정렬·표시는 차트 구조 점수(작성자 관점으로 덮이기 전)를 우선
             $score = null;
             if (isset($proposal['chart_score']) && is_numeric($proposal['chart_score'])) {
@@ -203,8 +204,7 @@ final class KrAmountScanner
             } elseif (isset($proposal['score']) && is_numeric($proposal['score'])) {
                 $score = (int) $proposal['score'];
             }
-            $entryRecommend = in_array($action, self::ENTRY_ACTIONS, true)
-                && !empty($newEntry['order_ready']);
+            $entryRecommend = $candidate['entry_recommend'];
 
             $lesson1Hit = !empty($proposal['lesson1_candle_recipe'])
                 || !empty($proposal['lesson1_upper_box'])
@@ -222,7 +222,7 @@ final class KrAmountScanner
             $row['action'] = $action;
             $row['action_label'] = (string) ($explain['action_label'] ?? $action);
             $row['entry_recommend'] = $entryRecommend;
-            $row['buy_now'] = !empty($newEntry['buy_now']);
+            $row['buy_now'] = $candidate['buy_now'];
             $row['candidate_available'] = !empty($newEntry['candidate_available']);
             $row['reward_risk_range'] = $proposal['price_candidate']['reward_risk'] ?? null;
             $row['trend_context'] = $proposal['trend_context'] ?? null;
@@ -449,6 +449,26 @@ final class KrAmountScanner
     /**
      * @param array<string,mixed> $row
      */
+    /**
+     * Candidate flags the scanner stores on a row. scan() calls this, and the replay check calls it too.
+     *
+     * @param array<string,mixed> $proposal
+     * @return array{action:string,order_ready:bool,buy_now:bool,entry_recommend:bool}
+     */
+    public static function candidateFromProposal(array $proposal): array
+    {
+        $newEntry = is_array($proposal['new_entry'] ?? null) ? $proposal['new_entry'] : [];
+        $action = (string) ($proposal['action'] ?? '');
+        $orderReady = !empty($newEntry['order_ready']);
+
+        return [
+            'action' => $action,
+            'order_ready' => $orderReady,
+            'buy_now' => !empty($newEntry['buy_now']),
+            'entry_recommend' => in_array($action, self::ENTRY_ACTIONS, true) && $orderReady,
+        ];
+    }
+
     private function entryRank(array $row): int
     {
         if (!empty($row['buy_now'])) {

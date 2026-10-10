@@ -1,0 +1,7 @@
+{
+  "status": "blocked_missing_original_dataset",
+  "dataset": "kr-saved-scan-20251008",
+  "required_archive": "history-kr-saved-scan-20251008.zip",
+  "full_run_performed": false,
+  "substitute_data_used": false
+}

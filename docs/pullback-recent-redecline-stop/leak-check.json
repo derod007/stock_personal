@@ -1,0 +1,8 @@
+{
+    "kind": "recent_redecline_stop_leak_check_v1",
+    "cases": 157,
+    "future_rows_replaced": 37452,
+    "records_changed": [],
+    "passed": true,
+    "contains_outcomes": false
+}

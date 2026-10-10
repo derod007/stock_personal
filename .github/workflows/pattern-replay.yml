@@ -14,3 +14,6 @@ jobs:
           php -l docs/research/prior-period-compare.php
           php tests/pattern_replay.php
           php tests/pullback_compare.php
+          php -l bin/paper/BreakevenResearch.php
+          php -l bin/paper_breakeven_research.php
+          php tests/breakeven_research.php

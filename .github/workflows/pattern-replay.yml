@@ -24,3 +24,7 @@ jobs:
           php -l bin/paper/BreakevenResearch.php
           php -l bin/paper_breakeven_research.php
           php tests/breakeven_research.php
+          php -l bin/paper/RedeclineStop.php
+          php -l bin/paper/RedeclineStudy.php
+          php -l bin/paper_recent_redecline_stop.php
+          php tests/redecline_stop.php

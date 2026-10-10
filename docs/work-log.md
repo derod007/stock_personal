@@ -1,5 +1,8 @@
-## 2026-10-10 23:50 · Cursor · 진행
-- 작업: 상승 눌림 최종 선택 157건(이전 75·최근 82)에서 최근 10봉 저점 손절과 최근 재하락 고점(PR #64 H_recent) 이후 저점 손절 비교. 진입·목표·보유·비용은 그대로, 체결 뒤 손절만 변경. 운영 반영 없음, 병합 안 함
+﻿## 2026-10-11 00:20 · Cursor · 끝
+- 한 일: 상승 눌림 최종 선택 157건(이전 75·최근 82)에서 최근 10봉 저점 손절과 PR #64 H_recent 이후 저점 손절 비교. 프로토콜·코드·사례별 대안 손절을 해시 고정한 뒤 실행, 기준 157건 재현 후 대안 적용, 파이썬 독립 재계산·테스트 통과. 진입·목표·보유·비용 그대로, 체결 뒤 손절만 변경, 운영 반영 없음
+- 파일: docs/pullback-recent-redecline-stop/(protocol.md, population.json, alt-stops.json, baseline-stored.json, pr64-consistency.json, leak-check.json, freeze.json, comparison.json, report.md, verify.md, verify-result.json), bin/paper/RedeclineStop.php, bin/paper/RedeclineStudy.php, bin/paper_recent_redecline_stop.php, tests/redecline_stop.php, docs/research/redecline-stop-verify.py, docs/research/redecline-stop-report.py, .github/workflows/pattern-replay.yml, docs/work-log.md
+- 커밋: 브랜치 cursor/pullback-recent-redecline-stop, PR 제출(병합 안 함)
+- 롤백: 없음
 
 ## 2026-10-10 · Codex · 완료
 - PR #64 수정: 기존 A/A2 고정값을 보존하며 LF·CRLF 해시 검증, 새 A2 출력은 LF 해시 사용. 9건 고점 관계 설명과 보류 3건 표현 정정

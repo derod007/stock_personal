@@ -1,0 +1,30 @@
+{
+  "all_passed": true,
+  "checks": {
+    "frozen_files_and_code_unchanged": {
+      "pass": true,
+      "changed": []
+    },
+    "comparison_names_this_freeze": {
+      "pass": true
+    },
+    "alt_stops_and_applicability_recomputed": {
+      "pass": true,
+      "cases": 157,
+      "mismatches": []
+    },
+    "signal_day_is_last_bar_used": {
+      "pass": true,
+      "bad": []
+    },
+    "baseline_and_alt_trades_recomputed": {
+      "pass": true,
+      "cases": 157,
+      "mismatches": []
+    },
+    "summary_numbers_recomputed_from_case_rows": {
+      "pass": true,
+      "mismatches": []
+    }
+  }
+}

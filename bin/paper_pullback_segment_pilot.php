@@ -57,7 +57,8 @@ if($cmd==='charts'){
 if($cmd==='compare'){
     // B stage. Refuses to run unless the A freeze file still matches the files it lists.
     $dir=rtrim($need('dir'),'/\\');$freeze=PaperPullbackSegmentPilot::loadJson($dir.'/a-freeze.json');
-    foreach($freeze['files_sha256'] as $name=>$sha)if(hash_file('sha256',$dir.'/'.$name)!==$sha)throw new RuntimeException('A freeze broken: '.$name.' changed');
+    $fc=PaperPullbackSegmentPilot::freezeCheck($dir);
+    if(!$fc['ok'])throw new RuntimeException('A freeze broken: '.json_encode($fc,JSON_UNESCAPED_UNICODE));
     $pack=rtrim(str_replace('\\','/',$need('pack')),'/');
     $result=PaperPullbackSegmentPilot::compare($pack,PaperPullbackSegmentPilot::loadJson($dir.'/annotations-a.json'),PaperPullbackSegmentPilot::loadJson($dir.'/sample-manifest.json'),hash_file('sha256',$dir.'/a-freeze.json'));
     PaperPullbackSegmentPilot::write($dir.'/code-comparison.json',$result);
@@ -66,9 +67,36 @@ if($cmd==='compare'){
     echo json_encode($count),"\n";
     exit(0);
 }
+if($cmd==='a2'){
+    // Follow-up review written after B was seen. Reads annotations-a.json, never writes it.
+    $dir=rtrim($need('dir'),'/\\');$pack=rtrim(str_replace('\\','/',$need('pack')),'/');
+    $fc=PaperPullbackSegmentPilot::freezeCheck($dir);
+    if(!$fc['ok'])throw new RuntimeException('A freeze broken: '.json_encode($fc,JSON_UNESCAPED_UNICODE));
+    $a2=PaperPullbackSegmentPilot::a2($pack,$dir.'/annotations-a2.src.json',PaperPullbackSegmentPilot::loadJson($dir.'/annotations-a.json'),hash_file('sha256',$dir.'/annotations-a2.src.json'));
+    PaperPullbackSegmentPilot::write($dir.'/annotations-a2.json',$a2);
+    echo json_encode($a2['status_counts'],JSON_UNESCAPED_UNICODE),"\n";
+    exit(0);
+}
+if($cmd==='recheck'){
+    $dir=rtrim($need('dir'),'/\\');$pack=rtrim(str_replace('\\','/',$need('pack')),'/');$L=fn(string $f)=>PaperPullbackSegmentPilot::loadJson($dir.'/'.$f);
+    $a2=$L('annotations-a2.json');$cmp=$L('code-comparison.json');
+    $res=PaperPullbackSegmentPilot::a2Recheck($a2,$L('annotations-a.json'),$cmp,['annotations_a2_src_sha256'=>hash_file('sha256',$dir.'/annotations-a2.src.json'),
+        'annotations_a2_json_sha256_lf'=>hash('sha256',str_replace("\r\n","\n",(string)file_get_contents($dir.'/annotations-a2.json'))),
+        'code_comparison_json_sha256_lf'=>hash('sha256',str_replace("\r\n","\n",(string)file_get_contents($dir.'/code-comparison.json')))]);
+    PaperPullbackSegmentPilot::write($dir.'/highs-review.json',$res);
+    $cd=$dir.'/charts-a2';if(!is_dir($cd))mkdir($cd,0775,true);
+    $re=[];foreach($res['cases'] as $r)$re[$r['case_id']]=$r;
+    foreach($a2['cases'] as $o){
+        $bars=PaperPullbackSegmentPilot::bars($pack,$o['case_id']);
+        $svg=PaperReviewCharts::svg(PaperPullbackSegmentPilot::viewOf($bars,120),[],$o['name'].' '.$o['symbol'].' · 판정일 '.$o['session_date'].' · 120거래일 · 추가 검토(B 확인 뒤)',true,$o['symbol'],PaperPullbackSegmentPilot::overlayA2($o,$re[$o['case_id']],$bars));
+        file_put_contents($cd.'/'.$o['case_id'].'-120.svg',$svg);
+    }
+    echo json_encode($res['summary'],JSON_UNESCAPED_UNICODE),"\n";
+    exit(0);
+}
 if($cmd==='html'){
     $dir=rtrim($need('dir'),'/\\');$L=fn(string $f)=>PaperPullbackSegmentPilot::loadJson($dir.'/'.$f);
-    file_put_contents($dir.'/index.html',PaperPullbackSegmentPilot::html($L('annotations-a.json'),$L('code-comparison.json'),$L('sample-manifest.json'),$L('a-freeze.json')));
+    file_put_contents($dir.'/index.html',PaperPullbackSegmentPilot::html($L('annotations-a.json'),$L('code-comparison.json'),$L('sample-manifest.json'),$L('a-freeze.json'),$L('annotations-a2.json'),$L('highs-review.json')));
     echo "index.html written\n";
     exit(0);
 }

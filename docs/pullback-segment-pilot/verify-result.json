@@ -32,7 +32,7 @@
         "no_date_after_decision_day_in_inputs_marks_and_charts": {
             "pass": true,
             "detail": {
-                "date_strings_checked_in_svg": 818
+                "date_strings_checked_in_svg": 1262
             }
         },
         "confirmed_pivots_confirmed_by_decision_day": {
@@ -42,14 +42,14 @@
         "marked_coordinates_match_price_file_and_chart_pixels": {
             "pass": true,
             "detail": {
-                "markers_checked": 222,
+                "markers_checked": 305,
                 "failures": []
             }
         },
         "volume_bar_heights_proportional_to_volume": {
             "pass": true,
             "detail": {
-                "bars_checked": 3840,
+                "bars_checked": 6720,
                 "failures": []
             }
         },
@@ -59,14 +59,43 @@
                 "different_charts": 0
             }
         },
-        "a_stage_files_unchanged_since_freeze": {
+        "a_stage_content_unchanged_since_freeze": {
             "pass": true,
-            "detail": []
+            "detail": {
+                "files": {
+                    "annotations-a.src.json": {
+                        "status": "byte_identical",
+                        "frozen_line_ending": "crlf",
+                        "frozen_hash_reproduced_from_lf_content": true
+                    },
+                    "annotations-a.json": {
+                        "status": "byte_identical",
+                        "frozen_line_ending": "lf",
+                        "frozen_hash_reproduced_from_lf_content": true
+                    },
+                    "protocol.md": {
+                        "status": "byte_identical",
+                        "frozen_line_ending": "crlf",
+                        "frozen_hash_reproduced_from_lf_content": true
+                    },
+                    "sample-manifest.json": {
+                        "status": "byte_identical",
+                        "frozen_line_ending": "lf",
+                        "frozen_hash_reproduced_from_lf_content": true
+                    }
+                },
+                "charts": {
+                    "content_changed": [],
+                    "line_ending_only": 0,
+                    "byte_identical": 48
+                },
+                "frozen_hashes_consistent_with_lf_hashes": true
+            }
         },
         "index_relative_links_exist": {
             "pass": true,
             "detail": {
-                "links": 51,
+                "links": 75,
                 "missing": []
             }
         },
@@ -118,6 +147,62 @@
                 "zone_mid": {
                     "matched": 24,
                     "mismatched": 0
+                }
+            }
+        },
+        "a2_covers_the_same_24_and_is_not_called_blind": {
+            "pass": true,
+            "detail": {
+                "H_big": {
+                    "none": 1,
+                    "marked": 19,
+                    "hold": 4
+                },
+                "H_recent": {
+                    "marked": 22,
+                    "hold": 2
+                }
+            }
+        },
+        "a2_src_hash_recorded_matches": {
+            "pass": true,
+            "detail": null
+        },
+        "a2_points_match_price_file_and_stay_within_decision_day": {
+            "pass": true,
+            "detail": {
+                "bad": [],
+                "future": []
+            }
+        },
+        "stop_recheck_covers_exactly_the_13_cases_whose_stop_reference_differed": {
+            "pass": true,
+            "detail": {
+                "cases": 13,
+                "labels": {
+                    "before_recent_high": 9,
+                    "matches_recent_low": 4
+                }
+            }
+        },
+        "breakout_and_target_facts_recomputed_from_price_file": {
+            "pass": true,
+            "detail": {
+                "bad": [],
+                "target_le_entry_mismatches": 0,
+                "summary": {
+                    "high_breakout_of_A_H_on_decision_day": 3,
+                    "close_breakout_of_A_H_on_decision_day": 2,
+                    "high_breakout_of_A_H_any_day_after_H": 3,
+                    "close_breakout_of_A_H_any_day_after_H": 2,
+                    "decision_high_above_target_ref": 3,
+                    "decision_close_above_target_ref": 2,
+                    "high_above_ref_but_close_not": 1,
+                    "target_le_entry_with_stored_plan": 1,
+                    "plans": 18,
+                    "target_le_close_without_plan": 1,
+                    "no_plan": 6,
+                    "target_le_entry_matches_close_at_or_above_ref": 24
                 }
             }
         }

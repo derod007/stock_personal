@@ -284,8 +284,34 @@ final class PaperPullbackSegmentPilot
             foreach(['손절'=>$stopLow,'목표'=>$tgtHigh] as $kind=>$ref)if((float)$bars[$ref['index']]['volume']<=0)$notes[]=$kind.' 기준 봉 '.$ref['date'].'의 거래량이 0이다. 가격 파일 한계로 읽는다.';
             if(!$inWin($L['index'],$stopWin))$notes[]='A의 L '.$L['date'].'은 코드의 손절 기준 창(최근 10봉, '.$bars[$stopWin[0]]['date'].'부터) 밖이다. 창이 눌림 구간보다 짧다.';
             if(!$inWin($hIdx,$tgtWin))$notes[]='A의 H '.$H['date'].'는 목표 기준 창('.$bars[max(0,$tgtWin[0])]['date'].'~'.$bars[$tgtWin[1]]['date'].') 밖이다.';
-            if((float)$bars[$n-1]['high']>(float)$tgtHigh['price'])$notes[]='판정일 고가 '.$fmt($bars[$n-1]['high']).'가 목표 기준 창(마지막 봉 제외)의 최고 '.$fmt($tgtHigh['price']).'보다 높다. 목표가 현재가 아래에 놓일 수 있다.';
-            if($pstat==='rejected_rr'&&$b['target']!==null&&$b['entry']!==null&&(float)$b['target']<=(float)$b['entry'])$notes[]='저장된 목표가 진입가 이하라 손익비가 0 이하이다.';
+            // High breakout, close breakout and target<=entry are three separate facts. The target is the highest high of the 20 bars
+            // before the last bar and the entry is the decision-day close, so target<=entry needs the CLOSE at or above that reference, not the high.
+            $dHigh=(float)$bars[$n-1]['high'];$dClose=(float)$bars[$n-1]['close'];$hh=(float)$H['price'];$ref=(float)$tgtHigh['price'];
+            $firstHigh=null;$firstClose=null;
+            for($j=$hIdx+1;$j<$n;$j++){
+                if(!empty($bars[$j]['ohlc_invalid']))continue;
+                if($firstHigh===null&&(float)$bars[$j]['high']>$hh)$firstHigh=$bars[$j]['date'];
+                if($firstClose===null&&(float)$bars[$j]['close']>$hh)$firstClose=$bars[$j]['date'];
+            }
+            $hasPlan=$b['entry']!==null;
+            $entryVal=$hasPlan?(float)$b['entry']:floor($dClose);
+            $targetVal=$hasPlan?(float)$b['target']:(float)($cand['target']??floor($ref));
+            $closeAtRef=floor($dClose)>=floor($ref);
+            $breakout=[
+                'A_H'=>['date'=>$H['date'],'high'=>$hh,
+                    'high_breakout'=>['any_after_H'=>$firstHigh!==null,'first_date'=>$firstHigh,'on_decision_day'=>$dHigh>$hh],
+                    'close_breakout'=>['any_after_H'=>$firstClose!==null,'first_date'=>$firstClose,'on_decision_day'=>$dClose>$hh]],
+                'target_reference'=>['date'=>$tgtHigh['date'],'high'=>$ref,'window'=>'20 bars before the last bar, decision day excluded',
+                    'decision_high_above_ref'=>$dHigh>$ref,'decision_close_above_ref'=>$dClose>$ref,'decision_close_at_or_above_ref_after_truncation'=>$closeAtRef],
+                'target_vs_entry'=>['basis'=>$hasPlan?'stored_entry':'decision_close_no_entry_plan','entry_or_close'=>$entryVal,'target'=>$targetVal,
+                    'target_le_entry'=>$targetVal<=$entryVal,
+                    'note'=>$hasPlan?'저장된 진입가와 목표가를 비교한 값':'실제 진입 계획이 없어 당일 종가(소수점 버림)와 후보 목표가를 비교한 값'],
+                'high_above_ref_but_close_not'=>$dHigh>$ref&&!$closeAtRef,
+            ];
+            if($dHigh>$ref)$notes[]='판정일 고가 '.$fmt($dHigh).'가 목표 기준 최고 '.$fmt($ref).'를 넘었다(고가 돌파).';
+            if($dHigh>$ref&&!$closeAtRef)$notes[]='종가 '.$fmt($dClose).'는 목표 기준 아래라 목표가 '.($hasPlan?'진입가':'당일 종가').'보다 높다. 고가 돌파만으로 목표가 진입가 이하가 되지 않는다.';
+            if($targetVal<=$entryVal)$notes[]='목표가 '.$fmt($targetVal).'가 '.($hasPlan?'저장된 진입가':'당일 종가(실제 진입 계획 없음)').' '.$fmt($entryVal).' 이하이다. 종가가 목표 기준 이상인 경우다.';
+            if($firstHigh!==null||$firstClose!==null)$notes[]='A의 H '.$H['date'].' 이후 고가 돌파 '.($firstHigh??'없음').' · 종가 돌파 '.($firstClose??'없음').'.';
             if($blockers)$notes[]='공통 차단 사유: '.implode(', ',$blockers).' → 최종 상태 '.$b['final_status'].'.';
             if($b['selected_pattern']!=='trend_pullback')$notes[]='이 날의 최종 계획은 '.$b['selected_pattern'].'이다. 눌림 패턴 자체 상태는 '.$pstat.'.';
             if(!empty($c['correction_state'])&&$c['correction_state']==='possibly_ended'&&$pstat!=='ready')$notes[]='A는 눌림이 끝났을 수 있다고 읽었다.';
@@ -314,7 +340,7 @@ final class PaperPullbackSegmentPilot
                     'A_S_inside_trend_windows'=>$inWin($sIdx,[$n-40,$n-1]),'A_H_inside_target_window'=>$inWin($hIdx,$tgtWin),'A_H_is_decision_window_last_bar'=>$hIdx===$n-1,
                     'A_L_inside_stop_window'=>$inWin($L['index'],$stopWin),'stop_ref_before_A_H'=>$stopBeforeH,'decision_day_high_is_outside_target_window_and_higher'=>(float)$bars[$n-1]['high']>(float)$tgtHigh['price'],
                 ],
-                'primary_category'=>$primary,'tags'=>$tags,'notes'=>$notes,
+                'primary_category'=>$primary,'tags'=>$tags,'notes'=>$notes,'breakout_target'=>$breakout,
             ];
         }
         $sum=['cases'=>count($out),'primary'=>[],'target_ref_is_A_H'=>0,'target_ref_is_A_H_or_alt'=>0,'stop_ref_is_A_L'=>0,'stop_ref_is_A_L_or_P'=>0,
@@ -326,6 +352,20 @@ final class PaperPullbackSegmentPilot
             $sum['A_L_outside_stop_window']+=(int)!$a['A_L_inside_stop_window'];$sum['A_H_outside_target_window']+=(int)!$a['A_H_inside_target_window'];
             $sum['decision_day_high_above_target_ref']+=(int)$a['decision_day_high_is_outside_target_window_and_higher'];$sum['with_common_block']+=(int)($o['common_block_reasons']!==[]);$sum['stop_ref_before_A_H']+=(int)$a['stop_ref_before_A_H'];
         }
+        $bs=['high_breakout_of_A_H_on_decision_day'=>0,'close_breakout_of_A_H_on_decision_day'=>0,'high_breakout_of_A_H_any_day_after_H'=>0,'close_breakout_of_A_H_any_day_after_H'=>0,
+            'decision_high_above_target_ref'=>0,'decision_close_above_target_ref'=>0,'high_above_ref_but_close_not'=>0,
+            'target_le_entry_with_stored_plan'=>0,'plans'=>0,'target_le_close_without_plan'=>0,'no_plan'=>0,'target_le_entry_matches_close_at_or_above_ref'=>0];
+        foreach($out as $o){
+            $t=$o['breakout_target'];
+            $bs['high_breakout_of_A_H_on_decision_day']+=(int)$t['A_H']['high_breakout']['on_decision_day'];$bs['close_breakout_of_A_H_on_decision_day']+=(int)$t['A_H']['close_breakout']['on_decision_day'];
+            $bs['high_breakout_of_A_H_any_day_after_H']+=(int)$t['A_H']['high_breakout']['any_after_H'];$bs['close_breakout_of_A_H_any_day_after_H']+=(int)$t['A_H']['close_breakout']['any_after_H'];
+            $bs['decision_high_above_target_ref']+=(int)$t['target_reference']['decision_high_above_ref'];$bs['decision_close_above_target_ref']+=(int)$t['target_reference']['decision_close_above_ref'];
+            $bs['high_above_ref_but_close_not']+=(int)$t['high_above_ref_but_close_not'];
+            if($t['target_vs_entry']['basis']==='stored_entry'){$bs['plans']++;$bs['target_le_entry_with_stored_plan']+=(int)$t['target_vs_entry']['target_le_entry'];}
+            else{$bs['no_plan']++;$bs['target_le_close_without_plan']+=(int)$t['target_vs_entry']['target_le_entry'];}
+            $bs['target_le_entry_matches_close_at_or_above_ref']+=(int)($t['target_vs_entry']['target_le_entry']===$t['target_reference']['decision_close_at_or_above_ref_after_truncation']);
+        }
+        $sum['breakout_target']=$bs;
         return ['version'=>self::VERSION,'stage'=>'B','summary'=>$sum,'a_freeze_commit_note'=>'annotations were frozen before this file was written','a_freeze_sha256'=>$freezeSha,
             'code_read'=>'src/TrendPullback.php (windows, gates, stop, target), B json of the 24 cases. C files were not opened.',
             'reproduction_totals'=>array_map(fn($p)=>['matched'=>$p[0],'mismatched'=>$p[1]],$repro),
@@ -363,9 +403,10 @@ final class PaperPullbackSegmentPilot
     }
 
     /** Offline first screen: A annotations first, the code comparison collapsed inside each case. */
-    public static function html(array $ann,array $cmp,array $manifest,array $freeze):string
+    public static function html(array $ann,array $cmp,array $manifest,array $freeze,array $a2,array $re):string
     {
         $e=fn($s)=>self::e($s);$cm=[];foreach($cmp['cases'] as $c)$cm[$c['case_id']]=$c;
+        $a2m=[];foreach($a2['cases'] as $c)$a2m[$c['case_id']]=$c;$rem=[];foreach($re['cases'] as $c)$rem[$c['case_id']]=$c;
         $mf=[];foreach($manifest['cases'] as $c)$mf[$c['case_id']]=$c;
         $h=[];
         $h[]='<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>눌림 구간 표시 24건</title><style>
@@ -429,13 +470,71 @@ nav{font-size:12px;line-height:1.9}nav a{margin-right:8px;text-decoration:none;c
             $h[]='<p class="small">눌림 코드 게이트: '.implode(' · ',$g).'</p>';
             $s=$x['stored'];
             $h[]='<p class="small">저장된 값(가격 수준): 진입 '.$e($s['entry']??'-').' · 손절 '.$e($s['candidate_stop']??'-').' · 목표 '.$e($s['candidate_target']??'-').' · 손익비 '.$e($s['reward_risk']??'-').' · 후보 구간 '.$e($s['zone_low']??'-').'~'.$e($s['zone_high']??'-').'</p>';
+            $bt=$x['breakout_target'];$yn=fn($v)=>$v?'예':'아니오';$ah=$bt['A_H'];$tr=$bt['target_reference'];$tv=$bt['target_vs_entry'];
+            $h[]='<table><tr><th colspan="3">돌파와 목표의 관계 (세 항목은 따로 계산)</th></tr>';
+            $h[]='<tr><td>A의 H '.$e($ah['date']).' · '.$e($fmt($ah['high'])).' 고가 돌파</td><td>판정일 '.$yn($ah['high_breakout']['on_decision_day']).'</td><td>H 이후 처음 '.$e($ah['high_breakout']['first_date']??'없음').'</td></tr>';
+            $h[]='<tr><td>A의 H 종가 돌파</td><td>판정일 '.$yn($ah['close_breakout']['on_decision_day']).'</td><td>H 이후 처음 '.$e($ah['close_breakout']['first_date']??'없음').'</td></tr>';
+            $h[]='<tr><td>목표 기준 '.$e($tr['date']).' · '.$e($fmt($tr['high'])).' (판정일 제외 20봉 최고)</td><td>판정일 고가 초과 '.$yn($tr['decision_high_above_ref']).'</td><td>판정일 종가 초과 '.$yn($tr['decision_close_above_ref']).'</td></tr>';
+            $h[]='<tr><td>목표가 ≤ 진입 기준: 목표 '.$e($fmt($tv['target'])).' / '.($tv['basis']==='stored_entry'?'저장된 진입가':'당일 종가(실제 진입 계획 없음)').' '.$e($fmt($tv['entry_or_close'])).'</td><td colspan="2"><b>'.$yn($tv['target_le_entry']).'</b> <span class="small">'.$e($tv['note']).'</span></td></tr></table>';
             $h[]='<ul>';foreach($x['notes'] as $n)$h[]='<li>'.$e($n).'</li>';
             $h[]='</ul>';
             if($x['tags'])$h[]='<p class="small">태그: '.$e(implode(', ',$x['tags'])).'</p>';
+            $h[]='</div></details>';
+            // Follow-up review, collapsed. Written after B was seen, so it is not blind.
+            $o=$a2m[$id];$r=$rem[$id];
+            $h[]='<details><summary>추가 검토 (B 확인 뒤, 블라인드 아님) · 큰 조정 시작 고점과 최근 재하락 시작 고점'.($r['in_13']?' · 손절 기준 재비교 대상':'').'</summary><div class="cmp">';
+            $h[]='<img src="charts-a2/'.$e($id).'-120.svg" alt="'.$e($c['name']).' 추가 검토 120거래일" loading="lazy">';
+            $stl=['marked'=>'표시','hold'=>'보류','none'=>'없음'];
+            $h[]='<table><tr><th>구분</th><th>상태</th><th>날짜</th><th class="num">가격</th><th>확정</th><th>읽은 이유</th></tr>';
+            $pr=function(string $name,string $state,?array $p,string $why) use($e){
+                if($p===null)return '<tr><td>'.$e($name).'</td><td>'.$e($state).'</td><td colspan="3">-</td><td>'.$e($why).'</td></tr>';
+                $conf=$p['pivot']['confirmed']?'확정 '.$p['pivot']['confirmed_date']:'관찰만 · '.self::reasonKo($p['pivot']['reason']);
+                return '<tr><td>'.$e($name).'</td><td>'.$e($state).'</td><td>'.$e($p['date']).'</td><td class="num">'.$e(PaperReviewCharts::num((float)$p['price'])).'</td><td>'.$e($conf).'</td><td>'.$e($why).'</td></tr>';
+            };
+            $h[]=$pr('큰 조정 시작 고점 (H_big)',$stl[$o['H_big']['status']],$o['H_big']['point'],$o['H_big']['why']);
+            $h[]=$pr('최근 재하락 시작 고점 (H_recent)',$stl[$o['H_recent']['status']].($o['H_recent']['relation_to_H_big']==='same'?' · H_big과 같음':''),$o['H_recent']['point'],$o['H_recent']['why']);
+            $h[]=$pr('H_big 뒤 최저점',$stl[$o['H_big']['status']],$o['adjusted_lows']['from_H_big'],'계산값');
+            $h[]=$pr('H_recent 뒤 최저점',$stl[$o['H_recent']['status']],$o['adjusted_lows']['from_H_recent'],'계산값');
+            $h[]='<tr><td>코드 손절 기준 저점(B)</td><td>-</td><td>'.$e($r['code_stop_reference_low']['date']).'</td><td class="num">'.$e(PaperReviewCharts::num((float)$r['code_stop_reference_low']['price'])).'</td><td>-</td><td>창 '.$e($r['code_stop_reference_low']['window']).'</td></tr></table>';
+            $h[]='<p><b>재비교'.($r['in_13']?'':' (참고: 이 사례는 손절 기준 저점이 A의 L과 같았다)').'</b>: '.$e(self::RECHECK_LABEL[$r['label']]).($r['relies_on_hold_or_none']?' <span class="small">(보류 또는 없음 후보를 포함한 비교)</span>':'').'</p>';
             $h[]='</div></details></section>';
         }
         $h[]='<div class="note small">A 입력: 가격 파일 json/a/*-input.json (판정일까지의 완료 봉). 이 화면은 외부 파일 없이 열리며 차트는 charts 폴더의 SVG를 상대 경로로 부릅니다.</div></main></body></html>';
         return implode("\n",$h)."\n";
+    }
+
+    /**
+     * A-stage freeze check that tells a line-ending change from a content change. a-freeze.json holds the original byte hashes
+     * (two of them were taken on CRLF working copies); a-freeze-lf.json holds the hash of the same content with CRLF folded to LF.
+     * @return array{ok:bool,files:array<string,array>,charts:array{content_changed:list<string>,line_ending_only:int,byte_identical:int},consistent:bool}
+     */
+    public static function freezeCheck(string $dir):array
+    {
+        $fr=self::loadJson($dir.'/a-freeze.json');$lf=self::loadJson($dir.'/a-freeze-lf.json');
+        $files=[];$ok=true;$consistent=true;
+        foreach($fr['files_sha256'] as $name=>$frozen){
+            $raw=(string)file_get_contents($dir.'/'.$name);$norm=str_replace("\r\n","\n",$raw);$rec=$lf['files'][$name];
+            $status=hash('sha256',$norm)!==$rec['lf_sha256']?'content_changed':(hash('sha256',$raw)===$frozen?'byte_identical':'line_ending_only');
+            // The original hash must be reproducible from the recorded LF content and the recorded line ending.
+            $again=$rec['frozen_line_ending']==='crlf'?str_replace("\n","\r\n",$norm):$norm;
+            $reproduces=$status!=='content_changed'?hash('sha256',$again)===$frozen:null;
+            if($reproduces===false||$rec['frozen_sha256']!==$frozen)$consistent=false;
+            if($status==='content_changed')$ok=false;
+            $files[$name]=['status'=>$status,'frozen_line_ending'=>$rec['frozen_line_ending'],'frozen_hash_reproduced_from_lf_content'=>$reproduces];
+        }
+        $charts=['content_changed'=>[],'line_ending_only'=>0,'byte_identical'=>0];
+        foreach($lf['charts_lf_sha256'] as $name=>$sha){
+            $path=$dir.'/charts/'.$name;
+            if(!is_file($path)){$charts['content_changed'][]=$name;continue;}
+            $raw=(string)file_get_contents($path);
+            if(hash('sha256',str_replace("\r\n","\n",$raw))!==$sha)$charts['content_changed'][]=$name;
+            elseif(hash('sha256',$raw)===$fr['charts_sha256'][$name])$charts['byte_identical']++;
+            else $charts['line_ending_only']++;
+        }
+        $extra=array_diff(array_map('basename',glob($dir.'/charts/*.svg')?:[]),array_keys($lf['charts_lf_sha256']));
+        foreach($extra as $e)$charts['content_changed'][]='unexpected '.$e;
+        if($charts['content_changed']!==[])$ok=false;
+        return ['ok'=>$ok&&$consistent,'files'=>$files,'charts'=>$charts,'consistent'=>$consistent];
     }
 
     /** Independent checks. The SVG is parsed back and compared with the A price file, not with the drawing code's own numbers. */
@@ -467,8 +566,8 @@ nav{font-size:12px;line-height:1.9}nav a{margin-right:8px;text-decoration:none;c
                 if($p['observable_at']>(int)$last['available_at'])$confBad[]=$id.' '.$code.' observable after D';
                 $bar=$bars[$p['index']];if($bar['date']!==$p['date']||(float)$bar[$p['field']]!==(float)$p['price'])$markerFail[]=$id.' '.$code.' '.$p['date'].' json vs price file';
             }
-            foreach([120,40] as $count){
-                $svg=(string)file_get_contents($dir.'/charts/'.$id.'-'.$count.'.svg');
+            foreach([['charts',120],['charts',40],['charts-a2',120]] as [$sub,$count]){
+                $svg=(string)file_get_contents($dir.'/'.$sub.'/'.$id.'-'.$count.'.svg');
                 preg_match_all('/\b(20\d\d-\d\d-\d\d)\b/',$svg,$m);foreach($m[1] as $d){$dateInSvg++;if($d>$D)$future[]=$id.' '.$count.' svg date '.$d;}
                 $view=min($count,$n);$first=$n-$view;$step=(960-72-16)/$view;
                 preg_match_all('/<line x1="([\d.]+)" y1="([\d.]+)" x2="\1" y2="([\d.]+)" stroke="#(?:c0392b|2471a3)"\/>/',$svg,$cl,PREG_SET_ORDER);
@@ -515,15 +614,13 @@ nav{font-size:12px;line-height:1.9}nav a{margin-right:8px;text-decoration:none;c
         }
         $ok('annotated_120_chart_candles_equal_package_A_chart',$diff===0,['different_charts'=>$diff]);
         // freeze
-        $broke=[];foreach($freeze['files_sha256'] as $name=>$sha)if(hash_file('sha256',$dir.'/'.$name)!==$sha)$broke[]=$name;
-        $cs=[];foreach(glob($dir.'/charts/*.svg') as $f)$cs[basename($f)]=hash_file('sha256',$f);ksort($cs);
-        if($cs!==$freeze['charts_sha256'])$broke[]='charts';
-        $ok('a_stage_files_unchanged_since_freeze',$broke===[],$broke);
+        $fc=self::freezeCheck($dir);
+        $ok('a_stage_content_unchanged_since_freeze',$fc['ok'],['files'=>$fc['files'],'charts'=>$fc['charts'],'frozen_hashes_consistent_with_lf_hashes'=>$fc['consistent']]);
         // links
         $html=(string)file_get_contents($dir.'/index.html');preg_match_all('/(?:src|href)="([^"#:]+)(?:#[^"]*)?"/',$html,$lk);$missing=[];
         foreach(array_unique($lk[1]) as $l)if(!is_file($dir.'/'.$l))$missing[]=$l;
         $ok('index_relative_links_exist',$missing===[],['links'=>count(array_unique($lk[1])),'missing'=>$missing]);
-        $files=['protocol.md','sample-manifest.json','annotations-a.src.json','annotations-a.json','a-freeze.json','code-comparison.json','index.html','review.md','verify.md'];
+        $files=['protocol.md','sample-manifest.json','annotations-a.src.json','annotations-a.json','a-freeze.json','a-freeze-lf.json','annotations-a2.src.json','annotations-a2.json','highs-review.json','code-comparison.json','index.html','review.md','verify.md'];
         $absent=array_values(array_filter($files,fn($f)=>!is_file($dir.'/'.$f)&&$f!=='verify.md'));
         $ok('deliverable_files_present',$absent===[],$absent);
         // first screen order and absence of outcome words
@@ -533,6 +630,45 @@ nav{font-size:12px;line-height:1.9}nav a{margin-right:8px;text-decoration:none;c
         $ok('code_comparison_covers_24_with_valid_categories',count($cmp['cases'])===24&&count(array_diff(array_column($cmp['cases'],'primary_category'),self::COMPARE_CATEGORIES))===0,$cmp['summary']['primary']);
         $rp=$cmp['reproduction_totals'];$allMatch=true;foreach($rp as $t)if($t['mismatched']!==0)$allMatch=false;
         $ok('code_windows_reproduce_stored_values',$allMatch,$rp);
+        // Follow-up review: statuses, dates, hash of the existing A annotation, and an independent recomputation of the breakout facts.
+        $a2=self::loadJson($dir.'/annotations-a2.json');$re=self::loadJson($dir.'/highs-review.json');$a2src=self::loadJson($dir.'/annotations-a2.src.json');
+        $okSet=array_column($a2['cases'],'case_id')===array_column($ann['cases'],'case_id')&&count($a2['cases'])===24&&$a2['blind']===false;
+        $ok('a2_covers_the_same_24_and_is_not_called_blind',$okSet&&!preg_match('/블라인드(?!가 아니)/u',(string)json_encode($a2['disclosure'],JSON_UNESCAPED_UNICODE)),$a2['status_counts']);
+        $ok('a2_src_hash_recorded_matches',$a2['inputs']['annotations_a2_src_sha256']===hash('sha256',(string)file_get_contents($dir.'/annotations-a2.src.json'))||$a2['inputs']['annotations_a2_src_sha256']===hash('sha256',str_replace("\r\n","\n",(string)file_get_contents($dir.'/annotations-a2.src.json'))),null);
+        $a2Bad=[];$a2Future=[];
+        foreach($a2['cases'] as $o){
+            $id=$o['case_id'];$bars=self::bars($pack,$id);$n=count($bars);$D=$o['session_date'];$last=(int)$bars[$n-1]['available_at'];
+            $pts=[$o['H_big']['point'],$o['H_recent']['point'],$o['adjusted_lows']['from_H_big'],$o['adjusted_lows']['from_H_recent']];
+            foreach($pts as $p){
+                if($p===null)continue;
+                if($p['date']>$D||$p['observable_at']>$last||($p['pivot']['confirmed']&&$p['pivot']['confirmed_at']>$last))$a2Future[]=$id.' '.$p['date'];
+                $bar=$bars[$p['index']]??null;if($bar===null||$bar['date']!==$p['date']||(float)$bar[$p['field']]!==(float)$p['price'])$a2Bad[]=$id.' '.$p['date'];
+                foreach(['first_high_above_after','first_close_above_after'] as $k)if(!empty($p[$k])&&$p[$k]>$D)$a2Future[]=$id.' '.$k;
+            }
+            $st=$o['H_big']['status'];
+            if(($st==='none')!==($o['H_big']['point']===null))$a2Bad[]=$id.' none/point mismatch';
+            if(!in_array($st,['marked','hold','none'],true)||!in_array($o['H_recent']['status'],['marked','hold'],true))$a2Bad[]=$id.' bad status';
+        }
+        $ok('a2_points_match_price_file_and_stay_within_decision_day',$a2Bad===[]&&$a2Future===[],['bad'=>array_slice($a2Bad,0,10),'future'=>array_slice($a2Future,0,10)]);
+        $rec13=array_values(array_filter($re['cases'],fn($x)=>$x['in_13']));
+        $stopNotA=array_values(array_filter($cmp['cases'],fn($x)=>!$x['against_A']['stop_ref_date_is_A_L']));
+        $ok('stop_recheck_covers_exactly_the_13_cases_whose_stop_reference_differed',count($rec13)===13&&array_column($rec13,'case_id')===array_column($stopNotA,'case_id'),['cases'=>count($rec13),'labels'=>$re['summary']['labels']]);
+        // Breakout facts recomputed from the A price file alone, then compared with code-comparison.json.
+        $boBad=[];$mismatchLe=0;
+        foreach($cmp['cases'] as $x){
+            $id=$x['case_id'];$bars=self::bars($pack,$id);$n=count($bars);$hDate=$ann['cases'][array_search($id,array_column($ann['cases'],'case_id'),true)]['points']['H']['main']['date'];
+            $hi=null;foreach($bars as $i=>$b)if($b['date']===$hDate)$hi=$i;$hh=(float)$bars[$hi]['high'];$dH=(float)$bars[$n-1]['high'];$dC=(float)$bars[$n-1]['close'];
+            $ref=0;for($i=$n-21;$i<=$n-2;$i++)$ref=max($ref,(float)$bars[$i]['high']);
+            $t=$x['breakout_target'];
+            if($t['A_H']['high_breakout']['on_decision_day']!==($dH>$hh))$boBad[]=$id.' high breakout';
+            if($t['A_H']['close_breakout']['on_decision_day']!==($dC>$hh))$boBad[]=$id.' close breakout';
+            if($t['target_reference']['decision_high_above_ref']!==($dH>$ref)||$t['target_reference']['decision_close_above_ref']!==($dC>$ref))$boBad[]=$id.' target reference';
+            $le=floor($ref)<=floor($dC);
+            if($t['target_vs_entry']['target_le_entry']!==$le)$mismatchLe++;
+            if(($x['stored']['entry']!==null)!==($t['target_vs_entry']['basis']==='stored_entry'))$boBad[]=$id.' basis';
+            if($t['target_vs_entry']['basis']==='stored_entry'&&(float)$x['stored']['entry']!==floor($dC))$boBad[]=$id.' stored entry is not the truncated decision close';
+        }
+        $ok('breakout_and_target_facts_recomputed_from_price_file',$boBad===[]&&$mismatchLe===0,['bad'=>$boBad,'target_le_entry_mismatches'=>$mismatchLe,'summary'=>$cmp['summary']['breakout_target']]);
         return ['version'=>self::VERSION,'all_passed'=>$fail===[],'failed'=>$fail,'checks'=>$r];
     }
 
@@ -541,6 +677,141 @@ nav{font-size:12px;line-height:1.9}nav a{margin-right:8px;text-decoration:none;c
         // Invalid candles or zero-volume bars inside the last 40 bars touch every code window.
         for($i=$n-40;$i<$n;$i++)if(!empty($bars[$i]['ohlc_invalid'])||(float)$bars[$i]['volume']<=0)return true;
         return false;
+    }
+
+    /** Index of the lowest low after bar $idx through the last bar. Earliest bar wins ties. Null when no bar follows. */
+    private static function lowAfter(array $bars,int $idx):?int
+    {
+        $best=null;
+        for($i=$idx+1;$i<count($bars);$i++){
+            if(!empty($bars[$i]['ohlc_invalid']))continue;
+            if($best===null||(float)$bars[$i]['low']<(float)$bars[$best]['low'])$best=$i;
+        }
+        return $best;
+    }
+
+    /** Resolved point plus the first later bar whose high / close is above it. */
+    private static function resolveHigh(array $bars,array $by,int $idx,?string $why,string $id):array
+    {
+        $p=self::resolve($bars,$by,'H',$bars[$idx]['date'],$why,$id);$hh=(float)$bars[$idx]['high'];$fh=null;$fc=null;
+        for($j=$idx+1;$j<count($bars);$j++){
+            if(!empty($bars[$j]['ohlc_invalid']))continue;
+            if($fh===null&&(float)$bars[$j]['high']>$hh)$fh=$bars[$j]['date'];
+            if($fc===null&&(float)$bars[$j]['close']>$hh)$fc=$bars[$j]['date'];
+        }
+        return $p+['first_high_above_after'=>$fh,'first_close_above_after'=>$fc];
+    }
+
+    /**
+     * Follow-up review written after B was seen (not blind). H_big and H_recent come from the rules in the src file, computed on the
+     * A price file only. The existing A annotation is read, never changed.
+     */
+    public static function a2(string $pack,string $srcPath,array $ann,string $srcSha):array
+    {
+        $src=self::loadJson($srcPath);$A=[];foreach($ann['cases'] as $c)$A[$c['case_id']]=$c;$out=[];
+        foreach($src['cases'] as $s){
+            $id=$s['case_id'];$c=$A[$id]??throw new RuntimeException($id.' has no A annotation');
+            $bars=self::bars($pack,$id);$n=count($bars);$by=self::index($bars);$first=max(0,$n-120);
+            $gi=null;
+            for($i=$first;$i<$n;$i++){
+                if(!empty($bars[$i]['ohlc_invalid']))continue;
+                if($gi===null||(float)$bars[$i]['high']>(float)$bars[$gi]['high'])$gi=$i;
+            }
+            $isD=$gi===$n-1;$edge=$first>0&&$gi-$first<5;$fewBig=!$isD&&$n-1-$gi<2;
+            $bs=$s['H_big']['status'];
+            if($isD!==($bs==='none'))throw new RuntimeException($id.': H_big status none must match a window high on the decision day');
+            if(($edge||$fewBig)&&$bs!=='hold')throw new RuntimeException($id.': H_big must be hold (window edge or fewer than 2 bars after)');
+            $lbi=$isD?null:self::lowAfter($bars,$gi);
+            $rec=null;
+            if($lbi!==null)for($i=$lbi+1;$i<$n;$i++){
+                if(!empty($bars[$i]['ohlc_invalid'])||(float)$bars[$i]['high']>=(float)$bars[$gi]['high'])continue;
+                if(self::pivot($bars,$i,'high')['confirmed'])$rec=$i;
+            }
+            $rs=$s['H_recent'];
+            if($rs['source']==='A_main')$ri=$c['points']['H']['main']['index'];
+            else{if($isD)throw new RuntimeException($id.': H_recent by rule needs a window high before the decision day');$ri=$rec??$gi;}
+            if($n-1-$ri<2&&$rs['status']!=='hold')throw new RuntimeException($id.': H_recent must be hold (fewer than 2 bars after)');
+            $big=$bs==='none'?null:self::resolveHigh($bars,$by,$gi,$s['H_big']['why'],$id);
+            $recent=self::resolveHigh($bars,$by,$ri,$rs['why'],$id);
+            $lowOf=function(?int $from) use($bars,$by,$id):?array{
+                if($from===null)return null;$li=self::lowAfter($bars,$from);
+                return $li===null?null:self::resolve($bars,$by,'L',$bars[$li]['date'],'H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다',$id);
+            };
+            $hMain=$c['points']['H']['main'];$lMain=$c['points']['L']['main'];
+            $out[]=[
+                'case_id'=>$id,'symbol'=>$c['symbol'],'name'=>$c['name'],'session_date'=>$c['session_date'],
+                'H_big'=>['status'=>$bs,'why'=>$s['H_big']['why'],'candidate_flags'=>['window_high_is_decision_day'=>$isD,'window_edge'=>$edge,'fewer_than_2_bars_after'=>$fewBig],'point'=>$big],
+                'H_recent'=>['status'=>$rs['status'],'why'=>$rs['why'],'source'=>$rs['source'],'rule_found_re_decline'=>$rec!==null,'fewer_than_2_bars_after'=>$n-1-$ri<2,'point'=>$recent,
+                    'relation_to_H_big'=>$big===null?'no_H_big':($ri===$gi?'same':'different')],
+                'adjusted_lows'=>['from_H_big'=>$bs==='none'?null:$lowOf($gi),'from_H_recent'=>$lowOf($ri)],
+                'A_reference'=>['H_main'=>$hMain['date'],'L'=>$lMain['date'],'H_main_is_H_big'=>$big!==null&&$hMain['date']===$bars[$gi]['date'],'H_main_is_H_recent'=>$hMain['date']===$bars[$ri]['date']],
+            ];
+        }
+        if(count($out)!==count($A))throw new RuntimeException('A2 covers '.count($out).' cases, A has '.count($A));
+        usort($out,fn($a,$b)=>strcmp($a['case_id'],$b['case_id']));
+        $st=['H_big'=>[],'H_recent'=>[]];
+        foreach($out as $o)foreach(['H_big','H_recent'] as $k)$st[$k][$o[$k]['status']]=($st[$k][$o[$k]['status']]??0)+1;
+        return ['version'=>self::VERSION,'stage'=>'A2','blind'=>false,
+            'disclosure'=>'B 확인과 코드 대조를 본 뒤에 만든 추가 검토다. 블라인드가 아니다. 기존 A 표시(annotations-a.json)는 덮어쓰지 않았다. H_big·H_recent의 날짜는 A 가격 파일에서 규칙으로 계산했고, 코드의 창은 쓰지 않았다.',
+            'rules'=>$src['rules'],'inputs'=>['annotations_a2_src_sha256'=>$srcSha,'annotations_a_json'=>'read only, unchanged'],'status_counts'=>$st,'cases'=>$out];
+    }
+
+    public const RECHECK_LABEL=['matches_both'=>'두 고점 기준 저점이 같고 코드 기준과 일치','matches_recent_low'=>'최근 재하락 저점과 일치','matches_big_low'=>'큰 조정 저점과 일치','before_recent_high'=>'코드 기준 저점이 최근 재하락 시작 고점보다 앞','neither'=>'어느 쪽과도 다름'];
+
+    /** Re-compare the code's stop-reference low with the lows after each high. Applies to every case; in_13 marks the cases whose stop reference differed from A's L. */
+    public static function a2Recheck(array $a2,array $ann,array $cmp,array $hashes):array
+    {
+        $A=[];foreach($ann['cases'] as $c)$A[$c['case_id']]=$c;$X=[];foreach($cmp['cases'] as $c)$X[$c['case_id']]=$c;
+        $out=[];$sum=['in_13'=>0,'labels'=>[],'relies_on_hold_or_none'=>0];
+        foreach($a2['cases'] as $o){
+            $id=$o['case_id'];$x=$X[$id];$a=$A[$id];$stop=$x['windows']['stop_last_10_bars']['low'];$win=$x['windows']['stop_last_10_bars'];
+            $in13=!$x['against_A']['stop_ref_date_is_A_L'];
+            $lb=$o['adjusted_lows']['from_H_big'];$lr=$o['adjusted_lows']['from_H_recent'];$aL=$a['points']['L']['main'];
+            $pct=fn(?array $l)=>$l===null?null:round(((float)$stop['price']-(float)$l['price'])/(float)$l['price']*100,1);
+            $mb=$lb!==null&&$lb['date']===$stop['date'];$mr=$lr!==null&&$lr['date']===$stop['date'];
+            $hr=$o['H_recent']['point']['index'];
+            $label=$mb&&$mr?'matches_both':($mr?'matches_recent_low':($mb?'matches_big_low':($stop['index']<$hr?'before_recent_high':'neither')));
+            $reliesHold=$o['H_big']['status']!=='marked'||$o['H_recent']['status']!=='marked';
+            $rec=['case_id'=>$id,'name'=>$o['name'],'in_13'=>$in13,
+                'code_stop_reference_low'=>['date'=>$stop['date'],'price'=>$stop['price'],'window'=>$win['from'].' ~ '.$win['to']],
+                'A_L'=>['date'=>$aL['date'],'price'=>$aL['price']],
+                'L_from_H_big'=>$lb===null?null:['date'=>$lb['date'],'price'=>$lb['price'],'in_stop_window'=>$lb['date']>=$win['from']],
+                'L_from_H_recent'=>$lr===null?null:['date'=>$lr['date'],'price'=>$lr['price'],'in_stop_window'=>$lr['date']>=$win['from']],
+                'stop_ref_equals'=>['A_L'=>$stop['date']===$aL['date'],'L_from_H_big'=>$mb,'L_from_H_recent'=>$mr],
+                'stop_ref_vs_L_from_H_big_pct'=>$pct($lb),'stop_ref_vs_L_from_H_recent_pct'=>$pct($lr),
+                'stop_ref_before_H_big'=>$o['H_big']['point']!==null&&$stop['index']<$o['H_big']['point']['index'],'stop_ref_before_H_recent'=>$stop['index']<$hr,
+                'H_big_status'=>$o['H_big']['status'],'H_recent_status'=>$o['H_recent']['status'],
+                'label'=>$label,'relies_on_hold_or_none'=>$reliesHold];
+            if($in13){$sum['in_13']++;$sum['labels'][$label]=($sum['labels'][$label]??0)+1;$sum['relies_on_hold_or_none']+=(int)$reliesHold;}
+            $out[]=$rec;
+        }
+        return ['version'=>self::VERSION,'stage'=>'A2 recheck','blind'=>false,
+            'disclosure'=>'B 확인 뒤의 추가 검토다. 코드의 손절 기준 저점(최근 10봉의 최저 저가)이 A의 L, 큰 조정 시작 고점 뒤 최저점, 최근 재하락 시작 고점 뒤 최저점 중 무엇과 같은 날인지 본다. 같다는 것은 날짜가 같다는 뜻이며 코드가 그 구조를 의도했다는 뜻이 아니다.',
+            'inputs'=>$hashes,'summary'=>$sum,'labels'=>self::RECHECK_LABEL,'cases'=>$out];
+    }
+
+    /** Chart marks for the follow-up review. The code stop reference comes from B and is drawn as a square. */
+    public static function overlayA2(array $a2case,array $re,array $bars):array
+    {
+        $marks=[];$legend=[];
+        $add=function(string $code,?array $p,string $field,bool $main,string $color,string $text) use(&$marks,&$legend){
+            if($p===null)return;
+            $marks[]=['at'=>$p['observable_at'],'price'=>(float)$p['price'],'field'=>$field,'code'=>$code,'main'=>$main,'confirmed'=>$p['pivot']['confirmed'],'color'=>$color,'date'=>$p['date']];
+            $conf=$p['pivot']['confirmed']?'확정 '.$p['pivot']['confirmed_date']:'관찰만';
+            $legend[]=['color'=>$color,'text'=>$text.' '.$p['date'].' · '.PaperReviewCharts::num((float)$p['price']).' · '.$conf];
+        };
+        $sl=['marked'=>'','hold'=>' (보류)','none'=>''];
+        $hb=$a2case['H_big'];$hr=$a2case['H_recent'];
+        if($hb['point']!==null)$add('Hb',$hb['point'],'high',$hb['status']==='marked','#922b21','큰 조정 시작 고점'.$sl[$hb['status']]);
+        else $legend[]=['color'=>'#922b21','text'=>'큰 조정 시작 고점 없음 (판정일 고가가 창 최고)'];
+        $same=$hr['relation_to_H_big']==='same';
+        $add('Hr',$hr['point'],'high',$hr['status']==='marked','#d35400','최근 재하락 시작 고점'.$sl[$hr['status']].($same?' · 큰 조정 시작 고점과 같음':''));
+        $add('Lb',$a2case['adjusted_lows']['from_H_big'],'low',true,'#1f618d','큰 조정 시작 고점 뒤 최저점');
+        $add('Lr',$a2case['adjusted_lows']['from_H_recent'],'low',true,'#117a65','최근 재하락 시작 고점 뒤 최저점');
+        $s=$re['code_stop_reference_low'];$i=null;foreach($bars as $k=>$b)if($b['date']===$s['date'])$i=$k;
+        $cp=self::resolve($bars,self::index($bars),'L',$s['date'],null,$a2case['case_id']);
+        $add('Cs',$cp,'low',false,'#566573','코드 손절 기준 저점(B에서 계산)');
+        return ['marks'=>$marks,'legend'=>$legend];
     }
 
     /** View of the last $count A bars with the indicator values stored in the price file. */

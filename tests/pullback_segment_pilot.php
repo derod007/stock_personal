@@ -50,4 +50,28 @@ foreach($m as $x){
 check($on,'each marker centre equals the wick end of its bar');
 check(str_contains($svg,'data-confirmed="1"')&&str_contains($svg,'data-confirmed="0"'),'confirmed and observed-only marks are distinguishable');
 check(str_contains($svg,'H test'),'the legend line is written');
+// Freeze check: line endings must not matter, content must.
+$src=__DIR__.'/../docs/pullback-segment-pilot';
+$tmp=sys_get_temp_dir().'/pspf_'.bin2hex(random_bytes(4));mkdir($tmp.'/charts',0777,true);
+$copy=function(string $mode) use($src,$tmp):void{
+    $names=array_merge(['a-freeze.json','a-freeze-lf.json','annotations-a.src.json','annotations-a.json','protocol.md','sample-manifest.json'],array_map(fn($f)=>'charts/'.basename($f),glob($src.'/charts/*.svg')));
+    foreach($names as $n){
+        $raw=file_get_contents($src.'/'.$n);$lf=str_replace("\r\n","\n",$raw);
+        $out=$mode==='lf'?$lf:($mode==='crlf'?str_replace("\n","\r\n",$lf):$raw);
+        if(in_array($n,['a-freeze.json','a-freeze-lf.json'],true))$out=$raw;
+        file_put_contents($tmp.'/'.$n,$out);
+    }
+};
+$copy('lf');$r=PaperPullbackSegmentPilot::freezeCheck($tmp);
+check($r['ok']&&$r['files']['protocol.md']['status']==='line_ending_only'&&$r['files']['protocol.md']['frozen_hash_reproduced_from_lf_content'],'an LF checkout of the frozen files passes and is reported as line-ending only');
+$copy('crlf');$r=PaperPullbackSegmentPilot::freezeCheck($tmp);
+check($r['ok']&&$r['files']['annotations-a.json']['status']==='line_ending_only','an all-CRLF checkout also passes');
+$copy('raw');$r=PaperPullbackSegmentPilot::freezeCheck($tmp);
+check($r['ok']&&$r['charts']['content_changed']===[],'the files as stored pass');
+file_put_contents($tmp.'/protocol.md',str_replace('A','B',(string)file_get_contents($tmp.'/protocol.md')));
+$r=PaperPullbackSegmentPilot::freezeCheck($tmp);
+check(!$r['ok']&&$r['files']['protocol.md']['status']==='content_changed','a real content change fails even if line endings are untouched');
+$copy('lf');$c=$tmp.'/charts/'.basename(glob($src.'/charts/*.svg')[0]);file_put_contents($c,str_replace('<svg','<svg ',(string)file_get_contents($c)));
+check(!PaperPullbackSegmentPilot::freezeCheck($tmp)['ok'],'a changed chart fails');
+foreach(glob($tmp.'/charts/*')as $f)unlink($f);foreach(glob($tmp.'/*.*')as $f)unlink($f);rmdir($tmp.'/charts');rmdir($tmp);
 echo "OK\n";

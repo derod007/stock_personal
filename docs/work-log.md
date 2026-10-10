@@ -1,4 +1,10 @@
-﻿## 2026-10-10 20:15 · Cursor · 끝
+﻿## 2026-10-10 23:30 · Cursor · 끝
+- 한 일: PR #63 후속. 고정 해시를 줄바꿈 차이와 내용 변경으로 나눠 검증(기존 고정 파일·해시 그대로, LF 해시 파일 추가), 큰 조정 시작 고점·최근 재하락 시작 고점을 추가 검토 버전으로 표시하고(B 확인 뒤라 블라인드 아님) 손절 기준이 달랐던 13건의 조정 저점을 다시 비교, 고가 돌파·종가 돌파·목표≤진입을 따로 계산하고 잘못된 설명을 고침. 기존 24건만, 전략·원본 변경 없음
+- 파일: docs/pullback-segment-pilot/(a-freeze-lf.json, annotations-a2.src.json, annotations-a2.json, highs-review.json, charts-a2/, code-comparison.json, index.html, review.md, verify.md, verify-result.json), bin/paper/PullbackSegmentPilot.php, bin/paper_pullback_segment_pilot.php, tests/pullback_segment_pilot.php, docs/work-log.md
+- 커밋: 브랜치 cursor/pullback-segment-followup, PR 제출(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-10 20:15 · Cursor · 끝
 - 한 일: 상승 눌림 24건(두 기간 각 선택 6·대기 3·탈락 3)을 A 자료만으로 먼저 표시해 고정하고, 그 뒤 코드의 참조 창과 대조한 검토 자료를 만들었다. 전략·점수·원본·계좌 변경 없음
 - 파일: docs/pullback-segment-pilot/(protocol.md, sample-manifest.json, annotations-a.json, annotations-a.src.json, a-freeze.json, code-comparison.json, index.html, review.md, verify.md, verify-result.json, charts/), bin/paper/PullbackSegmentPilot.php, bin/paper_pullback_segment_pilot.php, bin/paper/ReviewCharts.php(표식 옵션 추가, 기본 출력 그대로), tests/pullback_segment_pilot.php, .github/workflows/pattern-replay.yml, docs/work-log.md
 - 커밋: 브랜치 cursor/pullback-segment-pilot, PR 제출(병합 안 함)

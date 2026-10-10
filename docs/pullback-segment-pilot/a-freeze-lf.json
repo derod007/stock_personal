@@ -1,0 +1,79 @@
+{
+  "version": "pullback_segment_pilot_v1",
+  "purpose": "a-freeze.json is kept as written. Two frozen hashes (annotations-a.src.json, protocol.md) were taken on CRLF working copies, while Git stores LF. This file adds the hash of the same content with CRLF folded to LF, so a line-ending change can be told apart from a content change.",
+  "written_at_kst": "2026-10-10 22:40",
+  "derived_from": "git blobs at commit 71ca19a (the freeze commit). a-freeze.json itself is unchanged.",
+  "rule": "content is unchanged when sha256(file with CRLF replaced by LF) equals lf_sha256. The file is byte-identical when sha256(file) equals frozen_sha256. Equal content with a different byte hash is reported as line_ending_only.",
+  "files": {
+    "annotations-a.src.json": {
+      "frozen_sha256": "79a641dc8a6dd877f3ed22213c6f5f2aa53e02bb23e670284de26e2ef2accce2",
+      "lf_sha256": "c5512a6569007d3033b879987d5f9686c8d3bddb829b363ffd660417b754d1aa",
+      "frozen_line_ending": "crlf"
+    },
+    "annotations-a.json": {
+      "frozen_sha256": "2562827cd73c0969ea37703f2098dbe91864bb2c7c13d6371eed349e54bc2bff",
+      "lf_sha256": "2562827cd73c0969ea37703f2098dbe91864bb2c7c13d6371eed349e54bc2bff",
+      "frozen_line_ending": "lf"
+    },
+    "protocol.md": {
+      "frozen_sha256": "19f672e464d8441b78dcf8c567a51fe36ec8bf5c21d6950055647108de7ddad5",
+      "lf_sha256": "e9eb6752fc906d4a7a2acbc2c0ca4e2394f1ab5262100dee3710e65a0b1542f7",
+      "frozen_line_ending": "crlf"
+    },
+    "sample-manifest.json": {
+      "frozen_sha256": "efea4a5e8ce5597a34f7bebd45a0945b9189909cf4c5eda7caf7721b488144c3",
+      "lf_sha256": "efea4a5e8ce5597a34f7bebd45a0945b9189909cf4c5eda7caf7721b488144c3",
+      "frozen_line_ending": "lf"
+    }
+  },
+  "charts_lf_sha256": {
+    "013ad9902972b826-120.svg": "6a63401966cc93850da6861676873941457409b24cef84fb3e8b75b71e4e4f74",
+    "013ad9902972b826-40.svg": "f52512b5858bd952c1c9944608cffb90005f8f4085b4c7bc53f94e4a329a7bb7",
+    "01bea56f4af0f31f-120.svg": "a3d0620c9e0515046bcf4f32e377e962c0769d601e96868a2e99761e6a8d15f8",
+    "01bea56f4af0f31f-40.svg": "ba7f98857e8eabdf0a90db0f0213f60245d6944a69d7ad2537377b15fd692e93",
+    "029fd9c7a4f3fcb6-120.svg": "e836a78af9fd819b1dddbc5104e5d59c9157f3eda767d4c7cb9d8b2ad15ba938",
+    "029fd9c7a4f3fcb6-40.svg": "9f891cbe6b32fe363362104d8db48f3a600bff77dfaa1079b8f96df8d3489fc4",
+    "03779fd61d439aed-120.svg": "89de9f8e09f2e63713d46a73654d04e18f19feaa27789829d2a13556413b41c3",
+    "03779fd61d439aed-40.svg": "cfcb4e456598e94f72e5b6d7bae1639da8635ceb4b43bc561f3f8cee776ae07f",
+    "03c915d929f4769a-120.svg": "2600db5851c97dbad6f8187cea5c51635c3457d0c1606a5d270e14ce6006fcb4",
+    "03c915d929f4769a-40.svg": "03081230f004fe3d36f43bdfc757a2f5657d329eb7cfc7d0ab4db13a08858ae9",
+    "03d016b5e47bae98-120.svg": "bbb91f316fa9ef1b07bce6f7fb4c10ab45c02b6daf8878fcbafedd6738e29135",
+    "03d016b5e47bae98-40.svg": "6744d273766de7f2da7f48b763c5a4fde5eecbe39ab63c3f83b17e403bdf5ec4",
+    "05a3f1e796e376c7-120.svg": "de56b6e6422eed53b9f587e82cbb04a2ac6429fd409f8e058f17c70b8a76a2b6",
+    "05a3f1e796e376c7-40.svg": "de6450d5fde203a7a91680c769ff633a2b97409151d2db69bd7e413d6ccbf777",
+    "0628c0298c8155ce-120.svg": "53bd14536a34d6f5fb45c3fd4d6946ba4854bfc1dc1880f20bce8b1d35135e7c",
+    "0628c0298c8155ce-40.svg": "ca3fc8ee2344f13ba46c0c7b1363fb60d51862ca210fb669348d89c430b407ea",
+    "065da101de4d728c-120.svg": "42f8c8a45d5992a09ae369ba56799da46337bde6cef876bbeb9daa4ae2864c5f",
+    "065da101de4d728c-40.svg": "f3b7d4285d9610ce017c7018e83c475748210eed9fd889e7ee4be095a30a6c9d",
+    "0661fe259966d89d-120.svg": "369e4eda593b4686c721ed0c161ca9686e07eab280685e9328b402aa3e4721d4",
+    "0661fe259966d89d-40.svg": "9d0312a5886b5b99b8c2d0d52ae4931cc8c963912d60aa76bc7f21ecc81a1c1b",
+    "06e4c870056806ab-120.svg": "0272716a98be1f45bb03b2a50f1f5cc39de62545bf97fbd4056a365537942f19",
+    "06e4c870056806ab-40.svg": "a61bfa3facaca28d3e99e3f3aa4ddb73892cb410f1f851e7569dbcb85349c40f",
+    "0792ac2403c954e1-120.svg": "ff701248a5811e970393491efbae23bf763d5b1daae11c911f3c1d16f19b20c6",
+    "0792ac2403c954e1-40.svg": "a8d5717dfb3993a4e0e3e0d4cdda02bdd4166ef3ced965fa2956ed16ba0d6404",
+    "19f9ea891800aab8-120.svg": "e317718464b63355375a39b49f5b911559e01c3f987d08511c754800d6c9e8d8",
+    "19f9ea891800aab8-40.svg": "0ad7d0ee75afdcd55007fece6357d5791f344f2f7070c2591ef517d108775bbc",
+    "2032f201c0c38f7f-120.svg": "06436b38d455a382728781092b3289f85217cffe0e7a277751f56e65ed56ab1b",
+    "2032f201c0c38f7f-40.svg": "86994b9507c2ef54ca5db755f8986d88da3b2518eb47dbff6014e05cc8a132c5",
+    "284171e508e3e7e0-120.svg": "8bccd6c1e082a523eb573a226c609aa5e525f060a14d8847f45120347f490e88",
+    "284171e508e3e7e0-40.svg": "a6be92043165e9c50995924680077375ef75eefb973273544d9da34efccaf56c",
+    "30416c78c22d1d0e-120.svg": "85aed057460b19da20295d3cac045fd25a3841aef8c52e93adfc92e412c78ba0",
+    "30416c78c22d1d0e-40.svg": "7703c7c979f49e032b33ea4f58d24e655e51f1160cc876505fb077834135d9f1",
+    "37e84aadd60596f8-120.svg": "eba9c22b0bd9ea2f20f00fdf5f5b664c977bc8aa775694e0d01ed94e8525e63e",
+    "37e84aadd60596f8-40.svg": "e218f2d44cee5a6b09f3b1214b25625c887c07dc520d3dbefb69aef3c9c28022",
+    "433ea121b8d5fb8e-120.svg": "f014a0b196cf1381040503c385c26f9c1d41eeb0a93fc889a44d6ad0583fc82d",
+    "433ea121b8d5fb8e-40.svg": "d9629fbbf94fa06a36c840c7c8487d7508a94e3e65b031e6fef249f57c279949",
+    "6720e72eeff4d079-120.svg": "b3046eaf314b1c8473507016f38b957106bb2ada28ded41282ca85780fadcec5",
+    "6720e72eeff4d079-40.svg": "9588b738f69185c2967a7935ffa6eea94f48fe4c89022bfc5c233407e7d1fa38",
+    "77bcbde825d44efd-120.svg": "9fb1d1c4d420eaf6db450608003ff266b591d400c71ff1b98fe8376b99cfb1c3",
+    "77bcbde825d44efd-40.svg": "29c75e6233bbb8f1c4efddd9463c989a0ee4a8168e4bbdfdb7df6c5a66d6b2df",
+    "78eecedb44104872-120.svg": "e68f7780587b03ea411d4af0dd3e330b2124f755f5e380f346ec16e3c4ff6b58",
+    "78eecedb44104872-40.svg": "526f79642ee6fa1ec62b7b6dcfd1f164a72868518e8c8005cab57b0ff177afd0",
+    "907b3952ea96aafe-120.svg": "ccb3ac3e8ee3077041138396dc307adffba133f71ed06b9d673f9c7b829bcf95",
+    "907b3952ea96aafe-40.svg": "ba8e5c727db4c8c488a210a32566a48da105d8bdf6937b58524ee9999adde4ef",
+    "a68f09dcfd78f572-120.svg": "0a9c29d155c02eb6bf4931710ff02b99aa81a7eb8c22954af1c229d4425a69a6",
+    "a68f09dcfd78f572-40.svg": "526247b3f37ad6008f9f1d166e3c80236b2779ed2bffe9ee45cccd5d29bc3ef7",
+    "d5070c71e5f98361-120.svg": "19e1940e34ab1eab80643369b5e6862df87aa7a9caebec625c251b27d8f30d0d",
+    "d5070c71e5f98361-40.svg": "a4e0f8aa64f4221280042252f655ff1e1e0286f154f8d240404c7dfcb5dab562"
+  }
+}

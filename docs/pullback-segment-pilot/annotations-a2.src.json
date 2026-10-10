@@ -1,0 +1,35 @@
+{
+  "version": "pullback_segment_pilot_v1",
+  "kind": "a2_review_input",
+  "note": "B와 코드 대조를 본 뒤에 쓴 추가 검토다. 블라인드가 아니다. 날짜는 도구가 A 가격 파일에서 규칙으로 계산하고, 여기에는 상태(marked/hold/none)와 읽은 이유만 적는다. 기존 A 표시(annotations-a.json)는 바꾸지 않는다.",
+  "rules": {
+    "H_big": "큰 조정 시작 고점 = A 120거래일 창의 최고 고가(가장 이른 날). 판정일이 최고이면 none. 최고가 창의 첫 5봉 안이면 창 밖이 더 높을 수 있어 hold. 그 뒤 완료 봉이 2개 미만이면 hold. 5봉과 2봉은 이번 검토의 해석이며 원문 규칙이 아니다.",
+    "H_recent": "최근 재하락 시작 고점 = H_big 뒤 최저점(L_big) 다음에 나온 마지막 확정 피벗 고점(k=3, H_big보다 낮음). 없으면 H_big과 같다(재하락 없음). H_big이 none이면 A의 H main을 인용한다. 그 뒤 완료 봉이 2개 미만이면 hold."
+  },
+  "cases": [
+    {"case_id": "013ad9902972b826", "H_big": {"status": "none", "why": "판정일 고가가 창 최고다. 현재 진행 중인 큰 조정이 없다"}, "H_recent": {"source": "A_main", "status": "marked", "why": "H_big이 없어 A의 H main(1월 5일)을 인용했다. 판정일 신고가로 이미 넘어섰다"}},
+    {"case_id": "01bea56f4af0f31f", "H_big": {"status": "marked", "why": "창 최고는 3월 4일의 거래량 큰 하루 급등 봉이다. 그 뒤 6월 26일까지 약 49% 내렸다. 급등 봉이라 큰 조정의 출발로 볼지는 읽는 사람에 따라 갈린다"}, "H_recent": {"source": "rule", "status": "marked", "why": "저점 뒤 확정 피벗 고점 7월 24일에서 8월 3일까지 재하락"}},
+    {"case_id": "029fd9c7a4f3fcb6", "H_big": {"status": "marked", "why": "창 최고가 A의 H와 같다"}, "H_recent": {"source": "rule", "status": "marked", "why": "재하락 갈래가 없어 H_big과 같다"}},
+    {"case_id": "03779fd61d439aed", "H_big": {"status": "hold", "why": "창 최고 뒤 완료 봉이 하나뿐이라 큰 조정인지 판단할 수 없다"}, "H_recent": {"source": "rule", "status": "hold", "why": "하락이 한 봉이라 재하락 시작 고점을 정할 수 없다"}},
+    {"case_id": "03c915d929f4769a", "H_big": {"status": "marked", "why": "창 최고는 9월 30일의 거래량 큰 위꼬리 급등 봉이다. 저점이 바로 다음 날(10월 1일)이라 큰 조정이라기보다 급등 되돌림이다. 모호함이 높다"}, "H_recent": {"source": "rule", "status": "marked", "why": "10월 14일의 확정 피벗 고점에서 10월 20일까지 재하락"}},
+    {"case_id": "03d016b5e47bae98", "H_big": {"status": "hold", "why": "창 최고(5월 16일) 뒤 완료 봉이 하나뿐이다. 2~4월의 큰 조정은 고점(2월 26일 386,000)을 5월에 이미 넘었다"}, "H_recent": {"source": "rule", "status": "hold", "why": "하락이 한 봉이라 재하락 시작 고점을 정할 수 없다"}},
+    {"case_id": "05a3f1e796e376c7", "H_big": {"status": "hold", "why": "창 최고(2024년 11월 18일)가 창의 첫 5봉 안이라 창 밖이 더 높을 수 있다. 후보는 이 날짜이고, 같은 하락의 2월 18일 고점 2,370도 있다"}, "H_recent": {"source": "rule", "status": "marked", "why": "5월 2일의 확정 피벗 고점에서 5월 7일까지 재하락. 판정일 고가가 이 고점을 넘었으나 종가는 넘지 못했다"}},
+    {"case_id": "0628c0298c8155ce", "H_big": {"status": "marked", "why": "창 최고는 7월 11일 70,800. 9월 9일까지 약 58% 내려 큰 하락이었고, 현재 상승은 그 뒤의 반등이다. 중간에 낮아지는 고점이 여러 개라 시작 고점이 7월 11일보다 늦다고 볼 여지도 있다"}, "H_recent": {"source": "rule", "status": "marked", "why": "10월 25일의 확정 피벗 고점에서 10월 29일까지 재하락. 판정일 고가와 종가가 이 고점을 넘었다"}},
+    {"case_id": "065da101de4d728c", "H_big": {"status": "hold", "why": "창 최고(5월 8일)가 창의 첫 5봉 안이다. 그 뒤 낮아지는 고점(5월 23일 183,000, 7월 12일 181,600, 7월 15일 180,500)이 이어져 시작 고점을 하나로 정할 수 없다"}, "H_recent": {"source": "rule", "status": "marked", "why": "10월 21일의 확정 피벗 고점에서 10월 29일까지 재하락"}},
+    {"case_id": "0661fe259966d89d", "H_big": {"status": "marked", "why": "창 최고가 A의 H와 같다"}, "H_recent": {"source": "rule", "status": "marked", "why": "재하락 갈래가 없어 H_big과 같다. 4월 8~10일 거래량 0 봉이 창 안에 있다"}},
+    {"case_id": "06e4c870056806ab", "H_big": {"status": "marked", "why": "창 최고는 2024년 8월 29일 7,000. 12월 9일까지 약 60% 내렸고 현재 상승은 그 뒤의 반등이다"}, "H_recent": {"source": "rule", "status": "marked", "why": "1월 17일의 확정 피벗 고점에서 판정일까지 하락"}},
+    {"case_id": "0792ac2403c954e1", "H_big": {"status": "marked", "why": "창 최고가 A의 H와 같다"}, "H_recent": {"source": "rule", "status": "marked", "why": "재하락 갈래가 없어 H_big과 같다"}},
+    {"case_id": "19f9ea891800aab8", "H_big": {"status": "marked", "why": "창 최고가 A의 H와 같다"}, "H_recent": {"source": "rule", "status": "marked", "why": "재하락 갈래가 없어 H_big과 같다. 8월 29일에 낮아진 반등 고점이 있으나 확정 피벗이 아니다"}},
+    {"case_id": "2032f201c0c38f7f", "H_big": {"status": "marked", "why": "창 최고가 A의 H와 같다"}, "H_recent": {"source": "rule", "status": "marked", "why": "3월 4일 저점 뒤 반등한 3월 11일의 확정 피벗 고점에서 3월 13일까지 재하락"}},
+    {"case_id": "284171e508e3e7e0", "H_big": {"status": "marked", "why": "창 최고가 A의 H와 같다"}, "H_recent": {"source": "rule", "status": "marked", "why": "재하락 갈래가 없어 H_big과 같다. 이후 열 거래일은 좁은 횡보"}},
+    {"case_id": "30416c78c22d1d0e", "H_big": {"status": "marked", "why": "창 최고는 6월 25일 121,700. 8월 20일까지 약 34% 내렸다. 10월 29일 고점이 이 고점 바로 아래라 이중 천장으로도 읽힌다"}, "H_recent": {"source": "rule", "status": "marked", "why": "10월 29일의 확정 피벗 고점에서 11월 7일까지 재하락"}},
+    {"case_id": "37e84aadd60596f8", "H_big": {"status": "marked", "why": "창 최고는 6월 2일 464,000. 7월 29일까지 약 67% 내렸다"}, "H_recent": {"source": "rule", "status": "marked", "why": "9월 15일의 확정 피벗 고점에서 판정일까지 재하락"}},
+    {"case_id": "433ea121b8d5fb8e", "H_big": {"status": "marked", "why": "창 최고가 A의 H와 같다"}, "H_recent": {"source": "rule", "status": "marked", "why": "재하락 갈래가 없어 H_big과 같다"}},
+    {"case_id": "6720e72eeff4d079", "H_big": {"status": "marked", "why": "창 최고는 2월 14일 17,890(긴 위꼬리). 4월 9일까지 약 44% 내렸다"}, "H_recent": {"source": "rule", "status": "marked", "why": "5월 28일의 확정 피벗 고점에서 5월 30일까지 재하락"}},
+    {"case_id": "77bcbde825d44efd", "H_big": {"status": "marked", "why": "창 최고가 A의 H와 같다"}, "H_recent": {"source": "rule", "status": "marked", "why": "재하락 갈래가 없어 H_big과 같다"}},
+    {"case_id": "78eecedb44104872", "H_big": {"status": "marked", "why": "창 최고가 A의 H와 같다"}, "H_recent": {"source": "rule", "status": "marked", "why": "2월 6일 저점 뒤 반등한 2월 10일의 확정 피벗 고점에서 2월 13일까지 재하락. 저점은 더 높다"}},
+    {"case_id": "907b3952ea96aafe", "H_big": {"status": "marked", "why": "창 최고는 6월 26일의 거래량 큰 위꼬리 급등 봉이다. 저점이 이틀 뒤라 큰 조정이라기보다 급등 되돌림이다. 모호함이 높다"}, "H_recent": {"source": "rule", "status": "marked", "why": "7월 15일의 확정 피벗 고점에서 7월 17일까지 재하락"}},
+    {"case_id": "a68f09dcfd78f572", "H_big": {"status": "marked", "why": "창 최고가 A의 H와 같다"}, "H_recent": {"source": "rule", "status": "marked", "why": "재하락 갈래가 없어 H_big과 같다"}},
+    {"case_id": "d5070c71e5f98361", "H_big": {"status": "marked", "why": "창 최고는 5월 27일 30,550(긴 위꼬리). 7월 30일까지 약 73% 내렸다"}, "H_recent": {"source": "rule", "status": "marked", "why": "8월 28일의 확정 피벗 고점에서 9월 3일까지 재하락"}}
+  ]
+}

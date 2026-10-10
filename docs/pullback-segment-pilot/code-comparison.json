@@ -18,7 +18,21 @@
         "A_H_outside_target_window": 0,
         "decision_day_high_above_target_ref": 3,
         "with_common_block": 3,
-        "stop_ref_before_A_H": 7
+        "stop_ref_before_A_H": 7,
+        "breakout_target": {
+            "high_breakout_of_A_H_on_decision_day": 3,
+            "close_breakout_of_A_H_on_decision_day": 2,
+            "high_breakout_of_A_H_any_day_after_H": 3,
+            "close_breakout_of_A_H_any_day_after_H": 2,
+            "decision_high_above_target_ref": 3,
+            "decision_close_above_target_ref": 2,
+            "high_above_ref_but_close_not": 1,
+            "target_le_entry_with_stored_plan": 1,
+            "plans": 18,
+            "target_le_close_without_plan": 1,
+            "no_plan": 6,
+            "target_le_entry_matches_close_at_or_above_ref": 24
+        }
     },
     "a_freeze_commit_note": "annotations were frozen before this file was written",
     "a_freeze_sha256": "b26f3e006d2b688e32bd5eb93b363e409e33f104ee01dfd72d747b276bc67260",
@@ -203,10 +217,43 @@
                 "목표 기준 고점 2026-01-13(14,550)은 A의 H 2026-01-05(12,960)와 날짜가 다르다.",
                 "손절 기준 저점 2025-12-30(8,670)은 A의 L 2026-01-08(10,250)와 날짜가 다르다.",
                 "손절 기준 저점 2025-12-30은 A의 H 2026-01-05보다 앞이다. 코드의 10봉 창이 눌림이 아니라 그 앞의 상승 구간 저점을 잡았다.",
-                "판정일 고가 16,500가 목표 기준 창(마지막 봉 제외)의 최고 14,550보다 높다. 목표가 현재가 아래에 놓일 수 있다.",
-                "저장된 목표가 진입가 이하라 손익비가 0 이하이다.",
+                "판정일 고가 16,500가 목표 기준 최고 14,550를 넘었다(고가 돌파).",
+                "목표가 14,550가 저장된 진입가 14,980 이하이다. 종가가 목표 기준 이상인 경우다.",
+                "A의 H 2026-01-05 이후 고가 돌파 2026-01-12 · 종가 돌파 2026-01-12.",
                 "A는 눌림이 끝났을 수 있다고 읽었다."
-            ]
+            ],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2026-01-05",
+                    "high": 12960,
+                    "high_breakout": {
+                        "any_after_H": true,
+                        "first_date": "2026-01-12",
+                        "on_decision_day": true
+                    },
+                    "close_breakout": {
+                        "any_after_H": true,
+                        "first_date": "2026-01-12",
+                        "on_decision_day": true
+                    }
+                },
+                "target_reference": {
+                    "date": "2026-01-13",
+                    "high": 14550,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": true,
+                    "decision_close_above_ref": true,
+                    "decision_close_at_or_above_ref_after_truncation": true
+                },
+                "target_vs_entry": {
+                    "basis": "stored_entry",
+                    "entry_or_close": 14980,
+                    "target": 14550,
+                    "target_le_entry": true,
+                    "note": "저장된 진입가와 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "01bea56f4af0f31f",
@@ -350,7 +397,39 @@
             "tags": [],
             "notes": [
                 "이 날의 최종 계획은 trend_recovery이다. 눌림 패턴 자체 상태는 rejected_rr."
-            ]
+            ],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2026-07-24",
+                    "high": 156500,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2026-07-24",
+                    "high": 156500,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "stored_entry",
+                    "entry_or_close": 137600,
+                    "target": 156500,
+                    "target_le_entry": false,
+                    "note": "저장된 진입가와 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "029fd9c7a4f3fcb6",
@@ -497,7 +576,39 @@
             "notes": [
                 "손절 기준 저점 2026-01-02(44,250)은 A의 L 2026-01-15(48,900)와 날짜가 다르다.",
                 "손절 기준 저점 2026-01-02은 A의 H 2026-01-07보다 앞이다. 코드의 10봉 창이 눌림이 아니라 그 앞의 상승 구간 저점을 잡았다."
-            ]
+            ],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2026-01-07",
+                    "high": 60900,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2026-01-07",
+                    "high": 60900,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "decision_close_no_entry_plan",
+                    "entry_or_close": 50200,
+                    "target": 60900,
+                    "target_le_entry": false,
+                    "note": "실제 진입 계획이 없어 당일 종가(소수점 버림)와 후보 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "03779fd61d439aed",
@@ -644,7 +755,39 @@
             "notes": [
                 "손절 기준 저점 2025-09-24(19,880)은 A의 L 2025-10-14(25,150)와 날짜가 다르다.",
                 "손절 기준 저점 2025-09-24은 A의 H 2025-10-13보다 앞이다. 코드의 10봉 창이 눌림이 아니라 그 앞의 상승 구간 저점을 잡았다."
-            ]
+            ],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2025-10-13",
+                    "high": 28350,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2025-10-13",
+                    "high": 28350,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "decision_close_no_entry_plan",
+                    "entry_or_close": 26000,
+                    "target": 28350,
+                    "target_le_entry": false,
+                    "note": "실제 진입 계획이 없어 당일 종가(소수점 버림)와 후보 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "03c915d929f4769a",
@@ -792,7 +935,39 @@
                 "손절 기준 저점 2025-10-20(6,800)은 A의 L 2025-10-01(6,620)와 날짜가 다르다.",
                 "A의 L 2025-10-01은 코드의 손절 기준 창(최근 10봉, 2025-10-15부터) 밖이다. 창이 눌림 구간보다 짧다.",
                 "A는 눌림이 끝났을 수 있다고 읽었다."
-            ]
+            ],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2025-09-30",
+                    "high": 7640,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2025-09-30",
+                    "high": 7640,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "stored_entry",
+                    "entry_or_close": 7330,
+                    "target": 7640,
+                    "target_le_entry": false,
+                    "note": "저장된 진입가와 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "03d016b5e47bae98",
@@ -939,7 +1114,39 @@
             "notes": [
                 "손절 기준 저점 2025-05-02(317,000)은 A의 L 2025-05-19(384,000)와 날짜가 다르다.",
                 "손절 기준 저점 2025-05-02은 A의 H 2025-05-16보다 앞이다. 코드의 10봉 창이 눌림이 아니라 그 앞의 상승 구간 저점을 잡았다."
-            ]
+            ],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2025-05-16",
+                    "high": 409000,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2025-05-16",
+                    "high": 409000,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "decision_close_no_entry_plan",
+                    "entry_or_close": 393000,
+                    "target": 409000,
+                    "target_le_entry": false,
+                    "note": "실제 진입 계획이 없어 당일 종가(소수점 버림)와 후보 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "05a3f1e796e376c7",
@@ -1082,9 +1289,43 @@
             "primary_category": "structure_ok_excluded_by_target_rr",
             "tags": [],
             "notes": [
-                "판정일 고가 2,170가 목표 기준 창(마지막 봉 제외)의 최고 2,100보다 높다. 목표가 현재가 아래에 놓일 수 있다.",
+                "판정일 고가 2,170가 목표 기준 최고 2,100를 넘었다(고가 돌파).",
+                "종가 2,060는 목표 기준 아래라 목표가 진입가보다 높다. 고가 돌파만으로 목표가 진입가 이하가 되지 않는다.",
+                "A의 H 2025-05-02 이후 고가 돌파 2025-05-16 · 종가 돌파 없음.",
                 "A는 눌림이 끝났을 수 있다고 읽었다."
-            ]
+            ],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2025-05-02",
+                    "high": 2100,
+                    "high_breakout": {
+                        "any_after_H": true,
+                        "first_date": "2025-05-16",
+                        "on_decision_day": true
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2025-05-02",
+                    "high": 2100,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": true,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "stored_entry",
+                    "entry_or_close": 2060,
+                    "target": 2100,
+                    "target_le_entry": false,
+                    "note": "저장된 진입가와 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": true
+            }
         },
         {
             "case_id": "0628c0298c8155ce",
@@ -1238,10 +1479,44 @@
                 "목표 기준 고점 2024-10-25(43,500)은 A의 H 2024-10-07(40,850)와 날짜가 다르다.",
                 "손절 기준 저점 2024-10-18(33,600)은 A의 L 2024-10-17(33,150)와 날짜가 다르다.",
                 "A의 L 2024-10-17은 코드의 손절 기준 창(최근 10봉, 2024-10-18부터) 밖이다. 창이 눌림 구간보다 짧다.",
-                "판정일 고가 45,500가 목표 기준 창(마지막 봉 제외)의 최고 43,500보다 높다. 목표가 현재가 아래에 놓일 수 있다.",
+                "판정일 고가 45,500가 목표 기준 최고 43,500를 넘었다(고가 돌파).",
+                "목표가 43,500가 당일 종가(실제 진입 계획 없음) 44,600 이하이다. 종가가 목표 기준 이상인 경우다.",
+                "A의 H 2024-10-07 이후 고가 돌파 2024-10-23 · 종가 돌파 2024-10-23.",
                 "공통 차단 사유: context_wait → 최종 상태 context_wait.",
                 "A는 눌림이 끝났을 수 있다고 읽었다."
-            ]
+            ],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2024-10-07",
+                    "high": 40850,
+                    "high_breakout": {
+                        "any_after_H": true,
+                        "first_date": "2024-10-23",
+                        "on_decision_day": true
+                    },
+                    "close_breakout": {
+                        "any_after_H": true,
+                        "first_date": "2024-10-23",
+                        "on_decision_day": true
+                    }
+                },
+                "target_reference": {
+                    "date": "2024-10-25",
+                    "high": 43500,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": true,
+                    "decision_close_above_ref": true,
+                    "decision_close_at_or_above_ref_after_truncation": true
+                },
+                "target_vs_entry": {
+                    "basis": "decision_close_no_entry_plan",
+                    "entry_or_close": 44600,
+                    "target": 43500,
+                    "target_le_entry": true,
+                    "note": "실제 진입 계획이 없어 당일 종가(소수점 버림)와 후보 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "065da101de4d728c",
@@ -1385,7 +1660,39 @@
             "tags": [],
             "notes": [
                 "A는 눌림이 끝났을 수 있다고 읽었다."
-            ]
+            ],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2024-10-21",
+                    "high": 179200,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2024-10-21",
+                    "high": 179200,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "stored_entry",
+                    "entry_or_close": 175700,
+                    "target": 179200,
+                    "target_le_entry": false,
+                    "note": "저장된 진입가와 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "0661fe259966d89d",
@@ -1533,7 +1840,39 @@
                 "손절 기준 저점 2026-04-08(157,600)은 A의 L 2026-04-21(182,600)와 날짜가 다르다.",
                 "손절 기준 저점 2026-04-08은 A의 H 2026-04-14보다 앞이다. 코드의 10봉 창이 눌림이 아니라 그 앞의 상승 구간 저점을 잡았다.",
                 "손절 기준 봉 2026-04-08의 거래량이 0이다. 가격 파일 한계로 읽는다."
-            ]
+            ],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2026-04-14",
+                    "high": 200000,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2026-04-14",
+                    "high": 200000,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "decision_close_no_entry_plan",
+                    "entry_or_close": 184700,
+                    "target": 200000,
+                    "target_le_entry": false,
+                    "note": "실제 진입 계획이 없어 당일 종가(소수점 버림)와 후보 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "06e4c870056806ab",
@@ -1686,7 +2025,39 @@
                 "손절 기준 저점 2025-01-13(3,795)은 A의 L 2025-01-24(4,155)와 날짜가 다르다.",
                 "손절 기준 저점 2025-01-13은 A의 H 2025-01-17보다 앞이다. 코드의 10봉 창이 눌림이 아니라 그 앞의 상승 구간 저점을 잡았다.",
                 "공통 차단 사유: spike_dump → 최종 상태 risk_blocked."
-            ]
+            ],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2025-01-17",
+                    "high": 5170,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2025-01-17",
+                    "high": 5170,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "decision_close_no_entry_plan",
+                    "entry_or_close": 4170,
+                    "target": 5170,
+                    "target_le_entry": false,
+                    "note": "실제 진입 계획이 없어 당일 종가(소수점 버림)와 후보 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "0792ac2403c954e1",
@@ -1836,7 +2207,39 @@
             ],
             "notes": [
                 "공통 차단 사유: top_collapse → 최종 상태 risk_blocked."
-            ]
+            ],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2025-03-17",
+                    "high": 15110,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2025-03-17",
+                    "high": 15110,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "stored_entry",
+                    "entry_or_close": 13050,
+                    "target": 15110,
+                    "target_le_entry": false,
+                    "note": "저장된 진입가와 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "19f9ea891800aab8",
@@ -1978,7 +2381,39 @@
             },
             "primary_category": "consistent",
             "tags": [],
-            "notes": []
+            "notes": [],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2025-08-27",
+                    "high": 31350,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2025-08-27",
+                    "high": 31350,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "stored_entry",
+                    "entry_or_close": 26550,
+                    "target": 31350,
+                    "target_le_entry": false,
+                    "note": "저장된 진입가와 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "2032f201c0c38f7f",
@@ -2125,7 +2560,39 @@
             "notes": [
                 "손절 기준 저점 2026-03-09(108,000)은 A의 L 2026-03-04(106,700)와 날짜가 다르다.",
                 "A의 L 2026-03-04은 코드의 손절 기준 창(최근 10봉, 2026-03-05부터) 밖이다. 창이 눌림 구간보다 짧다."
-            ]
+            ],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2026-02-27",
+                    "high": 151900,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2026-02-27",
+                    "high": 151900,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "stored_entry",
+                    "entry_or_close": 120000,
+                    "target": 151900,
+                    "target_le_entry": false,
+                    "note": "저장된 진입가와 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "284171e508e3e7e0",
@@ -2267,7 +2734,39 @@
             },
             "primary_category": "consistent",
             "tags": [],
-            "notes": []
+            "notes": [],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2025-07-31",
+                    "high": 113200,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2025-07-31",
+                    "high": 113200,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "stored_entry",
+                    "entry_or_close": 103700,
+                    "target": 113200,
+                    "target_le_entry": false,
+                    "note": "저장된 진입가와 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "30416c78c22d1d0e",
@@ -2409,7 +2908,39 @@
             },
             "primary_category": "consistent",
             "tags": [],
-            "notes": []
+            "notes": [],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2025-10-29",
+                    "high": 117900,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2025-10-29",
+                    "high": 117900,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "stored_entry",
+                    "entry_or_close": 94300,
+                    "target": 117900,
+                    "target_le_entry": false,
+                    "note": "저장된 진입가와 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "37e84aadd60596f8",
@@ -2551,7 +3082,39 @@
             },
             "primary_category": "consistent",
             "tags": [],
-            "notes": []
+            "notes": [],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2026-09-15",
+                    "high": 352000,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2026-09-15",
+                    "high": 352000,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "stored_entry",
+                    "entry_or_close": 296500,
+                    "target": 352000,
+                    "target_le_entry": false,
+                    "note": "저장된 진입가와 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "433ea121b8d5fb8e",
@@ -2693,7 +3256,39 @@
             },
             "primary_category": "consistent",
             "tags": [],
-            "notes": []
+            "notes": [],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2025-02-13",
+                    "high": 91500,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2025-02-13",
+                    "high": 91500,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "stored_entry",
+                    "entry_or_close": 77400,
+                    "target": 91500,
+                    "target_le_entry": false,
+                    "note": "저장된 진입가와 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "6720e72eeff4d079",
@@ -2840,7 +3435,39 @@
             "notes": [
                 "손절 기준 저점 2025-05-30(12,390)은 A의 L 2025-05-20(12,270)와 날짜가 다르다.",
                 "A의 L 2025-05-20은 코드의 손절 기준 창(최근 10봉, 2025-05-21부터) 밖이다. 창이 눌림 구간보다 짧다."
-            ]
+            ],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2025-05-15",
+                    "high": 14230,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2025-05-15",
+                    "high": 14230,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "stored_entry",
+                    "entry_or_close": 12940,
+                    "target": 14230,
+                    "target_le_entry": false,
+                    "note": "저장된 진입가와 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "77bcbde825d44efd",
@@ -2987,7 +3614,39 @@
             "notes": [
                 "손절 기준 저점 2026-05-06(2,685)은 A의 L 2026-05-18(2,805)와 날짜가 다르다.",
                 "손절 기준 저점 2026-05-06은 A의 H 2026-05-07보다 앞이다. 코드의 10봉 창이 눌림이 아니라 그 앞의 상승 구간 저점을 잡았다."
-            ]
+            ],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2026-05-07",
+                    "high": 4675,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2026-05-07",
+                    "high": 4675,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "stored_entry",
+                    "entry_or_close": 3355,
+                    "target": 4675,
+                    "target_le_entry": false,
+                    "note": "저장된 진입가와 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "78eecedb44104872",
@@ -3129,7 +3788,39 @@
             },
             "primary_category": "consistent",
             "tags": [],
-            "notes": []
+            "notes": [],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2026-01-30",
+                    "high": 60300,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2026-01-30",
+                    "high": 60300,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "stored_entry",
+                    "entry_or_close": 49900,
+                    "target": 60300,
+                    "target_le_entry": false,
+                    "note": "저장된 진입가와 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "907b3952ea96aafe",
@@ -3276,7 +3967,39 @@
             "notes": [
                 "손절 기준 저점 2025-07-17(6,975)은 A의 L 2025-06-30(6,910)와 날짜가 다르다.",
                 "A의 L 2025-06-30은 코드의 손절 기준 창(최근 10봉, 2025-07-08부터) 밖이다. 창이 눌림 구간보다 짧다."
-            ]
+            ],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2025-06-26",
+                    "high": 8940,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2025-06-26",
+                    "high": 8940,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "stored_entry",
+                    "entry_or_close": 7435,
+                    "target": 8940,
+                    "target_le_entry": false,
+                    "note": "저장된 진입가와 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "a68f09dcfd78f572",
@@ -3418,7 +4141,39 @@
             },
             "primary_category": "consistent",
             "tags": [],
-            "notes": []
+            "notes": [],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2025-02-19",
+                    "high": 13300,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2025-02-19",
+                    "high": 13300,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "stored_entry",
+                    "entry_or_close": 10880,
+                    "target": 13300,
+                    "target_le_entry": false,
+                    "note": "저장된 진입가와 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         },
         {
             "case_id": "d5070c71e5f98361",
@@ -3565,7 +4320,39 @@
             "notes": [
                 "손절 기준 저점 2026-09-03(10,630)은 A의 L 2026-08-25(10,500)와 날짜가 다르다.",
                 "A의 L 2026-08-25은 코드의 손절 기준 창(최근 10봉, 2026-08-26부터) 밖이다. 창이 눌림 구간보다 짧다."
-            ]
+            ],
+            "breakout_target": {
+                "A_H": {
+                    "date": "2026-08-13",
+                    "high": 13400,
+                    "high_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    },
+                    "close_breakout": {
+                        "any_after_H": false,
+                        "first_date": null,
+                        "on_decision_day": false
+                    }
+                },
+                "target_reference": {
+                    "date": "2026-08-13",
+                    "high": 13400,
+                    "window": "20 bars before the last bar, decision day excluded",
+                    "decision_high_above_ref": false,
+                    "decision_close_above_ref": false,
+                    "decision_close_at_or_above_ref_after_truncation": false
+                },
+                "target_vs_entry": {
+                    "basis": "stored_entry",
+                    "entry_or_close": 11600,
+                    "target": 13400,
+                    "target_le_entry": false,
+                    "note": "저장된 진입가와 목표가를 비교한 값"
+                },
+                "high_above_ref_but_close_not": false
+            }
         }
     ]
 }

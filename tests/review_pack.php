@@ -47,4 +47,34 @@ $lastValid=null;foreach($ma['ma20'] as $i=>$v)if($v!==null&&empty($shown[$i]['oh
 check($lastValid===$plain[array_key_last($plain)],'moving averages skip an invalid close the same way the engine drops that bar');
 $empty=PaperReviewCharts::svg(['bars'=>[],'ma20'=>[],'ma60'=>[],'last_at'=>0],[],'빈 창',true);
 check(str_contains($empty,'이 창에 그릴 완료 봉이 없다'),'an empty window is labeled instead of inventing a candle');
+
+$pane=90.0;
+check(PaperReviewCharts::volumeHeight(400,$pane===0?1:400,$pane)/PaperReviewCharts::volumeHeight(100,400,$pane)===4.0,'volume height grows in proportion to volume');
+$volBars=[];
+foreach([100,400] as $i=>$volume){
+    $day=(new DateTimeImmutable('2026-03-02',$kst))->modify('+'.$i.' days')->setTime(15,30);
+    $volBars[]=['available_at'=>$day->getTimestamp(),'open'=>10,'high'=>11,'low'=>9,'close'=>10,'volume'=>$volume,'ohlc_invalid'=>false];
+}
+$volView=['bars'=>$volBars,'ma20'=>[null,null],'ma60'=>[null,null],'last_at'=>$volBars[1]['available_at']];
+$volSvg=PaperReviewCharts::svg($volView,[],'거래량',true,'005930.KS');
+preg_match_all('/<rect x="[0-9.]+" y="([0-9.]+)" width="[0-9.]+" height="([0-9.]+)"/',$volSvg,$volRects,PREG_SET_ORDER);
+$heights=[];
+foreach($volRects as $rect)if((float)$rect[1]>300)$heights[]=(float)$rect[2];
+check(count($heights)===2&&abs(($heights[1]/$heights[0])-(400/100))<0.001&&$heights[0]!==4.4,'drawn volume bars keep the volume ratio and do not use a fixed height');
+check(str_contains($volSvg,'2026-03-02')&&str_contains($volSvg,'2026-03-03'),'the chart prints the bar dates');
+check(str_contains($volSvg,'text-anchor="end"')&&str_contains($volSvg,'text-anchor="start"'),'the first and last date labels stay inside the chart');
+
+$spell=[
+    ['symbol'=>'A','pattern'=>'breakout_retest','status'=>'await_retest','session'=>1,'breakout_at'=>10],
+    ['symbol'=>'A','pattern'=>'breakout_retest','status'=>'await_retest','session'=>2,'breakout_at'=>10],
+    ['symbol'=>'A','pattern'=>'breakout_retest','status'=>'invalidated','session'=>3,'breakout_at'=>10],
+    ['symbol'=>'A','pattern'=>'trend_pullback','status'=>'wait_pullback','session'=>4],
+    ['symbol'=>'A','pattern'=>'trend_pullback','status'=>'wait_pullback','session'=>5],
+    ['symbol'=>'A','pattern'=>'trend_pullback','status'=>'await_confirmation','session'=>6],
+    ['symbol'=>'A','pattern'=>'trend_recovery','status'=>'no_upper_target','session'=>7,'breakdown_at'=>9],
+];
+$kept=PaperReviewPack::firstStructures($spell);
+check(count($kept)===5,'repeated days of one structure and status stay one case, and a new status is separate');
+$upper=['pattern'=>'trend_recovery','operational_ready'=>false,'raw'=>['ready'=>false,'status'=>'no_upper_target'],'independent_blockers'=>[],'stage'=>null];
+check(PaperReviewPack::bucket($upper)===null,'no_upper_target is not filed as the whole waiting bucket');
 echo "OK\n";

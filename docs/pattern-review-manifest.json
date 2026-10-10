@@ -1,13 +1,13 @@
 {
     "schema": 1,
     "kind": "pattern_review_pack_v1",
-    "commit": "0f299284ca4650ff09d2bea4bdd7d83db44e4114",
+    "commit": "339ff1401b83b31deadadcd68606b40ebdcd4581",
     "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
     "profile": "account1",
     "context_applied": true,
     "sampling": {
         "selected": "every final selected trade of the three patterns, every status",
-        "not_selected": "at most 10 structures per dataset, pattern and bucket, in case_id order. Buckets: ready_blocked, ready_not_selected, rejected_rr, await_or_invalid, higher_low_watch, higher_low_breakout. Returns are not used. Repeated days of one replay key stay one structure.",
+        "not_selected": "at most 10 structures per dataset, pattern and bucket, in case_id order. Replay buckets: ready_blocked, ready_not_selected, rejected_rr, higher_low_watch, higher_low_breakout. Waiting and invalid statuses are read from the daily engine judgment, not only from confirmation events: await_retest, await_confirmation, wait_pullback, await_recovery, await_higher_low, invalidated, expired, no_upper_target, invalid_levels. no_upper_target is its own status. The same structure and status keeps its first day only. Pullback spells are consecutive days of one status. Returns are not used.",
         "no_signal": "60 evaluated sessions per dataset with no replay event. Spread across months; remainder goes to the earliest months. Within a month, case_id order, at most 3 per symbol unless the month would otherwise be short.",
         "quality_blocked": "at most 20 per dataset, same month and symbol rule. No later prices are used to choose them.",
         "case_id": "sha256(dataset|cohort|symbol|session|pattern) first 16 hex characters"
@@ -53,12 +53,23 @@
                 "breakout_retest|rejected_rr": 124,
                 "higher_low|higher_low_watch": 295,
                 "trend_pullback|rejected_rr": 545,
-                "trend_recovery|await_or_invalid": 23,
                 "higher_low|higher_low_breakout": 97,
                 "trend_pullback|ready_blocked": 42,
                 "trend_recovery|ready_blocked": 7,
                 "trend_recovery|rejected_rr": 192,
-                "trend_recovery|ready_not_selected": 1
+                "trend_recovery|ready_not_selected": 1,
+                "trend_pullback|await_confirmation": 514,
+                "trend_recovery|expired": 419,
+                "breakout_retest|await_retest": 1484,
+                "breakout_retest|await_confirmation": 634,
+                "breakout_retest|expired": 273,
+                "trend_pullback|wait_pullback": 385,
+                "trend_recovery|await_recovery": 531,
+                "trend_recovery|await_higher_low": 403,
+                "trend_recovery|invalidated": 152,
+                "breakout_retest|invalidated": 526,
+                "trend_recovery|no_upper_target": 23,
+                "trend_recovery|await_confirmation": 219
             },
             "kr-saved-scan-20251008": {
                 "trend_pullback|rejected_rr": 469,
@@ -68,12 +79,23 @@
                 "higher_low|higher_low_breakout": 107,
                 "trend_recovery|ready_blocked": 8,
                 "trend_pullback|ready_blocked": 49,
-                "trend_recovery|await_or_invalid": 13
+                "breakout_retest|expired": 245,
+                "trend_recovery|await_recovery": 517,
+                "trend_pullback|await_confirmation": 470,
+                "breakout_retest|await_retest": 1247,
+                "breakout_retest|await_confirmation": 631,
+                "trend_recovery|expired": 391,
+                "trend_pullback|wait_pullback": 353,
+                "breakout_retest|invalidated": 454,
+                "trend_recovery|await_higher_low": 409,
+                "trend_recovery|await_confirmation": 220,
+                "trend_recovery|invalidated": 148,
+                "trend_recovery|no_upper_target": 13
             }
         },
         "bucket_charts": {
-            "kr-saved-scan-20261009": 78,
-            "kr-saved-scan-20251008": 78
+            "kr-saved-scan-20261009": 188,
+            "kr-saved-scan-20251008": 188
         },
         "no_signal_candidates": {
             "kr-saved-scan-20261009": 33123,
@@ -92,7 +114,7 @@
             "kr-saved-scan-20251008": 20
         }
     },
-    "cases": 526,
+    "cases": 746,
     "problems": [],
     "case_index": [
         {
@@ -961,70 +983,70 @@
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "await_breakout"
+            "status": "higher_low_watch"
         },
         {
             "case_id": "01917407f1e8ca56",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "await_breakout"
+            "status": "higher_low_watch"
         },
         {
             "case_id": "0222d92d794187f9",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "await_breakout"
+            "status": "higher_low_watch"
         },
         {
             "case_id": "03b2cd3491524607",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "await_breakout"
+            "status": "higher_low_watch"
         },
         {
             "case_id": "0400bab1c55b02d1",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "await_breakout"
+            "status": "higher_low_watch"
         },
         {
             "case_id": "043a2f1fa47db88e",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "await_breakout"
+            "status": "higher_low_watch"
         },
         {
             "case_id": "052996426db618ac",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "await_breakout"
+            "status": "higher_low_watch"
         },
         {
             "case_id": "061e533912a67de9",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "await_breakout"
+            "status": "higher_low_watch"
         },
         {
             "case_id": "062b04b554b153aa",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "await_breakout"
+            "status": "higher_low_watch"
         },
         {
             "case_id": "06e9078b10cf33ec",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "await_breakout"
+            "status": "higher_low_watch"
         },
         {
             "case_id": "00307f977ff18a54",
@@ -1097,263 +1119,193 @@
             "status": "rejected_rr"
         },
         {
-            "case_id": "0000fa0d2aed15ce",
-            "dataset": "kr-saved-scan-20261009",
-            "cohort": "not_selected",
-            "pattern": "trend_recovery",
-            "status": "no_upper_target"
-        },
-        {
-            "case_id": "07a0b672b14ea5ce",
-            "dataset": "kr-saved-scan-20261009",
-            "cohort": "not_selected",
-            "pattern": "trend_recovery",
-            "status": "no_upper_target"
-        },
-        {
-            "case_id": "07be97a221b14e93",
-            "dataset": "kr-saved-scan-20261009",
-            "cohort": "not_selected",
-            "pattern": "trend_recovery",
-            "status": "no_upper_target"
-        },
-        {
-            "case_id": "0b1224fe78925532",
-            "dataset": "kr-saved-scan-20261009",
-            "cohort": "not_selected",
-            "pattern": "trend_recovery",
-            "status": "no_upper_target"
-        },
-        {
-            "case_id": "0f93e2b8207f29cd",
-            "dataset": "kr-saved-scan-20261009",
-            "cohort": "not_selected",
-            "pattern": "trend_recovery",
-            "status": "no_upper_target"
-        },
-        {
-            "case_id": "12cfe20d32f61aa7",
-            "dataset": "kr-saved-scan-20261009",
-            "cohort": "not_selected",
-            "pattern": "trend_recovery",
-            "status": "no_upper_target"
-        },
-        {
-            "case_id": "1464371d791a527e",
-            "dataset": "kr-saved-scan-20261009",
-            "cohort": "not_selected",
-            "pattern": "trend_recovery",
-            "status": "no_upper_target"
-        },
-        {
-            "case_id": "34c4e463803b4259",
-            "dataset": "kr-saved-scan-20261009",
-            "cohort": "not_selected",
-            "pattern": "trend_recovery",
-            "status": "no_upper_target"
-        },
-        {
-            "case_id": "356589c4786de9c2",
-            "dataset": "kr-saved-scan-20261009",
-            "cohort": "not_selected",
-            "pattern": "trend_recovery",
-            "status": "no_upper_target"
-        },
-        {
-            "case_id": "3587014e4a28c2d8",
-            "dataset": "kr-saved-scan-20261009",
-            "cohort": "not_selected",
-            "pattern": "trend_recovery",
-            "status": "no_upper_target"
-        },
-        {
             "case_id": "02940b2f33d82ce9",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "breakout_observed"
+            "status": "higher_low_breakout"
         },
         {
             "case_id": "05436877fb5aefa9",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "breakout_observed"
+            "status": "higher_low_breakout"
         },
         {
             "case_id": "056098d56fcf6dd9",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "breakout_observed"
+            "status": "higher_low_breakout"
         },
         {
             "case_id": "08ef33827b5f257c",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "breakout_observed"
+            "status": "higher_low_breakout"
         },
         {
             "case_id": "0bafc00a10a90be6",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "breakout_observed"
+            "status": "higher_low_breakout"
         },
         {
             "case_id": "0c6eaa5b8857db93",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "breakout_observed"
+            "status": "higher_low_breakout"
         },
         {
             "case_id": "0eb311af6263952a",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "breakout_observed"
+            "status": "higher_low_breakout"
         },
         {
             "case_id": "10c8e838c951b9b0",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "breakout_observed"
+            "status": "higher_low_breakout"
         },
         {
             "case_id": "13614291490a5804",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "breakout_observed"
+            "status": "higher_low_breakout"
         },
         {
             "case_id": "13b89b3274238493",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "breakout_observed"
+            "status": "higher_low_breakout"
         },
         {
             "case_id": "07530b1f6091dce4",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "trend_pullback",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "0841885e23c614ec",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "trend_pullback",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "187ce3b76e532556",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "trend_pullback",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "19e0a3dc1e991751",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "trend_pullback",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "1a75d988362a88f6",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "trend_pullback",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "1d8d65386f47e857",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "trend_pullback",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "230aab1440653003",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "trend_pullback",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "25daaa2bfa80d98a",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "trend_pullback",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "27b14462480e7633",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "trend_pullback",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "2873912c7c4e513b",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "trend_pullback",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "437f72218cd2a2b2",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "45a265c2ae376894",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "483638a26dfc6283",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "650e76af74bf6dbc",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "b732ce207ab185f8",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "b79f46d1e84c28f8",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "e2c367608e919794",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "0208f5fe08e410fe",
@@ -1430,427 +1382,1267 @@
             "dataset": "kr-saved-scan-20261009",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
-            "status": "ready"
+            "status": "ready_not_selected"
+        },
+        {
+            "case_id": "00489b6312bbb3ee",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "008906ec37bb253e",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "01189b7b389b902e",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "02310626780f5b50",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "02f04b07c7489b8d",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "03779fd61d439aed",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "038b8ccdfbd28973",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "039d1ff40b19cfde",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "05262de33326815f",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "053f66c2bc645c69",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "0045918294b83786",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "expired"
+        },
+        {
+            "case_id": "00ecd004d8715a45",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "expired"
+        },
+        {
+            "case_id": "01770d0b9a29b690",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "expired"
+        },
+        {
+            "case_id": "01aa3042fd0b5ede",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "expired"
+        },
+        {
+            "case_id": "0277ecb9f20943a7",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "expired"
+        },
+        {
+            "case_id": "0407cf99073efd2b",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "expired"
+        },
+        {
+            "case_id": "04b6c8282ec983fe",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "expired"
+        },
+        {
+            "case_id": "06b4c2abee1d3b50",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "expired"
+        },
+        {
+            "case_id": "07ff45bf8af320fd",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "expired"
+        },
+        {
+            "case_id": "08d3f32e2db30d38",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "expired"
+        },
+        {
+            "case_id": "0025a8dce4cf23f4",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_retest"
+        },
+        {
+            "case_id": "0095542f8251af95",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_retest"
+        },
+        {
+            "case_id": "00ba08464aaea892",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_retest"
+        },
+        {
+            "case_id": "0106cf5fd301eed5",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_retest"
+        },
+        {
+            "case_id": "011e75e2c4267aa9",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_retest"
+        },
+        {
+            "case_id": "013fd4931f5e8f01",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_retest"
+        },
+        {
+            "case_id": "014289451e534eea",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_retest"
+        },
+        {
+            "case_id": "01566aee0bcae6a8",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_retest"
+        },
+        {
+            "case_id": "018b8a087eed041c",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_retest"
+        },
+        {
+            "case_id": "01d02d2d0a04db3e",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_retest"
+        },
+        {
+            "case_id": "009c7eb2328d943d",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "0154d3f76af073f0",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "01573d045f8cc451",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "01d907511b8e9b1c",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "01fc94fc8bff5cb5",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "02b41c4fb6934b3f",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "045ebb6bc0d021db",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "04e259e1fd00e0ae",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "05390e80e997622d",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "0571bb214d30eb75",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "01390eb76506057f",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "expired"
+        },
+        {
+            "case_id": "02c2319d72aff4dc",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "expired"
+        },
+        {
+            "case_id": "039ce89d880828c2",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "expired"
+        },
+        {
+            "case_id": "0533d12c1dc5db24",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "expired"
+        },
+        {
+            "case_id": "05b866cb11ed3b97",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "expired"
+        },
+        {
+            "case_id": "05db9d9daef018fa",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "expired"
+        },
+        {
+            "case_id": "06725ae1a35791d7",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "expired"
+        },
+        {
+            "case_id": "06b40894cf35a163",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "expired"
+        },
+        {
+            "case_id": "07b0f6ba48499500",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "expired"
+        },
+        {
+            "case_id": "091c51e629001a86",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "expired"
+        },
+        {
+            "case_id": "0036e1773449b404",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "wait_pullback"
+        },
+        {
+            "case_id": "00aceeab2965348e",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "wait_pullback"
+        },
+        {
+            "case_id": "01488a2093cf3e30",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "wait_pullback"
+        },
+        {
+            "case_id": "029fd9c7a4f3fcb6",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "wait_pullback"
+        },
+        {
+            "case_id": "05a0472bcc0e9415",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "wait_pullback"
+        },
+        {
+            "case_id": "05c36651f48116b2",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "wait_pullback"
+        },
+        {
+            "case_id": "05c7f84d9ce28559",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "wait_pullback"
+        },
+        {
+            "case_id": "0661fe259966d89d",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "wait_pullback"
+        },
+        {
+            "case_id": "067a62d3ccc14198",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "wait_pullback"
+        },
+        {
+            "case_id": "06d850d51ca567a9",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "wait_pullback"
+        },
+        {
+            "case_id": "00643eb7488edca2",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_recovery"
+        },
+        {
+            "case_id": "007950c8b3202f76",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_recovery"
+        },
+        {
+            "case_id": "01e727864388a8eb",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_recovery"
+        },
+        {
+            "case_id": "027a84ca25f35828",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_recovery"
+        },
+        {
+            "case_id": "02ba87b8c5aae1a0",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_recovery"
+        },
+        {
+            "case_id": "03247e36151ef80a",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_recovery"
+        },
+        {
+            "case_id": "0338efff39a291f1",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_recovery"
+        },
+        {
+            "case_id": "0394df34a3e7962d",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_recovery"
+        },
+        {
+            "case_id": "043c44e5e6fb59b9",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_recovery"
+        },
+        {
+            "case_id": "047057f557ecdb7c",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_recovery"
+        },
+        {
+            "case_id": "001c1145b33ad7fd",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_higher_low"
+        },
+        {
+            "case_id": "003d8bc5ad5dbc9f",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_higher_low"
+        },
+        {
+            "case_id": "00dd0f1d1acbac83",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_higher_low"
+        },
+        {
+            "case_id": "01cd04602b583b3f",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_higher_low"
+        },
+        {
+            "case_id": "01f06590859cdac8",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_higher_low"
+        },
+        {
+            "case_id": "03cb03b652baf0d3",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_higher_low"
+        },
+        {
+            "case_id": "0454b897f1c5f7e3",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_higher_low"
+        },
+        {
+            "case_id": "05468cbe7b018941",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_higher_low"
+        },
+        {
+            "case_id": "059bf953beabbdb2",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_higher_low"
+        },
+        {
+            "case_id": "05aad7cd1c43b941",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_higher_low"
+        },
+        {
+            "case_id": "025dabfb3b17567f",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "02d390d9a71345d2",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "030cc42f57b4ca78",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "034b574fee751c43",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "04df17cd38548839",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "0536c477a001e94e",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "0712bc67b3c30c01",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "07a68454c80fb796",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "0908f6135613f79f",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "094d85647dced7a5",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "003a857dade27f51",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "013f14ebdfd6867d",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "018aa5c380d3695c",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "0208d573e9f82cf6",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "0246397473cbbf50",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "0262475f71270813",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "029cbc77446d19ce",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "0395494381b1d032",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "04ad582b8e873870",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "05e14c9d5d7c1912",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "27d80e04c71c29cc",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "no_upper_target"
+        },
+        {
+            "case_id": "2f0171f40da5be9c",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "no_upper_target"
+        },
+        {
+            "case_id": "30f92711170ab08f",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "no_upper_target"
+        },
+        {
+            "case_id": "3691aa9a460b99d3",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "no_upper_target"
+        },
+        {
+            "case_id": "378c5671f6996aa0",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "no_upper_target"
+        },
+        {
+            "case_id": "427c56593d519973",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "no_upper_target"
+        },
+        {
+            "case_id": "5cd7cedc287dfeef",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "no_upper_target"
+        },
+        {
+            "case_id": "691793a6bd1ffd62",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "no_upper_target"
+        },
+        {
+            "case_id": "6b51c17e29580ac8",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "no_upper_target"
+        },
+        {
+            "case_id": "775f195d321d0a3d",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "no_upper_target"
+        },
+        {
+            "case_id": "00de89816b619ff5",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "00e7007b3ed1ce82",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "030485e56a2f816c",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "035ac3ea70fd32e7",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "03e2c1d38941147d",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "0435df6e596bd953",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "0694c9958f8c6233",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "06ae3a16852a718a",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "088eba92c8f312c0",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "08b76eee5f35c475",
+            "dataset": "kr-saved-scan-20261009",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_confirmation"
         },
         {
             "case_id": "00224e04c0085445",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "003d867c7fbb170d",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0058ea06ffb69852",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "005f8009e841ed3c",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00908aa222eb5a69",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "000510fbfbf7f3ed",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00079ea408cfb163",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "001938ce3a6b138e",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00216d965e70d636",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00223ddfc4163eec",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00147406a3e614b4",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00163bf2856f2081",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "001c001f04a53c10",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0039cb57714f2211",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "003fd380d2099d81",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00325f241506937f",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0054a99393406986",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00686c65a4fcc9cc",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "006eff19e3e793ed",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "008095a27c97bd33",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "000cc1ae74973804",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "005cfc83e054d3f9",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00850b56d2a76b46",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "008a3c5dbaf05475",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "009816850f429006",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "001d3f0ce2dd8ed9",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00285c3cb97ca389",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "002a02ba83253690",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "003f8e916d49e64b",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0045f2446efa9cf8",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "001f41677e096715",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0022c0164af8e797",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0029f3ab4fd8b6c1",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "003840bcec2984dc",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "003fd35f5b02a152",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "002cd2154206fd93",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0032168f5b5c9ce2",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0035b330b32609d4",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0039595d2978fb23",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00655e8439f11cbe",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0007a640cc02873f",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "001840cb7fdacec4",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "004c142e8280401d",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "004eed4549bc53ab",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "001b467f69da4550",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0032e85ad823495e",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "003ecb7bc99c5d90",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "005e8ad83ae2a712",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0001dc68be911ae9",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00064898cbb07dac",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "001939e32594323c",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00372054e1a01934",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00058f6e74883a1a",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0044f13d210806cd",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "006f0ed749414f8b",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00731a3253ba2e71",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "001b0d135045a8ac",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0023c6a54c22f2a4",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "008e75e9230ac4fb",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00ab10332fbbf76b",
             "dataset": "kr-saved-scan-20261009",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "1553383fd1f82e94",
@@ -2886,332 +3678,1102 @@
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "await_breakout"
+            "status": "higher_low_watch"
         },
         {
             "case_id": "02178d946401711a",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "await_breakout"
+            "status": "higher_low_watch"
         },
         {
             "case_id": "026f254daba1f981",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "await_breakout"
+            "status": "higher_low_watch"
         },
         {
             "case_id": "03013aaf218c404a",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "await_breakout"
+            "status": "higher_low_watch"
         },
         {
             "case_id": "03ef6fee3dd8de6c",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "await_breakout"
+            "status": "higher_low_watch"
         },
         {
             "case_id": "048aa227fc5cecbf",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "await_breakout"
+            "status": "higher_low_watch"
         },
         {
             "case_id": "04b209c873a8454d",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "await_breakout"
+            "status": "higher_low_watch"
         },
         {
             "case_id": "0807a5ac237c14ef",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "await_breakout"
+            "status": "higher_low_watch"
         },
         {
             "case_id": "086fa4e7e7adfc18",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "await_breakout"
+            "status": "higher_low_watch"
         },
         {
             "case_id": "08d5be550240cd68",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "await_breakout"
+            "status": "higher_low_watch"
         },
         {
             "case_id": "0069f45cd215db3e",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "breakout_observed"
+            "status": "higher_low_breakout"
         },
         {
             "case_id": "04745ef60669f111",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "breakout_observed"
+            "status": "higher_low_breakout"
         },
         {
             "case_id": "06a3ffeaae56323e",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "breakout_observed"
+            "status": "higher_low_breakout"
         },
         {
             "case_id": "0889ad5c5acc80da",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "breakout_observed"
+            "status": "higher_low_breakout"
         },
         {
             "case_id": "0bdcc5f5eea33e5e",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "breakout_observed"
+            "status": "higher_low_breakout"
         },
         {
             "case_id": "0be553b1eeddb469",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "breakout_observed"
+            "status": "higher_low_breakout"
         },
         {
             "case_id": "0bff8b9ed3b1f907",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "breakout_observed"
+            "status": "higher_low_breakout"
         },
         {
             "case_id": "0c009e845b79ffbe",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "breakout_observed"
+            "status": "higher_low_breakout"
         },
         {
             "case_id": "0d7ba98f998ac302",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "breakout_observed"
+            "status": "higher_low_breakout"
         },
         {
             "case_id": "127ec8f38471a57f",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "higher_low",
-            "status": "breakout_observed"
+            "status": "higher_low_breakout"
         },
         {
             "case_id": "0276ad236565e60b",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "310f61ad75b9dd36",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "318ad5049b7d0f13",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "7d3f25750cddf0e6",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "886ec713847809ba",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "b3c6872d80cdb70b",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "d97fe0cd05077c08",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "df5b71c43fae1558",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "058811bb5377e09f",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_pullback",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "0d9368feed84cee5",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_pullback",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "1004d42445ec2e4d",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_pullback",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "14ce17abebb11993",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_pullback",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "17aece9905061966",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_pullback",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "1a87cf8fb4d15f44",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_pullback",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "2c25632b6396ad90",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_pullback",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "2c2df688cf19b22b",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_pullback",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "37e4864e9d2ff050",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_pullback",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
             "case_id": "393b419999addbc8",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_pullback",
-            "status": "ready"
+            "status": "ready_blocked"
         },
         {
-            "case_id": "0ba6166e34b0473f",
+            "case_id": "00d16406fd6c70e5",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "expired"
+        },
+        {
+            "case_id": "01da36fd5bb4e78a",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "expired"
+        },
+        {
+            "case_id": "02c7e2f204dfa4d5",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "expired"
+        },
+        {
+            "case_id": "0461df4bae9dba17",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "expired"
+        },
+        {
+            "case_id": "05d62cdedbff1075",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "expired"
+        },
+        {
+            "case_id": "06e8e58c58a8e2d0",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "expired"
+        },
+        {
+            "case_id": "073d477280e4185c",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "expired"
+        },
+        {
+            "case_id": "08a1c8bb75b43f8b",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "expired"
+        },
+        {
+            "case_id": "08cf00c37a6c869d",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "expired"
+        },
+        {
+            "case_id": "08e9572846d8a7c6",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "expired"
+        },
+        {
+            "case_id": "01c3eeb8a028ad3c",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_recovery"
+        },
+        {
+            "case_id": "02e2a9029c50c917",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_recovery"
+        },
+        {
+            "case_id": "0306f1bbea4cd563",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_recovery"
+        },
+        {
+            "case_id": "0340506de39e3cb2",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_recovery"
+        },
+        {
+            "case_id": "0341575e8d72e748",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_recovery"
+        },
+        {
+            "case_id": "061432d0ef18827b",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_recovery"
+        },
+        {
+            "case_id": "06620e9fbf8e84eb",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_recovery"
+        },
+        {
+            "case_id": "067be0b3d5453647",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_recovery"
+        },
+        {
+            "case_id": "0897296b09eb14f3",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_recovery"
+        },
+        {
+            "case_id": "08bedd8fcbe6df5e",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_recovery"
+        },
+        {
+            "case_id": "01ede366afbcdda7",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "031cda0c65ab91d3",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "0342d194252fbabb",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "04e0cd4060b67d0b",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "0517aa37cc226a7d",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "058cb20a13952b8e",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "05b5dbd9b3513dad",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "061126f9b28fbe25",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "0628c0298c8155ce",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "063a5b72c29b36a1",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "007307861dff94a7",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_retest"
+        },
+        {
+            "case_id": "008ef7cdffc37524",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_retest"
+        },
+        {
+            "case_id": "0139279646d5ab1f",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_retest"
+        },
+        {
+            "case_id": "013d9906a5f8ec08",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_retest"
+        },
+        {
+            "case_id": "01571829331215eb",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_retest"
+        },
+        {
+            "case_id": "017ca364c5e2c9f6",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_retest"
+        },
+        {
+            "case_id": "0195712ab0d41eb2",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_retest"
+        },
+        {
+            "case_id": "02182735f4bf9846",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_retest"
+        },
+        {
+            "case_id": "0287cdb8bc6b5030",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_retest"
+        },
+        {
+            "case_id": "029af8c0e925564c",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_retest"
+        },
+        {
+            "case_id": "003250123440d9cf",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "00b337d15d5a0bcb",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "00d3017cb22d245f",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "00f15dffe35e27e3",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "0210c82c855c357a",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "0214a349f0d2fa90",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "0288b93f76396743",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "02dd8f0a595d1f7c",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "034830a1126ce7de",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "036d0b7be6491286",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "00edb1ab178d44f0",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "expired"
+        },
+        {
+            "case_id": "012ce60112c45fa2",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "expired"
+        },
+        {
+            "case_id": "02c74f0b3a448cf3",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "expired"
+        },
+        {
+            "case_id": "02cea30be87f534b",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "expired"
+        },
+        {
+            "case_id": "0352aa5f5b69ca08",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "expired"
+        },
+        {
+            "case_id": "03bbbb1f290e7b43",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "expired"
+        },
+        {
+            "case_id": "049992da43705b63",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "expired"
+        },
+        {
+            "case_id": "0508e5a63a3bc62a",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "expired"
+        },
+        {
+            "case_id": "06c02324c60a58f4",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "expired"
+        },
+        {
+            "case_id": "06d44957eaf544ee",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "expired"
+        },
+        {
+            "case_id": "013ed65ef290dedf",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "wait_pullback"
+        },
+        {
+            "case_id": "01a01cc0dfdf1aea",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "wait_pullback"
+        },
+        {
+            "case_id": "03a493782448f70b",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "wait_pullback"
+        },
+        {
+            "case_id": "03d016b5e47bae98",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "wait_pullback"
+        },
+        {
+            "case_id": "0592743438bec40e",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "wait_pullback"
+        },
+        {
+            "case_id": "05956b13d22659cd",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "wait_pullback"
+        },
+        {
+            "case_id": "06038ab8469dd1ee",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "wait_pullback"
+        },
+        {
+            "case_id": "068227edb2e6a7d6",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "wait_pullback"
+        },
+        {
+            "case_id": "06e4c870056806ab",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "wait_pullback"
+        },
+        {
+            "case_id": "07c28e585e2d60e6",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_pullback",
+            "status": "wait_pullback"
+        },
+        {
+            "case_id": "00acfec24c5abee6",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "00b5941b954a2d27",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "011bcd6372b9280b",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "0167ca83d6bcf320",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "019e8f2faad64849",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "0208e2842ecef894",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "024a0979508415b1",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "02967a679a4eb422",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "02c8b846fdcae2e8",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "02ce5826530e34f1",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "breakout_retest",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "0201f63283f4d9af",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_higher_low"
+        },
+        {
+            "case_id": "021834862821d67e",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_higher_low"
+        },
+        {
+            "case_id": "023e55b2d9afea70",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_higher_low"
+        },
+        {
+            "case_id": "035e0e8e9809106d",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_higher_low"
+        },
+        {
+            "case_id": "0360f8368fc1337f",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_higher_low"
+        },
+        {
+            "case_id": "03b92a15d8eb629c",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_higher_low"
+        },
+        {
+            "case_id": "048ad879b30e3f80",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_higher_low"
+        },
+        {
+            "case_id": "04b0615aba66c6ae",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_higher_low"
+        },
+        {
+            "case_id": "050c32907b9e8d78",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_higher_low"
+        },
+        {
+            "case_id": "079863ffec37991c",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_higher_low"
+        },
+        {
+            "case_id": "0066243ade3c73e1",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "008e079897214197",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "02ee5f97d63d2ff2",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "040fa7edace838ac",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "04e156eb104f108e",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "062a1a29f5b3adfc",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "0a122a100296d554",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "0a45aa755e73fe79",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "0b5bf17f883b83f0",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "0b5e43583f678812",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "await_confirmation"
+        },
+        {
+            "case_id": "0438253d7eb7c366",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "045737c2bf0aed73",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "04c60262e6eb3ce9",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "05f41dd011cc89d4",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "06d2aa7a2b09e5e2",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "096162d39ec026ce",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "09c10da2961bb3d9",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "0ab9b5ef39de8e47",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "0dbfbec997caafcc",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "0ed9a252eb02acac",
+            "dataset": "kr-saved-scan-20251008",
+            "cohort": "not_selected",
+            "pattern": "trend_recovery",
+            "status": "invalidated"
+        },
+        {
+            "case_id": "0881758fb078e97a",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
             "status": "no_upper_target"
         },
         {
-            "case_id": "35bf4c15ce9546c3",
+            "case_id": "186fe4f9fd5af1ea",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
             "status": "no_upper_target"
         },
         {
-            "case_id": "4072941bd950f78c",
+            "case_id": "188ef691df697813",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
             "status": "no_upper_target"
         },
         {
-            "case_id": "491f3bcad1d78e78",
+            "case_id": "229caebfd1539fc2",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
             "status": "no_upper_target"
         },
         {
-            "case_id": "5d3d681d5b947471",
+            "case_id": "3207c5baa673e6b0",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
             "status": "no_upper_target"
         },
         {
-            "case_id": "a0d9125a061b3ff2",
+            "case_id": "389260f6f699839e",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
             "status": "no_upper_target"
         },
         {
-            "case_id": "a1d424610c91fef6",
+            "case_id": "68226fbf8ea91a90",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
             "status": "no_upper_target"
         },
         {
-            "case_id": "bb5fd1d539526412",
+            "case_id": "75e8deef923be24f",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
             "status": "no_upper_target"
         },
         {
-            "case_id": "c405b5f3cfd3d1c9",
+            "case_id": "9a6497d5d017c52c",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
             "status": "no_upper_target"
         },
         {
-            "case_id": "d78c9a960b6a73cd",
+            "case_id": "9e4d05eea8ad25cc",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "not_selected",
             "pattern": "trend_recovery",
@@ -3222,420 +4784,420 @@
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "002d053a60cf1a99",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "002e726a09737914",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "004fec43a19d3cac",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "009e1c7181d7d9c1",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "000e90755cfa89e1",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0027ccfb849ec85a",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "002fae5f90044255",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "003a642a15ed720e",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "004064fa6815c763",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "000165803e0b51d7",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "000b8622592d009a",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00212a460071a9c8",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "002710c65b9f3d94",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "002a95cc961d326c",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00261d00e748f05c",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "002eddd77e6a3a5f",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0036bd923ba6215c",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0045c1f494a6a0fe",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00464525786815e0",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "001309db7f67ffc3",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0018fbf4babc1c3d",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "002b3c63ba7c7d9b",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00619d58d5fd592f",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "006380a1e4a77520",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0080a5332988a2e9",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00924fad62f3e20d",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00a453a437f2a332",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00ee15d3f2f4a2bd",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00f05a2619aba5e5",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "000065ad0ef25898",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00404427df5beda0",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0049756deaf0273c",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "006096c43f5c5ccc",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "009e3fdd7b355780",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00004611c03e8e1a",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0002ee6df6644e7c",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "005e66df7695a59d",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "006488dc19b16842",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00a74dc9e0343a73",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "000e2c897e3dd4ac",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00195914b052779d",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "002868059f66637a",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "002d29f42d8094ab",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "000775fd132aa1ae",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "000f595fb72ff5e0",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "002d09a4614224d5",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0037d89b8256bfe7",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00064294076561b4",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "005851e5a1fcf097",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "009d81b22dc16f6a",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00dd6542da73605b",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "001bac3f874b9741",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "003a59faf03ee2e6",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00683f358f0e7454",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "0072c4307a5b3d21",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00ba3210197236ae",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "00ef769076722100",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "014c26d4d12262d4",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "02741e9461a04b05",
             "dataset": "kr-saved-scan-20251008",
             "cohort": "no_signal",
             "pattern": "none",
-            "status": "no_event"
+            "status": "no_replay_event"
         },
         {
             "case_id": "064380feece6a99c",

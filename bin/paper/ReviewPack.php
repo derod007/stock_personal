@@ -57,8 +57,40 @@ final class PaperReviewPack
         if($ready&&$blocks!==[])return 'ready_blocked';
         if($ready&&$blocks===[])return 'ready_not_selected';
         if(($e['raw']['status']??'')==='rejected_rr')return 'rejected_rr';
-        if(in_array($e['raw']['status']??'',['await_confirmation','await_retest','await_recovery','await_higher_low','wait_pullback','invalidated','expired','no_upper_target'],true))return 'await_or_invalid';
         return null;
+    }
+
+    /** Statuses that are not confirmation events. no_upper_target is its own status, not a stand-in for the others. */
+    public const WATCH=[
+        'breakout_retest'=>['await_retest','await_confirmation','invalidated','expired'],
+        'trend_pullback'=>['wait_pullback','await_confirmation'],
+        'trend_recovery'=>['await_recovery','await_higher_low','await_confirmation','invalidated','expired','no_upper_target','invalid_levels'],
+    ];
+
+    /**
+     * Keep the first day of each structure and status. Later days of the same structure do not become new cases.
+     * Pullback has no stored structure id, so a consecutive run of the same status is one structure.
+     * @param list<array{symbol:string,pattern:string,status:string,session:int}> $rows
+     * @return list<array>
+     */
+    public static function firstStructures(array $rows):array
+    {
+        $spell=[];$seen=[];$out=[];
+        foreach($rows as $row){
+            $pattern=$row['pattern'];$status=$row['status'];
+            if(!in_array($status,self::WATCH[$pattern]??[],true)){unset($spell[$row['symbol'].'|'.$pattern]);continue;}
+            if($pattern==='breakout_retest'&&isset($row['breakout_at'])&&$row['breakout_at']!==null)$token='bo:'.$row['breakout_at'];
+            elseif($pattern==='trend_recovery'&&isset($row['breakdown_at'])&&$row['breakdown_at']!==null)$token='bd:'.$row['breakdown_at'];
+            else{
+                $key=$row['symbol'].'|'.$pattern;$prev=$spell[$key]??null;
+                $token=$prev&&$prev['status']===$status?$prev['token']:'spell:'.$row['session'];
+                $spell[$key]=['status'=>$status,'token'=>$token];
+            }
+            $id=$row['symbol'].'|'.$pattern.'|'.$status.'|'.$token;
+            if(isset($seen[$id]))continue;
+            $seen[$id]=true;$out[]=$row+['structure_token'=>$token];
+        }
+        return $out;
     }
 
     /** @param array{id:string,dir:string,replay:string} $ds */
@@ -105,7 +137,7 @@ final class PaperReviewPack
     {
         return [
             'selected'=>'every final selected trade of the three patterns, every status',
-            'not_selected'=>'at most 10 structures per dataset, pattern and bucket, in case_id order. Buckets: ready_blocked, ready_not_selected, rejected_rr, await_or_invalid, higher_low_watch, higher_low_breakout. Returns are not used. Repeated days of one replay key stay one structure.',
+            'not_selected'=>'at most 10 structures per dataset, pattern and bucket, in case_id order. Replay buckets: ready_blocked, ready_not_selected, rejected_rr, higher_low_watch, higher_low_breakout. Waiting and invalid statuses are read from the daily engine judgment, not only from confirmation events: await_retest, await_confirmation, wait_pullback, await_recovery, await_higher_low, invalidated, expired, no_upper_target, invalid_levels. no_upper_target is its own status. The same structure and status keeps its first day only. Pullback spells are consecutive days of one status. Returns are not used.',
             'no_signal'=>'60 evaluated sessions per dataset with no replay event. Spread across months; remainder goes to the earliest months. Within a month, case_id order, at most 3 per symbol unless the month would otherwise be short.',
             'quality_blocked'=>'at most 20 per dataset, same month and symbol rule. No later prices are used to choose them.',
             'case_id'=>'sha256(dataset|cohort|symbol|session|pattern) first 16 hex characters',
@@ -131,7 +163,15 @@ final class PaperReviewPack
         }
         $picked=[];
         foreach($pooled as $group)foreach(self::takeByCaseId($group,10) as $row)$picked[]=$row;
-        $days=self::sessions($ds['dir'],$replay,$start,$cutoff);
+        $scanned=self::sessions($ds['dir'],$replay,$start,$cutoff);
+        $days=$scanned['days'];$watch=$scanned['watch'];
+        $watchGroups=[];
+        foreach($watch as $row){
+            $id=self::caseId($ds['id'],'not_selected',$row['symbol'],(int)$row['session'],$row['pattern'].':'.$row['status']);
+            $watchGroups[$row['pattern'].'|'.$row['status']][]=['month'=>substr($row['date'],0,7),'symbol'=>$row['symbol'],'case_id'=>$id,'row'=>$row,'bucket'=>$row['status'],'pattern'=>$row['pattern']];
+        }
+        $watchPicked=[];
+        foreach($watchGroups as $group)foreach(self::takeByCaseId($group,10) as $row)$watchPicked[]=$row;
         $no=[];$blocked=[];
         foreach($days as $row){
             $id=self::caseId($ds['id'],$row['quality']?'quality_blocked':'no_signal',$row['symbol'],$row['session'],'none');
@@ -147,11 +187,13 @@ final class PaperReviewPack
         };
         foreach($selected as $e)$write(['cohort'=>'selected','event'=>$e,'bucket'=>null]);
         foreach($picked as $row)$write(['cohort'=>'not_selected','event'=>$row['event'],'bucket'=>$row['bucket']]);
+        foreach($watchPicked as $row)$write(['cohort'=>'not_selected','event'=>null,'row'=>$row['row'],'bucket'=>$row['bucket'],'pattern'=>$row['pattern']]);
         foreach($noSample as $row)$write(['cohort'=>'no_signal','event'=>null,'row'=>$row['row'],'bucket'=>null]);
         foreach($qSample as $row)$write(['cohort'=>'quality_blocked','event'=>null,'row'=>$row['row'],'bucket'=>null]);
         $selectedStatus=[];foreach($selected as $e){$st=$e['trades']['selected_baseline']['status'];$selectedStatus[$e['pattern']][$st]=($selectedStatus[$e['pattern']][$st]??0)+1;}
         $bucketCounts=[];foreach($pooled as $k=>$g)$bucketCounts[$k]=count($g);
-        return ['cases'=>$cases,'counts'=>['selected'=>$selectedStatus,'buckets'=>$bucketCounts,'bucket_charts'=>count($picked),
+        foreach($watchGroups as $k=>$g)$bucketCounts[$k]=count($g);
+        return ['cases'=>$cases,'counts'=>['selected'=>$selectedStatus,'buckets'=>$bucketCounts,'bucket_charts'=>count($picked)+count($watchPicked),
             'no_signal_candidates'=>count($no),'no_signal_charts'=>count($noSample),'quality_candidates'=>count($blocked),'quality_charts'=>count($qSample)],
             'rule'=>self::rule()];
     }
@@ -159,7 +201,7 @@ final class PaperReviewPack
     /** @return list<array{symbol:string,name:string,session:int,date:string,quality:bool,reasons:list<string>}> */
     private static function sessions(string $dir,array $replay,string $start,int $cutoff):array
     {
-        $out=[];
+        $out=[];$watch=[];
         foreach($replay['symbols'] as $s){
             fwrite(STDERR,"sessions ".$s['symbol']."\n");
             $bars=PaperHistoryResearch::readJson($dir.'/bars/'.$s['symbol'].'.json');
@@ -171,12 +213,20 @@ final class PaperReviewPack
                 if((int)$bar['available_at']>$cutoff)continue;
                 $prefix[]=$bar;$session=(int)$bar['available_at'];
                 if(PaperHistoryResearch::day($session)<$start||!empty($bar['synthetic'])||($bar['is_complete']??true)===false)continue;
-                $q=PaperQuality::inspect($prefix,$s['symbol'],$session,['sha256'=>'review-pack','price_basis'=>PaperHistoryResearch::PRICE_BASIS]);
-                $out[]=['symbol'=>$s['symbol'],'name'=>$s['name'],'session'=>$session,'date'=>PaperHistoryResearch::day($session),
-                    'quality'=>!$q['can_simulate'],'reasons'=>$q['reasons']??[]];
+                $d=PaperPatternReplay::day($prefix,$s['symbol'],$session,'account1');
+                $date=PaperHistoryResearch::day($session);
+                $out[]=['symbol'=>$s['symbol'],'name'=>$s['name'],'session'=>$session,'date'=>$date,
+                    'quality'=>$d['status']!=='evaluated','reasons'=>$d['quality_reasons']??[]];
+                if($d['status']!=='evaluated')continue;
+                foreach($d['analysis']['plan']['diagnostics']['patterns'] as $pattern=>$raw){
+                    if(!in_array($raw['status']??'',self::WATCH[$pattern]??[],true))continue;
+                    $watch[]=['symbol'=>$s['symbol'],'name'=>$s['name'],'pattern'=>$pattern,'status'=>$raw['status'],
+                        'session'=>$session,'date'=>$date,'breakout_at'=>$raw['breakout_at']??null,
+                        'breakdown_at'=>$raw['evidence']['breakdown']['at']??null];
+                }
             }
         }
-        return $out;
+        return ['days'=>$out,'watch'=>self::firstStructures($watch)];
     }
 
     private static function writeCase(string $out,array $ds,array $meta,array $replay,string $commit,string $fingerprint,int $cutoff,array $spec):array
@@ -184,8 +234,8 @@ final class PaperReviewPack
         $event=$spec['event'];$cohort=$spec['cohort'];
         fwrite(STDERR,"case ".$cohort." ".($event['symbol']??$spec['row']['symbol'])."\n");
         if($event){$symbol=$event['symbol'];$name=$event['name'];$session=(int)$event['session'];$pattern=$event['pattern'];}
-        else{$symbol=$spec['row']['symbol'];$name=$spec['row']['name'];$session=(int)$spec['row']['session'];$pattern='none';}
-        $id=self::caseId($ds['id'],$cohort,$symbol,$session,$event?$pattern.':'.($spec['bucket']??'selected'):'none');
+        else{$symbol=$spec['row']['symbol'];$name=$spec['row']['name'];$session=(int)$spec['row']['session'];$pattern=$spec['pattern']??'none';}
+        $id=self::caseId($ds['id'],$cohort,$symbol,$session,$cohort==='selected'||$cohort==='not_selected'?$pattern.':'.($spec['bucket']??'selected'):'none');
         $bars=PaperHistoryResearch::readJson($ds['dir'].'/bars/'.$symbol.'.json');
         $rows=$bars['rows']??[];foreach($rows as &$b)$b['available_at']=CandleClock::closeTime($b,$symbol);unset($b);
         usort($rows,fn($a,$c)=>$a['available_at']<=>$c['available_at']);
@@ -211,8 +261,10 @@ final class PaperReviewPack
             'first_date'=>$completed?PaperHistoryResearch::day((int)$completed[0]['available_at']):null,
             'last_available_at'=>$completed?(int)end($completed)['available_at']:null,
             'data_notes'=>$qualityNotes,'adjustment_unverified'=>true,
+            'indicator_input'=>self::inputMeta($completed),'prices'=>'json/a/'.$id.'-input.json',
             'charts'=>['d120'=>'a/'.$id.'-120.svg','d40'=>'a/'.$id.'-40.svg','week'=>'a/'.$id.'-week.svg']];
         self::put($out.'/json/a/'.$id.'.json',$a);
+        self::put($out.'/json/a/'.$id.'-input.json',self::inputSeries($completed));
         $v120=PaperReviewCharts::view($completed,$session,120);
         $v40=PaperReviewCharts::view($completed,$session,40);
         $week=PaperReviewCharts::weekly($completed,$session,$symbol);
@@ -220,9 +272,9 @@ final class PaperReviewPack
         $weekView=['bars'=>$weekBars,'ma20'=>array_slice(PaperReviewCharts::alignedSma($week,20),-count($weekBars)),'ma60'=>array_fill(0,count($weekBars),null),
             'last_at'=>$weekBars?(int)end($weekBars)['available_at']:0];
         $title=$name.' '.$a['session_date'].' 까지';
-        self::put($out.'/a/'.$id.'-120.svg',PaperReviewCharts::svg($v120,[],$title.' · 120거래일',true));
-        self::put($out.'/a/'.$id.'-40.svg',PaperReviewCharts::svg($v40,[],$title.' · 40거래일',true));
-        self::put($out.'/a/'.$id.'-week.svg',PaperReviewCharts::svg($weekView,[],$title.' · 완료 주봉',true));
+        self::put($out.'/a/'.$id.'-120.svg',PaperReviewCharts::svg($v120,[],$title.' · 120거래일',true,$symbol));
+        self::put($out.'/a/'.$id.'-40.svg',PaperReviewCharts::svg($v40,[],$title.' · 40거래일',true,$symbol));
+        self::put($out.'/a/'.$id.'-week.svg',PaperReviewCharts::svg($weekView,[],$title.' · 완료 주봉',true,$symbol));
         foreach([$v120,$v40,$weekView] as $view){
             foreach($view['bars'] as $bar)if((int)$bar['available_at']>$session)$problem=$id.' chart passes the decision day';
         }
@@ -231,17 +283,28 @@ final class PaperReviewPack
         if($again['bars']!==$v120['bars']||$again['ma20']!==$v120['ma20']||$again['ma60']!==$v120['ma60'])$problem=$id.' a later bar changed the decision-day chart';
         $showOutcome=$cohort==='selected'||$cohort==='not_selected';
         self::put($out.'/a/'.$id.'.html',self::pageA($a,$showOutcome));
-        $marks=$event?self::marks($event['raw'],$pattern):[];
+        $facts=self::engineFacts($engine);
+        $focus=$event['raw']??null;
+        if($focus===null&&$pattern!=='none')$focus=$engine['analysis']['plan']['diagnostics']['patterns'][$pattern]??null;
+        $marks=$focus?self::marks($focus,$pattern):[];
         $b=['case_id'=>$id,'cohort'=>$cohort,'sampling_rule'=>self::rule()[$cohort]??$cohort,'pattern'=>$pattern,
             'bucket'=>$spec['bucket'],'engine_status'=>$engine['status']??'not_recomputed',
-            'pattern_status'=>$event['raw']['status']??null,'gates'=>$event['raw']['gates']??null,
+            'replay_event'=>$event!==null,
+            'replay_note'=>$event!==null?'이 날짜는 replay에 구조 이벤트가 있다.':'이 날짜는 replay 이벤트가 없다. 패턴 구조 유무는 pattern_structure를 본다.',
+            'pattern_status'=>$focus['status']??($event['raw']['status']??null),'gates'=>$focus['gates']??($event['raw']['gates']??null),
             'day_patterns'=>self::dayPatterns($engine),
-            'independent_blockers'=>$event['independent_blockers']??null,'final_status'=>$event['final_status']??null,
+            'pattern_reasons'=>$facts['pattern_reasons'],'pattern_structure'=>$facts['pattern_structure'],
+            'independent_blockers'=>$event['independent_blockers']??$facts['common_blockers'],
+            'pattern_blockers'=>$facts['pattern_blockers'],
+            'final_status'=>$event['final_status']??$facts['final_status'],
+            'selected_pattern'=>$facts['selected_pattern'],'selected_version'=>$facts['selected_version'],
             'operational_ready'=>$event['operational_ready']??false,'input_hash'=>$event['input_hash']??($engine['input_hash']??null),
-            'entry'=>$event['raw']['entry']??null,'stop'=>$event['raw']['stop']??null,'target'=>$event['raw']['target']??null,
-            'reward_risk'=>$event['raw']['reward_risk']??null,'reason'=>$event['raw']['reason']??null,
-            'structure'=>$event?self::structure($event['raw'],$pattern):null,
-            'coordinates_missing'=>$event?self::missing($event['raw'],$pattern):[],
+            'indicator_input'=>$a['indicator_input'],
+            'entry'=>$focus['entry']??null,'stop'=>$focus['stop']??null,'target'=>$focus['target']??null,
+            'reward_risk'=>$focus['reward_risk']??null,'reason'=>$focus['reason']??null,
+            'structure'=>$focus?self::structure($focus,$pattern):null,
+            'coordinates'=>$marks,'coordinates_missing'=>$focus?self::missing($focus,$pattern):[],
+            'structure_token'=>$spec['row']['structure_token']??null,
             'quality_reasons'=>$spec['row']['reasons']??null,'charts'=>['annotated'=>'b/'.$id.'.svg']];
         self::put($out.'/json/b/'.$id.'.json',$b);
         $wide=$v120;
@@ -250,7 +313,7 @@ final class PaperReviewPack
             $need=count(array_filter($completed,fn($bar)=>$bar['available_at']>=$earliest&&$bar['available_at']<=$session));
             $wide=PaperReviewCharts::view($completed,$session,max(120,$need));
         }
-        self::put($out.'/b/'.$id.'.svg',PaperReviewCharts::svg($wide,$marks,$title.' · 코드가 기록한 수준',false));
+        self::put($out.'/b/'.$id.'.svg',PaperReviewCharts::svg($wide,$marks,$title.' · 코드가 기록한 수준',false,$symbol));
         self::put($out.'/b/'.$id.'.html',self::pageB($id,$b));
         $trade=$event['trades']['selected_baseline']??null;
         if($showOutcome){
@@ -260,7 +323,7 @@ final class PaperReviewPack
             $cMarks=[];
             if($trade&&($trade['entry_at']??null))$cMarks[]=['label'=>'진입','price'=>$trade['entry_fill']??null,'at'=>$trade['entry_at'],'kind'=>'entry'];
             if($trade&&($trade['exit_at']??null))$cMarks[]=['label'=>'청산','price'=>$trade['exit_fill']??null,'at'=>$trade['exit_at'],'kind'=>'stop'];
-            self::put($out.'/c/'.$id.'.svg',PaperReviewCharts::svg($cView,$cMarks,$title.' 이후 · 결과',false));
+            self::put($out.'/c/'.$id.'.svg',PaperReviewCharts::svg($cView,$cMarks,$title.' 이후 · 결과',false,$symbol));
             $c=['case_id'=>$id,'status'=>$trade['status']??'no_selected_trade','trade'=>$trade,'horizons'=>$event['horizons']??null,
                 'cost'=>'fee 10bp each side, slippage 5bp, daily bar order as TradeSimulator','outcome_limited_to'=>$replay['end'],
                 'chart'=>'c/'.$id.'.svg'];
@@ -268,7 +331,51 @@ final class PaperReviewPack
             self::put($out.'/c/'.$id.'.html',self::pageC($id,$c));
         }
         return ['problem'=>$problem,'index'=>['case_id'=>$id,'dataset'=>$ds['id'],'cohort'=>$cohort,'pattern'=>$pattern,
-            'status'=>$trade['status']??($spec['row']['quality']??false?'quality_blocked':($event['raw']['status']??'no_event'))]];
+            'status'=>$trade['status']??($spec['bucket']??(($spec['row']['quality']??false)?'quality_blocked':($event['raw']['status']??'no_replay_event')))]];
+    }
+
+    private static function inputRows(array $completed):array
+    {
+        $ma20=PaperReviewCharts::alignedSma($completed,20);$ma60=PaperReviewCharts::alignedSma($completed,60);$rows=[];
+        foreach($completed as $i=>$b)$rows[]=['date'=>PaperHistoryResearch::day((int)$b['available_at']),'available_at'=>(int)$b['available_at'],
+            'open'=>(float)$b['open'],'high'=>(float)$b['high'],'low'=>(float)$b['low'],'close'=>(float)$b['close'],
+            'volume'=>isset($b['volume'])&&is_numeric($b['volume'])?(float)$b['volume']:null,'ohlc_invalid'=>!empty($b['ohlc_invalid']),
+            'ma20'=>$ma20[$i]??null,'ma60'=>$ma60[$i]??null];
+        return $rows;
+    }
+
+    public static function inputHash(array $rows):string
+    {
+        $plain=[];foreach($rows as $r)$plain[]=[$r['date'],$r['open'],$r['high'],$r['low'],$r['close'],$r['volume'],$r['ohlc_invalid']];
+        return hash('sha256',(string)json_encode($plain,JSON_UNESCAPED_SLASHES));
+    }
+
+    private static function inputMeta(array $completed):array
+    {
+        $rows=self::inputRows($completed);$first=$rows[0]??null;$last=$rows!==[]?$rows[array_key_last($rows)]:null;
+        return ['bars'=>count($rows),'first_date'=>$first['date']??null,'last_date'=>$last['date']??null,'last_available_at'=>$last['available_at']??null,
+            'sha256'=>self::inputHash($rows),'encoding'=>'JSON list of [date, open, high, low, close, volume, ohlc_invalid] for completed bars through the decision day. ma20 and ma60 use valid closes from this same list and are placed back on these rows. Invalid closes stay listed and out of the average.'];
+    }
+
+    private static function inputSeries(array $completed):array
+    {
+        $rows=self::inputRows($completed);
+        return ['through'=>'decision_day','indicator_input'=>self::inputMeta($completed),'bars'=>$rows];
+    }
+
+    private static function engineFacts(?array $engine):array
+    {
+        $empty=['final_status'=>null,'selected_pattern'=>null,'selected_version'=>null,'common_blockers'=>null,'pattern_blockers'=>null,'pattern_reasons'=>null,'pattern_structure'=>null];
+        if(!$engine||($engine['status']??'')!=='evaluated')return $empty;
+        $plan=$engine['analysis']['plan'];$reasons=[];$structure=[];$blocks=[];
+        foreach($plan['diagnostics']['patterns']??[] as $name=>$raw){
+            $reasons[$name]=$raw['reason']??null;
+            $structure[$name]=in_array($raw['status']??'',['no_setup','insufficient_data'],true)?'absent':'present';
+            $blocks[$name]=PaperPatternReplay::blockers($engine['analysis'],$raw);
+        }
+        $selected=null;foreach($plan['diagnostics']['patterns']??[] as $name=>$raw)if(($raw['version']??null)===($plan['version']??null))$selected=$name;
+        return ['final_status'=>$plan['status']??null,'selected_pattern'=>$selected,'selected_version'=>$plan['version']??null,'common_blockers'=>$selected!==null?($blocks[$selected]??[]):null,
+            'pattern_blockers'=>$blocks,'pattern_reasons'=>$reasons,'pattern_structure'=>$structure];
     }
 
     private static function qualityNotes(array $completed):array
@@ -352,6 +459,7 @@ final class PaperReviewPack
             .'<p><a href="../index.html">목록</a></p><h1>'.htmlspecialchars($a['name'].' · '.$a['session_date'],ENT_QUOTES,'UTF-8').'</h1>'
             .'<p>판정일까지 완료된 봉 '.$a['completed_bars'].'개. 마지막 봉 완료 '.htmlspecialchars($when,ENT_QUOTES,'UTF-8')
             .'. 수정주가 여부는 확인되지 않았다.</p><p>'.$notes.'</p>'
+            .'<p><a href="../'.htmlspecialchars($a['prices'],ENT_QUOTES,'UTF-8').'">판정일까지의 가격과 이동평균 수치</a></p>'
             .'<img src="'.$id.'-120.svg" alt="120"><img src="'.$id.'-40.svg" alt="40"><img src="'.$id.'-week.svg" alt="week">'
             .'<p><a href="../b/'.$id.'.html">엔진이 기록한 판정을 연다</a></p>';
         if($outcome)$html.='<p><a href="../c/'.$id.'.html">판정일 이후 결과를 연다</a></p>';
@@ -399,7 +507,7 @@ final class PaperReviewPack
             $cohorts[$c['cohort']]=($cohorts[$c['cohort']]??0)+1;
             if($c['cohort']==='selected'&&$c['pattern']==='trend_pullback'&&$c['status']==='closed')$closedPullback++;
             $id=$c['case_id'];$needC=$c['cohort']==='selected'||$c['cohort']==='not_selected';
-            foreach(['a/'.$id.'.html','a/'.$id.'-120.svg','a/'.$id.'-40.svg','a/'.$id.'-week.svg','b/'.$id.'.html','b/'.$id.'.svg','json/a/'.$id.'.json','json/b/'.$id.'.json'] as $rel){
+            foreach(['a/'.$id.'.html','a/'.$id.'-120.svg','a/'.$id.'-40.svg','a/'.$id.'-week.svg','b/'.$id.'.html','b/'.$id.'.svg','json/a/'.$id.'.json','json/a/'.$id.'-input.json','json/b/'.$id.'.json'] as $rel){
                 if(!is_file($out.'/'.$rel))$missing[]=$rel;
             }
             foreach(['c/'.$id.'.html','c/'.$id.'.svg','json/c/'.$id.'.json'] as $rel){
@@ -419,6 +527,25 @@ final class PaperReviewPack
             }
             $bSvg=(string)file_get_contents($out.'/b/'.$id.'.svg');
             if(preg_match('/last_available_at=(\d+)/',$bSvg,$m)&&(int)$m[1]>(int)$a['session'])$problems[]=$id.' annotated chart passes the decision day';
+            $svg120=(string)file_get_contents($out.'/a/'.$id.'-120.svg');
+            if($svg120!==''&&!str_contains($svg120,'이 창에 그릴 완료 봉이 없다')&&!str_contains($svg120,$a['session_date']))$problems[]=$id.' chart has no decision-day tick';
+            $input=self::loadJson($out.'/json/a/'.$id.'-input.json');
+            foreach(self::A_FORBIDDEN as $key)if(array_key_exists($key,$input))$problems[]=$id.' price file contains '.$key;
+            $series=$input['bars']??[];
+            foreach($series as $bar)if((int)$bar['available_at']>(int)$a['session'])$problems[]=$id.' price file passes the decision day';
+            if(self::inputHash($series)!==($input['indicator_input']['sha256']??''))$problems[]=$id.' indicator input hash';
+            $againMa=PaperReviewCharts::alignedSma($series,20);
+            foreach($series as $i=>$bar){
+                $fresh=json_decode((string)json_encode($againMa[$i]??null),true);
+                if($fresh!==($bar['ma20']??null)){$problems[]=$id.' ma20 does not match the stored prices';break;}
+            }
+            if($c['cohort']==='no_signal'){
+                $bj=self::loadJson($out.'/json/b/'.$id.'.json');
+                if(!is_string($bj['final_status']??null)||$bj['final_status']==='')$problems[]=$id.' no-signal final status was not recomputed';
+                if(($bj['replay_event']??true)!==false)$problems[]=$id.' no-signal row is marked as a replay event';
+                if(!is_array($bj['pattern_structure']??null)||!is_array($bj['pattern_reasons']??null))$problems[]=$id.' no-signal pattern detail missing';
+                if(!is_string($bj['selected_pattern']??null))$problems[]=$id.' no-signal selected pattern missing';
+            }
         }
         if($closedPullback!==137)$problems[]='closed pullback charts '.$closedPullback.' (kept expectation 137)';
         $dirs=[];foreach($datasets as $ds)$dirs[$ds['id']]=$ds['dir'];
@@ -447,7 +574,7 @@ final class PaperReviewPack
             $labels=['-120'=>' · 120거래일','-40'=>' · 40거래일','-week'=>' · 완료 주봉'];
             foreach($views as $suffix=>$view){
                 $compared++;
-                if(PaperReviewCharts::svg($view,[],$title.$labels[$suffix],true)!==(string)file_get_contents($out.'/a/'.$id.$suffix.'.svg'))$mismatch++;
+                if(PaperReviewCharts::svg($view,[],$title.$labels[$suffix],true,$a['symbol'])!==(string)file_get_contents($out.'/a/'.$id.$suffix.'.svg'))$mismatch++;
             }
         }
         if($mismatch)$problems[]=$mismatch.' of '.$compared.' decision-day charts do not match a fresh render of the stored bars';
@@ -475,6 +602,11 @@ final class PaperReviewPack
             $v120=PaperReviewCharts::view($completed,$session,120);
             $event=$eventById[$id]??null;
             $marks=$event?self::marks($event['raw'],$event['pattern']):[];
+            if($marks===[]&&$c['cohort']==='not_selected'&&$c['pattern']!=='none'){
+                $engine=PaperPatternReplay::day($past,$a['symbol'],$session,'account1');
+                $raw=$engine['analysis']['plan']['diagnostics']['patterns'][$c['pattern']]??null;
+                if($raw)$marks=self::marks($raw,$c['pattern']);
+            }
             $wide=$v120;$earliest=null;
             foreach($marks as $m)if(($m['at']??null)!==null)$earliest=$earliest===null?$m['at']:min($earliest,$m['at']);
             if($earliest!==null&&$v120['bars']&&$earliest<(int)$v120['bars'][0]['available_at']){
@@ -483,7 +615,7 @@ final class PaperReviewPack
             }
             $title=$a['name'].' '.$a['session_date'].' 까지';
             $annotated++;
-            if(PaperReviewCharts::svg($wide,$marks,$title.' · 코드가 기록한 수준',false)!==(string)file_get_contents($out.'/b/'.$id.'.svg'))$annotatedMismatch++;
+            if(PaperReviewCharts::svg($wide,$marks,$title.' · 코드가 기록한 수준',false,$a['symbol'])!==(string)file_get_contents($out.'/b/'.$id.'.svg'))$annotatedMismatch++;
             if($c['cohort']!=='selected'&&$c['cohort']!=='not_selected')continue;
             $trade=$event['trades']['selected_baseline']??null;
             $future=array_values(array_filter(PaperReviewCharts::completedThrough($rows,$cutoffs[$a['dataset_id']]),fn($bar)=>$bar['available_at']>$session));
@@ -494,7 +626,7 @@ final class PaperReviewPack
             if($trade&&($trade['entry_at']??null))$cMarks[]=['label'=>'진입','price'=>$trade['entry_fill']??null,'at'=>$trade['entry_at'],'kind'=>'entry'];
             if($trade&&($trade['exit_at']??null))$cMarks[]=['label'=>'청산','price'=>$trade['exit_fill']??null,'at'=>$trade['exit_at'],'kind'=>'stop'];
             $outcomeChecked++;
-            if(PaperReviewCharts::svg($cView,$cMarks,$title.' 이후 · 결과',false)!==(string)file_get_contents($out.'/c/'.$id.'.svg'))$outcomeMismatch++;
+            if(PaperReviewCharts::svg($cView,$cMarks,$title.' 이후 · 결과',false,$a['symbol'])!==(string)file_get_contents($out.'/c/'.$id.'.svg'))$outcomeMismatch++;
             $cSvg=(string)file_get_contents($out.'/c/'.$id.'.svg');
             if(preg_match('/last_available_at=(\d+)/',$cSvg,$m)&&(int)$m[1]>$cutoffs[$a['dataset_id']])$problems[]=$id.' outcome chart passes the dataset cutoff';
         }

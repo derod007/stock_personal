@@ -1,4 +1,10 @@
-﻿## 2026-10-10 15:46 · Cursor · 끝
+﻿## 2026-10-10 16:46 · Cursor · 끝
+- 한 일: 검토 패키지의 거래량 높이, 대기·무효 표본, 신호 없음 판정, 판정일 수치, 날짜 눈금, 숏 손절 문구를 고치고 패키지를 다시 만들었다. 전략 변경 없음
+- 파일: bin/paper/ReviewCharts.php, bin/paper/ReviewPack.php, tests/review_pack.php, docs/pattern-source-map.md, docs/pattern-review-pack.md, docs/pattern-review-verify.md, docs/pattern-review-manifest.json, docs/pattern-review-examples/, docs/pattern-review-pack.zip, docs/work-log.md
+- 커밋: 브랜치 cursor/pattern-review-pack, PR 갱신(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-10 15:46 · Cursor · 끝
 - 한 일: 세 패턴의 원문·구현 대응표, 두 기간 최종 선택 전수와 미선택·신호 없음·품질 차단 표본, A/B/C 차트 패키지, 본전 이동 연구 마무리를 작성. 전략·손절·목표·계좌 변경 없음
 - 파일: bin/paper/ReviewCharts.php, bin/paper/ReviewPack.php, bin/paper_review_pack.php, tests/review_pack.php, docs/pattern-source-map.md, docs/pattern-review-pack.md, docs/pattern-review-verify.md, docs/pattern-review-manifest.json, docs/pattern-review-examples/, docs/pattern-review-pack.zip, docs/breakeven-study-close.md, .github/workflows/pattern-replay.yml, docs/work-log.md
 - 커밋: 브랜치 cursor/pattern-review-pack, PR 대기(병합 안 함)

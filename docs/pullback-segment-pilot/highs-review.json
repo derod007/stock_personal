@@ -1,0 +1,912 @@
+{
+    "version": "pullback_segment_pilot_v1",
+    "stage": "A2 recheck",
+    "blind": false,
+    "disclosure": "B 확인 뒤의 추가 검토다. 코드의 손절 기준 저점(최근 10봉의 최저 저가)이 A의 L, 큰 조정 시작 고점 뒤 최저점, 최근 재하락 시작 고점 뒤 최저점 중 무엇과 같은 날인지 본다. 같다는 것은 날짜가 같다는 뜻이며 코드가 그 구조를 의도했다는 뜻이 아니다.",
+    "inputs": {
+        "annotations_a2_src_sha256": "64675fccfb12a1450d92629675fb04e3270f9dc80b16e03e7dc493984bcfec21",
+        "annotations_a2_json_sha256_lf": "ddfd4ac57fd6f3459bff3e5dc07d47d054401af363b6bca893a44aa93c8c0c64",
+        "code_comparison_json_sha256_lf": "4ecd22cd324016f307a4a9a6b4711b58fd18b2633e8e3668ba31758720f8bd8f"
+    },
+    "summary": {
+        "in_13": 13,
+        "labels": {
+            "before_recent_high": 9,
+            "matches_recent_low": 4
+        },
+        "relies_on_hold_or_none": 3
+    },
+    "labels": {
+        "matches_both": "두 고점 기준 저점이 같고 코드 기준과 일치",
+        "matches_recent_low": "최근 재하락 저점과 일치",
+        "matches_big_low": "큰 조정 저점과 일치",
+        "before_recent_high": "코드 기준 저점이 최근 재하락 시작 고점보다 앞",
+        "neither": "어느 쪽과도 다름"
+    },
+    "cases": [
+        {
+            "case_id": "013ad9902972b826",
+            "name": "성호전자",
+            "in_13": true,
+            "code_stop_reference_low": {
+                "date": "2025-12-30",
+                "price": 8670,
+                "window": "2025-12-30 ~ 2026-01-14"
+            },
+            "A_L": {
+                "date": "2026-01-08",
+                "price": 10250
+            },
+            "L_from_H_big": null,
+            "L_from_H_recent": {
+                "date": "2026-01-08",
+                "price": 10250,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": false,
+                "L_from_H_big": false,
+                "L_from_H_recent": false
+            },
+            "stop_ref_vs_L_from_H_big_pct": null,
+            "stop_ref_vs_L_from_H_recent_pct": -15.4,
+            "stop_ref_before_H_big": false,
+            "stop_ref_before_H_recent": true,
+            "H_big_status": "none",
+            "H_recent_status": "marked",
+            "label": "before_recent_high",
+            "relies_on_hold_or_none": true
+        },
+        {
+            "case_id": "01bea56f4af0f31f",
+            "name": "S-Oil",
+            "in_13": false,
+            "code_stop_reference_low": {
+                "date": "2026-08-03",
+                "price": 119600,
+                "window": "2026-07-27 ~ 2026-08-07"
+            },
+            "A_L": {
+                "date": "2026-08-03",
+                "price": 119600
+            },
+            "L_from_H_big": {
+                "date": "2026-06-26",
+                "price": 90400,
+                "in_stop_window": false
+            },
+            "L_from_H_recent": {
+                "date": "2026-08-03",
+                "price": 119600,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": true,
+                "L_from_H_big": false,
+                "L_from_H_recent": true
+            },
+            "stop_ref_vs_L_from_H_big_pct": 32.3,
+            "stop_ref_vs_L_from_H_recent_pct": 0,
+            "stop_ref_before_H_big": false,
+            "stop_ref_before_H_recent": false,
+            "H_big_status": "marked",
+            "H_recent_status": "marked",
+            "label": "matches_recent_low",
+            "relies_on_hold_or_none": false
+        },
+        {
+            "case_id": "029fd9c7a4f3fcb6",
+            "name": "테스",
+            "in_13": true,
+            "code_stop_reference_low": {
+                "date": "2026-01-02",
+                "price": 44250,
+                "window": "2026-01-02 ~ 2026-01-15"
+            },
+            "A_L": {
+                "date": "2026-01-15",
+                "price": 48900
+            },
+            "L_from_H_big": {
+                "date": "2026-01-15",
+                "price": 48900,
+                "in_stop_window": true
+            },
+            "L_from_H_recent": {
+                "date": "2026-01-15",
+                "price": 48900,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": false,
+                "L_from_H_big": false,
+                "L_from_H_recent": false
+            },
+            "stop_ref_vs_L_from_H_big_pct": -9.5,
+            "stop_ref_vs_L_from_H_recent_pct": -9.5,
+            "stop_ref_before_H_big": true,
+            "stop_ref_before_H_recent": true,
+            "H_big_status": "marked",
+            "H_recent_status": "marked",
+            "label": "before_recent_high",
+            "relies_on_hold_or_none": false
+        },
+        {
+            "case_id": "03779fd61d439aed",
+            "name": "하나마이크론",
+            "in_13": true,
+            "code_stop_reference_low": {
+                "date": "2025-09-24",
+                "price": 19880,
+                "window": "2025-09-24 ~ 2025-10-14"
+            },
+            "A_L": {
+                "date": "2025-10-14",
+                "price": 25150
+            },
+            "L_from_H_big": {
+                "date": "2025-10-14",
+                "price": 25150,
+                "in_stop_window": true
+            },
+            "L_from_H_recent": {
+                "date": "2025-10-14",
+                "price": 25150,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": false,
+                "L_from_H_big": false,
+                "L_from_H_recent": false
+            },
+            "stop_ref_vs_L_from_H_big_pct": -21,
+            "stop_ref_vs_L_from_H_recent_pct": -21,
+            "stop_ref_before_H_big": true,
+            "stop_ref_before_H_recent": true,
+            "H_big_status": "hold",
+            "H_recent_status": "hold",
+            "label": "before_recent_high",
+            "relies_on_hold_or_none": true
+        },
+        {
+            "case_id": "03c915d929f4769a",
+            "name": "우리넷",
+            "in_13": true,
+            "code_stop_reference_low": {
+                "date": "2025-10-20",
+                "price": 6800,
+                "window": "2025-10-15 ~ 2025-10-28"
+            },
+            "A_L": {
+                "date": "2025-10-01",
+                "price": 6620
+            },
+            "L_from_H_big": {
+                "date": "2025-10-01",
+                "price": 6620,
+                "in_stop_window": false
+            },
+            "L_from_H_recent": {
+                "date": "2025-10-20",
+                "price": 6800,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": false,
+                "L_from_H_big": false,
+                "L_from_H_recent": true
+            },
+            "stop_ref_vs_L_from_H_big_pct": 2.7,
+            "stop_ref_vs_L_from_H_recent_pct": 0,
+            "stop_ref_before_H_big": false,
+            "stop_ref_before_H_recent": false,
+            "H_big_status": "marked",
+            "H_recent_status": "marked",
+            "label": "matches_recent_low",
+            "relies_on_hold_or_none": false
+        },
+        {
+            "case_id": "03d016b5e47bae98",
+            "name": "두산",
+            "in_13": true,
+            "code_stop_reference_low": {
+                "date": "2025-05-02",
+                "price": 317000,
+                "window": "2025-05-02 ~ 2025-05-19"
+            },
+            "A_L": {
+                "date": "2025-05-19",
+                "price": 384000
+            },
+            "L_from_H_big": {
+                "date": "2025-05-19",
+                "price": 384000,
+                "in_stop_window": true
+            },
+            "L_from_H_recent": {
+                "date": "2025-05-19",
+                "price": 384000,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": false,
+                "L_from_H_big": false,
+                "L_from_H_recent": false
+            },
+            "stop_ref_vs_L_from_H_big_pct": -17.4,
+            "stop_ref_vs_L_from_H_recent_pct": -17.4,
+            "stop_ref_before_H_big": true,
+            "stop_ref_before_H_recent": true,
+            "H_big_status": "hold",
+            "H_recent_status": "hold",
+            "label": "before_recent_high",
+            "relies_on_hold_or_none": true
+        },
+        {
+            "case_id": "05a3f1e796e376c7",
+            "name": "우리기술",
+            "in_13": false,
+            "code_stop_reference_low": {
+                "date": "2025-05-07",
+                "price": 1708,
+                "window": "2025-04-30 ~ 2025-05-16"
+            },
+            "A_L": {
+                "date": "2025-05-07",
+                "price": 1708
+            },
+            "L_from_H_big": {
+                "date": "2025-04-09",
+                "price": 1453,
+                "in_stop_window": false
+            },
+            "L_from_H_recent": {
+                "date": "2025-05-07",
+                "price": 1708,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": true,
+                "L_from_H_big": false,
+                "L_from_H_recent": true
+            },
+            "stop_ref_vs_L_from_H_big_pct": 17.5,
+            "stop_ref_vs_L_from_H_recent_pct": 0,
+            "stop_ref_before_H_big": false,
+            "stop_ref_before_H_recent": false,
+            "H_big_status": "hold",
+            "H_recent_status": "marked",
+            "label": "matches_recent_low",
+            "relies_on_hold_or_none": true
+        },
+        {
+            "case_id": "0628c0298c8155ce",
+            "name": "테크윙",
+            "in_13": true,
+            "code_stop_reference_low": {
+                "date": "2024-10-18",
+                "price": 33600,
+                "window": "2024-10-18 ~ 2024-10-31"
+            },
+            "A_L": {
+                "date": "2024-10-17",
+                "price": 33150
+            },
+            "L_from_H_big": {
+                "date": "2024-09-09",
+                "price": 30000,
+                "in_stop_window": false
+            },
+            "L_from_H_recent": {
+                "date": "2024-10-29",
+                "price": 39650,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": false,
+                "L_from_H_big": false,
+                "L_from_H_recent": false
+            },
+            "stop_ref_vs_L_from_H_big_pct": 12,
+            "stop_ref_vs_L_from_H_recent_pct": -15.3,
+            "stop_ref_before_H_big": false,
+            "stop_ref_before_H_recent": true,
+            "H_big_status": "marked",
+            "H_recent_status": "marked",
+            "label": "before_recent_high",
+            "relies_on_hold_or_none": false
+        },
+        {
+            "case_id": "065da101de4d728c",
+            "name": "NAVER",
+            "in_13": false,
+            "code_stop_reference_low": {
+                "date": "2024-10-29",
+                "price": 166700,
+                "window": "2024-10-22 ~ 2024-11-04"
+            },
+            "A_L": {
+                "date": "2024-10-29",
+                "price": 166700
+            },
+            "L_from_H_big": {
+                "date": "2024-08-05",
+                "price": 151100,
+                "in_stop_window": false
+            },
+            "L_from_H_recent": {
+                "date": "2024-10-29",
+                "price": 166700,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": true,
+                "L_from_H_big": false,
+                "L_from_H_recent": true
+            },
+            "stop_ref_vs_L_from_H_big_pct": 10.3,
+            "stop_ref_vs_L_from_H_recent_pct": 0,
+            "stop_ref_before_H_big": false,
+            "stop_ref_before_H_recent": false,
+            "H_big_status": "hold",
+            "H_recent_status": "marked",
+            "label": "matches_recent_low",
+            "relies_on_hold_or_none": true
+        },
+        {
+            "case_id": "0661fe259966d89d",
+            "name": "LS ELECTRIC",
+            "in_13": true,
+            "code_stop_reference_low": {
+                "date": "2026-04-08",
+                "price": 157600,
+                "window": "2026-04-08 ~ 2026-04-21"
+            },
+            "A_L": {
+                "date": "2026-04-21",
+                "price": 182600
+            },
+            "L_from_H_big": {
+                "date": "2026-04-21",
+                "price": 182600,
+                "in_stop_window": true
+            },
+            "L_from_H_recent": {
+                "date": "2026-04-21",
+                "price": 182600,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": false,
+                "L_from_H_big": false,
+                "L_from_H_recent": false
+            },
+            "stop_ref_vs_L_from_H_big_pct": -13.7,
+            "stop_ref_vs_L_from_H_recent_pct": -13.7,
+            "stop_ref_before_H_big": true,
+            "stop_ref_before_H_recent": true,
+            "H_big_status": "marked",
+            "H_recent_status": "marked",
+            "label": "before_recent_high",
+            "relies_on_hold_or_none": false
+        },
+        {
+            "case_id": "06e4c870056806ab",
+            "name": "한빛레이저",
+            "in_13": true,
+            "code_stop_reference_low": {
+                "date": "2025-01-13",
+                "price": 3795,
+                "window": "2025-01-13 ~ 2025-01-24"
+            },
+            "A_L": {
+                "date": "2025-01-24",
+                "price": 4155
+            },
+            "L_from_H_big": {
+                "date": "2024-12-09",
+                "price": 2770,
+                "in_stop_window": false
+            },
+            "L_from_H_recent": {
+                "date": "2025-01-24",
+                "price": 4155,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": false,
+                "L_from_H_big": false,
+                "L_from_H_recent": false
+            },
+            "stop_ref_vs_L_from_H_big_pct": 37,
+            "stop_ref_vs_L_from_H_recent_pct": -8.7,
+            "stop_ref_before_H_big": false,
+            "stop_ref_before_H_recent": true,
+            "H_big_status": "marked",
+            "H_recent_status": "marked",
+            "label": "before_recent_high",
+            "relies_on_hold_or_none": false
+        },
+        {
+            "case_id": "0792ac2403c954e1",
+            "name": "아이씨티케이",
+            "in_13": false,
+            "code_stop_reference_low": {
+                "date": "2025-04-01",
+                "price": 11310,
+                "window": "2025-03-20 ~ 2025-04-02"
+            },
+            "A_L": {
+                "date": "2025-04-01",
+                "price": 11310
+            },
+            "L_from_H_big": {
+                "date": "2025-04-01",
+                "price": 11310,
+                "in_stop_window": true
+            },
+            "L_from_H_recent": {
+                "date": "2025-04-01",
+                "price": 11310,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": true,
+                "L_from_H_big": true,
+                "L_from_H_recent": true
+            },
+            "stop_ref_vs_L_from_H_big_pct": 0,
+            "stop_ref_vs_L_from_H_recent_pct": 0,
+            "stop_ref_before_H_big": false,
+            "stop_ref_before_H_recent": false,
+            "H_big_status": "marked",
+            "H_recent_status": "marked",
+            "label": "matches_both",
+            "relies_on_hold_or_none": false
+        },
+        {
+            "case_id": "19f9ea891800aab8",
+            "name": "두산퓨얼셀",
+            "in_13": false,
+            "code_stop_reference_low": {
+                "date": "2025-09-05",
+                "price": 24300,
+                "window": "2025-08-28 ~ 2025-09-10"
+            },
+            "A_L": {
+                "date": "2025-09-05",
+                "price": 24300
+            },
+            "L_from_H_big": {
+                "date": "2025-09-05",
+                "price": 24300,
+                "in_stop_window": true
+            },
+            "L_from_H_recent": {
+                "date": "2025-09-05",
+                "price": 24300,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": true,
+                "L_from_H_big": true,
+                "L_from_H_recent": true
+            },
+            "stop_ref_vs_L_from_H_big_pct": 0,
+            "stop_ref_vs_L_from_H_recent_pct": 0,
+            "stop_ref_before_H_big": false,
+            "stop_ref_before_H_recent": false,
+            "H_big_status": "marked",
+            "H_recent_status": "marked",
+            "label": "matches_both",
+            "relies_on_hold_or_none": false
+        },
+        {
+            "case_id": "2032f201c0c38f7f",
+            "name": "LG전자",
+            "in_13": true,
+            "code_stop_reference_low": {
+                "date": "2026-03-09",
+                "price": 108000,
+                "window": "2026-03-05 ~ 2026-03-18"
+            },
+            "A_L": {
+                "date": "2026-03-04",
+                "price": 106700
+            },
+            "L_from_H_big": {
+                "date": "2026-03-04",
+                "price": 106700,
+                "in_stop_window": false
+            },
+            "L_from_H_recent": {
+                "date": "2026-03-13",
+                "price": 109800,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": false,
+                "L_from_H_big": false,
+                "L_from_H_recent": false
+            },
+            "stop_ref_vs_L_from_H_big_pct": 1.2,
+            "stop_ref_vs_L_from_H_recent_pct": -1.6,
+            "stop_ref_before_H_big": false,
+            "stop_ref_before_H_recent": true,
+            "H_big_status": "marked",
+            "H_recent_status": "marked",
+            "label": "before_recent_high",
+            "relies_on_hold_or_none": false
+        },
+        {
+            "case_id": "284171e508e3e7e0",
+            "name": "기아",
+            "in_13": false,
+            "code_stop_reference_low": {
+                "date": "2025-08-04",
+                "price": 100500,
+                "window": "2025-08-01 ~ 2025-08-14"
+            },
+            "A_L": {
+                "date": "2025-08-04",
+                "price": 100500
+            },
+            "L_from_H_big": {
+                "date": "2025-08-04",
+                "price": 100500,
+                "in_stop_window": true
+            },
+            "L_from_H_recent": {
+                "date": "2025-08-04",
+                "price": 100500,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": true,
+                "L_from_H_big": true,
+                "L_from_H_recent": true
+            },
+            "stop_ref_vs_L_from_H_big_pct": 0,
+            "stop_ref_vs_L_from_H_recent_pct": 0,
+            "stop_ref_before_H_big": false,
+            "stop_ref_before_H_recent": false,
+            "H_big_status": "marked",
+            "H_recent_status": "marked",
+            "label": "matches_both",
+            "relies_on_hold_or_none": false
+        },
+        {
+            "case_id": "30416c78c22d1d0e",
+            "name": "한전기술",
+            "in_13": false,
+            "code_stop_reference_low": {
+                "date": "2025-11-07",
+                "price": 89800,
+                "window": "2025-10-28 ~ 2025-11-10"
+            },
+            "A_L": {
+                "date": "2025-11-07",
+                "price": 89800
+            },
+            "L_from_H_big": {
+                "date": "2025-08-20",
+                "price": 80300,
+                "in_stop_window": false
+            },
+            "L_from_H_recent": {
+                "date": "2025-11-07",
+                "price": 89800,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": true,
+                "L_from_H_big": false,
+                "L_from_H_recent": true
+            },
+            "stop_ref_vs_L_from_H_big_pct": 11.8,
+            "stop_ref_vs_L_from_H_recent_pct": 0,
+            "stop_ref_before_H_big": false,
+            "stop_ref_before_H_recent": false,
+            "H_big_status": "marked",
+            "H_recent_status": "marked",
+            "label": "matches_recent_low",
+            "relies_on_hold_or_none": false
+        },
+        {
+            "case_id": "37e84aadd60596f8",
+            "name": "로보티즈",
+            "in_13": false,
+            "code_stop_reference_low": {
+                "date": "2026-10-01",
+                "price": 276500,
+                "window": "2026-09-16 ~ 2026-10-01"
+            },
+            "A_L": {
+                "date": "2026-10-01",
+                "price": 276500
+            },
+            "L_from_H_big": {
+                "date": "2026-07-29",
+                "price": 155000,
+                "in_stop_window": false
+            },
+            "L_from_H_recent": {
+                "date": "2026-10-01",
+                "price": 276500,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": true,
+                "L_from_H_big": false,
+                "L_from_H_recent": true
+            },
+            "stop_ref_vs_L_from_H_big_pct": 78.4,
+            "stop_ref_vs_L_from_H_recent_pct": 0,
+            "stop_ref_before_H_big": false,
+            "stop_ref_before_H_recent": false,
+            "H_big_status": "marked",
+            "H_recent_status": "marked",
+            "label": "matches_recent_low",
+            "relies_on_hold_or_none": false
+        },
+        {
+            "case_id": "433ea121b8d5fb8e",
+            "name": "HD건설기계",
+            "in_13": false,
+            "code_stop_reference_low": {
+                "date": "2025-02-21",
+                "price": 71100,
+                "window": "2025-02-13 ~ 2025-02-26"
+            },
+            "A_L": {
+                "date": "2025-02-21",
+                "price": 71100
+            },
+            "L_from_H_big": {
+                "date": "2025-02-21",
+                "price": 71100,
+                "in_stop_window": true
+            },
+            "L_from_H_recent": {
+                "date": "2025-02-21",
+                "price": 71100,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": true,
+                "L_from_H_big": true,
+                "L_from_H_recent": true
+            },
+            "stop_ref_vs_L_from_H_big_pct": 0,
+            "stop_ref_vs_L_from_H_recent_pct": 0,
+            "stop_ref_before_H_big": false,
+            "stop_ref_before_H_recent": false,
+            "H_big_status": "marked",
+            "H_recent_status": "marked",
+            "label": "matches_both",
+            "relies_on_hold_or_none": false
+        },
+        {
+            "case_id": "6720e72eeff4d079",
+            "name": "켄코아에어로스페이스",
+            "in_13": true,
+            "code_stop_reference_low": {
+                "date": "2025-05-30",
+                "price": 12390,
+                "window": "2025-05-21 ~ 2025-06-04"
+            },
+            "A_L": {
+                "date": "2025-05-20",
+                "price": 12270
+            },
+            "L_from_H_big": {
+                "date": "2025-04-09",
+                "price": 9950,
+                "in_stop_window": false
+            },
+            "L_from_H_recent": {
+                "date": "2025-05-30",
+                "price": 12390,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": false,
+                "L_from_H_big": false,
+                "L_from_H_recent": true
+            },
+            "stop_ref_vs_L_from_H_big_pct": 24.5,
+            "stop_ref_vs_L_from_H_recent_pct": 0,
+            "stop_ref_before_H_big": false,
+            "stop_ref_before_H_recent": false,
+            "H_big_status": "marked",
+            "H_recent_status": "marked",
+            "label": "matches_recent_low",
+            "relies_on_hold_or_none": false
+        },
+        {
+            "case_id": "77bcbde825d44efd",
+            "name": "드림시큐리티",
+            "in_13": true,
+            "code_stop_reference_low": {
+                "date": "2026-05-06",
+                "price": 2685,
+                "window": "2026-05-06 ~ 2026-05-19"
+            },
+            "A_L": {
+                "date": "2026-05-18",
+                "price": 2805
+            },
+            "L_from_H_big": {
+                "date": "2026-05-18",
+                "price": 2805,
+                "in_stop_window": true
+            },
+            "L_from_H_recent": {
+                "date": "2026-05-18",
+                "price": 2805,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": false,
+                "L_from_H_big": false,
+                "L_from_H_recent": false
+            },
+            "stop_ref_vs_L_from_H_big_pct": -4.3,
+            "stop_ref_vs_L_from_H_recent_pct": -4.3,
+            "stop_ref_before_H_big": true,
+            "stop_ref_before_H_recent": true,
+            "H_big_status": "marked",
+            "H_recent_status": "marked",
+            "label": "before_recent_high",
+            "relies_on_hold_or_none": false
+        },
+        {
+            "case_id": "78eecedb44104872",
+            "name": "필옵틱스",
+            "in_13": false,
+            "code_stop_reference_low": {
+                "date": "2026-02-06",
+                "price": 46900,
+                "window": "2026-02-03 ~ 2026-02-19"
+            },
+            "A_L": {
+                "date": "2026-02-06",
+                "price": 46900
+            },
+            "L_from_H_big": {
+                "date": "2026-02-06",
+                "price": 46900,
+                "in_stop_window": true
+            },
+            "L_from_H_recent": {
+                "date": "2026-02-13",
+                "price": 47400,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": true,
+                "L_from_H_big": true,
+                "L_from_H_recent": false
+            },
+            "stop_ref_vs_L_from_H_big_pct": 0,
+            "stop_ref_vs_L_from_H_recent_pct": -1.1,
+            "stop_ref_before_H_big": false,
+            "stop_ref_before_H_recent": true,
+            "H_big_status": "marked",
+            "H_recent_status": "marked",
+            "label": "matches_big_low",
+            "relies_on_hold_or_none": false
+        },
+        {
+            "case_id": "907b3952ea96aafe",
+            "name": "센서뷰",
+            "in_13": true,
+            "code_stop_reference_low": {
+                "date": "2025-07-17",
+                "price": 6975,
+                "window": "2025-07-08 ~ 2025-07-21"
+            },
+            "A_L": {
+                "date": "2025-06-30",
+                "price": 6910
+            },
+            "L_from_H_big": {
+                "date": "2025-06-30",
+                "price": 6910,
+                "in_stop_window": false
+            },
+            "L_from_H_recent": {
+                "date": "2025-07-17",
+                "price": 6975,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": false,
+                "L_from_H_big": false,
+                "L_from_H_recent": true
+            },
+            "stop_ref_vs_L_from_H_big_pct": 0.9,
+            "stop_ref_vs_L_from_H_recent_pct": 0,
+            "stop_ref_before_H_big": false,
+            "stop_ref_before_H_recent": false,
+            "H_big_status": "marked",
+            "H_recent_status": "marked",
+            "label": "matches_recent_low",
+            "relies_on_hold_or_none": false
+        },
+        {
+            "case_id": "a68f09dcfd78f572",
+            "name": "하나마이크론",
+            "in_13": false,
+            "code_stop_reference_low": {
+                "date": "2025-03-07",
+                "price": 10230,
+                "window": "2025-02-24 ~ 2025-03-10"
+            },
+            "A_L": {
+                "date": "2025-03-07",
+                "price": 10230
+            },
+            "L_from_H_big": {
+                "date": "2025-03-07",
+                "price": 10230,
+                "in_stop_window": true
+            },
+            "L_from_H_recent": {
+                "date": "2025-03-07",
+                "price": 10230,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": true,
+                "L_from_H_big": true,
+                "L_from_H_recent": true
+            },
+            "stop_ref_vs_L_from_H_big_pct": 0,
+            "stop_ref_vs_L_from_H_recent_pct": 0,
+            "stop_ref_before_H_big": false,
+            "stop_ref_before_H_recent": false,
+            "H_big_status": "marked",
+            "H_recent_status": "marked",
+            "label": "matches_both",
+            "relies_on_hold_or_none": false
+        },
+        {
+            "case_id": "d5070c71e5f98361",
+            "name": "엑스게이트",
+            "in_13": true,
+            "code_stop_reference_low": {
+                "date": "2026-09-03",
+                "price": 10630,
+                "window": "2026-08-26 ~ 2026-09-08"
+            },
+            "A_L": {
+                "date": "2026-08-25",
+                "price": 10500
+            },
+            "L_from_H_big": {
+                "date": "2026-07-30",
+                "price": 8190,
+                "in_stop_window": false
+            },
+            "L_from_H_recent": {
+                "date": "2026-09-03",
+                "price": 10630,
+                "in_stop_window": true
+            },
+            "stop_ref_equals": {
+                "A_L": false,
+                "L_from_H_big": false,
+                "L_from_H_recent": true
+            },
+            "stop_ref_vs_L_from_H_big_pct": 29.8,
+            "stop_ref_vs_L_from_H_recent_pct": 0,
+            "stop_ref_before_H_big": false,
+            "stop_ref_before_H_recent": false,
+            "H_big_status": "marked",
+            "H_recent_status": "marked",
+            "label": "matches_recent_low",
+            "relies_on_hold_or_none": false
+        }
+    ]
+}

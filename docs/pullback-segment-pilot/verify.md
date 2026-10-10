@@ -30,10 +30,10 @@ php bin/paper_pullback_segment_pilot.php verify --pack=<PR #61 ZIP을 푼 폴더
 | 거래량 막대 높이가 거래량에 비례 | 통과 | 막대 3,840개를 가격 파일의 거래량과 대조. 비례 오차 0.06px 이하, 최소 1px 바닥은 별도 확인 |
 | 표시 차트의 봉이 패키지 A 차트와 같음 | 통과 | 120일 차트 24개에서 제목·표식·범례를 빼면 패키지 A 차트와 동일 |
 | 상대 경로 | 통과 | `index.html`의 링크 51개가 모두 존재 |
-| 산출물 파일 | 통과 | protocol.md, sample-manifest.json, annotations-a.json(+src), a-freeze.json, code-comparison.json, index.html, review.md, verify.md |
+| 산출물 파일 | 통과 | protocol.md, sample-manifest.json, annotations-a.json(+src), a-freeze.json, a-freeze-lf.json, annotations-a2.json(+src), highs-review.json, code-comparison.json, index.html, review.md, verify.md |
 | 첫 화면 순서·성과 표현 | 통과 | 첫 카드에서 A 표시가 먼저이고 코드 대조는 접힘. 수익률·승률 표현 없음 |
 | 코드 창 재현 | 통과 | 상승 구조, MA20 근접, 거래량 감소, 목표가, 손절가, 구간 중심값이 24건 모두 저장값과 일치 |
-| 고정 뒤 A 파일 변경 | 없음 | 아래 해시가 고정 시점과 같음. 검증 명령이 매번 다시 비교함 |
+| 고정 뒤 A 파일 변경 | 없음 | 내용 변경 0건. 줄바꿈만 다른 파일은 `line_ending_only`로 구분함(아래 해시 표). 검증 명령이 매번 다시 비교함 |
 | 운영·원본·계좌 변경 | 없음 | `git diff origin/main`의 파일은 검토 자료, 검토용 차트 도구(`bin/paper/ReviewCharts.php`, 기본 출력은 그대로), 검토용 스크립트, 테스트, CI, 작업 기록뿐. `src/`, `config/`, 계좌·캐시·원본 데이터는 바뀌지 않음 |
 | 테스트 | 통과 | `tests/pullback_segment_pilot.php`, `tests/review_pack.php` |
 
@@ -43,15 +43,37 @@ php bin/paper_pullback_segment_pilot.php verify --pack=<PR #61 ZIP을 푼 폴더
 
 고정 시각은 `a-freeze.json`의 `frozen_at_kst`입니다. 고정 뒤 B 파일과 코드를 열었고 C 파일은 열지 않았습니다.
 
-| 파일 | SHA256 (LF 줄바꿈 기준) |
-|---|---|
-| annotations-a.src.json | `79a641dc8a6dd877f3ed22213c6f5f2aa53e02bb23e670284de26e2ef2accce2` |
-| annotations-a.json | `2562827cd73c0969ea37703f2098dbe91864bb2c7c13d6371eed349e54bc2bff` |
-| protocol.md | `19f672e464d8441b78dcf8c567a51fe36ec8bf5c21d6950055647108de7ddad5` |
-| sample-manifest.json | `efea4a5e8ce5597a34f7bebd45a0945b9189909cf4c5eda7caf7721b488144c3` |
-| 차트 48개 묶음 | `0ecaf0850c736027799fbf20cddffa0a3da05380165bedd97bb6734bee10ed5b` |
+고정 때의 해시(`a-freeze.json`, 바꾸지 않음)는 **파일을 만든 Windows 작업 폴더의 바이트 기준**입니다. 그래서 두 파일은 CRLF 줄바꿈 상태의 해시이고, Git에 저장된 파일은 LF라서 그대로 비교하면 달라집니다. 이전 문서의 "LF 줄바꿈 기준"이라는 설명은 틀렸습니다(표의 두 해시는 CRLF 기준이었습니다).
 
-고정 커밋에는 이 파일들과 표시용 코드가 들어 있습니다. 고정 뒤에 추가된 것은 `code-comparison.json`, `index.html`, `review.md`, `verify.md`, `verify-result.json`, 코드 대조·HTML·검증 함수, 테스트, CI 줄입니다. Windows에서 줄바꿈이 CRLF로 바뀌면 해시가 달라지므로 LF로 비교해야 합니다.
+| 파일 | 고정 때 해시 (원래 줄바꿈 기준) | 고정 때 줄바꿈 | LF로 바꾼 뒤 해시 (`a-freeze-lf.json`) |
+|---|---|---|---|
+| annotations-a.src.json | `79a641dc8a6dd877f3ed22213c6f5f2aa53e02bb23e670284de26e2ef2accce2` | CRLF | `c5512a6569007d3033b879987d5f9686c8d3bddb829b363ffd660417b754d1aa` |
+| annotations-a.json | `2562827cd73c0969ea37703f2098dbe91864bb2c7c13d6371eed349e54bc2bff` | LF | 같음 |
+| protocol.md | `19f672e464d8441b78dcf8c567a51fe36ec8bf5c21d6950055647108de7ddad5` | CRLF | `e9eb6752fc906d4a7a2acbc2c0ca4e2394f1ab5262100dee3710e65a0b1542f7` |
+| sample-manifest.json | `efea4a5e8ce5597a34f7bebd45a0945b9189909cf4c5eda7caf7721b488144c3` | LF | 같음 |
+| 차트 48개 묶음 | `0ecaf0850c736027799fbf20cddffa0a3da05380165bedd97bb6734bee10ed5b` | LF | 차트별 LF 해시 48개 |
+
+`a-freeze-lf.json`은 고정 커밋(`71ca19a`)의 Git 저장본에서 계산한 LF 해시를 따로 적은 파일입니다. 기존 고정 파일과 해시는 그대로 두었습니다. 검증은 파일마다 세 가지로 나눠 보고합니다.
+
+- `byte_identical`: 줄바꿈까지 고정 때와 같음.
+- `line_ending_only`: LF로 바꾸면 기록된 LF 해시와 같음. 줄바꿈만 다른 것이며 실패가 아님.
+- `content_changed`: LF로 바꿔도 다름. 실제 내용 변경이며 실패.
+
+또 LF 내용에 기록된 줄바꿈(CRLF 또는 LF)을 다시 입히면 고정 때의 원래 해시가 재현되는지 확인합니다(재현됨). 이 확인으로 고정 해시와 LF 해시가 같은 내용에서 나왔음을 보입니다. 실제 Git 저장본(`HEAD`를 `git archive`로 풀어 CR이 0개임을 확인한 것)에서는 `annotations-a.src.json`과 `protocol.md`가 `line_ending_only`, 나머지 두 파일과 차트 48개가 `byte_identical`로 통과했습니다. 단위 테스트는 LF 체크아웃, 전체 CRLF 체크아웃, 한 글자 내용 변경(실패), 차트 변경(실패)을 확인합니다.
+
+고정 커밋에는 이 파일들과 표시용 코드가 들어 있습니다. 고정 뒤에 추가된 것은 `code-comparison.json`, `index.html`, `review.md`, `verify.md`, `verify-result.json`, 코드 대조·HTML·검증 함수, 테스트, CI 줄이고, 이번 후속에서 `a-freeze-lf.json`, `annotations-a2.src.json`, `annotations-a2.json`, `highs-review.json`, `charts-a2/`가 더해졌습니다.
+
+## 후속 검토 검증 (PR #63 이후)
+
+| 항목 | 결과 | 확인한 내용 |
+|---|---|---|
+| 고정 파일 해시 | 통과 | 위 세 가지 구분. 이 작업 폴더에서는 `byte_identical` 4개와 차트 48개, Git 저장본(LF)에서는 `line_ending_only` 2개 |
+| 추가 검토 24건, 블라인드 표현 | 통과 | 24건 모두 있고 `blind=false`, 안내문에 "블라인드가 아니다"를 적음. 기존 A 표시는 읽기만 함 |
+| 추가 검토 좌표 | 통과 | H_big·H_recent·두 최저점의 날짜·가격이 가격 파일과 같고 판정일·확정 시각이 판정일 안. 추가 검토 차트 24개도 같은 방식으로 표식·거래량·날짜를 SVG에서 다시 읽어 검증 |
+| 손절 재비교 대상 | 통과 | `highs-review.json`의 대상이 손절 기준 날짜가 A의 L과 다른 13건과 정확히 같음 |
+| 돌파·목표 사실 | 통과 | 고가 돌파, 종가 돌파, 목표 기준 고점 초과, 목표 ≤ 진입을 가격 파일에서 따로 다시 계산해 `code-comparison.json`과 24건 모두 일치. 목표 ≤ 진입은 종가(소수점 버림)가 목표 기준 고점(버림) 이상일 때 성립하는지도 24건 확인 |
+
+위 표의 숫자 가운데 이전 표의 "표식 222개", "막대 3,840개", "날짜 문자열 818개", "링크 51개"는 후속 작업의 추가 차트와 섹션을 포함해 각각 305개, 6,720개, 1,262개, 75개로 늘었습니다(`verify-result.json`).
 
 ## 고정 전에 있었던 수정 (기록)
 
@@ -60,9 +82,16 @@ php bin/paper_pullback_segment_pilot.php verify --pack=<PR #61 ZIP을 푼 폴더
 
 ## 한계와 노출
 
+- 후속의 큰 조정 시작 고점·최근 재하락 시작 고점 검토는 B와 코드 대조를 본 뒤에 했으므로 블라인드가 아닙니다. 고점 날짜는 A 가격 파일에서 규칙으로 계산했고 코드의 창은 쓰지 않았습니다.
 - 완전한 블라인드가 아닙니다. 표시자는 각 사례가 선택/대기/탈락 중 어디에 속하는지 알고 있었고, 차트에서 종목명과 날짜를 보았습니다.
 - 작업 기록 맨 위에서 PR #62의 분류 이름과 건수, 기간별 결과 요약 한 줄을 읽었습니다. 사례별 분류와 성과표는 열지 않았습니다.
 - 이전 작업에서 눌림 코드의 윤곽을 알고 있었고 `f0445c951f5182c2`의 B 화면을 본 적이 있어 그 사례는 표본에서 뺐습니다.
 - 확정 피벗(k=3)은 이번 연구의 해석입니다. 원문 규칙이 아니고 ATR 배수, 봉 수, 거래량 비율, 피벗 좌우 개수는 원문 규칙으로 쓰지 않았습니다.
 - 표본은 시장 대표가 아닙니다. 패키지가 구조당 상한을 두어 만든 24건이며, 비율로 일반화하지 않습니다.
 - 임시 작업 폴더(압축을 푼 패키지)는 저장소 밖에 있고 커밋하지 않았습니다.
+
+## PR #64 최종 재현 수정
+
+초기 PR #64의 Git 저장본에서는 기존 A 해시 검사는 통과했지만 `a2_src_hash_recorded_matches`가 실패해 19/20이었습니다. 따라서 초기 저장본에서 전체 검증이 통과했다는 보고는 정정합니다. 새 A2 원본도 CRLF 기준 해시를 기록했기 때문입니다.
+
+기존 A/A2 파일과 기록 해시는 보존했습니다. A2 검증은 입력의 LF/CRLF 표현으로 기록 해시가 재현되는지 확인하고 다른 내용 변경은 거부합니다. 앞으로 A2 생성·재비교 명령은 LF 정규화 해시를 기록합니다. 실제 A2 입력에 대한 LF·CRLF·내용 변경 회귀 검사를 추가했습니다.

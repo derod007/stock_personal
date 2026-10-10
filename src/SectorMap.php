@@ -58,6 +58,8 @@ final class SectorMap
     public function __construct(
         private readonly string $cacheDir,
         private readonly int $cacheTtlSeconds = 86400,
+        /** @var (\Closure(string,string):string)|null 테스트용 HTTP 대체(URL, Accept) */
+        private readonly ?\Closure $http = null,
     ) {
         if (!is_dir($this->cacheDir)) {
             mkdir($this->cacheDir, 0777, true);
@@ -136,15 +138,96 @@ final class SectorMap
             'sector_label' => self::BUCKETS[$bucket] ?? '기타',
             'name' => $meta['name'] !== '' ? $meta['name'] : null,
         ];
-        file_put_contents($cacheFile, json_encode($out, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+        // 이름도 업종도 못 읽은 조회 실패는 캐시하지 않는다(자리표시자 '기타'가 하루 동안 굳는 것을 막는다).
+        if ($meta['name'] !== '' || $meta['upjong'] !== '') {
+            file_put_contents($cacheFile, json_encode($out, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+        }
 
         return $out;
+    }
+
+    /** @var array<string,string>|null 네이버 업종 번호 → 업종명(프로세스당 한 번만 조회) */
+    private ?array $industryNames = null;
+
+    /**
+     * finance.naver.com/item/main.naver 는 업종 링크가 없는 새 사이트로 이동한다.
+     * 그래서 같은 사이트의 JSON(종목 integration의 industryCode, 업종 목록)에서 먼저 읽고,
+     * 그 응답 자체를 못 읽을 때만 예전 HTML 파싱으로 되돌아간다.
+     *
+     * @return array{name:string, upjong:string}
+     */
+    private function fetchNaverMeta(string $code): array
+    {
+        $mobile = $this->fetchMobileMeta($code);
+
+        return $mobile ?? $this->fetchLegacyMeta($code);
+    }
+
+    /**
+     * @return array{name:string, upjong:string}|null null = 응답을 못 읽음
+     */
+    private function fetchMobileMeta(string $code): ?array
+    {
+        try {
+            $item = json_decode($this->httpGet('https://m.stock.naver.com/api/stock/' . rawurlencode($code) . '/integration', 'application/json'), true);
+            if (!is_array($item) || (string) ($item['itemCode'] ?? '') !== $code) {
+                return null;
+            }
+            $name = trim((string) ($item['stockName'] ?? ''));
+            $no = (string) ($item['industryCode'] ?? '');
+            $upjong = '';
+            if ($no !== '') {
+                $names = $this->industryNames();
+                if ($names === []) {
+                    return null;
+                }
+                $upjong = $names[$no] ?? '';
+            }
+
+            return ['name' => $name, 'upjong' => $upjong];
+        } catch (\Throwable) {
+            return null;
+        }
+    }
+
+    /**
+     * @return array<string,string>
+     */
+    private function industryNames(): array
+    {
+        if ($this->industryNames !== null) {
+            return $this->industryNames;
+        }
+        $names = [];
+        try {
+            for ($page = 1; $page <= 5; $page++) {
+                $j = json_decode($this->httpGet('https://m.stock.naver.com/api/stocks/industry?page=' . $page . '&pageSize=100', 'application/json'), true);
+                if (!is_array($j) || !is_array($j['groups'] ?? null)) {
+                    $names = [];
+                    break;
+                }
+                foreach ($j['groups'] as $g) {
+                    $no = (string) ($g['no'] ?? '');
+                    $label = preg_replace('/\s+/u', '', trim((string) ($g['name'] ?? ''))) ?? '';
+                    if ($no !== '' && $label !== '') {
+                        $names[$no] = $label;
+                    }
+                }
+                if ($j['groups'] === [] || count($names) >= (int) ($j['totalCount'] ?? 0)) {
+                    break;
+                }
+            }
+        } catch (\Throwable) {
+            $names = [];
+        }
+
+        return $this->industryNames = $names;
     }
 
     /**
      * @return array{name:string, upjong:string}
      */
-    private function fetchNaverMeta(string $code): array
+    private function fetchLegacyMeta(string $code): array
     {
         $url = 'https://finance.naver.com/item/main.naver?code=' . rawurlencode($code);
         try {
@@ -243,8 +326,11 @@ final class SectorMap
         return preg_match('/인버스|레버리지|커버드콜|ETF|액티브|맥쿼리인프라/u', $name) === 1;
     }
 
-    private function httpGet(string $url): string
+    private function httpGet(string $url, string $accept = 'text/html,application/xhtml+xml'): string
     {
+        if ($this->http !== null) {
+            return ($this->http)($url, $accept);
+        }
         $ch = curl_init($url);
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true,
@@ -253,7 +339,7 @@ final class SectorMap
             CURLOPT_ENCODING => '',
             CURLOPT_HTTPHEADER => [
                 'User-Agent: ' . self::USER_AGENT,
-                'Accept: text/html,application/xhtml+xml',
+                'Accept: ' . $accept,
                 'Accept-Language: ko-KR,ko;q=0.9,en;q=0.8',
                 'Referer: https://finance.naver.com/',
             ],

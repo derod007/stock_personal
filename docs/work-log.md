@@ -1,4 +1,10 @@
-﻿## 2026-10-11 01:36 · Cursor · 끝
+﻿## 2026-10-11 02:10 · Cursor · 끝
+- 한 일: PR #66 섹터 업종명이 전부 기타인 원인 확인(대표 5종목 임시 폴더 실행: 구 사이트가 새 사이트로 302, 업종 링크 없음). 같은 사이트 JSON에서 현재 업종 144종목 확보(미확인 0)해 연구용 섹터 맵 v2 생성. 새 계좌 va·vb·vc 소규모 재검증과 재개·재실행 확인. 운영 캐시·계좌·전략·기존 결과 그대로. 전체 실행·병합 안 함
+- 파일: bin/paper_sector_collect.php, bin/paper_sector_diagnose.php, bin/paper/SectorFreeze.php, bin/paper_account_replay.php, tests/sector_freeze.php, docs/historical-account-replay/(sector-map-v2.json, sector-collection-v2.json, sector-collection-diagnosis.json, smoke-sector-v2/, followup.md, protocol.md), docs/research/account-replay-followup.py, docs/work-log.md
+- 커밋: 브랜치 cursor/historical-paper-replay, PR #66에 반영(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-11 01:36 · Cursor · 끝
 - 한 일: PR #66 섹터 경로 대조. 운영 스캐너 경로 data/raw/cache/sector와 data/cache/sector를 읽기만 확인. 대상 144종목 유효 업종명은 두 경로 모두 0건(자리표시자 144). 보완·충돌 없음. 맵과 소규모 계좌는 새로 만들지 않음
 - 파일: bin/paper/SectorFreeze.php, bin/paper_account_replay.php, tests/sector_freeze.php, docs/historical-account-replay/(sector-path-check.json, followup.md, protocol.md), docs/research/account-replay-followup.py, docs/work-log.md
 - 커밋: 브랜치 cursor/historical-paper-replay, PR #66에 반영(병합 안 함)

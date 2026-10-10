@@ -15,6 +15,8 @@ use ChartEntryLab\{NaverDailyQuotes,SectorMap};
 final class PaperSectorFreeze
 {
     public const KIND='research_sector_map_v1';
+    /** Same rules; each secured row also carries the source URL, fetch time, industry code and response hash. */
+    public const KIND_V2='research_sector_map_v2';
     public const UNCLASSIFIED='unclassified';
     /** Written when the industry name was empty. Not a researched classification. */
     public const PLACEHOLDER_SECTOR='기타';
@@ -25,8 +27,9 @@ final class PaperSectorFreeze
      * @param list<string> $savedScanFiles absolute paths of the saved scan bundles
      * @return array<string,mixed>
      */
-    public static function build(string $cacheDir,array $datasetDirs,array $savedScanFiles):array
+    public static function build(string $cacheDir,array $datasetDirs,array $savedScanFiles,string $kind=self::KIND,array $extra=[]):array
     {
+        if(!in_array($kind,[self::KIND,self::KIND_V2],true))throw new InvalidArgumentException('Unknown sector map kind '.$kind);
         $cacheDir=rtrim(str_replace('\\','/',$cacheDir),'/');
         if(!is_dir($cacheDir))throw new RuntimeException('Sector cache not found: '.$cacheDir);
         $before=self::fingerprint($cacheDir);
@@ -81,6 +84,13 @@ final class PaperSectorFreeze
                     'source'=>self::rel($cacheFile),'source_sha256'=>hash_file('sha256',$cacheFile),
                     'source_mtime_kst'=>(new DateTimeImmutable('@'.filemtime($cacheFile)))->setTimezone(new DateTimeZone('Asia/Seoul'))->format('Y-m-d'),
                     'rule'=>'SectorMap::bucketOf'];
+                if($kind===self::KIND_V2){
+                    foreach(['source_url','industry_code','fetched_at','response_sha256','stock_name_source'] as $k){
+                        $row[$k]=$cached[$k]??null;
+                    }
+                    if(!is_string($row['source_url'])||$row['source_url']===''||!is_string($row['fetched_at'])||!is_string($row['response_sha256']))
+                        throw new RuntimeException('A secured row needs source, fetch time and response hash: '.$symbol);
+                }
                 if($row['bucket_rule_differs'])$differs++;
                 $secured++;
             }
@@ -92,13 +102,13 @@ final class PaperSectorFreeze
         if(self::fingerprint($cacheDir)!==$before)throw new RuntimeException('Sector cache changed while it was being read');
         foreach($scanBefore as $f=>$h)if(!hash_equals($h,(string)hash_file('sha256',$f)))throw new RuntimeException('Saved scan changed while it was being read');
         if(is_dir($ruleDir)&&str_contains($ruleDir,'noramu-sector-rule-'))@rmdir($ruleDir);
-        $out=['schema'=>1,'kind'=>self::KIND,'assumption'=>self::ASSUMPTION,
+        $out=['schema'=>1,'kind'=>$kind,'assumption'=>self::ASSUMPTION,
             'unclassified_bucket'=>self::UNCLASSIFIED,'unclassified_is_one_shared_bucket'=>true,
             'rule'=>'ChartEntryLab\\SectorMap::bucketOf','cache_dir'=>self::rel($cacheDir),
             'saved_scan_files'=>array_map(fn($f)=>['path'=>self::rel($f),'sha256'=>$scanBefore[$f]],$savedScanFiles),
             'counts'=>['symbols'=>count($symbols),'secured'=>$secured,'unconfirmed'=>count($unconfirmed),'bucket_rule_differs'=>$differs],
             'bucket_counts'=>$buckets,'unconfirmed_reasons'=>$reasons,
-            'sectors'=>$sectors,'symbols'=>$rows,'unconfirmed'=>$unconfirmed];
+            'sectors'=>$sectors,'symbols'=>$rows,'unconfirmed'=>$unconfirmed]+$extra;
         self::assertReplayMap($out);
         return $out;
     }
@@ -174,7 +184,7 @@ final class PaperSectorFreeze
     /** @param array<string,mixed> $map */
     public static function assertReplayMap(array $map):void
     {
-        if(($map['kind']??'')!==self::KIND)throw new InvalidArgumentException('Not a research sector map');
+        if(!in_array($map['kind']??'',[self::KIND,self::KIND_V2],true))throw new InvalidArgumentException('Not a research sector map');
         if(($map['unclassified_bucket']??'')!==self::UNCLASSIFIED||empty($map['unclassified_is_one_shared_bucket']))
             throw new InvalidArgumentException('Unclassified symbols must share one bucket');
         if(!str_contains((string)($map['assumption']??''),'당시 업종을 복원한 것이 아니다'))

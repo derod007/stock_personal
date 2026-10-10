@@ -69,7 +69,17 @@ if($cmd==='sector-map'){
     if($to==='')throw new InvalidArgumentException('--out required');
     $norm=str_replace('\\','/',$to);
     if(preg_match('#/data/(ohlcv|raw|cache|paper)#',$norm)||str_contains($norm,'/history-research/'))throw new RuntimeException('Refusing to write the sector map into operational or dataset files');
-    $built=PaperSectorFreeze::build($cache,$dirs,array_keys($scans));
+    $v2=($o['version']??'1')==='2';
+    $extra=[];
+    if($v2){
+        if(isset($o['collection-report'])){
+            $extra['collection']=['report'=>str_replace('\\','/',$o['collection-report']),'report_sha256'=>PaperStrategyVersion::fileHash($o['collection-report'])];
+        }
+        if(isset($o['supersedes'])){
+            $extra['supersedes']=['file'=>str_replace('\\','/',$o['supersedes']),'file_sha256'=>PaperStrategyVersion::fileHash($o['supersedes'])];
+        }
+    }
+    $built=PaperSectorFreeze::build($cache,$dirs,array_keys($scans),$v2?PaperSectorFreeze::KIND_V2:PaperSectorFreeze::KIND,$extra);
     PaperHistoryResearch::writeFile($to,$enc($built));
     $out(['written'=>$to,'file_sha256'=>PaperStrategyVersion::fileHash($to),'counts'=>$built['counts'],'bucket_counts'=>$built['bucket_counts'],'unconfirmed_reasons'=>$built['unconfirmed_reasons']]);
     exit(0);
@@ -93,7 +103,7 @@ $sectorMap=null;
 if(isset($o['sector-map'])){
     $sectorMap=json_decode((string)file_get_contents($o['sector-map']),true,512,JSON_THROW_ON_ERROR);
     if(!is_array($sectorMap['sectors']??null))throw new InvalidArgumentException('Sector map needs {"sectors":{symbol:bucket}}');
-    if(($sectorMap['kind']??'')===PaperSectorFreeze::KIND)PaperSectorFreeze::assertReplayMap($sectorMap);
+    if(in_array($sectorMap['kind']??'',[PaperSectorFreeze::KIND,PaperSectorFreeze::KIND_V2],true))PaperSectorFreeze::assertReplayMap($sectorMap);
 }
 $readJournal=static function()use($journalPath):array{
     $j=(new PaperJournal($journalPath))->read();

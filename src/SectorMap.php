@@ -117,13 +117,13 @@ final class SectorMap
                     'sector_label' => self::BUCKETS[$bucket] ?? '기타',
                     'name' => $name !== '' ? $name : null,
                 ];
-                if (
+                if ($this->cacheableMeta($name, $sectorName) && (
                     $out['sector_bucket'] !== (string) $cached['sector_bucket']
                     || (string) ($cached['sector_label'] ?? '') !== $out['sector_label']
-                ) {
+                )) {
                     file_put_contents($cacheFile, json_encode($out, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
                 }
-                if ($name !== '') {
+                if ($name !== '' && $this->cacheableMeta($name, $sectorName)) {
                     return $out;
                 }
             }
@@ -138,12 +138,18 @@ final class SectorMap
             'sector_label' => self::BUCKETS[$bucket] ?? '기타',
             'name' => $meta['name'] !== '' ? $meta['name'] : null,
         ];
-        // 이름도 업종도 못 읽은 조회 실패는 캐시하지 않는다(자리표시자 '기타'가 하루 동안 굳는 것을 막는다).
-        if ($meta['name'] !== '' || $meta['upjong'] !== '') {
+        // 업종 미확인 일반 주식은 이름이 있어도 캐시하지 않는다. 기존 유효 파일도 덮어쓰지 않는다.
+        if ($this->cacheableMeta($meta['name'], $meta['upjong'])) {
             file_put_contents($cacheFile, json_encode($out, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
         }
 
         return $out;
+    }
+
+    /** Unknown ordinary-stock industries must not be cached as successful metadata. */
+    private function cacheableMeta(string $name, string $industry): bool
+    {
+        return ($industry !== '' && $industry !== '기타') || $this->isEtfName($name);
     }
 
     /** @var array<string,string>|null 네이버 업종 번호 → 업종명(프로세스당 한 번만 조회) */
@@ -182,8 +188,14 @@ final class SectorMap
                     return null;
                 }
                 $upjong = $names[$no] ?? '';
+                if ($upjong === '' || $upjong === '기타') {
+                    return null; // A known industry code without a label is a lookup failure.
+                }
             }
 
+            if (!$this->cacheableMeta($name, $upjong)) {
+                return null; // Missing code alone is not evidence that the instrument is an ETF.
+            }
             return ['name' => $name, 'upjong' => $upjong];
         } catch (\Throwable) {
             return null;

@@ -70,4 +70,34 @@ mkdir($root.'/e',0770,true);
 file_put_contents($root.'/e/sector_005930.json',json_encode(['sector'=>'기타','sector_bucket'=>'other','sector_label'=>'기타','name'=>null],JSON_UNESCAPED_UNICODE));
 $r=(new SectorMap($root.'/e',86400,\Closure::fromCallable($http)))->resolve('005930.KS');
 ok($r['sector']==='반도체와반도체장비','a placeholder cache entry is refetched instead of staying 기타');
+// Partial failures: ordinary stocks may have a name without a usable industry.
+foreach (['999',null,'empty'] as $kind) {
+    $dir=$root.'/partial-'.($kind??'missing');
+    $partial=function(string $url)use($kind,$item,$redirectPage):string{
+        if(str_contains($url,'/integration'))return $item('005930','삼성전자',$kind===null?null:'999');
+        if(str_contains($url,'/stocks/industry'))return json_encode(['totalCount'=>1,'groups'=>[['no'=>$kind==='empty'?'999':'278','name'=>$kind==='empty'?'':'반도체']]],JSON_UNESCAPED_UNICODE);
+        return $redirectPage;
+    };
+    $result=(new SectorMap($dir,86400,\Closure::fromCallable($partial)))->resolve('005930.KS');
+    ok(!is_file($dir.'/sector_005930.json'),'ordinary stock missing industry is not cached: '.($kind??'missing code'));
+}
+// A named placeholder must be refreshed, unlike a real industry mapped to other.
+mkdir($root.'/named',0770,true);
+file_put_contents($root.'/named/sector_005930.json',json_encode(['sector'=>'기타','sector_bucket'=>'other','sector_label'=>'기타','name'=>'삼성전자'],JSON_UNESCAPED_UNICODE));
+$r=(new SectorMap($root.'/named',86400,\Closure::fromCallable($http)))->resolve('005930.KS');
+ok($r['sector_bucket']==='semi','named placeholder is refetched');
+mkdir($root.'/valid',0770,true);
+$valid=json_encode(['sector'=>'알려진별도업종','sector_bucket'=>'other','sector_label'=>'기타','name'=>'검증종목'],JSON_UNESCAPED_UNICODE);
+$validPath=$root.'/valid/sector_005930.json';file_put_contents($validPath,$valid);
+$never=static function(string $url):string{throw new RuntimeException('no request expected');};
+$r=(new SectorMap($root.'/valid',86400,$never))->resolve('005930.KS');
+ok($r['sector']==='알려진별도업종','a valid industry mapped to other is a cache hit');
+(new SectorMap($root.'/valid',86400,\Closure::fromCallable($http3)))->resolve('005930.KS',false);
+ok(file_get_contents($validPath)===$valid,'failed forced refresh preserves valid cache bytes');
+$partialNamed=static function(string $url)use($item,$redirectPage):string{
+    return str_contains($url,'/integration')?$item('005930','삼성전자',null):$redirectPage;
+};
+(new SectorMap($root.'/valid',86400,$partialNamed))->resolve('005930.KS',false);
+ok(file_get_contents($validPath)===$valid,'partial forced refresh also preserves valid cache bytes');
+ok(is_file($root.'/d/sector_069500.json'),'ETF identified by existing name rule can be cached without industry');
 echo "SECTOR_COLLECT_PASS\n";

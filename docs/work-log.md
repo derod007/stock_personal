@@ -1,4 +1,11 @@
-﻿## 2026-10-10 23:30 · Cursor · 끝
+## 2026-10-10 · Codex · 완료
+- PR #64 수정: 기존 A/A2 고정값을 보존하며 LF·CRLF 해시 검증, 새 A2 출력은 LF 해시 사용. 9건 고점 관계 설명과 보류 3건 표현 정정
+- 검증: 전체 20항목 및 A2 줄바꿈·내용 변경 회귀 검사 통과. 사용자 요청으로 검증된 PR #64 병합 진행. 운영 전략·계좌·원본 변경 없음
+
+## 2026-10-10 · Codex · 진행
+- PR #64 마무리: A2 줄바꿈 해시 회귀 수정, 13건 해석·보류 3건 명시, Git 저장본 검증 후 사용자 요청으로 병합
+
+## 2026-10-10 23:30 · Cursor · 끝
 - 한 일: PR #63 후속. 고정 해시를 줄바꿈 차이와 내용 변경으로 나눠 검증(기존 고정 파일·해시 그대로, LF 해시 파일 추가), 큰 조정 시작 고점·최근 재하락 시작 고점을 추가 검토 버전으로 표시하고(B 확인 뒤라 블라인드 아님) 손절 기준이 달랐던 13건의 조정 저점을 다시 비교, 고가 돌파·종가 돌파·목표≤진입을 따로 계산하고 잘못된 설명을 고침. 기존 24건만, 전략·원본 변경 없음
 - 파일: docs/pullback-segment-pilot/(a-freeze-lf.json, annotations-a2.src.json, annotations-a2.json, highs-review.json, charts-a2/, code-comparison.json, index.html, review.md, verify.md, verify-result.json), bin/paper/PullbackSegmentPilot.php, bin/paper_pullback_segment_pilot.php, tests/pullback_segment_pilot.php, docs/work-log.md
 - 커밋: 브랜치 cursor/pullback-segment-followup, PR 제출(병합 안 함)

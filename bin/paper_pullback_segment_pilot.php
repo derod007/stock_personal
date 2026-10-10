@@ -72,7 +72,7 @@ if($cmd==='a2'){
     $dir=rtrim($need('dir'),'/\\');$pack=rtrim(str_replace('\\','/',$need('pack')),'/');
     $fc=PaperPullbackSegmentPilot::freezeCheck($dir);
     if(!$fc['ok'])throw new RuntimeException('A freeze broken: '.json_encode($fc,JSON_UNESCAPED_UNICODE));
-    $a2=PaperPullbackSegmentPilot::a2($pack,$dir.'/annotations-a2.src.json',PaperPullbackSegmentPilot::loadJson($dir.'/annotations-a.json'),hash_file('sha256',$dir.'/annotations-a2.src.json'));
+    $a2=PaperPullbackSegmentPilot::a2($pack,$dir.'/annotations-a2.src.json',PaperPullbackSegmentPilot::loadJson($dir.'/annotations-a.json'),hash('sha256',str_replace("\r\n","\n",(string)file_get_contents($dir.'/annotations-a2.src.json'))));
     PaperPullbackSegmentPilot::write($dir.'/annotations-a2.json',$a2);
     echo json_encode($a2['status_counts'],JSON_UNESCAPED_UNICODE),"\n";
     exit(0);
@@ -80,7 +80,7 @@ if($cmd==='a2'){
 if($cmd==='recheck'){
     $dir=rtrim($need('dir'),'/\\');$pack=rtrim(str_replace('\\','/',$need('pack')),'/');$L=fn(string $f)=>PaperPullbackSegmentPilot::loadJson($dir.'/'.$f);
     $a2=$L('annotations-a2.json');$cmp=$L('code-comparison.json');
-    $res=PaperPullbackSegmentPilot::a2Recheck($a2,$L('annotations-a.json'),$cmp,['annotations_a2_src_sha256'=>hash_file('sha256',$dir.'/annotations-a2.src.json'),
+    $res=PaperPullbackSegmentPilot::a2Recheck($a2,$L('annotations-a.json'),$cmp,['annotations_a2_src_sha256'=>hash('sha256',str_replace("\r\n","\n",(string)file_get_contents($dir.'/annotations-a2.src.json'))),
         'annotations_a2_json_sha256_lf'=>hash('sha256',str_replace("\r\n","\n",(string)file_get_contents($dir.'/annotations-a2.json'))),
         'code_comparison_json_sha256_lf'=>hash('sha256',str_replace("\r\n","\n",(string)file_get_contents($dir.'/code-comparison.json')))]);
     PaperPullbackSegmentPilot::write($dir.'/highs-review.json',$res);

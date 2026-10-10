@@ -74,4 +74,12 @@ check(!$r['ok']&&$r['files']['protocol.md']['status']==='content_changed','a rea
 $copy('lf');$c=$tmp.'/charts/'.basename(glob($src.'/charts/*.svg')[0]);file_put_contents($c,str_replace('<svg','<svg ',(string)file_get_contents($c)));
 check(!PaperPullbackSegmentPilot::freezeCheck($tmp)['ok'],'a changed chart fails');
 foreach(glob($tmp.'/charts/*')as $f)unlink($f);foreach(glob($tmp.'/*.*')as $f)unlink($f);rmdir($tmp.'/charts');rmdir($tmp);
+// Regression: the committed A2 source is LF but its legacy recorded hash is CRLF.
+$a2=PaperPullbackSegmentPilot::loadJson($src.'/annotations-a2.json');
+$raw=(string)file_get_contents($src.'/annotations-a2.src.json');
+$lf=str_replace("\r\n","\n",$raw);$legacy=$a2['inputs']['annotations_a2_src_sha256'];
+check(PaperPullbackSegmentPilot::textHashMatches($lf,$legacy),'A2 LF checkout accepts the original CRLF hash');
+check(PaperPullbackSegmentPilot::textHashMatches(str_replace("\n","\r\n",$lf),$legacy),'A2 CRLF checkout accepts the original hash');
+check(PaperPullbackSegmentPilot::textHashMatches(str_replace("\n","\r\n",$lf),hash('sha256',$lf)),'new LF A2 hashes work in CRLF checkouts');
+check(!PaperPullbackSegmentPilot::textHashMatches($lf.' ',$legacy),'A2 real content change fails');
 echo "OK\n";

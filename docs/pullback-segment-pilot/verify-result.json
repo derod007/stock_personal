@@ -64,7 +64,7 @@
             "detail": {
                 "files": {
                     "annotations-a.src.json": {
-                        "status": "byte_identical",
+                        "status": "line_ending_only",
                         "frozen_line_ending": "crlf",
                         "frozen_hash_reproduced_from_lf_content": true
                     },
@@ -74,7 +74,7 @@
                         "frozen_hash_reproduced_from_lf_content": true
                     },
                     "protocol.md": {
-                        "status": "byte_identical",
+                        "status": "line_ending_only",
                         "frozen_line_ending": "crlf",
                         "frozen_hash_reproduced_from_lf_content": true
                     },

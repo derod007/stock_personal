@@ -508,6 +508,13 @@ nav{font-size:12px;line-height:1.9}nav a{margin-right:8px;text-decoration:none;c
      * (two of them were taken on CRLF working copies); a-freeze-lf.json holds the hash of the same content with CRLF folded to LF.
      * @return array{ok:bool,files:array<string,array>,charts:array{content_changed:list<string>,line_ending_only:int,byte_identical:int},consistent:bool}
      */
+    /** Accept legacy CRLF hashes and LF hashes without ignoring any non-newline content. */
+    public static function textHashMatches(string $raw,string $expected):bool
+    {
+        $lf=str_replace("\r\n","\n",$raw);
+        return in_array($expected,[hash('sha256',$raw),hash('sha256',$lf),hash('sha256',str_replace("\n","\r\n",$lf))],true);
+    }
+
     public static function freezeCheck(string $dir):array
     {
         $fr=self::loadJson($dir.'/a-freeze.json');$lf=self::loadJson($dir.'/a-freeze-lf.json');
@@ -634,7 +641,7 @@ nav{font-size:12px;line-height:1.9}nav a{margin-right:8px;text-decoration:none;c
         $a2=self::loadJson($dir.'/annotations-a2.json');$re=self::loadJson($dir.'/highs-review.json');$a2src=self::loadJson($dir.'/annotations-a2.src.json');
         $okSet=array_column($a2['cases'],'case_id')===array_column($ann['cases'],'case_id')&&count($a2['cases'])===24&&$a2['blind']===false;
         $ok('a2_covers_the_same_24_and_is_not_called_blind',$okSet&&!preg_match('/블라인드(?!가 아니)/u',(string)json_encode($a2['disclosure'],JSON_UNESCAPED_UNICODE)),$a2['status_counts']);
-        $ok('a2_src_hash_recorded_matches',$a2['inputs']['annotations_a2_src_sha256']===hash('sha256',(string)file_get_contents($dir.'/annotations-a2.src.json'))||$a2['inputs']['annotations_a2_src_sha256']===hash('sha256',str_replace("\r\n","\n",(string)file_get_contents($dir.'/annotations-a2.src.json'))),null);
+        $ok('a2_src_hash_recorded_matches',self::textHashMatches((string)file_get_contents($dir.'/annotations-a2.src.json'),$a2['inputs']['annotations_a2_src_sha256']),null);
         $a2Bad=[];$a2Future=[];
         foreach($a2['cases'] as $o){
             $id=$o['case_id'];$bars=self::bars($pack,$id);$n=count($bars);$D=$o['session_date'];$last=(int)$bars[$n-1]['available_at'];

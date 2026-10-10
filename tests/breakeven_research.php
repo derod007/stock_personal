@@ -1,0 +1,33 @@
+<?php
+declare(strict_types=1);
+require __DIR__.'/../bin/bootstrap.php';require __DIR__.'/../bin/paper/BreakevenResearch.php';
+function becheck(bool $ok,string $why):void{if(!$ok)throw new RuntimeException($why);echo "PASS $why\n";}
+$p=['ready'=>true,'signal_at'=>0,'entry'=>100,'stop'=>90,'target'=>120,'order_valid_bars'=>3];
+$b=fn($t,$o,$h,$l,$c)=>['available_at'=>$t,'open'=>$o,'high'=>$h,'low'=>$l,'close'=>$c,'volume'=>100];
+$f=[$b(1,101,104,99,103),$b(2,103,106,99,105)];
+$r=PaperBreakevenResearch::compare($p,$f);
+becheck($r['trigger_at']===1&&$r['active_from']===2&&$r['variant']['exit_at']===2,'entry close triggers NEXT session; same day low ignored');
+becheck($r['baseline']['status']==='incomplete'&&$r['variant']['status']==='closed','unfinished baseline can become closed');
+becheck($r['variant']['net_return_pct']<0,'entry-price stop is a net loss after costs');
+$r=PaperBreakevenResearch::compare($p,[$b(1,101,104,99,102),$b(2,102,105,99,102)]);
+becheck($r['trigger_at']===null&&$r['variant']===$r['baseline'],'high-only 3 percent does not arm');
+$r=PaperBreakevenResearch::compare($p,[$f[0],$b(2,95,102,94,100)]);
+becheck($r['variant']['exit_fill']===94.9525,'downward gap fills below entry with slippage');
+$r=PaperBreakevenResearch::compare($p,[$f[0],$b(2,121,122,99,120)]);
+becheck($r['variant']===$r['baseline']&&$r['variant']['first_exit']==='target','opening target gap wins chronology');
+$r=PaperBreakevenResearch::compare($p,[$f[0],$b(2,105,121,99,115)]);
+becheck($r['variant']['first_exit']==='stop'&&$r['variant']['ambiguous_bar'],'intrabar stop wins target tie');
+$r=PaperBreakevenResearch::compare($p,[$b(1,101,104,89,103)]);
+becheck($r['trigger_at']===null&&$r['variant']===$r['baseline'],'already stopped trade cannot arm on close');
+$r=PaperBreakevenResearch::compare($p,[$f[0],null,$f[1]]);
+becheck($r['variant']['status']==='future_quality_blocked'&&$r['active_from']===null,'bad session is not skipped');
+$r=PaperBreakevenResearch::compare($p,[$f[0],$f[1],null]);
+becheck($r['variant']['status']==='closed','earlier variant exit survives later quality block');
+$r=PaperBreakevenResearch::compare($p,[$b(1,110,115,105,111),$b(2,110,115,105,111),$b(3,110,115,105,111)]);
+becheck($r['variant']===$r['baseline']&&$r['variant']['status']==='unfilled','unfilled orders unchanged');
+$r=PaperBreakevenResearch::compare($p,[$b(1,99,104,98,102.03),$b(2,100,102,98,99)]);
+becheck($r['baseline']['entry_fill']===99.0495&&$r['trigger_at']===1,'trigger uses actual gap-improved fill');
+$r=PaperBreakevenResearch::compare($p,$f);
+$s=PaperBreakevenResearch::summary([['stop'=>90]+$r]);
+becheck($s['selected']===1&&$s['newly_closed']===1&&$s['paired_closed']===0&&$s['mean_delta_pp']===null,'new closures not mixed into paired means or zero returns');
+echo "OK\n";

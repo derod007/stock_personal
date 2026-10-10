@@ -1,0 +1,125 @@
+{
+    "version": "pullback_segment_pilot_v1",
+    "all_passed": true,
+    "failed": [],
+    "checks": {
+        "counts_per_period_and_category": {
+            "pass": true,
+            "detail": {
+                "total": 24,
+                "by_period": {
+                    "kr-saved-scan-20261009": {
+                        "selected": 6,
+                        "waiting": 3,
+                        "dropped": 3
+                    },
+                    "kr-saved-scan-20251008": {
+                        "selected": 6,
+                        "waiting": 3,
+                        "dropped": 3
+                    }
+                }
+            }
+        },
+        "annotations_cover_the_same_24": {
+            "pass": true,
+            "detail": null
+        },
+        "annotations_have_no_category_status_or_outcome_keys": {
+            "pass": true,
+            "detail": []
+        },
+        "no_date_after_decision_day_in_inputs_marks_and_charts": {
+            "pass": true,
+            "detail": {
+                "date_strings_checked_in_svg": 818
+            }
+        },
+        "confirmed_pivots_confirmed_by_decision_day": {
+            "pass": true,
+            "detail": []
+        },
+        "marked_coordinates_match_price_file_and_chart_pixels": {
+            "pass": true,
+            "detail": {
+                "markers_checked": 222,
+                "failures": []
+            }
+        },
+        "volume_bar_heights_proportional_to_volume": {
+            "pass": true,
+            "detail": {
+                "bars_checked": 3840,
+                "failures": []
+            }
+        },
+        "annotated_120_chart_candles_equal_package_A_chart": {
+            "pass": true,
+            "detail": {
+                "different_charts": 0
+            }
+        },
+        "a_stage_files_unchanged_since_freeze": {
+            "pass": true,
+            "detail": []
+        },
+        "index_relative_links_exist": {
+            "pass": true,
+            "detail": {
+                "links": 51,
+                "missing": []
+            }
+        },
+        "deliverable_files_present": {
+            "pass": true,
+            "detail": []
+        },
+        "index_shows_A_marks_before_code_comparison": {
+            "pass": true,
+            "detail": null
+        },
+        "index_has_no_return_or_win_loss_wording": {
+            "pass": true,
+            "detail": null
+        },
+        "code_comparison_covers_24_with_valid_categories": {
+            "pass": true,
+            "detail": {
+                "chart_ambiguous": 6,
+                "structure_ok_excluded_by_target_rr": 5,
+                "different_segments": 5,
+                "data_limit": 1,
+                "consistent": 7
+            }
+        },
+        "code_windows_reproduce_stored_values": {
+            "pass": true,
+            "detail": {
+                "rising_structure": {
+                    "matched": 24,
+                    "mismatched": 0
+                },
+                "near_ma20": {
+                    "matched": 24,
+                    "mismatched": 0
+                },
+                "volume_contracted": {
+                    "matched": 24,
+                    "mismatched": 0
+                },
+                "target": {
+                    "matched": 24,
+                    "mismatched": 0
+                },
+                "stop": {
+                    "matched": 24,
+                    "mismatched": 0
+                },
+                "zone_mid": {
+                    "matched": 24,
+                    "mismatched": 0
+                }
+            }
+        }
+    }
+}

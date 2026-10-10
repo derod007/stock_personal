@@ -54,5 +54,30 @@ if($cmd==='charts'){
     echo count($ann['cases'])*2," charts written\n";
     exit(0);
 }
+if($cmd==='compare'){
+    // B stage. Refuses to run unless the A freeze file still matches the files it lists.
+    $dir=rtrim($need('dir'),'/\\');$freeze=PaperPullbackSegmentPilot::loadJson($dir.'/a-freeze.json');
+    foreach($freeze['files_sha256'] as $name=>$sha)if(hash_file('sha256',$dir.'/'.$name)!==$sha)throw new RuntimeException('A freeze broken: '.$name.' changed');
+    $pack=rtrim(str_replace('\\','/',$need('pack')),'/');
+    $result=PaperPullbackSegmentPilot::compare($pack,PaperPullbackSegmentPilot::loadJson($dir.'/annotations-a.json'),PaperPullbackSegmentPilot::loadJson($dir.'/sample-manifest.json'),hash_file('sha256',$dir.'/a-freeze.json'));
+    PaperPullbackSegmentPilot::write($dir.'/code-comparison.json',$result);
+    echo json_encode($result['reproduction_totals'],JSON_PRETTY_PRINT),"\n";
+    $count=[];foreach($result['cases'] as $c)$count[$c['primary_category']]=($count[$c['primary_category']]??0)+1;
+    echo json_encode($count),"\n";
+    exit(0);
+}
+if($cmd==='html'){
+    $dir=rtrim($need('dir'),'/\\');$L=fn(string $f)=>PaperPullbackSegmentPilot::loadJson($dir.'/'.$f);
+    file_put_contents($dir.'/index.html',PaperPullbackSegmentPilot::html($L('annotations-a.json'),$L('code-comparison.json'),$L('sample-manifest.json'),$L('a-freeze.json')));
+    echo "index.html written\n";
+    exit(0);
+}
+if($cmd==='verify'){
+    $dir=rtrim($need('dir'),'/\\');$pack=rtrim(str_replace('\\','/',$need('pack')),'/');
+    $res=PaperPullbackSegmentPilot::verify($pack,$dir);
+    PaperPullbackSegmentPilot::write($dir.'/verify-result.json',$res);
+    foreach($res['checks'] as $k=>$c)echo($c['pass']?'PASS ':'FAIL ').$k."\n";
+    exit($res['all_passed']?0:1);
+}
 fwrite(STDERR,"Usage: php bin/paper_pullback_segment_pilot.php select|annotate|charts|view ...\n");
 exit(64);

@@ -1,0 +1,4036 @@
+{
+    "version": "pullback_segment_pilot_v1",
+    "stage": "A",
+    "pivot_rule": "k=3, strict, confirmed at the 3rd right bar (this study only)",
+    "inputs": {
+        "annotations_src_sha256": "79a641dc8a6dd877f3ed22213c6f5f2aa53e02bb23e670284de26e2ef2accce2",
+        "price_files": "json/a/{case_id}-input.json (bars through the decision day)",
+        "not_read": "B files, C files, engine code, PR #62 labels, returns"
+    },
+    "cases": [
+        {
+            "case_id": "013ad9902972b826",
+            "symbol": "043260.KQ",
+            "name": "성호전자",
+            "session_date": "2026-01-14",
+            "bars_in_price_file": 308,
+            "first_bar": "2024-10-08",
+            "last_bar": "2026-01-14",
+            "view_120_first": "2025-07-17",
+            "view_40_first": "2025-11-17",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2025-12-26",
+                        "index": 296,
+                        "field": "low",
+                        "price": 7300,
+                        "observable_at": 1766730600,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1767335400,
+                            "confirmed_date": "2026-01-02",
+                            "reason": null
+                        },
+                        "bars_after": 11,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-11-24",
+                            "index": 273,
+                            "field": "low",
+                            "price": 1860,
+                            "observable_at": 1763965800,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1764225000,
+                                "confirmed_date": "2025-11-27",
+                                "reason": null
+                            },
+                            "bars_after": 34,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "첫 급등 2,355 뒤 눌림에서 가속이 시작된 저점"
+                        },
+                        {
+                            "date": "2025-09-01",
+                            "index": 219,
+                            "field": "low",
+                            "price": 1021,
+                            "observable_at": 1756708200,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1756967400,
+                                "confirmed_date": "2025-09-04",
+                                "reason": null
+                            },
+                            "bars_after": 88,
+                            "in_view_120": true,
+                            "in_view_40": false,
+                            "why": "횡보 바닥에서 전체 상승이 시작된 저점"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2026-01-05",
+                        "index": 300,
+                        "field": "high",
+                        "price": 12960,
+                        "observable_at": 1767594600,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1767853800,
+                            "confirmed_date": "2026-01-08",
+                            "reason": null
+                        },
+                        "bars_after": 7,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "1월 8일 하락 직전의 고점. 판정일에 이 고점을 넘는 새 고점이 나왔으므로, 진행 중인 눌림이 아니라 이미 끝난 마지막 눌림의 고점이다"
+                    },
+                    "alternatives": []
+                },
+                "L": {
+                    "main": {
+                        "date": "2026-01-08",
+                        "index": 303,
+                        "field": "low",
+                        "price": 10250,
+                        "observable_at": 1767853800,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1768285800,
+                            "confirmed_date": "2026-01-13",
+                            "reason": null
+                        },
+                        "bars_after": 4,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2026-01-08",
+                        "index": 303,
+                        "field": "low",
+                        "price": 10250,
+                        "observable_at": 1767853800,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1768285800,
+                            "confirmed_date": "2026-01-13",
+                            "reason": null
+                        },
+                        "bars_after": 4,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "하락 최저점을 지지 후보로 읽음"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-12-26",
+                            "index": 296,
+                            "field": "low",
+                            "price": 7300,
+                            "observable_at": 1766730600,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1767335400,
+                                "confirmed_date": "2026-01-02",
+                                "reason": null
+                            },
+                            "bars_after": 11,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "마지막 상승 아래의 앞선 확정 저점"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "confirmed",
+                "why": "가격이 이미 눌림의 고점을 넘었다",
+                "evidence": [
+                    {
+                        "date": "2026-01-12",
+                        "observable_at": 1768199400,
+                        "note": "종가 13,800이 H 고가 12,960 위"
+                    },
+                    {
+                        "date": "2026-01-14",
+                        "observable_at": 1768372200,
+                        "note": "판정일에 신고가 16,500"
+                    }
+                ]
+            },
+            "correction_state": "possibly_ended",
+            "ambiguity": {
+                "level": "high",
+                "why": "4개월에 약 12배가 올라 상승 구간의 시작을 하나로 정하기 어렵고, 선형 차트라 앞부분이 눌려 보인다"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 7,
+                "high_above_H_first_date": "2026-01-12",
+                "close_above_H_first_date": "2026-01-12",
+                "L_is_decision_day": false,
+                "decision_day_close": 14980,
+                "H_high": 12960
+            },
+            "data_notes": [
+                "판정일에 진행 중인 눌림은 없다."
+            ]
+        },
+        {
+            "case_id": "01bea56f4af0f31f",
+            "symbol": "010950.KS",
+            "name": "S-Oil",
+            "session_date": "2026-08-07",
+            "bars_in_price_file": 446,
+            "first_bar": "2024-10-08",
+            "last_bar": "2026-08-07",
+            "view_120_first": "2026-02-10",
+            "view_40_first": "2026-06-12",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2026-06-26",
+                        "index": 416,
+                        "field": "low",
+                        "price": 90400,
+                        "observable_at": 1782455400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1782887400,
+                            "confirmed_date": "2026-07-01",
+                            "reason": null
+                        },
+                        "bars_after": 29,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2026-05-29",
+                            "index": 397,
+                            "field": "low",
+                            "price": 102100,
+                            "observable_at": 1780036200,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1780554600,
+                                "confirmed_date": "2026-06-04",
+                                "reason": null
+                            },
+                            "bars_after": 48,
+                            "in_view_120": true,
+                            "in_view_40": false,
+                            "why": "그 앞의 바닥 저점"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2026-07-24",
+                        "index": 435,
+                        "field": "high",
+                        "price": 156500,
+                        "observable_at": 1784874600,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1785306600,
+                            "confirmed_date": "2026-07-29",
+                            "reason": null
+                        },
+                        "bars_after": 10,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "8월 초 하락 직전의 가장 높은 고가"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2026-07-13",
+                            "index": 427,
+                            "field": "high",
+                            "price": 146500,
+                            "observable_at": 1783924200,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1784183400,
+                                "confirmed_date": "2026-07-16",
+                                "reason": null
+                            },
+                            "bars_after": 18,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "같은 상승의 앞선 고점, 1만원 낮음"
+                        }
+                    ]
+                },
+                "L": {
+                    "main": {
+                        "date": "2026-08-03",
+                        "index": 441,
+                        "field": "low",
+                        "price": 119600,
+                        "observable_at": 1785738600,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1785997800,
+                            "confirmed_date": "2026-08-06",
+                            "reason": null
+                        },
+                        "bars_after": 4,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2026-08-03",
+                        "index": 441,
+                        "field": "low",
+                        "price": 119600,
+                        "observable_at": 1785738600,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1785997800,
+                            "confirmed_date": "2026-08-06",
+                            "reason": null
+                        },
+                        "bars_after": 4,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "하락 최저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2026-06-26",
+                            "index": 416,
+                            "field": "low",
+                            "price": 90400,
+                            "observable_at": 1782455400,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1782887400,
+                                "confirmed_date": "2026-07-01",
+                                "reason": null
+                            },
+                            "bars_after": 29,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "상승의 바닥"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "partial",
+                "why": "하루의 강한 반등이다. H 고가와 7월 27일 고가 아래",
+                "evidence": [
+                    {
+                        "date": "2026-08-07",
+                        "observable_at": 1786084200,
+                        "note": "종가 137,600이 직전 3거래일 고가와 20일 평균 위"
+                    }
+                ]
+            },
+            "correction_state": "ongoing",
+            "ambiguity": {
+                "level": "medium",
+                "why": "3월의 하루짜리 급등 177,100이 창 안에 있지만 현재 상승과 무관하다"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 10,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": false,
+                "decision_day_close": 137600,
+                "H_high": 156500
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "029fd9c7a4f3fcb6",
+            "symbol": "095610.KQ",
+            "name": "테스",
+            "session_date": "2026-01-15",
+            "bars_in_price_file": 309,
+            "first_bar": "2024-10-08",
+            "last_bar": "2026-01-15",
+            "view_120_first": "2025-07-18",
+            "view_40_first": "2025-11-18",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2025-12-15",
+                        "index": 288,
+                        "field": "low",
+                        "price": 35450,
+                        "observable_at": 1765780200,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1766039400,
+                            "confirmed_date": "2025-12-18",
+                            "reason": null
+                        },
+                        "bars_after": 20,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-11-26",
+                            "index": 275,
+                            "field": "low",
+                            "price": 37650,
+                            "observable_at": 1764138600,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1764570600,
+                                "confirmed_date": "2025-12-01",
+                                "reason": null
+                            },
+                            "bars_after": 33,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "같은 바닥의 앞선 저점"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2026-01-07",
+                        "index": 302,
+                        "field": "high",
+                        "price": 60900,
+                        "observable_at": 1767767400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1768199400,
+                            "confirmed_date": "2026-01-12",
+                            "reason": null
+                        },
+                        "bars_after": 6,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "1월 급등의 정점"
+                    },
+                    "alternatives": []
+                },
+                "L": {
+                    "main": {
+                        "date": "2026-01-15",
+                        "index": 308,
+                        "field": "low",
+                        "price": 48900,
+                        "observable_at": 1768458600,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 0,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2026-01-15",
+                        "index": 308,
+                        "field": "low",
+                        "price": 48900,
+                        "observable_at": 1768458600,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 0,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "관찰 최저점이 판정일 봉 하나뿐"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-12-15",
+                            "index": 288,
+                            "field": "low",
+                            "price": 35450,
+                            "observable_at": 1765780200,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1766039400,
+                                "confirmed_date": "2025-12-18",
+                                "reason": null
+                            },
+                            "bars_after": 20,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "마지막 확정 저점. 현재 저점은 판정일 봉"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "not_confirmed",
+                "why": "1월 7일 뒤 종가가 계단식으로 낮아지고 최저점이 판정일이라 올라간 저점이 아직 없다",
+                "evidence": []
+            },
+            "correction_state": "ongoing",
+            "ambiguity": {
+                "level": "medium",
+                "why": "관찰 최저점이 오늘 봉이라 확정되지 않았다"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 6,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": true,
+                "decision_day_close": 50200,
+                "H_high": 60900
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "03779fd61d439aed",
+            "symbol": "067310.KQ",
+            "name": "하나마이크론",
+            "session_date": "2025-10-14",
+            "bars_in_price_file": 245,
+            "first_bar": "2024-10-08",
+            "last_bar": "2025-10-14",
+            "view_120_first": "2025-04-14",
+            "view_40_first": "2025-08-11",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2025-08-20",
+                        "index": 211,
+                        "field": "low",
+                        "price": 11410,
+                        "observable_at": 1755671400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1756103400,
+                            "confirmed_date": "2025-08-25",
+                            "reason": null
+                        },
+                        "bars_after": 33,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-07-23",
+                            "index": 192,
+                            "field": "low",
+                            "price": 10400,
+                            "observable_at": 1753252200,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1753684200,
+                                "confirmed_date": "2025-07-28",
+                                "reason": null
+                            },
+                            "bars_after": 52,
+                            "in_view_120": true,
+                            "in_view_40": false,
+                            "why": "같은 바닥의 앞선 저점"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2025-10-13",
+                        "index": 243,
+                        "field": "high",
+                        "price": 28350,
+                        "observable_at": 1760337000,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 1,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "거의 수직 상승 뒤의 최근 고점. 그 뒤 완료 봉이 하나뿐"
+                    },
+                    "alternatives": []
+                },
+                "L": {
+                    "main": {
+                        "date": "2025-10-14",
+                        "index": 244,
+                        "field": "low",
+                        "price": 25150,
+                        "observable_at": 1760423400,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 0,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2025-10-14",
+                        "index": 244,
+                        "field": "low",
+                        "price": 25150,
+                        "observable_at": 1760423400,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 0,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "판정일 봉"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-09-30",
+                            "index": 239,
+                            "field": "low",
+                            "price": 22000,
+                            "observable_at": 1759213800,
+                            "pivot": {
+                                "confirmed": false,
+                                "confirmed_at": null,
+                                "confirmed_date": null,
+                                "reason": "a neighbouring bar within 3 bars is as low or more extreme"
+                            },
+                            "bars_after": 5,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "마지막 가속 직전의 조용한 저점. 확정 피벗은 아님"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "unknown",
+                "why": "눌림이 한 봉이라 확인하거나 부정할 근거가 없다",
+                "evidence": []
+            },
+            "correction_state": "ongoing",
+            "ambiguity": {
+                "level": "medium",
+                "why": "H와 L이 마지막 두 봉이라 한 봉 하락이 눌림 구간인지 아직 알 수 없다"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 1,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": true,
+                "decision_day_close": 26000,
+                "H_high": 28350
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "03c915d929f4769a",
+            "symbol": "115440.KQ",
+            "name": "우리넷",
+            "session_date": "2025-10-28",
+            "bars_in_price_file": 255,
+            "first_bar": "2024-10-08",
+            "last_bar": "2025-10-28",
+            "view_120_first": "2025-04-28",
+            "view_40_first": "2025-08-26",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2025-09-26",
+                        "index": 237,
+                        "field": "low",
+                        "price": 6500,
+                        "observable_at": 1758868200,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1759300200,
+                            "confirmed_date": "2025-10-01",
+                            "reason": null
+                        },
+                        "bars_after": 17,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-07-29",
+                            "index": 196,
+                            "field": "low",
+                            "price": 6130,
+                            "observable_at": 1753770600,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1754029800,
+                                "confirmed_date": "2025-08-01",
+                                "reason": null
+                            },
+                            "bars_after": 58,
+                            "in_view_120": true,
+                            "in_view_40": false,
+                            "why": "여름 바닥의 저점"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2025-09-30",
+                        "index": 239,
+                        "field": "high",
+                        "price": 7640,
+                        "observable_at": 1759213800,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1760077800,
+                            "confirmed_date": "2025-10-10",
+                            "reason": null
+                        },
+                        "bars_after": 15,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "거래량 3백만의 위꼬리 급등 하루. 종가는 6,710으로 되돌렸다"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-10-14",
+                            "index": 244,
+                            "field": "high",
+                            "price": 7270,
+                            "observable_at": 1760423400,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1760682600,
+                                "confirmed_date": "2025-10-17",
+                                "reason": null
+                            },
+                            "bars_after": 10,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "같은 횡보 안의 나중의 낮은 고점"
+                        }
+                    ]
+                },
+                "L": {
+                    "main": {
+                        "date": "2025-10-01",
+                        "index": 240,
+                        "field": "low",
+                        "price": 6620,
+                        "observable_at": 1759300200,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "a neighbouring bar within 3 bars is as low or more extreme"
+                        },
+                        "bars_after": 14,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2025-10-01",
+                        "index": 240,
+                        "field": "low",
+                        "price": 6620,
+                        "observable_at": 1759300200,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "a neighbouring bar within 3 bars is as low or more extreme"
+                        },
+                        "bars_after": 14,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터의 최저 저가"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-10-20",
+                            "index": 248,
+                            "field": "low",
+                            "price": 6800,
+                            "observable_at": 1760941800,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1761201000,
+                                "confirmed_date": "2025-10-23",
+                                "reason": null
+                            },
+                            "bars_after": 6,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "10월 1일 저점보다 높은 두 번째 저점"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "partial",
+                "why": "저점은 올라가지만 종가는 H 고가 7,640 아래",
+                "evidence": [
+                    {
+                        "date": "2025-10-20",
+                        "observable_at": 1760941800,
+                        "note": "저가 6,800이 10월 1일 저가 6,620보다 높고, 이후 저가가 모두 6,900 이상"
+                    }
+                ]
+            },
+            "correction_state": "possibly_ended",
+            "ambiguity": {
+                "level": "high",
+                "why": "H가 하루짜리 위꼬리 급등이고 L이 바로 다음 날이다. 눌림이라기보다 6,600~7,400 횡보로도 읽힌다"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 15,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": false,
+                "decision_day_close": 7330,
+                "H_high": 7640
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "03d016b5e47bae98",
+            "symbol": "000150.KS",
+            "name": "두산",
+            "session_date": "2025-05-19",
+            "bars_in_price_file": 882,
+            "first_bar": "2021-10-08",
+            "last_bar": "2025-05-19",
+            "view_120_first": "2024-11-18",
+            "view_40_first": "2025-03-20",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2025-04-17",
+                        "index": 862,
+                        "field": "low",
+                        "price": 265500,
+                        "observable_at": 1744871400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1745303400,
+                            "confirmed_date": "2025-04-22",
+                            "reason": null
+                        },
+                        "bars_after": 19,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-04-07",
+                            "index": 854,
+                            "field": "low",
+                            "price": 236500,
+                            "observable_at": 1744007400,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1744266600,
+                                "confirmed_date": "2025-04-10",
+                                "reason": null
+                            },
+                            "bars_after": 27,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "V자의 가장 낮은 점. 가장 가까운 확정 저점은 나중의 4월 17일"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2025-05-16",
+                        "index": 880,
+                        "field": "high",
+                        "price": 409000,
+                        "observable_at": 1747377000,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 1,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "최근 고점. 그 뒤 완료 봉이 하나"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-05-14",
+                            "index": 878,
+                            "field": "high",
+                            "price": 408500,
+                            "observable_at": 1747204200,
+                            "pivot": {
+                                "confirmed": false,
+                                "confirmed_at": null,
+                                "confirmed_date": null,
+                                "reason": "a neighbouring bar within 3 bars is as high or more extreme"
+                            },
+                            "bars_after": 3,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "두 봉 앞의 거의 같은 고점"
+                        },
+                        {
+                            "date": "2025-02-26",
+                            "index": 827,
+                            "field": "high",
+                            "price": 386000,
+                            "observable_at": 1740551400,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1741069800,
+                                "confirmed_date": "2025-03-04",
+                                "reason": null
+                            },
+                            "bars_after": 54,
+                            "in_view_120": true,
+                            "in_view_40": false,
+                            "why": "앞선 39% 하락의 출발 고점. 현재 가격은 이 위"
+                        }
+                    ]
+                },
+                "L": {
+                    "main": {
+                        "date": "2025-05-19",
+                        "index": 881,
+                        "field": "low",
+                        "price": 384000,
+                        "observable_at": 1747636200,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 0,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2025-05-19",
+                        "index": 881,
+                        "field": "low",
+                        "price": 384000,
+                        "observable_at": 1747636200,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 0,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "판정일 저가"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-04-17",
+                            "index": 862,
+                            "field": "low",
+                            "price": 265500,
+                            "observable_at": 1744871400,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1745303400,
+                                "confirmed_date": "2025-04-22",
+                                "reason": null
+                            },
+                            "bars_after": 19,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "마지막 확정 저점"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "unknown",
+                "why": "V자 회복 뒤 한 봉 하락이라 근거를 따질 수 없다",
+                "evidence": []
+            },
+            "correction_state": "ongoing",
+            "ambiguity": {
+                "level": "high",
+                "why": "2~4월의 큰 하락이 신고가로 끝났고 현재 하락은 한 봉이다. 어느 쪽을 구간으로 볼지는 읽는 사람에 따라 갈린다"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 1,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": true,
+                "decision_day_close": 393000,
+                "H_high": 409000
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "05a3f1e796e376c7",
+            "symbol": "032820.KQ",
+            "name": "우리기술",
+            "session_date": "2025-05-16",
+            "bars_in_price_file": 881,
+            "first_bar": "2021-10-08",
+            "last_bar": "2025-05-16",
+            "view_120_first": "2024-11-15",
+            "view_40_first": "2025-03-19",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2025-04-09",
+                        "index": 856,
+                        "field": "low",
+                        "price": 1453,
+                        "observable_at": 1744180200,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1744612200,
+                            "confirmed_date": "2025-04-14",
+                            "reason": null
+                        },
+                        "bars_after": 24,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2024-12-30",
+                            "index": 791,
+                            "field": "low",
+                            "price": 1621,
+                            "observable_at": 1735540200,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1736145000,
+                                "confirmed_date": "2025-01-06",
+                                "reason": null
+                            },
+                            "bars_after": 89,
+                            "in_view_120": true,
+                            "in_view_40": false,
+                            "why": "2,370까지 가던 앞선 상승 아래의 저점"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2025-05-02",
+                        "index": 872,
+                        "field": "high",
+                        "price": 2100,
+                        "observable_at": 1746167400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1746772200,
+                            "confirmed_date": "2025-05-09",
+                            "reason": null
+                        },
+                        "bars_after": 8,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "5월 초 하락 직전의 반등 고점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-02-18",
+                            "index": 821,
+                            "field": "high",
+                            "price": 2370,
+                            "observable_at": 1739860200,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1740119400,
+                                "confirmed_date": "2025-02-21",
+                                "reason": null
+                            },
+                            "bars_after": 59,
+                            "in_view_120": true,
+                            "in_view_40": false,
+                            "why": "4월 저점 앞의 더 큰 상승의 고점"
+                        }
+                    ]
+                },
+                "L": {
+                    "main": {
+                        "date": "2025-05-07",
+                        "index": 873,
+                        "field": "low",
+                        "price": 1708,
+                        "observable_at": 1746599400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1747031400,
+                            "confirmed_date": "2025-05-12",
+                            "reason": null
+                        },
+                        "bars_after": 7,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2025-05-07",
+                        "index": 873,
+                        "field": "low",
+                        "price": 1708,
+                        "observable_at": 1746599400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1747031400,
+                            "confirmed_date": "2025-05-12",
+                            "reason": null
+                        },
+                        "bars_after": 7,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "하락 최저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-04-09",
+                            "index": 856,
+                            "field": "low",
+                            "price": 1453,
+                            "observable_at": 1744180200,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1744612200,
+                                "confirmed_date": "2025-04-14",
+                                "reason": null
+                            },
+                            "bars_after": 24,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "반등의 바닥"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "partial",
+                "why": "판정일에 큰 거래량으로 급등했으나 종가는 H 아래",
+                "evidence": [
+                    {
+                        "date": "2025-05-16",
+                        "observable_at": 1747377000,
+                        "note": "고가 2,170이 H 고가 2,100을 넘었지만 종가 2,060은 못 넘음"
+                    }
+                ]
+            },
+            "correction_state": "possibly_ended",
+            "ambiguity": {
+                "level": "medium",
+                "why": "120일 차트가 깨끗한 상승이 아니라 하락 뒤의 횡보 구간이다"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 8,
+                "high_above_H_first_date": "2025-05-16",
+                "close_above_H_first_date": null,
+                "L_is_decision_day": false,
+                "decision_day_close": 2060,
+                "H_high": 2100
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "0628c0298c8155ce",
+            "symbol": "089030.KQ",
+            "name": "테크윙",
+            "session_date": "2024-10-31",
+            "bars_in_price_file": 751,
+            "first_bar": "2021-10-08",
+            "last_bar": "2024-10-31",
+            "view_120_first": "2024-05-03",
+            "view_40_first": "2024-08-29",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2024-09-30",
+                        "index": 730,
+                        "field": "low",
+                        "price": 34950,
+                        "observable_at": 1727677800,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1728282600,
+                            "confirmed_date": "2024-10-07",
+                            "reason": null
+                        },
+                        "bars_after": 20,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2024-09-09",
+                            "index": 718,
+                            "field": "low",
+                            "price": 30000,
+                            "observable_at": 1725863400,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1726122600,
+                                "confirmed_date": "2024-09-12",
+                                "reason": null
+                            },
+                            "bars_after": 32,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "70,800에서 내려온 더 큰 하락의 바닥"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2024-10-07",
+                        "index": 733,
+                        "field": "high",
+                        "price": 40850,
+                        "observable_at": 1728282600,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1728628200,
+                            "confirmed_date": "2024-10-11",
+                            "reason": null
+                        },
+                        "bars_after": 17,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "끝난 마지막 눌림의 고점. 판정일에 이 위의 새 고점이 나왔다"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2024-09-26",
+                            "index": 728,
+                            "field": "high",
+                            "price": 40600,
+                            "observable_at": 1727332200,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1727850600,
+                                "confirmed_date": "2024-10-02",
+                                "reason": null
+                            },
+                            "bars_after": 22,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "조금 낮은 앞선 고점"
+                        }
+                    ]
+                },
+                "L": {
+                    "main": {
+                        "date": "2024-10-17",
+                        "index": 740,
+                        "field": "low",
+                        "price": 33150,
+                        "observable_at": 1729146600,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1729578600,
+                            "confirmed_date": "2024-10-22",
+                            "reason": null
+                        },
+                        "bars_after": 10,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2024-10-17",
+                        "index": 740,
+                        "field": "low",
+                        "price": 33150,
+                        "observable_at": 1729146600,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1729578600,
+                            "confirmed_date": "2024-10-22",
+                            "reason": null
+                        },
+                        "bars_after": 10,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "눌림 최저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2024-09-09",
+                            "index": 718,
+                            "field": "low",
+                            "price": 30000,
+                            "observable_at": 1725863400,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1726122600,
+                                "confirmed_date": "2024-09-12",
+                                "reason": null
+                            },
+                            "bars_after": 32,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "하락의 바닥"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "confirmed",
+                "why": "가격이 눌림의 고점을 넘었다",
+                "evidence": [
+                    {
+                        "date": "2024-10-23",
+                        "observable_at": 1729665000,
+                        "note": "종가 40,950이 H 고가 40,850 위"
+                    },
+                    {
+                        "date": "2024-10-31",
+                        "observable_at": 1730356200,
+                        "note": "고가 45,500은 이번 반등의 신고가"
+                    }
+                ]
+            },
+            "correction_state": "possibly_ended",
+            "ambiguity": {
+                "level": "medium",
+                "why": "창 안에 70,800에서 30,000으로 내린 큰 하락이 있어, 이 상승은 확립된 상승 추세가 아니라 반등이다"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 17,
+                "high_above_H_first_date": "2024-10-23",
+                "close_above_H_first_date": "2024-10-23",
+                "L_is_decision_day": false,
+                "decision_day_close": 44600,
+                "H_high": 40850
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "065da101de4d728c",
+            "symbol": "035420.KS",
+            "name": "NAVER",
+            "session_date": "2024-11-04",
+            "bars_in_price_file": 753,
+            "first_bar": "2021-10-08",
+            "last_bar": "2024-11-04",
+            "view_120_first": "2024-05-08",
+            "view_40_first": "2024-09-02",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2024-10-08",
+                        "index": 734,
+                        "field": "low",
+                        "price": 165100,
+                        "observable_at": 1728369000,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1728887400,
+                            "confirmed_date": "2024-10-14",
+                            "reason": null
+                        },
+                        "bars_after": 18,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2024-09-09",
+                            "index": 718,
+                            "field": "low",
+                            "price": 152500,
+                            "observable_at": 1725863400,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1726122600,
+                                "confirmed_date": "2024-09-12",
+                                "reason": null
+                            },
+                            "bars_after": 34,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "앞선 스윙의 저점"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2024-10-21",
+                        "index": 742,
+                        "field": "high",
+                        "price": 179200,
+                        "observable_at": 1729492200,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1729751400,
+                            "confirmed_date": "2024-10-24",
+                            "reason": null
+                        },
+                        "bars_after": 10,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "10월 말 하락 직전의 최근 스윙 고점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2024-09-30",
+                            "index": 730,
+                            "field": "high",
+                            "price": 177300,
+                            "observable_at": 1727677800,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1728282600,
+                                "confirmed_date": "2024-10-07",
+                                "reason": null
+                            },
+                            "bars_after": 22,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "앞선 더 낮은 고점"
+                        }
+                    ]
+                },
+                "L": {
+                    "main": {
+                        "date": "2024-10-29",
+                        "index": 748,
+                        "field": "low",
+                        "price": 166700,
+                        "observable_at": 1730183400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1730442600,
+                            "confirmed_date": "2024-11-01",
+                            "reason": null
+                        },
+                        "bars_after": 4,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2024-10-29",
+                        "index": 748,
+                        "field": "low",
+                        "price": 166700,
+                        "observable_at": 1730183400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1730442600,
+                            "confirmed_date": "2024-11-01",
+                            "reason": null
+                        },
+                        "bars_after": 4,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "하락 최저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2024-10-08",
+                            "index": 734,
+                            "field": "low",
+                            "price": 165100,
+                            "observable_at": 1728369000,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1728887400,
+                                "confirmed_date": "2024-10-14",
+                                "reason": null
+                            },
+                            "bars_after": 18,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "앞선 스윙 저점"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "partial",
+                "why": "하락 대부분을 되돌렸지만 H 고가 179,200 아래",
+                "evidence": [
+                    {
+                        "date": "2024-11-04",
+                        "observable_at": 1730701800,
+                        "note": "종가 175,700이 10월 22일 이후 모든 종가 위"
+                    }
+                ]
+            },
+            "correction_state": "possibly_ended",
+            "ambiguity": {
+                "level": "medium",
+                "why": "15만~18만 사이 횡보이고 60일 평균이 내려간다"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 10,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": false,
+                "decision_day_close": 175700,
+                "H_high": 179200
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "0661fe259966d89d",
+            "symbol": "010120.KS",
+            "name": "LS ELECTRIC",
+            "session_date": "2026-04-21",
+            "bars_in_price_file": 373,
+            "first_bar": "2024-10-08",
+            "last_bar": "2026-04-21",
+            "view_120_first": "2025-10-27",
+            "view_40_first": "2026-02-24",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2026-03-31",
+                        "index": 357,
+                        "field": "low",
+                        "price": 143000,
+                        "observable_at": 1774938600,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1775197800,
+                            "confirmed_date": "2026-04-03",
+                            "reason": null
+                        },
+                        "bars_after": 15,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2026-03-04",
+                            "index": 338,
+                            "field": "low",
+                            "price": 120000,
+                            "observable_at": 1772605800,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1773037800,
+                                "confirmed_date": "2026-03-09",
+                                "reason": null
+                            },
+                            "bars_after": 34,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "앞선 바닥 저점"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2026-04-14",
+                        "index": 367,
+                        "field": "high",
+                        "price": 200000,
+                        "observable_at": 1776148200,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1776407400,
+                            "confirmed_date": "2026-04-17",
+                            "reason": null
+                        },
+                        "bars_after": 5,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "4월 상승의 정점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2026-03-20",
+                            "index": 350,
+                            "field": "high",
+                            "price": 181400,
+                            "observable_at": 1773988200,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1774420200,
+                                "confirmed_date": "2026-03-25",
+                                "reason": null
+                            },
+                            "bars_after": 22,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "앞선 더 낮은 정점"
+                        }
+                    ]
+                },
+                "L": {
+                    "main": {
+                        "date": "2026-04-21",
+                        "index": 372,
+                        "field": "low",
+                        "price": 182600,
+                        "observable_at": 1776753000,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 0,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2026-04-21",
+                        "index": 372,
+                        "field": "low",
+                        "price": 182600,
+                        "observable_at": 1776753000,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 0,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "판정일 저가"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2026-03-31",
+                            "index": 357,
+                            "field": "low",
+                            "price": 143000,
+                            "observable_at": 1774938600,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1775197800,
+                                "confirmed_date": "2026-04-03",
+                                "reason": null
+                            },
+                            "bars_after": 15,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "마지막 확정 저점"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "not_confirmed",
+                "why": "4월 14일 뒤 저가가 하루씩 내려가고 최저점이 판정일이다",
+                "evidence": []
+            },
+            "correction_state": "ongoing",
+            "ambiguity": {
+                "level": "low",
+                "why": "뚜렷한 상승 추세와 얕은 하락 하나"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 5,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": true,
+                "decision_day_close": 184700,
+                "H_high": 200000
+            },
+            "data_notes": [
+                "120일 창에 거래량 0인 봉 3개: 2026-04-08, 2026-04-09, 2026-04-10",
+                "2026-04-08~04-10 세 거래일은 거래량 0, 가격 동일이다. 거래 정지로 보이나 파일만으로 확인하지 못했다."
+            ]
+        },
+        {
+            "case_id": "06e4c870056806ab",
+            "symbol": "452190.KQ",
+            "name": "한빛레이저",
+            "session_date": "2025-01-24",
+            "bars_in_price_file": 259,
+            "first_bar": "2024-01-04",
+            "last_bar": "2025-01-24",
+            "view_120_first": "2024-07-29",
+            "view_40_first": "2024-11-27",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2025-01-09",
+                        "index": 247,
+                        "field": "low",
+                        "price": 3260,
+                        "observable_at": 1736404200,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1736836200,
+                            "confirmed_date": "2025-01-14",
+                            "reason": null
+                        },
+                        "bars_after": 11,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2024-12-09",
+                            "index": 227,
+                            "field": "low",
+                            "price": 2770,
+                            "observable_at": 1733725800,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1733985000,
+                                "confirmed_date": "2024-12-12",
+                                "reason": null
+                            },
+                            "bars_after": 31,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "전체 하락의 바닥"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2025-01-17",
+                        "index": 253,
+                        "field": "high",
+                        "price": 5170,
+                        "observable_at": 1737095400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1737527400,
+                            "confirmed_date": "2025-01-22",
+                            "reason": null
+                        },
+                        "bars_after": 5,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "나흘 급등의 정점"
+                    },
+                    "alternatives": []
+                },
+                "L": {
+                    "main": {
+                        "date": "2025-01-24",
+                        "index": 258,
+                        "field": "low",
+                        "price": 4155,
+                        "observable_at": 1737700200,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 0,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2025-01-24",
+                        "index": 258,
+                        "field": "low",
+                        "price": 4155,
+                        "observable_at": 1737700200,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 0,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "판정일 저가"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-01-09",
+                            "index": 247,
+                            "field": "low",
+                            "price": 3260,
+                            "observable_at": 1736404200,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1736836200,
+                                "confirmed_date": "2025-01-14",
+                                "reason": null
+                            },
+                            "bars_after": 11,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "급등의 출발점"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "not_confirmed",
+                "why": "급등 뒤 종가가 닷새 연속 낮아졌다",
+                "evidence": []
+            },
+            "correction_state": "ongoing",
+            "ambiguity": {
+                "level": "high",
+                "why": "120일 차트는 7,000에서 2,770으로 내려온 하락이 대부분이고 상승 구간은 나흘짜리 반등이다"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 5,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": true,
+                "decision_day_close": 4170,
+                "H_high": 5170
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "0792ac2403c954e1",
+            "symbol": "456010.KQ",
+            "name": "아이씨티케이",
+            "session_date": "2025-04-02",
+            "bars_in_price_file": 213,
+            "first_bar": "2024-05-17",
+            "last_bar": "2025-04-02",
+            "view_120_first": "2024-10-04",
+            "view_40_first": "2025-02-05",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2025-03-04",
+                        "index": 191,
+                        "field": "low",
+                        "price": 8020,
+                        "observable_at": 1741069800,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1741329000,
+                            "confirmed_date": "2025-03-07",
+                            "reason": null
+                        },
+                        "bars_after": 21,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2024-12-09",
+                            "index": 138,
+                            "field": "low",
+                            "price": 4805,
+                            "observable_at": 1733725800,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1733985000,
+                                "confirmed_date": "2024-12-12",
+                                "reason": null
+                            },
+                            "bars_after": 74,
+                            "in_view_120": true,
+                            "in_view_40": false,
+                            "why": "더 큰 회복의 바닥"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2025-03-17",
+                        "index": 200,
+                        "field": "high",
+                        "price": 15110,
+                        "observable_at": 1742193000,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1742452200,
+                            "confirmed_date": "2025-03-20",
+                            "reason": null
+                        },
+                        "bars_after": 12,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "3월 상승의 정점"
+                    },
+                    "alternatives": []
+                },
+                "L": {
+                    "main": {
+                        "date": "2025-04-01",
+                        "index": 211,
+                        "field": "low",
+                        "price": 11310,
+                        "observable_at": 1743489000,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 1,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2025-04-01",
+                        "index": 211,
+                        "field": "low",
+                        "price": 11310,
+                        "observable_at": 1743489000,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 1,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "판정일 하루 전 저점이라 확정되지 않음"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-03-20",
+                            "index": 203,
+                            "field": "low",
+                            "price": 12180,
+                            "observable_at": 1742452200,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1742884200,
+                                "confirmed_date": "2025-03-25",
+                                "reason": null
+                            },
+                            "bars_after": 9,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "H 뒤 첫 확정 저점"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "partial",
+                "why": "거래량이 큰 하루의 강세. H 고가에는 한참 못 미침",
+                "evidence": [
+                    {
+                        "date": "2025-04-02",
+                        "observable_at": 1743575400,
+                        "note": "종가 13,050이 직전 5일 종가와 20일 평균 위"
+                    }
+                ]
+            },
+            "correction_state": "ongoing",
+            "ambiguity": {
+                "level": "medium",
+                "why": "저점이 판정일 하루 전이라 확정되지 않았다"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 12,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": false,
+                "decision_day_close": 13050,
+                "H_high": 15110
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "19f9ea891800aab8",
+            "symbol": "336260.KS",
+            "name": "두산퓨얼셀",
+            "session_date": "2025-09-10",
+            "bars_in_price_file": 961,
+            "first_bar": "2021-10-08",
+            "last_bar": "2025-09-10",
+            "view_120_first": "2025-03-19",
+            "view_40_first": "2025-07-16",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2025-08-20",
+                        "index": 945,
+                        "field": "low",
+                        "price": 23700,
+                        "observable_at": 1755671400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1756103400,
+                            "confirmed_date": "2025-08-25",
+                            "reason": null
+                        },
+                        "bars_after": 15,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-07-23",
+                            "index": 926,
+                            "field": "low",
+                            "price": 21600,
+                            "observable_at": 1753252200,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1753684200,
+                                "confirmed_date": "2025-07-28",
+                                "reason": null
+                            },
+                            "bars_after": 34,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "같은 상승의 앞선 저점"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2025-08-27",
+                        "index": 950,
+                        "field": "high",
+                        "price": 31350,
+                        "observable_at": 1756276200,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1756708200,
+                            "confirmed_date": "2025-09-01",
+                            "reason": null
+                        },
+                        "bars_after": 10,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "8월 상승의 정점"
+                    },
+                    "alternatives": []
+                },
+                "L": {
+                    "main": {
+                        "date": "2025-09-05",
+                        "index": 957,
+                        "field": "low",
+                        "price": 24300,
+                        "observable_at": 1757053800,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1757485800,
+                            "confirmed_date": "2025-09-10",
+                            "reason": null
+                        },
+                        "bars_after": 3,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2025-09-05",
+                        "index": 957,
+                        "field": "low",
+                        "price": 24300,
+                        "observable_at": 1757053800,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1757485800,
+                            "confirmed_date": "2025-09-10",
+                            "reason": null
+                        },
+                        "bars_after": 3,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "하락 최저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-08-20",
+                            "index": 945,
+                            "field": "low",
+                            "price": 23700,
+                            "observable_at": 1755671400,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1756103400,
+                                "confirmed_date": "2025-08-25",
+                                "reason": null
+                            },
+                            "bars_after": 15,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "H 앞의 마지막 확정 저점"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "partial",
+                "why": "하루의 반등. 8월 29일 종가 28,600 아래",
+                "evidence": [
+                    {
+                        "date": "2025-09-10",
+                        "observable_at": 1757485800,
+                        "note": "종가 26,550이 직전 4일 종가 위"
+                    }
+                ]
+            },
+            "correction_state": "ongoing",
+            "ambiguity": {
+                "level": "low",
+                "why": "뚜렷한 상승 추세와 얕은 하락"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 10,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": false,
+                "decision_day_close": 26550,
+                "H_high": 31350
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "2032f201c0c38f7f",
+            "symbol": "066570.KS",
+            "name": "LG전자",
+            "session_date": "2026-03-18",
+            "bars_in_price_file": 349,
+            "first_bar": "2024-10-08",
+            "last_bar": "2026-03-18",
+            "view_120_first": "2025-09-15",
+            "view_40_first": "2026-01-16",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2026-02-06",
+                        "index": 324,
+                        "field": "low",
+                        "price": 96000,
+                        "observable_at": 1770359400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1770791400,
+                            "confirmed_date": "2026-02-11",
+                            "reason": null
+                        },
+                        "bars_after": 24,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2026-01-12",
+                            "index": 305,
+                            "field": "low",
+                            "price": 86600,
+                            "observable_at": 1768199400,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1768458600,
+                                "confirmed_date": "2026-01-15",
+                                "reason": null
+                            },
+                            "bars_after": 43,
+                            "in_view_120": true,
+                            "in_view_40": false,
+                            "why": "첫 상승 계단 앞의 저점"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2026-02-27",
+                        "index": 336,
+                        "field": "high",
+                        "price": 151900,
+                        "observable_at": 1772173800,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1772692200,
+                            "confirmed_date": "2026-03-05",
+                            "reason": null
+                        },
+                        "bars_after": 12,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "2월 급등의 정점"
+                    },
+                    "alternatives": []
+                },
+                "L": {
+                    "main": {
+                        "date": "2026-03-04",
+                        "index": 338,
+                        "field": "low",
+                        "price": 106700,
+                        "observable_at": 1772605800,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1773037800,
+                            "confirmed_date": "2026-03-09",
+                            "reason": null
+                        },
+                        "bars_after": 10,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2026-03-04",
+                        "index": 338,
+                        "field": "low",
+                        "price": 106700,
+                        "observable_at": 1772605800,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1773037800,
+                            "confirmed_date": "2026-03-09",
+                            "reason": null
+                        },
+                        "bars_after": 10,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "하락 최저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2026-02-06",
+                            "index": 324,
+                            "field": "low",
+                            "price": 96000,
+                            "observable_at": 1770359400,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1770791400,
+                                "confirmed_date": "2026-02-11",
+                                "reason": null
+                            },
+                            "bars_after": 24,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "급등의 바닥"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "partial",
+                "why": "저점은 올라가지만 3월 11일 고점보다 고점이 낮다",
+                "evidence": [
+                    {
+                        "date": "2026-03-13",
+                        "observable_at": 1773383400,
+                        "note": "저가 109,800이 3월 4일 저가보다 높음"
+                    },
+                    {
+                        "date": "2026-03-18",
+                        "observable_at": 1773815400,
+                        "note": "종가 120,000이 직전 5일 종가 위"
+                    }
+                ]
+            },
+            "correction_state": "ongoing",
+            "ambiguity": {
+                "level": "low",
+                "why": "큰 급등과 뚜렷한 하락 하나"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 12,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": false,
+                "decision_day_close": 120000,
+                "H_high": 151900
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "284171e508e3e7e0",
+            "symbol": "000270.KS",
+            "name": "기아",
+            "session_date": "2025-08-14",
+            "bars_in_price_file": 943,
+            "first_bar": "2021-10-08",
+            "last_bar": "2025-08-14",
+            "view_120_first": "2025-02-20",
+            "view_40_first": "2025-06-20",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2025-07-22",
+                        "index": 925,
+                        "field": "low",
+                        "price": 97600,
+                        "observable_at": 1753165800,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1753425000,
+                            "confirmed_date": "2025-07-25",
+                            "reason": null
+                        },
+                        "bars_after": 17,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-06-02",
+                            "index": 891,
+                            "field": "low",
+                            "price": 88100,
+                            "observable_at": 1748845800,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1749450600,
+                                "confirmed_date": "2025-06-09",
+                                "reason": null
+                            },
+                            "bars_after": 51,
+                            "in_view_120": true,
+                            "in_view_40": false,
+                            "why": "더 큰 상승의 저점"
+                        },
+                        {
+                            "date": "2025-06-23",
+                            "index": 904,
+                            "field": "low",
+                            "price": 94400,
+                            "observable_at": 1750660200,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1750919400,
+                                "confirmed_date": "2025-06-26",
+                                "reason": null
+                            },
+                            "bars_after": 38,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "첫 번째 올라가는 저점"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2025-07-31",
+                        "index": 932,
+                        "field": "high",
+                        "price": 113200,
+                        "observable_at": 1753943400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1754375400,
+                            "confirmed_date": "2025-08-05",
+                            "reason": null
+                        },
+                        "bars_after": 10,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "7월 상승의 정점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-07-24",
+                            "index": 927,
+                            "field": "high",
+                            "price": 109000,
+                            "observable_at": 1753338600,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1753770600,
+                                "confirmed_date": "2025-07-29",
+                                "reason": null
+                            },
+                            "bars_after": 15,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "같은 상승의 앞선 고점"
+                        }
+                    ]
+                },
+                "L": {
+                    "main": {
+                        "date": "2025-08-04",
+                        "index": 934,
+                        "field": "low",
+                        "price": 100500,
+                        "observable_at": 1754289000,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1754548200,
+                            "confirmed_date": "2025-08-07",
+                            "reason": null
+                        },
+                        "bars_after": 8,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2025-08-04",
+                        "index": 934,
+                        "field": "low",
+                        "price": 100500,
+                        "observable_at": 1754289000,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1754548200,
+                            "confirmed_date": "2025-08-07",
+                            "reason": null
+                        },
+                        "bars_after": 8,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "8월 초 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-07-22",
+                            "index": 925,
+                            "field": "low",
+                            "price": 97600,
+                            "observable_at": 1753165800,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1753425000,
+                                "confirmed_date": "2025-07-25",
+                                "reason": null
+                            },
+                            "bars_after": 17,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "H 앞의 마지막 확정 저점"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "partial",
+                "why": "열 거래일 동안 100,500~104,700의 좁은 횡보이고 저점이 천천히 올라간다",
+                "evidence": [
+                    {
+                        "date": "2025-08-14",
+                        "observable_at": 1755153000,
+                        "note": "마지막 두 거래일의 종가가 8월 1일 이후 가장 높음"
+                    }
+                ]
+            },
+            "correction_state": "possibly_ended",
+            "ambiguity": {
+                "level": "medium",
+                "why": "얕은 하락 뒤 횡보라 하락이 끝났는지 차트로 보이지 않는다"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 10,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": false,
+                "decision_day_close": 103700,
+                "H_high": 113200
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "30416c78c22d1d0e",
+            "symbol": "052690.KS",
+            "name": "한전기술",
+            "session_date": "2025-11-10",
+            "bars_in_price_file": 264,
+            "first_bar": "2024-10-08",
+            "last_bar": "2025-11-10",
+            "view_120_first": "2025-05-14",
+            "view_40_first": "2025-09-08",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2025-09-30",
+                        "index": 239,
+                        "field": "low",
+                        "price": 83100,
+                        "observable_at": 1759213800,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1760077800,
+                            "confirmed_date": "2025-10-10",
+                            "reason": null
+                        },
+                        "bars_after": 24,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-09-15",
+                            "index": 229,
+                            "field": "low",
+                            "price": 86300,
+                            "observable_at": 1757917800,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1758177000,
+                                "confirmed_date": "2025-09-18",
+                                "reason": null
+                            },
+                            "bars_after": 34,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "같은 바닥의 앞선 저점"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2025-10-29",
+                        "index": 255,
+                        "field": "high",
+                        "price": 117900,
+                        "observable_at": 1761719400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1762151400,
+                            "confirmed_date": "2025-11-03",
+                            "reason": null
+                        },
+                        "bars_after": 8,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "10월 상승의 정점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-06-25",
+                            "index": 172,
+                            "field": "high",
+                            "price": 121700,
+                            "observable_at": 1750833000,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1751265000,
+                                "confirmed_date": "2025-06-30",
+                                "reason": null
+                            },
+                            "bars_after": 91,
+                            "in_view_120": true,
+                            "in_view_40": false,
+                            "why": "H 바로 아래의 장기 정점 121,700"
+                        }
+                    ]
+                },
+                "L": {
+                    "main": {
+                        "date": "2025-11-07",
+                        "index": 262,
+                        "field": "low",
+                        "price": 89800,
+                        "observable_at": 1762497000,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 1,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2025-11-07",
+                        "index": 262,
+                        "field": "low",
+                        "price": 89800,
+                        "observable_at": 1762497000,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 1,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "저점 뒤 완료 봉이 하나뿐이라 확정되지 않음"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-09-30",
+                            "index": 239,
+                            "field": "low",
+                            "price": 83100,
+                            "observable_at": 1759213800,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1760077800,
+                                "confirmed_date": "2025-10-10",
+                                "reason": null
+                            },
+                            "bars_after": 24,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "마지막 확정 저점"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "not_confirmed",
+                "why": "종가가 20일 평균 아래에 머물고, 판정일에 저점이 조금 올라간 것이 유일한 신호",
+                "evidence": []
+            },
+            "correction_state": "ongoing",
+            "ambiguity": {
+                "level": "medium",
+                "why": "H가 6월 정점 바로 아래라 더 큰 구조를 이중 천장으로 읽을 수도 있다"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 8,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": false,
+                "decision_day_close": 94300,
+                "H_high": 117900
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "37e84aadd60596f8",
+            "symbol": "108490.KQ",
+            "name": "로보티즈",
+            "session_date": "2026-10-01",
+            "bars_in_price_file": 482,
+            "first_bar": "2024-10-08",
+            "last_bar": "2026-10-01",
+            "view_120_first": "2026-04-07",
+            "view_40_first": "2026-08-04",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2026-08-31",
+                        "index": 460,
+                        "field": "low",
+                        "price": 238500,
+                        "observable_at": 1788157800,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1788417000,
+                            "confirmed_date": "2026-09-03",
+                            "reason": null
+                        },
+                        "bars_after": 21,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2026-07-29",
+                            "index": 438,
+                            "field": "low",
+                            "price": 155000,
+                            "observable_at": 1785306600,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1785738600,
+                                "confirmed_date": "2026-08-03",
+                                "reason": null
+                            },
+                            "bars_after": 43,
+                            "in_view_120": true,
+                            "in_view_40": false,
+                            "why": "155,000에서 시작한 전체 반등의 바닥"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2026-09-15",
+                        "index": 471,
+                        "field": "high",
+                        "price": 352000,
+                        "observable_at": 1789453800,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1789713000,
+                            "confirmed_date": "2026-09-18",
+                            "reason": null
+                        },
+                        "bars_after": 10,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "9월 상승의 정점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2026-09-07",
+                            "index": 465,
+                            "field": "high",
+                            "price": 339000,
+                            "observable_at": 1788762600,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1789021800,
+                                "confirmed_date": "2026-09-10",
+                                "reason": null
+                            },
+                            "bars_after": 16,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "같은 상승의 앞선 낮은 고점"
+                        }
+                    ]
+                },
+                "L": {
+                    "main": {
+                        "date": "2026-10-01",
+                        "index": 481,
+                        "field": "low",
+                        "price": 276500,
+                        "observable_at": 1790836200,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 0,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2026-10-01",
+                        "index": 481,
+                        "field": "low",
+                        "price": 276500,
+                        "observable_at": 1790836200,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 0,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "판정일 저가"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2026-08-31",
+                            "index": 460,
+                            "field": "low",
+                            "price": 238500,
+                            "observable_at": 1788157800,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1788417000,
+                                "confirmed_date": "2026-09-03",
+                                "reason": null
+                            },
+                            "bars_after": 21,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "H 앞의 마지막 확정 저점"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "not_confirmed",
+                "why": "종가가 310,000에서 286,000으로 미끄러지고 최저점이 판정일",
+                "evidence": []
+            },
+            "correction_state": "ongoing",
+            "ambiguity": {
+                "level": "medium",
+                "why": "어느 반등을 상승 구간으로 볼지에 따라 S가 바뀐다. 창 안에 464,000에서 155,000으로 내린 큰 하락이 있다"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 10,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": true,
+                "decision_day_close": 296500,
+                "H_high": 352000
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "433ea121b8d5fb8e",
+            "symbol": "267270.KS",
+            "name": "HD건설기계",
+            "session_date": "2025-02-26",
+            "bars_in_price_file": 828,
+            "first_bar": "2021-10-08",
+            "last_bar": "2025-02-26",
+            "view_120_first": "2024-08-26",
+            "view_40_first": "2024-12-24",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2025-02-03",
+                        "index": 810,
+                        "field": "low",
+                        "price": 63500,
+                        "observable_at": 1738564200,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1738823400,
+                            "confirmed_date": "2025-02-06",
+                            "reason": null
+                        },
+                        "bars_after": 17,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-01-20",
+                            "index": 804,
+                            "field": "low",
+                            "price": 64100,
+                            "observable_at": 1737354600,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1737613800,
+                                "confirmed_date": "2025-01-23",
+                                "reason": null
+                            },
+                            "bars_after": 23,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "앞선 저점"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2025-02-13",
+                        "index": 818,
+                        "field": "high",
+                        "price": 91500,
+                        "observable_at": 1739428200,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1739860200,
+                            "confirmed_date": "2025-02-18",
+                            "reason": null
+                        },
+                        "bars_after": 9,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "1월 저점에서 오른 급등 고점"
+                    },
+                    "alternatives": []
+                },
+                "L": {
+                    "main": {
+                        "date": "2025-02-21",
+                        "index": 824,
+                        "field": "low",
+                        "price": 71100,
+                        "observable_at": 1740119400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1740551400,
+                            "confirmed_date": "2025-02-26",
+                            "reason": null
+                        },
+                        "bars_after": 3,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2025-02-21",
+                        "index": 824,
+                        "field": "low",
+                        "price": 71100,
+                        "observable_at": 1740119400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1740551400,
+                            "confirmed_date": "2025-02-26",
+                            "reason": null
+                        },
+                        "bars_after": 3,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "하락 최저점. 판정일에 확정됨"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-02-03",
+                            "index": 810,
+                            "field": "low",
+                            "price": 63500,
+                            "observable_at": 1738564200,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1738823400,
+                                "confirmed_date": "2025-02-06",
+                                "reason": null
+                            },
+                            "bars_after": 17,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "급등의 바닥"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "partial",
+                "why": "저점은 올라가지만 종가는 2월 14일 종가 77,900 아래",
+                "evidence": [
+                    {
+                        "date": "2025-02-26",
+                        "observable_at": 1740551400,
+                        "note": "2월 21일 뒤 저가 세 개가 모두 71,100보다 높음"
+                    }
+                ]
+            },
+            "correction_state": "possibly_ended",
+            "ambiguity": {
+                "level": "low",
+                "why": "뚜렷한 급등과 하락"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 9,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": false,
+                "decision_day_close": 77400,
+                "H_high": 91500
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "6720e72eeff4d079",
+            "symbol": "274090.KQ",
+            "name": "켄코아에어로스페이스",
+            "session_date": "2025-06-04",
+            "bars_in_price_file": 893,
+            "first_bar": "2021-10-08",
+            "last_bar": "2025-06-04",
+            "view_120_first": "2024-12-03",
+            "view_40_first": "2025-04-04",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2025-05-13",
+                        "index": 877,
+                        "field": "low",
+                        "price": 12500,
+                        "observable_at": 1747117800,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1747377000,
+                            "confirmed_date": "2025-05-16",
+                            "reason": null
+                        },
+                        "bars_after": 15,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-04-29",
+                            "index": 870,
+                            "field": "low",
+                            "price": 11520,
+                            "observable_at": 1745908200,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1746599400,
+                                "confirmed_date": "2025-05-07",
+                                "reason": null
+                            },
+                            "bars_after": 22,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "두 번째 반등 앞의 저점"
+                        },
+                        {
+                            "date": "2025-04-09",
+                            "index": 856,
+                            "field": "low",
+                            "price": 9950,
+                            "observable_at": 1744180200,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1744612200,
+                                "confirmed_date": "2025-04-14",
+                                "reason": null
+                            },
+                            "bars_after": 36,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "17,890에서 내려온 큰 하락의 저점"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2025-05-15",
+                        "index": 879,
+                        "field": "high",
+                        "price": 14230,
+                        "observable_at": 1747290600,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1747722600,
+                            "confirmed_date": "2025-05-20",
+                            "reason": null
+                        },
+                        "bars_after": 13,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "5월 반등의 정점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-05-28",
+                            "index": 888,
+                            "field": "high",
+                            "price": 13650,
+                            "observable_at": 1748413800,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1748845800,
+                                "confirmed_date": "2025-06-02",
+                                "reason": null
+                            },
+                            "bars_after": 4,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "나중의 낮은 고점"
+                        }
+                    ]
+                },
+                "L": {
+                    "main": {
+                        "date": "2025-05-20",
+                        "index": 882,
+                        "field": "low",
+                        "price": 12270,
+                        "observable_at": 1747722600,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1747981800,
+                            "confirmed_date": "2025-05-23",
+                            "reason": null
+                        },
+                        "bars_after": 10,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2025-05-20",
+                        "index": 882,
+                        "field": "low",
+                        "price": 12270,
+                        "observable_at": 1747722600,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1747981800,
+                            "confirmed_date": "2025-05-23",
+                            "reason": null
+                        },
+                        "bars_after": 10,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "하락 최저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-04-29",
+                            "index": 870,
+                            "field": "low",
+                            "price": 11520,
+                            "observable_at": 1745908200,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1746599400,
+                                "confirmed_date": "2025-05-07",
+                                "reason": null
+                            },
+                            "bars_after": 22,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "앞선 반등의 낮은 저점"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "not_confirmed",
+                "why": "열 거래일 12,400~13,650 횡보이고 H 고가 14,230을 넘은 종가가 없다",
+                "evidence": []
+            },
+            "correction_state": "ongoing",
+            "ambiguity": {
+                "level": "high",
+                "why": "44% 하락 뒤 반등이고 이후 좁은 횡보라 상승 구간이 이틀뿐이다"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 13,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": false,
+                "decision_day_close": 12940,
+                "H_high": 14230
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "77bcbde825d44efd",
+            "symbol": "203650.KQ",
+            "name": "드림시큐리티",
+            "session_date": "2026-05-19",
+            "bars_in_price_file": 391,
+            "first_bar": "2024-10-08",
+            "last_bar": "2026-05-19",
+            "view_120_first": "2025-11-20",
+            "view_40_first": "2026-03-23",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2026-04-30",
+                        "index": 379,
+                        "field": "low",
+                        "price": 2605,
+                        "observable_at": 1777530600,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1778135400,
+                            "confirmed_date": "2026-05-07",
+                            "reason": null
+                        },
+                        "bars_after": 11,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2026-04-02",
+                            "index": 359,
+                            "field": "low",
+                            "price": 1546,
+                            "observable_at": 1775111400,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1775543400,
+                                "confirmed_date": "2026-04-07",
+                                "reason": null
+                            },
+                            "bars_after": 31,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "긴 횡보 바닥의 저점"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2026-05-07",
+                        "index": 382,
+                        "field": "high",
+                        "price": 4675,
+                        "observable_at": 1778135400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1778567400,
+                            "confirmed_date": "2026-05-12",
+                            "reason": null
+                        },
+                        "bars_after": 8,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "5월 급등의 정점"
+                    },
+                    "alternatives": []
+                },
+                "L": {
+                    "main": {
+                        "date": "2026-05-18",
+                        "index": 389,
+                        "field": "low",
+                        "price": 2805,
+                        "observable_at": 1779085800,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 1,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2026-05-18",
+                        "index": 389,
+                        "field": "low",
+                        "price": 2805,
+                        "observable_at": 1779085800,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 1,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "판정일 하루 전 저점이라 확정되지 않음"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2026-04-30",
+                            "index": 379,
+                            "field": "low",
+                            "price": 2605,
+                            "observable_at": 1777530600,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1778135400,
+                                "confirmed_date": "2026-05-07",
+                                "reason": null
+                            },
+                            "bars_after": 11,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "H 앞의 마지막 확정 저점"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "partial",
+                "why": "하루다. 5월 7일 이후의 흐름은 아직 낮아지는 쪽",
+                "evidence": [
+                    {
+                        "date": "2026-05-19",
+                        "observable_at": 1779172200,
+                        "note": "종가 3,355가 전일 종가 위, 거래량이 훨씬 큼"
+                    }
+                ]
+            },
+            "correction_state": "ongoing",
+            "ambiguity": {
+                "level": "medium",
+                "why": "한 달에 세 배가 오르고 하루 변동이 10~20%다"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 8,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": false,
+                "decision_day_close": 3355,
+                "H_high": 4675
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "78eecedb44104872",
+            "symbol": "161580.KQ",
+            "name": "필옵틱스",
+            "session_date": "2026-02-19",
+            "bars_in_price_file": 331,
+            "first_bar": "2024-10-08",
+            "last_bar": "2026-02-19",
+            "view_120_first": "2025-08-20",
+            "view_40_first": "2025-12-18",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2026-01-21",
+                        "index": 312,
+                        "field": "low",
+                        "price": 40950,
+                        "observable_at": 1768977000,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1769409000,
+                            "confirmed_date": "2026-01-26",
+                            "reason": null
+                        },
+                        "bars_after": 18,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2026-01-15",
+                            "index": 308,
+                            "field": "low",
+                            "price": 40850,
+                            "observable_at": 1768458600,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1768890600,
+                                "confirmed_date": "2026-01-20",
+                                "reason": null
+                            },
+                            "bars_after": 22,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "일주일 앞의 조금 낮은 저점"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2026-01-30",
+                        "index": 319,
+                        "field": "high",
+                        "price": 60300,
+                        "observable_at": 1769754600,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1770186600,
+                            "confirmed_date": "2026-02-04",
+                            "reason": null
+                        },
+                        "bars_after": 11,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "1월 상승의 정점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2026-02-10",
+                            "index": 326,
+                            "field": "high",
+                            "price": 55000,
+                            "observable_at": 1770705000,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1770964200,
+                                "confirmed_date": "2026-02-13",
+                                "reason": null
+                            },
+                            "bars_after": 4,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "재상승을 시도한 나중의 낮은 고점"
+                        }
+                    ]
+                },
+                "L": {
+                    "main": {
+                        "date": "2026-02-06",
+                        "index": 324,
+                        "field": "low",
+                        "price": 46900,
+                        "observable_at": 1770359400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1770791400,
+                            "confirmed_date": "2026-02-11",
+                            "reason": null
+                        },
+                        "bars_after": 6,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2026-02-06",
+                        "index": 324,
+                        "field": "low",
+                        "price": 46900,
+                        "observable_at": 1770359400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1770791400,
+                            "confirmed_date": "2026-02-11",
+                            "reason": null
+                        },
+                        "bars_after": 6,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "하락 최저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2026-01-21",
+                            "index": 312,
+                            "field": "low",
+                            "price": 40950,
+                            "observable_at": 1768977000,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1769409000,
+                                "confirmed_date": "2026-01-26",
+                                "reason": null
+                            },
+                            "bars_after": 18,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "H 앞의 마지막 확정 저점"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "partial",
+                "why": "저점은 올라갔지만 2월 10일 고점을 넘은 종가가 없다",
+                "evidence": [
+                    {
+                        "date": "2026-02-13",
+                        "observable_at": 1770964200,
+                        "note": "저가 47,400이 2월 6일 저가보다 높음"
+                    }
+                ]
+            },
+            "correction_state": "ongoing",
+            "ambiguity": {
+                "level": "low",
+                "why": "뚜렷한 하락과 낮은 고점"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 11,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": false,
+                "decision_day_close": 49900,
+                "H_high": 60300
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "907b3952ea96aafe",
+            "symbol": "321370.KQ",
+            "name": "센서뷰",
+            "session_date": "2025-07-21",
+            "bars_in_price_file": 483,
+            "first_bar": "2023-07-25",
+            "last_bar": "2025-07-21",
+            "view_120_first": "2025-01-21",
+            "view_40_first": "2025-05-23",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2025-06-16",
+                        "index": 457,
+                        "field": "low",
+                        "price": 5755,
+                        "observable_at": 1750055400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1750314600,
+                            "confirmed_date": "2025-06-19",
+                            "reason": null
+                        },
+                        "bars_after": 25,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-04-09",
+                            "index": 414,
+                            "field": "low",
+                            "price": 5425,
+                            "observable_at": 1744180200,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1744612200,
+                                "confirmed_date": "2025-04-14",
+                                "reason": null
+                            },
+                            "bars_after": 68,
+                            "in_view_120": true,
+                            "in_view_40": false,
+                            "why": "봄 하락의 바닥"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2025-06-26",
+                        "index": 465,
+                        "field": "high",
+                        "price": 8940,
+                        "observable_at": 1750919400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1751351400,
+                            "confirmed_date": "2025-07-01",
+                            "reason": null
+                        },
+                        "bars_after": 17,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "급등 고점. 차트에 긴 위꼬리가 있다"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-07-15",
+                            "index": 478,
+                            "field": "high",
+                            "price": 7360,
+                            "observable_at": 1752561000,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1752820200,
+                                "confirmed_date": "2025-07-18",
+                                "reason": null
+                            },
+                            "bars_after": 4,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "나중의 낮은 고점"
+                        }
+                    ]
+                },
+                "L": {
+                    "main": {
+                        "date": "2025-06-30",
+                        "index": 467,
+                        "field": "low",
+                        "price": 6910,
+                        "observable_at": 1751265000,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "a neighbouring bar within 3 bars is as low or more extreme"
+                        },
+                        "bars_after": 15,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2025-06-30",
+                        "index": 467,
+                        "field": "low",
+                        "price": 6910,
+                        "observable_at": 1751265000,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "a neighbouring bar within 3 bars is as low or more extreme"
+                        },
+                        "bars_after": 15,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "하락 최저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-06-16",
+                            "index": 457,
+                            "field": "low",
+                            "price": 5755,
+                            "observable_at": 1750055400,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1750314600,
+                                "confirmed_date": "2025-06-19",
+                                "reason": null
+                            },
+                            "bars_after": 25,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "급등의 출발점"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "partial",
+                "why": "마지막 낮은 고점은 종가로 넘었으나 급등 고점에는 한참 못 미침",
+                "evidence": [
+                    {
+                        "date": "2025-07-21",
+                        "observable_at": 1753079400,
+                        "note": "종가 7,435가 7월 15일 고가 7,360 위"
+                    }
+                ]
+            },
+            "correction_state": "possibly_ended",
+            "ambiguity": {
+                "level": "high",
+                "why": "꼬리 봉 하나가 H를 정하고, 3주 동안 횡보했다"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 17,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": false,
+                "decision_day_close": 7435,
+                "H_high": 8940
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "a68f09dcfd78f572",
+            "symbol": "067310.KQ",
+            "name": "하나마이크론",
+            "session_date": "2025-03-10",
+            "bars_in_price_file": 835,
+            "first_bar": "2021-10-08",
+            "last_bar": "2025-03-10",
+            "view_120_first": "2024-09-04",
+            "view_40_first": "2025-01-07",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2025-02-03",
+                        "index": 810,
+                        "field": "low",
+                        "price": 9430,
+                        "observable_at": 1738564200,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1738823400,
+                            "confirmed_date": "2025-02-06",
+                            "reason": null
+                        },
+                        "bars_after": 24,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-01-02",
+                            "index": 792,
+                            "field": "low",
+                            "price": 9030,
+                            "observable_at": 1735799400,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1736231400,
+                                "confirmed_date": "2025-01-07",
+                                "reason": null
+                            },
+                            "bars_after": 42,
+                            "in_view_120": true,
+                            "in_view_40": false,
+                            "why": "1월 바닥의 저점"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2025-02-19",
+                        "index": 822,
+                        "field": "high",
+                        "price": 13300,
+                        "observable_at": 1739946600,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1740378600,
+                            "confirmed_date": "2025-02-24",
+                            "reason": null
+                        },
+                        "bars_after": 12,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "2월 상승의 정점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-02-27",
+                            "index": 828,
+                            "field": "high",
+                            "price": 12190,
+                            "observable_at": 1740637800,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1741156200,
+                                "confirmed_date": "2025-03-05",
+                                "reason": null
+                            },
+                            "bars_after": 6,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "나중의 낮은 고점"
+                        }
+                    ]
+                },
+                "L": {
+                    "main": {
+                        "date": "2025-03-07",
+                        "index": 833,
+                        "field": "low",
+                        "price": 10230,
+                        "observable_at": 1741329000,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 1,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2025-03-07",
+                        "index": 833,
+                        "field": "low",
+                        "price": 10230,
+                        "observable_at": 1741329000,
+                        "pivot": {
+                            "confirmed": false,
+                            "confirmed_at": null,
+                            "confirmed_date": null,
+                            "reason": "fewer than 3 completed bars after it before the decision day"
+                        },
+                        "bars_after": 1,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "판정일 이틀 전 저점이라 확정되지 않음"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2025-02-03",
+                            "index": 810,
+                            "field": "low",
+                            "price": 9430,
+                            "observable_at": 1738564200,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1738823400,
+                                "confirmed_date": "2025-02-06",
+                                "reason": null
+                            },
+                            "bars_after": 24,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "상승의 바닥"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "not_confirmed",
+                "why": "판정일 저가가 3월 7일 저가보다 높지만 한 봉이다",
+                "evidence": []
+            },
+            "correction_state": "ongoing",
+            "ambiguity": {
+                "level": "low",
+                "why": "뚜렷한 상승과 하락"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 12,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": false,
+                "decision_day_close": 10880,
+                "H_high": 13300
+            },
+            "data_notes": []
+        },
+        {
+            "case_id": "d5070c71e5f98361",
+            "symbol": "356680.KQ",
+            "name": "엑스게이트",
+            "session_date": "2026-09-08",
+            "bars_in_price_file": 467,
+            "first_bar": "2024-10-08",
+            "last_bar": "2026-09-08",
+            "view_120_first": "2026-03-17",
+            "view_40_first": "2026-07-13",
+            "points": {
+                "S": {
+                    "main": {
+                        "date": "2026-07-30",
+                        "index": 439,
+                        "field": "low",
+                        "price": 8190,
+                        "observable_at": 1785393000,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1785825000,
+                            "confirmed_date": "2026-08-04",
+                            "reason": null
+                        },
+                        "bars_after": 27,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H보다 앞선 가장 가까운 확정 저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2026-07-21",
+                            "index": 432,
+                            "field": "low",
+                            "price": 9500,
+                            "observable_at": 1784615400,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1784874600,
+                                "confirmed_date": "2026-07-24",
+                                "reason": null
+                            },
+                            "bars_after": 34,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "같은 하락 안의 앞선 저점"
+                        }
+                    ]
+                },
+                "H": {
+                    "main": {
+                        "date": "2026-08-13",
+                        "index": 449,
+                        "field": "high",
+                        "price": 13400,
+                        "observable_at": 1786602600,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1787121000,
+                            "confirmed_date": "2026-08-19",
+                            "reason": null
+                        },
+                        "bars_after": 17,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "8월 반등의 정점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2026-08-28",
+                            "index": 459,
+                            "field": "high",
+                            "price": 13280,
+                            "observable_at": 1787898600,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1788330600,
+                                "confirmed_date": "2026-09-02",
+                                "reason": null
+                            },
+                            "bars_after": 7,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "거래량이 터진 나중의 낮은 고점"
+                        }
+                    ]
+                },
+                "L": {
+                    "main": {
+                        "date": "2026-08-25",
+                        "index": 456,
+                        "field": "low",
+                        "price": 10500,
+                        "observable_at": 1787639400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1787898600,
+                            "confirmed_date": "2026-08-28",
+                            "reason": null
+                        },
+                        "bars_after": 10,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "H 다음 봉부터 판정일까지의 가장 낮은 저가. 도구가 계산한 값이다"
+                    },
+                    "alternatives": []
+                },
+                "P": {
+                    "main": {
+                        "date": "2026-08-25",
+                        "index": 456,
+                        "field": "low",
+                        "price": 10500,
+                        "observable_at": 1787639400,
+                        "pivot": {
+                            "confirmed": true,
+                            "confirmed_at": 1787898600,
+                            "confirmed_date": "2026-08-28",
+                            "reason": null
+                        },
+                        "bars_after": 10,
+                        "in_view_120": true,
+                        "in_view_40": true,
+                        "why": "하락 최저점"
+                    },
+                    "alternatives": [
+                        {
+                            "date": "2026-07-30",
+                            "index": 439,
+                            "field": "low",
+                            "price": 8190,
+                            "observable_at": 1785393000,
+                            "pivot": {
+                                "confirmed": true,
+                                "confirmed_at": 1785825000,
+                                "confirmed_date": "2026-08-04",
+                                "reason": null
+                            },
+                            "bars_after": 27,
+                            "in_view_120": true,
+                            "in_view_40": true,
+                            "why": "앞선 폭락의 바닥"
+                        }
+                    ],
+                    "same_as_L": true
+                }
+            },
+            "rebound": {
+                "state": "partial",
+                "why": "올라간 저점 하나. 종가는 8월 28일 고점 아래",
+                "evidence": [
+                    {
+                        "date": "2026-09-03",
+                        "observable_at": 1788417000,
+                        "note": "저가 10,630이 8월 25일 저가보다 높음"
+                    }
+                ]
+            },
+            "correction_state": "ongoing",
+            "ambiguity": {
+                "level": "high",
+                "why": "창 안에 30,550에서 73% 폭락한 구간이 있고, 상승 구간은 더 큰 하락 추세 안의 30일 반등이다"
+            },
+            "file_facts": {
+                "bars_from_H_to_decision_day": 17,
+                "high_above_H_first_date": null,
+                "close_above_H_first_date": null,
+                "L_is_decision_day": false,
+                "decision_day_close": 11600,
+                "H_high": 13400
+            },
+            "data_notes": []
+        }
+    ]
+}

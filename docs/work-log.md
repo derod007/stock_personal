@@ -1,4 +1,11 @@
-﻿## 2026-10-11 02:10 · Cursor · 끝
+## 2026-10-11 · Codex · 끝
+- PR #66: 고정 섹터 맵 v2로 최근 244세션 전체 연구 계좌 실행·내보내기 완료. 종료 56건, 보유 3건, 총자산 +18.1689%, 종가 최대 낙폭 5.3961%. 장부 10항목·67주문 재시뮬레이션·PR #65 최근 신호 82건 대조 통과. 재실행 0세션·저널 동일. 관련 테스트 3개 통과.
+- 이전 기간은 원본 kr-saved-scan-20251008 미제공으로 실행하지 않음. 필요한 ZIP과 한계를 full-v2/report.md에 기록. 전략·설정·운영 상태·원본·기존 연구 결과 불변. 병합 없음.
+
+## 2026-10-11 · Codex · 진행
+- PR #66 맵 v2 고정 전체 재현 실행 및 원본 가용성 확인 (직접 병합 없음)
+
+## 2026-10-11 02:10 · Cursor · 끝
 - 한 일: PR #66 섹터 업종명이 전부 기타인 원인 확인(대표 5종목 임시 폴더 실행: 구 사이트가 새 사이트로 302, 업종 링크 없음). 같은 사이트 JSON에서 현재 업종 144종목 확보(미확인 0)해 연구용 섹터 맵 v2 생성. 새 계좌 va·vb·vc 소규모 재검증과 재개·재실행 확인. 운영 캐시·계좌·전략·기존 결과 그대로. 전체 실행·병합 안 함
 - 파일: bin/paper_sector_collect.php, bin/paper_sector_diagnose.php, bin/paper/SectorFreeze.php, bin/paper_account_replay.php, tests/sector_freeze.php, docs/historical-account-replay/(sector-map-v2.json, sector-collection-v2.json, sector-collection-diagnosis.json, smoke-sector-v2/, followup.md, protocol.md), docs/research/account-replay-followup.py, docs/work-log.md
 - 커밋: 브랜치 cursor/historical-paper-replay, PR #66에 반영(병합 안 함)

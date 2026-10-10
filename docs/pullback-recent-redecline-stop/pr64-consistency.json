@@ -1,0 +1,444 @@
+{
+    "kind": "recent_redecline_stop_pr64_consistency_v1",
+    "pr64_cases": 24,
+    "cases": 12,
+    "pr64_cases_not_selected_entries": [
+        {
+            "case_id": "013ad9902972b826",
+            "name": "성호전자",
+            "pr64": {
+                "H_big": "none",
+                "H_recent": "marked",
+                "source": "A_main"
+            },
+            "auto_status": "not_applicable",
+            "auto_reason": "h_big_none_manual_A_only",
+            "expected_status": "not_applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "01bea56f4af0f31f",
+            "name": "S-Oil",
+            "pr64": {
+                "H_big": "marked",
+                "H_recent": "marked",
+                "source": "rule"
+            },
+            "auto_status": "applicable",
+            "auto_reason": null,
+            "expected_status": "applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "029fd9c7a4f3fcb6",
+            "name": "테스",
+            "pr64": {
+                "H_big": "marked",
+                "H_recent": "marked",
+                "source": "rule"
+            },
+            "auto_status": "applicable",
+            "auto_reason": null,
+            "expected_status": "applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "03779fd61d439aed",
+            "name": "하나마이크론",
+            "pr64": {
+                "H_big": "hold",
+                "H_recent": "hold",
+                "source": "rule"
+            },
+            "auto_status": "not_applicable",
+            "auto_reason": "h_big_hold_few_bars_after",
+            "expected_status": "not_applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "03c915d929f4769a",
+            "name": "우리넷",
+            "pr64": {
+                "H_big": "marked",
+                "H_recent": "marked",
+                "source": "rule"
+            },
+            "auto_status": "applicable",
+            "auto_reason": null,
+            "expected_status": "applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "03d016b5e47bae98",
+            "name": "두산",
+            "pr64": {
+                "H_big": "hold",
+                "H_recent": "hold",
+                "source": "rule"
+            },
+            "auto_status": "not_applicable",
+            "auto_reason": "h_big_hold_few_bars_after",
+            "expected_status": "not_applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "05a3f1e796e376c7",
+            "name": "우리기술",
+            "pr64": {
+                "H_big": "hold",
+                "H_recent": "marked",
+                "source": "rule"
+            },
+            "auto_status": "not_applicable",
+            "auto_reason": "h_big_hold_window_edge",
+            "expected_status": "not_applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "0628c0298c8155ce",
+            "name": "테크윙",
+            "pr64": {
+                "H_big": "marked",
+                "H_recent": "marked",
+                "source": "rule"
+            },
+            "auto_status": "applicable",
+            "auto_reason": null,
+            "expected_status": "applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "065da101de4d728c",
+            "name": "NAVER",
+            "pr64": {
+                "H_big": "hold",
+                "H_recent": "marked",
+                "source": "rule"
+            },
+            "auto_status": "not_applicable",
+            "auto_reason": "h_big_hold_window_edge",
+            "expected_status": "not_applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "0661fe259966d89d",
+            "name": "LS ELECTRIC",
+            "pr64": {
+                "H_big": "marked",
+                "H_recent": "marked",
+                "source": "rule"
+            },
+            "auto_status": "applicable",
+            "auto_reason": null,
+            "expected_status": "applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "06e4c870056806ab",
+            "name": "한빛레이저",
+            "pr64": {
+                "H_big": "marked",
+                "H_recent": "marked",
+                "source": "rule"
+            },
+            "auto_status": "applicable",
+            "auto_reason": null,
+            "expected_status": "applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "0792ac2403c954e1",
+            "name": "아이씨티케이",
+            "pr64": {
+                "H_big": "marked",
+                "H_recent": "marked",
+                "source": "rule"
+            },
+            "auto_status": "applicable",
+            "auto_reason": null,
+            "expected_status": "applicable",
+            "status_matches": true,
+            "dates_match": true
+        }
+    ],
+    "mismatches": [],
+    "contains_outcomes": false,
+    "applicable_both": 12,
+    "rows": [
+        {
+            "case_id": "19f9ea891800aab8",
+            "name": "두산퓨얼셀",
+            "pr64": {
+                "H_big": "marked",
+                "H_recent": "marked",
+                "source": "rule",
+                "H_big_date": "2025-08-27",
+                "H_recent_date": "2025-08-27",
+                "low_after_H_recent_date": "2025-09-05"
+            },
+            "auto": {
+                "status": "applicable",
+                "reason": null,
+                "H_big_date": "2025-08-27",
+                "H_recent_date": "2025-08-27",
+                "low_after_H_recent_date": "2025-09-05"
+            },
+            "expected_status": "applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "2032f201c0c38f7f",
+            "name": "LG전자",
+            "pr64": {
+                "H_big": "marked",
+                "H_recent": "marked",
+                "source": "rule",
+                "H_big_date": "2026-02-27",
+                "H_recent_date": "2026-03-11",
+                "low_after_H_recent_date": "2026-03-13"
+            },
+            "auto": {
+                "status": "applicable",
+                "reason": null,
+                "H_big_date": "2026-02-27",
+                "H_recent_date": "2026-03-11",
+                "low_after_H_recent_date": "2026-03-13"
+            },
+            "expected_status": "applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "284171e508e3e7e0",
+            "name": "기아",
+            "pr64": {
+                "H_big": "marked",
+                "H_recent": "marked",
+                "source": "rule",
+                "H_big_date": "2025-07-31",
+                "H_recent_date": "2025-07-31",
+                "low_after_H_recent_date": "2025-08-04"
+            },
+            "auto": {
+                "status": "applicable",
+                "reason": null,
+                "H_big_date": "2025-07-31",
+                "H_recent_date": "2025-07-31",
+                "low_after_H_recent_date": "2025-08-04"
+            },
+            "expected_status": "applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "30416c78c22d1d0e",
+            "name": "한전기술",
+            "pr64": {
+                "H_big": "marked",
+                "H_recent": "marked",
+                "source": "rule",
+                "H_big_date": "2025-06-25",
+                "H_recent_date": "2025-10-29",
+                "low_after_H_recent_date": "2025-11-07"
+            },
+            "auto": {
+                "status": "applicable",
+                "reason": null,
+                "H_big_date": "2025-06-25",
+                "H_recent_date": "2025-10-29",
+                "low_after_H_recent_date": "2025-11-07"
+            },
+            "expected_status": "applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "37e84aadd60596f8",
+            "name": "로보티즈",
+            "pr64": {
+                "H_big": "marked",
+                "H_recent": "marked",
+                "source": "rule",
+                "H_big_date": "2026-06-02",
+                "H_recent_date": "2026-09-15",
+                "low_after_H_recent_date": "2026-10-01"
+            },
+            "auto": {
+                "status": "applicable",
+                "reason": null,
+                "H_big_date": "2026-06-02",
+                "H_recent_date": "2026-09-15",
+                "low_after_H_recent_date": "2026-10-01"
+            },
+            "expected_status": "applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "433ea121b8d5fb8e",
+            "name": "HD건설기계",
+            "pr64": {
+                "H_big": "marked",
+                "H_recent": "marked",
+                "source": "rule",
+                "H_big_date": "2025-02-13",
+                "H_recent_date": "2025-02-13",
+                "low_after_H_recent_date": "2025-02-21"
+            },
+            "auto": {
+                "status": "applicable",
+                "reason": null,
+                "H_big_date": "2025-02-13",
+                "H_recent_date": "2025-02-13",
+                "low_after_H_recent_date": "2025-02-21"
+            },
+            "expected_status": "applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "6720e72eeff4d079",
+            "name": "켄코아에어로스페이스",
+            "pr64": {
+                "H_big": "marked",
+                "H_recent": "marked",
+                "source": "rule",
+                "H_big_date": "2025-02-14",
+                "H_recent_date": "2025-05-28",
+                "low_after_H_recent_date": "2025-05-30"
+            },
+            "auto": {
+                "status": "applicable",
+                "reason": null,
+                "H_big_date": "2025-02-14",
+                "H_recent_date": "2025-05-28",
+                "low_after_H_recent_date": "2025-05-30"
+            },
+            "expected_status": "applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "77bcbde825d44efd",
+            "name": "드림시큐리티",
+            "pr64": {
+                "H_big": "marked",
+                "H_recent": "marked",
+                "source": "rule",
+                "H_big_date": "2026-05-07",
+                "H_recent_date": "2026-05-07",
+                "low_after_H_recent_date": "2026-05-18"
+            },
+            "auto": {
+                "status": "applicable",
+                "reason": null,
+                "H_big_date": "2026-05-07",
+                "H_recent_date": "2026-05-07",
+                "low_after_H_recent_date": "2026-05-18"
+            },
+            "expected_status": "applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "78eecedb44104872",
+            "name": "필옵틱스",
+            "pr64": {
+                "H_big": "marked",
+                "H_recent": "marked",
+                "source": "rule",
+                "H_big_date": "2026-01-30",
+                "H_recent_date": "2026-02-10",
+                "low_after_H_recent_date": "2026-02-13"
+            },
+            "auto": {
+                "status": "applicable",
+                "reason": null,
+                "H_big_date": "2026-01-30",
+                "H_recent_date": "2026-02-10",
+                "low_after_H_recent_date": "2026-02-13"
+            },
+            "expected_status": "applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "907b3952ea96aafe",
+            "name": "센서뷰",
+            "pr64": {
+                "H_big": "marked",
+                "H_recent": "marked",
+                "source": "rule",
+                "H_big_date": "2025-06-26",
+                "H_recent_date": "2025-07-15",
+                "low_after_H_recent_date": "2025-07-17"
+            },
+            "auto": {
+                "status": "applicable",
+                "reason": null,
+                "H_big_date": "2025-06-26",
+                "H_recent_date": "2025-07-15",
+                "low_after_H_recent_date": "2025-07-17"
+            },
+            "expected_status": "applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "a68f09dcfd78f572",
+            "name": "하나마이크론",
+            "pr64": {
+                "H_big": "marked",
+                "H_recent": "marked",
+                "source": "rule",
+                "H_big_date": "2025-02-19",
+                "H_recent_date": "2025-02-19",
+                "low_after_H_recent_date": "2025-03-07"
+            },
+            "auto": {
+                "status": "applicable",
+                "reason": null,
+                "H_big_date": "2025-02-19",
+                "H_recent_date": "2025-02-19",
+                "low_after_H_recent_date": "2025-03-07"
+            },
+            "expected_status": "applicable",
+            "status_matches": true,
+            "dates_match": true
+        },
+        {
+            "case_id": "d5070c71e5f98361",
+            "name": "엑스게이트",
+            "pr64": {
+                "H_big": "marked",
+                "H_recent": "marked",
+                "source": "rule",
+                "H_big_date": "2026-05-27",
+                "H_recent_date": "2026-08-28",
+                "low_after_H_recent_date": "2026-09-03"
+            },
+            "auto": {
+                "status": "applicable",
+                "reason": null,
+                "H_big_date": "2026-05-27",
+                "H_recent_date": "2026-08-28",
+                "low_after_H_recent_date": "2026-09-03"
+            },
+            "expected_status": "applicable",
+            "status_matches": true,
+            "dates_match": true
+        }
+    ]
+}

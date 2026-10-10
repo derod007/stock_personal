@@ -1,0 +1,72 @@
+{
+    "schema": 1,
+    "kind": "recent_redecline_stop_freeze_v1",
+    "frozen_at_kst": "2026-10-10 23:49:29",
+    "statement": "Protocol, code, population and the alternative stop of every case were fixed before any alternative-stop trade result was computed. Hashes are of LF-normalised file bytes.",
+    "git_head_at_freeze": "8d5fb23a3abeff631e0d5124f55d87ebadceb997",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "study_version": "recent_redecline_stop_study_v1",
+    "rule_version": "recent_redecline_stop_v1",
+    "files_sha256_lf": {
+        "population.json": "66a96fe3703146620426e488ed76af7b87b839afee50366234ea34af59c9226e",
+        "baseline-stored.json": "289e46f81c3f3583b960f4b0db9ec8b47e72dd3c09a5b3e54b55ac7207b24195",
+        "alt-stops.json": "34ad4e9a6ea467266cd0051a5a5d52cf2c764107ef92169d8c2711951c7623d9",
+        "pr64-consistency.json": "6fb7762d7a9565c1cc9473a18f94dd4a387b4ef69a99895f5a20f8de6de43d76",
+        "leak-check.json": "5110c4be4126d3403ef8fb8593faf956ef96e58eb4b7e6ee55c4bf666eab041e",
+        "protocol.md": "8a798a75bc4a5b4a5d2c04458ef048822f71021d063a2a51b0dc7410b2b48596"
+    },
+    "code_sha256_lf": {
+        "bin/paper/RedeclineStop.php": "7d9be8d98d84d0547d220f08d8932bea6747cba5797c6eef83a17541612aa2f2",
+        "bin/paper/RedeclineStudy.php": "e44631e495f2bc000e96a837a305145f5a11616b0cdaa28086b62fbb9dc1f1dc",
+        "bin/paper_recent_redecline_stop.php": "f8caa23e8678afdff9a12a4ad1f05f7ff8faf50b6e875d9f2b156a035bbea230",
+        "tests/redecline_stop.php": "412df9d302404e3edcff5315cad3dbba5543d927b1849ea85b0b2678e8cbb049",
+        "bin/paper/PatternReplay.php": "5cf0d2cd10d1917ccac779b561df3478353d778cc0e552350005de784d8439ea",
+        "src/TradeSimulator.php": "9024b31c25bdb45b5262e8aea4494a777378df47958bbec7de3af6c46fdfcc08",
+        "src/TrendPullback.php": "ec972a069c75e15a5ff637e36f3ca5a07a7d4eff4b6aacf342c4dd1b48844581",
+        "src/PriceCandidate.php": "b9e71c34020d585fa3a7d1d16571c6a81ac8b83ec43dfff45500a9abfd53957d",
+        "src/PaperQuality.php": "dac9a2ed7614ea00862656b9d0d9e5b2a6494e015f333cc397e9190bf5ddd82c",
+        "src/CandleClock.php": "fa4eeaf906a4a9219211b855b9dd9f3202f603c4db263a6044319240a9e0431d"
+    },
+    "datasets": {
+        "prior": {
+            "dataset": "kr-saved-scan-20251008",
+            "dataset_json_sha256": "5f69e86104b4bd73cd2a4a03ba2ad2ad8275e16563a99e1d528d916600c3e9c8",
+            "universe_sha256": "93f244ad3ee41e8bf571f75bb781ef65df6053b12880939220885b7bf91da09e",
+            "as_of_day": "2025-10-02",
+            "close_ts": 1759386600
+        },
+        "recent": {
+            "dataset": "kr-saved-scan-20261009",
+            "dataset_json_sha256": "c683c269d8434ee5b77a382b489cbf8fe8ce5c443cfd45451c306b70ba32faca",
+            "universe_sha256": "93f244ad3ee41e8bf571f75bb781ef65df6053b12880939220885b7bf91da09e",
+            "as_of_day": "2026-10-08",
+            "close_ts": 1791441000
+        }
+    },
+    "population": {
+        "selected": 157,
+        "by_period": {
+            "prior": 75,
+            "recent": 82
+        }
+    },
+    "alt_stops_summary": {
+        "prior": {
+            "selected": 75,
+            "applicable": 72,
+            "not_applicable": 3,
+            "reasons": {
+                "h_big_hold_window_edge": 3
+            }
+        },
+        "recent": {
+            "selected": 82,
+            "applicable": 81,
+            "not_applicable": 1,
+            "reasons": {
+                "h_big_hold_window_edge": 1
+            }
+        }
+    },
+    "not_blind": "Exploratory study on data that were already reviewed (PR #55-#64). Not a blind or independent test."
+}

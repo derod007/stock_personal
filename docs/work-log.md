@@ -1,4 +1,10 @@
-﻿## 2026-10-11 00:40 · Cursor · 끝
+﻿## 2026-10-11 01:25 · Cursor · 끝
+- 한 일: PR #66 보완. 운영 섹터 캐시·저장 스캔을 읽기만 해 연구용 섹터 맵을 고정(확보 0, 미확인 144, 한 버킷), 완료봉에서 plan.ready·스캐너 후보·PaperScanUniverse 대응을 운영 함수로 검증, 고정 맵으로 소규모 3구간을 별도 계좌에서 재실행(장부·섹터 한도·재실행·이어 하기). 전부 미분류 결과는 유지. 전체 실행·병합 없음
+- 파일: bin/paper/SectorFreeze.php, bin/paper/AccountReplay.php, bin/paper_account_replay.php, src/KrAmountScanner.php, tests/sector_freeze.php, tests/selection_correspondence.php, tests/account_replay.php, docs/historical-account-replay/(sector-map.json, followup.md, protocol.md, selection-check.json, smoke-sector/), docs/research/account-replay-followup.py, .github/workflows/pattern-replay.yml, docs/work-log.md
+- 커밋: 브랜치 cursor/historical-paper-replay, PR #66에 반영(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-11 00:40 · Cursor · 끝
 - 한 일: 고정 종목군 과거 모의계좌 재현 준비. 운영 계좌 코드(PaperPortfolio·TradeSimulator·ChartPlanEngine·PaperQuality)를 수정 없이 replay 모드로 호출하는 연구용 CLI, 연구 계좌 설정(운영 설정에서 계좌 ID만 다름), 실행 순서·규칙 대응표, 실데이터 3구간 소규모 검증(장부 대조·독립 재시뮬레이션·이어 하기 동일·PR #65 신호 대조·파일 불변), 단위시험 추가. 전체 두 기간 실행·수익성 결론·전략 조정·운영 반영 없음
 - 파일: bin/paper/AccountReplay.php, bin/paper_account_replay.php, config/paper-history-kr-recovery-v1.json, tests/account_replay.php, docs/historical-account-replay/(protocol.md, report.md, quality-scan-prior.json, quality-scan-recent.json, smoke/{a,b,c}/), docs/research/account-replay-report.py, .github/workflows/pattern-replay.yml, docs/work-log.md
 - 커밋: 브랜치 cursor/historical-paper-replay, PR 제출(병합 안 함)

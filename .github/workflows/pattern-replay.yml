@@ -31,3 +31,5 @@ jobs:
           php -l bin/paper/AccountReplay.php
           php -l bin/paper_account_replay.php
           php tests/account_replay.php
+          php tests/sector_freeze.php
+          php tests/selection_correspondence.php

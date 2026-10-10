@@ -15,7 +15,7 @@ declare(strict_types=1);
  *
  * Full runs (no --smoke-label) are refused until --confirm-full-run=after-code-review is given and a sector map is chosen.
  */
-require __DIR__.'/bootstrap.php';require __DIR__.'/paper/AccountReplay.php';
+require __DIR__.'/bootstrap.php';require __DIR__.'/paper/AccountReplay.php';require __DIR__.'/paper/SectorFreeze.php';
 use ChartEntryLab\PaperJournal;
 
 $cmd=$argv[1]??'';$o=[];
@@ -23,10 +23,31 @@ foreach(array_slice($argv,2) as $a){
     if(!preg_match('/^--([a-z-]+)=(.*)$/s',$a,$m))throw new InvalidArgumentException('Unknown argument '.$a);
     $o[$m[1]]=$m[2];
 }
-if(!in_array($cmd,['plan','run','status','verify','log','export','crosscheck','quality-scan','compare'],true))throw new InvalidArgumentException('Commands: plan run status verify log export crosscheck quality-scan compare');
+if(!in_array($cmd,['plan','run','status','verify','log','export','crosscheck','quality-scan','compare','sector-map'],true))throw new InvalidArgumentException('Commands: plan run status verify log export crosscheck quality-scan compare sector-map');
 if(isset($o['state-dir']))putenv('PAPER_STATE_DIR='.$o['state-dir']);
 $root=dirname(__DIR__);
 $cfgs=PaperAccountReplay::configs($root);$research=$cfgs['research'];
+$enc=static fn(array $v):string=>PaperHistoryResearch::encode($v,true)."\n";
+$out=static function(array $v)use($enc):void{echo $enc($v);};
+if($cmd==='sector-map'){
+    $cache=$o['cache-dir']??$root.'/data/cache/sector';
+    $dirs=[];
+    foreach($research['periods'] as $name=>$p){
+        $key=$name.'-dir';
+        if(empty($o[$key])||!is_dir($o[$key]))throw new InvalidArgumentException('--'.$key.' required (verified dataset, read only)');
+        $dirs[$name]=$o[$key];
+    }
+    $scans=[];
+    foreach($dirs as $dir)foreach(PaperSectorFreeze::savedScanPaths($root,$dir) as $f)$scans[$f]=true;
+    $to=rtrim($o['out']??'','/\\');
+    if($to==='')throw new InvalidArgumentException('--out required');
+    $norm=str_replace('\\','/',$to);
+    if(preg_match('#/data/(ohlcv|raw|cache|paper)#',$norm)||str_contains($norm,'/history-research/'))throw new RuntimeException('Refusing to write the sector map into operational or dataset files');
+    $built=PaperSectorFreeze::build($cache,$dirs,array_keys($scans));
+    PaperHistoryResearch::writeFile($to,$enc($built));
+    $out(['written'=>$to,'file_sha256'=>PaperStrategyVersion::fileHash($to),'counts'=>$built['counts'],'bucket_counts'=>$built['bucket_counts'],'unconfirmed_reasons'=>$built['unconfirmed_reasons']]);
+    exit(0);
+}
 $period=$o['period']??'';if(!isset($research['periods'][$period]))throw new InvalidArgumentException('--period=prior|recent required');
 $smoke=$o['smoke-label']??null;
 $start=$o['start']??null;$through=$o['through']??null;
@@ -36,8 +57,6 @@ $id=PaperAccountReplay::accountId($research,$period,$smoke);
 $config=PaperAccountReplay::accountConfig($cfgs['base'],$id,$research);
 $stateRoot=PaperAccountReplay::stateRoot();
 $dir=PaperAccountReplay::accountDir($stateRoot,$research,$id);$journalPath=PaperAccountReplay::journalPath($dir);
-$enc=static fn(array $v):string=>PaperHistoryResearch::encode($v,true)."\n";
-$out=static function(array $v)use($enc):void{echo $enc($v);};
 $needData=static function()use($o,$research,$period):array{
     if(empty($o['dataset-dir'])||!is_dir($o['dataset-dir']))throw new InvalidArgumentException('--dataset-dir required (verified history dataset)');
     $data=PaperAccountReplay::loadDataset($o['dataset-dir']);
@@ -48,6 +67,7 @@ $sectorMap=null;
 if(isset($o['sector-map'])){
     $sectorMap=json_decode((string)file_get_contents($o['sector-map']),true,512,JSON_THROW_ON_ERROR);
     if(!is_array($sectorMap['sectors']??null))throw new InvalidArgumentException('Sector map needs {"sectors":{symbol:bucket}}');
+    if(($sectorMap['kind']??'')===PaperSectorFreeze::KIND)PaperSectorFreeze::assertReplayMap($sectorMap);
 }
 $readJournal=static function()use($journalPath):array{
     $j=(new PaperJournal($journalPath))->read();
@@ -109,7 +129,7 @@ if($cmd==='run'){
     $guard=static fn():array=>['dataset_tree'=>PaperAccountReplay::treeHash($data['dir']),'operational_top_level'=>PaperAccountReplay::topLevelHash($stateRoot)];
     $before=$guard();
     $r=PaperAccountReplay::run($data,$config,$journalPath,['through'=>$through,'start'=>$start,'chunk'=>(int)($o['chunk']??20),
-        'sector_map'=>$sectorMap,'smoke'=>$smoke!==null]);
+        'sector_map'=>$sectorMap,'sector_map_file_sha256'=>isset($o['sector-map'])?PaperStrategyVersion::fileHash($o['sector-map']):null,'smoke'=>$smoke!==null]);
     $after=$guard();
     $r['untouched']=['dataset_files'=>$before['dataset_tree']===$after['dataset_tree'],'operational_state_files'=>$before['operational_top_level']===$after['operational_top_level']];
     $out($r);

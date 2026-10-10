@@ -156,6 +156,9 @@ $sec=['sectors'=>['A1.KS'=>'semi','A2.KS'=>'semi','A3.KS'=>'semi','A4.KS'=>'bio'
 $o=evs($j,'order');$byS=[];foreach($o as $x)$byS[$x['symbol']]=$x;
 archeck(isset($byS['A3.KS'])&&$byS['A3.KS']['quantity']<$byS['A1.KS']['quantity']/5&&isset($byS['A4.KS']),'the 40% sector limit leaves only the remainder for a third position in one sector');
 archeck($j['state']['research']['sector_source']==='explicit_map'&&PaperAccountReplay::reconcile($j,$data)['pass'],'an explicit sector map is recorded and reconciles');
+$cfgM=acfg();$one=mkdata(['A1.KS'],PREP+4);
+go($one,$cfgM,['A1.KS'=>[PREP+1=>plan(PREP+1)]],['sector_map'=>['sectors'=>['A1.KS'=>'semi']],'sector_map_file_sha256'=>'map-a']);
+archeck(arthrows(fn()=>PaperAccountReplay::run($one,$cfgM,jpath($cfgM['id']),['plan_provider'=>provider(['A1.KS'=>[PREP+1=>plan(PREP+1)]]),'sector_map'=>['sectors'=>['A1.KS'=>'bio']],'sector_map_file_sha256'=>'map-b']),'Research input changed'),'a changed sector classification cannot continue the same research account');
 $data2=mkdata(['A1.KS','A2.KS'],PREP+12);
 $tiny=acfg(['initial_cash'=>100]);
 [$r,$j]=go($data2,$tiny,['A1.KS'=>[PREP+1=>plan(PREP+1)]]);

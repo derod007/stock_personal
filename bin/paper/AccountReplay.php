@@ -162,10 +162,13 @@ final class PaperAccountReplay
         $meta=['kind'=>self::VERSION,'label'=>self::LABEL,'dataset'=>$data['dataset'],'dataset_files'=>$data['files'],'bars_sha256'=>$bars,
             'start_day'=>$startDay??$data['start_day'],'as_of_day'=>$data['as_of_day'],'plan_source'=>$provider===null?'engine':'injected_test',
             'sector_source'=>($opts['sector_map']??null)===null?'none_all_unclassified':'explicit_map','sector_map_sha256'=>$sectorHash,
+            'sector_map_file_sha256'=>$opts['sector_map_file_sha256']??null,
             'smoke'=>$startDay!==null||!empty($opts['smoke']),'excluded_symbols'=>$data['excluded'],
             'code_sha256_lf'=>self::runtimeCodeHashes()];
         $sessions=self::sessions($data,$startDay,$opts['through']??null);
         $journal=new PaperJournal($journalPath);
+        $existing=$journal->read();
+        if($existing!==null)self::assertCompatible($existing['state'],$meta,$configHash,$version);
         $last=($journal->read()['state']['last_session']??0);
         $pending=array_values(array_filter($sessions,fn($t)=>$t>$last));
         if(isset($opts['stop_after_sessions']))$pending=array_slice($pending,0,(int)$opts['stop_after_sessions']);
@@ -197,7 +200,7 @@ final class PaperAccountReplay
         if(($s['config_hash']??null)!==$configHash||($s['mode']??null)!=='replay')throw new RuntimeException('Account config changed; use a new research account ID');
         PaperStrategyVersion::verify($s,$version);
         $r=$s['research']??[];
-        foreach(['dataset','dataset_files','bars_sha256','plan_source','sector_map_sha256','start_day','as_of_day','code_sha256_lf'] as $k){
+        foreach(['dataset','dataset_files','bars_sha256','plan_source','sector_map_sha256','sector_map_file_sha256','start_day','as_of_day','code_sha256_lf'] as $k){
             if(($r[$k]??null)!==$meta[$k])throw new RuntimeException('Research input changed ('.$k.'); use a new research account ID');
         }
     }
@@ -375,6 +378,7 @@ final class PaperAccountReplay
             if($o['planned_risk']>$pt['equity']*$cfg['risk_pct']+0.01)$limitErrors[]='risk size '.$o['symbol'];
         }
         $add('order_size_and_risk_within_limits',$limitErrors===[],$limitErrors===[]?count($orderEvents).' orders checked':implode('; ',array_slice($limitErrors,0,5)));
+        $add('sector_notional_within_limit',...self::sectorLimitCheck($journal));
         // Marks against the dataset
         if($data!==null){
             $bad=[];$n=0;
@@ -390,6 +394,44 @@ final class PaperAccountReplay
         $add('no_forced_liquidation',array_diff(array_keys($reasons),['stop','target','time'])===[],'exit reasons: '.json_encode($reasons));
         $pass=true;foreach($checks as $c)$pass=$pass&&$c['pass'];
         return ['pass'=>$pass,'checks'=>$checks,'summary'=>self::summary($journal)];
+    }
+
+    /**
+     * Replays sector notionals from the events. A filled position counts as the larger of its reservation and its mark,
+     * which is how PaperPortfolio applies the sector cap. Unclassified names share one bucket.
+     * @return array{0:bool,1:string}
+     */
+    private static function sectorLimitCheck(array $journal):array
+    {
+        $cfg=$journal['state']['config'];$pct=(float)$cfg['sector_pct'];
+        $marks=[];$eq=[];
+        foreach($journal['events'] as $e){
+            $p=$e['payload'];
+            if($e['type']==='day_log')foreach($p['held']??[] as $sym=>$h)if(isset($h['mark_close']))$marks[$p['session']][$sym]=(float)$h['mark_close'];
+            if($e['type']==='equity')$eq[$p['session']]=(float)$p['equity'];
+        }
+        $active=[];$errors=[];$max=0.0;$checked=0;
+        foreach($journal['events'] as $e){
+            $p=$e['payload'];$sym=$p['symbol']??'';
+            if($e['type']==='order'){
+                $sector=(string)($p['sector']??'');if($sector==='')$sector='unclassified';
+                $equity=$eq[$p['session']]??null;
+                if($equity===null){$errors[]='no equity '.$sym;continue;}
+                $used=0.0;
+                foreach($active as $osym=>$o){
+                    $n=$o['filled']?max($o['reservation'],$o['qty']*($marks[$p['session']][$osym]??$o['fill']??0)):$o['reservation'];
+                    if($o['sector']===$sector)$used+=$n;
+                }
+                $room=$equity*$pct-$used;
+                if((float)$p['reserved_cash']>$room+1.0)$errors[]=$sym.' '.PaperHistoryResearch::day($p['session']);
+                if($equity>0)$max=max($max,($used+(float)$p['reserved_cash'])/$equity);
+                $active[$sym]=['sector'=>$sector,'filled'=>false,'qty'=>(int)$p['quantity'],'reservation'=>(float)$p['reserved_cash'],'fill'=>null];
+                $checked++;
+            }elseif($e['type']==='fill'&&isset($active[$sym])){
+                $active[$sym]['filled']=true;$active[$sym]['fill']=(float)$p['price'];
+            }elseif(in_array($e['type'],['exit','order_cancelled'],true))unset($active[$sym]);
+        }
+        return [$errors===[],$errors===[]?$checked.' orders, max sector share '.round($max*100,2).'%':implode('; ',array_slice($errors,0,5))];
     }
 
     /** Every ordered trade re-simulated on the dataset's completed bars, outside the portfolio. */

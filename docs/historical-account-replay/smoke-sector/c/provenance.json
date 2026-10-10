@@ -1,0 +1,351 @@
+{
+    "schema": 1,
+    "kind": "historical_account_replay_v1",
+    "label": "저장 스캔에서 확보한 고정 종목군 계좌 재현 (당시 매일의 TOP100 복원 아님)",
+    "account": "hist-smoke-kr-recovery-v1-20251008-sc",
+    "period": "prior",
+    "smoke": true,
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "code_sha256_lf": {
+        "bin/paper/AccountReplay.php": "4465d8fdbbaa6bff65882b84944f67065f3eeb9a3c4a86f923673f7e94af0ded",
+        "bin/paper_account_replay.php": "b12418c7c05a08d47ad2a30567ac7662e6964a40f418c3452c549e5c74d26467",
+        "tests/account_replay.php": "99d936ecceeaec8c69f7429325a25b2fa55a4b0c3625f4b5037eaac139420d77",
+        "config/paper-history-kr-recovery-v1.json": "ebf0893907d05f127abf1345c0261b613bb9c87924d1ad91d3ac53cf347403af",
+        "config/paper-kr-recovery-v1.json": "dc092bc8e3939a5de22eb25ed79a442666928f46b30d672dd48afd0e7ecd7bb4",
+        "config/paper-strategy-files.json": "8ed84ba6ed1e2020f33d2951a7836c1db8ef4cd92457568e47e9af0daa3c8fdd",
+        "bin/paper/HistoryResearch.php": "478f0f919d75dc319a76745649f51cdc3d57404f20187541f12f2108472206da",
+        "bin/paper/StrategyVersion.php": "fcdf4fdbe42edae5dd8031037a66aa966eefbc9ba9ad9d7a6b5667c96d8af858"
+    },
+    "config_hash": "7d08d1f250c570642e2876e16c9b0b4545109328d76c10d99e8c5c69d7ed83b0",
+    "dataset": {
+        "name": "kr-saved-scan-20251008",
+        "files": {
+            "dataset.json": "5f69e86104b4bd73cd2a4a03ba2ad2ad8275e16563a99e1d528d916600c3e9c8",
+            "universe.json": "93f244ad3ee41e8bf571f75bb781ef65df6053b12880939220885b7bf91da09e"
+        },
+        "start_day": "2024-10-08",
+        "as_of_day": "2025-10-02",
+        "symbols_used": 137,
+        "symbols_excluded": 19,
+        "bars_set_sha256": "897a32cc43c4587ba406beb27dda457eb1e107b685f6aa306761a9693ab5ff5b"
+    },
+    "journal_sha256": "9f5e4d1fad89e5127d006dc05261e4028f9ccd569ba84ca892d713659f12126d",
+    "journal_normalized_sha256": "3f7b38b669855360e00d7b034688d4fc2268840c9f341cdde7634a51ec0f81f9",
+    "state_hash": "bcf2784a44fa4d6f936c4be491f293dbc102f37f117584b352e25ebdf8ec94c3",
+    "research": {
+        "kind": "historical_account_replay_v1",
+        "label": "저장 스캔에서 확보한 고정 종목군 계좌 재현 (당시 매일의 TOP100 복원 아님)",
+        "dataset": "kr-saved-scan-20251008",
+        "dataset_files": {
+            "dataset.json": "5f69e86104b4bd73cd2a4a03ba2ad2ad8275e16563a99e1d528d916600c3e9c8",
+            "universe.json": "93f244ad3ee41e8bf571f75bb781ef65df6053b12880939220885b7bf91da09e"
+        },
+        "bars_sha256": {
+            "000150.KS": "2db70fe9afa430a48064f09e5600ab094f3bc489bd8750322bf69cc4b8bc23f6",
+            "000270.KS": "1ad05427258b2b7620092f8c89a5b376c23dff25fe5103b6cb035d8242c49a8c",
+            "000500.KS": "3450a20bc97d83fa2857d57de06fedea9170fe71ab4aad85a57aaa42033c3fea",
+            "000660.KS": "c33dcf0f0fc60cf1bc60bdf61467940e16bb869ec02a09fa846bcd84212dc827",
+            "000720.KS": "2e1904cc17a47bbfc9f9166d52f2990e2574ab3c51deef71130339e1a23481c4",
+            "000810.KS": "27eb5ff9372c1261c2a112056fef4e426b0589bde3c587b3503202a496bd1540",
+            "000990.KS": "deb2158495b016acefd9a24e1a79f976387ff92c52777e8e588391e475c36584",
+            "001440.KS": "81aef57e3b8eeebbe1f203b94bc7a9b3e42d065363e3b66ce98e528f9499c3f1",
+            "001820.KS": "17c0a4b5f95e44bcd1b95784a229f60e7ff84da9fe456492d862a56709b03921",
+            "002710.KS": "c3951a080c717ec20b07188ab649a58f03065abc282edf914435b3e7ef6f83c1",
+            "003230.KS": "b9a149bbded633c7733e0b3d5134480343bedf4ecd64ee15483f9d6f9ea38408",
+            "003490.KS": "7baf93adfb60bd65731c55ff8733e800eeafe9ab5694ce69ed3b6cc8ff859c68",
+            "003670.KS": "8af9357f34e589f9a4df743f788088885ec5144fd1474162c19172787f6242b7",
+            "005290.KQ": "7dab5b4e812766c8bd079eaca14255a0ffc21f1ac82b1851381711ab5b7648eb",
+            "005380.KS": "a47391fbf5a921d4eab733a5bdb5ce62d317efd1dfdcf29426728634721a2fa7",
+            "005490.KS": "9df016f4783f12b3d8f8278918222b21010734f133830f4cf3c2898567243a0a",
+            "005830.KS": "270328bc9ddac1bcd07b4661b3e426fbfdb2aca0ebc36d2d2b43f2996e7be8e0",
+            "005930.KS": "3b4ed2d1eef33d0450d15d2537f6bde0c9c4309722e88ab887aed3ec9f47fd67",
+            "005935.KS": "27c54ad301d80f97eeead48678afeff9f403a7fb0bc08605f787bd95c0c48524",
+            "006340.KS": "3f655d94986962513b600727e96c73f4ace12ac2e436322fd17c9ee33b33abd3",
+            "006360.KS": "8ce6f14a0e3ff5085839ac0d2ecc0828337a7b4eaba02951a6b5e63ea7e64140",
+            "006400.KS": "638bb382ad9da007e2681d541180b86a54489d55b2c44ac0e006238231cbf37c",
+            "007660.KS": "9dfe8e65624593c7a0de524787cdc9551935bb42e0e557f514fcc06573efb538",
+            "007810.KS": "9144e981bee161234d8dd0c1c8660dfd41a34f511b51fd131d075383a49725f2",
+            "009150.KS": "2aaa614a9ef320b14ae9ab64764f98b1b123de0e804da5f83b7817403213c654",
+            "009540.KS": "567bb95cd3fc1afe5aef66fcfc82766d40c161b59b205aab094b9dd64d0af8e3",
+            "009830.KS": "f340f95e0a20a60f5da15b7b438febfcb004c1751899db97b3e0c546579c9d09",
+            "010060.KS": "e647ae46cd27769b598086f589c1678dbabe82aacea055bd0aab31d1daf0aa33",
+            "010120.KS": "8ab3b1e333fe7e8bcfb9775d92cef61e1082bc5dea94c33063828b14a634d314",
+            "010140.KS": "8c0fcc97d6f5bb21e0248f7d6929b6eb6b8fa63d9a9d2fea93de53aee248714f",
+            "010170.KQ": "178e43fff1551a674ed43792d6a184eba64952efa9a46ca48377342a0f55b0dc",
+            "010950.KS": "810d0114705baae5758b4e7e90c51eacbdfc38b0e659149627506ad6951da6ec",
+            "011070.KS": "56c2bcb4ecd12441cacbf12177821919eccb404ebd41d9857eea90ad72f30ed5",
+            "012330.KS": "9fa57da1c95fddc2b58ed7d275255b5aff87bef1851538232f963cdc09c5276b",
+            "012450.KS": "2da1b2a1e4de992b4dc4e4bf397d7a7248a7169d5a50f1dc622310e50e6bef82",
+            "014280.KS": "5e4765b139176ec351d70aaf50b2f541d0a5cf0235acd4374d791db998698da0",
+            "015760.KS": "726a6ce7a7562f0eb8ca6cf2161dc960f254019d3af823f762eed1a2747e0237",
+            "017670.KS": "9f85f84ac60b01c6184f5be8898887ee675ba3b3b829fd0260b51c079bbcfa62",
+            "018880.KS": "2d607ce0c12628fa0bda2b8a2cc997400c70f2c0e2bf0ed5c347503db46088a5",
+            "028050.KS": "5b8833866581d7983734848342580d441f43e5688194ced257d829ea4284d5b4",
+            "028260.KS": "411dfffa825f06464e59e42622338acf50bf1de828ebf72e87a610f22eb897b2",
+            "028300.KQ": "113f71559b5c64da3be80da1ff3d5f222e010d844f0e7ac3ffd65092027e4f6d",
+            "030530.KQ": "6d1d8e123c32ad313b15f942a2b66b027342dabd29bdc36e08d6fd876b65fc48",
+            "032820.KQ": "76c0a6929f549a23b48d3276c4de5423b185193f9c9a30e4a6b2d74826a51dfb",
+            "032830.KS": "b619d9736b34cb5294cd3c561c30f0c6e85cf71337e32f65ddd41ed373c73c31",
+            "033780.KS": "e20340a69c1faa05e223b9f098497e4091a09344159a9d3c0edb376bbaeaac0f",
+            "034020.KS": "38b22f9ac97d6ea9af7d8f4d6b3b0f635e8f1315272dd2c4c7a9d4476ea426a7",
+            "034730.KS": "4f41b2738f910cc84d5b13b6b1745b48a9a8bef258fedd43946b6fc126059f50",
+            "035420.KS": "3e210dc4fa3a8b9b77cd870b06d1d083007113da4188acd20aa4dbcc99f5d6fb",
+            "035720.KS": "0e524e73eb2fcca6e302f7c91b11f368991473e00087bbb4dd677f5f5440e382",
+            "036540.KQ": "5a0391b222768a6d4a3d3dff9e7edd848ea4e5ba2bbd11873d297eea41db24e4",
+            "039030.KQ": "a469168846354213b3fa4f25ce6daf71465472a81e169c2ca0343f1af5b12523",
+            "041190.KQ": "5cdc79452f4ee58a94b82eecd6941c0f4393f59d7294303ff9011c5b14181206",
+            "042660.KS": "336bcbf0d11e5dfa3db82a0fcf912332a6f0424a4b4f2c44a1cabf5c0f6c162e",
+            "042700.KS": "f0554fe003ff5a0e61c2bb79fbb630ad63653dfb4a97b45f3a0becbb2d4c3d78",
+            "043260.KQ": "b914624a0ba7e4ce1c81e643efd563d97c475cea1ff784bc5d15f9ae541225f3",
+            "046970.KQ": "3524d63eeb524e035c93eb484f6ee7c3f777c8c74408e4f7adf65c30c4e55c74",
+            "047040.KS": "9750baecf96a1c50070b96913d066a823591355d98017f8c95e646dcf54a662b",
+            "047920.KQ": "de5fafc4672a7762ef7d2c73a0901274c68f0430705db89aa13b02d979be85eb",
+            "051910.KS": "bb84f7ad613d32d812c24c001b43ebf74d068d07d6042daf61511214e94f0a15",
+            "052690.KS": "dbb6b839228be3eba9816270068a75d90a778e8bca9ffb1a06bc1a2af84fdc33",
+            "053260.KQ": "128f791fa2ae018945f73b05ff96710015c211025ee038ea9d6af03c255bcc16",
+            "055550.KS": "d5d5aec23ed05fc5758bb7037e7cd0c6811fa96e5ac749526daf2ea9dd3b2e64",
+            "058470.KQ": "5b059f94f2d5b439127b4d67918329322002afb017d09adedebaed90e3aec9a2",
+            "062040.KS": "624ab761597a143de059eaf1fc81a3931b94a9c0d8877d37a178bf8c23708b6c",
+            "064350.KS": "6db98c9209178a245c8ef86925a880836d7813c167c2d5a26e2fe9ff2a2bb3b9",
+            "066570.KS": "f1d8b9f108c45df06a445b101a86bbc3e4686be96a20f9966813ae921bcffc21",
+            "066970.KS": "88598d7af5bddde546d7c50a99933c749c07166bb53553e3705c166b443498d6",
+            "067310.KQ": "94c6255adc3cd05ce9f1bd070c56db954af657fdccbfba0793b28424d3229d60",
+            "068270.KS": "c452aa3b82df3db862a94381d6efa903ce09c5a8d685f563845fea28190df23f",
+            "069540.KQ": "564bbb1c77ce7aeb1d0a895a721903b644a28d11578d7436a8ca2fa921ab3023",
+            "071050.KS": "afbb7c0c4a7f71820e1fdf4d4b6b04d56dd210c6c37321b7ade3a74274b06582",
+            "071090.KS": "2f8bee49ccd3eddf9ce563346bdce64acd54e4797d00e32c2cc34a397302a13b",
+            "072950.KQ": "25a5191b09a5176c12557e83cbc29ff18dbac9672b84803c8e674ecc69997dd4",
+            "078930.KS": "c829a35adb9c5b1b45c320975db9f9844bc460ed198e2fe8526dc9a9f6674c48",
+            "079550.KS": "45182827ded0b5d367912b3cb13dfa10955a887653b55199f99a3f53ce38079d",
+            "080220.KQ": "ec6b6907d13844be74ac0fdec2f794b2aa9b9aba5931d981f1d4338505b2fc16",
+            "082740.KS": "e4f1e2f2a7d524e4b012c0a07509292723e3bfd087ab701a9787c2fd5358b553",
+            "086520.KQ": "15ae023a08b3ed482e3b8fd7d73fcf135e5165c436e46aa7002855ac78e5df26",
+            "086790.KS": "ec1a3af749d18f1592e6aad410ec0c55db73e9bbc8dfed92b40fc93ecc52707d",
+            "089030.KQ": "c7b32bb09cc5606d7b1277f4bf57fb038dd68ec99e4a41d0f45e393cc2746844",
+            "089970.KQ": "803f141fe5b95e774d9a0ba5b543abd1193d3adc9a2c2d4a18ed71f5811422e5",
+            "092870.KQ": "ba1f655ea4fb0125be45227bcb27264730d2a744a4eefe39d84e0022baaeb8eb",
+            "093370.KS": "27575f8bfe2ced3cfe00ebbc41b4fbffbb487549a0037d48dec78bc83e70680a",
+            "095610.KQ": "f52b4429f75b0001ff908633920a61313e8016896d54fdb364276065d0b0000e",
+            "096770.KS": "cad0d2699bfcd805c9d1eed2ab9fdb678b8bc6d2586e4d63c3dace06ef3ec561",
+            "098460.KQ": "0ef982cbd6200b5a46677e75eeb2fd3f036cc835b74033ca236d0a993e3feb6e",
+            "103590.KS": "4920db8d967eafbe83b9c3cfb9755b9d277f4f59329d5c02ebaaacd04ed6b2bc",
+            "105560.KS": "f0733141ff9d6cb7c218553225b7d4aa551a273fbf8aab99a7e529cc3d0d3334",
+            "115440.KQ": "c95968efe6434efcebf20b88b2356be8824e27681a1e2938226eab24b7a11fb0",
+            "128940.KS": "0ae3c8655a99e01ee1bebf6233bc997298d862d67c455139b0a960ac2f829407",
+            "161580.KQ": "a0f239e5bfff6ccad99ad74cea14d4da5a81c0cf7332c035c129adff638ec45e",
+            "161890.KS": "cdbb1e623a1cbb513849ae9567572a6efcceafcabd8ab3f275ddb43367850f54",
+            "178320.KQ": "19baf1a862570cc3d80d473ccbe4efd32c9f6e28545b413a382c6579ce1e52cf",
+            "196170.KQ": "aa8ff95b459bb1c832da8a0942e560f798504e3af38f5e25a65341c1c33992b4",
+            "201490.KQ": "f1f9b21bc93c924583b85ea2a6650acd915a00afc571efadcc8cfe238a600909",
+            "203650.KQ": "3a1b2b70aae10b11804f53fd0f020613e2e6fa8ed95242ac2f7d726edbcaa6ba",
+            "207940.KS": "4458bfea1c57a00da08b14f6972018c1cc8bed9769ecb95c066466524cc7a1b8",
+            "222800.KQ": "b9302fbf022a82fafed69db8c7183ad2bf8f23d5bf17dd76ecd4884e31fbd5de",
+            "232140.KQ": "5323db71df7c8395f7474205ab172fe3981236f5e0e5dbf2c7ebf3d198846ab7",
+            "240810.KQ": "52b6531edc81aec79ba2f254c15452e47ae029098bcebe36c7e7c83ded8a7768",
+            "247540.KQ": "31614890c357e8f4f6217eb624ba0ab38746993fd79ddd976944265e8623d0b3",
+            "256840.KQ": "599cccdebb5971de6659bb4c1d61065eca6f1a49e72cdaf081a17375183ce322",
+            "267260.KS": "bb50d4ad095ee0654ac6de92523baed4e47cfc08f0619a0267be92a56aacfb74",
+            "267270.KS": "e74d609dced71c3da51ecf0d3ba8ac198e17da0e42146849d91bbd6cdfdc9613",
+            "267320.KQ": "3109dd63f4d46f4f7499c6269cbd6198910d3b9bd4cd8b9792e42aa742481d60",
+            "272210.KS": "9f017d9ba5b00c29bb040e2c767ce30d9f1526bf119c7c5b35117d3d6dbed5a1",
+            "274090.KQ": "a644ccf4365afaac0fec72d2e17652839beb24f386c3f40f2a308289336bc082",
+            "278470.KS": "5b69ddd78fa51a6c508cb3a1f4b0dd028dda81ec6ac1d3a7ce5c98a22dda2c2a",
+            "298040.KS": "ed2df8abd47391f23d86c1ea6464ad5bf1f27270964d1dd98cfbae16568d6dde",
+            "303810.KQ": "d87e8190a063f9bbfda2105297bedf19ce61ac3e0769203a7d88fce445107d0d",
+            "316140.KS": "ffe836f09cb76edab8afffe08b7d954f45370053f681e7c2ff4926d158200cd4",
+            "319660.KQ": "e30ea188f6388b98e9e96669dd1b121810923026dad088719395af10b1f7870a",
+            "321370.KQ": "39b436179cc430954634fb464c5181000cef3a44288a82f84c787c9a1776951b",
+            "322000.KS": "1379f325747120193bbcf6d43bc5f1eca70aaf2a5896cc72fd4dcaca976a0310",
+            "323280.KQ": "84bacff514a4debfc5255ae663b467c4031c13aa8ff4eb26b123783fd72b5552",
+            "327260.KQ": "fa02f7e9538e07cbf33d7085594ec9bfb1a9a520ce7917c092043b8c1828fd4d",
+            "328130.KQ": "399c7ee496bf5fc2bef367ae7534ec624660a8d41c7db9db138be4221d46c0be",
+            "329180.KS": "47533c35a6ecf92f102b9f2115591515517692429188dff42bdacffc28e7f3d6",
+            "336260.KS": "e9cef87b2ec4319dd837a46242066b2581d77a8e308d25113a12823635107a78",
+            "352820.KS": "c7475a303f528f6921188cb82ea0b38619cf887a8faf22d276fbf71b628e4b85",
+            "353200.KS": "344964fca946712fba42600202bb91fc3378913c0f03699656a6e41dc883236a",
+            "356680.KQ": "284f110fcb5c1c39a3c68880940428c801d3cac1a152610a08f24f40bbec5e7d",
+            "356860.KQ": "0a650f054e763b3892007d9f2f17355dbb0ea6b9949133bf7c898888993e32ce",
+            "373220.KS": "d3e0287bc9c979f051463e6ab61606e5f5cf9630c13dbea6f020baee48ce07d9",
+            "393210.KQ": "ae3db26c129cc43db4915879a270e1d4a7d5c6896d9645c62a67cccfdc2bc19a",
+            "396300.KQ": "e1c3dd4588736db35ff848b71193b833e49aace4297681eea3abfe0316d0763d",
+            "402340.KS": "76e298b9c6e7123f238e46a21a21abdbf63bf1ecb98a574c8b025af1ab947d1f",
+            "403870.KQ": "23f3109da6191bf609605119c06fcbc565b1c750b1cb9bd176c25801d1680285",
+            "417200.KQ": "6a00edc9c4e4e61aa553f37de39b918ce0d0c03d5d68f03c2174fc88c73b2539",
+            "419050.KQ": "3f90b666fde53976d8a50279dab5c1d4b4d773e9bd3f5c14d5ade80719da2847",
+            "425040.KQ": "08f74c444b7852469a8c478253bb2cbdb7c4bd8859e5277f0a91eb06b6716f4d",
+            "440110.KQ": "05f964a51dfcc3b34197b443f2041804aa56790a1ab8992b8d77419d284397af",
+            "452190.KQ": "5db798048a8252c76de5ec9782970a24dbd5780f5b53ada03a8d672974016b7c",
+            "456010.KQ": "1efe82d205b0dc9ea313b41b43c6068dda35a99d44febbf3b96a108b5d009292",
+            "457370.KQ": "ea540b49a376621cc25c27d73b44e2b2b2537d89bef1cb95a801db71ac39f09f",
+            "475150.KS": "2258f0848fbe7b8ba80dba1be46b972dad6971a7ac6d25c7e88bcbf6a93a622d"
+        },
+        "start_day": "2025-06-23",
+        "as_of_day": "2025-10-02",
+        "plan_source": "engine",
+        "sector_source": "explicit_map",
+        "sector_map_sha256": "d0d19870b12dc8738ffb9132171d818dab10ee6e62ef4c5acbb7bc1ffb818b5a",
+        "sector_map_file_sha256": "8e248fe9160cea80dd54ed5da3a4dfe51deb0ecdeade9e3a714b407f79ce003d",
+        "smoke": true,
+        "excluded_symbols": [
+            {
+                "symbol": "012210.KQ",
+                "state": "done",
+                "reasons": [
+                    "price_jump_beyond_daily_limit"
+                ]
+            },
+            {
+                "symbol": "014950.KQ",
+                "state": "done",
+                "reasons": [
+                    "insufficient_history",
+                    "missing_session",
+                    "no_evaluation_bars"
+                ]
+            },
+            {
+                "symbol": "036930.KQ",
+                "state": "done",
+                "reasons": [
+                    "price_jump_beyond_daily_limit"
+                ]
+            },
+            {
+                "symbol": "052260.KQ",
+                "state": "done",
+                "reasons": [
+                    "price_jump_beyond_daily_limit"
+                ]
+            },
+            {
+                "symbol": "100000.KQ",
+                "state": "failed",
+                "reasons": [
+                    "Yahoo HTTP 404 for 100000.KQ"
+                ]
+            },
+            {
+                "symbol": "100005.KQ",
+                "state": "failed",
+                "reasons": [
+                    "Yahoo HTTP 404 for 100005.KQ"
+                ]
+            },
+            {
+                "symbol": "108490.KQ",
+                "state": "done",
+                "reasons": [
+                    "price_jump_beyond_daily_limit"
+                ]
+            },
+            {
+                "symbol": "266690.KQ",
+                "state": "done",
+                "reasons": [
+                    "insufficient_history",
+                    "missing_session",
+                    "no_evaluation_bars"
+                ]
+            },
+            {
+                "symbol": "350001.KQ",
+                "state": "failed",
+                "reasons": [
+                    "Yahoo HTTP 404 for 350001.KQ"
+                ]
+            },
+            {
+                "symbol": "386380.KQ",
+                "state": "done",
+                "reasons": [
+                    "insufficient_history",
+                    "missing_session",
+                    "no_evaluation_bars"
+                ]
+            },
+            {
+                "symbol": "387690.KQ",
+                "state": "done",
+                "reasons": [
+                    "insufficient_history",
+                    "missing_session",
+                    "no_evaluation_bars"
+                ]
+            },
+            {
+                "symbol": "390000.KQ",
+                "state": "failed",
+                "reasons": [
+                    "Yahoo HTTP 404 for 390000.KQ"
+                ]
+            },
+            {
+                "symbol": "457190.KS",
+                "state": "done",
+                "reasons": [
+                    "price_jump_beyond_daily_limit"
+                ]
+            },
+            {
+                "symbol": "478340.KQ",
+                "state": "done",
+                "reasons": [
+                    "insufficient_history",
+                    "missing_session",
+                    "no_evaluation_bars"
+                ]
+            },
+            {
+                "symbol": "486510.KQ",
+                "state": "done",
+                "reasons": [
+                    "insufficient_history",
+                    "missing_session",
+                    "no_evaluation_bars"
+                ]
+            },
+            {
+                "symbol": "486990.KQ",
+                "state": "done",
+                "reasons": [
+                    "insufficient_history",
+                    "missing_session",
+                    "no_evaluation_bars"
+                ]
+            },
+            {
+                "symbol": "490470.KQ",
+                "state": "done",
+                "reasons": [
+                    "insufficient_history",
+                    "missing_session",
+                    "no_evaluation_bars"
+                ]
+            },
+            {
+                "symbol": "610003.KQ",
+                "state": "failed",
+                "reasons": [
+                    "Yahoo HTTP 404 for 610003.KQ"
+                ]
+            },
+            {
+                "symbol": "950260.KQ",
+                "state": "done",
+                "reasons": [
+                    "insufficient_history",
+                    "missing_session",
+                    "no_evaluation_bars"
+                ]
+            }
+        ],
+        "code_sha256_lf": {
+            "bin/paper/AccountReplay.php": "4465d8fdbbaa6bff65882b84944f67065f3eeb9a3c4a86f923673f7e94af0ded",
+            "bin/paper/HistoryResearch.php": "478f0f919d75dc319a76745649f51cdc3d57404f20187541f12f2108472206da",
+            "bin/paper/StrategyVersion.php": "fcdf4fdbe42edae5dd8031037a66aa966eefbc9ba9ad9d7a6b5667c96d8af858",
+            "config/paper-history-kr-recovery-v1.json": "ebf0893907d05f127abf1345c0261b613bb9c87924d1ad91d3ac53cf347403af",
+            "config/paper-kr-recovery-v1.json": "dc092bc8e3939a5de22eb25ed79a442666928f46b30d672dd48afd0e7ecd7bb4",
+            "config/paper-strategy-files.json": "8ed84ba6ed1e2020f33d2951a7836c1db8ef4cd92457568e47e9af0daa3c8fdd"
+        }
+    }
+}

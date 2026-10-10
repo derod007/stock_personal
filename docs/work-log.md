@@ -1,4 +1,10 @@
-﻿## 2026-10-11 01:25 · Cursor · 끝
+﻿## 2026-10-11 01:36 · Cursor · 끝
+- 한 일: PR #66 섹터 경로 대조. 운영 스캐너 경로 data/raw/cache/sector와 data/cache/sector를 읽기만 확인. 대상 144종목 유효 업종명은 두 경로 모두 0건(자리표시자 144). 보완·충돌 없음. 맵과 소규모 계좌는 새로 만들지 않음
+- 파일: bin/paper/SectorFreeze.php, bin/paper_account_replay.php, tests/sector_freeze.php, docs/historical-account-replay/(sector-path-check.json, followup.md, protocol.md), docs/research/account-replay-followup.py, docs/work-log.md
+- 커밋: 브랜치 cursor/historical-paper-replay, PR #66에 반영(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-11 01:25 · Cursor · 끝
 - 한 일: PR #66 보완. 운영 섹터 캐시·저장 스캔을 읽기만 해 연구용 섹터 맵을 고정(확보 0, 미확인 144, 한 버킷), 완료봉에서 plan.ready·스캐너 후보·PaperScanUniverse 대응을 운영 함수로 검증, 고정 맵으로 소규모 3구간을 별도 계좌에서 재실행(장부·섹터 한도·재실행·이어 하기). 전부 미분류 결과는 유지. 전체 실행·병합 없음
 - 파일: bin/paper/SectorFreeze.php, bin/paper/AccountReplay.php, bin/paper_account_replay.php, src/KrAmountScanner.php, tests/sector_freeze.php, tests/selection_correspondence.php, tests/account_replay.php, docs/historical-account-replay/(sector-map.json, followup.md, protocol.md, selection-check.json, smoke-sector/), docs/research/account-replay-followup.py, .github/workflows/pattern-replay.yml, docs/work-log.md
 - 커밋: 브랜치 cursor/historical-paper-replay, PR #66에 반영(병합 안 함)

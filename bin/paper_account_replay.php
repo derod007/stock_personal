@@ -23,12 +23,38 @@ foreach(array_slice($argv,2) as $a){
     if(!preg_match('/^--([a-z-]+)=(.*)$/s',$a,$m))throw new InvalidArgumentException('Unknown argument '.$a);
     $o[$m[1]]=$m[2];
 }
-if(!in_array($cmd,['plan','run','status','verify','log','export','crosscheck','quality-scan','compare','sector-map'],true))throw new InvalidArgumentException('Commands: plan run status verify log export crosscheck quality-scan compare sector-map');
+if(!in_array($cmd,['plan','run','status','verify','log','export','crosscheck','quality-scan','compare','sector-map','sector-paths'],true))throw new InvalidArgumentException('Commands: plan run status verify log export crosscheck quality-scan compare sector-map sector-paths');
 if(isset($o['state-dir']))putenv('PAPER_STATE_DIR='.$o['state-dir']);
 $root=dirname(__DIR__);
 $cfgs=PaperAccountReplay::configs($root);$research=$cfgs['research'];
 $enc=static fn(array $v):string=>PaperHistoryResearch::encode($v,true)."\n";
 $out=static function(array $v)use($enc):void{echo $enc($v);};
+if($cmd==='sector-paths'){
+    // Read both caches. The scanner path is the one paper_scan_universe.php gives KrAmountScanner.
+    $primary=$o['primary-dir']??$root.'/data/raw/cache/sector';
+    $supplement=$o['supplement-dir']??$root.'/data/cache/sector';
+    $from=$o['symbols-from']??$root.'/docs/historical-account-replay/sector-map.json';
+    $listed=json_decode((string)file_get_contents($from),true,512,JSON_THROW_ON_ERROR);
+    $symbols=array_keys($listed['sectors']??[]);
+    sort($symbols);
+    if($symbols===[])throw new RuntimeException('No symbols in '.$from);
+    $to=rtrim($o['out']??'','/\\');
+    if($to==='')throw new InvalidArgumentException('--out required');
+    $norm=str_replace('\\','/',$to);
+    if(preg_match('#/data/(ohlcv|raw|cache|paper)#',$norm)||str_contains($norm,'/history-research/'))throw new RuntimeException('Refusing to write the path check into operational or dataset files');
+    $a=PaperSectorFreeze::survey($primary,$symbols);
+    $b=PaperSectorFreeze::survey($supplement,$symbols);
+    $cmp=PaperSectorFreeze::compareSurveys($a,$b);
+    $report=['schema'=>1,'kind'=>'sector_path_check_v1','symbols'=>count($symbols),
+        'note'=>'paper_scan_universe.php builds KrAmountScanner with data/raw/cache, and that scanner reads sector_<code>.json under data/raw/cache/sector. data/cache/sector is a different cache. Placeholder industry name "기타" is not a classification. Neither cache was written.',
+        'primary'=>['role'=>'operational_scanner','path'=>$a['dir'],'files'=>$a['files'],'fingerprint'=>$a['fingerprint'],'counts'=>$a['counts']],
+        'supplement'=>['role'=>'other_cache','path'=>$b['dir'],'files'=>$b['files'],'fingerprint'=>$b['fingerprint'],'counts'=>$b['counts']],
+        'supplement_used'=>$cmp['supplement_used'],'conflicts'=>$cmp['conflicts'],
+        'new_map'=>false,'reason'=>'No target symbol has a real industry name in either cache, so the research map was not replaced.'];
+    PaperHistoryResearch::writeFile($to,$enc($report));
+    $out($report+['written'=>$to]);
+    exit(0);
+}
 if($cmd==='sector-map'){
     $cache=$o['cache-dir']??$root.'/data/cache/sector';
     $dirs=[];

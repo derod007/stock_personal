@@ -103,6 +103,74 @@ final class PaperSectorFreeze
         return $out;
     }
 
+    /**
+     * Read-only count of real industry names. A placeholder ("기타" or empty) is not a classification.
+     * Does not construct SectorMap against the cache, so nothing is refreshed or rewritten.
+     *
+     * @param list<string> $symbols
+     * @return array<string,mixed>
+     */
+    public static function survey(string $cacheDir,array $symbols):array
+    {
+        $cacheDir=rtrim(str_replace('\\','/',$cacheDir),'/');
+        if(!is_dir($cacheDir))throw new RuntimeException('Sector cache not found: '.$cacheDir);
+        $before=self::fingerprint($cacheDir);
+        $counts=['secured'=>0,'placeholder'=>0,'missing'=>0,'unreadable'=>0];
+        $rows=[];
+        foreach($symbols as $symbol){
+            $code=NaverDailyQuotes::codeOf($symbol);
+            $file=$code!==null?$cacheDir.'/sector_'.$code.'.json':null;
+            $entry=self::readCacheEntry($file);
+            $counts[$entry['class']]++;
+            $row=['class'=>$entry['class']];
+            if($entry['class']==='secured'){
+                $row['sector_name']=$entry['sector_name'];
+                $row['stored_bucket']=$entry['stored_bucket'];
+                $row['sha256']=hash_file('sha256',$entry['file']);
+            }
+            $rows[$symbol]=$row;
+        }
+        if(self::fingerprint($cacheDir)!==$before)throw new RuntimeException('Sector cache changed while it was being read');
+        return ['dir'=>self::rel($cacheDir),'files'=>count(glob($cacheDir.'/sector_*.json')?:[]),'fingerprint'=>$before,
+            'counts'=>$counts,'symbols'=>$rows];
+    }
+
+    /**
+     * Scanner path wins. The other path fills only a placeholder or a missing file, and a real-name disagreement is listed.
+     *
+     * @param array<string,mixed> $primary
+     * @param array<string,mixed> $supplement
+     * @return array{supplement_used:list<string>,conflicts:list<array<string,string>>}
+     */
+    public static function compareSurveys(array $primary,array $supplement):array
+    {
+        $used=[];$conflicts=[];
+        foreach($primary['symbols'] as $symbol=>$p){
+            $s=$supplement['symbols'][$symbol]??['class'=>'missing'];
+            $pReal=($p['class']??'')==='secured';
+            $sReal=($s['class']??'')==='secured';
+            if($pReal&&$sReal&&($p['sector_name']??'')!==($s['sector_name']??'')){
+                $conflicts[]=['symbol'=>$symbol,'primary_sector'=>$p['sector_name'],'supplement_sector'=>$s['sector_name'],
+                    'primary_bucket'=>$p['stored_bucket']??null,'supplement_bucket'=>$s['stored_bucket']??null];
+            }elseif(!$pReal&&$sReal){
+                $used[]=$symbol;
+            }
+        }
+        sort($used);
+        return ['supplement_used'=>$used,'conflicts'=>$conflicts];
+    }
+
+    /** @return array{class:string,sector_name?:string,stored_bucket?:string,file?:string} */
+    public static function readCacheEntry(?string $file):array
+    {
+        if($file===null||!is_file($file))return ['class'=>'missing'];
+        $cached=json_decode((string)file_get_contents($file),true);
+        if(!is_array($cached))return ['class'=>'unreadable'];
+        $industry=trim((string)($cached['sector']??''));
+        if($industry===''||$industry===self::PLACEHOLDER_SECTOR)return ['class'=>'placeholder'];
+        return ['class'=>'secured','sector_name'=>$industry,'stored_bucket'=>(string)($cached['sector_bucket']??''),'file'=>$file];
+    }
+
     /** @param array<string,mixed> $map */
     public static function assertReplayMap(array $map):void
     {

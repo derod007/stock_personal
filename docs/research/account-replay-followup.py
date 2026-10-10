@@ -72,7 +72,22 @@ def main():
         "",
         "세 구간 모두 정지하지 않았다. 보유 종목의 봉이 없거나 무효이면 계좌를 멈추는 기존 규칙은 유지한다. 보간하거나 날짜를 건너뛰지 않는다.",
         "",
+        "## 섹터 캐시 경로",
+        "",
     ]
+    check = BASE / "sector-path-check.json"
+    if check.is_file():
+        p = load(check)
+        a, b = p["primary"], p["supplement"]
+        lines += [
+            "`paper_scan_universe.php`는 `KrAmountScanner`에 `data/raw/cache`를 넘기고, 스캐너는 그 아래 `sector`에서 업종을 읽는다. `data/cache/sector`는 다른 캐시다. 업종명 `기타`는 분류로 세지 않는다. 두 캐시 모두 쓰지 않았다.",
+            "",
+            f"- 운영 스캐너 경로 `{a['path']}`: 유효 업종명 {a['counts']['secured']}건, 자리표시자 {a['counts']['placeholder']}건, 파일 없음 {a['counts']['missing']}건.",
+            f"- 다른 캐시 `{b['path']}`: 유효 업종명 {b['counts']['secured']}건, 자리표시자 {b['counts']['placeholder']}건, 파일 없음 {b['counts']['missing']}건.",
+            f"- 보완으로 채운 종목 {len(p['supplement_used'])}건, 업종명이 서로 다른 종목 {len(p['conflicts'])}건.",
+            "- 유효 업종명이 없어 연구용 섹터 맵은 바꾸지 않았고, 소규모 계좌도 다시 돌리지 않았다. 운영 캐시는 쓰지 않았다.",
+            "",
+        ]
     (BASE / "followup.md").write_text("\n".join(lines), encoding="utf-8", newline="\n")
     print("written", file_hash)
 

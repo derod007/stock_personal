@@ -1,0 +1,34 @@
+{
+    "schema": 1,
+    "kind": "sector_path_check_v1",
+    "symbols": 144,
+    "note": "paper_scan_universe.php builds KrAmountScanner with data/raw/cache, and that scanner reads sector_<code>.json under data/raw/cache/sector. data/cache/sector is a different cache. Placeholder industry name \"기타\" is not a classification. Neither cache was written.",
+    "primary": {
+        "role": "operational_scanner",
+        "path": "data/raw/cache/sector",
+        "files": 569,
+        "fingerprint": "8e6871296144ae1d1a16819dfafe343e1d7bb3f743697c1ba4e94234e47d7a92",
+        "counts": {
+            "secured": 0,
+            "placeholder": 144,
+            "missing": 0,
+            "unreadable": 0
+        }
+    },
+    "supplement": {
+        "role": "other_cache",
+        "path": "data/cache/sector",
+        "files": 539,
+        "fingerprint": "c8c7a670b1157ac03abc25eb9b72b35c879efed75691ad7ae37a542901805fab",
+        "counts": {
+            "secured": 0,
+            "placeholder": 144,
+            "missing": 0,
+            "unreadable": 0
+        }
+    },
+    "supplement_used": [],
+    "conflicts": [],
+    "new_map": false,
+    "reason": "No target symbol has a real industry name in either cache, so the research map was not replaced."
+}

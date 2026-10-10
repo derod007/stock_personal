@@ -1,4 +1,11 @@
-﻿## 2026-10-10 16:46 · Cursor · 끝
+## 2026-10-10 · Codex · 완료
+- 상승 눌림 157건 A 입력 구조 라벨 고정·차트 전수 대조 후 종료 137건 비교. H 58/D 82/U 17, H와 D의 성과 우위는 기간별 반전. 운영 변경 없음
+- 산출물: docs/pullback-structure-review-20261010.md 및 기준·사례·JSON·재현 스크립트. 구조 검사 8개와 기존 기간별 합계 검증 통과. PR로만 제출, 병합 안 함
+
+## 2026-10-10 · Codex · 진행
+- 작업: 원문별 조건 범위를 고정하고, 판정일까지의 가격으로 상승 눌림 157건 구조 분류 후 두 기간 성과 비교. 운영 변경 없음
+
+## 2026-10-10 16:46 · Cursor · 끝
 - 한 일: 검토 패키지의 거래량 높이, 대기·무효 표본, 신호 없음 판정, 판정일 수치, 날짜 눈금, 숏 손절 문구를 고치고 패키지를 다시 만들었다. 전략 변경 없음
 - 파일: bin/paper/ReviewCharts.php, bin/paper/ReviewPack.php, tests/review_pack.php, docs/pattern-source-map.md, docs/pattern-review-pack.md, docs/pattern-review-verify.md, docs/pattern-review-manifest.json, docs/pattern-review-examples/, docs/pattern-review-pack.zip, docs/work-log.md
 - 커밋: 브랜치 cursor/pattern-review-pack, PR 갱신(병합 안 함)

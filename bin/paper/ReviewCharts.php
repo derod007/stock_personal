@@ -92,7 +92,7 @@ final class PaperReviewCharts
     }
 
     /** @param list<array{label:string,price:?float,at:?int,kind:string}> $marks */
-    public static function svg(array $view, array $marks, string $title, bool $pricesOnlyInView, ?string $symbol=null): string
+    public static function svg(array $view, array $marks, string $title, bool $pricesOnlyInView, ?string $symbol=null, ?array $overlay=null): string
     {
         $bars=$view['bars'];
         if($bars===[]){
@@ -139,6 +139,7 @@ final class PaperReviewCharts
         }
         $svg[]=self::line($view['ma20'],$x,$y,'#e67e22');
         $svg[]=self::line($view['ma60'],$x,$y,'#8e44ad');
+        if($overlay!==null)foreach(self::overlayMarkers($overlay['marks']??[],$bars,$x,$y,$esc,$font) as $part)$svg[]=$part;
         $lastX=$x(count($bars)-1);
         $svg[]=sprintf('<line x1="%.1f" y1="%d" x2="%.1f" y2="%d" stroke="#222" stroke-dasharray="3 3"/>',$lastX,$pt,$lastX,$pt+$pv);
         foreach($marks as $m){
@@ -172,9 +173,45 @@ final class PaperReviewCharts
             $svg[]=sprintf('<line x1="%.1f" y1="%d" x2="%.1f" y2="%d" stroke="#bbb"/>',$xx,$pt+$pv+$gap+$vh+2,$xx,$dateY-4);
             $svg[]=sprintf('<text x="%.1f" y="%d" text-anchor="%s" font-size="10" font-family="%s" fill="#333">%s</text>',$tx,$dateY,$anchor,$font,$esc($label));
         }
+        if($overlay!==null)foreach(array_slice($overlay['legend']??[],0,5) as $k=>$line){
+            $svg[]=sprintf('<text x="72" y="%d" font-size="11" font-family="%s" fill="%s">%s</text>',$dateY+18+$k*13,$font,$esc((string)($line['color']??'#222')),$esc((string)$line['text']));
+        }
         $svg[]='<text x="72" y="508" font-size="11" font-family="'.$font.'" fill="#333">빨강 상승 · 파랑 하락 · 주황 MA20 · 보라 MA60(60개 이상이 있을 때) · 점선은 판정일. 거래량은 아래 칸. 눈금은 봉 날짜.</text>';
         $svg[]='</svg>';
         return implode('',$svg);
+    }
+
+    /**
+     * Annotation markers sit exactly on the wick end of the named bar: the high for a high mark, the low for a low mark.
+     * Filled circle = confirmed pivot, white circle = observed only, small square = alternative candidate.
+     * Marks that land on the same bar and side are merged into one label.
+     * @param list<array{at:int,price:float,field:string,code:string,main:bool,confirmed:bool,color:string,date:string}> $marks
+     */
+    private static function overlayMarkers(array $marks, array $bars, Closure $x, Closure $y, Closure $esc, string $font): array
+    {
+        $slot=[];
+        foreach($marks as $m)foreach($bars as $i=>$b){
+            if((int)$b['available_at']!==(int)$m['at']||!empty($b['ohlc_invalid']))continue;
+            $key=$i.'|'.$m['field'].'|'.($m['main']?'m':'a');
+            if(!isset($slot[$key]))$slot[$key]=['i'=>$i,'m'=>$m,'codes'=>[]];
+            $slot[$key]['codes'][]=$m['code'];
+            if($m['main'])$slot[$key]['m']['confirmed']=$slot[$key]['m']['confirmed']&&$m['confirmed'];
+        }
+        $out=[];
+        // Alternatives that sit on a main mark of the same side are not drawn twice.
+        foreach($slot as $key=>$s){
+            if(!$s['m']['main']&&isset($slot[$s['i'].'|'.$s['m']['field'].'|m']))continue;
+            $m=$s['m'];$cx=$x($s['i']);$cy=$y((float)$m['price']);$high=$m['field']==='high';
+            $label=implode('·',array_values(array_unique($s['codes'])));$color=$m['color'];
+            $attr=sprintf('data-code="%s" data-date="%s" data-price="%s" data-field="%s" data-confirmed="%d" data-main="%d"',
+                $esc($label),$esc($m['date']),$esc((string)$m['price']),$m['field'],$m['confirmed']?1:0,$m['main']?1:0);
+            if($m['main'])$out[]=sprintf('<circle cx="%.1f" cy="%.1f" r="5" fill="%s" stroke="%s" stroke-width="2" %s/>',$cx,$cy,$m['confirmed']?$color:'#fff',$color,$attr);
+            else $out[]=sprintf('<rect x="%.1f" y="%.1f" width="7" height="7" fill="#fff" stroke="%s" stroke-width="1.6" %s/>',$cx-3.5,$cy-3.5,$color,$attr);
+            $ty=$high?$cy-9:$cy+17;
+            $out[]=sprintf('<text x="%.1f" y="%.1f" text-anchor="middle" font-size="%d" font-weight="%s" font-family="%s" fill="%s" stroke="#fff" stroke-width="3" paint-order="stroke">%s</text>',
+                $cx,$ty,$m['main']?12:10,$m['main']?'bold':'normal',$font,$color,$esc($label));
+        }
+        return $out;
     }
 
     private static function line(array $values, Closure $x, Closure $y, string $color): string

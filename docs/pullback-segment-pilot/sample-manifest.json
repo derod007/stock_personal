@@ -1,0 +1,403 @@
+{
+    "version": "pullback_segment_pilot_v1",
+    "seed": "pullback-segment-pilot-v1",
+    "sources": {
+        "zip": "docs/pattern-review-pack.zip",
+        "zip_sha256": "1fe0fe05335393f447f0fe0002b56bb2f46812eda3c5804eb8ea1a23010257b2",
+        "zip_bytes": 36449646,
+        "package_manifest_sha256": "0ac24de9335f74b8e6449d355a71d36e1e92093b792f3097baa75454bb69a0ca",
+        "main_commit": "eef5ecbb0d9b4a3ebb233dd2811122e434f1cd3a",
+        "package_cases": 746,
+        "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+        "note": "PR #61 corrected package as merged. A files supply symbol, name and decision date only for this list."
+    },
+    "purpose": "Mark the current pullback segment on A charts before reading engine facts. Not a profitability study and not a market sample.",
+    "metadata_used": [
+        "manifest: case_id, dataset, cohort, pattern, status (not_selected only)",
+        "A json: symbol, name, session_date"
+    ],
+    "metadata_not_used": [
+        "trade status, returns, outcome files, C files, B files, PR #62 labels, performance tables"
+    ],
+    "category_map": {
+        "selected": "manifest cohort selected and pattern trend_pullback: the final selected plan was the pullback plan",
+        "waiting": "manifest cohort not_selected, pattern trend_pullback, pattern status wait_pullback (not yet near the zone) or await_confirmation (zone reached, confirmation pending)",
+        "dropped": "manifest cohort not_selected, pattern trend_pullback, pattern status rejected_rr (confirmed, then dropped by reward/risk). The pullback pattern has no separate invalidated status",
+        "not_used": "ready_blocked and ready_not_selected: the pattern itself was ready, so they are neither waiting nor dropped by the pattern. A pullback seen only in another pattern's final plan is never counted as a pullback selection"
+    },
+    "rule": {
+        "order": "per dataset: selected, waiting, dropped. Candidates sorted by sha256(seed|dataset|category|case_id).",
+        "distribution": "a symbol is used once per dataset. Pass 1 also wants a month not yet used in that dataset. Pass 2 drops the month rule. Waiting slots alternate wait_pullback, await_confirmation, wait_pullback.",
+        "adjacent_duplicates": "one case per symbol per dataset, so adjacent days of one structure cannot both appear",
+        "exposure": "the engine page of f0445c951f5182c2 was shown to the agent in earlier work, so it is not a candidate",
+        "not_representative": "the package itself holds only up to 10 structures per pattern, status and dataset for non-selected cases. This list is not a market sample."
+    },
+    "package_status_counts": {
+        "kr-saved-scan-20261009": {
+            "selected": {
+                "(not read)": 82
+            },
+            "not_selected": {
+                "rejected_rr": 10,
+                "ready_blocked": 10,
+                "await_confirmation": 10,
+                "wait_pullback": 10
+            }
+        },
+        "kr-saved-scan-20251008": {
+            "selected": {
+                "(not read)": 75
+            },
+            "not_selected": {
+                "rejected_rr": 10,
+                "ready_blocked": 10,
+                "await_confirmation": 10,
+                "wait_pullback": 10
+            }
+        }
+    },
+    "available_after_exclusion": {
+        "kr-saved-scan-20261009": {
+            "selected": 81,
+            "waiting": 20,
+            "dropped": 10
+        },
+        "kr-saved-scan-20251008": {
+            "selected": 75,
+            "waiting": 20,
+            "dropped": 10
+        }
+    },
+    "exposed_excluded": [
+        "f0445c951f5182c2"
+    ],
+    "planned": {
+        "per_dataset": {
+            "selected": 6,
+            "waiting": 3,
+            "dropped": 3
+        },
+        "total": 24
+    },
+    "actual": {
+        "kr-saved-scan-20261009": {
+            "selected": 6,
+            "waiting": 3,
+            "dropped": 3
+        },
+        "kr-saved-scan-20251008": {
+            "selected": 6,
+            "waiting": 3,
+            "dropped": 3
+        }
+    },
+    "pullback_status_detail": {
+        "kr-saved-scan-20261009": {
+            "wait_pullback": 2,
+            "await_confirmation": 1,
+            "rejected_rr": 3
+        },
+        "kr-saved-scan-20251008": {
+            "wait_pullback": 2,
+            "await_confirmation": 1,
+            "rejected_rr": 3
+        }
+    },
+    "shortfalls": [],
+    "selection_notes": [
+        "kr-saved-scan-20261009 dropped slot 2 03c915d929f4769a: month already used, kept status and symbol rule",
+        "kr-saved-scan-20261009 dropped slot 3 013ad9902972b826: month already used, kept status and symbol rule",
+        "kr-saved-scan-20251008 dropped slot 3 05a3f1e796e376c7: month already used, kept status and symbol rule"
+    ],
+    "total": 24,
+    "cases": [
+        {
+            "dataset": "kr-saved-scan-20261009",
+            "category": "selected",
+            "slot": 1,
+            "case_id": "30416c78c22d1d0e",
+            "symbol": "052690.KS",
+            "name": "한전기술",
+            "session_date": "2025-11-10",
+            "pullback_status": null,
+            "order_key": "0688afcecef18c9a627057f740d921233ae71d93d048db300840108513457590",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20261009",
+            "category": "selected",
+            "slot": 2,
+            "case_id": "37e84aadd60596f8",
+            "symbol": "108490.KQ",
+            "name": "로보티즈",
+            "session_date": "2026-10-01",
+            "pullback_status": null,
+            "order_key": "093bbe02299093a0b2ceda625ce5a260ed7cc698ad488f19cc8d1c288791461c",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20261009",
+            "category": "selected",
+            "slot": 3,
+            "case_id": "78eecedb44104872",
+            "symbol": "161580.KQ",
+            "name": "필옵틱스",
+            "session_date": "2026-02-19",
+            "pullback_status": null,
+            "order_key": "0a69255c32e3d0fcaa96406a2c0aeaa3f09a791598ae5649d95c1d0dab1655cc",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20261009",
+            "category": "selected",
+            "slot": 4,
+            "case_id": "d5070c71e5f98361",
+            "symbol": "356680.KQ",
+            "name": "엑스게이트",
+            "session_date": "2026-09-08",
+            "pullback_status": null,
+            "order_key": "0b58d8d347985e3e7c2a4ecbdea97c68cbc60aab856368cfcf5c6b5b52788ad1",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20261009",
+            "category": "selected",
+            "slot": 5,
+            "case_id": "77bcbde825d44efd",
+            "symbol": "203650.KQ",
+            "name": "드림시큐리티",
+            "session_date": "2026-05-19",
+            "pullback_status": null,
+            "order_key": "0df38212a82326c5251f4fa22733953637baa22906b2db6ea8c5377a9e97bbf1",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20261009",
+            "category": "selected",
+            "slot": 6,
+            "case_id": "2032f201c0c38f7f",
+            "symbol": "066570.KS",
+            "name": "LG전자",
+            "session_date": "2026-03-18",
+            "pullback_status": null,
+            "order_key": "169fd6c34481e3837fadab5d024982e0dccae82bcd06bc403e41ebb1b0f7f34b",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20261009",
+            "category": "waiting",
+            "slot": 1,
+            "case_id": "0661fe259966d89d",
+            "symbol": "010120.KS",
+            "name": "LS ELECTRIC",
+            "session_date": "2026-04-21",
+            "pullback_status": "wait_pullback",
+            "order_key": "18df76316366b550c1a635f8767eac22c4904ed26a6a7c811acdbecaae85cd5f",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20261009",
+            "category": "waiting",
+            "slot": 2,
+            "case_id": "03779fd61d439aed",
+            "symbol": "067310.KQ",
+            "name": "하나마이크론",
+            "session_date": "2025-10-14",
+            "pullback_status": "await_confirmation",
+            "order_key": "2760f08e01fe1897d41e804c25a21bf7069ef6af12cb4dd92e6ba7127f3e9fbe",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20261009",
+            "category": "waiting",
+            "slot": 3,
+            "case_id": "029fd9c7a4f3fcb6",
+            "symbol": "095610.KQ",
+            "name": "테스",
+            "session_date": "2026-01-15",
+            "pullback_status": "wait_pullback",
+            "order_key": "6aeda6e69041f32cc61f257bddb539be2822c26aec994aee68a02f80e472295e",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20261009",
+            "category": "dropped",
+            "slot": 1,
+            "case_id": "01bea56f4af0f31f",
+            "symbol": "010950.KS",
+            "name": "S-Oil",
+            "session_date": "2026-08-07",
+            "pullback_status": "rejected_rr",
+            "order_key": "6736be930ce42e175eaa06bbd26dd3156623940a84b6b08795cad1d6a6c0a361",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20261009",
+            "category": "dropped",
+            "slot": 2,
+            "case_id": "03c915d929f4769a",
+            "symbol": "115440.KQ",
+            "name": "우리넷",
+            "session_date": "2025-10-28",
+            "pullback_status": "rejected_rr",
+            "order_key": "0648120b5bd5f4640dd7e324aea946f1445c8fda90ba13dc7ff57bd4a92a3208",
+            "pass": 2
+        },
+        {
+            "dataset": "kr-saved-scan-20261009",
+            "category": "dropped",
+            "slot": 3,
+            "case_id": "013ad9902972b826",
+            "symbol": "043260.KQ",
+            "name": "성호전자",
+            "session_date": "2026-01-14",
+            "pullback_status": "rejected_rr",
+            "order_key": "180299e8fb430e5b5448810658d659fb7dd15b3ae2d7b8887e79e3790d494899",
+            "pass": 2
+        },
+        {
+            "dataset": "kr-saved-scan-20251008",
+            "category": "selected",
+            "slot": 1,
+            "case_id": "19f9ea891800aab8",
+            "symbol": "336260.KS",
+            "name": "두산퓨얼셀",
+            "session_date": "2025-09-10",
+            "pullback_status": null,
+            "order_key": "00cea0e45217c71e68d5d455b6310ad29597a003dfb42cf2769f9ae349dfe00f",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20251008",
+            "category": "selected",
+            "slot": 2,
+            "case_id": "907b3952ea96aafe",
+            "symbol": "321370.KQ",
+            "name": "센서뷰",
+            "session_date": "2025-07-21",
+            "pullback_status": null,
+            "order_key": "04dcdf95ee279560fa6139eae1dfacea16ef793112ecc2440ac9909272b90db2",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20251008",
+            "category": "selected",
+            "slot": 3,
+            "case_id": "284171e508e3e7e0",
+            "symbol": "000270.KS",
+            "name": "기아",
+            "session_date": "2025-08-14",
+            "pullback_status": null,
+            "order_key": "0c71091429e75cc00123bdc8c67aeac0267cecd8ca3f5bc65286b6da7234938e",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20251008",
+            "category": "selected",
+            "slot": 4,
+            "case_id": "433ea121b8d5fb8e",
+            "symbol": "267270.KS",
+            "name": "HD건설기계",
+            "session_date": "2025-02-26",
+            "pullback_status": null,
+            "order_key": "14e182d6738afc870aa75f6e0222cbe4137829137c0deba92703ee6434bbdcda",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20251008",
+            "category": "selected",
+            "slot": 5,
+            "case_id": "a68f09dcfd78f572",
+            "symbol": "067310.KQ",
+            "name": "하나마이크론",
+            "session_date": "2025-03-10",
+            "pullback_status": null,
+            "order_key": "16675a76b3226e0c114087fd0faec44faf73b65e36483f976a27eb0b4b4d9f09",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20251008",
+            "category": "selected",
+            "slot": 6,
+            "case_id": "6720e72eeff4d079",
+            "symbol": "274090.KQ",
+            "name": "켄코아에어로스페이스",
+            "session_date": "2025-06-04",
+            "pullback_status": null,
+            "order_key": "183791068d87f12587e9eb11c2e13f2ad582af33b6b34f6165c20dbcd8f379f6",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20251008",
+            "category": "waiting",
+            "slot": 1,
+            "case_id": "06e4c870056806ab",
+            "symbol": "452190.KQ",
+            "name": "한빛레이저",
+            "session_date": "2025-01-24",
+            "pullback_status": "wait_pullback",
+            "order_key": "790b60a3b3d4760168f2dac8180fb4c0d3a5974b63504bbadc7715cfb7e1f765",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20251008",
+            "category": "waiting",
+            "slot": 2,
+            "case_id": "0628c0298c8155ce",
+            "symbol": "089030.KQ",
+            "name": "테크윙",
+            "session_date": "2024-10-31",
+            "pullback_status": "await_confirmation",
+            "order_key": "09521cc97644f042eb9639c70b0b1ad49d8071c24ccd3f6f08ab4ff12f42d462",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20251008",
+            "category": "waiting",
+            "slot": 3,
+            "case_id": "03d016b5e47bae98",
+            "symbol": "000150.KS",
+            "name": "두산",
+            "session_date": "2025-05-19",
+            "pullback_status": "wait_pullback",
+            "order_key": "ab41f9c0c6273742ba13acb1acc38544d3ad87b7de84a78eaadcfa380fded913",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20251008",
+            "category": "dropped",
+            "slot": 1,
+            "case_id": "065da101de4d728c",
+            "symbol": "035420.KS",
+            "name": "NAVER",
+            "session_date": "2024-11-04",
+            "pullback_status": "rejected_rr",
+            "order_key": "a2e1c41c7298ac3bba2b2c544592ac4506b8d6cfbb41b37a235fc47b9ea9902a",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20251008",
+            "category": "dropped",
+            "slot": 2,
+            "case_id": "0792ac2403c954e1",
+            "symbol": "456010.KQ",
+            "name": "아이씨티케이",
+            "session_date": "2025-04-02",
+            "pullback_status": "rejected_rr",
+            "order_key": "b330b488c262f67ceb6b8e52f8e85e8e6f23e060c761aa562350c3e65bf2b6bb",
+            "pass": 1
+        },
+        {
+            "dataset": "kr-saved-scan-20251008",
+            "category": "dropped",
+            "slot": 3,
+            "case_id": "05a3f1e796e376c7",
+            "symbol": "032820.KQ",
+            "name": "우리기술",
+            "session_date": "2025-05-16",
+            "pullback_status": "rejected_rr",
+            "order_key": "12d9335bd3a9a9c39d6d52188d68b3ba67b441cac2e7c23fe601022c68769866",
+            "pass": 2
+        }
+    ]
+}

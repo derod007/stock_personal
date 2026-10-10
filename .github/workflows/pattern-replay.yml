@@ -14,6 +14,9 @@ jobs:
           php -l bin/paper/ReviewPack.php
           php -l bin/paper_review_pack.php
           php tests/review_pack.php
+          php -l bin/paper/PullbackSegmentPilot.php
+          php -l bin/paper_pullback_segment_pilot.php
+          php tests/pullback_segment_pilot.php
           php -l bin/paper/PullbackCompare.php
           php -l docs/research/prior-period-compare.php
           php tests/pattern_replay.php

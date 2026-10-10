@@ -1,0 +1,3571 @@
+{
+    "version": "pullback_segment_pilot_v1",
+    "stage": "B",
+    "summary": {
+        "cases": 24,
+        "primary": {
+            "chart_ambiguous": 6,
+            "structure_ok_excluded_by_target_rr": 5,
+            "different_segments": 5,
+            "data_limit": 1,
+            "consistent": 7
+        },
+        "target_ref_is_A_H": 22,
+        "target_ref_is_A_H_or_alt": 22,
+        "stop_ref_is_A_L": 11,
+        "stop_ref_is_A_L_or_P": 12,
+        "A_L_outside_stop_window": 6,
+        "A_H_outside_target_window": 0,
+        "decision_day_high_above_target_ref": 3,
+        "with_common_block": 3,
+        "stop_ref_before_A_H": 7
+    },
+    "a_freeze_commit_note": "annotations were frozen before this file was written",
+    "a_freeze_sha256": "b26f3e006d2b688e32bd5eb93b363e409e33f104ee01dfd72d747b276bc67260",
+    "code_read": "src/TrendPullback.php (windows, gates, stop, target), B json of the 24 cases. C files were not opened.",
+    "reproduction_totals": {
+        "rising_structure": {
+            "matched": 24,
+            "mismatched": 0
+        },
+        "near_ma20": {
+            "matched": 24,
+            "mismatched": 0
+        },
+        "volume_contracted": {
+            "matched": 24,
+            "mismatched": 0
+        },
+        "target": {
+            "matched": 24,
+            "mismatched": 0
+        },
+        "stop": {
+            "matched": 24,
+            "mismatched": 0
+        },
+        "zone_mid": {
+            "matched": 24,
+            "mismatched": 0
+        }
+    },
+    "rule": {
+        "primary_order": "data_limit, then structure_ok_excluded_by_target_rr (pattern status rejected_rr and both reference dates are A main or alternative dates), then consistent (both reference dates are A main dates), then chart_ambiguous (reference dates are A alternatives, or A ambiguity high), else different_segments. common_risk_block is a primary category only when the pattern itself was ready; otherwise it is a tag.",
+        "reference_dates": "target reference = date of the highest high in the 20 bars before the last bar; stop reference = date of the lowest low in the last 10 bars. These are window extremes, not intended structural points.",
+        "no_bug_claim": "A difference between a window extreme and an A mark is a difference of definition. No source or spec states the intended start of the segment."
+    },
+    "cases": [
+        {
+            "case_id": "013ad9902972b826",
+            "symbol": "043260.KQ",
+            "name": "성호전자",
+            "session_date": "2026-01-14",
+            "category": "dropped",
+            "dataset": "kr-saved-scan-20261009",
+            "pattern_status": "rejected_rr",
+            "final_status": "rejected_rr",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": true,
+                "volume_contracted": true,
+                "recovery_close": true,
+                "bullish_candle": true,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": 14980,
+                "stop": 8319,
+                "target": 14550,
+                "reward_risk": -0.065,
+                "zone_low": 8980,
+                "zone_high": 10383,
+                "candidate_stop": 8319,
+                "candidate_target": 14550
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2025-12-15",
+                    "to": "2026-01-14",
+                    "bars": 20,
+                    "low": {
+                        "index": 288,
+                        "date": "2025-12-15",
+                        "price": 4900
+                    },
+                    "high": {
+                        "index": 307,
+                        "date": "2026-01-14",
+                        "price": 16500
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2025-11-17",
+                    "to": "2025-12-12",
+                    "bars": 20,
+                    "low": {
+                        "index": 273,
+                        "date": "2025-11-24",
+                        "price": 1860
+                    },
+                    "high": {
+                        "index": 285,
+                        "date": "2025-12-10",
+                        "price": 6510
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2026-01-07",
+                    "to": "2026-01-13",
+                    "bars": 5,
+                    "low": {
+                        "index": 303,
+                        "date": "2026-01-08",
+                        "price": 10250
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2025-12-30",
+                    "to": "2026-01-14",
+                    "bars": 10,
+                    "low": {
+                        "index": 298,
+                        "date": "2025-12-30",
+                        "price": 8670
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2025-12-12",
+                    "to": "2026-01-13",
+                    "bars": 20,
+                    "high": {
+                        "index": 306,
+                        "date": "2026-01-13",
+                        "price": 14550
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2025-12-09",
+                    "to": "2026-01-08",
+                    "bars": 20,
+                    "mean": 3986159
+                },
+                "volume_pullback_3": {
+                    "from": "2026-01-09",
+                    "to": "2026-01-13",
+                    "bars": 3,
+                    "mean": 2395215,
+                    "ratio_to_base": 0.601
+                }
+            },
+            "atr_recovered_from_zone": 1753.8,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": false,
+                "target_ref_date_is_A_H_or_alternative": false,
+                "target_ref_vs_A_H_price_pct": 12.3,
+                "stop_ref_date_is_A_L": false,
+                "stop_ref_date_is_A_L_or_P_candidate": false,
+                "stop_ref_low_vs_A_L_price_pct": -15.4,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": true,
+                "stop_ref_before_A_H": true,
+                "decision_day_high_is_outside_target_window_and_higher": true
+            },
+            "primary_category": "chart_ambiguous",
+            "tags": [
+                "excluded_by_target_rr",
+                "target_ref_not_A_H",
+                "stop_ref_not_A_L"
+            ],
+            "notes": [
+                "목표 기준 고점 2026-01-13(14,550)은 A의 H 2026-01-05(12,960)와 날짜가 다르다.",
+                "손절 기준 저점 2025-12-30(8,670)은 A의 L 2026-01-08(10,250)와 날짜가 다르다.",
+                "손절 기준 저점 2025-12-30은 A의 H 2026-01-05보다 앞이다. 코드의 10봉 창이 눌림이 아니라 그 앞의 상승 구간 저점을 잡았다.",
+                "판정일 고가 16,500가 목표 기준 창(마지막 봉 제외)의 최고 14,550보다 높다. 목표가 현재가 아래에 놓일 수 있다.",
+                "저장된 목표가 진입가 이하라 손익비가 0 이하이다.",
+                "A는 눌림이 끝났을 수 있다고 읽었다."
+            ]
+        },
+        {
+            "case_id": "01bea56f4af0f31f",
+            "symbol": "010950.KS",
+            "name": "S-Oil",
+            "session_date": "2026-08-07",
+            "category": "dropped",
+            "dataset": "kr-saved-scan-20261009",
+            "pattern_status": "rejected_rr",
+            "final_status": "rejected_rr",
+            "selected_pattern": "trend_recovery",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": true,
+                "volume_contracted": true,
+                "recovery_close": true,
+                "bullish_candle": true,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": 137600,
+                "stop": 117679,
+                "target": 156500,
+                "reward_risk": 0.949,
+                "zone_low": 131233,
+                "zone_high": 138916,
+                "candidate_stop": 117679,
+                "candidate_target": 156500
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2026-07-10",
+                    "to": "2026-08-07",
+                    "bars": 20,
+                    "low": {
+                        "index": 441,
+                        "date": "2026-08-03",
+                        "price": 119600
+                    },
+                    "high": {
+                        "index": 435,
+                        "date": "2026-07-24",
+                        "price": 156500
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2026-06-12",
+                    "to": "2026-07-09",
+                    "bars": 20,
+                    "low": {
+                        "index": 416,
+                        "date": "2026-06-26",
+                        "price": 90400
+                    },
+                    "high": {
+                        "index": 424,
+                        "date": "2026-07-08",
+                        "price": 134700
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2026-07-31",
+                    "to": "2026-08-06",
+                    "bars": 5,
+                    "low": {
+                        "index": 441,
+                        "date": "2026-08-03",
+                        "price": 119600
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2026-07-27",
+                    "to": "2026-08-07",
+                    "bars": 10,
+                    "low": {
+                        "index": 441,
+                        "date": "2026-08-03",
+                        "price": 119600
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2026-07-09",
+                    "to": "2026-08-06",
+                    "bars": 20,
+                    "high": {
+                        "index": 435,
+                        "date": "2026-07-24",
+                        "price": 156500
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2026-07-06",
+                    "to": "2026-08-03",
+                    "bars": 20,
+                    "mean": 526263
+                },
+                "volume_pullback_3": {
+                    "from": "2026-08-04",
+                    "to": "2026-08-06",
+                    "bars": 3,
+                    "mean": 366555,
+                    "ratio_to_base": 0.697
+                }
+            },
+            "atr_recovered_from_zone": 9603.8,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": true,
+                "stop_ref_date_is_A_L_or_P_candidate": true,
+                "stop_ref_low_vs_A_L_price_pct": 0,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": true,
+                "stop_ref_before_A_H": false,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "structure_ok_excluded_by_target_rr",
+            "tags": [],
+            "notes": [
+                "이 날의 최종 계획은 trend_recovery이다. 눌림 패턴 자체 상태는 rejected_rr."
+            ]
+        },
+        {
+            "case_id": "029fd9c7a4f3fcb6",
+            "symbol": "095610.KQ",
+            "name": "테스",
+            "session_date": "2026-01-15",
+            "category": "waiting",
+            "dataset": "kr-saved-scan-20261009",
+            "pattern_status": "wait_pullback",
+            "final_status": "wait_pullback",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": false,
+                "volume_contracted": true,
+                "recovery_close": false,
+                "bullish_candle": false,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": null,
+                "stop": null,
+                "target": null,
+                "reward_risk": null,
+                "zone_low": 45683,
+                "zone_high": 48851,
+                "candidate_stop": 43457,
+                "candidate_target": 60900
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2025-12-16",
+                    "to": "2026-01-15",
+                    "bars": 20,
+                    "low": {
+                        "index": 289,
+                        "date": "2025-12-16",
+                        "price": 36000
+                    },
+                    "high": {
+                        "index": 302,
+                        "date": "2026-01-07",
+                        "price": 60900
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2025-11-18",
+                    "to": "2025-12-15",
+                    "bars": 20,
+                    "low": {
+                        "index": 288,
+                        "date": "2025-12-15",
+                        "price": 35450
+                    },
+                    "high": {
+                        "index": 269,
+                        "date": "2025-11-18",
+                        "price": 47450
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2026-01-08",
+                    "to": "2026-01-14",
+                    "bars": 5,
+                    "low": {
+                        "index": 305,
+                        "date": "2026-01-12",
+                        "price": 50500
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2026-01-02",
+                    "to": "2026-01-15",
+                    "bars": 10,
+                    "low": {
+                        "index": 299,
+                        "date": "2026-01-02",
+                        "price": 44250
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2025-12-15",
+                    "to": "2026-01-14",
+                    "bars": 20,
+                    "high": {
+                        "index": 302,
+                        "date": "2026-01-07",
+                        "price": 60900
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2025-12-10",
+                    "to": "2026-01-09",
+                    "bars": 20,
+                    "mean": 363193
+                },
+                "volume_pullback_3": {
+                    "from": "2026-01-12",
+                    "to": "2026-01-14",
+                    "bars": 3,
+                    "mean": 280104,
+                    "ratio_to_base": 0.771
+                }
+            },
+            "atr_recovered_from_zone": 3960,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": false,
+                "stop_ref_date_is_A_L_or_P_candidate": false,
+                "stop_ref_low_vs_A_L_price_pct": -9.5,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": true,
+                "stop_ref_before_A_H": true,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "different_segments",
+            "tags": [
+                "stop_ref_not_A_L"
+            ],
+            "notes": [
+                "손절 기준 저점 2026-01-02(44,250)은 A의 L 2026-01-15(48,900)와 날짜가 다르다.",
+                "손절 기준 저점 2026-01-02은 A의 H 2026-01-07보다 앞이다. 코드의 10봉 창이 눌림이 아니라 그 앞의 상승 구간 저점을 잡았다."
+            ]
+        },
+        {
+            "case_id": "03779fd61d439aed",
+            "symbol": "067310.KQ",
+            "name": "하나마이크론",
+            "session_date": "2025-10-14",
+            "category": "waiting",
+            "dataset": "kr-saved-scan-20261009",
+            "pattern_status": "await_confirmation",
+            "final_status": "await_confirmation",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": true,
+                "volume_contracted": false,
+                "recovery_close": false,
+                "bullish_candle": false,
+                "volume_recovery": false,
+                "fresh_confirmation": false
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": null,
+                "stop": null,
+                "target": null,
+                "reward_risk": null,
+                "zone_low": 20253,
+                "zone_high": 21824,
+                "candidate_stop": 19487,
+                "candidate_target": 28350
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2025-09-09",
+                    "to": "2025-10-14",
+                    "bars": 20,
+                    "low": {
+                        "index": 225,
+                        "date": "2025-09-09",
+                        "price": 14290
+                    },
+                    "high": {
+                        "index": 243,
+                        "date": "2025-10-13",
+                        "price": 28350
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2025-08-11",
+                    "to": "2025-09-08",
+                    "bars": 20,
+                    "low": {
+                        "index": 211,
+                        "date": "2025-08-20",
+                        "price": 11410
+                    },
+                    "high": {
+                        "index": 217,
+                        "date": "2025-08-28",
+                        "price": 14260
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2025-09-30",
+                    "to": "2025-10-13",
+                    "bars": 5,
+                    "low": {
+                        "index": 239,
+                        "date": "2025-09-30",
+                        "price": 22000
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2025-09-24",
+                    "to": "2025-10-14",
+                    "bars": 10,
+                    "low": {
+                        "index": 235,
+                        "date": "2025-09-24",
+                        "price": 19880
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2025-09-08",
+                    "to": "2025-10-13",
+                    "bars": 20,
+                    "high": {
+                        "index": 243,
+                        "date": "2025-10-13",
+                        "price": 28350
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2025-09-03",
+                    "to": "2025-10-01",
+                    "bars": 20,
+                    "mean": 1952244
+                },
+                "volume_pullback_3": {
+                    "from": "2025-10-02",
+                    "to": "2025-10-13",
+                    "bars": 3,
+                    "mean": 2765347,
+                    "ratio_to_base": 1.416
+                }
+            },
+            "atr_recovered_from_zone": 1963.8,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": false,
+                "stop_ref_date_is_A_L_or_P_candidate": false,
+                "stop_ref_low_vs_A_L_price_pct": -21,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": true,
+                "stop_ref_before_A_H": true,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "different_segments",
+            "tags": [
+                "stop_ref_not_A_L"
+            ],
+            "notes": [
+                "손절 기준 저점 2025-09-24(19,880)은 A의 L 2025-10-14(25,150)와 날짜가 다르다.",
+                "손절 기준 저점 2025-09-24은 A의 H 2025-10-13보다 앞이다. 코드의 10봉 창이 눌림이 아니라 그 앞의 상승 구간 저점을 잡았다."
+            ]
+        },
+        {
+            "case_id": "03c915d929f4769a",
+            "symbol": "115440.KQ",
+            "name": "우리넷",
+            "session_date": "2025-10-28",
+            "category": "dropped",
+            "dataset": "kr-saved-scan-20261009",
+            "pattern_status": "rejected_rr",
+            "final_status": "rejected_rr",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": true,
+                "volume_contracted": true,
+                "recovery_close": true,
+                "bullish_candle": true,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": 7330,
+                "stop": 6754,
+                "target": 7640,
+                "reward_risk": 0.538,
+                "zone_low": 6914,
+                "zone_high": 7098,
+                "candidate_stop": 6754,
+                "candidate_target": 7640
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2025-09-24",
+                    "to": "2025-10-28",
+                    "bars": 20,
+                    "low": {
+                        "index": 237,
+                        "date": "2025-09-26",
+                        "price": 6500
+                    },
+                    "high": {
+                        "index": 239,
+                        "date": "2025-09-30",
+                        "price": 7640
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2025-08-26",
+                    "to": "2025-09-23",
+                    "bars": 20,
+                    "low": {
+                        "index": 220,
+                        "date": "2025-09-02",
+                        "price": 6470
+                    },
+                    "high": {
+                        "index": 233,
+                        "date": "2025-09-22",
+                        "price": 7080
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2025-10-21",
+                    "to": "2025-10-27",
+                    "bars": 5,
+                    "low": {
+                        "index": 249,
+                        "date": "2025-10-21",
+                        "price": 6920
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2025-10-15",
+                    "to": "2025-10-28",
+                    "bars": 10,
+                    "low": {
+                        "index": 248,
+                        "date": "2025-10-20",
+                        "price": 6800
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2025-09-23",
+                    "to": "2025-10-27",
+                    "bars": 20,
+                    "high": {
+                        "index": 239,
+                        "date": "2025-09-30",
+                        "price": 7640
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2025-09-17",
+                    "to": "2025-10-22",
+                    "bars": 20,
+                    "mean": 337861
+                },
+                "volume_pullback_3": {
+                    "from": "2025-10-23",
+                    "to": "2025-10-27",
+                    "bars": 3,
+                    "mean": 200310,
+                    "ratio_to_base": 0.593
+                }
+            },
+            "atr_recovered_from_zone": 230,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": false,
+                "stop_ref_date_is_A_L_or_P_candidate": true,
+                "stop_ref_low_vs_A_L_price_pct": 2.7,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": false,
+                "stop_ref_before_A_H": false,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "structure_ok_excluded_by_target_rr",
+            "tags": [
+                "stop_ref_not_A_L"
+            ],
+            "notes": [
+                "손절 기준 저점 2025-10-20(6,800)은 A의 L 2025-10-01(6,620)와 날짜가 다르다.",
+                "A의 L 2025-10-01은 코드의 손절 기준 창(최근 10봉, 2025-10-15부터) 밖이다. 창이 눌림 구간보다 짧다.",
+                "A는 눌림이 끝났을 수 있다고 읽었다."
+            ]
+        },
+        {
+            "case_id": "03d016b5e47bae98",
+            "symbol": "000150.KS",
+            "name": "두산",
+            "session_date": "2025-05-19",
+            "category": "waiting",
+            "dataset": "kr-saved-scan-20251008",
+            "pattern_status": "wait_pullback",
+            "final_status": "wait_pullback",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": false,
+                "volume_contracted": false,
+                "recovery_close": false,
+                "bullish_candle": false,
+                "volume_recovery": false,
+                "fresh_confirmation": false
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": null,
+                "stop": null,
+                "target": null,
+                "reward_risk": null,
+                "zone_low": 323407,
+                "zone_high": 339692,
+                "candidate_stop": 312928,
+                "candidate_target": 409000
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2025-04-17",
+                    "to": "2025-05-19",
+                    "bars": 20,
+                    "low": {
+                        "index": 862,
+                        "date": "2025-04-17",
+                        "price": 265500
+                    },
+                    "high": {
+                        "index": 880,
+                        "date": "2025-05-16",
+                        "price": 409000
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2025-03-20",
+                    "to": "2025-04-16",
+                    "bars": 20,
+                    "low": {
+                        "index": 854,
+                        "date": "2025-04-07",
+                        "price": 236500
+                    },
+                    "high": {
+                        "index": 842,
+                        "date": "2025-03-20",
+                        "price": 332000
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2025-05-12",
+                    "to": "2025-05-16",
+                    "bars": 5,
+                    "low": {
+                        "index": 876,
+                        "date": "2025-05-12",
+                        "price": 350000
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2025-05-02",
+                    "to": "2025-05-19",
+                    "bars": 10,
+                    "low": {
+                        "index": 872,
+                        "date": "2025-05-02",
+                        "price": 317000
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2025-04-16",
+                    "to": "2025-05-16",
+                    "bars": 20,
+                    "high": {
+                        "index": 880,
+                        "date": "2025-05-16",
+                        "price": 409000
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2025-04-11",
+                    "to": "2025-05-13",
+                    "bars": 20,
+                    "mean": 178326
+                },
+                "volume_pullback_3": {
+                    "from": "2025-05-14",
+                    "to": "2025-05-16",
+                    "bars": 3,
+                    "mean": 233035,
+                    "ratio_to_base": 1.307
+                }
+            },
+            "atr_recovered_from_zone": 20356.3,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": false,
+                "stop_ref_date_is_A_L_or_P_candidate": false,
+                "stop_ref_low_vs_A_L_price_pct": -17.4,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": true,
+                "stop_ref_before_A_H": true,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "chart_ambiguous",
+            "tags": [
+                "stop_ref_not_A_L"
+            ],
+            "notes": [
+                "손절 기준 저점 2025-05-02(317,000)은 A의 L 2025-05-19(384,000)와 날짜가 다르다.",
+                "손절 기준 저점 2025-05-02은 A의 H 2025-05-16보다 앞이다. 코드의 10봉 창이 눌림이 아니라 그 앞의 상승 구간 저점을 잡았다."
+            ]
+        },
+        {
+            "case_id": "05a3f1e796e376c7",
+            "symbol": "032820.KQ",
+            "name": "우리기술",
+            "session_date": "2025-05-16",
+            "category": "dropped",
+            "dataset": "kr-saved-scan-20251008",
+            "pattern_status": "rejected_rr",
+            "final_status": "rejected_rr",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": true,
+                "volume_contracted": true,
+                "recovery_close": true,
+                "bullish_candle": true,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": 2060,
+                "stop": 1686,
+                "target": 2100,
+                "reward_risk": 0.107,
+                "zone_low": 1868,
+                "zone_high": 1953,
+                "candidate_stop": 1686,
+                "candidate_target": 2100
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2025-04-16",
+                    "to": "2025-05-16",
+                    "bars": 20,
+                    "low": {
+                        "index": 873,
+                        "date": "2025-05-07",
+                        "price": 1708
+                    },
+                    "high": {
+                        "index": 880,
+                        "date": "2025-05-16",
+                        "price": 2170
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2025-03-19",
+                    "to": "2025-04-15",
+                    "bars": 20,
+                    "low": {
+                        "index": 856,
+                        "date": "2025-04-09",
+                        "price": 1453
+                    },
+                    "high": {
+                        "index": 844,
+                        "date": "2025-03-24",
+                        "price": 2035
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2025-05-09",
+                    "to": "2025-05-15",
+                    "bars": 5,
+                    "low": {
+                        "index": 875,
+                        "date": "2025-05-09",
+                        "price": 1799
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2025-04-30",
+                    "to": "2025-05-16",
+                    "bars": 10,
+                    "low": {
+                        "index": 873,
+                        "date": "2025-05-07",
+                        "price": 1708
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2025-04-15",
+                    "to": "2025-05-15",
+                    "bars": 20,
+                    "high": {
+                        "index": 872,
+                        "date": "2025-05-02",
+                        "price": 2100
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2025-04-10",
+                    "to": "2025-05-12",
+                    "bars": 20,
+                    "mean": 4241747
+                },
+                "volume_pullback_3": {
+                    "from": "2025-05-13",
+                    "to": "2025-05-15",
+                    "bars": 3,
+                    "mean": 3151593,
+                    "ratio_to_base": 0.743
+                }
+            },
+            "atr_recovered_from_zone": 106.3,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": true,
+                "stop_ref_date_is_A_L_or_P_candidate": true,
+                "stop_ref_low_vs_A_L_price_pct": 0,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": true,
+                "stop_ref_before_A_H": false,
+                "decision_day_high_is_outside_target_window_and_higher": true
+            },
+            "primary_category": "structure_ok_excluded_by_target_rr",
+            "tags": [],
+            "notes": [
+                "판정일 고가 2,170가 목표 기준 창(마지막 봉 제외)의 최고 2,100보다 높다. 목표가 현재가 아래에 놓일 수 있다.",
+                "A는 눌림이 끝났을 수 있다고 읽었다."
+            ]
+        },
+        {
+            "case_id": "0628c0298c8155ce",
+            "symbol": "089030.KQ",
+            "name": "테크윙",
+            "session_date": "2024-10-31",
+            "category": "waiting",
+            "dataset": "kr-saved-scan-20251008",
+            "pattern_status": "await_confirmation",
+            "final_status": "context_wait",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": true,
+                "volume_contracted": false,
+                "recovery_close": true,
+                "bullish_candle": true,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [
+                "context_wait"
+            ],
+            "pattern_blockers": [
+                "context_wait"
+            ],
+            "stored": {
+                "entry": null,
+                "stop": null,
+                "target": null,
+                "reward_risk": null,
+                "zone_low": 37758,
+                "zone_high": 40156,
+                "candidate_stop": 33000,
+                "candidate_target": 43500
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2024-10-02",
+                    "to": "2024-10-31",
+                    "bars": 20,
+                    "low": {
+                        "index": 740,
+                        "date": "2024-10-17",
+                        "price": 33150
+                    },
+                    "high": {
+                        "index": 750,
+                        "date": "2024-10-31",
+                        "price": 45500
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2024-08-29",
+                    "to": "2024-09-30",
+                    "bars": 20,
+                    "low": {
+                        "index": 718,
+                        "date": "2024-09-09",
+                        "price": 30000
+                    },
+                    "high": {
+                        "index": 712,
+                        "date": "2024-08-30",
+                        "price": 41600
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2024-10-24",
+                    "to": "2024-10-30",
+                    "bars": 5,
+                    "low": {
+                        "index": 748,
+                        "date": "2024-10-29",
+                        "price": 39650
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2024-10-18",
+                    "to": "2024-10-31",
+                    "bars": 10,
+                    "low": {
+                        "index": 741,
+                        "date": "2024-10-18",
+                        "price": 33600
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2024-09-30",
+                    "to": "2024-10-30",
+                    "bars": 20,
+                    "high": {
+                        "index": 746,
+                        "date": "2024-10-25",
+                        "price": 43500
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2024-09-25",
+                    "to": "2024-10-25",
+                    "bars": 20,
+                    "mean": 904388
+                },
+                "volume_pullback_3": {
+                    "from": "2024-10-28",
+                    "to": "2024-10-30",
+                    "bars": 3,
+                    "mean": 782165,
+                    "ratio_to_base": 0.865
+                }
+            },
+            "atr_recovered_from_zone": 2997.5,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": false,
+                "target_ref_date_is_A_H_or_alternative": false,
+                "target_ref_vs_A_H_price_pct": 6.5,
+                "stop_ref_date_is_A_L": false,
+                "stop_ref_date_is_A_L_or_P_candidate": false,
+                "stop_ref_low_vs_A_L_price_pct": 1.4,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": false,
+                "stop_ref_before_A_H": false,
+                "decision_day_high_is_outside_target_window_and_higher": true
+            },
+            "primary_category": "different_segments",
+            "tags": [
+                "common_risk_block",
+                "target_ref_not_A_H",
+                "stop_ref_not_A_L"
+            ],
+            "notes": [
+                "목표 기준 고점 2024-10-25(43,500)은 A의 H 2024-10-07(40,850)와 날짜가 다르다.",
+                "손절 기준 저점 2024-10-18(33,600)은 A의 L 2024-10-17(33,150)와 날짜가 다르다.",
+                "A의 L 2024-10-17은 코드의 손절 기준 창(최근 10봉, 2024-10-18부터) 밖이다. 창이 눌림 구간보다 짧다.",
+                "판정일 고가 45,500가 목표 기준 창(마지막 봉 제외)의 최고 43,500보다 높다. 목표가 현재가 아래에 놓일 수 있다.",
+                "공통 차단 사유: context_wait → 최종 상태 context_wait.",
+                "A는 눌림이 끝났을 수 있다고 읽었다."
+            ]
+        },
+        {
+            "case_id": "065da101de4d728c",
+            "symbol": "035420.KS",
+            "name": "NAVER",
+            "session_date": "2024-11-04",
+            "category": "dropped",
+            "dataset": "kr-saved-scan-20251008",
+            "pattern_status": "rejected_rr",
+            "final_status": "rejected_rr",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": true,
+                "volume_contracted": true,
+                "recovery_close": true,
+                "bullish_candle": true,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": 175700,
+                "stop": 165858,
+                "target": 179200,
+                "reward_risk": 0.356,
+                "zone_low": 170572,
+                "zone_high": 173937,
+                "candidate_stop": 165858,
+                "candidate_target": 179200
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2024-10-07",
+                    "to": "2024-11-04",
+                    "bars": 20,
+                    "low": {
+                        "index": 734,
+                        "date": "2024-10-08",
+                        "price": 165100
+                    },
+                    "high": {
+                        "index": 742,
+                        "date": "2024-10-21",
+                        "price": 179200
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2024-09-02",
+                    "to": "2024-10-04",
+                    "bars": 20,
+                    "low": {
+                        "index": 718,
+                        "date": "2024-09-09",
+                        "price": 152500
+                    },
+                    "high": {
+                        "index": 730,
+                        "date": "2024-09-30",
+                        "price": 177300
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2024-10-28",
+                    "to": "2024-11-01",
+                    "bars": 5,
+                    "low": {
+                        "index": 748,
+                        "date": "2024-10-29",
+                        "price": 166700
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2024-10-22",
+                    "to": "2024-11-04",
+                    "bars": 10,
+                    "low": {
+                        "index": 748,
+                        "date": "2024-10-29",
+                        "price": 166700
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2024-10-04",
+                    "to": "2024-11-01",
+                    "bars": 20,
+                    "high": {
+                        "index": 742,
+                        "date": "2024-10-21",
+                        "price": 179200
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2024-09-27",
+                    "to": "2024-10-29",
+                    "bars": 20,
+                    "mean": 809259
+                },
+                "volume_pullback_3": {
+                    "from": "2024-10-30",
+                    "to": "2024-11-01",
+                    "bars": 3,
+                    "mean": 482198,
+                    "ratio_to_base": 0.596
+                }
+            },
+            "atr_recovered_from_zone": 4206.3,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": true,
+                "stop_ref_date_is_A_L_or_P_candidate": true,
+                "stop_ref_low_vs_A_L_price_pct": 0,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": true,
+                "stop_ref_before_A_H": false,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "structure_ok_excluded_by_target_rr",
+            "tags": [],
+            "notes": [
+                "A는 눌림이 끝났을 수 있다고 읽었다."
+            ]
+        },
+        {
+            "case_id": "0661fe259966d89d",
+            "symbol": "010120.KS",
+            "name": "LS ELECTRIC",
+            "session_date": "2026-04-21",
+            "category": "waiting",
+            "dataset": "kr-saved-scan-20261009",
+            "pattern_status": "wait_pullback",
+            "final_status": "wait_pullback",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": false,
+                "volume_contracted": false,
+                "recovery_close": false,
+                "bullish_candle": false,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": null,
+                "stop": null,
+                "target": null,
+                "reward_risk": null,
+                "zone_low": 163641,
+                "zone_high": 170818,
+                "candidate_stop": 155805,
+                "candidate_target": 200000
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2026-03-25",
+                    "to": "2026-04-21",
+                    "bars": 20,
+                    "low": {
+                        "index": 357,
+                        "date": "2026-03-31",
+                        "price": 143000
+                    },
+                    "high": {
+                        "index": 367,
+                        "date": "2026-04-14",
+                        "price": 200000
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2026-02-24",
+                    "to": "2026-03-24",
+                    "bars": 20,
+                    "low": {
+                        "index": 338,
+                        "date": "2026-03-04",
+                        "price": 120000
+                    },
+                    "high": {
+                        "index": 350,
+                        "date": "2026-03-20",
+                        "price": 181400
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2026-04-14",
+                    "to": "2026-04-20",
+                    "bars": 5,
+                    "low": {
+                        "index": 367,
+                        "date": "2026-04-14",
+                        "price": 183100
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2026-04-08",
+                    "to": "2026-04-21",
+                    "bars": 10,
+                    "low": {
+                        "index": 363,
+                        "date": "2026-04-08",
+                        "price": 157600
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2026-03-24",
+                    "to": "2026-04-20",
+                    "bars": 20,
+                    "high": {
+                        "index": 367,
+                        "date": "2026-04-14",
+                        "price": 200000
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2026-03-19",
+                    "to": "2026-04-15",
+                    "bars": 20,
+                    "mean": 813563
+                },
+                "volume_pullback_3": {
+                    "from": "2026-04-16",
+                    "to": "2026-04-20",
+                    "bars": 3,
+                    "mean": 755855,
+                    "ratio_to_base": 0.929
+                }
+            },
+            "atr_recovered_from_zone": 8971.3,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": false,
+                "stop_ref_date_is_A_L_or_P_candidate": false,
+                "stop_ref_low_vs_A_L_price_pct": -13.7,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": true,
+                "stop_ref_before_A_H": true,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "data_limit",
+            "tags": [
+                "stop_ref_not_A_L"
+            ],
+            "notes": [
+                "손절 기준 저점 2026-04-08(157,600)은 A의 L 2026-04-21(182,600)와 날짜가 다르다.",
+                "손절 기준 저점 2026-04-08은 A의 H 2026-04-14보다 앞이다. 코드의 10봉 창이 눌림이 아니라 그 앞의 상승 구간 저점을 잡았다.",
+                "손절 기준 봉 2026-04-08의 거래량이 0이다. 가격 파일 한계로 읽는다."
+            ]
+        },
+        {
+            "case_id": "06e4c870056806ab",
+            "symbol": "452190.KQ",
+            "name": "한빛레이저",
+            "session_date": "2025-01-24",
+            "category": "waiting",
+            "dataset": "kr-saved-scan-20251008",
+            "pattern_status": "wait_pullback",
+            "final_status": "risk_blocked",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": false,
+                "volume_contracted": true,
+                "recovery_close": false,
+                "bullish_candle": false,
+                "volume_recovery": false,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [
+                "spike_dump"
+            ],
+            "pattern_blockers": [
+                "spike_dump"
+            ],
+            "stored": {
+                "entry": null,
+                "stop": null,
+                "target": null,
+                "reward_risk": null,
+                "zone_low": 3716,
+                "zone_high": 4066,
+                "candidate_stop": 3707,
+                "candidate_target": 5170
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2024-12-26",
+                    "to": "2025-01-24",
+                    "bars": 20,
+                    "low": {
+                        "index": 241,
+                        "date": "2024-12-30",
+                        "price": 2980
+                    },
+                    "high": {
+                        "index": 253,
+                        "date": "2025-01-17",
+                        "price": 5170
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2024-11-27",
+                    "to": "2024-12-24",
+                    "bars": 20,
+                    "low": {
+                        "index": 227,
+                        "date": "2024-12-09",
+                        "price": 2770
+                    },
+                    "high": {
+                        "index": 221,
+                        "date": "2024-11-29",
+                        "price": 3860
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2025-01-17",
+                    "to": "2025-01-23",
+                    "bars": 5,
+                    "low": {
+                        "index": 257,
+                        "date": "2025-01-23",
+                        "price": 4300
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2025-01-13",
+                    "to": "2025-01-24",
+                    "bars": 10,
+                    "low": {
+                        "index": 249,
+                        "date": "2025-01-13",
+                        "price": 3795
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2024-12-24",
+                    "to": "2025-01-23",
+                    "bars": 20,
+                    "high": {
+                        "index": 253,
+                        "date": "2025-01-17",
+                        "price": 5170
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2024-12-19",
+                    "to": "2025-01-20",
+                    "bars": 20,
+                    "mean": 4340606
+                },
+                "volume_pullback_3": {
+                    "from": "2025-01-21",
+                    "to": "2025-01-23",
+                    "bars": 3,
+                    "mean": 1358931,
+                    "ratio_to_base": 0.313
+                }
+            },
+            "atr_recovered_from_zone": 437.5,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": false,
+                "stop_ref_date_is_A_L_or_P_candidate": false,
+                "stop_ref_low_vs_A_L_price_pct": -8.7,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": true,
+                "stop_ref_before_A_H": true,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "chart_ambiguous",
+            "tags": [
+                "common_risk_block",
+                "stop_ref_not_A_L"
+            ],
+            "notes": [
+                "손절 기준 저점 2025-01-13(3,795)은 A의 L 2025-01-24(4,155)와 날짜가 다르다.",
+                "손절 기준 저점 2025-01-13은 A의 H 2025-01-17보다 앞이다. 코드의 10봉 창이 눌림이 아니라 그 앞의 상승 구간 저점을 잡았다.",
+                "공통 차단 사유: spike_dump → 최종 상태 risk_blocked."
+            ]
+        },
+        {
+            "case_id": "0792ac2403c954e1",
+            "symbol": "456010.KQ",
+            "name": "아이씨티케이",
+            "session_date": "2025-04-02",
+            "category": "dropped",
+            "dataset": "kr-saved-scan-20251008",
+            "pattern_status": "rejected_rr",
+            "final_status": "risk_blocked",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": true,
+                "volume_contracted": true,
+                "recovery_close": true,
+                "bullish_candle": true,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [
+                "top_collapse"
+            ],
+            "pattern_blockers": [
+                "top_collapse"
+            ],
+            "stored": {
+                "entry": 13050,
+                "stop": 11078,
+                "target": 15110,
+                "reward_risk": 1.045,
+                "zone_low": 12149,
+                "zone_high": 13077,
+                "candidate_stop": 11078,
+                "candidate_target": 15110
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2025-03-06",
+                    "to": "2025-04-02",
+                    "bars": 20,
+                    "low": {
+                        "index": 193,
+                        "date": "2025-03-06",
+                        "price": 10150
+                    },
+                    "high": {
+                        "index": 200,
+                        "date": "2025-03-17",
+                        "price": 15110
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2025-02-05",
+                    "to": "2025-03-05",
+                    "bars": 20,
+                    "low": {
+                        "index": 191,
+                        "date": "2025-03-04",
+                        "price": 8020
+                    },
+                    "high": {
+                        "index": 177,
+                        "date": "2025-02-11",
+                        "price": 10780
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2025-03-26",
+                    "to": "2025-04-01",
+                    "bars": 5,
+                    "low": {
+                        "index": 211,
+                        "date": "2025-04-01",
+                        "price": 11310
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2025-03-20",
+                    "to": "2025-04-02",
+                    "bars": 10,
+                    "low": {
+                        "index": 211,
+                        "date": "2025-04-01",
+                        "price": 11310
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2025-03-05",
+                    "to": "2025-04-01",
+                    "bars": 20,
+                    "high": {
+                        "index": 200,
+                        "date": "2025-03-17",
+                        "price": 15110
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2025-02-27",
+                    "to": "2025-03-27",
+                    "bars": 20,
+                    "mean": 4422402
+                },
+                "volume_pullback_3": {
+                    "from": "2025-03-28",
+                    "to": "2025-04-01",
+                    "bars": 3,
+                    "mean": 795056,
+                    "ratio_to_base": 0.18
+                }
+            },
+            "atr_recovered_from_zone": 1160,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": true,
+                "stop_ref_date_is_A_L_or_P_candidate": true,
+                "stop_ref_low_vs_A_L_price_pct": 0,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": true,
+                "stop_ref_before_A_H": false,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "structure_ok_excluded_by_target_rr",
+            "tags": [
+                "common_risk_block"
+            ],
+            "notes": [
+                "공통 차단 사유: top_collapse → 최종 상태 risk_blocked."
+            ]
+        },
+        {
+            "case_id": "19f9ea891800aab8",
+            "symbol": "336260.KS",
+            "name": "두산퓨얼셀",
+            "session_date": "2025-09-10",
+            "category": "selected",
+            "dataset": "kr-saved-scan-20251008",
+            "pattern_status": "ready",
+            "final_status": "ready",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": true,
+                "volume_contracted": true,
+                "recovery_close": true,
+                "bullish_candle": true,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": 26550,
+                "stop": 23952,
+                "target": 31350,
+                "reward_risk": 1.848,
+                "zone_low": 25332,
+                "zone_high": 26722,
+                "candidate_stop": 23952,
+                "candidate_target": 31350
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2025-08-13",
+                    "to": "2025-09-10",
+                    "bars": 20,
+                    "low": {
+                        "index": 945,
+                        "date": "2025-08-20",
+                        "price": 23700
+                    },
+                    "high": {
+                        "index": 950,
+                        "date": "2025-08-27",
+                        "price": 31350
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2025-07-16",
+                    "to": "2025-08-12",
+                    "bars": 20,
+                    "low": {
+                        "index": 934,
+                        "date": "2025-08-04",
+                        "price": 21300
+                    },
+                    "high": {
+                        "index": 939,
+                        "date": "2025-08-11",
+                        "price": 25350
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2025-09-03",
+                    "to": "2025-09-09",
+                    "bars": 5,
+                    "low": {
+                        "index": 957,
+                        "date": "2025-09-05",
+                        "price": 24300
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2025-08-28",
+                    "to": "2025-09-10",
+                    "bars": 10,
+                    "low": {
+                        "index": 957,
+                        "date": "2025-09-05",
+                        "price": 24300
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2025-08-12",
+                    "to": "2025-09-09",
+                    "bars": 20,
+                    "high": {
+                        "index": 950,
+                        "date": "2025-08-27",
+                        "price": 31350
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2025-08-07",
+                    "to": "2025-09-04",
+                    "bars": 20,
+                    "mean": 1239861
+                },
+                "volume_pullback_3": {
+                    "from": "2025-09-05",
+                    "to": "2025-09-09",
+                    "bars": 3,
+                    "mean": 581519,
+                    "ratio_to_base": 0.469
+                }
+            },
+            "atr_recovered_from_zone": 1737.5,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": true,
+                "stop_ref_date_is_A_L_or_P_candidate": true,
+                "stop_ref_low_vs_A_L_price_pct": 0,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": true,
+                "stop_ref_before_A_H": false,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "consistent",
+            "tags": [],
+            "notes": []
+        },
+        {
+            "case_id": "2032f201c0c38f7f",
+            "symbol": "066570.KS",
+            "name": "LG전자",
+            "session_date": "2026-03-18",
+            "category": "selected",
+            "dataset": "kr-saved-scan-20261009",
+            "pattern_status": "ready",
+            "final_status": "ready",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": true,
+                "volume_contracted": true,
+                "recovery_close": true,
+                "bullish_candle": true,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": 120000,
+                "stop": 106180,
+                "target": 151900,
+                "reward_risk": 2.308,
+                "zone_low": 118745,
+                "zone_high": 126025,
+                "candidate_stop": 106180,
+                "candidate_target": 151900
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2026-02-13",
+                    "to": "2026-03-18",
+                    "bars": 20,
+                    "low": {
+                        "index": 338,
+                        "date": "2026-03-04",
+                        "price": 106700
+                    },
+                    "high": {
+                        "index": 336,
+                        "date": "2026-02-27",
+                        "price": 151900
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2026-01-16",
+                    "to": "2026-02-12",
+                    "bars": 20,
+                    "low": {
+                        "index": 309,
+                        "date": "2026-01-16",
+                        "price": 94300
+                    },
+                    "high": {
+                        "index": 327,
+                        "date": "2026-02-11",
+                        "price": 128700
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2026-03-11",
+                    "to": "2026-03-17",
+                    "bars": 5,
+                    "low": {
+                        "index": 345,
+                        "date": "2026-03-13",
+                        "price": 109800
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2026-03-05",
+                    "to": "2026-03-18",
+                    "bars": 10,
+                    "low": {
+                        "index": 341,
+                        "date": "2026-03-09",
+                        "price": 108000
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2026-02-12",
+                    "to": "2026-03-17",
+                    "bars": 20,
+                    "high": {
+                        "index": 336,
+                        "date": "2026-02-27",
+                        "price": 151900
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2026-02-09",
+                    "to": "2026-03-12",
+                    "bars": 20,
+                    "mean": 2738206
+                },
+                "volume_pullback_3": {
+                    "from": "2026-03-13",
+                    "to": "2026-03-17",
+                    "bars": 3,
+                    "mean": 690890,
+                    "ratio_to_base": 0.252
+                }
+            },
+            "atr_recovered_from_zone": 9100,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": false,
+                "stop_ref_date_is_A_L_or_P_candidate": false,
+                "stop_ref_low_vs_A_L_price_pct": 1.2,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": false,
+                "stop_ref_before_A_H": false,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "different_segments",
+            "tags": [
+                "stop_ref_not_A_L"
+            ],
+            "notes": [
+                "손절 기준 저점 2026-03-09(108,000)은 A의 L 2026-03-04(106,700)와 날짜가 다르다.",
+                "A의 L 2026-03-04은 코드의 손절 기준 창(최근 10봉, 2026-03-05부터) 밖이다. 창이 눌림 구간보다 짧다."
+            ]
+        },
+        {
+            "case_id": "284171e508e3e7e0",
+            "symbol": "000270.KS",
+            "name": "기아",
+            "session_date": "2025-08-14",
+            "category": "selected",
+            "dataset": "kr-saved-scan-20251008",
+            "pattern_status": "ready",
+            "final_status": "ready",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": true,
+                "volume_contracted": true,
+                "recovery_close": true,
+                "bullish_candle": true,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": 103700,
+                "stop": 99849,
+                "target": 113200,
+                "reward_risk": 2.467,
+                "zone_low": 101538,
+                "zone_high": 104141,
+                "candidate_stop": 99849,
+                "candidate_target": 113200
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2025-07-18",
+                    "to": "2025-08-14",
+                    "bars": 20,
+                    "low": {
+                        "index": 925,
+                        "date": "2025-07-22",
+                        "price": 97600
+                    },
+                    "high": {
+                        "index": 932,
+                        "date": "2025-07-31",
+                        "price": 113200
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2025-06-20",
+                    "to": "2025-07-17",
+                    "bars": 20,
+                    "low": {
+                        "index": 904,
+                        "date": "2025-06-23",
+                        "price": 94400
+                    },
+                    "high": {
+                        "index": 906,
+                        "date": "2025-06-25",
+                        "price": 104500
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2025-08-07",
+                    "to": "2025-08-13",
+                    "bars": 5,
+                    "low": {
+                        "index": 940,
+                        "date": "2025-08-12",
+                        "price": 101000
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2025-08-01",
+                    "to": "2025-08-14",
+                    "bars": 10,
+                    "low": {
+                        "index": 934,
+                        "date": "2025-08-04",
+                        "price": 100500
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2025-07-17",
+                    "to": "2025-08-13",
+                    "bars": 20,
+                    "high": {
+                        "index": 932,
+                        "date": "2025-07-31",
+                        "price": 113200
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2025-07-14",
+                    "to": "2025-08-08",
+                    "bars": 20,
+                    "mean": 1229885
+                },
+                "volume_pullback_3": {
+                    "from": "2025-08-11",
+                    "to": "2025-08-13",
+                    "bars": 3,
+                    "mean": 575496,
+                    "ratio_to_base": 0.468
+                }
+            },
+            "atr_recovered_from_zone": 3253.8,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": true,
+                "stop_ref_date_is_A_L_or_P_candidate": true,
+                "stop_ref_low_vs_A_L_price_pct": 0,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": true,
+                "stop_ref_before_A_H": false,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "consistent",
+            "tags": [],
+            "notes": []
+        },
+        {
+            "case_id": "30416c78c22d1d0e",
+            "symbol": "052690.KS",
+            "name": "한전기술",
+            "session_date": "2025-11-10",
+            "category": "selected",
+            "dataset": "kr-saved-scan-20261009",
+            "pattern_status": "ready",
+            "final_status": "ready",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": true,
+                "volume_contracted": true,
+                "recovery_close": true,
+                "bullish_candle": true,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": 94300,
+                "stop": 88667,
+                "target": 117900,
+                "reward_risk": 4.19,
+                "zone_low": 98589,
+                "zone_high": 103120,
+                "candidate_stop": 88667,
+                "candidate_target": 117900
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2025-10-14",
+                    "to": "2025-11-10",
+                    "bars": 20,
+                    "low": {
+                        "index": 244,
+                        "date": "2025-10-14",
+                        "price": 87400
+                    },
+                    "high": {
+                        "index": 255,
+                        "date": "2025-10-29",
+                        "price": 117900
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2025-09-08",
+                    "to": "2025-10-13",
+                    "bars": 20,
+                    "low": {
+                        "index": 239,
+                        "date": "2025-09-30",
+                        "price": 83100
+                    },
+                    "high": {
+                        "index": 227,
+                        "date": "2025-09-11",
+                        "price": 93500
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2025-11-03",
+                    "to": "2025-11-07",
+                    "bars": 5,
+                    "low": {
+                        "index": 262,
+                        "date": "2025-11-07",
+                        "price": 89800
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2025-10-28",
+                    "to": "2025-11-10",
+                    "bars": 10,
+                    "low": {
+                        "index": 262,
+                        "date": "2025-11-07",
+                        "price": 89800
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2025-10-13",
+                    "to": "2025-11-07",
+                    "bars": 20,
+                    "high": {
+                        "index": 255,
+                        "date": "2025-10-29",
+                        "price": 117900
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2025-10-01",
+                    "to": "2025-11-04",
+                    "bars": 20,
+                    "mean": 569536
+                },
+                "volume_pullback_3": {
+                    "from": "2025-11-05",
+                    "to": "2025-11-07",
+                    "bars": 3,
+                    "mean": 230076,
+                    "ratio_to_base": 0.404
+                }
+            },
+            "atr_recovered_from_zone": 5663.8,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": true,
+                "stop_ref_date_is_A_L_or_P_candidate": true,
+                "stop_ref_low_vs_A_L_price_pct": 0,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": true,
+                "stop_ref_before_A_H": false,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "consistent",
+            "tags": [],
+            "notes": []
+        },
+        {
+            "case_id": "37e84aadd60596f8",
+            "symbol": "108490.KQ",
+            "name": "로보티즈",
+            "session_date": "2026-10-01",
+            "category": "selected",
+            "dataset": "kr-saved-scan-20261009",
+            "pattern_status": "ready",
+            "final_status": "ready",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": true,
+                "volume_contracted": true,
+                "recovery_close": true,
+                "bullish_candle": true,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": 296500,
+                "stop": 272921,
+                "target": 352000,
+                "reward_risk": 2.354,
+                "zone_low": 291492,
+                "zone_high": 305807,
+                "candidate_stop": 272921,
+                "candidate_target": 352000
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2026-09-02",
+                    "to": "2026-10-01",
+                    "bars": 20,
+                    "low": {
+                        "index": 462,
+                        "date": "2026-09-02",
+                        "price": 243000
+                    },
+                    "high": {
+                        "index": 471,
+                        "date": "2026-09-15",
+                        "price": 352000
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2026-08-04",
+                    "to": "2026-09-01",
+                    "bars": 20,
+                    "low": {
+                        "index": 442,
+                        "date": "2026-08-04",
+                        "price": 211500
+                    },
+                    "high": {
+                        "index": 451,
+                        "date": "2026-08-18",
+                        "price": 306000
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2026-09-22",
+                    "to": "2026-09-30",
+                    "bars": 5,
+                    "low": {
+                        "index": 479,
+                        "date": "2026-09-29",
+                        "price": 277000
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2026-09-16",
+                    "to": "2026-10-01",
+                    "bars": 10,
+                    "low": {
+                        "index": 481,
+                        "date": "2026-10-01",
+                        "price": 276500
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2026-09-01",
+                    "to": "2026-09-30",
+                    "bars": 20,
+                    "high": {
+                        "index": 471,
+                        "date": "2026-09-15",
+                        "price": 352000
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2026-08-27",
+                    "to": "2026-09-23",
+                    "bars": 20,
+                    "mean": 417545
+                },
+                "volume_pullback_3": {
+                    "from": "2026-09-28",
+                    "to": "2026-09-30",
+                    "bars": 3,
+                    "mean": 180414,
+                    "ratio_to_base": 0.432
+                }
+            },
+            "atr_recovered_from_zone": 17893.8,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": true,
+                "stop_ref_date_is_A_L_or_P_candidate": true,
+                "stop_ref_low_vs_A_L_price_pct": 0,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": true,
+                "stop_ref_before_A_H": false,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "consistent",
+            "tags": [],
+            "notes": []
+        },
+        {
+            "case_id": "433ea121b8d5fb8e",
+            "symbol": "267270.KS",
+            "name": "HD건설기계",
+            "session_date": "2025-02-26",
+            "category": "selected",
+            "dataset": "kr-saved-scan-20251008",
+            "pattern_status": "ready",
+            "final_status": "ready",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": true,
+                "volume_contracted": true,
+                "recovery_close": true,
+                "bullish_candle": true,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": 77400,
+                "stop": 70125,
+                "target": 91500,
+                "reward_risk": 1.938,
+                "zone_low": 70936,
+                "zone_high": 74833,
+                "candidate_stop": 70125,
+                "candidate_target": 91500
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2025-01-24",
+                    "to": "2025-02-26",
+                    "bars": 20,
+                    "low": {
+                        "index": 810,
+                        "date": "2025-02-03",
+                        "price": 63500
+                    },
+                    "high": {
+                        "index": 818,
+                        "date": "2025-02-13",
+                        "price": 91500
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2024-12-24",
+                    "to": "2025-01-23",
+                    "bars": 20,
+                    "low": {
+                        "index": 790,
+                        "date": "2024-12-27",
+                        "price": 57300
+                    },
+                    "high": {
+                        "index": 806,
+                        "date": "2025-01-22",
+                        "price": 74100
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2025-02-19",
+                    "to": "2025-02-25",
+                    "bars": 5,
+                    "low": {
+                        "index": 824,
+                        "date": "2025-02-21",
+                        "price": 71100
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2025-02-13",
+                    "to": "2025-02-26",
+                    "bars": 10,
+                    "low": {
+                        "index": 824,
+                        "date": "2025-02-21",
+                        "price": 71100
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2025-01-23",
+                    "to": "2025-02-25",
+                    "bars": 20,
+                    "high": {
+                        "index": 818,
+                        "date": "2025-02-13",
+                        "price": 91500
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2025-01-20",
+                    "to": "2025-02-20",
+                    "bars": 20,
+                    "mean": 525622
+                },
+                "volume_pullback_3": {
+                    "from": "2025-02-21",
+                    "to": "2025-02-25",
+                    "bars": 3,
+                    "mean": 242147,
+                    "ratio_to_base": 0.461
+                }
+            },
+            "atr_recovered_from_zone": 4871.3,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": true,
+                "stop_ref_date_is_A_L_or_P_candidate": true,
+                "stop_ref_low_vs_A_L_price_pct": 0,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": true,
+                "stop_ref_before_A_H": false,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "consistent",
+            "tags": [],
+            "notes": []
+        },
+        {
+            "case_id": "6720e72eeff4d079",
+            "symbol": "274090.KQ",
+            "name": "켄코아에어로스페이스",
+            "session_date": "2025-06-04",
+            "category": "selected",
+            "dataset": "kr-saved-scan-20251008",
+            "pattern_status": "ready",
+            "final_status": "ready",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": true,
+                "volume_contracted": true,
+                "recovery_close": true,
+                "bullish_candle": true,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": 12940,
+                "stop": 12251,
+                "target": 14230,
+                "reward_risk": 1.872,
+                "zone_low": 12733,
+                "zone_high": 13287,
+                "candidate_stop": 12251,
+                "candidate_target": 14230
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2025-05-07",
+                    "to": "2025-06-04",
+                    "bars": 20,
+                    "low": {
+                        "index": 882,
+                        "date": "2025-05-20",
+                        "price": 12270
+                    },
+                    "high": {
+                        "index": 879,
+                        "date": "2025-05-15",
+                        "price": 14230
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2025-04-04",
+                    "to": "2025-05-02",
+                    "bars": 20,
+                    "low": {
+                        "index": 856,
+                        "date": "2025-04-09",
+                        "price": 9950
+                    },
+                    "high": {
+                        "index": 860,
+                        "date": "2025-04-15",
+                        "price": 13650
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2025-05-27",
+                    "to": "2025-06-02",
+                    "bars": 5,
+                    "low": {
+                        "index": 890,
+                        "date": "2025-05-30",
+                        "price": 12390
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2025-05-21",
+                    "to": "2025-06-04",
+                    "bars": 10,
+                    "low": {
+                        "index": 890,
+                        "date": "2025-05-30",
+                        "price": 12390
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2025-05-02",
+                    "to": "2025-06-02",
+                    "bars": 20,
+                    "high": {
+                        "index": 879,
+                        "date": "2025-05-15",
+                        "price": 14230
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2025-04-28",
+                    "to": "2025-05-28",
+                    "bars": 20,
+                    "mean": 244326
+                },
+                "volume_pullback_3": {
+                    "from": "2025-05-29",
+                    "to": "2025-06-02",
+                    "bars": 3,
+                    "mean": 120438,
+                    "ratio_to_base": 0.493
+                }
+            },
+            "atr_recovered_from_zone": 692.5,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": false,
+                "stop_ref_date_is_A_L_or_P_candidate": false,
+                "stop_ref_low_vs_A_L_price_pct": 1,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": false,
+                "stop_ref_before_A_H": false,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "chart_ambiguous",
+            "tags": [
+                "stop_ref_not_A_L"
+            ],
+            "notes": [
+                "손절 기준 저점 2025-05-30(12,390)은 A의 L 2025-05-20(12,270)와 날짜가 다르다.",
+                "A의 L 2025-05-20은 코드의 손절 기준 창(최근 10봉, 2025-05-21부터) 밖이다. 창이 눌림 구간보다 짧다."
+            ]
+        },
+        {
+            "case_id": "77bcbde825d44efd",
+            "symbol": "203650.KQ",
+            "name": "드림시큐리티",
+            "session_date": "2026-05-19",
+            "category": "selected",
+            "dataset": "kr-saved-scan-20261009",
+            "pattern_status": "ready",
+            "final_status": "ready",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": true,
+                "volume_contracted": true,
+                "recovery_close": true,
+                "bullish_candle": true,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": 3355,
+                "stop": 2583,
+                "target": 4675,
+                "reward_risk": 1.71,
+                "zone_low": 3194,
+                "zone_high": 3599,
+                "candidate_stop": 2583,
+                "candidate_target": 4675
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2026-04-20",
+                    "to": "2026-05-19",
+                    "bars": 20,
+                    "low": {
+                        "index": 379,
+                        "date": "2026-04-30",
+                        "price": 2605
+                    },
+                    "high": {
+                        "index": 382,
+                        "date": "2026-05-07",
+                        "price": 4675
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2026-03-23",
+                    "to": "2026-04-17",
+                    "bars": 20,
+                    "low": {
+                        "index": 351,
+                        "date": "2026-03-23",
+                        "price": 1533
+                    },
+                    "high": {
+                        "index": 369,
+                        "date": "2026-04-16",
+                        "price": 3545
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2026-05-12",
+                    "to": "2026-05-18",
+                    "bars": 5,
+                    "low": {
+                        "index": 389,
+                        "date": "2026-05-18",
+                        "price": 2805
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2026-05-06",
+                    "to": "2026-05-19",
+                    "bars": 10,
+                    "low": {
+                        "index": 381,
+                        "date": "2026-05-06",
+                        "price": 2685
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2026-04-17",
+                    "to": "2026-05-18",
+                    "bars": 20,
+                    "high": {
+                        "index": 382,
+                        "date": "2026-05-07",
+                        "price": 4675
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2026-04-14",
+                    "to": "2026-05-13",
+                    "bars": 20,
+                    "mean": 31066492
+                },
+                "volume_pullback_3": {
+                    "from": "2026-05-14",
+                    "to": "2026-05-18",
+                    "bars": 3,
+                    "mean": 4959877,
+                    "ratio_to_base": 0.16
+                }
+            },
+            "atr_recovered_from_zone": 506.3,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": false,
+                "stop_ref_date_is_A_L_or_P_candidate": false,
+                "stop_ref_low_vs_A_L_price_pct": -4.3,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": true,
+                "stop_ref_before_A_H": true,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "different_segments",
+            "tags": [
+                "stop_ref_not_A_L"
+            ],
+            "notes": [
+                "손절 기준 저점 2026-05-06(2,685)은 A의 L 2026-05-18(2,805)와 날짜가 다르다.",
+                "손절 기준 저점 2026-05-06은 A의 H 2026-05-07보다 앞이다. 코드의 10봉 창이 눌림이 아니라 그 앞의 상승 구간 저점을 잡았다."
+            ]
+        },
+        {
+            "case_id": "78eecedb44104872",
+            "symbol": "161580.KQ",
+            "name": "필옵틱스",
+            "session_date": "2026-02-19",
+            "category": "selected",
+            "dataset": "kr-saved-scan-20261009",
+            "pattern_status": "ready",
+            "final_status": "ready",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": true,
+                "volume_contracted": true,
+                "recovery_close": true,
+                "bullish_candle": true,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": 49900,
+                "stop": 46111,
+                "target": 60300,
+                "reward_risk": 2.745,
+                "zone_low": 48677,
+                "zone_high": 51832,
+                "candidate_stop": 46111,
+                "candidate_target": 60300
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2026-01-20",
+                    "to": "2026-02-19",
+                    "bars": 20,
+                    "low": {
+                        "index": 312,
+                        "date": "2026-01-21",
+                        "price": 40950
+                    },
+                    "high": {
+                        "index": 319,
+                        "date": "2026-01-30",
+                        "price": 60300
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2025-12-18",
+                    "to": "2026-01-19",
+                    "bars": 20,
+                    "low": {
+                        "index": 308,
+                        "date": "2026-01-15",
+                        "price": 40850
+                    },
+                    "high": {
+                        "index": 301,
+                        "date": "2026-01-06",
+                        "price": 47500
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2026-02-09",
+                    "to": "2026-02-13",
+                    "bars": 5,
+                    "low": {
+                        "index": 329,
+                        "date": "2026-02-13",
+                        "price": 47400
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2026-02-03",
+                    "to": "2026-02-19",
+                    "bars": 10,
+                    "low": {
+                        "index": 324,
+                        "date": "2026-02-06",
+                        "price": 46900
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2026-01-19",
+                    "to": "2026-02-13",
+                    "bars": 20,
+                    "high": {
+                        "index": 319,
+                        "date": "2026-01-30",
+                        "price": 60300
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2026-01-14",
+                    "to": "2026-02-10",
+                    "bars": 20,
+                    "mean": 731045
+                },
+                "volume_pullback_3": {
+                    "from": "2026-02-11",
+                    "to": "2026-02-13",
+                    "bars": 3,
+                    "mean": 388850,
+                    "ratio_to_base": 0.532
+                }
+            },
+            "atr_recovered_from_zone": 3943.8,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": true,
+                "stop_ref_date_is_A_L_or_P_candidate": true,
+                "stop_ref_low_vs_A_L_price_pct": 0,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": true,
+                "stop_ref_before_A_H": false,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "consistent",
+            "tags": [],
+            "notes": []
+        },
+        {
+            "case_id": "907b3952ea96aafe",
+            "symbol": "321370.KQ",
+            "name": "센서뷰",
+            "session_date": "2025-07-21",
+            "category": "selected",
+            "dataset": "kr-saved-scan-20251008",
+            "pattern_status": "ready",
+            "final_status": "ready",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": true,
+                "volume_contracted": true,
+                "recovery_close": true,
+                "bullish_candle": true,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": 7435,
+                "stop": 6916,
+                "target": 8940,
+                "reward_risk": 2.9,
+                "zone_low": 7110,
+                "zone_high": 7343,
+                "candidate_stop": 6916,
+                "candidate_target": 8940
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2025-06-24",
+                    "to": "2025-07-21",
+                    "bars": 20,
+                    "low": {
+                        "index": 463,
+                        "date": "2025-06-24",
+                        "price": 6225
+                    },
+                    "high": {
+                        "index": 465,
+                        "date": "2025-06-26",
+                        "price": 8940
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2025-05-23",
+                    "to": "2025-06-23",
+                    "bars": 20,
+                    "low": {
+                        "index": 443,
+                        "date": "2025-05-23",
+                        "price": 5685
+                    },
+                    "high": {
+                        "index": 457,
+                        "date": "2025-06-16",
+                        "price": 6600
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2025-07-14",
+                    "to": "2025-07-18",
+                    "bars": 5,
+                    "low": {
+                        "index": 480,
+                        "date": "2025-07-17",
+                        "price": 6975
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2025-07-08",
+                    "to": "2025-07-21",
+                    "bars": 10,
+                    "low": {
+                        "index": 480,
+                        "date": "2025-07-17",
+                        "price": 6975
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2025-06-23",
+                    "to": "2025-07-18",
+                    "bars": 20,
+                    "high": {
+                        "index": 465,
+                        "date": "2025-06-26",
+                        "price": 8940
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2025-06-18",
+                    "to": "2025-07-15",
+                    "bars": 20,
+                    "mean": 461798
+                },
+                "volume_pullback_3": {
+                    "from": "2025-07-16",
+                    "to": "2025-07-18",
+                    "bars": 3,
+                    "mean": 52863,
+                    "ratio_to_base": 0.114
+                }
+            },
+            "atr_recovered_from_zone": 291.3,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": false,
+                "stop_ref_date_is_A_L_or_P_candidate": false,
+                "stop_ref_low_vs_A_L_price_pct": 0.9,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": false,
+                "stop_ref_before_A_H": false,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "chart_ambiguous",
+            "tags": [
+                "stop_ref_not_A_L"
+            ],
+            "notes": [
+                "손절 기준 저점 2025-07-17(6,975)은 A의 L 2025-06-30(6,910)와 날짜가 다르다.",
+                "A의 L 2025-06-30은 코드의 손절 기준 창(최근 10봉, 2025-07-08부터) 밖이다. 창이 눌림 구간보다 짧다."
+            ]
+        },
+        {
+            "case_id": "a68f09dcfd78f572",
+            "symbol": "067310.KQ",
+            "name": "하나마이크론",
+            "session_date": "2025-03-10",
+            "category": "selected",
+            "dataset": "kr-saved-scan-20251008",
+            "pattern_status": "ready",
+            "final_status": "ready",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": true,
+                "volume_contracted": true,
+                "recovery_close": true,
+                "bullish_candle": true,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": 10880,
+                "stop": 10115,
+                "target": 13300,
+                "reward_risk": 3.163,
+                "zone_low": 11221,
+                "zone_high": 11679,
+                "candidate_stop": 10115,
+                "candidate_target": 13300
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2025-02-10",
+                    "to": "2025-03-10",
+                    "bars": 20,
+                    "low": {
+                        "index": 833,
+                        "date": "2025-03-07",
+                        "price": 10230
+                    },
+                    "high": {
+                        "index": 822,
+                        "date": "2025-02-19",
+                        "price": 13300
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2025-01-07",
+                    "to": "2025-02-07",
+                    "bars": 20,
+                    "low": {
+                        "index": 810,
+                        "date": "2025-02-03",
+                        "price": 9430
+                    },
+                    "high": {
+                        "index": 802,
+                        "date": "2025-01-16",
+                        "price": 12970
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2025-02-28",
+                    "to": "2025-03-07",
+                    "bars": 5,
+                    "low": {
+                        "index": 833,
+                        "date": "2025-03-07",
+                        "price": 10230
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2025-02-24",
+                    "to": "2025-03-10",
+                    "bars": 10,
+                    "low": {
+                        "index": 833,
+                        "date": "2025-03-07",
+                        "price": 10230
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2025-02-07",
+                    "to": "2025-03-07",
+                    "bars": 20,
+                    "high": {
+                        "index": 822,
+                        "date": "2025-02-19",
+                        "price": 13300
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2025-02-04",
+                    "to": "2025-03-04",
+                    "bars": 20,
+                    "mean": 1233047
+                },
+                "volume_pullback_3": {
+                    "from": "2025-03-05",
+                    "to": "2025-03-07",
+                    "bars": 3,
+                    "mean": 609281,
+                    "ratio_to_base": 0.494
+                }
+            },
+            "atr_recovered_from_zone": 572.5,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": true,
+                "stop_ref_date_is_A_L_or_P_candidate": true,
+                "stop_ref_low_vs_A_L_price_pct": 0,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": true,
+                "stop_ref_before_A_H": false,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "consistent",
+            "tags": [],
+            "notes": []
+        },
+        {
+            "case_id": "d5070c71e5f98361",
+            "symbol": "356680.KQ",
+            "name": "엑스게이트",
+            "session_date": "2026-09-08",
+            "category": "selected",
+            "dataset": "kr-saved-scan-20261009",
+            "pattern_status": "ready",
+            "final_status": "ready",
+            "selected_pattern": "trend_pullback",
+            "pullback_gates": {
+                "rising_structure": true,
+                "atr_valid": true,
+                "valid_zone": true,
+                "near_ma20": true,
+                "volume_contracted": true,
+                "recovery_close": true,
+                "bullish_candle": true,
+                "volume_recovery": true,
+                "fresh_confirmation": true
+            },
+            "common_block_reasons": [],
+            "pattern_blockers": [],
+            "stored": {
+                "entry": 11600,
+                "stop": 10471,
+                "target": 13400,
+                "reward_risk": 1.594,
+                "zone_low": 11447,
+                "zone_high": 12081,
+                "candidate_stop": 10471,
+                "candidate_target": 13400
+            },
+            "explicit_start_coordinate": "명시적 시작 좌표 없음",
+            "package_says": {
+                "pullback_start": "unrecorded",
+                "coordinates_missing": [
+                    "pullback_interval_start"
+                ]
+            },
+            "windows": {
+                "trend_recent_20": {
+                    "from": "2026-08-11",
+                    "to": "2026-09-08",
+                    "bars": 20,
+                    "low": {
+                        "index": 456,
+                        "date": "2026-08-25",
+                        "price": 10500
+                    },
+                    "high": {
+                        "index": 449,
+                        "date": "2026-08-13",
+                        "price": 13400
+                    }
+                },
+                "trend_prior_20": {
+                    "from": "2026-07-13",
+                    "to": "2026-08-10",
+                    "bars": 20,
+                    "low": {
+                        "index": 439,
+                        "date": "2026-07-30",
+                        "price": 8190
+                    },
+                    "high": {
+                        "index": 427,
+                        "date": "2026-07-13",
+                        "price": 12390
+                    }
+                },
+                "near_5_bars_before_last": {
+                    "from": "2026-09-01",
+                    "to": "2026-09-07",
+                    "bars": 5,
+                    "low": {
+                        "index": 463,
+                        "date": "2026-09-03",
+                        "price": 10630
+                    }
+                },
+                "stop_last_10_bars": {
+                    "from": "2026-08-26",
+                    "to": "2026-09-08",
+                    "bars": 10,
+                    "low": {
+                        "index": 463,
+                        "date": "2026-09-03",
+                        "price": 10630
+                    }
+                },
+                "target_20_bars_before_last": {
+                    "from": "2026-08-10",
+                    "to": "2026-09-07",
+                    "bars": 20,
+                    "high": {
+                        "index": 449,
+                        "date": "2026-08-13",
+                        "price": 13400
+                    }
+                },
+                "volume_base_20": {
+                    "from": "2026-08-05",
+                    "to": "2026-09-02",
+                    "bars": 20,
+                    "mean": 902710
+                },
+                "volume_pullback_3": {
+                    "from": "2026-09-03",
+                    "to": "2026-09-07",
+                    "bars": 3,
+                    "mean": 270204,
+                    "ratio_to_base": 0.299
+                }
+            },
+            "atr_recovered_from_zone": 792.5,
+            "reproduction": {
+                "rising_structure": true,
+                "zone_mid": true,
+                "target": true,
+                "stop": true,
+                "near_ma20": true,
+                "volume_contracted": true
+            },
+            "against_A": {
+                "target_ref_date_is_A_H": true,
+                "target_ref_date_is_A_H_or_alternative": true,
+                "target_ref_vs_A_H_price_pct": 0,
+                "stop_ref_date_is_A_L": false,
+                "stop_ref_date_is_A_L_or_P_candidate": false,
+                "stop_ref_low_vs_A_L_price_pct": 1.2,
+                "A_S_inside_trend_windows": true,
+                "A_H_inside_target_window": true,
+                "A_H_is_decision_window_last_bar": false,
+                "A_L_inside_stop_window": false,
+                "stop_ref_before_A_H": false,
+                "decision_day_high_is_outside_target_window_and_higher": false
+            },
+            "primary_category": "chart_ambiguous",
+            "tags": [
+                "stop_ref_not_A_L"
+            ],
+            "notes": [
+                "손절 기준 저점 2026-09-03(10,630)은 A의 L 2026-08-25(10,500)와 날짜가 다르다.",
+                "A의 L 2026-08-25은 코드의 손절 기준 창(최근 10봉, 2026-08-26부터) 밖이다. 창이 눌림 구간보다 짧다."
+            ]
+        }
+    ]
+}

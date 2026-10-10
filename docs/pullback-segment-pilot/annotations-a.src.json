@@ -1,0 +1,249 @@
+{
+  "version": "pullback_segment_pilot_v1",
+  "kind": "a_stage_authoring_input",
+  "note": "날짜와 읽은 이유는 A 차트와 A 가격 도우미만 보고 적었다. 가격·관찰 시점·확정 시점은 도구가 가격 파일에서 채우고, L은 도구가 계산한다.",
+  "cases": [
+    {
+      "case_id": "013ad9902972b826",
+      "S": {"main": {"date": "2025-12-26"}, "alternatives": [{"date": "2025-11-24", "why": "첫 급등 2,355 뒤 눌림에서 가속이 시작된 저점"}, {"date": "2025-09-01", "why": "횡보 바닥에서 전체 상승이 시작된 저점"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2026-01-05"}, "alternatives": [], "why": "1월 8일 하락 직전의 고점. 판정일에 이 고점을 넘는 새 고점이 나왔으므로, 진행 중인 눌림이 아니라 이미 끝난 마지막 눌림의 고점이다"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2025-12-26", "why": "마지막 상승 아래의 앞선 확정 저점"}], "why": "하락 최저점을 지지 후보로 읽음"},
+      "R": {"status": "confirmed", "evidence": [{"date": "2026-01-12", "note": "종가 13,800이 H 고가 12,960 위"}, {"date": "2026-01-14", "note": "판정일에 신고가 16,500"}], "why": "가격이 이미 눌림의 고점을 넘었다"},
+      "correction_state": "possibly_ended",
+      "ambiguity": "high",
+      "ambiguity_why": "4개월에 약 12배가 올라 상승 구간의 시작을 하나로 정하기 어렵고, 선형 차트라 앞부분이 눌려 보인다",
+      "note": "판정일에 진행 중인 눌림은 없다."
+    },
+    {
+      "case_id": "01bea56f4af0f31f",
+      "S": {"main": {"date": "2026-06-26"}, "alternatives": [{"date": "2026-05-29", "why": "그 앞의 바닥 저점"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2026-07-24"}, "alternatives": [{"date": "2026-07-13", "why": "같은 상승의 앞선 고점, 1만원 낮음"}], "why": "8월 초 하락 직전의 가장 높은 고가"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2026-06-26", "why": "상승의 바닥"}], "why": "하락 최저점"},
+      "R": {"status": "partial", "evidence": [{"date": "2026-08-07", "note": "종가 137,600이 직전 3거래일 고가와 20일 평균 위"}], "why": "하루의 강한 반등이다. H 고가와 7월 27일 고가 아래"},
+      "correction_state": "ongoing",
+      "ambiguity": "medium",
+      "ambiguity_why": "3월의 하루짜리 급등 177,100이 창 안에 있지만 현재 상승과 무관하다"
+    },
+    {
+      "case_id": "029fd9c7a4f3fcb6",
+      "S": {"main": {"date": "2025-12-15"}, "alternatives": [{"date": "2025-11-26", "why": "같은 바닥의 앞선 저점"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2026-01-07"}, "alternatives": [], "why": "1월 급등의 정점"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2025-12-15", "why": "마지막 확정 저점. 현재 저점은 판정일 봉"}], "why": "관찰 최저점이 판정일 봉 하나뿐"},
+      "R": {"status": "not_confirmed", "evidence": [], "why": "1월 7일 뒤 종가가 계단식으로 낮아지고 최저점이 판정일이라 올라간 저점이 아직 없다"},
+      "correction_state": "ongoing",
+      "ambiguity": "medium",
+      "ambiguity_why": "관찰 최저점이 오늘 봉이라 확정되지 않았다"
+    },
+    {
+      "case_id": "03779fd61d439aed",
+      "S": {"main": {"date": "2025-08-20"}, "alternatives": [{"date": "2025-07-23", "why": "같은 바닥의 앞선 저점"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2025-10-13"}, "alternatives": [], "why": "거의 수직 상승 뒤의 최근 고점. 그 뒤 완료 봉이 하나뿐"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2025-09-30", "why": "마지막 가속 직전의 조용한 저점. 확정 피벗은 아님"}], "why": "판정일 봉"},
+      "R": {"status": "unknown", "evidence": [], "why": "눌림이 한 봉이라 확인하거나 부정할 근거가 없다"},
+      "correction_state": "ongoing",
+      "ambiguity": "medium",
+      "ambiguity_why": "H와 L이 마지막 두 봉이라 한 봉 하락이 눌림 구간인지 아직 알 수 없다"
+    },
+    {
+      "case_id": "03c915d929f4769a",
+      "S": {"main": {"date": "2025-09-26"}, "alternatives": [{"date": "2025-07-29", "why": "여름 바닥의 저점"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2025-09-30"}, "alternatives": [{"date": "2025-10-14", "why": "같은 횡보 안의 나중의 낮은 고점"}], "why": "거래량 3백만의 위꼬리 급등 하루. 종가는 6,710으로 되돌렸다"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2025-10-20", "why": "10월 1일 저점보다 높은 두 번째 저점"}], "why": "H 다음 봉부터의 최저 저가"},
+      "R": {"status": "partial", "evidence": [{"date": "2025-10-20", "note": "저가 6,800이 10월 1일 저가 6,620보다 높고, 이후 저가가 모두 6,900 이상"}], "why": "저점은 올라가지만 종가는 H 고가 7,640 아래"},
+      "correction_state": "possibly_ended",
+      "ambiguity": "high",
+      "ambiguity_why": "H가 하루짜리 위꼬리 급등이고 L이 바로 다음 날이다. 눌림이라기보다 6,600~7,400 횡보로도 읽힌다"
+    },
+    {
+      "case_id": "03d016b5e47bae98",
+      "S": {"main": {"date": "2025-04-17"}, "alternatives": [{"date": "2025-04-07", "why": "V자의 가장 낮은 점. 가장 가까운 확정 저점은 나중의 4월 17일"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2025-05-16"}, "alternatives": [{"date": "2025-05-14", "why": "두 봉 앞의 거의 같은 고점"}, {"date": "2025-02-26", "why": "앞선 39% 하락의 출발 고점. 현재 가격은 이 위"}], "why": "최근 고점. 그 뒤 완료 봉이 하나"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2025-04-17", "why": "마지막 확정 저점"}], "why": "판정일 저가"},
+      "R": {"status": "unknown", "evidence": [], "why": "V자 회복 뒤 한 봉 하락이라 근거를 따질 수 없다"},
+      "correction_state": "ongoing",
+      "ambiguity": "high",
+      "ambiguity_why": "2~4월의 큰 하락이 신고가로 끝났고 현재 하락은 한 봉이다. 어느 쪽을 구간으로 볼지는 읽는 사람에 따라 갈린다"
+    },
+    {
+      "case_id": "05a3f1e796e376c7",
+      "S": {"main": {"date": "2025-04-09"}, "alternatives": [{"date": "2024-12-30", "why": "2,370까지 가던 앞선 상승 아래의 저점"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2025-05-02"}, "alternatives": [{"date": "2025-02-18", "why": "4월 저점 앞의 더 큰 상승의 고점"}], "why": "5월 초 하락 직전의 반등 고점"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2025-04-09", "why": "반등의 바닥"}], "why": "하락 최저점"},
+      "R": {"status": "partial", "evidence": [{"date": "2025-05-16", "note": "고가 2,170이 H 고가 2,100을 넘었지만 종가 2,060은 못 넘음"}], "why": "판정일에 큰 거래량으로 급등했으나 종가는 H 아래"},
+      "correction_state": "possibly_ended",
+      "ambiguity": "medium",
+      "ambiguity_why": "120일 차트가 깨끗한 상승이 아니라 하락 뒤의 횡보 구간이다"
+    },
+    {
+      "case_id": "0628c0298c8155ce",
+      "S": {"main": {"date": "2024-09-30"}, "alternatives": [{"date": "2024-09-09", "why": "70,800에서 내려온 더 큰 하락의 바닥"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2024-10-07"}, "alternatives": [{"date": "2024-09-26", "why": "조금 낮은 앞선 고점"}], "why": "끝난 마지막 눌림의 고점. 판정일에 이 위의 새 고점이 나왔다"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2024-09-09", "why": "하락의 바닥"}], "why": "눌림 최저점"},
+      "R": {"status": "confirmed", "evidence": [{"date": "2024-10-23", "note": "종가 40,950이 H 고가 40,850 위"}, {"date": "2024-10-31", "note": "고가 45,500은 이번 반등의 신고가"}], "why": "가격이 눌림의 고점을 넘었다"},
+      "correction_state": "possibly_ended",
+      "ambiguity": "medium",
+      "ambiguity_why": "창 안에 70,800에서 30,000으로 내린 큰 하락이 있어, 이 상승은 확립된 상승 추세가 아니라 반등이다"
+    },
+    {
+      "case_id": "065da101de4d728c",
+      "S": {"main": {"date": "2024-10-08"}, "alternatives": [{"date": "2024-09-09", "why": "앞선 스윙의 저점"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2024-10-21"}, "alternatives": [{"date": "2024-09-30", "why": "앞선 더 낮은 고점"}], "why": "10월 말 하락 직전의 최근 스윙 고점"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2024-10-08", "why": "앞선 스윙 저점"}], "why": "하락 최저점"},
+      "R": {"status": "partial", "evidence": [{"date": "2024-11-04", "note": "종가 175,700이 10월 22일 이후 모든 종가 위"}], "why": "하락 대부분을 되돌렸지만 H 고가 179,200 아래"},
+      "correction_state": "possibly_ended",
+      "ambiguity": "medium",
+      "ambiguity_why": "15만~18만 사이 횡보이고 60일 평균이 내려간다"
+    },
+    {
+      "case_id": "0661fe259966d89d",
+      "S": {"main": {"date": "2026-03-31"}, "alternatives": [{"date": "2026-03-04", "why": "앞선 바닥 저점"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2026-04-14"}, "alternatives": [{"date": "2026-03-20", "why": "앞선 더 낮은 정점"}], "why": "4월 상승의 정점"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2026-03-31", "why": "마지막 확정 저점"}], "why": "판정일 저가"},
+      "R": {"status": "not_confirmed", "evidence": [], "why": "4월 14일 뒤 저가가 하루씩 내려가고 최저점이 판정일이다"},
+      "correction_state": "ongoing",
+      "ambiguity": "low",
+      "ambiguity_why": "뚜렷한 상승 추세와 얕은 하락 하나",
+      "note": "2026-04-08~04-10 세 거래일은 거래량 0, 가격 동일이다. 거래 정지로 보이나 파일만으로 확인하지 못했다."
+    },
+    {
+      "case_id": "06e4c870056806ab",
+      "S": {"main": {"date": "2025-01-09"}, "alternatives": [{"date": "2024-12-09", "why": "전체 하락의 바닥"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2025-01-17"}, "alternatives": [], "why": "나흘 급등의 정점"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2025-01-09", "why": "급등의 출발점"}], "why": "판정일 저가"},
+      "R": {"status": "not_confirmed", "evidence": [], "why": "급등 뒤 종가가 닷새 연속 낮아졌다"},
+      "correction_state": "ongoing",
+      "ambiguity": "high",
+      "ambiguity_why": "120일 차트는 7,000에서 2,770으로 내려온 하락이 대부분이고 상승 구간은 나흘짜리 반등이다"
+    },
+    {
+      "case_id": "0792ac2403c954e1",
+      "S": {"main": {"date": "2025-03-04"}, "alternatives": [{"date": "2024-12-09", "why": "더 큰 회복의 바닥"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2025-03-17"}, "alternatives": [], "why": "3월 상승의 정점"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2025-03-20", "why": "H 뒤 첫 확정 저점"}], "why": "판정일 하루 전 저점이라 확정되지 않음"},
+      "R": {"status": "partial", "evidence": [{"date": "2025-04-02", "note": "종가 13,050이 직전 5일 종가와 20일 평균 위"}], "why": "거래량이 큰 하루의 강세. H 고가에는 한참 못 미침"},
+      "correction_state": "ongoing",
+      "ambiguity": "medium",
+      "ambiguity_why": "저점이 판정일 하루 전이라 확정되지 않았다"
+    },
+    {
+      "case_id": "19f9ea891800aab8",
+      "S": {"main": {"date": "2025-08-20"}, "alternatives": [{"date": "2025-07-23", "why": "같은 상승의 앞선 저점"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2025-08-27"}, "alternatives": [], "why": "8월 상승의 정점"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2025-08-20", "why": "H 앞의 마지막 확정 저점"}], "why": "하락 최저점"},
+      "R": {"status": "partial", "evidence": [{"date": "2025-09-10", "note": "종가 26,550이 직전 4일 종가 위"}], "why": "하루의 반등. 8월 29일 종가 28,600 아래"},
+      "correction_state": "ongoing",
+      "ambiguity": "low",
+      "ambiguity_why": "뚜렷한 상승 추세와 얕은 하락"
+    },
+    {
+      "case_id": "2032f201c0c38f7f",
+      "S": {"main": {"date": "2026-02-06"}, "alternatives": [{"date": "2026-01-12", "why": "첫 상승 계단 앞의 저점"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2026-02-27"}, "alternatives": [], "why": "2월 급등의 정점"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2026-02-06", "why": "급등의 바닥"}], "why": "하락 최저점"},
+      "R": {"status": "partial", "evidence": [{"date": "2026-03-13", "note": "저가 109,800이 3월 4일 저가보다 높음"}, {"date": "2026-03-18", "note": "종가 120,000이 직전 5일 종가 위"}], "why": "저점은 올라가지만 3월 11일 고점보다 고점이 낮다"},
+      "correction_state": "ongoing",
+      "ambiguity": "low",
+      "ambiguity_why": "큰 급등과 뚜렷한 하락 하나"
+    },
+    {
+      "case_id": "284171e508e3e7e0",
+      "S": {"main": {"date": "2025-07-22"}, "alternatives": [{"date": "2025-06-02", "why": "더 큰 상승의 저점"}, {"date": "2025-06-23", "why": "첫 번째 올라가는 저점"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2025-07-31"}, "alternatives": [{"date": "2025-07-24", "why": "같은 상승의 앞선 고점"}], "why": "7월 상승의 정점"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2025-07-22", "why": "H 앞의 마지막 확정 저점"}], "why": "8월 초 저점"},
+      "R": {"status": "partial", "evidence": [{"date": "2025-08-14", "note": "마지막 두 거래일의 종가가 8월 1일 이후 가장 높음"}], "why": "열 거래일 동안 100,500~104,700의 좁은 횡보이고 저점이 천천히 올라간다"},
+      "correction_state": "possibly_ended",
+      "ambiguity": "medium",
+      "ambiguity_why": "얕은 하락 뒤 횡보라 하락이 끝났는지 차트로 보이지 않는다"
+    },
+    {
+      "case_id": "30416c78c22d1d0e",
+      "S": {"main": {"date": "2025-09-30"}, "alternatives": [{"date": "2025-09-15", "why": "같은 바닥의 앞선 저점"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2025-10-29"}, "alternatives": [{"date": "2025-06-25", "why": "H 바로 아래의 장기 정점 121,700"}], "why": "10월 상승의 정점"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2025-09-30", "why": "마지막 확정 저점"}], "why": "저점 뒤 완료 봉이 하나뿐이라 확정되지 않음"},
+      "R": {"status": "not_confirmed", "evidence": [], "why": "종가가 20일 평균 아래에 머물고, 판정일에 저점이 조금 올라간 것이 유일한 신호"},
+      "correction_state": "ongoing",
+      "ambiguity": "medium",
+      "ambiguity_why": "H가 6월 정점 바로 아래라 더 큰 구조를 이중 천장으로 읽을 수도 있다"
+    },
+    {
+      "case_id": "37e84aadd60596f8",
+      "S": {"main": {"date": "2026-08-31"}, "alternatives": [{"date": "2026-07-29", "why": "155,000에서 시작한 전체 반등의 바닥"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2026-09-15"}, "alternatives": [{"date": "2026-09-07", "why": "같은 상승의 앞선 낮은 고점"}], "why": "9월 상승의 정점"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2026-08-31", "why": "H 앞의 마지막 확정 저점"}], "why": "판정일 저가"},
+      "R": {"status": "not_confirmed", "evidence": [], "why": "종가가 310,000에서 286,000으로 미끄러지고 최저점이 판정일"},
+      "correction_state": "ongoing",
+      "ambiguity": "medium",
+      "ambiguity_why": "어느 반등을 상승 구간으로 볼지에 따라 S가 바뀐다. 창 안에 464,000에서 155,000으로 내린 큰 하락이 있다"
+    },
+    {
+      "case_id": "433ea121b8d5fb8e",
+      "S": {"main": {"date": "2025-02-03"}, "alternatives": [{"date": "2025-01-20", "why": "앞선 저점"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2025-02-13"}, "alternatives": [], "why": "1월 저점에서 오른 급등 고점"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2025-02-03", "why": "급등의 바닥"}], "why": "하락 최저점. 판정일에 확정됨"},
+      "R": {"status": "partial", "evidence": [{"date": "2025-02-26", "note": "2월 21일 뒤 저가 세 개가 모두 71,100보다 높음"}], "why": "저점은 올라가지만 종가는 2월 14일 종가 77,900 아래"},
+      "correction_state": "possibly_ended",
+      "ambiguity": "low",
+      "ambiguity_why": "뚜렷한 급등과 하락"
+    },
+    {
+      "case_id": "6720e72eeff4d079",
+      "S": {"main": {"date": "2025-05-13"}, "alternatives": [{"date": "2025-04-29", "why": "두 번째 반등 앞의 저점"}, {"date": "2025-04-09", "why": "17,890에서 내려온 큰 하락의 저점"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2025-05-15"}, "alternatives": [{"date": "2025-05-28", "why": "나중의 낮은 고점"}], "why": "5월 반등의 정점"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2025-04-29", "why": "앞선 반등의 낮은 저점"}], "why": "하락 최저점"},
+      "R": {"status": "not_confirmed", "evidence": [], "why": "열 거래일 12,400~13,650 횡보이고 H 고가 14,230을 넘은 종가가 없다"},
+      "correction_state": "ongoing",
+      "ambiguity": "high",
+      "ambiguity_why": "44% 하락 뒤 반등이고 이후 좁은 횡보라 상승 구간이 이틀뿐이다"
+    },
+    {
+      "case_id": "77bcbde825d44efd",
+      "S": {"main": {"date": "2026-04-30"}, "alternatives": [{"date": "2026-04-02", "why": "긴 횡보 바닥의 저점"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2026-05-07"}, "alternatives": [], "why": "5월 급등의 정점"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2026-04-30", "why": "H 앞의 마지막 확정 저점"}], "why": "판정일 하루 전 저점이라 확정되지 않음"},
+      "R": {"status": "partial", "evidence": [{"date": "2026-05-19", "note": "종가 3,355가 전일 종가 위, 거래량이 훨씬 큼"}], "why": "하루다. 5월 7일 이후의 흐름은 아직 낮아지는 쪽"},
+      "correction_state": "ongoing",
+      "ambiguity": "medium",
+      "ambiguity_why": "한 달에 세 배가 오르고 하루 변동이 10~20%다"
+    },
+    {
+      "case_id": "78eecedb44104872",
+      "S": {"main": {"date": "2026-01-21"}, "alternatives": [{"date": "2026-01-15", "why": "일주일 앞의 조금 낮은 저점"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2026-01-30"}, "alternatives": [{"date": "2026-02-10", "why": "재상승을 시도한 나중의 낮은 고점"}], "why": "1월 상승의 정점"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2026-01-21", "why": "H 앞의 마지막 확정 저점"}], "why": "하락 최저점"},
+      "R": {"status": "partial", "evidence": [{"date": "2026-02-13", "note": "저가 47,400이 2월 6일 저가보다 높음"}], "why": "저점은 올라갔지만 2월 10일 고점을 넘은 종가가 없다"},
+      "correction_state": "ongoing",
+      "ambiguity": "low",
+      "ambiguity_why": "뚜렷한 하락과 낮은 고점"
+    },
+    {
+      "case_id": "907b3952ea96aafe",
+      "S": {"main": {"date": "2025-06-16"}, "alternatives": [{"date": "2025-04-09", "why": "봄 하락의 바닥"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2025-06-26"}, "alternatives": [{"date": "2025-07-15", "why": "나중의 낮은 고점"}], "why": "급등 고점. 차트에 긴 위꼬리가 있다"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2025-06-16", "why": "급등의 출발점"}], "why": "하락 최저점"},
+      "R": {"status": "partial", "evidence": [{"date": "2025-07-21", "note": "종가 7,435가 7월 15일 고가 7,360 위"}], "why": "마지막 낮은 고점은 종가로 넘었으나 급등 고점에는 한참 못 미침"},
+      "correction_state": "possibly_ended",
+      "ambiguity": "high",
+      "ambiguity_why": "꼬리 봉 하나가 H를 정하고, 3주 동안 횡보했다"
+    },
+    {
+      "case_id": "a68f09dcfd78f572",
+      "S": {"main": {"date": "2025-02-03"}, "alternatives": [{"date": "2025-01-02", "why": "1월 바닥의 저점"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2025-02-19"}, "alternatives": [{"date": "2025-02-27", "why": "나중의 낮은 고점"}], "why": "2월 상승의 정점"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2025-02-03", "why": "상승의 바닥"}], "why": "판정일 이틀 전 저점이라 확정되지 않음"},
+      "R": {"status": "not_confirmed", "evidence": [], "why": "판정일 저가가 3월 7일 저가보다 높지만 한 봉이다"},
+      "correction_state": "ongoing",
+      "ambiguity": "low",
+      "ambiguity_why": "뚜렷한 상승과 하락"
+    },
+    {
+      "case_id": "d5070c71e5f98361",
+      "S": {"main": {"date": "2026-07-30"}, "alternatives": [{"date": "2026-07-21", "why": "같은 하락 안의 앞선 저점"}], "why": "H보다 앞선 가장 가까운 확정 저점"},
+      "H": {"main": {"date": "2026-08-13"}, "alternatives": [{"date": "2026-08-28", "why": "거래량이 터진 나중의 낮은 고점"}], "why": "8월 반등의 정점"},
+      "P": {"main": {"date": "=L"}, "alternatives": [{"date": "2026-07-30", "why": "앞선 폭락의 바닥"}], "why": "하락 최저점"},
+      "R": {"status": "partial", "evidence": [{"date": "2026-09-03", "note": "저가 10,630이 8월 25일 저가보다 높음"}], "why": "올라간 저점 하나. 종가는 8월 28일 고점 아래"},
+      "correction_state": "ongoing",
+      "ambiguity": "high",
+      "ambiguity_why": "창 안에 30,550에서 73% 폭락한 구간이 있고, 상승 구간은 더 큰 하락 추세 안의 30일 반등이다"
+    }
+  ]
+}

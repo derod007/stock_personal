@@ -1,3 +1,9 @@
+﻿## 2026-10-10 20:15 · Cursor · 끝
+- 한 일: 상승 눌림 24건(두 기간 각 선택 6·대기 3·탈락 3)을 A 자료만으로 먼저 표시해 고정하고, 그 뒤 코드의 참조 창과 대조한 검토 자료를 만들었다. 전략·점수·원본·계좌 변경 없음
+- 파일: docs/pullback-segment-pilot/(protocol.md, sample-manifest.json, annotations-a.json, annotations-a.src.json, a-freeze.json, code-comparison.json, index.html, review.md, verify.md, verify-result.json, charts/), bin/paper/PullbackSegmentPilot.php, bin/paper_pullback_segment_pilot.php, bin/paper/ReviewCharts.php(표식 옵션 추가, 기본 출력 그대로), tests/pullback_segment_pilot.php, .github/workflows/pattern-replay.yml, docs/work-log.md
+- 커밋: 브랜치 cursor/pullback-segment-pilot, PR 제출(병합 안 함)
+- 롤백: 없음
+
 ## 2026-10-10 · Codex · 완료
 - 상승 눌림 157건 A 입력 구조 라벨 고정·차트 전수 대조 후 종료 137건 비교. H 58/D 82/U 17, H와 D의 성과 우위는 기간별 반전. 운영 변경 없음
 - 산출물: docs/pullback-structure-review-20261010.md 및 기준·사례·JSON·재현 스크립트. 구조 검사 8개와 기존 기간별 합계 검증 통과. PR로만 제출, 병합 안 함

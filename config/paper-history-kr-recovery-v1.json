@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "kind": "historical_fixed_universe_account_replay",
+  "label": "저장 스캔에서 확보한 고정 종목군 계좌 재현 (당시 TOP100 복원 아님)",
+  "base_config": "config/paper-kr-recovery-v1.json",
+  "inherit_all_but": ["id"],
+  "state_subdir": "history-account",
+  "id_prefix": "hist-kr-recovery-v1-",
+  "smoke_id_prefix": "hist-smoke-kr-recovery-v1-",
+  "periods": {
+    "prior": {"dataset": "kr-saved-scan-20251008", "account_id": "hist-kr-recovery-v1-20251008"},
+    "recent": {"dataset": "kr-saved-scan-20261009", "account_id": "hist-kr-recovery-v1-20261009"}
+  },
+  "mode": "replay",
+  "carry_over": "none"
+}

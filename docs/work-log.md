@@ -1,3 +1,9 @@
+﻿## 2026-10-11 00:40 · Cursor · 끝
+- 한 일: 고정 종목군 과거 모의계좌 재현 준비. 운영 계좌 코드(PaperPortfolio·TradeSimulator·ChartPlanEngine·PaperQuality)를 수정 없이 replay 모드로 호출하는 연구용 CLI, 연구 계좌 설정(운영 설정에서 계좌 ID만 다름), 실행 순서·규칙 대응표, 실데이터 3구간 소규모 검증(장부 대조·독립 재시뮬레이션·이어 하기 동일·PR #65 신호 대조·파일 불변), 단위시험 추가. 전체 두 기간 실행·수익성 결론·전략 조정·운영 반영 없음
+- 파일: bin/paper/AccountReplay.php, bin/paper_account_replay.php, config/paper-history-kr-recovery-v1.json, tests/account_replay.php, docs/historical-account-replay/(protocol.md, report.md, quality-scan-prior.json, quality-scan-recent.json, smoke/{a,b,c}/), docs/research/account-replay-report.py, .github/workflows/pattern-replay.yml, docs/work-log.md
+- 커밋: 브랜치 cursor/historical-paper-replay, PR 제출(병합 안 함)
+- 롤백: 없음
+
 ## 2026-10-10 · Codex · 완료
 - PR #65 보고서·생성기에서 중앙값 차이(이전 +0.17%p, 최근 +0.71%p)와 거래별 변화량 중앙값(각 0.00%p)을 분리. 반올림 전 계산 명시
 - 사례별 재계산과 보고서 재생성 일치 확인. 거래 결과·고정 연구 코드·운영 변경 없음. 사용자 요청으로 수정 PR 병합 진행

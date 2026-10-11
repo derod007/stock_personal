@@ -1,3 +1,9 @@
+## 2026-10-11 21:08 · Cursor · 끝
+- 한 일: 과거 연구 계좌 두 기간 수익 집중도 집계. 종료 거래 net_pnl만 사용(이전 49·최근 56, 실현손익 원본과 일치). 상위 1·3·5건 비중, 종목·패턴·청산 월 집계, 보고서. 계좌 재실행·운영 파일·기존 full-v2 결과 변경 없음
+- 파일: docs/research/account-replay-concentration.py, docs/historical-account-replay/concentration/(concentration.json, report.md), docs/work-log.md
+- 커밋: 브랜치 cursor/profit-concentration, 새 PR(병합 안 함)
+- 롤백: 없음
+
 ## 2026-10-11 20:58 · Cursor · 끝
 - 한 일: PR #67 병합 충돌 해결. main(PR #65·#66 반영)을 PR #67 브랜치에 병합하고 docs/work-log.md는 양쪽 항목을 모두 남김
 - 파일: docs/work-log.md

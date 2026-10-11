@@ -1,0 +1,99 @@
+{
+  "prior": {
+    "first_day": "2024-10-08",
+    "last_day": "2025-10-02",
+    "sessions": 242,
+    "initial_cash": 100000000,
+    "equity": 104922944.22378051,
+    "cash": 63779944.22378051,
+    "return_pct": 4.922944223780523,
+    "max_close_drawdown_pct": 9.050066981622706,
+    "closed": 49,
+    "wins": 18,
+    "losses": 31,
+    "realized_pnl": 3655780.2237805934,
+    "open_positions": 2,
+    "pending_orders": 1,
+    "halted": false,
+    "event_counts": {
+      "account_started": 1,
+      "day_log": 242,
+      "equity": 242,
+      "exit": 49,
+      "fill": 51,
+      "order": 56,
+      "order_cancelled": 4
+    },
+    "ready_signal_outcomes": {
+      "order": 56,
+      "position_limit": 33,
+      "already_active": 7,
+      "cash_or_risk_or_sector_limit": 1
+    },
+    "closed_by_pattern": {
+      "trend_recovery_v1": {
+        "closed": 7,
+        "net_pnl": 494210.24577451684
+      },
+      "trend_pullback_v1": {
+        "closed": 36,
+        "net_pnl": 1521825.4429375627
+      },
+      "breakout_retest_v1": {
+        "closed": 6,
+        "net_pnl": 1639744.5350685138
+      }
+    },
+    "net_unrealized_after_sell_cost": 1226021.0000000075,
+    "gross_unrealized": 1267163.9999999194
+  },
+  "recent": {
+    "first_day": "2025-10-10",
+    "last_day": "2026-10-08",
+    "sessions": 244,
+    "initial_cash": 100000000,
+    "equity": 118168892.26921238,
+    "cash": 72170042.26921238,
+    "return_pct": 18.16889226921239,
+    "max_close_drawdown_pct": 5.3961017366967345,
+    "closed": 56,
+    "wins": 24,
+    "losses": 32,
+    "realized_pnl": 18027499.414712373,
+    "open_positions": 3,
+    "pending_orders": 0,
+    "halted": false,
+    "event_counts": {
+      "account_started": 1,
+      "day_log": 244,
+      "equity": 244,
+      "exit": 56,
+      "fill": 59,
+      "order": 67,
+      "order_cancelled": 8
+    },
+    "ready_signal_outcomes": {
+      "order": 67,
+      "position_limit": 37,
+      "already_active": 8,
+      "data_quality": 1,
+      "cash_or_risk_or_sector_limit": 1
+    },
+    "closed_by_pattern": {
+      "trend_pullback_v1": {
+        "closed": 39,
+        "net_pnl": 17390505.0219306
+      },
+      "breakout_retest_v1": {
+        "closed": 8,
+        "net_pnl": -3318846.1924094884
+      },
+      "trend_recovery_v1": {
+        "closed": 9,
+        "net_pnl": 3955840.585191262
+      }
+    },
+    "net_unrealized_after_sell_cost": 95394.00450000726,
+    "gross_unrealized": 141392.85450000688
+  }
+}

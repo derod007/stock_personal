@@ -1,0 +1,9 @@
+{
+  "uploaded_archive": "kr-saved-scan-20251008.zip",
+  "archive_sha256": "320f581fd41614dba5db54a5a09d12b86f84d6984c01a4175201560c6235f457",
+  "dataset": "kr-saved-scan-20251008",
+  "verify": {
+    "intact": true,
+    "problems": []
+  }
+}

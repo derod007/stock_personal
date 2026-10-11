@@ -1,0 +1,2536 @@
+{
+  "schema": 1,
+  "kind": "historical_account_cash_fee_sensitivity_v2",
+  "generated_at_kst": "2026-10-11 23:03 +0900",
+  "note": "Cash fee only, via ResearchCashFee. PaperPortfolio is unchanged. Previous fee-sensitivity/ was not overwritten.",
+  "state_dir": "C:\\Users\\acdun\\Desktop\\dev\\stock-personal-paper\\fee-sensitivity-state-v2",
+  "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+  "commands": {
+    "run": "php -d memory_limit=3G bin/paper_account_replay.php run --period={period} --dataset-dir={dataset} --state-dir={state} --sector-map=docs/historical-account-replay/sector-map-v2.json --confirm-full-run=after-code-review --fee-bps={bps} --account-suffix=fee{bps}",
+    "export": "php bin/paper_account_replay.php export --period={period} --dataset-dir={dataset} --state-dir={state} --fee-bps={bps} --account-suffix=fee{bps} --out=docs/historical-account-replay/fee-sensitivity-v2/{period}/fee{bps}"
+  },
+  "baseline_vs_full": {
+    "prior": {
+      "economic_match": true,
+      "money": {
+        "cash": true,
+        "reserved_cash": true,
+        "equity": true,
+        "realized_pnl": true,
+        "unrealized_pnl_open_positions": true,
+        "max_close_drawdown": true
+      },
+      "counts": {
+        "event_counts": true,
+        "closed_trades": true,
+        "last_day": true,
+        "halted": true,
+        "trades": true
+      },
+      "metadata_differs": {
+        "account_id": {
+          "full_v2": "hist-kr-recovery-v1-20251008",
+          "this_run": "hist-kr-recovery-v1-20251008-fee10"
+        },
+        "config_hash": {
+          "full_v2": "10078f1b8f471cf14aa3199b61dc9c3648e7e39c8c0f75bbd5615e5eb877b24b",
+          "this_run": "6c9d20ff16200a02ffc5503052a49cb645e52cf546ffcafba52ace3acd17cf8f"
+        },
+        "strategy_fingerprint": {
+          "full_v2": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+          "this_run": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465"
+        },
+        "journal_normalized_sha256": {
+          "full_v2": "0a89da48a3983717b681810bb2622de68eb2c7d5375c44f9019471ecb9810afc",
+          "this_run": "91aeed42964b3f8b59a19a5a13f20ebcd65059ded8b004ae3f7c330a064f4117"
+        },
+        "why": [
+          "account id has a fee10 suffix so the run cannot write the original research folder",
+          "config_hash includes that account id",
+          "research metadata records cash_fee_bps, slippage_bps and research_fee_sha256",
+          "PaperPortfolio.php is unchanged; the operational strategy fingerprint stays 934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465"
+        ]
+      }
+    },
+    "recent": {
+      "economic_match": true,
+      "money": {
+        "cash": true,
+        "reserved_cash": true,
+        "equity": true,
+        "realized_pnl": true,
+        "unrealized_pnl_open_positions": true,
+        "max_close_drawdown": true
+      },
+      "counts": {
+        "event_counts": true,
+        "closed_trades": true,
+        "last_day": true,
+        "halted": true,
+        "trades": true
+      },
+      "metadata_differs": {
+        "account_id": {
+          "full_v2": "hist-kr-recovery-v1-20261009",
+          "this_run": "hist-kr-recovery-v1-20261009-fee10"
+        },
+        "config_hash": {
+          "full_v2": "720a9de16fc54c1905b727e37540ef948f72b91ce7660042af789db29bbba53f",
+          "this_run": "0a3a4d08bc69e5a1d38b0f2ed7e6aaa747c29deefe78a95b4a52527dc75781a0"
+        },
+        "strategy_fingerprint": {
+          "full_v2": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+          "this_run": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465"
+        },
+        "journal_normalized_sha256": {
+          "full_v2": "c043737f596ce84d002a980e6c6ba12d7a4248655b2fbbbe50af6a9e8f1037ab",
+          "this_run": "82fba486700befff56410b51bd9534825fad4ee132e47eb6f80ae07194bcbb8a"
+        },
+        "why": [
+          "account id has a fee10 suffix so the run cannot write the original research folder",
+          "config_hash includes that account id",
+          "research metadata records cash_fee_bps, slippage_bps and research_fee_sha256",
+          "PaperPortfolio.php is unchanged; the operational strategy fingerprint stays 934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465"
+        ]
+      }
+    }
+  },
+  "vs_previous": {
+    "prior": {
+      "fee10": {
+        "equity": true,
+        "cash": true,
+        "realized_pnl": true,
+        "trades": true
+      },
+      "fee20": {
+        "equity": true,
+        "cash": true,
+        "realized_pnl": true,
+        "trades": true
+      },
+      "fee30": {
+        "equity": true,
+        "cash": true,
+        "realized_pnl": true,
+        "trades": true
+      }
+    },
+    "recent": {
+      "fee10": {
+        "equity": true,
+        "cash": true,
+        "realized_pnl": true,
+        "trades": true
+      },
+      "fee20": {
+        "equity": true,
+        "cash": true,
+        "realized_pnl": true,
+        "trades": true
+      },
+      "fee30": {
+        "equity": true,
+        "cash": true,
+        "realized_pnl": true,
+        "trades": true
+      }
+    }
+  },
+  "periods": {
+    "prior": {
+      "fee10": {
+        "account": "hist-kr-recovery-v1-20251008-fee10",
+        "fee_bps": 10,
+        "equity": 104922944.22378051,
+        "return_pct": 4.922944223780523,
+        "max_close_drawdown": 0.09050066981622706,
+        "realized_pnl": 3655780.223780594,
+        "unrealized_pnl_open_positions": 1226021.0000000075,
+        "unrealized_mark": "last completed close, after modeled sell cash fee",
+        "cash": 63779944.22378051,
+        "reserved_cash": 20954533.599999998,
+        "fees": {
+          "buy": 666566.0491215,
+          "sell": 631644.203598,
+          "total": 1298210.2527195,
+          "fee_bps": 10
+        },
+        "orders": 56,
+        "fills": 51,
+        "exits": 49,
+        "cancelled": 4,
+        "closed": 49,
+        "open": 2,
+        "pending": 1,
+        "halted": false,
+        "halt_reason": null,
+        "reconcile_pass": true,
+        "last_day": "2025-10-02",
+        "fee_total": 1298210.2527195
+      },
+      "fee20": {
+        "account": "hist-kr-recovery-v1-20251008-fee20",
+        "fee_bps": 20,
+        "equity": 103309012.8848795,
+        "return_pct": 3.309012884879503,
+        "max_close_drawdown": 0.09202050732353839,
+        "realized_pnl": 2128996.884879506,
+        "unrealized_pnl_open_positions": 1101019.0,
+        "unrealized_mark": "last completed close, after modeled sell cash fee",
+        "cash": 63810512.8848795,
+        "reserved_cash": 20592703.2,
+        "fees": {
+          "buy": 1289759.1987995,
+          "sell": 1222404.552071,
+          "total": 2512163.7508704998,
+          "fee_bps": 20
+        },
+        "orders": 56,
+        "fills": 51,
+        "exits": 49,
+        "cancelled": 4,
+        "closed": 49,
+        "open": 2,
+        "pending": 1,
+        "halted": false,
+        "halt_reason": null,
+        "reconcile_pass": true,
+        "last_day": "2025-10-02",
+        "fee_total": 2512163.7508704998
+      },
+      "fee30": {
+        "account": "hist-kr-recovery-v1-20251008-fee30",
+        "fee_bps": 30,
+        "equity": 101823600.54677081,
+        "return_pct": 1.8236005467708205,
+        "max_close_drawdown": 0.09499940888961911,
+        "realized_pnl": 734387.546770832,
+        "unrealized_pnl_open_positions": 976330.5000000056,
+        "unrealized_mark": "last completed close, after modeled sell cash fee",
+        "cash": 64196100.54677081,
+        "reserved_cash": 20306737.999999996,
+        "fees": {
+          "buy": 1880276.62449075,
+          "sell": 1783857.3279885,
+          "total": 3664133.95247925,
+          "fee_bps": 30
+        },
+        "orders": 56,
+        "fills": 51,
+        "exits": 49,
+        "cancelled": 4,
+        "closed": 49,
+        "open": 2,
+        "pending": 1,
+        "halted": false,
+        "halt_reason": null,
+        "reconcile_pass": true,
+        "last_day": "2025-10-02",
+        "fee_total": 3664133.95247925
+      }
+    },
+    "recent": {
+      "fee10": {
+        "account": "hist-kr-recovery-v1-20261009-fee10",
+        "fee_bps": 10,
+        "equity": 118168892.26921238,
+        "return_pct": 18.16889226921239,
+        "max_close_drawdown": 0.053961017366967345,
+        "realized_pnl": 18027499.41471237,
+        "unrealized_pnl_open_positions": 95394.00450000726,
+        "unrealized_mark": "last completed close, after modeled sell cash fee",
+        "cash": 72170042.26921238,
+        "reserved_cash": 0.0,
+        "fees": {
+          "buy": 612261.8853676914,
+          "sell": 585629.819341613,
+          "total": 1197891.7047093045,
+          "fee_bps": 10
+        },
+        "orders": 67,
+        "fills": 59,
+        "exits": 56,
+        "cancelled": 8,
+        "closed": 56,
+        "open": 3,
+        "pending": 0,
+        "halted": false,
+        "halt_reason": null,
+        "reconcile_pass": true,
+        "last_day": "2026-10-08",
+        "fee_total": 1197891.7047093045
+      },
+      "fee20": {
+        "account": "hist-kr-recovery-v1-20261009-fee20",
+        "fee_bps": 20,
+        "equity": 116618281.10336734,
+        "return_pct": 16.618281103367337,
+        "max_close_drawdown": 0.05402315997870355,
+        "realized_pnl": 16524910.982367216,
+        "unrealized_pnl_open_positions": 3664.3209999995306,
+        "unrealized_mark": "last completed close, after modeled sell cash fee",
+        "cash": 71765381.10336734,
+        "reserved_cash": 0.0,
+        "fees": {
+          "buy": 1190375.0409921212,
+          "sell": 1138563.680642124,
+          "total": 2328938.7216342455,
+          "fee_bps": 20
+        },
+        "orders": 67,
+        "fills": 59,
+        "exits": 56,
+        "cancelled": 8,
+        "closed": 56,
+        "open": 3,
+        "pending": 0,
+        "halted": false,
+        "halt_reason": null,
+        "reconcile_pass": true,
+        "last_day": "2026-10-08",
+        "fee_total": 2328938.7216342455
+      },
+      "fee30": {
+        "account": "hist-kr-recovery-v1-20261009-fee30",
+        "fee_bps": 30,
+        "equity": 114890446.38848276,
+        "return_pct": 14.890446388482758,
+        "max_close_drawdown": 0.054039021506415486,
+        "realized_pnl": 14842761.438982759,
+        "unrealized_pnl_open_positions": -84183.650499993,
+        "unrealized_mark": "last completed close, after modeled sell cash fee",
+        "cash": 70934246.38848276,
+        "reserved_cash": 0.0,
+        "fees": {
+          "buy": 1734765.1561776563,
+          "sell": 1657745.427092916,
+          "total": 3392510.583270572,
+          "fee_bps": 30
+        },
+        "orders": 67,
+        "fills": 59,
+        "exits": 56,
+        "cancelled": 8,
+        "closed": 56,
+        "open": 3,
+        "pending": 0,
+        "halted": false,
+        "halt_reason": null,
+        "reconcile_pass": true,
+        "last_day": "2026-10-08",
+        "fee_total": 3392510.583270572
+      }
+    }
+  },
+  "diffs": {
+    "prior": {
+      "fee20": {
+        "same_orders": 56,
+        "dropped": [],
+        "added": [],
+        "quantity_changed": [
+          {
+            "symbol": "005290.KQ",
+            "signal_date": "2025-03-05",
+            "base_qty": 512,
+            "other_qty": 495,
+            "delta": -17,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "005290.KQ",
+            "signal_date": "2025-07-21",
+            "base_qty": 579,
+            "other_qty": 553,
+            "delta": -26,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "005830.KS",
+            "signal_date": "2025-08-05",
+            "base_qty": 62,
+            "other_qty": 51,
+            "delta": -11,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "005930.KS",
+            "signal_date": "2025-03-27",
+            "base_qty": 341,
+            "other_qty": 338,
+            "delta": -3,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "006340.KS",
+            "signal_date": "2025-01-02",
+            "base_qty": 3766,
+            "other_qty": 3994,
+            "delta": 228,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "006340.KS",
+            "signal_date": "2025-02-13",
+            "base_qty": 5127,
+            "other_qty": 4926,
+            "delta": -201,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "007810.KS",
+            "signal_date": "2025-01-02",
+            "base_qty": 1994,
+            "other_qty": 1672,
+            "delta": -322,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "010140.KS",
+            "signal_date": "2025-01-21",
+            "base_qty": 1524,
+            "other_qty": 1485,
+            "delta": -39,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "010140.KS",
+            "signal_date": "2025-06-30",
+            "base_qty": 77,
+            "other_qty": 37,
+            "delta": -40,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "010170.KQ",
+            "signal_date": "2025-01-16",
+            "base_qty": 14359,
+            "other_qty": 13986,
+            "delta": -373,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "015760.KS",
+            "signal_date": "2025-07-21",
+            "base_qty": 488,
+            "other_qty": 467,
+            "delta": -21,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "018880.KS",
+            "signal_date": "2025-09-11",
+            "base_qty": 5916,
+            "other_qty": 5746,
+            "delta": -170,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "030530.KQ",
+            "signal_date": "2025-07-28",
+            "base_qty": 3202,
+            "other_qty": 3056,
+            "delta": -146,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "032820.KQ",
+            "signal_date": "2024-10-15",
+            "base_qty": 5854,
+            "other_qty": 5706,
+            "delta": -148,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "034020.KS",
+            "signal_date": "2025-03-05",
+            "base_qty": 404,
+            "other_qty": 394,
+            "delta": -10,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "034730.KS",
+            "signal_date": "2025-07-08",
+            "base_qty": 51,
+            "other_qty": 50,
+            "delta": -1,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "034730.KS",
+            "signal_date": "2025-09-08",
+            "base_qty": 87,
+            "other_qty": 83,
+            "delta": -4,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "036540.KQ",
+            "signal_date": "2025-07-11",
+            "base_qty": 6583,
+            "other_qty": 6508,
+            "delta": -75,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "041190.KQ",
+            "signal_date": "2025-08-04",
+            "base_qty": 1144,
+            "other_qty": 1109,
+            "delta": -35,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "046970.KQ",
+            "signal_date": "2025-05-21",
+            "base_qty": 9846,
+            "other_qty": 9507,
+            "delta": -339,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "062040.KS",
+            "signal_date": "2024-12-30",
+            "base_qty": 201,
+            "other_qty": 195,
+            "delta": -6,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "064350.KS",
+            "signal_date": "2025-03-31",
+            "base_qty": 139,
+            "other_qty": 134,
+            "delta": -5,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "064350.KS",
+            "signal_date": "2025-09-30",
+            "base_qty": 94,
+            "other_qty": 93,
+            "delta": -1,
+            "base_status": "open",
+            "other_status": "open"
+          },
+          {
+            "symbol": "066570.KS",
+            "signal_date": "2025-10-02",
+            "base_qty": 274,
+            "other_qty": 269,
+            "delta": -5,
+            "base_status": "pending",
+            "other_status": "pending"
+          },
+          {
+            "symbol": "071050.KS",
+            "signal_date": "2025-06-20",
+            "base_qty": 108,
+            "other_qty": 105,
+            "delta": -3,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "071050.KS",
+            "signal_date": "2025-07-11",
+            "base_qty": 95,
+            "other_qty": 91,
+            "delta": -4,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "071090.KS",
+            "signal_date": "2025-08-12",
+            "base_qty": 1134,
+            "other_qty": 1161,
+            "delta": 27,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "079550.KS",
+            "signal_date": "2025-01-24",
+            "base_qty": 41,
+            "other_qty": 40,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "079550.KS",
+            "signal_date": "2025-06-19",
+            "base_qty": 25,
+            "other_qty": 24,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "080220.KQ",
+            "signal_date": "2025-07-08",
+            "base_qty": 31,
+            "other_qty": 17,
+            "delta": -14,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "082740.KS",
+            "signal_date": "2025-03-04",
+            "base_qty": 520,
+            "other_qty": 505,
+            "delta": -15,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "082740.KS",
+            "signal_date": "2025-08-08",
+            "base_qty": 261,
+            "other_qty": 253,
+            "delta": -8,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "086790.KS",
+            "signal_date": "2024-11-06",
+            "base_qty": 328,
+            "other_qty": 324,
+            "delta": -4,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "092870.KQ",
+            "signal_date": "2025-03-05",
+            "base_qty": 1,
+            "other_qty": 3,
+            "delta": 2,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "096770.KS",
+            "signal_date": "2025-06-20",
+            "base_qty": 85,
+            "other_qty": 83,
+            "delta": -2,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "201490.KQ",
+            "signal_date": "2025-05-13",
+            "base_qty": 11033,
+            "other_qty": 10937,
+            "delta": -96,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "203650.KQ",
+            "signal_date": "2024-10-10",
+            "base_qty": 10771,
+            "other_qty": 10424,
+            "delta": -347,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "203650.KQ",
+            "signal_date": "2025-01-31",
+            "base_qty": 5821,
+            "other_qty": 5694,
+            "delta": -127,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "203650.KQ",
+            "signal_date": "2025-05-20",
+            "base_qty": 11422,
+            "other_qty": 11319,
+            "delta": -103,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "267260.KS",
+            "signal_date": "2024-12-03",
+            "base_qty": 37,
+            "other_qty": 36,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "267270.KS",
+            "signal_date": "2025-02-26",
+            "base_qty": 143,
+            "other_qty": 139,
+            "delta": -4,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "272210.KS",
+            "signal_date": "2025-04-01",
+            "base_qty": 293,
+            "other_qty": 287,
+            "delta": -6,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "272210.KS",
+            "signal_date": "2025-05-16",
+            "base_qty": 193,
+            "other_qty": 188,
+            "delta": -5,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "298040.KS",
+            "signal_date": "2025-05-14",
+            "base_qty": 24,
+            "other_qty": 23,
+            "delta": -1,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "298040.KS",
+            "signal_date": "2025-10-01",
+            "base_qty": 14,
+            "other_qty": 13,
+            "delta": -1,
+            "base_status": "open",
+            "other_status": "open"
+          },
+          {
+            "symbol": "322000.KS",
+            "signal_date": "2025-02-05",
+            "base_qty": 63,
+            "other_qty": 59,
+            "delta": -4,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "329180.KS",
+            "signal_date": "2025-09-24",
+            "base_qty": 41,
+            "other_qty": 40,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "336260.KS",
+            "signal_date": "2025-09-10",
+            "base_qty": 395,
+            "other_qty": 382,
+            "delta": -13,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "356680.KQ",
+            "signal_date": "2024-11-05",
+            "base_qty": 1838,
+            "other_qty": 1804,
+            "delta": -34,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "393210.KQ",
+            "signal_date": "2025-06-09",
+            "base_qty": 1294,
+            "other_qty": 1261,
+            "delta": -33,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "396300.KQ",
+            "signal_date": "2025-05-28",
+            "base_qty": 561,
+            "other_qty": 383,
+            "delta": -178,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "417200.KQ",
+            "signal_date": "2025-02-04",
+            "base_qty": 884,
+            "other_qty": 861,
+            "delta": -23,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "419050.KQ",
+            "signal_date": "2025-06-25",
+            "base_qty": 11519,
+            "other_qty": 11215,
+            "delta": -304,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "452190.KQ",
+            "signal_date": "2025-03-28",
+            "base_qty": 2154,
+            "other_qty": 2088,
+            "delta": -66,
+            "base_status": "closed",
+            "other_status": "closed"
+          }
+        ],
+        "quantity_down": 51,
+        "quantity_up": 3,
+        "quantity_same": 2
+      },
+      "fee30": {
+        "same_orders": 54,
+        "dropped": [
+          {
+            "symbol": "007810.KS",
+            "signal_date": "2025-03-12",
+            "quantity": 20,
+            "entry": 11870,
+            "stop": 10717,
+            "target": 14800,
+            "fill": {
+              "date": "2025-03-13",
+              "price": 11870,
+              "fee": 237.4
+            },
+            "exit": {
+              "date": "2025-03-31",
+              "price": 10711.6415,
+              "reason": "stop",
+              "net_pnl": -23618.80282999997,
+              "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+          },
+          {
+            "symbol": "092870.KQ",
+            "signal_date": "2025-03-05",
+            "quantity": 1,
+            "entry": 12620,
+            "stop": 11626,
+            "target": 15760,
+            "fill": {
+              "date": "2025-03-06",
+              "price": 12620,
+              "fee": 12.620000000000001
+            },
+            "exit": {
+              "date": "2025-03-11",
+              "price": 11394.3,
+              "reason": "stop",
+              "net_pnl": -1249.7142999999996,
+              "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+          }
+        ],
+        "added": [
+          {
+            "symbol": "015760.KS",
+            "signal_date": "2025-03-21",
+            "quantity": 113,
+            "entry": 22100,
+            "stop": 21491,
+            "target": 23700,
+            "fill": {
+              "date": "2025-03-24",
+              "price": 22100,
+              "fee": 7491.900000000001
+            },
+            "exit": {
+              "date": "2025-03-31",
+              "price": 21480.2545,
+              "reason": "stop",
+              "net_pnl": -84804.9477754999,
+              "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+          },
+          {
+            "symbol": "067310.KQ",
+            "signal_date": "2025-03-10",
+            "quantity": 39,
+            "entry": 10880,
+            "stop": 10115,
+            "target": 13300,
+            "fill": {
+              "date": "2025-03-11",
+              "price": 10385.189999999999,
+              "fee": 1215.0672299999999
+            },
+            "exit": {
+              "date": "2025-03-21",
+              "price": 13300,
+              "reason": "target",
+              "net_pnl": 110906.42277000012,
+              "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+          }
+        ],
+        "quantity_changed": [
+          {
+            "symbol": "005290.KQ",
+            "signal_date": "2025-03-05",
+            "base_qty": 512,
+            "other_qty": 481,
+            "delta": -31,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "005290.KQ",
+            "signal_date": "2025-07-21",
+            "base_qty": 579,
+            "other_qty": 530,
+            "delta": -49,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "005830.KS",
+            "signal_date": "2025-08-05",
+            "base_qty": 62,
+            "other_qty": 40,
+            "delta": -22,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "005930.KS",
+            "signal_date": "2025-03-27",
+            "base_qty": 341,
+            "other_qty": 336,
+            "delta": -5,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "006340.KS",
+            "signal_date": "2025-01-02",
+            "base_qty": 3766,
+            "other_qty": 4203,
+            "delta": 437,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "006340.KS",
+            "signal_date": "2025-02-13",
+            "base_qty": 5127,
+            "other_qty": 4732,
+            "delta": -395,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "007810.KS",
+            "signal_date": "2025-01-02",
+            "base_qty": 1994,
+            "other_qty": 1385,
+            "delta": -609,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "010140.KS",
+            "signal_date": "2025-01-21",
+            "base_qty": 1524,
+            "other_qty": 1425,
+            "delta": -99,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "010140.KS",
+            "signal_date": "2025-06-30",
+            "base_qty": 77,
+            "other_qty": 39,
+            "delta": -38,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "010170.KQ",
+            "signal_date": "2025-01-16",
+            "base_qty": 14359,
+            "other_qty": 13639,
+            "delta": -720,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "015760.KS",
+            "signal_date": "2025-07-21",
+            "base_qty": 488,
+            "other_qty": 448,
+            "delta": -40,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "018880.KS",
+            "signal_date": "2025-09-11",
+            "base_qty": 5916,
+            "other_qty": 5460,
+            "delta": -456,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "030530.KQ",
+            "signal_date": "2025-07-28",
+            "base_qty": 3202,
+            "other_qty": 2923,
+            "delta": -279,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "032820.KQ",
+            "signal_date": "2024-10-15",
+            "base_qty": 5854,
+            "other_qty": 5565,
+            "delta": -289,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "034020.KS",
+            "signal_date": "2025-03-05",
+            "base_qty": 404,
+            "other_qty": 384,
+            "delta": -20,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "034730.KS",
+            "signal_date": "2025-07-08",
+            "base_qty": 51,
+            "other_qty": 49,
+            "delta": -2,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "034730.KS",
+            "signal_date": "2025-09-08",
+            "base_qty": 87,
+            "other_qty": 79,
+            "delta": -8,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "036540.KQ",
+            "signal_date": "2025-07-11",
+            "base_qty": 6583,
+            "other_qty": 6441,
+            "delta": -142,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "041190.KQ",
+            "signal_date": "2025-08-04",
+            "base_qty": 1144,
+            "other_qty": 1076,
+            "delta": -68,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "046970.KQ",
+            "signal_date": "2025-05-21",
+            "base_qty": 9846,
+            "other_qty": 9201,
+            "delta": -645,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "062040.KS",
+            "signal_date": "2024-12-30",
+            "base_qty": 201,
+            "other_qty": 190,
+            "delta": -11,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "064350.KS",
+            "signal_date": "2025-03-31",
+            "base_qty": 139,
+            "other_qty": 130,
+            "delta": -9,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "064350.KS",
+            "signal_date": "2025-09-30",
+            "base_qty": 94,
+            "other_qty": 91,
+            "delta": -3,
+            "base_status": "open",
+            "other_status": "open"
+          },
+          {
+            "symbol": "066570.KS",
+            "signal_date": "2025-10-02",
+            "base_qty": 274,
+            "other_qty": 265,
+            "delta": -9,
+            "base_status": "pending",
+            "other_status": "pending"
+          },
+          {
+            "symbol": "071050.KS",
+            "signal_date": "2025-06-20",
+            "base_qty": 108,
+            "other_qty": 101,
+            "delta": -7,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "071050.KS",
+            "signal_date": "2025-07-11",
+            "base_qty": 95,
+            "other_qty": 88,
+            "delta": -7,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "071090.KS",
+            "signal_date": "2025-08-12",
+            "base_qty": 1134,
+            "other_qty": 1202,
+            "delta": 68,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "079550.KS",
+            "signal_date": "2025-01-24",
+            "base_qty": 41,
+            "other_qty": 39,
+            "delta": -2,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "079550.KS",
+            "signal_date": "2025-06-19",
+            "base_qty": 25,
+            "other_qty": 23,
+            "delta": -2,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "080220.KQ",
+            "signal_date": "2025-07-08",
+            "base_qty": 31,
+            "other_qty": 13,
+            "delta": -18,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "082740.KS",
+            "signal_date": "2025-03-04",
+            "base_qty": 520,
+            "other_qty": 492,
+            "delta": -28,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "082740.KS",
+            "signal_date": "2025-08-08",
+            "base_qty": 261,
+            "other_qty": 245,
+            "delta": -16,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "086790.KS",
+            "signal_date": "2024-11-06",
+            "base_qty": 328,
+            "other_qty": 311,
+            "delta": -17,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "096770.KS",
+            "signal_date": "2025-06-20",
+            "base_qty": 85,
+            "other_qty": 81,
+            "delta": -4,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "201490.KQ",
+            "signal_date": "2025-05-13",
+            "base_qty": 11033,
+            "other_qty": 10859,
+            "delta": -174,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "203650.KQ",
+            "signal_date": "2024-10-10",
+            "base_qty": 10771,
+            "other_qty": 10098,
+            "delta": -673,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "203650.KQ",
+            "signal_date": "2025-01-31",
+            "base_qty": 5821,
+            "other_qty": 5577,
+            "delta": -244,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "203650.KQ",
+            "signal_date": "2025-05-20",
+            "base_qty": 11422,
+            "other_qty": 11233,
+            "delta": -189,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "267260.KS",
+            "signal_date": "2024-12-03",
+            "base_qty": 37,
+            "other_qty": 35,
+            "delta": -2,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "267270.KS",
+            "signal_date": "2025-02-26",
+            "base_qty": 143,
+            "other_qty": 136,
+            "delta": -7,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "272210.KS",
+            "signal_date": "2025-04-01",
+            "base_qty": 293,
+            "other_qty": 279,
+            "delta": -14,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "272210.KS",
+            "signal_date": "2025-05-16",
+            "base_qty": 193,
+            "other_qty": 183,
+            "delta": -10,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "298040.KS",
+            "signal_date": "2025-05-14",
+            "base_qty": 24,
+            "other_qty": 23,
+            "delta": -1,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "298040.KS",
+            "signal_date": "2025-10-01",
+            "base_qty": 14,
+            "other_qty": 12,
+            "delta": -2,
+            "base_status": "open",
+            "other_status": "open"
+          },
+          {
+            "symbol": "322000.KS",
+            "signal_date": "2025-02-05",
+            "base_qty": 63,
+            "other_qty": 57,
+            "delta": -6,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "329180.KS",
+            "signal_date": "2025-09-24",
+            "base_qty": 41,
+            "other_qty": 40,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "336260.KS",
+            "signal_date": "2025-09-10",
+            "base_qty": 395,
+            "other_qty": 370,
+            "delta": -25,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "356680.KQ",
+            "signal_date": "2024-11-05",
+            "base_qty": 1838,
+            "other_qty": 1772,
+            "delta": -66,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "393210.KQ",
+            "signal_date": "2025-06-09",
+            "base_qty": 1294,
+            "other_qty": 1230,
+            "delta": -64,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "396300.KQ",
+            "signal_date": "2025-05-28",
+            "base_qty": 561,
+            "other_qty": 226,
+            "delta": -335,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "417200.KQ",
+            "signal_date": "2025-02-04",
+            "base_qty": 884,
+            "other_qty": 839,
+            "delta": -45,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "419050.KQ",
+            "signal_date": "2025-06-25",
+            "base_qty": 11519,
+            "other_qty": 10710,
+            "delta": -809,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "452190.KQ",
+            "signal_date": "2025-03-28",
+            "base_qty": 2154,
+            "other_qty": 2030,
+            "delta": -124,
+            "base_status": "closed",
+            "other_status": "closed"
+          }
+        ],
+        "quantity_down": 51,
+        "quantity_up": 2,
+        "quantity_same": 1
+      }
+    },
+    "recent": {
+      "fee20": {
+        "same_orders": 67,
+        "dropped": [],
+        "added": [],
+        "quantity_changed": [
+          {
+            "symbol": "000270.KS",
+            "signal_date": "2026-02-04",
+            "base_qty": 84,
+            "other_qty": 81,
+            "delta": -3,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "000270.KS",
+            "signal_date": "2026-03-17",
+            "base_qty": 55,
+            "other_qty": 54,
+            "delta": -1,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "000500.KS",
+            "signal_date": "2025-11-20",
+            "base_qty": 253,
+            "other_qty": 248,
+            "delta": -5,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "000500.KS",
+            "signal_date": "2026-03-06",
+            "base_qty": 146,
+            "other_qty": 143,
+            "delta": -3,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "000500.KS",
+            "signal_date": "2026-06-01",
+            "base_qty": 23,
+            "other_qty": 22,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "000500.KS",
+            "signal_date": "2026-07-22",
+            "base_qty": 25,
+            "other_qty": 24,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "000720.KS",
+            "signal_date": "2026-05-06",
+            "base_qty": 144,
+            "other_qty": 137,
+            "delta": -7,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "001440.KS",
+            "signal_date": "2026-05-21",
+            "base_qty": 158,
+            "other_qty": 154,
+            "delta": -4,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "001820.KS",
+            "signal_date": "2026-03-10",
+            "base_qty": 120,
+            "other_qty": 118,
+            "delta": -2,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "005490.KS",
+            "signal_date": "2026-04-08",
+            "base_qty": 31,
+            "other_qty": 30,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "006340.KS",
+            "signal_date": "2026-05-21",
+            "base_qty": 16,
+            "other_qty": 15,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "007810.KS",
+            "signal_date": "2026-02-12",
+            "base_qty": 124,
+            "other_qty": 122,
+            "delta": -2,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "007810.KS",
+            "signal_date": "2026-04-24",
+            "base_qty": 80,
+            "other_qty": 78,
+            "delta": -2,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "009150.KS",
+            "signal_date": "2025-12-26",
+            "base_qty": 83,
+            "other_qty": 81,
+            "delta": -2,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "010120.KS",
+            "signal_date": "2025-11-27",
+            "base_qty": 109,
+            "other_qty": 107,
+            "delta": -2,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "010170.KQ",
+            "signal_date": "2026-04-27",
+            "base_qty": 27,
+            "other_qty": 29,
+            "delta": 2,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "010950.KS",
+            "signal_date": "2026-04-10",
+            "base_qty": 104,
+            "other_qty": 101,
+            "delta": -3,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "012450.KS",
+            "signal_date": "2026-01-19",
+            "base_qty": 11,
+            "other_qty": 10,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "028050.KS",
+            "signal_date": "2026-09-03",
+            "base_qty": 347,
+            "other_qty": 334,
+            "delta": -13,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "028050.KS",
+            "signal_date": "2026-10-06",
+            "base_qty": 495,
+            "other_qty": 488,
+            "delta": -7,
+            "base_status": "open",
+            "other_status": "open"
+          },
+          {
+            "symbol": "032820.KQ",
+            "signal_date": "2025-10-24",
+            "base_qty": 2817,
+            "other_qty": 2753,
+            "delta": -64,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "034730.KS",
+            "signal_date": "2025-10-29",
+            "base_qty": 86,
+            "other_qty": 83,
+            "delta": -3,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "034730.KS",
+            "signal_date": "2026-03-10",
+            "base_qty": 2,
+            "other_qty": 1,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "036540.KQ",
+            "signal_date": "2026-01-26",
+            "base_qty": 2118,
+            "other_qty": 2062,
+            "delta": -56,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "036540.KQ",
+            "signal_date": "2026-05-14",
+            "base_qty": 1396,
+            "other_qty": 1360,
+            "delta": -36,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "041190.KQ",
+            "signal_date": "2026-09-18",
+            "base_qty": 314,
+            "other_qty": 178,
+            "delta": -136,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "042700.KS",
+            "signal_date": "2026-01-27",
+            "base_qty": 87,
+            "other_qty": 84,
+            "delta": -3,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "046970.KQ",
+            "signal_date": "2026-05-11",
+            "base_qty": 575,
+            "other_qty": 564,
+            "delta": -11,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "052690.KS",
+            "signal_date": "2025-11-10",
+            "base_qty": 181,
+            "other_qty": 175,
+            "delta": -6,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "066570.KS",
+            "signal_date": "2026-01-05",
+            "base_qty": 235,
+            "other_qty": 234,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "068270.KS",
+            "signal_date": "2025-12-08",
+            "base_qty": 121,
+            "other_qty": 120,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "071050.KS",
+            "signal_date": "2026-01-27",
+            "base_qty": 76,
+            "other_qty": 73,
+            "delta": -3,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "071090.KS",
+            "signal_date": "2026-02-09",
+            "base_qty": 256,
+            "other_qty": 281,
+            "delta": 25,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "072950.KQ",
+            "signal_date": "2026-01-30",
+            "base_qty": 3145,
+            "other_qty": 3029,
+            "delta": -116,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "078930.KS",
+            "signal_date": "2026-03-25",
+            "base_qty": 194,
+            "other_qty": 188,
+            "delta": -6,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "078930.KS",
+            "signal_date": "2026-08-26",
+            "base_qty": 60,
+            "other_qty": 59,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "092870.KQ",
+            "signal_date": "2025-10-20",
+            "base_qty": 935,
+            "other_qty": 910,
+            "delta": -25,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "092870.KQ",
+            "signal_date": "2025-10-23",
+            "base_qty": 622,
+            "other_qty": 610,
+            "delta": -12,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "092870.KQ",
+            "signal_date": "2026-01-15",
+            "base_qty": 1075,
+            "other_qty": 1036,
+            "delta": -39,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "092870.KQ",
+            "signal_date": "2026-10-01",
+            "base_qty": 147,
+            "other_qty": 143,
+            "delta": -4,
+            "base_status": "open",
+            "other_status": "open"
+          },
+          {
+            "symbol": "108490.KQ",
+            "signal_date": "2025-11-24",
+            "base_qty": 44,
+            "other_qty": 43,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "108490.KQ",
+            "signal_date": "2026-02-19",
+            "base_qty": 41,
+            "other_qty": 40,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "108490.KQ",
+            "signal_date": "2026-10-01",
+            "base_qty": 48,
+            "other_qty": 46,
+            "delta": -2,
+            "base_status": "open",
+            "other_status": "open"
+          },
+          {
+            "symbol": "115440.KQ",
+            "signal_date": "2026-09-09",
+            "base_qty": 842,
+            "other_qty": 823,
+            "delta": -19,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "128940.KS",
+            "signal_date": "2026-09-14",
+            "base_qty": 3,
+            "other_qty": 1,
+            "delta": -2,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "203650.KQ",
+            "signal_date": "2026-05-19",
+            "base_qty": 1462,
+            "other_qty": 1436,
+            "delta": -26,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "232140.KQ",
+            "signal_date": "2025-12-19",
+            "base_qty": 1201,
+            "other_qty": 1161,
+            "delta": -40,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "240810.KQ",
+            "signal_date": "2025-10-29",
+            "base_qty": 161,
+            "other_qty": 158,
+            "delta": -3,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "316140.KS",
+            "signal_date": "2025-12-19",
+            "base_qty": 322,
+            "other_qty": 250,
+            "delta": -72,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "319660.KQ",
+            "signal_date": "2026-01-14",
+            "base_qty": 467,
+            "other_qty": 448,
+            "delta": -19,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "322000.KS",
+            "signal_date": "2025-11-27",
+            "base_qty": 7,
+            "other_qty": 6,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "322000.KS",
+            "signal_date": "2026-05-22",
+            "base_qty": 36,
+            "other_qty": 35,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "356680.KQ",
+            "signal_date": "2025-10-10",
+            "base_qty": 1352,
+            "other_qty": 1324,
+            "delta": -28,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "356680.KQ",
+            "signal_date": "2026-09-04",
+            "base_qty": 20,
+            "other_qty": 11,
+            "delta": -9,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "417200.KQ",
+            "signal_date": "2025-11-18",
+            "base_qty": 745,
+            "other_qty": 727,
+            "delta": -18,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "417200.KQ",
+            "signal_date": "2026-04-01",
+            "base_qty": 299,
+            "other_qty": 293,
+            "delta": -6,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "456010.KQ",
+            "signal_date": "2025-10-21",
+            "base_qty": 1043,
+            "other_qty": 1012,
+            "delta": -31,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "457190.KS",
+            "signal_date": "2026-02-25",
+            "base_qty": 110,
+            "other_qty": 104,
+            "delta": -6,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "475150.KS",
+            "signal_date": "2026-07-13",
+            "base_qty": 141,
+            "other_qty": 138,
+            "delta": -3,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "475150.KS",
+            "signal_date": "2026-08-13",
+            "base_qty": 68,
+            "other_qty": 67,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          }
+        ],
+        "quantity_down": 58,
+        "quantity_up": 2,
+        "quantity_same": 7
+      },
+      "fee30": {
+        "same_orders": 67,
+        "dropped": [],
+        "added": [],
+        "quantity_changed": [
+          {
+            "symbol": "000270.KS",
+            "signal_date": "2026-02-04",
+            "base_qty": 84,
+            "other_qty": 79,
+            "delta": -5,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "000270.KS",
+            "signal_date": "2026-03-17",
+            "base_qty": 55,
+            "other_qty": 52,
+            "delta": -3,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "000500.KS",
+            "signal_date": "2025-11-20",
+            "base_qty": 253,
+            "other_qty": 243,
+            "delta": -10,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "000500.KS",
+            "signal_date": "2026-03-06",
+            "base_qty": 146,
+            "other_qty": 140,
+            "delta": -6,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "000500.KS",
+            "signal_date": "2026-06-01",
+            "base_qty": 23,
+            "other_qty": 22,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "000500.KS",
+            "signal_date": "2026-07-22",
+            "base_qty": 25,
+            "other_qty": 24,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "000720.KS",
+            "signal_date": "2026-05-06",
+            "base_qty": 144,
+            "other_qty": 130,
+            "delta": -14,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "001440.KS",
+            "signal_date": "2026-05-21",
+            "base_qty": 158,
+            "other_qty": 150,
+            "delta": -8,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "001820.KS",
+            "signal_date": "2026-03-10",
+            "base_qty": 120,
+            "other_qty": 116,
+            "delta": -4,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "003230.KS",
+            "signal_date": "2026-09-14",
+            "base_qty": 12,
+            "other_qty": 11,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "005490.KS",
+            "signal_date": "2026-04-08",
+            "base_qty": 31,
+            "other_qty": 29,
+            "delta": -2,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "006340.KS",
+            "signal_date": "2026-05-21",
+            "base_qty": 16,
+            "other_qty": 18,
+            "delta": 2,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "006400.KS",
+            "signal_date": "2026-03-18",
+            "base_qty": 30,
+            "other_qty": 29,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "007810.KS",
+            "signal_date": "2026-02-12",
+            "base_qty": 124,
+            "other_qty": 119,
+            "delta": -5,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "007810.KS",
+            "signal_date": "2026-04-24",
+            "base_qty": 80,
+            "other_qty": 77,
+            "delta": -3,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "009150.KS",
+            "signal_date": "2025-12-26",
+            "base_qty": 83,
+            "other_qty": 77,
+            "delta": -6,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "010120.KS",
+            "signal_date": "2025-11-27",
+            "base_qty": 109,
+            "other_qty": 105,
+            "delta": -4,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "010170.KQ",
+            "signal_date": "2026-04-27",
+            "base_qty": 27,
+            "other_qty": 25,
+            "delta": -2,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "010950.KS",
+            "signal_date": "2026-04-10",
+            "base_qty": 104,
+            "other_qty": 98,
+            "delta": -6,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "012450.KS",
+            "signal_date": "2026-01-19",
+            "base_qty": 11,
+            "other_qty": 10,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "028050.KS",
+            "signal_date": "2026-09-03",
+            "base_qty": 347,
+            "other_qty": 321,
+            "delta": -26,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "028050.KS",
+            "signal_date": "2026-10-06",
+            "base_qty": 495,
+            "other_qty": 480,
+            "delta": -15,
+            "base_status": "open",
+            "other_status": "open"
+          },
+          {
+            "symbol": "032820.KQ",
+            "signal_date": "2025-10-24",
+            "base_qty": 2817,
+            "other_qty": 2689,
+            "delta": -128,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "034730.KS",
+            "signal_date": "2025-10-29",
+            "base_qty": 86,
+            "other_qty": 80,
+            "delta": -6,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "034730.KS",
+            "signal_date": "2026-03-10",
+            "base_qty": 2,
+            "other_qty": 1,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "036540.KQ",
+            "signal_date": "2026-01-26",
+            "base_qty": 2118,
+            "other_qty": 2006,
+            "delta": -112,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "036540.KQ",
+            "signal_date": "2026-05-14",
+            "base_qty": 1396,
+            "other_qty": 1303,
+            "delta": -93,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "041190.KQ",
+            "signal_date": "2026-09-18",
+            "base_qty": 314,
+            "other_qty": 302,
+            "delta": -12,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "042700.KS",
+            "signal_date": "2026-01-27",
+            "base_qty": 87,
+            "other_qty": 81,
+            "delta": -6,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "046970.KQ",
+            "signal_date": "2026-05-11",
+            "base_qty": 575,
+            "other_qty": 553,
+            "delta": -22,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "052690.KS",
+            "signal_date": "2025-11-10",
+            "base_qty": 181,
+            "other_qty": 169,
+            "delta": -12,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "066570.KS",
+            "signal_date": "2026-01-05",
+            "base_qty": 235,
+            "other_qty": 232,
+            "delta": -3,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "068270.KS",
+            "signal_date": "2025-12-08",
+            "base_qty": 121,
+            "other_qty": 119,
+            "delta": -2,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "071050.KS",
+            "signal_date": "2026-01-27",
+            "base_qty": 76,
+            "other_qty": 71,
+            "delta": -5,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "071090.KS",
+            "signal_date": "2026-02-09",
+            "base_qty": 256,
+            "other_qty": 222,
+            "delta": -34,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "072950.KQ",
+            "signal_date": "2026-01-30",
+            "base_qty": 3145,
+            "other_qty": 2916,
+            "delta": -229,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "078930.KS",
+            "signal_date": "2026-03-25",
+            "base_qty": 194,
+            "other_qty": 182,
+            "delta": -12,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "078930.KS",
+            "signal_date": "2026-08-26",
+            "base_qty": 60,
+            "other_qty": 57,
+            "delta": -3,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "092870.KQ",
+            "signal_date": "2025-10-20",
+            "base_qty": 935,
+            "other_qty": 887,
+            "delta": -48,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "092870.KQ",
+            "signal_date": "2025-10-23",
+            "base_qty": 622,
+            "other_qty": 599,
+            "delta": -23,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "092870.KQ",
+            "signal_date": "2026-01-15",
+            "base_qty": 1075,
+            "other_qty": 998,
+            "delta": -77,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "092870.KQ",
+            "signal_date": "2026-10-01",
+            "base_qty": 147,
+            "other_qty": 139,
+            "delta": -8,
+            "base_status": "open",
+            "other_status": "open"
+          },
+          {
+            "symbol": "108490.KQ",
+            "signal_date": "2025-11-24",
+            "base_qty": 44,
+            "other_qty": 42,
+            "delta": -2,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "108490.KQ",
+            "signal_date": "2026-02-19",
+            "base_qty": 41,
+            "other_qty": 39,
+            "delta": -2,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "108490.KQ",
+            "signal_date": "2026-10-01",
+            "base_qty": 48,
+            "other_qty": 45,
+            "delta": -3,
+            "base_status": "open",
+            "other_status": "open"
+          },
+          {
+            "symbol": "115440.KQ",
+            "signal_date": "2026-09-09",
+            "base_qty": 842,
+            "other_qty": 803,
+            "delta": -39,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "203650.KQ",
+            "signal_date": "2026-05-19",
+            "base_qty": 1462,
+            "other_qty": 1409,
+            "delta": -53,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "232140.KQ",
+            "signal_date": "2025-12-19",
+            "base_qty": 1201,
+            "other_qty": 1124,
+            "delta": -77,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "240810.KQ",
+            "signal_date": "2025-10-29",
+            "base_qty": 161,
+            "other_qty": 154,
+            "delta": -7,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "316140.KS",
+            "signal_date": "2025-12-19",
+            "base_qty": 322,
+            "other_qty": 189,
+            "delta": -133,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "319660.KQ",
+            "signal_date": "2026-01-14",
+            "base_qty": 467,
+            "other_qty": 430,
+            "delta": -37,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "322000.KS",
+            "signal_date": "2025-11-27",
+            "base_qty": 7,
+            "other_qty": 6,
+            "delta": -1,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "322000.KS",
+            "signal_date": "2026-05-22",
+            "base_qty": 36,
+            "other_qty": 34,
+            "delta": -2,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "356680.KQ",
+            "signal_date": "2025-10-10",
+            "base_qty": 1352,
+            "other_qty": 1297,
+            "delta": -55,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "356680.KQ",
+            "signal_date": "2026-09-04",
+            "base_qty": 20,
+            "other_qty": 13,
+            "delta": -7,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "417200.KQ",
+            "signal_date": "2025-11-18",
+            "base_qty": 745,
+            "other_qty": 714,
+            "delta": -31,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "417200.KQ",
+            "signal_date": "2026-04-01",
+            "base_qty": 299,
+            "other_qty": 287,
+            "delta": -12,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "456010.KQ",
+            "signal_date": "2025-10-21",
+            "base_qty": 1043,
+            "other_qty": 983,
+            "delta": -60,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "457190.KS",
+            "signal_date": "2026-02-25",
+            "base_qty": 110,
+            "other_qty": 103,
+            "delta": -7,
+            "base_status": "cancelled",
+            "other_status": "cancelled"
+          },
+          {
+            "symbol": "475150.KS",
+            "signal_date": "2026-07-13",
+            "base_qty": 141,
+            "other_qty": 135,
+            "delta": -6,
+            "base_status": "closed",
+            "other_status": "closed"
+          },
+          {
+            "symbol": "475150.KS",
+            "signal_date": "2026-08-13",
+            "base_qty": 68,
+            "other_qty": 66,
+            "delta": -2,
+            "base_status": "closed",
+            "other_status": "closed"
+          }
+        ],
+        "quantity_down": 60,
+        "quantity_up": 1,
+        "quantity_same": 6
+      }
+    }
+  },
+  "hashes": {
+    "src/PaperPortfolio.php": "4ddf94689717f7f0192905dd59df0e3988a0d22fde6709b40daf87b988c82be3",
+    "src/TradeSimulator.php": "27a3aad7ca771987457636ffa732fd409c60ecf7a3ee975bdf4ac15f8a6533f9",
+    "bin/paper/AccountReplay.php": "8b949518dda645768735ebf9d6bf20b8c527eb45546cfdf1e4bbced2c0accbd5",
+    "bin/paper/ResearchCashFee.php": "b8f93e28f9ea3a578ddb21df7e2010e659f961c28fa865d8230e80cd1284bc52",
+    "bin/paper_account_replay.php": "9a374e330546f92de8abbf07ec1ac47a615b292453db7530e984b4b7968b08ce",
+    "tests/account_replay.php": "c992e3bb785c49464f8db5cc36dde6d4592a0dad44f575069713f616b478227b",
+    "config/paper-kr-recovery-v1.json": "886f09a68e99c99e90b9f9881df2bb4449a8ce2d1bf02b46cbe63c1749ae7a99",
+    "config/paper-history-kr-recovery-v1.json": "e02d0a0f8fac8f4b51623a29a030f642dc1774d0568e76c5104853c22a566529",
+    "config/paper-strategy-files.json": "f55f41f7aee23f71775881ab4021f1ff3e7851112af922322964c28f143c2020",
+    "docs/historical-account-replay/sector-map-v2.json": "7f1566372296ec8c36fe9fd8b92ee9c5e1b4e06197b4383a5ee59f8ffcafedaa",
+    "datasets": {
+      "prior": {
+        "dir": "C:\\Users\\acdun\\Desktop\\dev\\stock-personal-paper\\history-research\\kr-saved-scan-20251008",
+        "dataset.json": "5f69e86104b4bd73cd2a4a03ba2ad2ad8275e16563a99e1d528d916600c3e9c8"
+      },
+      "recent": {
+        "dir": "C:\\Users\\acdun\\Desktop\\dev\\stock-personal-paper\\history-research\\kr-saved-scan-20261009",
+        "dataset.json": "c683c269d8434ee5b77a382b489cbf8fe8ce5c443cfd45451c306b70ba32faca"
+      }
+    }
+  }
+}

@@ -89,8 +89,18 @@ $smoke=$o['smoke-label']??null;
 $start=$o['start']??null;$through=$o['through']??null;
 foreach(['start','through'] as $k)if(isset($o[$k])&&!preg_match('/^\d{4}-\d{2}-\d{2}$/',$o[$k]))throw new InvalidArgumentException('--'.$k.' must be YYYY-MM-DD');
 if($start!==null&&$smoke===null)throw new InvalidArgumentException('--start is only for smoke accounts (--smoke-label)');
-$id=PaperAccountReplay::accountId($research,$period,$smoke);
+$feeBps=null;
+if(isset($o['fee-bps'])){
+    if(!is_numeric($o['fee-bps'])||!is_finite((float)$o['fee-bps'])||(float)$o['fee-bps']<0||(float)$o['fee-bps']>=10000){
+        throw new InvalidArgumentException('--fee-bps must be a finite number in [0, 10000)');
+    }
+    $feeBps=(float)$o['fee-bps'];
+}
+$suffix=$o['account-suffix']??null;
+if($feeBps!==null&&$suffix===null)$suffix='fee'.(string)(int)$feeBps;
+$id=PaperAccountReplay::accountId($research,$period,$smoke,$suffix);
 $config=PaperAccountReplay::accountConfig($cfgs['base'],$id,$research);
+if($feeBps!==null&&$feeBps!==10.0)$config['fee_bps']=$feeBps;
 $stateRoot=PaperAccountReplay::stateRoot();
 $dir=PaperAccountReplay::accountDir($stateRoot,$research,$id);$journalPath=PaperAccountReplay::journalPath($dir);
 $needData=static function()use($o,$research,$period):array{

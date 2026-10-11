@@ -1,0 +1,63 @@
+{
+    "account": "hist-kr-recovery-v1-20261009-fee30",
+    "initial_cash": 100000000,
+    "cash": 70934246.38848276,
+    "reserved_cash": 0,
+    "equity": 114890446.38848276,
+    "realized_pnl": 14842761.438982759,
+    "closed_trades": 56,
+    "wins": 24,
+    "losses": 32,
+    "open_positions": [
+        {
+            "symbol": "092870.KQ",
+            "quantity": 139,
+            "entry_fill": 53026.5,
+            "mark_close": 53300,
+            "mark_session": 1791441000,
+            "unrealized_pnl_after_sell_cost": -6321.650499998592,
+            "bars_held": 4
+        },
+        {
+            "symbol": "108490.KQ",
+            "quantity": 45,
+            "entry_fill": 296500,
+            "mark_close": 297500,
+            "mark_session": 1791441000,
+            "unrealized_pnl_after_sell_cost": -35189.99999999814,
+            "bars_held": 4
+        },
+        {
+            "symbol": "028050.KS",
+            "quantity": 480,
+            "entry_fill": 48050,
+            "mark_close": 48250,
+            "mark_session": 1791441000,
+            "unrealized_pnl_after_sell_cost": -42671.999999996275,
+            "bars_held": 2
+        }
+    ],
+    "pending_orders": [],
+    "unrealized_pnl_open_positions": -84183.650499993,
+    "max_close_drawdown": 0.054039021506415486,
+    "last_session": 1791441000,
+    "last_day": "2026-10-08",
+    "halted": false,
+    "halt_reason": null,
+    "event_counts": {
+        "account_started": 1,
+        "day_log": 244,
+        "equity": 244,
+        "exit": 56,
+        "fill": 59,
+        "order": 67,
+        "order_cancelled": 8
+    },
+    "research": {
+        "dataset": "kr-saved-scan-20261009",
+        "start_day": "2025-10-08",
+        "plan_source": "engine",
+        "sector_source": "explicit_map",
+        "smoke": false
+    }
+}

@@ -62,10 +62,10 @@ function go(array $data,array $cfg,array $plans,array $opts=[]):array
     return [$r,(new PaperJournal(jpath($cfg['id'])))->read()];
 }
 function evs(array $j,string $type):array{return array_values(array_map(fn($e)=>$e['payload'],array_filter($j['events'],fn($e)=>$e['type']===$type)));}
-function qtyFor(float $equity,float $cash,float $entry,float $stop,array $c):int
+function qtyFor(float $equity,float $cash,float $entry,float $stop,array $c,float $fee=0.001,float $slip=0.0005):int
 {
     $risk=min($equity*$c['risk_pct'],$equity*$c['total_risk_pct']);$cap=min($cash,$equity*$c['position_pct'],$equity*$c['sector_pct']);
-    $unit=$entry*1.001-$stop*0.9995*0.999;return (int)floor(min($risk/$unit,$cap/($entry*1.001)));
+    $unit=$entry*(1+$fee)-$stop*(1-$slip)*(1-$fee);return (int)floor(min($risk/$unit,$cap/($entry*(1+$fee))));
 }
 
 // ---- configuration and paths ----
@@ -75,6 +75,13 @@ archeck(arthrows(fn()=>PaperAccountReplay::accountConfig($base,'paper-kr-recover
 archeck(arthrows(fn()=>PaperAccountReplay::accountConfig($base,'other-account',$research),'own ID prefix'),'an ID without the research prefix is refused');
 archeck(arthrows(fn()=>PaperAccountReplay::accountDir($tmp,$research,'paper-kr-recovery-v1'),'research account'),'the operational ID has no research folder');
 archeck(PaperAccountReplay::accountId($research,'recent','a1')==='hist-smoke-kr-recovery-v1-20261009-a1'&&arthrows(fn()=>PaperAccountReplay::accountId($research,'recent','A/../x'),'Smoke label'),'smoke IDs are separate and validated');
+archeck(PaperAccountReplay::accountId($research,'prior',null,'fee20')==='hist-kr-recovery-v1-20251008-fee20','a research suffix keeps the period ID and does not reuse the operational account');
+$fp='934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465';
+archeck(PaperStrategyVersion::current($root)===$fp,'operational strategy fingerprint matches main / full-v2');
+PaperStrategyVersion::verify(['version'=>$fp,'strategy_fingerprint'=>$fp],$fp);
+archeck(true,'an existing fingerprint account still verifies');
+$manifest=json_decode((string)file_get_contents($root.'/config/paper-strategy-files.json'),true,512,JSON_THROW_ON_ERROR);
+archeck(!in_array('bin/paper/ResearchCashFee.php',$manifest,true)&&in_array('src/PaperPortfolio.php',$manifest,true),'research cash-fee code is outside the strategy manifest');
 archeck(str_ends_with(PaperAccountReplay::accountDir($tmp,$research,'hist-kr-recovery-v1-20261009'),'/history-account/hist-kr-recovery-v1-20261009')&&$research['carry_over']==='none','account folder is separate and nothing is carried over');
 // ---- order, same-day rule, fill, target exit, books ----
 $data=mkdata(['AAA.KS'],PREP+30,['AAA.KS'=>[PREP+3=>[100,111,99,110]]]);
@@ -255,6 +262,34 @@ archeck(arthrows(fn()=>PaperAccountReplay::run($data7,$cfgC,$pC,[]),'Research in
 $jc=(new PaperJournal($pC))->read();
 archeck(array_keys($jc['state']['research']['code_sha256_lf'])===PaperAccountReplay::RUNTIME_CODE&&$jc['state']['research']['code_sha256_lf']===PaperAccountReplay::runtimeCodeHashes(),'the journal records the hashes of the replay code and configs it was started with');
 archeck(arthrows(fn()=>PaperAccountReplay::run($data7,array_replace($cfgC,['risk_pct'=>0.02]),$pC,['plan_provider'=>provider($plans7)]),'config changed'),'a changed account config is refused');
+archeck(arthrows(fn()=>PaperAccountReplay::run($data7,array_replace($cfgC,['fee_bps'=>20]),$pC,['plan_provider'=>provider($plans7)]),'config changed'),'resuming with a different cash fee is refused');
+
+// ---- research cash-fee override (slippage stays 5bp) ----
+$feeData=mkdata(['F1.KS','F2.KS'],PREP+12,['F1.KS'=>[PREP+3=>[100,111,99,110]]]);
+$feePlans=['F1.KS'=>[PREP+1=>plan(PREP+1)],'F2.KS'=>[PREP+1=>plan(PREP+1)]];
+$feeBase=['position_pct'=>0.95,'sector_pct'=>1.0,'risk_pct'=>0.9,'total_risk_pct'=>1.0,'initial_cash'=>1000000];
+[$r10,$j10]=go($feeData,acfg($feeBase),$feePlans);
+[$r20,$j20]=go($feeData,acfg($feeBase+['fee_bps'=>20]),$feePlans);
+$o10=evs($j10,'order');$o20=evs($j20,'order');
+$by10=[];foreach($o10 as $x)$by10[$x['symbol']]=$x;$by20=[];foreach($o20 as $x)$by20[$x['symbol']]=$x;
+archeck($by20['F1.KS']['quantity']<$by10['F1.KS']['quantity']&&$by20['F1.KS']['reserved_cash']>$by20['F1.KS']['quantity']*$by20['F1.KS']['entry']*1.001,'a 20bp cash fee sizes fewer shares and reserves more than the 10bp rule');
+archeck($by20['F2.KS']['quantity']<$by10['F2.KS']['quantity'],'the second same-session order also shrinks because the first reservation used more cash');
+$f20=evs($j20,'fill');$x20=evs($j20,'exit');
+$q1=$by20['F1.KS']['quantity'];$fillPx=$f20[0]['price'];$exitPx=$x20[0]['price'];
+archeck(abs($f20[0]['fee']-$q1*$fillPx*0.002)<1e-6&&abs($x20[0]['net_pnl']-($q1*$exitPx*0.998-$q1*$fillPx*1.002))<0.01,'buy and sell each take 20bp once; slippage is not charged again as cash');
+archeck(abs($f20[0]['price']-100)<1e-9&&abs($x20[0]['price']-110)<1e-9,'cash fee does not change the fill or target print');
+archeck(PaperAccountReplay::reconcile($j20,$feeData)['pass']&&PaperAccountReplay::reconcile($j10,$feeData)['pass'],'both fee journals rebuild cash and match the independent simulator');
+$tight=acfg(['initial_cash'=>100.25,'risk_pct'=>0.9,'position_pct'=>1.0,'sector_pct'=>1.0,'total_risk_pct'=>1.0]);
+$one=mkdata(['G1.KS'],PREP+6);
+[$r10g,$j10g]=go($one,$tight,['G1.KS'=>[PREP+1=>plan(PREP+1)]]);
+$tight30=acfg(['initial_cash'=>100.25,'risk_pct'=>0.9,'position_pct'=>1.0,'sector_pct'=>1.0,'total_risk_pct'=>1.0,'fee_bps'=>30]);
+[$r30g,$j30g]=go($one,$tight30,['G1.KS'=>[PREP+1=>plan(PREP+1)]]);
+$sig30=evs($j30g,'day_log')[1]['signals'];
+archeck(count(evs($j10g,'order'))===1&&evs($j30g,'order')===[]&&$sig30[0]['outcome']==='cash_or_risk_or_sector_limit','30bp can refuse a share that 10bp could still reserve');
+$p20=jpath($j20['state']['config']['id']);$before=hash_file('sha256',$p20);
+$r=PaperAccountReplay::run($feeData,$j20['state']['config'],$p20,['plan_provider'=>provider($feePlans),'chunk'=>9]);
+archeck($j10['state']['research']['cash_fee_bps']===10.0&&$j20['state']['research']['cash_fee_bps']===20.0&&$j10['state']['research']['slippage_bps']===5.0&&$j10['state']['research']['research_fee_sha256']===ResearchCashFee::hashes($root)&&$j10['state']['strategy_fingerprint']===$fp,'research fee settings and code hashes are stored beside the unchanged operational fingerprint');
+archeck($r['processed_sessions']===0&&hash_file('sha256',$p20)===$before,'re-running the same fee account adds no event');
 archeck(arthrows(fn()=>PaperAccountReplay::run($data7,acfg(),jpath('hist-smoke-kr-recovery-v1-zz'),['plan_provider'=>provider($plans7),'start'=>'2000-01-01']),'precedes'),'a start before the evaluation start is refused');
 
 // ---- only the research account is written ----

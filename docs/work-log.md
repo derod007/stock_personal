@@ -1,3 +1,9 @@
+## 2026-10-11 22:26 · Cursor · 끝
+- 한 일: 현금 거래비용만 각 10·20·30bp로 두 기간 연구 계좌를 처음부터 재실행. 기준 10bp는 full-v2와 주문·현금·평가 일치. 20·30bp는 총자산이 줄고 이전 30bp만 주문 구성이 바뀜. 슬리피지·운영·full-v2 변경 없음. 병합 안 함
+- 파일: src/PaperPortfolio.php, bin/paper/AccountReplay.php, bin/paper_account_replay.php, tests/account_replay.php, docs/research/account-replay-fee-sensitivity.py, docs/historical-account-replay/fee-sensitivity/, docs/work-log.md
+- 커밋: 브랜치 cursor/fee-sensitivity, 새 PR(병합 안 함)
+- 롤백: 없음
+
 ## 2026-10-11 21:36 · Cursor · 끝
 - 한 일: PR #69 보완. 청산가·진입가를 일봉 범위와 따로 대조, 독립 경로의 청산일·가격·사유·취소일·취소 사유를 저장 결과와 대조, 가격·날짜·사유·가격+손익 변조 사본이 실패하는지 확인. 123건 재검증(오류 0, 가정 의존 9=고가 밖 진입 3+저가 밖 청산 6). 운영 엔진·full-v2 변경 없음. 비용 실험·병합 안 함
 - 파일: docs/research/account-replay-fill-audit.py, tests/test_fill_audit.py, docs/historical-account-replay/fill-audit/, docs/work-log.md

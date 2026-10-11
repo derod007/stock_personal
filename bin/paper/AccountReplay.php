@@ -52,13 +52,20 @@ final class PaperAccountReplay
         return $config;
     }
 
-    public static function accountId(array $research,string $period,?string $smokeLabel):string
+    public static function accountId(array $research,string $period,?string $smokeLabel,?string $suffix=null):string
     {
         $p=$research['periods'][$period]??throw new InvalidArgumentException('Unknown period '.$period);
-        if($smokeLabel===null)return $p['account_id'];
-        if(!preg_match('/^[a-z0-9]{1,24}$/',$smokeLabel))throw new InvalidArgumentException('Smoke label must be [a-z0-9]{1,24}');
-        $stamp=substr($p['account_id'],strlen($research['id_prefix']));
-        return $research['smoke_id_prefix'].$stamp.'-'.$smokeLabel;
+        if($smokeLabel===null)$id=$p['account_id'];
+        else{
+            if(!preg_match('/^[a-z0-9]{1,24}$/',$smokeLabel))throw new InvalidArgumentException('Smoke label must be [a-z0-9]{1,24}');
+            $stamp=substr($p['account_id'],strlen($research['id_prefix']));
+            $id=$research['smoke_id_prefix'].$stamp.'-'.$smokeLabel;
+        }
+        if($suffix===null)return $id;
+        if(!preg_match('/^[a-z0-9]{1,16}$/',$suffix))throw new InvalidArgumentException('Account suffix must be [a-z0-9]{1,16}');
+        $id=$id.'-'.$suffix;
+        if(strlen($id)>64)throw new InvalidArgumentException('Account ID too long');
+        return $id;
     }
 
     /** Account folder. Never an operational path and never inside a dataset. */
@@ -164,6 +171,7 @@ final class PaperAccountReplay
             'sector_source'=>($opts['sector_map']??null)===null?'none_all_unclassified':'explicit_map','sector_map_sha256'=>$sectorHash,
             'sector_map_file_sha256'=>$opts['sector_map_file_sha256']??null,
             'smoke'=>$startDay!==null||!empty($opts['smoke']),'excluded_symbols'=>$data['excluded'],
+            'cash_fee_bps'=>(float)($config['fee_bps']??10),'slippage_bps'=>5.0,
             'code_sha256_lf'=>self::runtimeCodeHashes()];
         $sessions=self::sessions($data,$startDay,$opts['through']??null);
         $journal=new PaperJournal($journalPath);
@@ -200,7 +208,7 @@ final class PaperAccountReplay
         if(($s['config_hash']??null)!==$configHash||($s['mode']??null)!=='replay')throw new RuntimeException('Account config changed; use a new research account ID');
         PaperStrategyVersion::verify($s,$version);
         $r=$s['research']??[];
-        foreach(['dataset','dataset_files','bars_sha256','plan_source','sector_map_sha256','sector_map_file_sha256','start_day','as_of_day','code_sha256_lf'] as $k){
+        foreach(['dataset','dataset_files','bars_sha256','plan_source','sector_map_sha256','sector_map_file_sha256','start_day','as_of_day','cash_fee_bps','slippage_bps','code_sha256_lf'] as $k){
             if(($r[$k]??null)!==$meta[$k])throw new RuntimeException('Research input changed ('.$k.'); use a new research account ID');
         }
     }
@@ -311,7 +319,8 @@ final class PaperAccountReplay
                     $orders[$sym]=['qty'=>$p['quantity'],'entry'=>$p['entry'],'stop'=>$p['stop'],'target'=>$p['target'],'reserved'=>$p['reserved_cash'],
                         'filled'=>false,'cost'=>null,'session'=>$p['session'],'planned_risk'=>$p['planned_risk'],'pattern'=>$p['pattern']??null,
                         'signal_at'=>$p['signal_at']??null,'ttl'=>$p['order_valid_bars']??null];
-                    if(!self::near((float)$p['reserved_cash'],$p['quantity']*$p['entry']*(1+self::FEE_RATE),1e-6))$errors[]='reservation math '.$sym;
+                    $fee=PaperPortfolio::feeRate($cfg);
+                    if(!self::near((float)$p['reserved_cash'],$p['quantity']*$p['entry']*(1+$fee),1e-6))$errors[]='reservation math '.$sym;
                     if(count($orders)>$cfg['max_positions'])$errors[]='max positions exceeded at '.$p['session'];
                     $orderEvents[]=$p;
                     break;
@@ -321,7 +330,8 @@ final class PaperAccountReplay
                     if($o['qty']!==$p['quantity'])$errors[]='fill quantity differs '.$sym;
                     if($p['session']<=$o['session'])$errors[]='fill not after the signal session '.$sym;
                     if($p['price']>$o['entry']+1e-9)$errors[]='fill above limit '.$sym;
-                    $cost=$p['quantity']*$p['price']*(1+self::FEE_RATE);
+                    $fee=PaperPortfolio::feeRate($cfg);
+                    $cost=$p['quantity']*$p['price']*(1+$fee);
                     if(!self::near($cost-$p['quantity']*$p['price'],$p['fee'],1e-6))$errors[]='fee math '.$sym;
                     $cash-=$cost;if($cash<-0.01)$errors[]='negative cash after fill '.$sym;
                     $orders[$sym]['filled']=true;$orders[$sym]['cost']=$cost;$orders[$sym]['fill']=$p['price'];$orders[$sym]['fill_session']=$p['session'];
@@ -331,7 +341,8 @@ final class PaperAccountReplay
                     $sym=$p['symbol'];$o=$orders[$sym]??null;
                     if($o===null||!$o['filled']){$errors[]='exit without fill '.$sym;break;}
                     if($o['qty']!==$p['quantity'])$errors[]='exit quantity differs '.$sym;
-                    $proceeds=$p['quantity']*$p['price']*(1-self::FEE_RATE);$net=$proceeds-$o['cost'];
+                    $fee=PaperPortfolio::feeRate($cfg);
+                    $proceeds=$p['quantity']*$p['price']*(1-$fee);$net=$proceeds-$o['cost'];
                     if(!self::near($net,$p['net_pnl'],0.01))$errors[]='net pnl math '.$sym;
                     $cash+=$proceeds;$realized+=$net;$closed++;if($net>0)$wins++;if($net<0)$losses++;
                     $exits[$sym.'@'.$o['session']]=$p+['entry_fill'=>$o['fill']];
@@ -374,7 +385,8 @@ final class PaperAccountReplay
         $limitErrors=[];
         foreach($orderEvents as $o){
             $pt=$eq[$o['session']]??null;if($pt===null){$limitErrors[]='no equity point '.$o['session'];continue;}
-            if($o['quantity']*$o['entry']*(1+self::FEE_RATE)>$pt['equity']*$cfg['position_pct']+0.01)$limitErrors[]='position size '.$o['symbol'];
+            $fee=PaperPortfolio::feeRate($cfg);
+            if($o['quantity']*$o['entry']*(1+$fee)>$pt['equity']*$cfg['position_pct']+0.01)$limitErrors[]='position size '.$o['symbol'];
             if($o['planned_risk']>$pt['equity']*$cfg['risk_pct']+0.01)$limitErrors[]='risk size '.$o['symbol'];
         }
         $add('order_size_and_risk_within_limits',$limitErrors===[],$limitErrors===[]?count($orderEvents).' orders checked':implode('; ',array_slice($limitErrors,0,5)));
@@ -474,7 +486,7 @@ final class PaperAccountReplay
         foreach($s['active'] as $sym=>$o){
             if(!$o['filled']){$pending[]=['symbol'=>$sym,'quantity'=>$o['quantity'],'entry'=>$o['plan']['entry']??null,'stop'=>$o['plan']['stop']??null,'target'=>$o['plan']['target']??null,'bars_seen'=>count($o['history']),'reserved_cash'=>$o['reservation']];continue;}
             $mark=$s['marks'][$sym]['close']??$o['entry_fill'];
-            $u=$o['quantity']*$mark*(1-self::FEE_RATE)-$o['entry_cost'];$unrealized+=$u;
+            $u=$o['quantity']*$mark*(1-PaperPortfolio::feeRate($s['config']))-$o['entry_cost'];$unrealized+=$u;
             $open[]=['symbol'=>$sym,'quantity'=>$o['quantity'],'entry_fill'=>$o['entry_fill'],'mark_close'=>$mark,'mark_session'=>$s['marks'][$sym]['session']??null,
                 'unrealized_pnl_after_sell_cost'=>$u,'bars_held'=>count($o['history'])];
         }

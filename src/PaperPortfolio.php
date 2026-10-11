@@ -24,10 +24,26 @@ final class PaperPortfolio
                 if(($config['currency']==='KRW')!==$kr || $sector==='') throw new \InvalidArgumentException('Separate market/currency accounts required');
             }
         }
+        self::feeRate($config);
         return ['config'=>$config,'version'=>$version,'mode'=>$mode,'cash'=>(float)$config['initial_cash'],
             'realized'=>0.0,'active'=>[],'marks'=>[],'last_session'=>0,'last_snapshots'=>[],
             'peak_equity'=>(float)$config['initial_cash'],'max_drawdown'=>0.0,'equity'=>[],
             'frozen'=>[],'closed_trades'=>0,'wins'=>0,'losses'=>0,'sectors'=>[]];
+    }
+
+    /** Cash fee as a fraction. Default 10bp each side. Slippage is not this value. */
+    public static function feeRate(array $config): float
+    {
+        $bps=$config['fee_bps']??10;
+        if(!is_numeric($bps)||!is_finite((float)$bps)||(float)$bps<0||(float)$bps>=10000){
+            throw new \InvalidArgumentException('Invalid fee_bps');
+        }
+        return (float)$bps/10000;
+    }
+
+    public static function slipRate(): float
+    {
+        return 0.0005;
     }
     public static function equity(array $s): float
     {
@@ -68,15 +84,16 @@ final class PaperPortfolio
             $bar=$bars[$symbol];
             if($s['mode']==='forward' && self::openTime($session,$cfg['currency'])<=$o['recorded_at']) { unset($o);continue; }
             $o['history'][]=$bar;
-            $t=(new TradeSimulator())->simulate($o['plan'],$o['history'],20);
+            $fee=self::feeRate($cfg);$slip=self::slipRate();
+            $t=(new TradeSimulator($fee*10000,$slip*10000))->simulate($o['plan'],$o['history'],20);
             if($t['filled'] && !$o['filled']) {
-                $cost=$o['quantity']*$t['entry_fill']*1.001;
+                $cost=$o['quantity']*$t['entry_fill']*(1+$fee);
                 if($cost>$s['cash']+0.01) throw new \RuntimeException('Cash invariant failed');
                 $s['cash']-=$cost;$o['filled']=true;$o['entry_fill']=$t['entry_fill'];$o['entry_cost']=$cost;
-                $emit('fill',['symbol'=>$symbol,'session'=>$session,'quantity'=>$o['quantity'],'price'=>$t['entry_fill'],'fee'=>$o['quantity']*$t['entry_fill']*0.001]);
+                $emit('fill',['symbol'=>$symbol,'session'=>$session,'quantity'=>$o['quantity'],'price'=>$t['entry_fill'],'fee'=>$o['quantity']*$t['entry_fill']*$fee]);
             }
             if($t['status']==='closed') {
-                $proceeds=$o['quantity']*$t['exit_fill']*0.999;
+                $proceeds=$o['quantity']*$t['exit_fill']*(1-$fee);
                 $net=$proceeds-$o['entry_cost'];$s['cash']+=$proceeds;$s['realized']+=$net;
                 $s['closed_trades']++;if($net>0)$s['wins']++;if($net<0)$s['losses']++;
                 $emit('exit',['symbol'=>$symbol,'session'=>$session,'quantity'=>$o['quantity'],
@@ -120,18 +137,19 @@ final class PaperPortfolio
                     $sectorUsed+=$o['filled']?max($o['reservation'],$o['quantity']*($s['marks'][$sym]['close']??0)):$o['reservation'];
                 }
             }
+            $fee=self::feeRate($cfg);$slip=self::slipRate();
             $risk=max(0,min($equity*$cfg['risk_pct'],$equity*$cfg['total_risk_pct']-$riskUsed));
             $capacity=max(0,min($s['cash']-self::reserved($s),$equity*$cfg['position_pct'],$equity*$cfg['sector_pct']-$sectorUsed));
-            $unitRisk=$entry*1.001-$stop*0.9995*0.999;
-            $qty=(int)floor(min($risk/$unitRisk,$capacity/($entry*1.001)));
+            $unitRisk=$entry*(1+$fee)-$stop*(1-$slip)*(1-$fee);
+            $qty=(int)floor(min($risk/$unitRisk,$capacity/($entry*(1+$fee))));
             if($qty<1) {
                 $emit('decision',['symbol'=>$symbol,'session'=>$session,'status'=>'no_order','reason'=>'cash_or_risk_or_sector_limit']);continue;
             }
-            $s['active'][$symbol]=['plan'=>$p,'history'=>[],'quantity'=>$qty,'reservation'=>$qty*$entry*1.001,
+            $s['active'][$symbol]=['plan'=>$p,'history'=>[],'quantity'=>$qty,'reservation'=>$qty*$entry*(1+$fee),
                 'planned_risk'=>$qty*$unitRisk,'filled'=>false,'entry_fill'=>null,'entry_cost'=>null,
                 'recorded_at'=>$snapshot['recorded_at'],'snapshot_key'=>$key];
             $emit('order',['symbol'=>$symbol,'session'=>$session,'quantity'=>$qty,'entry'=>$entry,'stop'=>$stop,
-                'target'=>$target,'planned_risk'=>$qty*$unitRisk,'reserved_cash'=>$qty*$entry*1.001]);
+                'target'=>$target,'planned_risk'=>$qty*$unitRisk,'reserved_cash'=>$qty*$entry*(1+$fee)]);
         }
         $equity=self::equity($s);
         // Stale marks are estimates; do not use them to update measured drawdown.

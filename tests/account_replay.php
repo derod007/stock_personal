@@ -76,6 +76,12 @@ archeck(arthrows(fn()=>PaperAccountReplay::accountConfig($base,'other-account',$
 archeck(arthrows(fn()=>PaperAccountReplay::accountDir($tmp,$research,'paper-kr-recovery-v1'),'research account'),'the operational ID has no research folder');
 archeck(PaperAccountReplay::accountId($research,'recent','a1')==='hist-smoke-kr-recovery-v1-20261009-a1'&&arthrows(fn()=>PaperAccountReplay::accountId($research,'recent','A/../x'),'Smoke label'),'smoke IDs are separate and validated');
 archeck(PaperAccountReplay::accountId($research,'prior',null,'fee20')==='hist-kr-recovery-v1-20251008-fee20','a research suffix keeps the period ID and does not reuse the operational account');
+$fp='934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465';
+archeck(PaperStrategyVersion::current($root)===$fp,'operational strategy fingerprint matches main / full-v2');
+PaperStrategyVersion::verify(['version'=>$fp,'strategy_fingerprint'=>$fp],$fp);
+archeck(true,'an existing fingerprint account still verifies');
+$manifest=json_decode((string)file_get_contents($root.'/config/paper-strategy-files.json'),true,512,JSON_THROW_ON_ERROR);
+archeck(!in_array('bin/paper/ResearchCashFee.php',$manifest,true)&&in_array('src/PaperPortfolio.php',$manifest,true),'research cash-fee code is outside the strategy manifest');
 archeck(str_ends_with(PaperAccountReplay::accountDir($tmp,$research,'hist-kr-recovery-v1-20261009'),'/history-account/hist-kr-recovery-v1-20261009')&&$research['carry_over']==='none','account folder is separate and nothing is carried over');
 // ---- order, same-day rule, fill, target exit, books ----
 $data=mkdata(['AAA.KS'],PREP+30,['AAA.KS'=>[PREP+3=>[100,111,99,110]]]);
@@ -282,6 +288,7 @@ $sig30=evs($j30g,'day_log')[1]['signals'];
 archeck(count(evs($j10g,'order'))===1&&evs($j30g,'order')===[]&&$sig30[0]['outcome']==='cash_or_risk_or_sector_limit','30bp can refuse a share that 10bp could still reserve');
 $p20=jpath($j20['state']['config']['id']);$before=hash_file('sha256',$p20);
 $r=PaperAccountReplay::run($feeData,$j20['state']['config'],$p20,['plan_provider'=>provider($feePlans),'chunk'=>9]);
+archeck($j10['state']['research']['cash_fee_bps']===10.0&&$j20['state']['research']['cash_fee_bps']===20.0&&$j10['state']['research']['slippage_bps']===5.0&&$j10['state']['research']['research_fee_sha256']===ResearchCashFee::hashes($root)&&$j10['state']['strategy_fingerprint']===$fp,'research fee settings and code hashes are stored beside the unchanged operational fingerprint');
 archeck($r['processed_sessions']===0&&hash_file('sha256',$p20)===$before,'re-running the same fee account adds no event');
 archeck(arthrows(fn()=>PaperAccountReplay::run($data7,acfg(),jpath('hist-smoke-kr-recovery-v1-zz'),['plan_provider'=>provider($plans7),'start'=>'2000-01-01']),'precedes'),'a start before the evaluation start is refused');
 

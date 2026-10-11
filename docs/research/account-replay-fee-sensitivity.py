@@ -8,27 +8,31 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 FULL = ROOT / "docs/historical-account-replay/full-v2"
-OUT = ROOT / "docs/historical-account-replay/fee-sensitivity"
+PREV = ROOT / "docs/historical-account-replay/fee-sensitivity"
+OUT = ROOT / "docs/historical-account-replay/fee-sensitivity-v2"
 KST = timezone(timedelta(hours=9))
 INITIAL = 100_000_000.0
 LABELS = ("fee10", "fee20", "fee30")
 FEE_BPS = {"fee10": 10, "fee20": 20, "fee30": 30}
 PERIODS = ("prior", "recent")
+MAIN_FINGERPRINT = "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465"
 CODE = [
     "src/PaperPortfolio.php",
     "src/TradeSimulator.php",
     "bin/paper/AccountReplay.php",
+    "bin/paper/ResearchCashFee.php",
     "bin/paper_account_replay.php",
     "tests/account_replay.php",
     "config/paper-kr-recovery-v1.json",
     "config/paper-history-kr-recovery-v1.json",
+    "config/paper-strategy-files.json",
     "docs/historical-account-replay/sector-map-v2.json",
 ]
 DATASETS = {
     "prior": Path(r"C:\Users\acdun\Desktop\dev\stock-personal-paper\history-research\kr-saved-scan-20251008"),
     "recent": Path(r"C:\Users\acdun\Desktop\dev\stock-personal-paper\history-research\kr-saved-scan-20261009"),
 }
-STATE = Path(r"C:\Users\acdun\Desktop\dev\stock-personal-paper\fee-sensitivity-state")
+STATE = Path(r"C:\Users\acdun\Desktop\dev\stock-personal-paper\fee-sensitivity-state-v2")
 COMMANDS = {
     "run": (
         "php -d memory_limit=3G bin/paper_account_replay.php run "
@@ -40,7 +44,7 @@ COMMANDS = {
         "php bin/paper_account_replay.php export "
         "--period={period} --dataset-dir={dataset} --state-dir={state} "
         "--fee-bps={bps} --account-suffix=fee{bps} "
-        "--out=docs/historical-account-replay/fee-sensitivity/{period}/fee{bps}"
+        "--out=docs/historical-account-replay/fee-sensitivity-v2/{period}/fee{bps}"
     ),
 }
 
@@ -172,8 +176,8 @@ def baseline_vs_full(period: str, doc: dict) -> dict:
             "why": [
                 "account id has a fee10 suffix so the run cannot write the original research folder",
                 "config_hash includes that account id",
-                "PaperPortfolio now reads an optional fee_bps (default 10); that file is in the strategy fingerprint",
-                "AccountReplay records cash_fee_bps and slippage_bps in research metadata",
+                "research metadata records cash_fee_bps, slippage_bps and research_fee_sha256",
+                "PaperPortfolio.php is unchanged; the operational strategy fingerprint stays "+MAIN_FINGERPRINT,
             ],
         },
     }
@@ -187,6 +191,21 @@ def pct(n: float) -> str:
     return f"{n:.4f}%"
 
 
+def vs_prev_line(doc: dict) -> str:
+    vp = doc.get("vs_previous") or {}
+    bad = []
+    for period in PERIODS:
+        for lab in LABELS:
+            row = (vp.get(period) or {}).get(lab) or {}
+            keys = ("equity", "cash", "realized_pnl", "trades")
+            missing = [k for k in keys if not row.get(k)]
+            if missing:
+                bad.append(f"{period}/{lab}({','.join(missing)})")
+    if not bad:
+        return "이전 실험(`fee-sensitivity/`)과 평가·현금·실현손익·거래가 같습니다."
+    return "이전 실험과 다른 항목: " + "; ".join(bad) + ". 수익을 맞추려고 조정하지 않았습니다."
+
+
 def write_report(doc: dict) -> None:
     lines = [
         "# 현금 거래비용 민감도",
@@ -194,13 +213,16 @@ def write_report(doc: dict) -> None:
         "슬리피지 5bp는 그대로 두고, 현금에서 빼는 매수·매도 비용만 각 10bp / 20bp / 30bp로 바꿨습니다. 끝난 거래에서 비용만 뺀 것이 아니라 계좌를 처음부터 다시 진행했습니다.",
         "",
         "운영 계좌·캐시·원본 데이터셋·기존 full-v2는 쓰지 않았습니다. 일봉 범위 밖 모형 가격 9건도 보정하지 않았습니다.",
+        "첫 실험 산출물(`fee-sensitivity/`)은 덮어쓰지 않았습니다. 이번 재실행은 `fee-sensitivity-v2/` 입니다.",
         "",
         "## 실행 전 검증",
         "",
-        f"- 기존 `tests/account_replay.php`와 추가한 비용 고정 사례: 통과. 20bp는 수량이 줄고 예약 현금이 늘며, 30bp는 10bp에서 들어가던 1주를 거절합니다. 매수·매도 비용은 한 번씩만 붙고 슬리피지를 현금으로 다시 빼지 않습니다. 같은 계좌를 다시 돌리면 사건이 늘지 않습니다. 수수료가 다른 설정으로 이어 하면 `Account config changed`로 거절됩니다.",
+        f"- 운영 전략 지문 `{MAIN_FINGERPRINT}` = main / full-v2. `PaperStrategyVersion::verify`는 기존 지문 계좌를 통과시킵니다.",
+        f"- 기존 `tests/account_replay.php`와 추가한 비용 고정 사례: 통과. 20bp는 수량이 줄고 예약 현금이 늘며, 30bp는 10bp에서 들어가던 1주를 거절합니다. 매수·매도 비용은 한 번씩만 붙고 슬리피지를 현금으로 다시 빼지 않습니다. 같은 계좌를 다시 돌리면 사건이 늘지 않습니다. 수수료나 연구 코드 해시가 다른 설정으로 이어 하면 거절됩니다.",
         f"- 기준 10bp 재현 대 full-v2: 이전·최근 모두 주문·체결·청산·수량·현금·평가금액이 같습니다. "
         f"이전 통과={doc['baseline_vs_full']['prior']['economic_match']}, 최근 통과={doc['baseline_vs_full']['recent']['economic_match']}.",
-        "- 달라진 메타데이터: 계좌 ID에 `fee10` 접미사가 붙어 config_hash가 바뀌고, `PaperPortfolio.php` 변경으로 전략 지문이 바뀌며, 연구 메타에 `cash_fee_bps`/`slippage_bps`가 들어갑니다. 경제 숫자는 그대로입니다.",
+        "- 달라진 메타데이터: 계좌 ID 접미사, config_hash, 연구 메타의 `cash_fee_bps`/`research_fee_sha256`. `PaperPortfolio.php`와 운영 지문은 그대로입니다.",
+        f"- {vs_prev_line(doc)}",
         "",
         "## 기간별 비교",
         "",
@@ -308,28 +330,43 @@ def main() -> None:
     periods = {}
     diffs = {}
     vs_full = {}
+    vs_prev = {}
     for period in PERIODS:
         docs = {lab: load(period, lab) for lab in LABELS}
         vs_full[period] = baseline_vs_full(period, docs["fee10"])
         periods[period] = {}
         diffs[period] = {}
+        vs_prev[period] = {}
         for lab in LABELS:
             snap = snapshot(docs[lab], FEE_BPS[lab])
             snap["fee_total"] = snap["fees"]["total"]
             periods[period][lab] = snap
+            prev_s = json.loads((PREV / period / lab / "summary.json").read_text(encoding="utf-8"))
+            prev_t = json.loads((PREV / period / lab / "trades.json").read_text(encoding="utf-8"))["trades"]
+            vs_prev[period][lab] = {
+                "equity": near(float(prev_s["equity"]), snap["equity"]),
+                "cash": near(float(prev_s["cash"]), snap["cash"]),
+                "realized_pnl": near(float(prev_s["realized_pnl"]), snap["realized_pnl"]),
+                "trades": [slim(t) for t in prev_t] == [slim(t) for t in docs[lab]["trades"]],
+            }
         for lab in ("fee20", "fee30"):
             diffs[period][lab] = trade_diff(docs["fee10"]["trades"], docs[lab]["trades"])
+        fp = docs["fee10"]["provenance"]["strategy_fingerprint"]
+        if fp != MAIN_FINGERPRINT:
+            raise SystemExit(f"operational fingerprint changed on {period}: {fp}")
         if not vs_full[period]["economic_match"]:
             raise SystemExit(f"baseline {period} does not match full-v2")
 
     out = {
         "schema": 1,
-        "kind": "historical_account_cash_fee_sensitivity_v1",
+        "kind": "historical_account_cash_fee_sensitivity_v2",
         "generated_at_kst": datetime.now(KST).strftime("%Y-%m-%d %H:%M %z"),
-        "note": "Cash fee only. Slippage stays 5bp. Accounts were rerun from 100,000,000 KRW. full-v2 was not rewritten.",
+        "note": "Cash fee only, via ResearchCashFee. PaperPortfolio is unchanged. Previous fee-sensitivity/ was not overwritten.",
         "state_dir": str(STATE),
+        "strategy_fingerprint": MAIN_FINGERPRINT,
         "commands": COMMANDS,
         "baseline_vs_full": vs_full,
+        "vs_previous": vs_prev,
         "periods": periods,
         "diffs": diffs,
         "hashes": hashes,

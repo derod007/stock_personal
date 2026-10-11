@@ -1,3 +1,15 @@
+## 2026-10-11 23:04 · Cursor · 끝
+- 한 일: PR #70 운영 전략 지문을 main과 같게 복원. 비용 변경은 ResearchCashFee로 분리. 새 상태 경로에서 6계좌 재실행. 기준 10bp는 full-v2와 일치, 이전 실험과 경제 숫자 동일. 병합 안 함
+- 파일: src/PaperPortfolio.php, bin/paper/ResearchCashFee.php, bin/paper/AccountReplay.php, tests/account_replay.php, docs/research/account-replay-fee-sensitivity.py, docs/historical-account-replay/fee-sensitivity-v2/, docs/work-log.md
+- 커밋: 브랜치 cursor/fee-sensitivity, PR #70에 추가(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-11 22:40 · Cursor · 진행
+- 한 일: PR #70 운영 전략 지문 복원. PaperPortfolio는 main과 같게 두고 비용 변경은 연구 코드로 분리. 새 상태 경로에서 6계좌 재실행
+- 파일: 작업 중
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-11 22:26 · Cursor · 끝
 - 한 일: 현금 거래비용만 각 10·20·30bp로 두 기간 연구 계좌를 처음부터 재실행. 기준 10bp는 full-v2와 주문·현금·평가 일치. 20·30bp는 총자산이 줄고 이전 30bp만 주문 구성이 바뀜. 슬리피지·운영·full-v2 변경 없음. 병합 안 함
 - 파일: src/PaperPortfolio.php, bin/paper/AccountReplay.php, bin/paper_account_replay.php, tests/account_replay.php, docs/research/account-replay-fee-sensitivity.py, docs/historical-account-replay/fee-sensitivity/, docs/work-log.md

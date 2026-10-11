@@ -1,0 +1,3628 @@
+{
+  "schema": 1,
+  "kind": "historical_account_fill_cases_v1",
+  "count": 47,
+  "cases": [
+    {
+      "id": "prior-267260.KS-2024-12-03",
+      "tags": [
+        "gap_entry",
+        "top_win"
+      ],
+      "period": "prior",
+      "symbol": "267260.KS",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2024-12-03",
+      "order": {
+        "entry": 355000,
+        "stop": 329771,
+        "target": 413500,
+        "quantity": 37
+      },
+      "fill": {
+        "date": "2024-12-04",
+        "price": 346173,
+        "fee": 12808.401
+      },
+      "exit": {
+        "date": "2025-01-03",
+        "price": 399800,
+        "reason": "time",
+        "net_pnl": 1956597.9990000017,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2024-12-03",
+        "open": 339000.0,
+        "high": 355500.0,
+        "low": 338500.0,
+        "close": 355000.0,
+        "volume": 258868,
+        "available_at": 1733207400,
+        "symbol": "267260.KS"
+      },
+      "fill_bar": {
+        "date": "2024-12-04",
+        "open": 346000.0,
+        "high": 361500.0,
+        "low": 340500.0,
+        "close": 357500.0,
+        "volume": 340313,
+        "available_at": 1733293800,
+        "symbol": "267260.KS"
+      },
+      "exit_bar": {
+        "date": "2025-01-03",
+        "open": 405000.0,
+        "high": 409500.0,
+        "low": 390000.0,
+        "close": 400000.0,
+        "volume": 260275,
+        "available_at": 1735885800,
+        "symbol": "267260.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "time",
+        "fill": 346173.0,
+        "fill_date": "2024-12-04",
+        "exit": 399800.0,
+        "exit_date": "2025-01-03",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 20,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/prior-267260.KS-2024-12-03.svg"
+    },
+    {
+      "id": "prior-010170.KQ-2025-01-16",
+      "tags": [
+        "gap_entry",
+        "top_win"
+      ],
+      "period": "prior",
+      "symbol": "010170.KQ",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2025-01-16",
+      "order": {
+        "entry": 828,
+        "stop": 757,
+        "target": 1039,
+        "quantity": 14359
+      },
+      "fill": {
+        "date": "2025-01-17",
+        "price": 822.411,
+        "fee": 11808.999548999998
+      },
+      "exit": {
+        "date": "2025-02-04",
+        "price": 1039,
+        "reason": "target",
+        "net_pnl": 3083273.4504510015,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-01-16",
+        "open": 779.0,
+        "high": 890.0,
+        "low": 778.0,
+        "close": 828.0,
+        "volume": 862346,
+        "available_at": 1737009000,
+        "symbol": "010170.KQ"
+      },
+      "fill_bar": {
+        "date": "2025-01-17",
+        "open": 822.0,
+        "high": 955.0,
+        "low": 818.0,
+        "close": 872.0,
+        "volume": 3992517,
+        "available_at": 1737095400,
+        "symbol": "010170.KQ"
+      },
+      "exit_bar": {
+        "date": "2025-02-04",
+        "open": 828.0,
+        "high": 1072.0,
+        "low": 828.0,
+        "close": 1072.0,
+        "volume": 26287451,
+        "available_at": 1738650600,
+        "symbol": "010170.KQ"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "target",
+        "fill": 822.411,
+        "fill_date": "2025-01-17",
+        "exit": 1039.0,
+        "exit_date": "2025-02-04",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 9,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/prior-010170.KQ-2025-01-16.svg"
+    },
+    {
+      "id": "prior-203650.KQ-2025-01-31",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "prior",
+      "symbol": "203650.KQ",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2025-01-31",
+      "order": {
+        "entry": 1770,
+        "stop": 1597,
+        "target": 2215,
+        "quantity": 5821
+      },
+      "fill": {
+        "date": "2025-02-03",
+        "price": 1740.87,
+        "fee": 10133.60427
+      },
+      "exit": {
+        "date": "2025-02-28",
+        "price": 1689.155,
+        "reason": "time",
+        "net_pnl": -320999.19052499905,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-01-31",
+        "open": 1740.0,
+        "high": 1787.5,
+        "low": 1737.5,
+        "close": 1770.0,
+        "volume": 829844,
+        "available_at": 1738305000,
+        "symbol": "203650.KQ"
+      },
+      "fill_bar": {
+        "date": "2025-02-03",
+        "open": 1740.0,
+        "high": 1747.5,
+        "low": 1675.0,
+        "close": 1697.5,
+        "volume": 1253644,
+        "available_at": 1738564200,
+        "symbol": "203650.KQ"
+      },
+      "exit_bar": {
+        "date": "2025-02-28",
+        "open": 1717.5,
+        "high": 1717.5,
+        "low": 1682.5,
+        "close": 1690.0,
+        "volume": 710610,
+        "available_at": 1740724200,
+        "symbol": "203650.KQ"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "time",
+        "fill": 1740.87,
+        "fill_date": "2025-02-03",
+        "exit": 1689.1550000000002,
+        "exit_date": "2025-02-28",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 20,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/prior-203650.KQ-2025-01-31.svg"
+    },
+    {
+      "id": "prior-006340.KS-2025-02-13",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "prior",
+      "symbol": "006340.KS",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2025-02-13",
+      "order": {
+        "entry": 3455,
+        "stop": 3261,
+        "target": 4095,
+        "quantity": 5127
+      },
+      "fill": {
+        "date": "2025-02-14",
+        "price": 3441.72,
+        "fee": 17645.698439999996
+      },
+      "exit": {
+        "date": "2025-02-24",
+        "price": 3259.3695,
+        "reason": "stop",
+        "net_pnl": -969267.4993664958,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-02-13",
+        "open": 3450.0,
+        "high": 3490.0,
+        "low": 3405.0,
+        "close": 3455.0,
+        "volume": 2818355,
+        "available_at": 1739428200,
+        "symbol": "006340.KS"
+      },
+      "fill_bar": {
+        "date": "2025-02-14",
+        "open": 3440.0,
+        "high": 3445.0,
+        "low": 3315.0,
+        "close": 3340.0,
+        "volume": 2319880,
+        "available_at": 1739514600,
+        "symbol": "006340.KS"
+      },
+      "exit_bar": {
+        "date": "2025-02-24",
+        "open": 3265.0,
+        "high": 3275.0,
+        "low": 3190.0,
+        "close": 3260.0,
+        "volume": 1301366,
+        "available_at": 1740378600,
+        "symbol": "006340.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 3441.72,
+        "fill_date": "2025-02-14",
+        "exit": 3259.3695000000002,
+        "exit_date": "2025-02-24",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 7,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/prior-006340.KS-2025-02-13.svg"
+    },
+    {
+      "id": "prior-267270.KS-2025-02-26",
+      "tags": [
+        "gap_entry",
+        "gap_stop"
+      ],
+      "period": "prior",
+      "symbol": "267270.KS",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2025-02-26",
+      "order": {
+        "entry": 77400,
+        "stop": 70125,
+        "target": 91500,
+        "quantity": 143
+      },
+      "fill": {
+        "date": "2025-02-27",
+        "price": 76238.09999999999,
+        "fee": 10902.048299999999
+      },
+      "exit": {
+        "date": "2025-03-04",
+        "price": 69965,
+        "reason": "stop",
+        "net_pnl": -917960.3432999961,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-02-26",
+        "open": 75600.0,
+        "high": 78300.0,
+        "low": 75400.0,
+        "close": 77400.0,
+        "volume": 373946,
+        "available_at": 1740551400,
+        "symbol": "267270.KS"
+      },
+      "fill_bar": {
+        "date": "2025-02-27",
+        "open": 76200.0,
+        "high": 76400.0,
+        "low": 74200.0,
+        "close": 74600.0,
+        "volume": 194888,
+        "available_at": 1740637800,
+        "symbol": "267270.KS"
+      },
+      "exit_bar": {
+        "date": "2025-03-04",
+        "open": 70000.0,
+        "high": 71900.0,
+        "low": 65000.0,
+        "close": 71600.0,
+        "volume": 450739,
+        "available_at": 1741069800,
+        "symbol": "267270.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 76238.09999999999,
+        "fill_date": "2025-02-27",
+        "exit": 69965.0,
+        "exit_date": "2025-03-04",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 3,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))",
+          "gap through stop: exit is min(stop, open)*(1-5bp)"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/prior-267270.KS-2025-02-26.svg"
+    },
+    {
+      "id": "prior-092870.KQ-2025-03-05",
+      "tags": [
+        "gap_stop"
+      ],
+      "period": "prior",
+      "symbol": "092870.KQ",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2025-03-05",
+      "order": {
+        "entry": 12620,
+        "stop": 11626,
+        "target": 15760,
+        "quantity": 1
+      },
+      "fill": {
+        "date": "2025-03-06",
+        "price": 12620,
+        "fee": 12.620000000000001
+      },
+      "exit": {
+        "date": "2025-03-11",
+        "price": 11394.3,
+        "reason": "stop",
+        "net_pnl": -1249.7142999999996,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-03-05",
+        "open": 12350.0,
+        "high": 12650.0,
+        "low": 12050.0,
+        "close": 12620.0,
+        "volume": 128865,
+        "available_at": 1741156200,
+        "symbol": "092870.KQ"
+      },
+      "fill_bar": {
+        "date": "2025-03-06",
+        "open": 12620.0,
+        "high": 12640.0,
+        "low": 11920.0,
+        "close": 11950.0,
+        "volume": 143318,
+        "available_at": 1741242600,
+        "symbol": "092870.KQ"
+      },
+      "exit_bar": {
+        "date": "2025-03-11",
+        "open": 11400.0,
+        "high": 11940.0,
+        "low": 11350.0,
+        "close": 11890.0,
+        "volume": 72035,
+        "available_at": 1741674600,
+        "symbol": "092870.KQ"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 12620.0,
+        "fill_date": "2025-03-06",
+        "exit": 11394.300000000001,
+        "exit_date": "2025-03-11",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 4,
+        "notes": [
+          "gap through stop: exit is min(stop, open)*(1-5bp)"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/prior-092870.KQ-2025-03-05.svg"
+    },
+    {
+      "id": "prior-005930.KS-2025-03-27",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "prior",
+      "symbol": "005930.KS",
+      "pattern": "trend_recovery_v1",
+      "signal_date": "2025-03-27",
+      "order": {
+        "entry": 61800,
+        "stop": 59500,
+        "target": 65400,
+        "quantity": 341
+      },
+      "fill": {
+        "date": "2025-03-28",
+        "price": 60730.35,
+        "fee": 20709.049349999998
+      },
+      "exit": {
+        "date": "2025-03-31",
+        "price": 59470.25,
+        "reason": "stop",
+        "net_pnl": -470682.5045999959,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-03-27",
+        "open": 60900.0,
+        "high": 62000.0,
+        "low": 60800.0,
+        "close": 61800.0,
+        "volume": 20389790,
+        "available_at": 1743057000,
+        "symbol": "005930.KS"
+      },
+      "fill_bar": {
+        "date": "2025-03-28",
+        "open": 60700.0,
+        "high": 61100.0,
+        "low": 60000.0,
+        "close": 60200.0,
+        "volume": 16282514,
+        "available_at": 1743143400,
+        "symbol": "005930.KS"
+      },
+      "exit_bar": {
+        "date": "2025-03-31",
+        "open": 59500.0,
+        "high": 59700.0,
+        "low": 57800.0,
+        "close": 57800.0,
+        "volume": 17633494,
+        "available_at": 1743402600,
+        "symbol": "005930.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 60730.35,
+        "fill_date": "2025-03-28",
+        "exit": 59470.25,
+        "exit_date": "2025-03-31",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 2,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/prior-005930.KS-2025-03-27.svg"
+    },
+    {
+      "id": "prior-452190.KQ-2025-03-28",
+      "tags": [
+        "gap_entry",
+        "same_day_exit"
+      ],
+      "period": "prior",
+      "symbol": "452190.KQ",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2025-03-28",
+      "order": {
+        "entry": 6050,
+        "stop": 5580,
+        "target": 8180,
+        "quantity": 2154
+      },
+      "fill": {
+        "date": "2025-03-31",
+        "price": 5802.9,
+        "fee": 12499.4466
+      },
+      "exit": {
+        "date": "2025-03-31",
+        "price": 5577.21,
+        "reason": "stop",
+        "net_pnl": -510649.01693999954,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-03-28",
+        "open": 5840.0,
+        "high": 6210.0,
+        "low": 5680.0,
+        "close": 6050.0,
+        "volume": 1675993,
+        "available_at": 1743143400,
+        "symbol": "452190.KQ"
+      },
+      "fill_bar": {
+        "date": "2025-03-31",
+        "open": 5800.0,
+        "high": 5900.0,
+        "low": 5420.0,
+        "close": 5430.0,
+        "volume": 1041533,
+        "available_at": 1743402600,
+        "symbol": "452190.KQ"
+      },
+      "exit_bar": {
+        "date": "2025-03-31",
+        "open": 5800.0,
+        "high": 5900.0,
+        "low": 5420.0,
+        "close": 5430.0,
+        "volume": 1041533,
+        "available_at": 1743402600,
+        "symbol": "452190.KQ"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 5802.9,
+        "fill_date": "2025-03-31",
+        "exit": 5577.21,
+        "exit_date": "2025-03-31",
+        "ambiguous_bar": false,
+        "same_day_exit": true,
+        "held": 1,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/prior-452190.KQ-2025-03-28.svg"
+    },
+    {
+      "id": "prior-064350.KS-2025-03-31",
+      "tags": [
+        "same_day_exit"
+      ],
+      "period": "prior",
+      "symbol": "064350.KS",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2025-03-31",
+      "order": {
+        "entry": 105000,
+        "stop": 97850,
+        "target": 116800,
+        "quantity": 139
+      },
+      "fill": {
+        "date": "2025-04-02",
+        "price": 105000,
+        "fee": 14595
+      },
+      "exit": {
+        "date": "2025-04-02",
+        "price": 97801.075,
+        "reason": "stop",
+        "net_pnl": -1028839.9244249985,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-03-31",
+        "open": 99300.0,
+        "high": 106200.0,
+        "low": 99300.0,
+        "close": 105000.0,
+        "volume": 1347699,
+        "available_at": 1743402600,
+        "symbol": "064350.KS"
+      },
+      "fill_bar": {
+        "date": "2025-04-02",
+        "open": 106900.0,
+        "high": 107200.0,
+        "low": 97200.0,
+        "close": 99000.0,
+        "volume": 1845907,
+        "available_at": 1743575400,
+        "symbol": "064350.KS"
+      },
+      "exit_bar": {
+        "date": "2025-04-02",
+        "open": 106900.0,
+        "high": 107200.0,
+        "low": 97200.0,
+        "close": 99000.0,
+        "volume": 1845907,
+        "available_at": 1743575400,
+        "symbol": "064350.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 105000.0,
+        "fill_date": "2025-04-02",
+        "exit": 97801.07500000001,
+        "exit_date": "2025-04-02",
+        "ambiguous_bar": false,
+        "same_day_exit": true,
+        "held": 1,
+        "notes": []
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/prior-064350.KS-2025-03-31.svg"
+    },
+    {
+      "id": "prior-272210.KS-2025-05-16",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "prior",
+      "symbol": "272210.KS",
+      "pattern": "breakout_retest_v1",
+      "signal_date": "2025-05-16",
+      "order": {
+        "entry": 47350,
+        "stop": 42246,
+        "target": 57000,
+        "quantity": 193
+      },
+      "fill": {
+        "date": "2025-05-19",
+        "price": 46573.274999999994,
+        "fee": 8988.642075
+      },
+      "exit": {
+        "date": "2025-06-09",
+        "price": 42224.877,
+        "reason": "stop",
+        "net_pnl": -856378.8573359977,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-05-16",
+        "open": 45600.0,
+        "high": 48000.0,
+        "low": 45600.0,
+        "close": 47350.0,
+        "volume": 4884189,
+        "available_at": 1747377000,
+        "symbol": "272210.KS"
+      },
+      "fill_bar": {
+        "date": "2025-05-19",
+        "open": 46550.0,
+        "high": 48200.0,
+        "low": 44850.0,
+        "close": 45300.0,
+        "volume": 2592855,
+        "available_at": 1747636200,
+        "symbol": "272210.KS"
+      },
+      "exit_bar": {
+        "date": "2025-06-09",
+        "open": 44350.0,
+        "high": 44350.0,
+        "low": 41550.0,
+        "close": 42800.0,
+        "volume": 2457045,
+        "available_at": 1749450600,
+        "symbol": "272210.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 46573.274999999994,
+        "fill_date": "2025-05-19",
+        "exit": 42224.877,
+        "exit_date": "2025-06-09",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 14,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/prior-272210.KS-2025-05-16.svg"
+    },
+    {
+      "id": "prior-203650.KQ-2025-05-20",
+      "tags": [
+        "gap_entry",
+        "top_win"
+      ],
+      "period": "prior",
+      "symbol": "203650.KQ",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2025-05-20",
+      "order": {
+        "entry": 1755,
+        "stop": 1683,
+        "target": 2097,
+        "quantity": 11422
+      },
+      "fill": {
+        "date": "2025-05-21",
+        "price": 1753.3762499999998,
+        "fee": 20027.063527499995
+      },
+      "exit": {
+        "date": "2025-06-19",
+        "price": 1994.0025,
+        "reason": "time",
+        "net_pnl": 2705630.4674175046,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-05-20",
+        "open": 1730.0,
+        "high": 1760.0,
+        "low": 1730.0,
+        "close": 1755.0,
+        "volume": 466190,
+        "available_at": 1747722600,
+        "symbol": "203650.KQ"
+      },
+      "fill_bar": {
+        "date": "2025-05-21",
+        "open": 1752.5,
+        "high": 1825.0,
+        "low": 1752.5,
+        "close": 1772.5,
+        "volume": 635422,
+        "available_at": 1747809000,
+        "symbol": "203650.KQ"
+      },
+      "exit_bar": {
+        "date": "2025-06-19",
+        "open": 1982.5,
+        "high": 2005.0,
+        "low": 1955.0,
+        "close": 1995.0,
+        "volume": 1597388,
+        "available_at": 1750314600,
+        "symbol": "203650.KQ"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "time",
+        "fill": 1753.3762499999998,
+        "fill_date": "2025-05-21",
+        "exit": 1994.0025,
+        "exit_date": "2025-06-19",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 20,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/prior-203650.KQ-2025-05-20.svg"
+    },
+    {
+      "id": "prior-079550.KS-2025-06-19",
+      "tags": [
+        "gap_entry",
+        "same_day_exit"
+      ],
+      "period": "prior",
+      "symbol": "079550.KS",
+      "pattern": "breakout_retest_v1",
+      "signal_date": "2025-06-19",
+      "order": {
+        "entry": 593000,
+        "stop": 555092,
+        "target": 722000,
+        "quantity": 25
+      },
+      "fill": {
+        "date": "2025-06-24",
+        "price": 576288,
+        "fee": 14407.2
+      },
+      "exit": {
+        "date": "2025-06-24",
+        "price": 554814.454,
+        "reason": "stop",
+        "net_pnl": -565116.2113499977,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-06-19",
+        "open": 571000.0,
+        "high": 595000.0,
+        "low": 568000.0,
+        "close": 593000.0,
+        "volume": 162655,
+        "available_at": 1750314600,
+        "symbol": "079550.KS"
+      },
+      "fill_bar": {
+        "date": "2025-06-24",
+        "open": 576000.0,
+        "high": 589000.0,
+        "low": 536000.0,
+        "close": 554000.0,
+        "volume": 513343,
+        "available_at": 1750746600,
+        "symbol": "079550.KS"
+      },
+      "exit_bar": {
+        "date": "2025-06-24",
+        "open": 576000.0,
+        "high": 589000.0,
+        "low": 536000.0,
+        "close": 554000.0,
+        "volume": 513343,
+        "available_at": 1750746600,
+        "symbol": "079550.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 576288.0,
+        "fill_date": "2025-06-24",
+        "exit": 554814.454,
+        "exit_date": "2025-06-24",
+        "ambiguous_bar": false,
+        "same_day_exit": true,
+        "held": 1,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/prior-079550.KS-2025-06-19.svg"
+    },
+    {
+      "id": "prior-071050.KS-2025-06-20",
+      "tags": [
+        "gap_entry",
+        "top_win"
+      ],
+      "period": "prior",
+      "symbol": "071050.KS",
+      "pattern": "breakout_retest_v1",
+      "signal_date": "2025-06-20",
+      "order": {
+        "entry": 131900,
+        "stop": 122964,
+        "target": 159400,
+        "quantity": 108
+      },
+      "fill": {
+        "date": "2025-06-23",
+        "price": 131865.9,
+        "fee": 14241.5172
+      },
+      "exit": {
+        "date": "2025-07-11",
+        "price": 159400,
+        "reason": "target",
+        "net_pnl": 2942226.082800003,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-06-20",
+        "open": 128500.0,
+        "high": 131900.0,
+        "low": 126800.0,
+        "close": 131900.0,
+        "volume": 413415,
+        "available_at": 1750401000,
+        "symbol": "071050.KS"
+      },
+      "fill_bar": {
+        "date": "2025-06-23",
+        "open": 131800.0,
+        "high": 133700.0,
+        "low": 128400.0,
+        "close": 132000.0,
+        "volume": 326149,
+        "available_at": 1750660200,
+        "symbol": "071050.KS"
+      },
+      "exit_bar": {
+        "date": "2025-07-11",
+        "open": 155000.0,
+        "high": 161700.0,
+        "low": 155000.0,
+        "close": 158000.0,
+        "volume": 344803,
+        "available_at": 1752215400,
+        "symbol": "071050.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "target",
+        "fill": 131865.9,
+        "fill_date": "2025-06-23",
+        "exit": 159400.0,
+        "exit_date": "2025-07-11",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 15,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/prior-071050.KS-2025-06-20.svg"
+    },
+    {
+      "id": "prior-419050.KQ-2025-06-25",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "prior",
+      "symbol": "419050.KQ",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2025-06-25",
+      "order": {
+        "entry": 1763,
+        "stop": 1681,
+        "target": 1888,
+        "quantity": 11519
+      },
+      "fill": {
+        "date": "2025-06-26",
+        "price": 1760.8799999999999,
+        "fee": 20283.57672
+      },
+      "exit": {
+        "date": "2025-07-02",
+        "price": 1680.1595,
+        "reason": "stop",
+        "net_pnl": -969456.7735004984,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-06-25",
+        "open": 1719.0,
+        "high": 1773.0,
+        "low": 1719.0,
+        "close": 1763.0,
+        "volume": 356666,
+        "available_at": 1750833000,
+        "symbol": "419050.KQ"
+      },
+      "fill_bar": {
+        "date": "2025-06-26",
+        "open": 1760.0,
+        "high": 1762.0,
+        "low": 1724.0,
+        "close": 1743.0,
+        "volume": 168802,
+        "available_at": 1750919400,
+        "symbol": "419050.KQ"
+      },
+      "exit_bar": {
+        "date": "2025-07-02",
+        "open": 1708.0,
+        "high": 1718.0,
+        "low": 1675.0,
+        "close": 1705.0,
+        "volume": 224579,
+        "available_at": 1751437800,
+        "symbol": "419050.KQ"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 1760.8799999999999,
+        "fill_date": "2025-06-26",
+        "exit": 1680.1595,
+        "exit_date": "2025-07-02",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 5,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/prior-419050.KQ-2025-06-25.svg"
+    },
+    {
+      "id": "prior-080220.KQ-2025-07-08",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "prior",
+      "symbol": "080220.KQ",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2025-07-08",
+      "order": {
+        "entry": 15730,
+        "stop": 14221,
+        "target": 19030,
+        "quantity": 31
+      },
+      "fill": {
+        "date": "2025-07-09",
+        "price": 15687.839999999998,
+        "fee": 486.32303999999993
+      },
+      "exit": {
+        "date": "2025-08-01",
+        "price": 14213.8895,
+        "reason": "stop",
+        "net_pnl": -46619.41911449988,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-07-08",
+        "open": 15080.0,
+        "high": 15740.0,
+        "low": 15070.0,
+        "close": 15730.0,
+        "volume": 609383,
+        "available_at": 1751956200,
+        "symbol": "080220.KQ"
+      },
+      "fill_bar": {
+        "date": "2025-07-09",
+        "open": 15680.0,
+        "high": 15740.0,
+        "low": 15290.0,
+        "close": 15360.0,
+        "volume": 427247,
+        "available_at": 1752042600,
+        "symbol": "080220.KQ"
+      },
+      "exit_bar": {
+        "date": "2025-08-01",
+        "open": 14850.0,
+        "high": 14940.0,
+        "low": 14190.0,
+        "close": 14280.0,
+        "volume": 422361,
+        "available_at": 1754029800,
+        "symbol": "080220.KQ"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 15687.839999999998,
+        "fill_date": "2025-07-09",
+        "exit": 14213.889500000001,
+        "exit_date": "2025-08-01",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 18,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/prior-080220.KQ-2025-07-08.svg"
+    },
+    {
+      "id": "prior-071050.KS-2025-07-11",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "prior",
+      "symbol": "071050.KS",
+      "pattern": "breakout_retest_v1",
+      "signal_date": "2025-07-11",
+      "order": {
+        "entry": 158000,
+        "stop": 147507,
+        "target": 181500,
+        "quantity": 95
+      },
+      "fill": {
+        "date": "2025-07-14",
+        "price": 157378.65,
+        "fee": 14950.97175
+      },
+      "exit": {
+        "date": "2025-07-18",
+        "price": 147433.2465,
+        "reason": "stop",
+        "net_pnl": -973770.4626674987,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-07-11",
+        "open": 155000.0,
+        "high": 161700.0,
+        "low": 155000.0,
+        "close": 158000.0,
+        "volume": 344803,
+        "available_at": 1752215400,
+        "symbol": "071050.KS"
+      },
+      "fill_bar": {
+        "date": "2025-07-14",
+        "open": 157300.0,
+        "high": 164000.0,
+        "low": 155800.0,
+        "close": 163600.0,
+        "volume": 267011,
+        "available_at": 1752474600,
+        "symbol": "071050.KS"
+      },
+      "exit_bar": {
+        "date": "2025-07-18",
+        "open": 152700.0,
+        "high": 153200.0,
+        "low": 146000.0,
+        "close": 148900.0,
+        "volume": 402787,
+        "available_at": 1752820200,
+        "symbol": "071050.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 157378.65,
+        "fill_date": "2025-07-14",
+        "exit": 147433.2465,
+        "exit_date": "2025-07-18",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 5,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/prior-071050.KS-2025-07-11.svg"
+    },
+    {
+      "id": "prior-005830.KS-2025-08-05",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "prior",
+      "symbol": "005830.KS",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2025-08-05",
+      "order": {
+        "entry": 125500,
+        "stop": 120784,
+        "target": 148300,
+        "quantity": 62
+      },
+      "fill": {
+        "date": "2025-08-06",
+        "price": 124362.15,
+        "fee": 7710.4533
+      },
+      "exit": {
+        "date": "2025-09-03",
+        "price": 136531.7,
+        "reason": "time",
+        "net_pnl": 738336.6813000022,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-08-05",
+        "open": 123300.0,
+        "high": 128200.0,
+        "low": 123200.0,
+        "close": 125500.0,
+        "volume": 234251,
+        "available_at": 1754375400,
+        "symbol": "005830.KS"
+      },
+      "fill_bar": {
+        "date": "2025-08-06",
+        "open": 124300.0,
+        "high": 128500.0,
+        "low": 123300.0,
+        "close": 128200.0,
+        "volume": 151818,
+        "available_at": 1754461800,
+        "symbol": "005830.KS"
+      },
+      "exit_bar": {
+        "date": "2025-09-03",
+        "open": 141500.0,
+        "high": 141800.0,
+        "low": 135600.0,
+        "close": 136600.0,
+        "volume": 156637,
+        "available_at": 1756881000,
+        "symbol": "005830.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "time",
+        "fill": 124362.15,
+        "fill_date": "2025-08-06",
+        "exit": 136531.7,
+        "exit_date": "2025-09-03",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 20,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/prior-005830.KS-2025-08-05.svg"
+    },
+    {
+      "id": "prior-082740.KS-2025-08-08",
+      "tags": [
+        "top_win"
+      ],
+      "period": "prior",
+      "symbol": "082740.KS",
+      "pattern": "breakout_retest_v1",
+      "signal_date": "2025-08-08",
+      "order": {
+        "entry": 39900,
+        "stop": 36027,
+        "target": 48100,
+        "quantity": 261
+      },
+      "fill": {
+        "date": "2025-08-11",
+        "price": 39900,
+        "fee": 10413.9
+      },
+      "exit": {
+        "date": "2025-08-29",
+        "price": 48100,
+        "reason": "target",
+        "net_pnl": 2117232.000000002,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-08-08",
+        "open": 38500.0,
+        "high": 40550.0,
+        "low": 37450.0,
+        "close": 39900.0,
+        "volume": 1635123,
+        "available_at": 1754634600,
+        "symbol": "082740.KS"
+      },
+      "fill_bar": {
+        "date": "2025-08-11",
+        "open": 39900.0,
+        "high": 39900.0,
+        "low": 38300.0,
+        "close": 39050.0,
+        "volume": 783112,
+        "available_at": 1754893800,
+        "symbol": "082740.KS"
+      },
+      "exit_bar": {
+        "date": "2025-08-29",
+        "open": 41250.0,
+        "high": 48600.0,
+        "low": 41100.0,
+        "close": 47500.0,
+        "volume": 6415230,
+        "available_at": 1756449000,
+        "symbol": "082740.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "target",
+        "fill": 39900.0,
+        "fill_date": "2025-08-11",
+        "exit": 48100.0,
+        "exit_date": "2025-08-29",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 14,
+        "notes": []
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/prior-082740.KS-2025-08-08.svg"
+    },
+    {
+      "id": "recent-356680.KQ-2025-10-10",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "recent",
+      "symbol": "356680.KQ",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2025-10-10",
+      "order": {
+        "entry": 8200,
+        "stop": 7480,
+        "target": 9450,
+        "quantity": 1352
+      },
+      "fill": {
+        "date": "2025-10-13",
+        "price": 7903.95,
+        "fee": 10686.1404
+      },
+      "exit": {
+        "date": "2025-10-14",
+        "price": 9450,
+        "reason": "target",
+        "net_pnl": 2066797.0596000012,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-10-10",
+        "open": 8080.0,
+        "high": 8320.0,
+        "low": 7970.0,
+        "close": 8200.0,
+        "volume": 1276048,
+        "available_at": 1760077800,
+        "symbol": "356680.KQ"
+      },
+      "fill_bar": {
+        "date": "2025-10-13",
+        "open": 7900.0,
+        "high": 8170.0,
+        "low": 7880.0,
+        "close": 7980.0,
+        "volume": 547405,
+        "available_at": 1760337000,
+        "symbol": "356680.KQ"
+      },
+      "exit_bar": {
+        "date": "2025-10-14",
+        "open": 8520.0,
+        "high": 9500.0,
+        "low": 8240.0,
+        "close": 8620.0,
+        "volume": 19407951,
+        "available_at": 1760423400,
+        "symbol": "356680.KQ"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "target",
+        "fill": 7903.95,
+        "fill_date": "2025-10-13",
+        "exit": 9450.0,
+        "exit_date": "2025-10-14",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 2,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-356680.KQ-2025-10-10.svg"
+    },
+    {
+      "id": "recent-456010.KQ-2025-10-21",
+      "tags": [
+        "gap_entry",
+        "top_win"
+      ],
+      "period": "recent",
+      "symbol": "456010.KQ",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2025-10-21",
+      "order": {
+        "entry": 14800,
+        "stop": 13860,
+        "target": 18950,
+        "quantity": 1043
+      },
+      "fill": {
+        "date": "2025-10-22",
+        "price": 14627.31,
+        "fee": 15256.28433
+      },
+      "exit": {
+        "date": "2025-10-28",
+        "price": 18950,
+        "reason": "target",
+        "net_pnl": 4473544.535669999,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-10-21",
+        "open": 14530.0,
+        "high": 15160.0,
+        "low": 14530.0,
+        "close": 14800.0,
+        "volume": 462032,
+        "available_at": 1761028200,
+        "symbol": "456010.KQ"
+      },
+      "fill_bar": {
+        "date": "2025-10-22",
+        "open": 14620.0,
+        "high": 16080.0,
+        "low": 14140.0,
+        "close": 15290.0,
+        "volume": 1166618,
+        "available_at": 1761114600,
+        "symbol": "456010.KQ"
+      },
+      "exit_bar": {
+        "date": "2025-10-28",
+        "open": 16450.0,
+        "high": 19240.0,
+        "low": 16090.0,
+        "close": 17550.0,
+        "volume": 9573570,
+        "available_at": 1761633000,
+        "symbol": "456010.KQ"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "target",
+        "fill": 14627.31,
+        "fill_date": "2025-10-22",
+        "exit": 18950.0,
+        "exit_date": "2025-10-28",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 5,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-456010.KQ-2025-10-21.svg"
+    },
+    {
+      "id": "recent-005935.KS-2025-10-27",
+      "tags": [
+        "gap_entry",
+        "slip_above_high"
+      ],
+      "period": "recent",
+      "symbol": "005935.KS",
+      "pattern": "breakout_retest_v1",
+      "signal_date": "2025-10-27",
+      "order": {
+        "entry": 79800,
+        "stop": 75658,
+        "target": 90800,
+        "quantity": 5
+      },
+      "fill": {
+        "date": "2025-10-28",
+        "price": 79539.75,
+        "fee": 397.69875
+      },
+      "exit": {
+        "date": "2025-11-05",
+        "price": 75620.171,
+        "reason": "stop",
+        "net_pnl": -20373.694605000026,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-10-27",
+        "open": 79400.0,
+        "high": 80000.0,
+        "low": 78800.0,
+        "close": 79800.0,
+        "volume": 3820308,
+        "available_at": 1761546600,
+        "symbol": "005935.KS"
+      },
+      "fill_bar": {
+        "date": "2025-10-28",
+        "open": 79500.0,
+        "high": 79500.0,
+        "low": 77500.0,
+        "close": 77700.0,
+        "volume": 2527326,
+        "available_at": 1761633000,
+        "symbol": "005935.KS"
+      },
+      "exit_bar": {
+        "date": "2025-11-05",
+        "open": 78200.0,
+        "high": 79600.0,
+        "low": 74300.0,
+        "close": 78000.0,
+        "volume": 7785154,
+        "available_at": 1762324200,
+        "symbol": "005935.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 79539.75,
+        "fill_date": "2025-10-28",
+        "exit": 75620.171,
+        "exit_date": "2025-11-05",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 7,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "assumption_dependent",
+      "uncertainty": [
+        "5bp slip on the open prints above that session high; the tape never shows that price"
+      ],
+      "chart": "charts/recent-005935.KS-2025-10-27.svg"
+    },
+    {
+      "id": "recent-034730.KS-2025-10-29",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "recent",
+      "symbol": "034730.KS",
+      "pattern": "breakout_retest_v1",
+      "signal_date": "2025-10-29",
+      "order": {
+        "entry": 250000,
+        "stop": 238250,
+        "target": 274500,
+        "quantity": 86
+      },
+      "fill": {
+        "date": "2025-10-30",
+        "price": 249624.75,
+        "fee": 21467.7285
+      },
+      "exit": {
+        "date": "2025-11-05",
+        "price": 238130.875,
+        "reason": "stop",
+        "net_pnl": -1030420.2337499969,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-10-29",
+        "open": 246500.0,
+        "high": 256000.0,
+        "low": 242500.0,
+        "close": 250000.0,
+        "volume": 296682,
+        "available_at": 1761719400,
+        "symbol": "034730.KS"
+      },
+      "fill_bar": {
+        "date": "2025-10-30",
+        "open": 249500.0,
+        "high": 251500.0,
+        "low": 243000.0,
+        "close": 247500.0,
+        "volume": 188268,
+        "available_at": 1761805800,
+        "symbol": "034730.KS"
+      },
+      "exit_bar": {
+        "date": "2025-11-05",
+        "open": 247000.0,
+        "high": 247000.0,
+        "low": 230500.0,
+        "close": 237500.0,
+        "volume": 328815,
+        "available_at": 1762324200,
+        "symbol": "034730.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 249624.75,
+        "fill_date": "2025-10-30",
+        "exit": 238130.875,
+        "exit_date": "2025-11-05",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 5,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-034730.KS-2025-10-29.svg"
+    },
+    {
+      "id": "recent-240810.KQ-2025-10-29",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "recent",
+      "symbol": "240810.KQ",
+      "pattern": "breakout_retest_v1",
+      "signal_date": "2025-10-29",
+      "order": {
+        "entry": 65800,
+        "stop": 59291,
+        "target": 78000,
+        "quantity": 161
+      },
+      "fill": {
+        "date": "2025-10-30",
+        "price": 64932.45,
+        "fee": 10454.12445
+      },
+      "exit": {
+        "date": "2025-11-19",
+        "price": 59261.3545,
+        "reason": "stop",
+        "net_pnl": -933041.5780244973,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-10-29",
+        "open": 61500.0,
+        "high": 66400.0,
+        "low": 60200.0,
+        "close": 65800.0,
+        "volume": 918257,
+        "available_at": 1761719400,
+        "symbol": "240810.KQ"
+      },
+      "fill_bar": {
+        "date": "2025-10-30",
+        "open": 64900.0,
+        "high": 68800.0,
+        "low": 64300.0,
+        "close": 65000.0,
+        "volume": 657713,
+        "available_at": 1761805800,
+        "symbol": "240810.KQ"
+      },
+      "exit_bar": {
+        "date": "2025-11-19",
+        "open": 61000.0,
+        "high": 61800.0,
+        "low": 57700.0,
+        "close": 61100.0,
+        "volume": 730626,
+        "available_at": 1763533800,
+        "symbol": "240810.KQ"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 64932.45,
+        "fill_date": "2025-10-30",
+        "exit": 59261.3545,
+        "exit_date": "2025-11-19",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 15,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-240810.KQ-2025-10-29.svg"
+    },
+    {
+      "id": "recent-000500.KS-2025-11-20",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "recent",
+      "symbol": "000500.KS",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2025-11-20",
+      "order": {
+        "entry": 39222,
+        "stop": 35220,
+        "target": 54777,
+        "quantity": 253
+      },
+      "fill": {
+        "date": "2025-11-21",
+        "price": 36629.4149296875,
+        "fee": 9267.241977210937
+      },
+      "exit": {
+        "date": "2025-12-18",
+        "price": 45532.77691,
+        "reason": "time",
+        "net_pnl": 2231763.546483623,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-11-20",
+        "open": 38444.4453125,
+        "high": 40166.66796875,
+        "low": 38388.890625,
+        "close": 39222.22265625,
+        "volume": 147063,
+        "available_at": 1763620200,
+        "symbol": "000500.KS"
+      },
+      "fill_bar": {
+        "date": "2025-11-21",
+        "open": 36611.109375,
+        "high": 38055.5546875,
+        "low": 36388.890625,
+        "close": 37333.33203125,
+        "volume": 74404,
+        "available_at": 1763706600,
+        "symbol": "000500.KS"
+      },
+      "exit_bar": {
+        "date": "2025-12-18",
+        "open": 44666.66796875,
+        "high": 46000.0,
+        "low": 44055.5546875,
+        "close": 45555.5546875,
+        "volume": 88657,
+        "available_at": 1766039400,
+        "symbol": "000500.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "time",
+        "fill": 36629.4149296875,
+        "fill_date": "2025-11-21",
+        "exit": 45532.77691015625,
+        "exit_date": "2025-12-18",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 20,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-000500.KS-2025-11-20.svg"
+    },
+    {
+      "id": "recent-108490.KQ-2025-11-24",
+      "tags": [
+        "top_win"
+      ],
+      "period": "recent",
+      "symbol": "108490.KQ",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2025-11-24",
+      "order": {
+        "entry": 206500,
+        "stop": 184094,
+        "target": 294500,
+        "quantity": 44
+      },
+      "fill": {
+        "date": "2025-11-25",
+        "price": 206500,
+        "fee": 9086
+      },
+      "exit": {
+        "date": "2025-12-04",
+        "price": 294500,
+        "reason": "target",
+        "net_pnl": 3849956.000000002,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-11-24",
+        "open": 194800.0,
+        "high": 209000.0,
+        "low": 188700.0,
+        "close": 206500.0,
+        "volume": 896001,
+        "available_at": 1763965800,
+        "symbol": "108490.KQ"
+      },
+      "fill_bar": {
+        "date": "2025-11-25",
+        "open": 210000.0,
+        "high": 210500.0,
+        "low": 195000.0,
+        "close": 195000.0,
+        "volume": 464935,
+        "available_at": 1764052200,
+        "symbol": "108490.KQ"
+      },
+      "exit_bar": {
+        "date": "2025-12-04",
+        "open": 269500.0,
+        "high": 301000.0,
+        "low": 262500.0,
+        "close": 288000.0,
+        "volume": 3059116,
+        "available_at": 1764829800,
+        "symbol": "108490.KQ"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "target",
+        "fill": 206500.0,
+        "fill_date": "2025-11-25",
+        "exit": 294500.0,
+        "exit_date": "2025-12-04",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 8,
+        "notes": []
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-108490.KQ-2025-11-24.svg"
+    },
+    {
+      "id": "recent-068270.KS-2025-12-08",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "recent",
+      "symbol": "068270.KS",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2025-12-08",
+      "order": {
+        "entry": 178190,
+        "stop": 171459,
+        "target": 193809,
+        "quantity": 121
+      },
+      "fill": {
+        "date": "2025-12-09",
+        "price": 177803.13839062498,
+        "fee": 21514.17974526562
+      },
+      "exit": {
+        "date": "2025-12-26",
+        "price": 171373.2705,
+        "reason": "stop",
+        "net_pnl": -820264.3602413833,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-12-08",
+        "open": 176095.234375,
+        "high": 179809.53125,
+        "low": 175142.859375,
+        "close": 178190.46875,
+        "volume": 662293,
+        "available_at": 1765175400,
+        "symbol": "068270.KS"
+      },
+      "fill_bar": {
+        "date": "2025-12-09",
+        "open": 177714.28125,
+        "high": 178380.953125,
+        "low": 176571.421875,
+        "close": 178380.953125,
+        "volume": 366441,
+        "available_at": 1765261800,
+        "symbol": "068270.KS"
+      },
+      "exit_bar": {
+        "date": "2025-12-26",
+        "open": 173047.625,
+        "high": 173619.046875,
+        "low": 171428.578125,
+        "close": 171428.578125,
+        "volume": 485739,
+        "available_at": 1766730600,
+        "symbol": "068270.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 177803.13839062498,
+        "fill_date": "2025-12-09",
+        "exit": 171373.2705,
+        "exit_date": "2025-12-26",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 13,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-068270.KS-2025-12-08.svg"
+    },
+    {
+      "id": "recent-319660.KQ-2026-01-14",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "recent",
+      "symbol": "319660.KQ",
+      "pattern": "trend_recovery_v1",
+      "signal_date": "2026-01-14",
+      "order": {
+        "entry": 42700,
+        "stop": 40450,
+        "target": 46350,
+        "quantity": 467
+      },
+      "fill": {
+        "date": "2026-01-15",
+        "price": 41870.924999999996,
+        "fee": 19553.721974999997
+      },
+      "exit": {
+        "date": "2026-01-20",
+        "price": 40429.775,
+        "reason": "stop",
+        "net_pnl": -711451.4768999964,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2026-01-14",
+        "open": 41850.0,
+        "high": 42850.0,
+        "low": 41550.0,
+        "close": 42700.0,
+        "volume": 248359,
+        "available_at": 1768372200,
+        "symbol": "319660.KQ"
+      },
+      "fill_bar": {
+        "date": "2026-01-15",
+        "open": 41850.0,
+        "high": 42600.0,
+        "low": 40600.0,
+        "close": 41250.0,
+        "volume": 519639,
+        "available_at": 1768458600,
+        "symbol": "319660.KQ"
+      },
+      "exit_bar": {
+        "date": "2026-01-20",
+        "open": 41450.0,
+        "high": 41600.0,
+        "low": 39750.0,
+        "close": 40050.0,
+        "volume": 365585,
+        "available_at": 1768890600,
+        "symbol": "319660.KQ"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 41870.924999999996,
+        "fill_date": "2026-01-15",
+        "exit": 40429.775,
+        "exit_date": "2026-01-20",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 4,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-319660.KQ-2026-01-14.svg"
+    },
+    {
+      "id": "recent-036540.KQ-2026-01-26",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "recent",
+      "symbol": "036540.KQ",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2026-01-26",
+      "order": {
+        "entry": 5480,
+        "stop": 4987,
+        "target": 6530,
+        "quantity": 2118
+      },
+      "fill": {
+        "date": "2026-01-27",
+        "price": 5452.724999999999,
+        "fee": 11548.87155
+      },
+      "exit": {
+        "date": "2026-01-29",
+        "price": 6530,
+        "reason": "target",
+        "net_pnl": 2256289.0384500027,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2026-01-26",
+        "open": 5290.0,
+        "high": 5550.0,
+        "low": 5240.0,
+        "close": 5480.0,
+        "volume": 2699652,
+        "available_at": 1769409000,
+        "symbol": "036540.KQ"
+      },
+      "fill_bar": {
+        "date": "2026-01-27",
+        "open": 5450.0,
+        "high": 5880.0,
+        "low": 5400.0,
+        "close": 5810.0,
+        "volume": 5171166,
+        "available_at": 1769495400,
+        "symbol": "036540.KQ"
+      },
+      "exit_bar": {
+        "date": "2026-01-29",
+        "open": 7270.0,
+        "high": 7280.0,
+        "low": 6580.0,
+        "close": 6860.0,
+        "volume": 11492280,
+        "available_at": 1769668200,
+        "symbol": "036540.KQ"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "target",
+        "fill": 5452.724999999999,
+        "fill_date": "2026-01-27",
+        "exit": 6530.0,
+        "exit_date": "2026-01-29",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 3,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))",
+          "later-session open already through target; target is taken at the limit"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-036540.KQ-2026-01-26.svg"
+    },
+    {
+      "id": "recent-072950.KQ-2026-01-30",
+      "tags": [
+        "gap_entry",
+        "top_win"
+      ],
+      "period": "recent",
+      "symbol": "072950.KQ",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2026-01-30",
+      "order": {
+        "entry": 5590,
+        "stop": 5253,
+        "target": 6380,
+        "quantity": 3145
+      },
+      "fill": {
+        "date": "2026-02-02",
+        "price": 5572.785,
+        "fee": 17526.408825
+      },
+      "exit": {
+        "date": "2026-02-10",
+        "price": 6380,
+        "reason": "target",
+        "net_pnl": 2501099.6661750004,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2026-01-30",
+        "open": 5500.0,
+        "high": 5740.0,
+        "low": 5430.0,
+        "close": 5590.0,
+        "volume": 118061,
+        "available_at": 1769754600,
+        "symbol": "072950.KQ"
+      },
+      "fill_bar": {
+        "date": "2026-02-02",
+        "open": 5570.0,
+        "high": 5720.0,
+        "low": 5450.0,
+        "close": 5570.0,
+        "volume": 104454,
+        "available_at": 1770013800,
+        "symbol": "072950.KQ"
+      },
+      "exit_bar": {
+        "date": "2026-02-10",
+        "open": 6100.0,
+        "high": 6410.0,
+        "low": 6010.0,
+        "close": 6260.0,
+        "volume": 208637,
+        "available_at": 1770705000,
+        "symbol": "072950.KQ"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "target",
+        "fill": 5572.785,
+        "fill_date": "2026-02-02",
+        "exit": 6380.0,
+        "exit_date": "2026-02-10",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 7,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-072950.KQ-2026-01-30.svg"
+    },
+    {
+      "id": "recent-000270.KS-2026-02-04",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "recent",
+      "symbol": "000270.KS",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2026-02-04",
+      "order": {
+        "entry": 156800,
+        "stop": 144040,
+        "target": 177000,
+        "quantity": 84
+      },
+      "fill": {
+        "date": "2026-02-05",
+        "price": 156778.35,
+        "fee": 13169.3814
+      },
+      "exit": {
+        "date": "2026-02-25",
+        "price": 177000,
+        "reason": "target",
+        "net_pnl": 1670581.2186000012,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2026-02-04",
+        "open": 155100.0,
+        "high": 158000.0,
+        "low": 154000.0,
+        "close": 156800.0,
+        "volume": 1387022,
+        "available_at": 1770186600,
+        "symbol": "000270.KS"
+      },
+      "fill_bar": {
+        "date": "2026-02-05",
+        "open": 156700.0,
+        "high": 161250.0,
+        "low": 154800.0,
+        "close": 156200.0,
+        "volume": 1589252,
+        "available_at": 1770273000,
+        "symbol": "000270.KS"
+      },
+      "exit_bar": {
+        "date": "2026-02-25",
+        "open": 175700.0,
+        "high": 199900.0,
+        "low": 175500.0,
+        "close": 196100.0,
+        "volume": 3876333,
+        "available_at": 1772001000,
+        "symbol": "000270.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "target",
+        "fill": 156778.35,
+        "fill_date": "2026-02-05",
+        "exit": 177000.0,
+        "exit_date": "2026-02-25",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 12,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-000270.KS-2026-02-04.svg"
+    },
+    {
+      "id": "recent-071090.KS-2026-02-09",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "recent",
+      "symbol": "071090.KS",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2026-02-09",
+      "order": {
+        "entry": 3720,
+        "stop": 3437,
+        "target": 4455,
+        "quantity": 256
+      },
+      "fill": {
+        "date": "2026-02-10",
+        "price": 3716.8574999999996,
+        "fee": 951.5155199999999
+      },
+      "exit": {
+        "date": "2026-03-04",
+        "price": 3435.2815,
+        "reason": "stop",
+        "net_pnl": -73914.40358399984,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2026-02-09",
+        "open": 3655.0,
+        "high": 3795.0,
+        "low": 3655.0,
+        "close": 3720.0,
+        "volume": 167521,
+        "available_at": 1770618600,
+        "symbol": "071090.KS"
+      },
+      "fill_bar": {
+        "date": "2026-02-10",
+        "open": 3715.0,
+        "high": 3785.0,
+        "low": 3695.0,
+        "close": 3775.0,
+        "volume": 203320,
+        "available_at": 1770705000,
+        "symbol": "071090.KS"
+      },
+      "exit_bar": {
+        "date": "2026-03-04",
+        "open": 3510.0,
+        "high": 3540.0,
+        "low": 3125.0,
+        "close": 3165.0,
+        "volume": 342159,
+        "available_at": 1772605800,
+        "symbol": "071090.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 3716.8574999999996,
+        "fill_date": "2026-02-10",
+        "exit": 3435.2815,
+        "exit_date": "2026-03-04",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 13,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-071090.KS-2026-02-09.svg"
+    },
+    {
+      "id": "recent-007810.KS-2026-02-12",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "recent",
+      "symbol": "007810.KS",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2026-02-12",
+      "order": {
+        "entry": 58300,
+        "stop": 49230,
+        "target": 75800,
+        "quantity": 124
+      },
+      "fill": {
+        "date": "2026-02-13",
+        "price": 57328.649999999994,
+        "fee": 7108.7526
+      },
+      "exit": {
+        "date": "2026-03-04",
+        "price": 49205.385,
+        "reason": "stop",
+        "net_pnl": -1020495.0803399989,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2026-02-12",
+        "open": 56200.0,
+        "high": 58400.0,
+        "low": 54800.0,
+        "close": 58300.0,
+        "volume": 396700,
+        "available_at": 1770877800,
+        "symbol": "007810.KS"
+      },
+      "fill_bar": {
+        "date": "2026-02-13",
+        "open": 57300.0,
+        "high": 61000.0,
+        "low": 55900.0,
+        "close": 58400.0,
+        "volume": 387391,
+        "available_at": 1770964200,
+        "symbol": "007810.KS"
+      },
+      "exit_bar": {
+        "date": "2026-03-04",
+        "open": 49400.0,
+        "high": 52300.0,
+        "low": 44800.0,
+        "close": 45100.0,
+        "volume": 356152,
+        "available_at": 1772605800,
+        "symbol": "007810.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 57328.649999999994,
+        "fill_date": "2026-02-13",
+        "exit": 49205.385,
+        "exit_date": "2026-03-04",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 10,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-007810.KS-2026-02-12.svg"
+    },
+    {
+      "id": "recent-108490.KQ-2026-02-19",
+      "tags": [
+        "gap_entry",
+        "gap_stop"
+      ],
+      "period": "recent",
+      "symbol": "108490.KQ",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2026-02-19",
+      "order": {
+        "entry": 284000,
+        "stop": 257607,
+        "target": 364000,
+        "quantity": 41
+      },
+      "fill": {
+        "date": "2026-02-20",
+        "price": 283641.75,
+        "fee": 11629.31175
+      },
+      "exit": {
+        "date": "2026-03-04",
+        "price": 239880,
+        "reason": "stop",
+        "net_pnl": -1815696.1417499986,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2026-02-19",
+        "open": 275500.0,
+        "high": 286000.0,
+        "low": 262500.0,
+        "close": 284000.0,
+        "volume": 251938,
+        "available_at": 1771482600,
+        "symbol": "108490.KQ"
+      },
+      "fill_bar": {
+        "date": "2026-02-20",
+        "open": 283500.0,
+        "high": 285000.0,
+        "low": 277000.0,
+        "close": 279500.0,
+        "volume": 103770,
+        "available_at": 1771569000,
+        "symbol": "108490.KQ"
+      },
+      "exit_bar": {
+        "date": "2026-03-04",
+        "open": 240000.0,
+        "high": 249000.0,
+        "low": 201000.0,
+        "close": 207500.0,
+        "volume": 492149,
+        "available_at": 1772605800,
+        "symbol": "108490.KQ"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 283641.75,
+        "fill_date": "2026-02-20",
+        "exit": 239880.0,
+        "exit_date": "2026-03-04",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 8,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))",
+          "gap through stop: exit is min(stop, open)*(1-5bp)"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-108490.KQ-2026-02-19.svg"
+    },
+    {
+      "id": "recent-000500.KS-2026-03-06",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "recent",
+      "symbol": "000500.KS",
+      "pattern": "trend_recovery_v1",
+      "signal_date": "2026-03-06",
+      "order": {
+        "entry": 55722,
+        "stop": 48166,
+        "target": 67333,
+        "quantity": 146
+      },
+      "fill": {
+        "date": "2026-03-09",
+        "price": 50747.58376757812,
+        "fee": 7409.147230066405
+      },
+      "exit": {
+        "date": "2026-04-03",
+        "price": 57859.94618,
+        "reason": "time",
+        "net_pnl": 1022548.2128412491,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2026-03-06",
+        "open": 52833.33203125,
+        "high": 56444.4453125,
+        "low": 51944.4453125,
+        "close": 55722.22265625,
+        "volume": 104616,
+        "available_at": 1772778600,
+        "symbol": "000500.KS"
+      },
+      "fill_bar": {
+        "date": "2026-03-09",
+        "open": 50722.22265625,
+        "high": 52777.77734375,
+        "low": 50111.109375,
+        "close": 51500.0,
+        "volume": 67314,
+        "available_at": 1773037800,
+        "symbol": "000500.KS"
+      },
+      "exit_bar": {
+        "date": "2026-04-03",
+        "open": 57777.77734375,
+        "high": 58777.77734375,
+        "low": 56055.5546875,
+        "close": 57888.890625,
+        "volume": 27806,
+        "available_at": 1775197800,
+        "symbol": "000500.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "time",
+        "fill": 50747.58376757812,
+        "fill_date": "2026-03-09",
+        "exit": 57859.946179687504,
+        "exit_date": "2026-04-03",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 20,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-000500.KS-2026-03-06.svg"
+    },
+    {
+      "id": "recent-034730.KS-2026-03-10",
+      "tags": [
+        "gap_stop"
+      ],
+      "period": "recent",
+      "symbol": "034730.KS",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2026-03-10",
+      "order": {
+        "entry": 351000,
+        "stop": 311235,
+        "target": 424000,
+        "quantity": 2
+      },
+      "fill": {
+        "date": "2026-03-11",
+        "price": 351000,
+        "fee": 702
+      },
+      "exit": {
+        "date": "2026-03-31",
+        "price": 308345.75,
+        "reason": "stop",
+        "net_pnl": -86627.19149999984,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2026-03-10",
+        "open": 347000.0,
+        "high": 356000.0,
+        "low": 340500.0,
+        "close": 351000.0,
+        "volume": 228794,
+        "available_at": 1773124200,
+        "symbol": "034730.KS"
+      },
+      "fill_bar": {
+        "date": "2026-03-11",
+        "open": 401500.0,
+        "high": 402500.0,
+        "low": 351000.0,
+        "close": 359500.0,
+        "volume": 1048503,
+        "available_at": 1773210600,
+        "symbol": "034730.KS"
+      },
+      "exit_bar": {
+        "date": "2026-03-31",
+        "open": 308500.0,
+        "high": 320500.0,
+        "low": 298000.0,
+        "close": 301000.0,
+        "volume": 246406,
+        "available_at": 1774938600,
+        "symbol": "034730.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 351000.0,
+        "fill_date": "2026-03-11",
+        "exit": 308345.75,
+        "exit_date": "2026-03-31",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 15,
+        "notes": [
+          "gap through stop: exit is min(stop, open)*(1-5bp)"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-034730.KS-2026-03-10.svg"
+    },
+    {
+      "id": "recent-006400.KS-2026-03-18",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "recent",
+      "symbol": "006400.KS",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2026-03-18",
+      "order": {
+        "entry": 405000,
+        "stop": 369557,
+        "target": 473500,
+        "quantity": 30
+      },
+      "fill": {
+        "date": "2026-03-19",
+        "price": 397198.5,
+        "fee": 11915.955
+      },
+      "exit": {
+        "date": "2026-04-09",
+        "price": 473500,
+        "reason": "target",
+        "net_pnl": 2262924.045000002,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2026-03-18",
+        "open": 397000.0,
+        "high": 405000.0,
+        "low": 393500.0,
+        "close": 405000.0,
+        "volume": 384421,
+        "available_at": 1773815400,
+        "symbol": "006400.KS"
+      },
+      "fill_bar": {
+        "date": "2026-03-19",
+        "open": 397000.0,
+        "high": 414000.0,
+        "low": 396000.0,
+        "close": 402500.0,
+        "volume": 428488,
+        "available_at": 1773901800,
+        "symbol": "006400.KS"
+      },
+      "exit_bar": {
+        "date": "2026-04-09",
+        "open": 475000.0,
+        "high": 493500.0,
+        "low": 469000.0,
+        "close": 480000.0,
+        "volume": 1003279,
+        "available_at": 1775716200,
+        "symbol": "006400.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "target",
+        "fill": 397198.5,
+        "fill_date": "2026-03-19",
+        "exit": 473500.0,
+        "exit_date": "2026-04-09",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 16,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))",
+          "later-session open already through target; target is taken at the limit"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-006400.KS-2026-03-18.svg"
+    },
+    {
+      "id": "recent-005490.KS-2026-04-08",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "recent",
+      "symbol": "005490.KS",
+      "pattern": "trend_recovery_v1",
+      "signal_date": "2026-04-08",
+      "order": {
+        "entry": 362500,
+        "stop": 327000,
+        "target": 427500,
+        "quantity": 31
+      },
+      "fill": {
+        "date": "2026-04-09",
+        "price": 360180,
+        "fee": 11165.58
+      },
+      "exit": {
+        "date": "2026-04-28",
+        "price": 427500,
+        "reason": "target",
+        "net_pnl": 2062501.9200000018,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2026-04-08",
+        "open": 358000.0,
+        "high": 363500.0,
+        "low": 351000.0,
+        "close": 362500.0,
+        "volume": 454015,
+        "available_at": 1775629800,
+        "symbol": "005490.KS"
+      },
+      "fill_bar": {
+        "date": "2026-04-09",
+        "open": 360000.0,
+        "high": 370000.0,
+        "low": 357500.0,
+        "close": 367000.0,
+        "volume": 474808,
+        "available_at": 1775716200,
+        "symbol": "005490.KS"
+      },
+      "exit_bar": {
+        "date": "2026-04-28",
+        "open": 442000.0,
+        "high": 482000.0,
+        "low": 441000.0,
+        "close": 466500.0,
+        "volume": 1962453,
+        "available_at": 1777357800,
+        "symbol": "005490.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "target",
+        "fill": 360180.0,
+        "fill_date": "2026-04-09",
+        "exit": 427500.0,
+        "exit_date": "2026-04-28",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 14,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))",
+          "later-session open already through target; target is taken at the limit"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-005490.KS-2026-04-08.svg"
+    },
+    {
+      "id": "recent-011070.KS-2026-04-15",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "recent",
+      "symbol": "011070.KS",
+      "pattern": "breakout_retest_v1",
+      "signal_date": "2026-04-15",
+      "order": {
+        "entry": 383000,
+        "stop": 352821,
+        "target": 469500,
+        "quantity": 1
+      },
+      "fill": {
+        "date": "2026-04-16",
+        "price": 379689.75,
+        "fee": 379.68975
+      },
+      "exit": {
+        "date": "2026-04-22",
+        "price": 469500,
+        "reason": "target",
+        "net_pnl": 88961.06025000004,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2026-04-15",
+        "open": 373000.0,
+        "high": 389000.0,
+        "low": 373000.0,
+        "close": 383000.0,
+        "volume": 252722,
+        "available_at": 1776234600,
+        "symbol": "011070.KS"
+      },
+      "fill_bar": {
+        "date": "2026-04-16",
+        "open": 379500.0,
+        "high": 384000.0,
+        "low": 372000.0,
+        "close": 379000.0,
+        "volume": 150011,
+        "available_at": 1776321000,
+        "symbol": "011070.KS"
+      },
+      "exit_bar": {
+        "date": "2026-04-22",
+        "open": 453000.0,
+        "high": 505000.0,
+        "low": 446500.0,
+        "close": 500000.0,
+        "volume": 598835,
+        "available_at": 1776839400,
+        "symbol": "011070.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "target",
+        "fill": 379689.75,
+        "fill_date": "2026-04-16",
+        "exit": 469500.0,
+        "exit_date": "2026-04-22",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 5,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-011070.KS-2026-04-15.svg"
+    },
+    {
+      "id": "recent-036540.KQ-2026-05-14",
+      "tags": [
+        "gap_entry",
+        "top_win"
+      ],
+      "period": "recent",
+      "symbol": "036540.KQ",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2026-05-14",
+      "order": {
+        "entry": 8280,
+        "stop": 7493,
+        "target": 10450,
+        "quantity": 1396
+      },
+      "fill": {
+        "date": "2026-05-18",
+        "price": 8004,
+        "fee": 11173.584
+      },
+      "exit": {
+        "date": "2026-05-22",
+        "price": 10450,
+        "reason": "target",
+        "net_pnl": 3388854.216000002,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2026-05-14",
+        "open": 8090.0,
+        "high": 8600.0,
+        "low": 7760.0,
+        "close": 8280.0,
+        "volume": 8497448,
+        "available_at": 1778740200,
+        "symbol": "036540.KQ"
+      },
+      "fill_bar": {
+        "date": "2026-05-18",
+        "open": 8000.0,
+        "high": 8950.0,
+        "low": 7700.0,
+        "close": 8500.0,
+        "volume": 10734687,
+        "available_at": 1779085800,
+        "symbol": "036540.KQ"
+      },
+      "exit_bar": {
+        "date": "2026-05-22",
+        "open": 8920.0,
+        "high": 10960.0,
+        "low": 8760.0,
+        "close": 10250.0,
+        "volume": 69036014,
+        "available_at": 1779431400,
+        "symbol": "036540.KQ"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "target",
+        "fill": 8004.0,
+        "fill_date": "2026-05-18",
+        "exit": 10450.0,
+        "exit_date": "2026-05-22",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 5,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-036540.KQ-2026-05-14.svg"
+    },
+    {
+      "id": "recent-203650.KQ-2026-05-19",
+      "tags": [
+        "gap_entry",
+        "slip_above_high"
+      ],
+      "period": "recent",
+      "symbol": "203650.KQ",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2026-05-19",
+      "order": {
+        "entry": 3355,
+        "stop": 2583,
+        "target": 4675,
+        "quantity": 1462
+      },
+      "fill": {
+        "date": "2026-05-20",
+        "price": 3261.6299999999997,
+        "fee": 4768.50306
+      },
+      "exit": {
+        "date": "2026-05-27",
+        "price": 4675,
+        "reason": "target",
+        "net_pnl": 2054743.5869400017,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2026-05-19",
+        "open": 3225.0,
+        "high": 3710.0,
+        "low": 3090.0,
+        "close": 3355.0,
+        "volume": 13787874,
+        "available_at": 1779172200,
+        "symbol": "203650.KQ"
+      },
+      "fill_bar": {
+        "date": "2026-05-20",
+        "open": 3260.0,
+        "high": 3260.0,
+        "low": 2980.0,
+        "close": 3105.0,
+        "volume": 3779563,
+        "available_at": 1779258600,
+        "symbol": "203650.KQ"
+      },
+      "exit_bar": {
+        "date": "2026-05-27",
+        "open": 4810.0,
+        "high": 4810.0,
+        "low": 3650.0,
+        "close": 3800.0,
+        "volume": 32022370,
+        "available_at": 1779863400,
+        "symbol": "203650.KQ"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "target",
+        "fill": 3261.6299999999997,
+        "fill_date": "2026-05-20",
+        "exit": 4675.0,
+        "exit_date": "2026-05-27",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 5,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))",
+          "later-session open already through target; target is taken at the limit"
+        ]
+      },
+      "worst": "assumption_dependent",
+      "uncertainty": [
+        "5bp slip on the open prints above that session high; the tape never shows that price"
+      ],
+      "chart": "charts/recent-203650.KQ-2026-05-19.svg"
+    },
+    {
+      "id": "recent-000500.KS-2026-06-01",
+      "tags": [
+        "gap_entry",
+        "gap_stop"
+      ],
+      "period": "recent",
+      "symbol": "000500.KS",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2026-06-01",
+      "order": {
+        "entry": 204444,
+        "stop": 154000,
+        "target": 352777,
+        "quantity": 23
+      },
+      "fill": {
+        "date": "2026-06-04",
+        "price": 203434.99478906248,
+        "fee": 4679.004880148437
+      },
+      "exit": {
+        "date": "2026-06-08",
+        "price": 145760.411461,
+        "reason": "stop",
+        "net_pnl": -1334546.9108891878,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2026-06-01",
+        "open": 190555.5625,
+        "high": 211111.109375,
+        "low": 180833.328125,
+        "close": 204444.4375,
+        "volume": 286572,
+        "available_at": 1780295400,
+        "symbol": "000500.KS"
+      },
+      "fill_bar": {
+        "date": "2026-06-04",
+        "open": 203333.328125,
+        "high": 203611.109375,
+        "low": 186111.109375,
+        "close": 188055.5625,
+        "volume": 89865,
+        "available_at": 1780554600,
+        "symbol": "000500.KS"
+      },
+      "exit_bar": {
+        "date": "2026-06-08",
+        "open": 145833.328125,
+        "high": 171666.671875,
+        "low": 145833.328125,
+        "close": 158888.890625,
+        "volume": 84193,
+        "available_at": 1780900200,
+        "symbol": "000500.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 203434.99478906248,
+        "fill_date": "2026-06-04",
+        "exit": 145760.4114609375,
+        "exit_date": "2026-06-08",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 3,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))",
+          "gap through stop: exit is min(stop, open)*(1-5bp)"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-000500.KS-2026-06-01.svg"
+    },
+    {
+      "id": "recent-011070.KS-2026-06-15",
+      "tags": [
+        "gap_entry",
+        "gap_stop"
+      ],
+      "period": "recent",
+      "symbol": "011070.KS",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2026-06-15",
+      "order": {
+        "entry": 1209000,
+        "stop": 933457,
+        "target": 1788000,
+        "quantity": 4
+      },
+      "fill": {
+        "date": "2026-06-17",
+        "price": 1207603.5,
+        "fee": 4830.414
+      },
+      "exit": {
+        "date": "2026-06-26",
+        "price": 922538.5,
+        "reason": "stop",
+        "net_pnl": -1148780.568,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2026-06-15",
+        "open": 1091000.0,
+        "high": 1226000.0,
+        "low": 1090000.0,
+        "close": 1209000.0,
+        "volume": 542578,
+        "available_at": 1781505000,
+        "symbol": "011070.KS"
+      },
+      "fill_bar": {
+        "date": "2026-06-17",
+        "open": 1207000.0,
+        "high": 1305000.0,
+        "low": 1202000.0,
+        "close": 1248000.0,
+        "volume": 317100,
+        "available_at": 1781677800,
+        "symbol": "011070.KS"
+      },
+      "exit_bar": {
+        "date": "2026-06-26",
+        "open": 923000.0,
+        "high": 1005000.0,
+        "low": 901000.0,
+        "close": 931000.0,
+        "volume": 468089,
+        "available_at": 1782455400,
+        "symbol": "011070.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 1207603.5,
+        "fill_date": "2026-06-17",
+        "exit": 922538.5,
+        "exit_date": "2026-06-26",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 8,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))",
+          "gap through stop: exit is min(stop, open)*(1-5bp)"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-011070.KS-2026-06-15.svg"
+    },
+    {
+      "id": "recent-000500.KS-2026-07-22",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "recent",
+      "symbol": "000500.KS",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2026-07-22",
+      "order": {
+        "entry": 209500,
+        "stop": 163388,
+        "target": 326000,
+        "quantity": 25
+      },
+      "fill": {
+        "date": "2026-07-23",
+        "price": 201100.5,
+        "fee": 5027.5125
+      },
+      "exit": {
+        "date": "2026-07-28",
+        "price": 163306.306,
+        "reason": "stop",
+        "net_pnl": -953965.0201499988,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2026-07-22",
+        "open": 187000.0,
+        "high": 233000.0,
+        "low": 184000.0,
+        "close": 209500.0,
+        "volume": 504438,
+        "available_at": 1784701800,
+        "symbol": "000500.KS"
+      },
+      "fill_bar": {
+        "date": "2026-07-23",
+        "open": 201000.0,
+        "high": 221500.0,
+        "low": 196000.0,
+        "close": 217000.0,
+        "volume": 463409,
+        "available_at": 1784788200,
+        "symbol": "000500.KS"
+      },
+      "exit_bar": {
+        "date": "2026-07-28",
+        "open": 174000.0,
+        "high": 174000.0,
+        "low": 149000.0,
+        "close": 151800.0,
+        "volume": 268232,
+        "available_at": 1785220200,
+        "symbol": "000500.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 201100.5,
+        "fill_date": "2026-07-23",
+        "exit": 163306.306,
+        "exit_date": "2026-07-28",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 4,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-000500.KS-2026-07-22.svg"
+    },
+    {
+      "id": "recent-028050.KS-2026-09-03",
+      "tags": [
+        "gap_entry",
+        "slip_above_high"
+      ],
+      "period": "recent",
+      "symbol": "028050.KS",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2026-09-03",
+      "order": {
+        "entry": 46100,
+        "stop": 42911,
+        "target": 51400,
+        "quantity": 347
+      },
+      "fill": {
+        "date": "2026-09-04",
+        "price": 46073.024999999994,
+        "fee": 15987.339675
+      },
+      "exit": {
+        "date": "2026-09-08",
+        "price": 51400,
+        "reason": "target",
+        "net_pnl": 1814637.1853250023,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2026-09-03",
+        "open": 44050.0,
+        "high": 47000.0,
+        "low": 43800.0,
+        "close": 46100.0,
+        "volume": 1488007,
+        "available_at": 1788417000,
+        "symbol": "028050.KS"
+      },
+      "fill_bar": {
+        "date": "2026-09-04",
+        "open": 46050.0,
+        "high": 46050.0,
+        "low": 44950.0,
+        "close": 45850.0,
+        "volume": 917565,
+        "available_at": 1788503400,
+        "symbol": "028050.KS"
+      },
+      "exit_bar": {
+        "date": "2026-09-08",
+        "open": 48550.0,
+        "high": 51600.0,
+        "low": 48350.0,
+        "close": 49150.0,
+        "volume": 3107412,
+        "available_at": 1788849000,
+        "symbol": "028050.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "target",
+        "fill": 46073.024999999994,
+        "fill_date": "2026-09-04",
+        "exit": 51400.0,
+        "exit_date": "2026-09-08",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 3,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "assumption_dependent",
+      "uncertainty": [
+        "5bp slip on the open prints above that session high; the tape never shows that price"
+      ],
+      "chart": "charts/recent-028050.KS-2026-09-03.svg"
+    },
+    {
+      "id": "recent-115440.KQ-2026-09-09",
+      "tags": [
+        "top_win"
+      ],
+      "period": "recent",
+      "symbol": "115440.KQ",
+      "pattern": "trend_recovery_v1",
+      "signal_date": "2026-09-09",
+      "order": {
+        "entry": 8200,
+        "stop": 6830,
+        "target": 11750,
+        "quantity": 842
+      },
+      "fill": {
+        "date": "2026-09-10",
+        "price": 8200,
+        "fee": 6904.400000000001
+      },
+      "exit": {
+        "date": "2026-09-23",
+        "price": 11750,
+        "reason": "target",
+        "net_pnl": 2972302.1000000006,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2026-09-09",
+        "open": 7320.0,
+        "high": 9300.0,
+        "low": 7320.0,
+        "close": 8200.0,
+        "volume": 2545854,
+        "available_at": 1788935400,
+        "symbol": "115440.KQ"
+      },
+      "fill_bar": {
+        "date": "2026-09-10",
+        "open": 8370.0,
+        "high": 8370.0,
+        "low": 7760.0,
+        "close": 8020.0,
+        "volume": 418594,
+        "available_at": 1789021800,
+        "symbol": "115440.KQ"
+      },
+      "exit_bar": {
+        "date": "2026-09-23",
+        "open": 10510.0,
+        "high": 12120.0,
+        "low": 10130.0,
+        "close": 12120.0,
+        "volume": 7090222,
+        "available_at": 1790145000,
+        "symbol": "115440.KQ"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "target",
+        "fill": 8200.0,
+        "fill_date": "2026-09-10",
+        "exit": 11750.0,
+        "exit_date": "2026-09-23",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 10,
+        "notes": []
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-115440.KQ-2026-09-09.svg"
+    },
+    {
+      "id": "recent-003230.KS-2026-09-14",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "recent",
+      "symbol": "003230.KS",
+      "pattern": "trend_pullback_v1",
+      "signal_date": "2026-09-14",
+      "order": {
+        "entry": 1310000,
+        "stop": 1221457,
+        "target": 1557000,
+        "quantity": 12
+      },
+      "fill": {
+        "date": "2026-09-15",
+        "price": 1308654,
+        "fee": 15703.848
+      },
+      "exit": {
+        "date": "2026-09-23",
+        "price": 1220846.2715,
+        "reason": "stop",
+        "net_pnl": -1084046.745257996,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2026-09-14",
+        "open": 1284000.0,
+        "high": 1322000.0,
+        "low": 1278000.0,
+        "close": 1310000.0,
+        "volume": 72267,
+        "available_at": 1789367400,
+        "symbol": "003230.KS"
+      },
+      "fill_bar": {
+        "date": "2026-09-15",
+        "open": 1308000.0,
+        "high": 1315000.0,
+        "low": 1270000.0,
+        "close": 1277000.0,
+        "volume": 33321,
+        "available_at": 1789453800,
+        "symbol": "003230.KS"
+      },
+      "exit_bar": {
+        "date": "2026-09-23",
+        "open": 1238000.0,
+        "high": 1238000.0,
+        "low": 1205000.0,
+        "close": 1215000.0,
+        "volume": 57242,
+        "available_at": 1790145000,
+        "symbol": "003230.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 1308654.0,
+        "fill_date": "2026-09-15",
+        "exit": 1220846.2715,
+        "exit_date": "2026-09-23",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 7,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-003230.KS-2026-09-14.svg"
+    },
+    {
+      "id": "recent-092870.KQ-2026-10-01",
+      "tags": [
+        "gap_entry"
+      ],
+      "period": "recent",
+      "symbol": "092870.KQ",
+      "pattern": "breakout_retest_v1",
+      "signal_date": "2026-10-01",
+      "order": {
+        "entry": 53100,
+        "stop": 45202,
+        "target": 68200,
+        "quantity": 147
+      },
+      "fill": {
+        "date": "2026-10-02",
+        "price": 53026.5,
+        "fee": 7794.8955000000005
+      },
+      "exit": null,
+      "cancelled": null,
+      "status": "open",
+      "signal_bar": {
+        "date": "2026-10-01",
+        "open": 48700.0,
+        "high": 54600.0,
+        "low": 48650.0,
+        "close": 53100.0,
+        "volume": 680348,
+        "available_at": 1790836200,
+        "symbol": "092870.KQ"
+      },
+      "fill_bar": {
+        "date": "2026-10-02",
+        "open": 53000.0,
+        "high": 54000.0,
+        "low": 50600.0,
+        "close": 52600.0,
+        "volume": 411932,
+        "available_at": 1790922600,
+        "symbol": "092870.KQ"
+      },
+      "exit_bar": null,
+      "independent": {
+        "status": "open",
+        "fill": 53026.5,
+        "fill_date": "2026-10-02",
+        "held": 4,
+        "notes": [
+          "gap-through limit: fill is min(limit, open*(1+5bp))"
+        ]
+      },
+      "worst": "pass",
+      "uncertainty": [],
+      "chart": "charts/recent-092870.KQ-2026-10-01.svg"
+    }
+  ]
+}

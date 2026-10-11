@@ -1,3 +1,9 @@
+## 2026-10-11 · Codex · 끝
+- PR #68 원본 종료 105건을 Decimal로 독립 대조: 상위 거래·종목·패턴·청산 월 집계 및 실현손익 일치. 기존 해시의 CRLF 차이 확인 후 Git LF 기준 산출물 재생성, 검토 기록 추가. 한글 PR 제목·설명 및 병합 메시지 정리. 사용자 승인에 따라 검증한 커밋 병합 진행. 운영·기존 full-v2 불변.
+
+## 2026-10-11 · Codex · 진행
+- PR #68 원본 거래 독립 대조·재현 검토 후 한글 제목/설명 정리 및 병합 검토.
+
 ## 2026-10-11 21:08 · Cursor · 끝
 - 한 일: 과거 연구 계좌 두 기간 수익 집중도 집계. 종료 거래 net_pnl만 사용(이전 49·최근 56, 실현손익 원본과 일치). 상위 1·3·5건 비중, 종목·패턴·청산 월 집계, 보고서. 계좌 재실행·운영 파일·기존 full-v2 결과 변경 없음
 - 파일: docs/research/account-replay-concentration.py, docs/historical-account-replay/concentration/(concentration.json, report.md), docs/work-log.md

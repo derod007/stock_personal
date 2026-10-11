@@ -2,11 +2,11 @@
   "schema": 1,
   "kind": "historical_account_concentration_v1",
   "assumption": "현재 업종 맵 v2를 과거 두 기간에 같이 적용한 연구 계좌의 종료 거래만 본다. 당시 업종이나 매일 TOP100을 복원한 것이 아니다.",
-  "generated_at_kst": "2026-10-11 21:08 +0900",
-  "generated_at_utc": "2026-10-11T12:08:31Z",
+  "generated_at_kst": "2026-10-11 21:17 +0900",
+  "generated_at_utc": "2026-10-11T12:17:25Z",
   "note": "Concentration of already-closed trades. Excluding a trade here is arithmetic, not a replay without that trade. Unrealized PnL is reported separately and is not added to realized totals. Trade averages are not account returns.",
   "comparison_md": "docs/historical-account-replay/full-v2/comparison.md",
-  "comparison_md_sha256": "b1d5498df5535f77f87b0a8de5f7b5cf0c1afae85e90088805e414ae3904bdd6",
+  "comparison_md_sha256": "5bccc9f0d3d7a8914653df1beaabe4bb10c3caab0d4c1d80a4cce8557b1b9794",
   "replay": {
     "prior": [
       "php -d memory_limit=3G bin/paper_account_replay.php run --period=prior --dataset-dir=DATASET --state-dir=STATE --sector-map=docs/historical-account-replay/sector-map-v2.json --confirm-full-run=after-code-review",
@@ -807,10 +807,10 @@
       "group_nets_sum_to_realized": true
     },
     "input_sha256": {
-      "trades.json": "db350c38eda00884297f86e5ed891a1060d92059c3bdfef37008599e1b98aa85",
-      "summary.json": "843ccd9cb85e91b11d7ce6e14667094b86a4eb31f52a193aa880d1a109f54859",
-      "daily-log.jsonl": "0525242b229a9800dc431f22af7653182bbd7cb6c5e7b19987c62ea55a7217bb",
-      "provenance.json": "f668f5950aeafca7eea00b670a882a1508e27291f7e3fadca6298be222af58b9"
+      "trades.json": "53f075e551ffa67edd05dd07404360c778484d70f5e3a29513a0ba9a1b102da3",
+      "summary.json": "a2a2432347ecf9abd4aa2dda1ce672d73a2d5f9300059c191d3cdbdbb8b86e3f",
+      "daily-log.jsonl": "7d11f97f42b2b1c5b88d9b64187b4e9a0d6364e5f87a62640eba9004572cbc13",
+      "provenance.json": "2cb740dc00e8fe361ac8c8ac9ecb789ab370ef110346b1ebcc775be62c79480a"
     },
     "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
     "sector_map_file_sha256": "675cc2e3d5c390a981e4bf326e93929a4cb09f6c376178fbee43abf84c13be41",
@@ -1625,10 +1625,10 @@
       "group_nets_sum_to_realized": true
     },
     "input_sha256": {
-      "trades.json": "a526a6fcc641cab25ba00f0825ac6cfafb0fa29ed2d7ac9cc776a85edd87befa",
-      "summary.json": "201df094bab58e8d4e87ff9c3a9cba1e0e861b2716277eaa066ee9ca97cd9c73",
-      "daily-log.jsonl": "fd67ae90a84c730d9c99388e1bdeb17f90a820ad7abcd260548faff1fe0eb398",
-      "provenance.json": "6141d8ca288e2c2f75435240bd5f217b3af987c9a78df91433161961e39eaf67"
+      "trades.json": "9f2ff25b84b5c80347e061703725d6ebf36a99e99b475f36a1f85ebb10ba5be7",
+      "summary.json": "18c20a2a440906c5c56892289ee0c693a3e248b0fe0d15d6da5f843ff01ef102",
+      "daily-log.jsonl": "2edb2c149340ee4edbcc5c88b99344a10cb56d55402ddbeeafa13a0610466bd2",
+      "provenance.json": "13de0ca93f0d492e48a5ce9b62c41a0d09e5fc9ad4083eb3fdcf50d0e22a44ad"
     },
     "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
     "sector_map_file_sha256": "675cc2e3d5c390a981e4bf326e93929a4cb09f6c376178fbee43abf84c13be41",

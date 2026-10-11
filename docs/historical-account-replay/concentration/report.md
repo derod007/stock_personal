@@ -30,7 +30,7 @@
 - 상위 거래를 제외한 나머지는 단순 차감입니다. 그 거래가 없었을 때의 수량·한도·후속 체결은 다시 계산하지 않았습니다.
 - 이 결과만으로 전략의 유효성이나 운영 변경을 확정하지 않습니다.
 
-입력 해시와 검사 결과는 `concentration.json`에 있습니다. 비교표 `docs/historical-account-replay/full-v2/comparison.md` sha256 `b1d5498df553…`.
+입력 해시와 검사 결과는 `concentration.json`에 있습니다. 비교표 `docs/historical-account-replay/full-v2/comparison.md` sha256 `5bccc9f0d3d7…`.
 
 ## 이전 기간 (2024-10-08~2025-10-02, 242세션)
 
@@ -286,4 +286,4 @@ php bin/paper_account_replay.php export --period=recent --dataset-dir=DATASET --
 python docs/research/account-replay-period-compare.py
 ```
 
-작성 시각(KST) 2026-10-11 21:08 +0900.
+작성 시각(KST) 2026-10-11 21:17 +0900.

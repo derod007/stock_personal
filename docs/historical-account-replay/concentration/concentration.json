@@ -1,0 +1,1640 @@
+{
+  "schema": 1,
+  "kind": "historical_account_concentration_v1",
+  "assumption": "현재 업종 맵 v2를 과거 두 기간에 같이 적용한 연구 계좌의 종료 거래만 본다. 당시 업종이나 매일 TOP100을 복원한 것이 아니다.",
+  "generated_at_kst": "2026-10-11 21:17 +0900",
+  "generated_at_utc": "2026-10-11T12:17:25Z",
+  "note": "Concentration of already-closed trades. Excluding a trade here is arithmetic, not a replay without that trade. Unrealized PnL is reported separately and is not added to realized totals. Trade averages are not account returns.",
+  "comparison_md": "docs/historical-account-replay/full-v2/comparison.md",
+  "comparison_md_sha256": "5bccc9f0d3d7a8914653df1beaabe4bb10c3caab0d4c1d80a4cce8557b1b9794",
+  "replay": {
+    "prior": [
+      "php -d memory_limit=3G bin/paper_account_replay.php run --period=prior --dataset-dir=DATASET --state-dir=STATE --sector-map=docs/historical-account-replay/sector-map-v2.json --confirm-full-run=after-code-review",
+      "php bin/paper_account_replay.php export --period=prior --dataset-dir=DATASET --state-dir=STATE --sector-map=docs/historical-account-replay/sector-map-v2.json --out=docs/historical-account-replay/full-v2/prior"
+    ],
+    "recent": [
+      "php -d memory_limit=3G bin/paper_account_replay.php run --period=recent --dataset-dir=DATASET --state-dir=STATE --sector-map=docs/historical-account-replay/sector-map-v2.json --confirm-full-run=after-code-review",
+      "php bin/paper_account_replay.php export --period=recent --dataset-dir=DATASET --state-dir=STATE --sector-map=docs/historical-account-replay/sector-map-v2.json --out=docs/historical-account-replay/full-v2/recent"
+    ],
+    "compare": "python docs/research/account-replay-period-compare.py",
+    "this": "python docs/research/account-replay-concentration.py"
+  },
+  "prior": {
+    "period": "prior",
+    "account": "hist-kr-recovery-v1-20251008",
+    "dataset": "kr-saved-scan-20251008",
+    "first_day": "2024-10-08",
+    "last_day": "2025-10-02",
+    "sessions": 242,
+    "initial_cash": 100000000,
+    "equity": 104922944.22378051,
+    "equity_change_pct": 4.922944223780523,
+    "realized_pnl": 3655780.2237805934,
+    "unrealized_pnl_open_positions": 1226021.0000000075,
+    "closed": 49,
+    "wins": 18,
+    "losses": 31,
+    "flats": 0,
+    "win_sum": 26305506.358373534,
+    "loss_sum": -22649726.134592943,
+    "skipped": {
+      "open": 2,
+      "pending": 1,
+      "cancelled": 4,
+      "note": "open, pending and cancelled rows are excluded; they are not booked as 0 realized PnL"
+    },
+    "top_wins": {
+      "1": {
+        "n": 1,
+        "taken": 1,
+        "sum": 3083273.4504510015,
+        "share_of_realized": 84.33968296000192,
+        "remainder_realized": 572506.7733295918,
+        "remainder_closed": 48,
+        "note": "remainder is realized minus these trades; it is not a rerun without them",
+        "trades": [
+          {
+            "symbol": "010170.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2025-01-16",
+            "entry_date": "2025-01-17",
+            "exit_date": "2025-02-04",
+            "exit_reason": "target",
+            "quantity": 14359,
+            "net_pnl": 3083273.4504510015
+          }
+        ],
+        "share_of_win_sum": 11.721019198208811,
+        "win_sum_denominator": 26305506.358373534,
+        "realized_denominator": 3655780.2237805934
+      },
+      "3": {
+        "n": 3,
+        "taken": 3,
+        "sum": 8731130.000668509,
+        "share_of_realized": 238.83082314065604,
+        "remainder_realized": -5075349.776887916,
+        "remainder_closed": 46,
+        "note": "remainder is realized minus these trades; it is not a rerun without them",
+        "trades": [
+          {
+            "symbol": "010170.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2025-01-16",
+            "entry_date": "2025-01-17",
+            "exit_date": "2025-02-04",
+            "exit_reason": "target",
+            "quantity": 14359,
+            "net_pnl": 3083273.4504510015
+          },
+          {
+            "symbol": "071050.KS",
+            "pattern": "breakout_retest_v1",
+            "signal_date": "2025-06-20",
+            "entry_date": "2025-06-23",
+            "exit_date": "2025-07-11",
+            "exit_reason": "target",
+            "quantity": 108,
+            "net_pnl": 2942226.082800003
+          },
+          {
+            "symbol": "203650.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2025-05-20",
+            "entry_date": "2025-05-21",
+            "exit_date": "2025-06-19",
+            "exit_reason": "time",
+            "quantity": 11422,
+            "net_pnl": 2705630.4674175046
+          }
+        ],
+        "share_of_win_sum": 33.191263767060036,
+        "win_sum_denominator": 26305506.358373534,
+        "realized_denominator": 3655780.2237805934
+      },
+      "5": {
+        "n": 5,
+        "taken": 5,
+        "sum": 12804959.999668512,
+        "share_of_realized": 350.26613242155935,
+        "remainder_realized": -9149179.77588792,
+        "remainder_closed": 44,
+        "note": "remainder is realized minus these trades; it is not a rerun without them",
+        "trades": [
+          {
+            "symbol": "010170.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2025-01-16",
+            "entry_date": "2025-01-17",
+            "exit_date": "2025-02-04",
+            "exit_reason": "target",
+            "quantity": 14359,
+            "net_pnl": 3083273.4504510015
+          },
+          {
+            "symbol": "071050.KS",
+            "pattern": "breakout_retest_v1",
+            "signal_date": "2025-06-20",
+            "entry_date": "2025-06-23",
+            "exit_date": "2025-07-11",
+            "exit_reason": "target",
+            "quantity": 108,
+            "net_pnl": 2942226.082800003
+          },
+          {
+            "symbol": "203650.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2025-05-20",
+            "entry_date": "2025-05-21",
+            "exit_date": "2025-06-19",
+            "exit_reason": "time",
+            "quantity": 11422,
+            "net_pnl": 2705630.4674175046
+          },
+          {
+            "symbol": "082740.KS",
+            "pattern": "breakout_retest_v1",
+            "signal_date": "2025-08-08",
+            "entry_date": "2025-08-11",
+            "exit_date": "2025-08-29",
+            "exit_reason": "target",
+            "quantity": 261,
+            "net_pnl": 2117232.000000002
+          },
+          {
+            "symbol": "267260.KS",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2024-12-03",
+            "entry_date": "2024-12-04",
+            "exit_date": "2025-01-03",
+            "exit_reason": "time",
+            "quantity": 37,
+            "net_pnl": 1956597.9990000017
+          }
+        ],
+        "share_of_win_sum": 48.677869284171585,
+        "win_sum_denominator": 26305506.358373534,
+        "realized_denominator": 3655780.2237805934
+      }
+    },
+    "top_losses": {
+      "1": {
+        "n": 1,
+        "taken": 1,
+        "sum": -1078776.5550379995,
+        "share_of_realized": -29.508791256668925,
+        "remainder_realized": 4734556.778818592,
+        "remainder_closed": 48,
+        "note": "remainder is realized minus these trades; it is not a rerun without them",
+        "trades": [
+          {
+            "symbol": "417200.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2025-02-04",
+            "entry_date": "2025-02-05",
+            "exit_date": "2025-02-27",
+            "exit_reason": "stop",
+            "quantity": 884,
+            "net_pnl": -1078776.5550379995
+          }
+        ],
+        "share_of_loss_sum": 4.762867986250762,
+        "loss_sum_denominator": -22649726.134592943,
+        "realized_denominator": 3655780.2237805934
+      },
+      "3": {
+        "n": 3,
+        "taken": 3,
+        "sum": -3179263.5170639977,
+        "share_of_realized": -86.96538966929992,
+        "remainder_realized": 6835043.740844591,
+        "remainder_closed": 46,
+        "note": "remainder is realized minus these trades; it is not a rerun without them",
+        "trades": [
+          {
+            "symbol": "417200.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2025-02-04",
+            "entry_date": "2025-02-05",
+            "exit_date": "2025-02-27",
+            "exit_reason": "stop",
+            "quantity": 884,
+            "net_pnl": -1078776.5550379995
+          },
+          {
+            "symbol": "082740.KS",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2025-03-04",
+            "entry_date": "2025-03-05",
+            "exit_date": "2025-03-26",
+            "exit_reason": "stop",
+            "quantity": 520,
+            "net_pnl": -1051525.8821599986
+          },
+          {
+            "symbol": "034020.KS",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2025-03-05",
+            "entry_date": "2025-03-06",
+            "exit_date": "2025-03-28",
+            "exit_reason": "stop",
+            "quantity": 404,
+            "net_pnl": -1048961.0798659995
+          }
+        ],
+        "share_of_loss_sum": 14.03665323885884,
+        "loss_sum_denominator": -22649726.134592943,
+        "realized_denominator": 3655780.2237805934
+      },
+      "5": {
+        "n": 5,
+        "taken": 5,
+        "sum": -5237343.670035996,
+        "share_of_realized": -143.26199468905278,
+        "remainder_realized": 8893123.893816588,
+        "remainder_closed": 44,
+        "note": "remainder is realized minus these trades; it is not a rerun without them",
+        "trades": [
+          {
+            "symbol": "417200.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2025-02-04",
+            "entry_date": "2025-02-05",
+            "exit_date": "2025-02-27",
+            "exit_reason": "stop",
+            "quantity": 884,
+            "net_pnl": -1078776.5550379995
+          },
+          {
+            "symbol": "082740.KS",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2025-03-04",
+            "entry_date": "2025-03-05",
+            "exit_date": "2025-03-26",
+            "exit_reason": "stop",
+            "quantity": 520,
+            "net_pnl": -1051525.8821599986
+          },
+          {
+            "symbol": "034020.KS",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2025-03-05",
+            "entry_date": "2025-03-06",
+            "exit_date": "2025-03-28",
+            "exit_reason": "stop",
+            "quantity": 404,
+            "net_pnl": -1048961.0798659995
+          },
+          {
+            "symbol": "030530.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2025-07-28",
+            "entry_date": "2025-07-29",
+            "exit_date": "2025-08-01",
+            "exit_reason": "stop",
+            "quantity": 3202,
+            "net_pnl": -1029240.2285469994
+          },
+          {
+            "symbol": "064350.KS",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2025-03-31",
+            "entry_date": "2025-04-02",
+            "exit_date": "2025-04-02",
+            "exit_reason": "stop",
+            "quantity": 139,
+            "net_pnl": -1028839.9244249985
+          }
+        ],
+        "share_of_loss_sum": 23.123209697608647,
+        "loss_sum_denominator": -22649726.134592943,
+        "realized_denominator": 3655780.2237805934
+      }
+    },
+    "by_symbol": [
+      {
+        "key": "203650.KQ",
+        "closed": 3,
+        "wins": 2,
+        "losses": 1,
+        "profit_sum": 4231611.892417509,
+        "loss_sum": -320999.19052499905,
+        "net_pnl": 3910612.70189251
+      },
+      {
+        "key": "010170.KQ",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 3083273.4504510015,
+        "loss_sum": 0,
+        "net_pnl": 3083273.4504510015
+      },
+      {
+        "key": "071050.KS",
+        "closed": 2,
+        "wins": 1,
+        "losses": 1,
+        "profit_sum": 2942226.082800003,
+        "loss_sum": -973770.4626674987,
+        "net_pnl": 1968455.620132504
+      },
+      {
+        "key": "267260.KS",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 1956597.9990000017,
+        "loss_sum": 0,
+        "net_pnl": 1956597.9990000017
+      },
+      {
+        "key": "015760.KS",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 1913789.6000000015,
+        "loss_sum": 0,
+        "net_pnl": 1913789.6000000015
+      },
+      {
+        "key": "062040.KS",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 1498495.200000003,
+        "loss_sum": 0,
+        "net_pnl": 1498495.200000003
+      },
+      {
+        "key": "007810.KS",
+        "closed": 2,
+        "wins": 1,
+        "losses": 1,
+        "profit_sum": 1238034.7200000025,
+        "loss_sum": -23618.80282999997,
+        "net_pnl": 1214415.9171700026
+      },
+      {
+        "key": "082740.KS",
+        "closed": 2,
+        "wins": 1,
+        "losses": 1,
+        "profit_sum": 2117232.000000002,
+        "loss_sum": -1051525.8821599986,
+        "net_pnl": 1065706.1178400032
+      },
+      {
+        "key": "079550.KS",
+        "closed": 2,
+        "wins": 1,
+        "losses": 1,
+        "profit_sum": 1537541.0000000019,
+        "loss_sum": -565116.2113499977,
+        "net_pnl": 972424.7886500042
+      },
+      {
+        "key": "096770.KS",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 920329.5737500023,
+        "loss_sum": 0,
+        "net_pnl": 920329.5737500023
+      },
+      {
+        "key": "005830.KS",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 738336.6813000022,
+        "loss_sum": 0,
+        "net_pnl": 738336.6813000022
+      },
+      {
+        "key": "036540.KQ",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 704325.8673750013,
+        "loss_sum": 0,
+        "net_pnl": 704325.8673750013
+      },
+      {
+        "key": "041190.KQ",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 543720.3714800011,
+        "loss_sum": 0,
+        "net_pnl": 543720.3714800011
+      },
+      {
+        "key": "006340.KS",
+        "closed": 2,
+        "wins": 1,
+        "losses": 1,
+        "profit_sum": 1256186.960000001,
+        "loss_sum": -969267.4993664958,
+        "net_pnl": 286919.46063350514
+      },
+      {
+        "key": "396300.KQ",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 274634.7450000001,
+        "loss_sum": 0,
+        "net_pnl": 274634.7450000001
+      },
+      {
+        "key": "322000.KS",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 182583.4500000002,
+        "loss_sum": 0,
+        "net_pnl": 182583.4500000002
+      },
+      {
+        "key": "005290.KQ",
+        "closed": 2,
+        "wins": 1,
+        "losses": 1,
+        "profit_sum": 1166586.764800001,
+        "loss_sum": -1026099.3981524967,
+        "net_pnl": 140487.36664750427
+      },
+      {
+        "key": "092870.KQ",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -1249.7142999999996,
+        "net_pnl": -1249.7142999999996
+      },
+      {
+        "key": "080220.KQ",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -46619.41911449988,
+        "net_pnl": -46619.41911449988
+      },
+      {
+        "key": "032820.KQ",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -296469.27351999655,
+        "net_pnl": -296469.27351999655
+      },
+      {
+        "key": "068270.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -416385.3729554936,
+        "net_pnl": -416385.3729554936
+      },
+      {
+        "key": "005930.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -470682.5045999959,
+        "net_pnl": -470682.5045999959
+      },
+      {
+        "key": "452190.KQ",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -510649.01693999954,
+        "net_pnl": -510649.01693999954
+      },
+      {
+        "key": "329180.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -579776.6521139964,
+        "net_pnl": -579776.6521139964
+      },
+      {
+        "key": "201490.KQ",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -590382.5325474963,
+        "net_pnl": -590382.5325474963
+      },
+      {
+        "key": "071090.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -734187.1401269995,
+        "net_pnl": -734187.1401269995
+      },
+      {
+        "key": "267270.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -917960.3432999961,
+        "net_pnl": -917960.3432999961
+      },
+      {
+        "key": "419050.KQ",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -969456.7735004984,
+        "net_pnl": -969456.7735004984
+      },
+      {
+        "key": "086790.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -986111.1647839956,
+        "net_pnl": -986111.1647839956
+      },
+      {
+        "key": "393210.KQ",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -1006028.9180399999,
+        "net_pnl": -1006028.9180399999
+      },
+      {
+        "key": "356680.KQ",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -1006523.3231539987,
+        "net_pnl": -1006523.3231539987
+      },
+      {
+        "key": "046970.KQ",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -1008558.5967179984,
+        "net_pnl": -1008558.5967179984
+      },
+      {
+        "key": "018880.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -1027244.2123799995,
+        "net_pnl": -1027244.2123799995
+      },
+      {
+        "key": "064350.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -1028839.9244249985,
+        "net_pnl": -1028839.9244249985
+      },
+      {
+        "key": "030530.KQ",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -1029240.2285469994,
+        "net_pnl": -1029240.2285469994
+      },
+      {
+        "key": "034020.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -1048961.0798659995,
+        "net_pnl": -1048961.0798659995
+      },
+      {
+        "key": "417200.KQ",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -1078776.5550379995,
+        "net_pnl": -1078776.5550379995
+      },
+      {
+        "key": "010140.KS",
+        "closed": 2,
+        "wins": 0,
+        "losses": 2,
+        "profit_sum": 0,
+        "loss_sum": -1093409.9515354964,
+        "net_pnl": -1093409.9515354964
+      },
+      {
+        "key": "272210.KS",
+        "closed": 2,
+        "wins": 0,
+        "losses": 2,
+        "profit_sum": 0,
+        "loss_sum": -1871815.9900349975,
+        "net_pnl": -1871815.9900349975
+      }
+    ],
+    "by_pattern": [
+      {
+        "key": "breakout_retest_v1",
+        "closed": 6,
+        "wins": 2,
+        "losses": 4,
+        "profit_sum": 5059458.082800005,
+        "loss_sum": -3419713.547731491,
+        "net_pnl": 1639744.5350685138
+      },
+      {
+        "key": "trend_pullback_v1",
+        "closed": 36,
+        "wins": 13,
+        "losses": 23,
+        "profit_sum": 17831497.021823525,
+        "loss_sum": -16309671.578885961,
+        "net_pnl": 1521825.4429375627
+      },
+      {
+        "key": "trend_recovery_v1",
+        "closed": 7,
+        "wins": 3,
+        "losses": 4,
+        "profit_sum": 3414551.2537500057,
+        "loss_sum": -2920341.007975489,
+        "net_pnl": 494210.24577451684
+      }
+    ],
+    "by_exit_month": [
+      {
+        "key": "2025-01",
+        "closed": 5,
+        "wins": 4,
+        "losses": 1,
+        "profit_sum": 5949314.879000008,
+        "loss_sum": -1024448.0163779967,
+        "net_pnl": 4924866.862622011
+      },
+      {
+        "key": "2025-08",
+        "closed": 5,
+        "wins": 3,
+        "losses": 2,
+        "profit_sum": 4735347.467375005,
+        "loss_sum": -1075859.6476614992,
+        "net_pnl": 3659487.8197135055
+      },
+      {
+        "key": "2025-02",
+        "closed": 6,
+        "wins": 3,
+        "losses": 3,
+        "profit_sum": 4803397.900451004,
+        "loss_sum": -2369043.2449294943,
+        "net_pnl": 2434354.6555215092
+      },
+      {
+        "key": "2025-07",
+        "closed": 6,
+        "wins": 2,
+        "losses": 4,
+        "profit_sum": 3862555.656550005,
+        "loss_sum": -3038288.5694779935,
+        "net_pnl": 824267.0870720115
+      },
+      {
+        "key": "2024-10",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -416385.3729554936,
+        "net_pnl": -416385.3729554936
+      },
+      {
+        "key": "2025-06",
+        "closed": 6,
+        "wins": 2,
+        "losses": 4,
+        "profit_sum": 2980265.2124175048,
+        "loss_sum": -3436082.5834439937,
+        "net_pnl": -455817.37102648895
+      },
+      {
+        "key": "2025-05",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -590382.5325474963,
+        "net_pnl": -590382.5325474963
+      },
+      {
+        "key": "2024-11",
+        "closed": 4,
+        "wins": 1,
+        "losses": 3,
+        "profit_sum": 1525981.4250000045,
+        "loss_sum": -2289103.761457991,
+        "net_pnl": -763122.3364579864
+      },
+      {
+        "key": "2025-04",
+        "closed": 3,
+        "wins": 1,
+        "losses": 2,
+        "profit_sum": 1166586.764800001,
+        "loss_sum": -2044277.0571239982,
+        "net_pnl": -877690.2923239972
+      },
+      {
+        "key": "2025-09",
+        "closed": 5,
+        "wins": 2,
+        "losses": 3,
+        "profit_sum": 1282057.0527800033,
+        "loss_sum": -2341208.0046209954,
+        "net_pnl": -1059150.951840992
+      },
+      {
+        "key": "2025-03",
+        "closed": 7,
+        "wins": 0,
+        "losses": 7,
+        "profit_sum": 0,
+        "loss_sum": -4024647.3439959898,
+        "net_pnl": -4024647.3439959898
+      }
+    ],
+    "checks": {
+      "closed_count_matches_summary": true,
+      "wins_match_summary": true,
+      "losses_match_summary": true,
+      "closed_net_equals_summary_realized": true,
+      "closed_net_equals_last_daily_realized": true,
+      "daily_exit_count_equals_closed": true,
+      "open_count_matches_summary": true,
+      "pending_count_matches_summary": true,
+      "no_zero_pnl_placeholders": true,
+      "group_nets_sum_to_realized": true
+    },
+    "input_sha256": {
+      "trades.json": "53f075e551ffa67edd05dd07404360c778484d70f5e3a29513a0ba9a1b102da3",
+      "summary.json": "a2a2432347ecf9abd4aa2dda1ce672d73a2d5f9300059c191d3cdbdbb8b86e3f",
+      "daily-log.jsonl": "7d11f97f42b2b1c5b88d9b64187b4e9a0d6364e5f87a62640eba9004572cbc13",
+      "provenance.json": "2cb740dc00e8fe361ac8c8ac9ecb789ab370ef110346b1ebcc775be62c79480a"
+    },
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "sector_map_file_sha256": "675cc2e3d5c390a981e4bf326e93929a4cb09f6c376178fbee43abf84c13be41",
+    "replay": [
+      "php -d memory_limit=3G bin/paper_account_replay.php run --period=prior --dataset-dir=DATASET --state-dir=STATE --sector-map=docs/historical-account-replay/sector-map-v2.json --confirm-full-run=after-code-review",
+      "php bin/paper_account_replay.php export --period=prior --dataset-dir=DATASET --state-dir=STATE --sector-map=docs/historical-account-replay/sector-map-v2.json --out=docs/historical-account-replay/full-v2/prior"
+    ]
+  },
+  "recent": {
+    "period": "recent",
+    "account": "hist-kr-recovery-v1-20261009",
+    "dataset": "kr-saved-scan-20261009",
+    "first_day": "2025-10-10",
+    "last_day": "2026-10-08",
+    "sessions": 244,
+    "initial_cash": 100000000,
+    "equity": 118168892.26921238,
+    "equity_change_pct": 18.16889226921239,
+    "realized_pnl": 18027499.414712373,
+    "unrealized_pnl_open_positions": 95394.00450000726,
+    "closed": 56,
+    "wins": 24,
+    "losses": 32,
+    "flats": 0,
+    "win_sum": 46061963.871334895,
+    "loss_sum": -28034464.456622526,
+    "skipped": {
+      "open": 3,
+      "pending": 0,
+      "cancelled": 8,
+      "note": "open, pending and cancelled rows are excluded; they are not booked as 0 realized PnL"
+    },
+    "top_wins": {
+      "1": {
+        "n": 1,
+        "taken": 1,
+        "sum": 4473544.535669999,
+        "share_of_realized": 24.815114025293532,
+        "remainder_realized": 13553954.879042374,
+        "remainder_closed": 55,
+        "note": "remainder is realized minus these trades; it is not a rerun without them",
+        "trades": [
+          {
+            "symbol": "456010.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2025-10-21",
+            "entry_date": "2025-10-22",
+            "exit_date": "2025-10-28",
+            "exit_reason": "target",
+            "quantity": 1043,
+            "net_pnl": 4473544.535669999
+          }
+        ],
+        "share_of_win_sum": 9.712014338263936,
+        "win_sum_denominator": 46061963.871334895,
+        "realized_denominator": 18027499.414712373
+      },
+      "3": {
+        "n": 3,
+        "taken": 3,
+        "sum": 11712354.751670003,
+        "share_of_realized": 64.96938084552906,
+        "remainder_realized": 6315144.66304237,
+        "remainder_closed": 53,
+        "note": "remainder is realized minus these trades; it is not a rerun without them",
+        "trades": [
+          {
+            "symbol": "456010.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2025-10-21",
+            "entry_date": "2025-10-22",
+            "exit_date": "2025-10-28",
+            "exit_reason": "target",
+            "quantity": 1043,
+            "net_pnl": 4473544.535669999
+          },
+          {
+            "symbol": "108490.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2025-11-24",
+            "entry_date": "2025-11-25",
+            "exit_date": "2025-12-04",
+            "exit_reason": "target",
+            "quantity": 44,
+            "net_pnl": 3849956.000000002
+          },
+          {
+            "symbol": "036540.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2026-05-14",
+            "entry_date": "2026-05-18",
+            "exit_date": "2026-05-22",
+            "exit_reason": "target",
+            "quantity": 1396,
+            "net_pnl": 3388854.216000002
+          }
+        ],
+        "share_of_win_sum": 25.427389037050567,
+        "win_sum_denominator": 46061963.871334895,
+        "realized_denominator": 18027499.414712373
+      },
+      "5": {
+        "n": 5,
+        "taken": 5,
+        "sum": 17185756.517845005,
+        "share_of_realized": 95.33078394566239,
+        "remainder_realized": 841742.8968673684,
+        "remainder_closed": 51,
+        "note": "remainder is realized minus these trades; it is not a rerun without them",
+        "trades": [
+          {
+            "symbol": "456010.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2025-10-21",
+            "entry_date": "2025-10-22",
+            "exit_date": "2025-10-28",
+            "exit_reason": "target",
+            "quantity": 1043,
+            "net_pnl": 4473544.535669999
+          },
+          {
+            "symbol": "108490.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2025-11-24",
+            "entry_date": "2025-11-25",
+            "exit_date": "2025-12-04",
+            "exit_reason": "target",
+            "quantity": 44,
+            "net_pnl": 3849956.000000002
+          },
+          {
+            "symbol": "036540.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2026-05-14",
+            "entry_date": "2026-05-18",
+            "exit_date": "2026-05-22",
+            "exit_reason": "target",
+            "quantity": 1396,
+            "net_pnl": 3388854.216000002
+          },
+          {
+            "symbol": "115440.KQ",
+            "pattern": "trend_recovery_v1",
+            "signal_date": "2026-09-09",
+            "entry_date": "2026-09-10",
+            "exit_date": "2026-09-23",
+            "exit_reason": "target",
+            "quantity": 842,
+            "net_pnl": 2972302.1000000006
+          },
+          {
+            "symbol": "072950.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2026-01-30",
+            "entry_date": "2026-02-02",
+            "exit_date": "2026-02-10",
+            "exit_reason": "target",
+            "quantity": 3145,
+            "net_pnl": 2501099.6661750004
+          }
+        ],
+        "share_of_win_sum": 37.31008205783423,
+        "win_sum_denominator": 46061963.871334895,
+        "realized_denominator": 18027499.414712373
+      }
+    },
+    "top_losses": {
+      "1": {
+        "n": 1,
+        "taken": 1,
+        "sum": -1815696.1417499986,
+        "share_of_realized": -10.071813621961322,
+        "remainder_realized": 19843195.55646237,
+        "remainder_closed": 55,
+        "note": "remainder is realized minus these trades; it is not a rerun without them",
+        "trades": [
+          {
+            "symbol": "108490.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2026-02-19",
+            "entry_date": "2026-02-20",
+            "exit_date": "2026-03-04",
+            "exit_reason": "stop",
+            "quantity": 41,
+            "net_pnl": -1815696.1417499986
+          }
+        ],
+        "share_of_loss_sum": 6.476657132364376,
+        "loss_sum_denominator": -28034464.456622526,
+        "realized_denominator": 18027499.414712373
+      },
+      "3": {
+        "n": 3,
+        "taken": 3,
+        "sum": -4329971.165014185,
+        "share_of_realized": -24.018700904688224,
+        "remainder_realized": 22357470.57972656,
+        "remainder_closed": 53,
+        "note": "remainder is realized minus these trades; it is not a rerun without them",
+        "trades": [
+          {
+            "symbol": "108490.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2026-02-19",
+            "entry_date": "2026-02-20",
+            "exit_date": "2026-03-04",
+            "exit_reason": "stop",
+            "quantity": 41,
+            "net_pnl": -1815696.1417499986
+          },
+          {
+            "symbol": "000500.KS",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2026-06-01",
+            "entry_date": "2026-06-04",
+            "exit_date": "2026-06-08",
+            "exit_reason": "stop",
+            "quantity": 23,
+            "net_pnl": -1334546.9108891878
+          },
+          {
+            "symbol": "046970.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2026-05-11",
+            "entry_date": "2026-05-12",
+            "exit_date": "2026-05-15",
+            "exit_reason": "stop",
+            "quantity": 575,
+            "net_pnl": -1179728.1123749986
+          }
+        ],
+        "share_of_loss_sum": 15.44517168042896,
+        "loss_sum_denominator": -28034464.456622526,
+        "realized_denominator": 18027499.414712373
+      },
+      "5": {
+        "n": 5,
+        "taken": 5,
+        "sum": -6664852.013258183,
+        "share_of_realized": -36.97047416248395,
+        "remainder_realized": 24692351.42797056,
+        "remainder_closed": 51,
+        "note": "remainder is realized minus these trades; it is not a rerun without them",
+        "trades": [
+          {
+            "symbol": "108490.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2026-02-19",
+            "entry_date": "2026-02-20",
+            "exit_date": "2026-03-04",
+            "exit_reason": "stop",
+            "quantity": 41,
+            "net_pnl": -1815696.1417499986
+          },
+          {
+            "symbol": "000500.KS",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2026-06-01",
+            "entry_date": "2026-06-04",
+            "exit_date": "2026-06-08",
+            "exit_reason": "stop",
+            "quantity": 23,
+            "net_pnl": -1334546.9108891878
+          },
+          {
+            "symbol": "046970.KQ",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2026-05-11",
+            "entry_date": "2026-05-12",
+            "exit_date": "2026-05-15",
+            "exit_reason": "stop",
+            "quantity": 575,
+            "net_pnl": -1179728.1123749986
+          },
+          {
+            "symbol": "007810.KS",
+            "pattern": "breakout_retest_v1",
+            "signal_date": "2026-04-24",
+            "entry_date": "2026-04-27",
+            "exit_date": "2026-05-15",
+            "exit_reason": "stop",
+            "quantity": 80,
+            "net_pnl": -1171446.2607999993
+          },
+          {
+            "symbol": "322000.KS",
+            "pattern": "trend_pullback_v1",
+            "signal_date": "2026-05-22",
+            "entry_date": "2026-05-26",
+            "exit_date": "2026-05-29",
+            "exit_reason": "stop",
+            "quantity": 36,
+            "net_pnl": -1163434.587443999
+          }
+        ],
+        "share_of_loss_sum": 23.77378038938696,
+        "loss_sum_denominator": -28034464.456622526,
+        "realized_denominator": 18027499.414712373
+      }
+    },
+    "by_symbol": [
+      {
+        "key": "036540.KQ",
+        "closed": 2,
+        "wins": 2,
+        "losses": 0,
+        "profit_sum": 5645143.254450005,
+        "loss_sum": 0,
+        "net_pnl": 5645143.254450005
+      },
+      {
+        "key": "456010.KQ",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 4473544.535669999,
+        "loss_sum": 0,
+        "net_pnl": 4473544.535669999
+      },
+      {
+        "key": "115440.KQ",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 2972302.1000000006,
+        "loss_sum": 0,
+        "net_pnl": 2972302.1000000006
+      },
+      {
+        "key": "072950.KQ",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 2501099.6661750004,
+        "loss_sum": 0,
+        "net_pnl": 2501099.6661750004
+      },
+      {
+        "key": "006400.KS",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 2262924.045000002,
+        "loss_sum": 0,
+        "net_pnl": 2262924.045000002
+      },
+      {
+        "key": "356680.KQ",
+        "closed": 2,
+        "wins": 2,
+        "losses": 0,
+        "profit_sum": 2105700.459600001,
+        "loss_sum": 0,
+        "net_pnl": 2105700.459600001
+      },
+      {
+        "key": "005490.KS",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 2062501.9200000018,
+        "loss_sum": 0,
+        "net_pnl": 2062501.9200000018
+      },
+      {
+        "key": "203650.KQ",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 2054743.5869400017,
+        "loss_sum": 0,
+        "net_pnl": 2054743.5869400017
+      },
+      {
+        "key": "108490.KQ",
+        "closed": 2,
+        "wins": 1,
+        "losses": 1,
+        "profit_sum": 3849956.000000002,
+        "loss_sum": -1815696.1417499986,
+        "net_pnl": 2034259.8582500033
+      },
+      {
+        "key": "232140.KQ",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 2018532.710000001,
+        "loss_sum": 0,
+        "net_pnl": 2018532.710000001
+      },
+      {
+        "key": "071050.KS",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 1942940.0000000019,
+        "loss_sum": 0,
+        "net_pnl": 1942940.0000000019
+      },
+      {
+        "key": "009150.KS",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 1905555.5000000037,
+        "loss_sum": 0,
+        "net_pnl": 1905555.5000000037
+      },
+      {
+        "key": "028050.KS",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 1814637.1853250023,
+        "loss_sum": 0,
+        "net_pnl": 1814637.1853250023
+      },
+      {
+        "key": "000270.KS",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 1670581.2186000012,
+        "loss_sum": 0,
+        "net_pnl": 1670581.2186000012
+      },
+      {
+        "key": "475150.KS",
+        "closed": 2,
+        "wins": 1,
+        "losses": 1,
+        "profit_sum": 1937347.0500000007,
+        "loss_sum": -362774.8353999988,
+        "net_pnl": 1574572.214600002
+      },
+      {
+        "key": "032820.KQ",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 1466614.710000001,
+        "loss_sum": 0,
+        "net_pnl": 1466614.710000001
+      },
+      {
+        "key": "000500.KS",
+        "closed": 4,
+        "wins": 2,
+        "losses": 2,
+        "profit_sum": 3254311.759324872,
+        "loss_sum": -2288511.9310391867,
+        "net_pnl": 965799.8282856853
+      },
+      {
+        "key": "417200.KQ",
+        "closed": 2,
+        "wins": 1,
+        "losses": 1,
+        "profit_sum": 1824542.8500000006,
+        "loss_sum": -987070.4455124997,
+        "net_pnl": 837472.4044875009
+      },
+      {
+        "key": "010170.KQ",
+        "closed": 1,
+        "wins": 1,
+        "losses": 0,
+        "profit_sum": 160433.46000000002,
+        "loss_sum": 0,
+        "net_pnl": 160433.46000000002
+      },
+      {
+        "key": "005935.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -20373.694605000026,
+        "net_pnl": -20373.694605000026
+      },
+      {
+        "key": "066970.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -42207.10600799997,
+        "net_pnl": -42207.10600799997
+      },
+      {
+        "key": "006340.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -46411.893175999954,
+        "net_pnl": -46411.893175999954
+      },
+      {
+        "key": "071090.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -73914.40358399984,
+        "net_pnl": -73914.40358399984
+      },
+      {
+        "key": "010120.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -286654.14049999975,
+        "net_pnl": -286654.14049999975
+      },
+      {
+        "key": "319660.KQ",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -711451.4768999964,
+        "net_pnl": -711451.4768999964
+      },
+      {
+        "key": "066570.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -798928.8152099997,
+        "net_pnl": -798928.8152099997
+      },
+      {
+        "key": "068270.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -820264.3602413833,
+        "net_pnl": -820264.3602413833
+      },
+      {
+        "key": "240810.KQ",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -933041.5780244973,
+        "net_pnl": -933041.5780244973
+      },
+      {
+        "key": "012450.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -1054738.644849997,
+        "net_pnl": -1054738.644849997
+      },
+      {
+        "key": "011070.KS",
+        "closed": 2,
+        "wins": 1,
+        "losses": 1,
+        "profit_sum": 88961.06025000004,
+        "loss_sum": -1148780.568,
+        "net_pnl": -1059819.5077499999
+      },
+      {
+        "key": "052690.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -1060706.366136497,
+        "net_pnl": -1060706.366136497
+      },
+      {
+        "key": "003230.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -1084046.745257996,
+        "net_pnl": -1084046.745257996
+      },
+      {
+        "key": "322000.KS",
+        "closed": 2,
+        "wins": 1,
+        "losses": 1,
+        "profit_sum": 49590.80000000005,
+        "loss_sum": -1163434.587443999,
+        "net_pnl": -1113843.787443999
+      },
+      {
+        "key": "034730.KS",
+        "closed": 2,
+        "wins": 0,
+        "losses": 2,
+        "profit_sum": 0,
+        "loss_sum": -1117047.4252499966,
+        "net_pnl": -1117047.4252499966
+      },
+      {
+        "key": "000720.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -1138451.0261759944,
+        "net_pnl": -1138451.0261759944
+      },
+      {
+        "key": "010950.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -1142507.0799999982,
+        "net_pnl": -1142507.0799999982
+      },
+      {
+        "key": "001440.KS",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -1146966.3292699978,
+        "net_pnl": -1146966.3292699978
+      },
+      {
+        "key": "046970.KQ",
+        "closed": 1,
+        "wins": 0,
+        "losses": 1,
+        "profit_sum": 0,
+        "loss_sum": -1179728.1123749986,
+        "net_pnl": -1179728.1123749986
+      },
+      {
+        "key": "007810.KS",
+        "closed": 2,
+        "wins": 0,
+        "losses": 2,
+        "profit_sum": 0,
+        "loss_sum": -2191941.3411399983,
+        "net_pnl": -2191941.3411399983
+      },
+      {
+        "key": "078930.KS",
+        "closed": 2,
+        "wins": 0,
+        "losses": 2,
+        "profit_sum": 0,
+        "loss_sum": -2278908.8841299983,
+        "net_pnl": -2278908.8841299983
+      },
+      {
+        "key": "092870.KQ",
+        "closed": 3,
+        "wins": 0,
+        "losses": 3,
+        "profit_sum": 0,
+        "loss_sum": -3139906.5246424936,
+        "net_pnl": -3139906.5246424936
+      }
+    ],
+    "by_pattern": [
+      {
+        "key": "trend_pullback_v1",
+        "closed": 39,
+        "wins": 17,
+        "losses": 22,
+        "profit_sum": 35985772.72824364,
+        "loss_sum": -18595267.706313044,
+        "net_pnl": 17390505.021930598
+      },
+      {
+        "key": "trend_recovery_v1",
+        "closed": 9,
+        "wins": 5,
+        "losses": 4,
+        "profit_sum": 8044290.082841252,
+        "loss_sum": -4088449.49764999,
+        "net_pnl": 3955840.585191262
+      },
+      {
+        "key": "breakout_retest_v1",
+        "closed": 8,
+        "wins": 2,
+        "losses": 6,
+        "profit_sum": 2031901.060250002,
+        "loss_sum": -5350747.25265949,
+        "net_pnl": -3318846.1924094884
+      }
+    ],
+    "by_exit_month": [
+      {
+        "key": "2026-04",
+        "closed": 5,
+        "wins": 5,
+        "losses": 0,
+        "profit_sum": 7261478.088091253,
+        "loss_sum": 0,
+        "net_pnl": 7261478.088091253
+      },
+      {
+        "key": "2025-10",
+        "closed": 4,
+        "wins": 3,
+        "losses": 1,
+        "profit_sum": 8006956.305270001,
+        "loss_sum": -1020001.3432124984,
+        "net_pnl": 6986954.962057503
+      },
+      {
+        "key": "2026-02",
+        "closed": 3,
+        "wins": 3,
+        "losses": 0,
+        "profit_sum": 6114620.884775003,
+        "loss_sum": 0,
+        "net_pnl": 6114620.884775003
+      },
+      {
+        "key": "2025-12",
+        "closed": 5,
+        "wins": 3,
+        "losses": 2,
+        "profit_sum": 6131310.346483625,
+        "loss_sum": -1106918.500741383,
+        "net_pnl": 5024391.8457422415
+      },
+      {
+        "key": "2026-01",
+        "closed": 7,
+        "wins": 3,
+        "losses": 4,
+        "profit_sum": 6180377.248450007,
+        "loss_sum": -3661427.8342099898,
+        "net_pnl": 2518949.4142400175
+      },
+      {
+        "key": "2026-09",
+        "closed": 6,
+        "wins": 3,
+        "losses": 3,
+        "profit_sum": 4825842.685325003,
+        "loss_sum": -2587548.4212879944,
+        "net_pnl": 2238294.2640370084
+      },
+      {
+        "key": "2026-07",
+        "closed": 2,
+        "wins": 1,
+        "losses": 1,
+        "profit_sum": 1937347.0500000007,
+        "loss_sum": -953965.0201499988,
+        "net_pnl": 983382.0298500019
+      },
+      {
+        "key": "2026-05",
+        "closed": 10,
+        "wins": 3,
+        "losses": 7,
+        "profit_sum": 5604031.262940004,
+        "loss_sum": -6988945.289240987,
+        "net_pnl": -1384914.0263009837
+      },
+      {
+        "key": "2026-06",
+        "closed": 2,
+        "wins": 0,
+        "losses": 2,
+        "profit_sum": 0,
+        "loss_sum": -2483327.478889188,
+        "net_pnl": -2483327.478889188
+      },
+      {
+        "key": "2026-03",
+        "closed": 5,
+        "wins": 0,
+        "losses": 5,
+        "profit_sum": 0,
+        "loss_sum": -4134914.8606739957,
+        "net_pnl": -4134914.8606739957
+      },
+      {
+        "key": "2025-11",
+        "closed": 7,
+        "wins": 0,
+        "losses": 7,
+        "profit_sum": 0,
+        "loss_sum": -5097415.708216489,
+        "net_pnl": -5097415.708216489
+      }
+    ],
+    "checks": {
+      "closed_count_matches_summary": true,
+      "wins_match_summary": true,
+      "losses_match_summary": true,
+      "closed_net_equals_summary_realized": true,
+      "closed_net_equals_last_daily_realized": true,
+      "daily_exit_count_equals_closed": true,
+      "open_count_matches_summary": true,
+      "pending_count_matches_summary": true,
+      "no_zero_pnl_placeholders": true,
+      "group_nets_sum_to_realized": true
+    },
+    "input_sha256": {
+      "trades.json": "9f2ff25b84b5c80347e061703725d6ebf36a99e99b475f36a1f85ebb10ba5be7",
+      "summary.json": "18c20a2a440906c5c56892289ee0c693a3e248b0fe0d15d6da5f843ff01ef102",
+      "daily-log.jsonl": "2edb2c149340ee4edbcc5c88b99344a10cb56d55402ddbeeafa13a0610466bd2",
+      "provenance.json": "13de0ca93f0d492e48a5ce9b62c41a0d09e5fc9ad4083eb3fdcf50d0e22a44ad"
+    },
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "sector_map_file_sha256": "675cc2e3d5c390a981e4bf326e93929a4cb09f6c376178fbee43abf84c13be41",
+    "replay": [
+      "php -d memory_limit=3G bin/paper_account_replay.php run --period=recent --dataset-dir=DATASET --state-dir=STATE --sector-map=docs/historical-account-replay/sector-map-v2.json --confirm-full-run=after-code-review",
+      "php bin/paper_account_replay.php export --period=recent --dataset-dir=DATASET --state-dir=STATE --sector-map=docs/historical-account-replay/sector-map-v2.json --out=docs/historical-account-replay/full-v2/recent"
+    ]
+  }
+}

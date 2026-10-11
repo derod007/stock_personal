@@ -1,0 +1,34 @@
+{
+    "account": "hist-smoke-kr-recovery-v1-20251008-sa",
+    "initial_cash": 100000000,
+    "cash": 99062949.13120653,
+    "reserved_cash": 0,
+    "equity": 99062949.13120653,
+    "realized_pnl": -937050.8687934834,
+    "closed_trades": 5,
+    "wins": 1,
+    "losses": 4,
+    "open_positions": [],
+    "pending_orders": [],
+    "unrealized_pnl_open_positions": 0,
+    "max_close_drawdown": 0.02370496721439097,
+    "last_session": 1732861800,
+    "last_day": "2024-11-29",
+    "halted": false,
+    "halt_reason": null,
+    "event_counts": {
+        "account_started": 1,
+        "day_log": 38,
+        "equity": 38,
+        "exit": 5,
+        "fill": 5,
+        "order": 5
+    },
+    "research": {
+        "dataset": "kr-saved-scan-20251008",
+        "start_day": "2024-10-08",
+        "plan_source": "engine",
+        "sector_source": "explicit_map",
+        "smoke": true
+    }
+}

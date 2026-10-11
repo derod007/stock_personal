@@ -1,0 +1,15 @@
+{
+  "account": "hist-kr-recovery-v1-20251008",
+  "processed_sessions": 0,
+  "pending_before": 0,
+  "halted": false,
+  "last_session": 1759386600,
+  "last_day": "2025-10-02",
+  "untouched": {
+    "dataset_files": true,
+    "operational_state_files": true
+  },
+  "journal_sha256_before": "9675671c19a58284589e9706e332c82598c586543d971448ce78be8830e3334e",
+  "journal_sha256_after": "9675671c19a58284589e9706e332c82598c586543d971448ce78be8830e3334e",
+  "journal_unchanged": true
+}

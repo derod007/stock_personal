@@ -1,0 +1,571 @@
+{
+    "trades": [
+        {
+            "symbol": "419050.KQ",
+            "signal_date": "2025-06-25",
+            "pattern": "trend_pullback_v1",
+            "sector": "unclassified",
+            "quantity": 11332,
+            "entry": 1763,
+            "stop": 1681,
+            "target": 1888,
+            "planned_risk": 977766.4294539961,
+            "reserved_cash": 19998294.316,
+            "fill": {
+                "date": "2025-06-26",
+                "price": 1760.8799999999999,
+                "fee": 19954.29216
+            },
+            "exit": {
+                "date": "2025-07-02",
+                "price": 1680.1595,
+                "reason": "stop",
+                "net_pnl": -953718.5656139962,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "010140.KS",
+            "signal_date": "2025-06-30",
+            "pattern": "trend_pullback_v1",
+            "sector": "unclassified",
+            "quantity": 1108,
+            "entry": 16760,
+            "stop": 15905,
+            "target": 18550,
+            "planned_risk": 992335.3786299982,
+            "reserved_cash": 18588650.08,
+            "fill": {
+                "date": "2025-07-01",
+                "price": 16760,
+                "fee": 18570.08
+            },
+            "exit": {
+                "date": "2025-07-04",
+                "price": 15897.0475,
+                "reason": "stop",
+                "net_pnl": -992335.3786300011,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "082740.KS",
+            "signal_date": "2025-06-30",
+            "pattern": "trend_pullback_v1",
+            "sector": "unclassified",
+            "quantity": 39,
+            "entry": 28450,
+            "stop": 26372,
+            "target": 32350,
+            "planned_risk": 83693.79774599978,
+            "reserved_cash": 1110659.5499999998,
+            "fill": {
+                "date": "2025-07-01",
+                "price": 28450,
+                "fee": 1109.55
+            },
+            "exit": {
+                "date": "2025-07-04",
+                "price": 26358.814,
+                "reason": "stop",
+                "net_pnl": -83693.79774599988,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "034730.KS",
+            "signal_date": "2025-07-08",
+            "pattern": "trend_pullback_v1",
+            "sector": "unclassified",
+            "quantity": 50,
+            "entry": 209000,
+            "stop": 190000,
+            "target": 241500,
+            "planned_risk": 974695.2499999985,
+            "reserved_cash": 10460449.999999998,
+            "fill": null,
+            "exit": null,
+            "cancelled": {
+                "date": "2025-07-11",
+                "reason": "unfilled"
+            },
+            "status": "cancelled"
+        },
+        {
+            "symbol": "079550.KS",
+            "signal_date": "2025-07-08",
+            "pattern": "trend_pullback_v1",
+            "sector": "unclassified",
+            "quantity": 18,
+            "entry": 524000,
+            "stop": 472142,
+            "target": 650000,
+            "planned_risk": 955619.5847219999,
+            "reserved_cash": 9441431.999999998,
+            "fill": null,
+            "exit": null,
+            "cancelled": {
+                "date": "2025-07-11",
+                "reason": "unfilled"
+            },
+            "status": "cancelled"
+        },
+        {
+            "symbol": "080220.KQ",
+            "signal_date": "2025-07-08",
+            "pattern": "trend_pullback_v1",
+            "sector": "unclassified",
+            "quantity": 633,
+            "entry": 15730,
+            "stop": 14221,
+            "target": 19030,
+            "planned_risk": 978652.4285534984,
+            "reserved_cash": 9967047.089999998,
+            "fill": {
+                "date": "2025-07-09",
+                "price": 15687.839999999998,
+                "fee": 9930.402719999998
+            },
+            "exit": {
+                "date": "2025-08-01",
+                "price": 14213.8895,
+                "reason": "stop",
+                "net_pnl": -951938.461273497,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "272210.KS",
+            "signal_date": "2025-07-08",
+            "pattern": "trend_pullback_v1",
+            "sector": "unclassified",
+            "quantity": 8,
+            "entry": 53000,
+            "stop": 49630,
+            "target": 70200,
+            "planned_risk": 27979.361479999905,
+            "reserved_cash": 424423.99999999994,
+            "fill": null,
+            "exit": null,
+            "cancelled": {
+                "date": "2025-07-11",
+                "reason": "unfilled"
+            },
+            "status": "cancelled"
+        },
+        {
+            "symbol": "036540.KQ",
+            "signal_date": "2025-07-11",
+            "pattern": "trend_pullback_v1",
+            "sector": "unclassified",
+            "quantity": 6253,
+            "entry": 3135,
+            "stop": 3038,
+            "target": 3490,
+            "planned_risk": 654629.5776929978,
+            "reserved_cash": 19622758.154999997,
+            "fill": {
+                "date": "2025-07-14",
+                "price": 3135,
+                "fee": 19603.155
+            },
+            "exit": {
+                "date": "2025-08-08",
+                "price": 3248.375,
+                "reason": "time",
+                "net_pnl": 669018.6311250031,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "071050.KS",
+            "signal_date": "2025-07-11",
+            "pattern": "breakout_retest_v1",
+            "sector": "unclassified",
+            "quantity": 60,
+            "entry": 158000,
+            "stop": 147507,
+            "target": 181500,
+            "planned_risk": 652331.204789998,
+            "reserved_cash": 9489479.999999998,
+            "fill": {
+                "date": "2025-07-14",
+                "price": 157378.65,
+                "fee": 9442.719000000001
+            },
+            "exit": {
+                "date": "2025-07-18",
+                "price": 147433.2465,
+                "reason": "stop",
+                "net_pnl": -615012.9237899985,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "005290.KQ",
+            "signal_date": "2025-07-21",
+            "pattern": "trend_pullback_v1",
+            "sector": "unclassified",
+            "quantity": 279,
+            "entry": 31900,
+            "stop": 30205,
+            "target": 34550,
+            "planned_risk": 494441.67890249874,
+            "reserved_cash": 8909000.1,
+            "fill": {
+                "date": "2025-07-22",
+                "price": 31900,
+                "fee": 8900.1
+            },
+            "exit": {
+                "date": "2025-07-25",
+                "price": 30189.8975,
+                "reason": "stop",
+                "net_pnl": -494441.6789024994,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "321370.KQ",
+            "signal_date": "2025-07-21",
+            "pattern": "trend_pullback_v1",
+            "sector": "unclassified",
+            "quantity": 1,
+            "entry": 7435,
+            "stop": 6916,
+            "target": 8940,
+            "planned_risk": 536.8055419999991,
+            "reserved_cash": 7442.4349999999995,
+            "fill": {
+                "date": "2025-07-22",
+                "price": 7435,
+                "fee": 7.4350000000000005
+            },
+            "exit": {
+                "date": "2025-07-23",
+                "price": 6912.542,
+                "reason": "stop",
+                "net_pnl": -536.8055419999991,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "096770.KS",
+            "signal_date": "2025-07-23",
+            "pattern": "trend_pullback_v1",
+            "sector": "unclassified",
+            "quantity": 1,
+            "entry": 116300,
+            "stop": 108991,
+            "target": 128000,
+            "planned_risk": 7588.73200449998,
+            "reserved_cash": 116416.29999999999,
+            "fill": {
+                "date": "2025-07-24",
+                "price": 115557.75,
+                "fee": 115.55775
+            },
+            "exit": {
+                "date": "2025-07-31",
+                "price": 108936.5045,
+                "reason": "stop",
+                "net_pnl": -6845.7397544999985,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "030530.KQ",
+            "signal_date": "2025-07-28",
+            "pattern": "trend_pullback_v1",
+            "sector": "unclassified",
+            "quantity": 1443,
+            "entry": 5960,
+            "stop": 5653,
+            "target": 6510,
+            "planned_risk": 463833.11986049917,
+            "reserved_cash": 8608880.28,
+            "fill": {
+                "date": "2025-07-29",
+                "price": 5960,
+                "fee": 8600.28
+            },
+            "exit": {
+                "date": "2025-08-01",
+                "price": 5650.1735,
+                "reason": "stop",
+                "net_pnl": -463833.1198605001,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "041190.KQ",
+            "signal_date": "2025-08-04",
+            "pattern": "trend_pullback_v1",
+            "sector": "unclassified",
+            "quantity": 1092,
+            "entry": 9590,
+            "stop": 8740,
+            "target": 12500,
+            "planned_risk": 952983.6279599962,
+            "reserved_cash": 10482752.28,
+            "fill": {
+                "date": "2025-08-05",
+                "price": 9590,
+                "fee": 10472.28
+            },
+            "exit": {
+                "date": "2025-09-02",
+                "price": 10084.955,
+                "reason": "time",
+                "net_pnl": 519005.8091400005,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "005830.KS",
+            "signal_date": "2025-08-05",
+            "pattern": "trend_pullback_v1",
+            "sector": "unclassified",
+            "quantity": 62,
+            "entry": 125500,
+            "stop": 120784,
+            "target": 148300,
+            "planned_risk": 311402.1676959987,
+            "reserved_cash": 7788780.999999999,
+            "fill": {
+                "date": "2025-08-06",
+                "price": 124362.15,
+                "fee": 7710.4533
+            },
+            "exit": {
+                "date": "2025-09-03",
+                "price": 136531.7,
+                "reason": "time",
+                "net_pnl": 738336.6813000022,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "066570.KS",
+            "signal_date": "2025-08-05",
+            "pattern": "trend_pullback_v1",
+            "sector": "unclassified",
+            "quantity": 1,
+            "entry": 76600,
+            "stop": 74421,
+            "target": 80900,
+            "planned_risk": 2367.1942894999956,
+            "reserved_cash": 76676.59999999999,
+            "fill": {
+                "date": "2025-08-06",
+                "price": 76138.05,
+                "fee": 76.13805
+            },
+            "exit": {
+                "date": "2025-08-29",
+                "price": 74383.7895,
+                "reason": "stop",
+                "net_pnl": -1904.7823395000014,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "082740.KS",
+            "signal_date": "2025-08-08",
+            "pattern": "breakout_retest_v1",
+            "sector": "unclassified",
+            "quantity": 244,
+            "entry": 39900,
+            "stop": 36027,
+            "target": 48100,
+            "planned_risk": 967929.0867059982,
+            "reserved_cash": 9745335.6,
+            "fill": {
+                "date": "2025-08-11",
+                "price": 39900,
+                "fee": 9735.6
+            },
+            "exit": {
+                "date": "2025-08-29",
+                "price": 48100,
+                "reason": "target",
+                "net_pnl": 1979328,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "034730.KS",
+            "signal_date": "2025-09-08",
+            "pattern": "trend_recovery_v1",
+            "sector": "unclassified",
+            "quantity": 82,
+            "entry": 212000,
+            "stop": 200500,
+            "target": 232000,
+            "planned_risk": 985037.2794999985,
+            "reserved_cash": 17401383.999999996,
+            "fill": null,
+            "exit": null,
+            "cancelled": {
+                "date": "2025-09-11",
+                "reason": "unfilled"
+            },
+            "status": "cancelled"
+        },
+        {
+            "symbol": "336260.KS",
+            "signal_date": "2025-09-10",
+            "pattern": "trend_pullback_v1",
+            "sector": "unclassified",
+            "quantity": 373,
+            "entry": 26550,
+            "stop": 23952,
+            "target": 31350,
+            "planned_risk": 992353.8269519977,
+            "reserved_cash": 9913053.149999999,
+            "fill": null,
+            "exit": null,
+            "cancelled": {
+                "date": "2025-09-12",
+                "reason": "cancelled_before_entry"
+            },
+            "status": "cancelled"
+        },
+        {
+            "symbol": "018880.KS",
+            "signal_date": "2025-09-11",
+            "pattern": "trend_recovery_v1",
+            "sector": "unclassified",
+            "quantity": 5583,
+            "entry": 3555,
+            "stop": 3390,
+            "target": 3900,
+            "planned_risk": 969422.6568149946,
+            "reserved_cash": 19867412.564999998,
+            "fill": {
+                "date": "2025-09-12",
+                "price": 3555,
+                "fee": 19847.565
+            },
+            "exit": {
+                "date": "2025-09-15",
+                "price": 3388.305,
+                "reason": "stop",
+                "net_pnl": -969422.6568149999,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "329180.KS",
+            "signal_date": "2025-09-24",
+            "pattern": "trend_pullback_v1",
+            "sector": "unclassified",
+            "quantity": 39,
+            "entry": 501000,
+            "stop": 488092,
+            "target": 535000,
+            "planned_risk": 551494.8642059965,
+            "reserved_cash": 19558538.999999996,
+            "fill": {
+                "date": "2025-09-25",
+                "price": 501000,
+                "fee": 19539
+            },
+            "exit": {
+                "date": "2025-09-26",
+                "price": 487847.954,
+                "reason": "stop",
+                "net_pnl": -551494.8642059974,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "064350.KS",
+            "signal_date": "2025-09-30",
+            "pattern": "trend_recovery_v1",
+            "sector": "unclassified",
+            "quantity": 89,
+            "entry": 219000,
+            "stop": 209500,
+            "target": 233500,
+            "planned_risk": 892949.9272499975,
+            "reserved_cash": 19510490.999999996,
+            "fill": {
+                "date": "2025-10-01",
+                "price": 219000,
+                "fee": 19491
+            },
+            "exit": null,
+            "cancelled": null,
+            "status": "open"
+        },
+        {
+            "symbol": "298040.KS",
+            "signal_date": "2025-10-01",
+            "pattern": "trend_pullback_v1",
+            "sector": "unclassified",
+            "quantity": 13,
+            "entry": 1375000,
+            "stop": 1305042,
+            "target": 1498000,
+            "planned_risk": 952768.8362269949,
+            "reserved_cash": 17892874.999999996,
+            "fill": {
+                "date": "2025-10-02",
+                "price": 1375000,
+                "fee": 17875
+            },
+            "exit": null,
+            "cancelled": null,
+            "status": "open"
+        },
+        {
+            "symbol": "066570.KS",
+            "signal_date": "2025-10-02",
+            "pattern": "trend_pullback_v1",
+            "sector": "unclassified",
+            "quantity": 13,
+            "entry": 76400,
+            "stop": 74617,
+            "target": 83800,
+            "planned_risk": 25626.746489499856,
+            "reserved_cash": 994193.1999999998,
+            "fill": null,
+            "exit": null,
+            "cancelled": null,
+            "status": "pending"
+        }
+    ]
+}

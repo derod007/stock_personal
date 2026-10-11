@@ -1,0 +1,77 @@
+<?php
+declare(strict_types=1);
+require __DIR__.'/../bin/bootstrap.php';
+require __DIR__.'/../bin/paper/SectorFreeze.php';
+use ChartEntryLab\SectorMap;
+
+function sf(bool $ok,string $why):void{if(!$ok)throw new RuntimeException('FAIL '.$why);echo "PASS $why\n";}
+$root=sys_get_temp_dir().'/sector-freeze-test-'.getmypid();
+function sfrm(string $dir):void{
+    if(!is_dir($dir)||!str_contains($dir,'sector-freeze-test-'))return;
+    foreach(scandir($dir) as $n){if($n==='.'||$n==='..')continue;$p=$dir.'/'.$n;is_dir($p)?sfrm($p):unlink($p);}
+    rmdir($dir);
+}
+sfrm($root);mkdir($root,0770,true);register_shutdown_function(fn()=>sfrm($root));
+
+function status(string $dir,string $symbol,string $quality='ok'):void{
+    $path=$dir.'/status/'.$symbol.'.json';
+    if(!is_dir(dirname($path)))mkdir(dirname($path),0770,true);
+    file_put_contents($path,json_encode(['state'=>'done','name'=>$symbol,'quality'=>['status'=>$quality]],JSON_UNESCAPED_UNICODE));
+}
+function scan(string $path,array $symbols):void{
+    $records=[];foreach($symbols as $s)$records[]=['symbol'=>$s];
+    if(!is_dir(dirname($path)))mkdir(dirname($path),0770,true);
+    file_put_contents($path,json_encode(['records'=>$records]));
+}
+function cache(string $dir,string $code,array $row):void{
+    if(!is_dir($dir))mkdir($dir,0770,true);
+    file_put_contents($dir.'/sector_'.$code.'.json',json_encode($row,JSON_UNESCAPED_UNICODE));
+}
+
+$prior=$root.'/prior';$recent=$root.'/recent';$cacheDir=$root.'/cache';
+status($prior,'005930.KS');status($prior,'000660.KS');status($prior,'035420.KS','hold');
+status($recent,'005930.KS');status($recent,'051910.KS');
+$scanFile=$root.'/scans/one.json';
+scan($scanFile,['005930.KS','000660.KS','051910.KS','999999.KS']);
+cache($cacheDir,'005930',['sector'=>'반도체와반도체장비','sector_bucket'=>'semi','sector_label'=>'반도체·전자','name'=>'삼성전자']);
+cache($cacheDir,'000660',['sector'=>'기타','sector_bucket'=>'other','sector_label'=>'기타','name'=>null]);
+cache($cacheDir,'051910',['sector'=>'화학','sector_bucket'=>'energy','sector_label'=>'에너지·소재','name'=>'LG화학']);
+$sentinel=$cacheDir.'/sector_005930.json';$before=hash_file('sha256',$sentinel);$finger=PaperSectorFreeze::fingerprint($cacheDir);
+$rules=new SectorMap($root.'/rule-only');
+$built=PaperSectorFreeze::build($cacheDir,['prior'=>$prior,'recent'=>$recent],[$scanFile]);
+sf(hash_file('sha256',$sentinel)===$before&&PaperSectorFreeze::fingerprint($cacheDir)===$finger,'reading the cache does not rewrite it');
+sf($built['sectors']['005930.KS']===$rules->bucketOf('반도체와반도체장비','삼성전자'),'a stored industry uses the operational bucket rule');
+sf($built['symbols']['005930.KS']['status']==='secured'&&$built['symbols']['005930.KS']['periods']===['prior','recent'],'the same symbol has one classification for both periods');
+sf($built['sectors']['000660.KS']==='unclassified'&&$built['symbols']['000660.KS']['reason']==='cache_placeholder','a placeholder cache entry is not turned into 기타');
+sf(!isset($built['sectors']['035420.KS']),'a quality-hold symbol is outside the replay map');
+sf($built['sectors']['051910.KS']===$rules->bucketOf('화학','LG화학')&&$built['symbols']['051910.KS']['periods']===['recent'],'the second period uses the same map, not a second classification');
+$unclassified=array_unique(array_map(fn($s)=>$built['sectors'][$s],array_column($built['unconfirmed'],'symbol')));
+sf($unclassified===['unclassified'],'every unconfirmed symbol shares the one unclassified bucket');
+$bad=$built;$bad['sectors']['000660.KS']='unclassified-000660.KS';
+sf((function()use($bad){try{PaperSectorFreeze::assertReplayMap($bad);return false;}catch(Throwable){return true;}})(),'an unconfirmed symbol cannot be given its own sector');
+$scannerDir=$root.'/raw-sector';$otherDir=$root.'/other-sector';
+cache($scannerDir,'005930',['sector'=>'반도체와반도체장비','sector_bucket'=>'semi','name'=>'삼성전자']);
+cache($scannerDir,'000660',['sector'=>'기타','sector_bucket'=>'other','name'=>null]);
+cache($otherDir,'005930',['sector'=>'자동차','sector_bucket'=>'auto','name'=>'삼성전자']);
+cache($otherDir,'000660',['sector'=>'은행','sector_bucket'=>'fin','name'=>'테스트']);
+cache($otherDir,'051910',['sector'=>'화학','sector_bucket'=>'energy','name'=>'LG화학']);
+$list=['005930.KS','000660.KS','051910.KS','999999.KS'];
+$keep=hash_file('sha256',$scannerDir.'/sector_005930.json');
+$primary=PaperSectorFreeze::survey($scannerDir,$list);
+$extra=PaperSectorFreeze::survey($otherDir,$list);
+sf(hash_file('sha256',$scannerDir.'/sector_005930.json')===$keep,'a path survey does not rewrite the cache');
+sf($primary['counts']===['secured'=>1,'placeholder'=>1,'missing'=>2,'unreadable'=>0],'scanner path counts a real name, a placeholder and missing files separately');
+$cmp=PaperSectorFreeze::compareSurveys($primary,$extra);
+sf($cmp['supplement_used']===['000660.KS','051910.KS'],'a placeholder or a missing scanner file can be filled from the other path');
+sf(count($cmp['conflicts'])===1&&$cmp['conflicts'][0]['symbol']==='005930.KS'&&$cmp['conflicts'][0]['primary_sector']==='반도체와반도체장비','a real-name disagreement is reported and the scanner name stays primary');
+$v2Dir=$root.'/v2cache';
+$prov=['source_url'=>'https://m.stock.naver.com/api/stock/005930/integration','industry_code'=>'278','fetched_at'=>'2026-10-11T02:00:00+09:00','response_sha256'=>str_repeat('a',64)];
+cache($v2Dir,'005930',['sector'=>'반도체와반도체장비','sector_bucket'=>'semi','name'=>'삼성전자']+$prov);
+cache($v2Dir,'051910',['sector'=>'화학','sector_bucket'=>'energy','name'=>'LG화학']+$prov);
+$v2=PaperSectorFreeze::build($v2Dir,['prior'=>$prior,'recent'=>$recent],[$scanFile],PaperSectorFreeze::KIND_V2,['collection'=>['report'=>'x']]);
+sf($v2['kind']==='research_sector_map_v2'&&$v2['symbols']['005930.KS']['source_url']===$prov['source_url']&&$v2['symbols']['005930.KS']['response_sha256']===$prov['response_sha256'],'a v2 row records source, fetch time, industry code and response hash');
+sf($v2['sectors']['000660.KS']==='unclassified'&&$v2['symbols']['000660.KS']['reason']==='cache_missing','a symbol that was not collected stays unconfirmed in v2');
+sf(count(array_unique(array_intersect_key($v2['sectors'],array_flip(['000660.KS']))))===1&&$v2['collection']['report']==='x','v2 keeps the shared unclassified bucket and the collection note');
+cache($v2Dir,'051910',['sector'=>'화학','sector_bucket'=>'energy','name'=>'LG화학']);
+sf((function()use($v2Dir,$prior,$recent,$scanFile){try{PaperSectorFreeze::build($v2Dir,['prior'=>$prior,'recent'=>$recent],[$scanFile],PaperSectorFreeze::KIND_V2);return false;}catch(Throwable){return true;}})(),'a v2 row without provenance is refused');
+echo "SECTOR_FREEZE_PASS\n";

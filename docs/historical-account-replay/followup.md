@@ -1,0 +1,92 @@
+# 섹터 고정과 후보 대응 — 추가 검증
+
+현재 운영 섹터 캐시에 저장된 업종명을 SectorMap::bucketOf로 분류해 두 기간에 같이 적용한다. 당시 업종을 복원한 것이 아니다.
+
+저장 스캔 원본에는 업종 칸이 없다. 종목 목록은 그 파일에서 오고, 업종은 운영 캐시 `data/cache/sector/sector_<코드>.json`을 읽기만 해서 `SectorMap::bucketOf`로 다시 매긴다. 캐시 파일은 바꾸지 않았다.
+
+## 섹터 매핑
+
+- 대상 144종목. 확보 0건, 미확인 144건. 캐시 저장 버킷과 현재 규칙이 달랐던 건 0건.
+- 미확인 이유: {"cache_placeholder": 144}. 캐시의 업종명이 비어 `기타`로 저장된 자리표시자다. 그 값을 운영 버킷 other로 올리지는 않았다.
+- 미확인 종목은 버킷 이름 `unclassified` 하나다. 종목별 버킷으로 40% 한도를 나누지 않는다.
+- 매핑 파일 LF 해시 `8e248fe9160cea80dd54ed5da3a4dfe51deb0ecdeade9e3a714b407f79ce003d`.
+- 같은 종목은 두 기간에 같은 칸을 쓴다. 분류가 바뀌면 그 연구 계좌는 이어 가지 않는다.
+
+## 후보 선별 대응
+
+완료봉을 운영 ChartPlanEngine, 그 결과의 apply, 스캐너의 candidateFromProposal, PaperScanUniverse::symbols에 같은 순서로 넣었다. 매일 거래대금 TOP100 선별과 별도의 가격 수집은 재현하지 않았다.
+
+| 사례 | 패턴 상태 | 발표된 계획 | 주문 가능 | 스캐너 후보 | 유니버스 선택 | 일치 |
+|---|---|---|---|---|---|---|
+| breakout ready | ready | ready | true | true | true | true |
+| breakout waiting | await_retest | await_retest | false | false | false | true |
+| breakout reward/risk rejected | rejected_rr | rejected_rr | false | false | false | true |
+| breakout common risk block | invalidated | risk_blocked | false | false | false | true |
+| pullback ready | ready | ready | true | true | true | true |
+| pullback waiting | await_confirmation | await_confirmation | false | false | false | true |
+| pullback reward/risk rejected | rejected_rr | rejected_rr | false | false | false | true |
+| pullback common risk block | ready | risk_blocked | false | false | false | true |
+| recovery ready | ready | ready | true | true | true | true |
+| recovery waiting | await_recovery | context_wait | false | false | false | true |
+| recovery reward/risk rejected | rejected_rr | rejected_rr | false | false | false | true |
+| recovery common risk block | ready | risk_blocked | false | false | false | true |
+
+보유 종목은 후보가 아니어도, 스캔 목록이 비어도 평가 대상에 남는다.
+
+## 짧은 구간 (고정 맵, 별도 계좌)
+
+이전의 전부 미분류 결과(`smoke/a`, `smoke/b`, `smoke/c`)는 그대로 두었다. 아래는 `smoke-sector/`다.
+
+| 구간 | 세션 | 주문 | 현금 | 실현손익 | 장부 | 섹터 한도 | 정지 | 기존 미분류와 주문·현금 |
+|---|--:|--:|--:|--:|---|---|---|---|
+| a 이전 시작부 | 38 | 5 | 99,062,949 | -937,051 | 통과 | 5 orders, max sector share 40% | 없음 | 같음 |
+| b 최근 시작부 | 46 | 16 | 64,890,675 | 5,739,495 | 통과 | 16 orders, max sector share 39.96% | 없음 | 같음 |
+| c 이전 끝부분 | 72 | 24 | 60,417,144 | -2,179,490 | 통과 | 24 orders, max sector share 40% | 없음 | 같음 |
+
+구간 a를 한 번에 실행한 저널과 4세션씩 나눠 이은 저널은 같다 (이벤트 92개, 정규화 해시 `2253b12103d20065293ca296693532c1a135f3f1b4eb5dfc93bdda20c31db238`). 같은 명령을 다시 실행하면 처리 세션 0이고 저널 파일이 바이트 단위로 같다.
+
+세 구간 모두 정지하지 않았다. 보유 종목의 봉이 없거나 무효이면 계좌를 멈추는 기존 규칙은 유지한다. 보간하거나 날짜를 건너뛰지 않는다.
+
+## 섹터 캐시 경로
+
+`paper_scan_universe.php`는 `KrAmountScanner`에 `data/raw/cache`를 넘기고, 스캐너는 그 아래 `sector`에서 업종을 읽는다. `data/cache/sector`는 다른 캐시다. 업종명 `기타`는 분류로 세지 않는다. 두 캐시 모두 쓰지 않았다.
+
+- 운영 스캐너 경로 `data/raw/cache/sector`: 유효 업종명 0건, 자리표시자 144건, 파일 없음 0건.
+- 다른 캐시 `data/cache/sector`: 유효 업종명 0건, 자리표시자 144건, 파일 없음 0건.
+- 보완으로 채운 종목 0건, 업종명이 서로 다른 종목 0건.
+- 두 경로 모두 유효 업종명이 없어, 운영 캐시에서는 맵을 바꾸지 못했다. 운영 캐시는 쓰지 않았다.
+
+## 업종이 전부 기타로 저장된 원인
+
+대표 5종목을 임시 폴더에서 현재 수집 경로(`SectorMap`)로 실행했다 (2026-10-10T16:40:13+00:00). 결과는 5건 모두 같은 원인이다.
+
+| 단계 | 결과 |
+|---|---|
+| HTTP 실패 | 아님. 상태 200, 전송 오류 없음 |
+| 인코딩 | 아님. 본문은 UTF-8이고 한글이 정상 해석됨 |
+| 응답 형식 변경 | **원인.** `finance.naver.com/item/main.naver`가 `stock.naver.com/domestic/stock/<코드>/price`로 302 이동한다. 새 페이지는 스크립트로 그려지는 화면이라 업종 링크(`sise_group_detail...type=upjong`)가 본문에 없다 |
+| 업종 파싱 | 위 때문에 정규식이 맞는 곳이 없어 빈 값이 된다 |
+
+`SectorMap`은 빈 업종을 `기타`로 저장하고, 제목에서도 이름을 못 읽어 이름을 비운다. 그래서 144종목 모두 `기타`·이름 없음으로 캐시되었다. 운영 수집 코드의 수정이 필요하며, 별도 PR로 분리한다.
+
+## 연구용 섹터 맵 v2
+
+운영 `SectorMap`을 쓰지 않고, 같은 사이트의 JSON 두 곳에서 현재 업종을 읽었다 (2026-10-11T01:44:49+09:00). 종목별 `industryCode`와 업종 목록(79개)의 이름을 맞추고, 버킷은 운영 규칙 `SectorMap::bucketOf`로 분류했다. 읽은 값은 운영 폴더 밖에 저장했고 운영 캐시는 쓰지 않았다(`operational_caches_unchanged`: true).
+
+- 확보 144 / 미확인 0 (총 144종목)
+- 종목마다 업종명, 운영 버킷, 출처 URL, 조회 시각, 업종코드, 응답 해시를 `sector-map-v2.json`에 기록했다. 실패한 종목은 추정하지 않고 하나의 `unclassified`로 둔다.
+- **연구 가정:** 현재 업종을 과거 두 기간에 같이 적용한다. 당시 업종을 복원한 것이 아니다.
+
+버킷별 종목 수: auto 19, bio 10, consumer 5, energy 38, fin 9, indust 9, other 4, semi 37, soft 13
+
+### v2 맵으로 소규모 구간 재검증 (새 계좌 va·vb·vc)
+
+| 구간 | 세션 | 주문 | 최종 현금 | 실현손익 | 장부 대사 | 섹터 한도 | 정지 | 이전(미분류) 주문·현금 |
+|---|---:|---:|---:|---:|---|---|---|---|
+| a 이전 시작부 | 38 | 5 | 98,820,492 | -1,179,508 | 통과 | 5 orders, max sector share 20% | 없음 | 주문 같음, 현금 다름 |
+| b 최근 시작부 | 46 | 16 | 64,356,732 | 5,739,495 | 통과 | 16 orders, max sector share 20.42% | 없음 | 주문 같음, 현금 다름 |
+| c 이전 끝부분 | 72 | 24 | 61,086,953 | -1,509,681 | 통과 | 24 orders, max sector share 40% | 없음 | 주문 같음, 현금 다름 |
+
+구간 a를 한 번에 실행한 저널과 4세션씩 나눠 이은 저널은 같다 (이벤트 92개). 같은 명령을 다시 실행하면 처리 세션 0이고 저널 파일이 같다. 이전 맵으로 만든 계좌(sa)에 v2 맵을 주면 `Research input changed (sector_map_sha256)`로 거부한다.
+
+섹터가 나뉘자 모든 종목을 한 버킷으로 둔 이전 결과와 세 구간 모두 최종 현금이 달라졌다(표의 마지막 열). 기존 `smoke/`와 `smoke-sector/` 결과는 그대로 둔다.

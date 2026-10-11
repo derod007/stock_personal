@@ -1,0 +1,10 @@
+{
+  "status": "completed",
+  "dataset": "kr-saved-scan-20251008",
+  "uploaded_archive": "kr-saved-scan-20251008.zip",
+  "full_run_performed": true,
+  "substitute_data_used": false,
+  "sessions": 242,
+  "halted": false,
+  "reconcile_pass": true
+}

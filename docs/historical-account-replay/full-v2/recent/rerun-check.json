@@ -1,0 +1,10 @@
+{
+  "processed_sessions": 0,
+  "pending_before": 0,
+  "halted": false,
+  "journal_sha256_before": "a0322afd1c061c918292aa654775b23274f8b0eed20ce3730aa0b9d2a56cfe06",
+  "journal_sha256_after": "a0322afd1c061c918292aa654775b23274f8b0eed20ce3730aa0b9d2a56cfe06",
+  "journal_unchanged": true,
+  "dataset_files_unchanged": true,
+  "operational_state_files_unchanged": true
+}

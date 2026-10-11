@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "kind": "historical_account_fill_cases_v1",
-  "count": 47,
+  "count": 49,
   "cases": [
     {
       "id": "prior-267260.KS-2024-12-03",
@@ -12,7 +12,16 @@
       "period": "prior",
       "symbol": "267260.KS",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2024-12-03",
+        "fill": "2024-12-04",
+        "exit": "2025-01-03",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2024-12-03",
+      "fill_date": "2024-12-04",
+      "exit_date": "2025-01-03",
       "order": {
         "entry": 355000,
         "stop": 329771,
@@ -78,6 +87,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2024-12-04",
+        "session_role": "entry_session",
+        "ohlc": [
+          346000.0,
+          361500.0,
+          340500.0,
+          357500.0
+        ],
+        "stored": 346173.0,
+        "stored_side": "inside",
+        "model_price": 346173.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-01-03",
+        "session_role": "exit_session",
+        "ohlc": [
+          405000.0,
+          409500.0,
+          390000.0,
+          400000.0
+        ],
+        "stored": 399800.0,
+        "stored_side": "inside",
+        "model_price": 399800.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/prior-267260.KS-2024-12-03.svg"
     },
@@ -90,7 +134,16 @@
       "period": "prior",
       "symbol": "010170.KQ",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2025-01-16",
+        "fill": "2025-01-17",
+        "exit": "2025-02-04",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-01-16",
+      "fill_date": "2025-01-17",
+      "exit_date": "2025-02-04",
       "order": {
         "entry": 828,
         "stop": 757,
@@ -156,8 +209,168 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-01-17",
+        "session_role": "entry_session",
+        "ohlc": [
+          822.0,
+          955.0,
+          818.0,
+          872.0
+        ],
+        "stored": 822.411,
+        "stored_side": "inside",
+        "model_price": 822.411,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-02-04",
+        "session_role": "exit_session",
+        "ohlc": [
+          828.0,
+          1072.0,
+          828.0,
+          1072.0
+        ],
+        "stored": 1039.0,
+        "stored_side": "inside",
+        "model_price": 1039.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/prior-010170.KQ-2025-01-16.svg"
+    },
+    {
+      "id": "prior-079550.KS-2025-01-24",
+      "tags": [
+        "exit_below_low",
+        "model_outside_tape"
+      ],
+      "period": "prior",
+      "symbol": "079550.KS",
+      "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2025-01-24",
+        "fill": "2025-01-31",
+        "exit": "2025-02-12",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
+      "signal_date": "2025-01-24",
+      "fill_date": "2025-01-31",
+      "exit_date": "2025-02-12",
+      "order": {
+        "entry": 230500,
+        "stop": 205985,
+        "target": 268500,
+        "quantity": 41
+      },
+      "fill": {
+        "date": "2025-01-31",
+        "price": 230500,
+        "fee": 9450.5
+      },
+      "exit": {
+        "date": "2025-02-12",
+        "price": 268500,
+        "reason": "target",
+        "net_pnl": 1537541.0000000019,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-01-24",
+        "open": 222500.0,
+        "high": 234500.0,
+        "low": 220500.0,
+        "close": 230500.0,
+        "volume": 345732,
+        "available_at": 1737700200,
+        "symbol": "079550.KS"
+      },
+      "fill_bar": {
+        "date": "2025-01-31",
+        "open": 234500.0,
+        "high": 236500.0,
+        "low": 224500.0,
+        "close": 226500.0,
+        "volume": 222556,
+        "available_at": 1738305000,
+        "symbol": "079550.KS"
+      },
+      "exit_bar": {
+        "date": "2025-02-12",
+        "open": 272500.0,
+        "high": 292500.0,
+        "low": 271000.0,
+        "close": 290000.0,
+        "volume": 808678,
+        "available_at": 1739341800,
+        "symbol": "079550.KS"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "target",
+        "fill": 230500.0,
+        "fill_date": "2025-01-31",
+        "exit": 268500.0,
+        "exit_date": "2025-02-12",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 9,
+        "notes": [
+          "later-session open already through target; target is taken at the limit"
+        ]
+      },
+      "worst": "assumption_dependent",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-01-31",
+        "session_role": "entry_session",
+        "ohlc": [
+          234500.0,
+          236500.0,
+          224500.0,
+          226500.0
+        ],
+        "stored": 230500.0,
+        "stored_side": "inside",
+        "model_price": 230500.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "assumption_dependent",
+        "detail": "exit matches the conservative model and that model is below_low the tape",
+        "code": "src/TradeSimulator.php:60-84",
+        "date": "2025-02-12",
+        "session_role": "exit_session",
+        "ohlc": [
+          272500.0,
+          292500.0,
+          271000.0,
+          290000.0
+        ],
+        "stored": 268500.0,
+        "stored_side": "below_low",
+        "model_price": 268500.0,
+        "model_side": "below_low",
+        "model_also_outside": true
+      },
+      "uncertainty": [
+        "exit matches the conservative model and that model is below_low the tape"
+      ],
+      "chart": "charts/prior-079550.KS-2025-01-24.svg"
     },
     {
       "id": "prior-203650.KQ-2025-01-31",
@@ -167,7 +380,16 @@
       "period": "prior",
       "symbol": "203650.KQ",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2025-01-31",
+        "fill": "2025-02-03",
+        "exit": "2025-02-28",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-01-31",
+      "fill_date": "2025-02-03",
+      "exit_date": "2025-02-28",
       "order": {
         "entry": 1770,
         "stop": 1597,
@@ -233,6 +455,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-02-03",
+        "session_role": "entry_session",
+        "ohlc": [
+          1740.0,
+          1747.5,
+          1675.0,
+          1697.5
+        ],
+        "stored": 1740.87,
+        "stored_side": "inside",
+        "model_price": 1740.87,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-02-28",
+        "session_role": "exit_session",
+        "ohlc": [
+          1717.5,
+          1717.5,
+          1682.5,
+          1690.0
+        ],
+        "stored": 1689.155,
+        "stored_side": "inside",
+        "model_price": 1689.1550000000002,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/prior-203650.KQ-2025-01-31.svg"
     },
@@ -244,7 +501,16 @@
       "period": "prior",
       "symbol": "006340.KS",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2025-02-13",
+        "fill": "2025-02-14",
+        "exit": "2025-02-24",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-02-13",
+      "fill_date": "2025-02-14",
+      "exit_date": "2025-02-24",
       "order": {
         "entry": 3455,
         "stop": 3261,
@@ -310,6 +576,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-02-14",
+        "session_role": "entry_session",
+        "ohlc": [
+          3440.0,
+          3445.0,
+          3315.0,
+          3340.0
+        ],
+        "stored": 3441.72,
+        "stored_side": "inside",
+        "model_price": 3441.72,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-02-24",
+        "session_role": "exit_session",
+        "ohlc": [
+          3265.0,
+          3275.0,
+          3190.0,
+          3260.0
+        ],
+        "stored": 3259.3695,
+        "stored_side": "inside",
+        "model_price": 3259.3695000000002,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/prior-006340.KS-2025-02-13.svg"
     },
@@ -322,7 +623,16 @@
       "period": "prior",
       "symbol": "267270.KS",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2025-02-26",
+        "fill": "2025-02-27",
+        "exit": "2025-03-04",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-02-26",
+      "fill_date": "2025-02-27",
+      "exit_date": "2025-03-04",
       "order": {
         "entry": 77400,
         "stop": 70125,
@@ -389,6 +699,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-02-27",
+        "session_role": "entry_session",
+        "ohlc": [
+          76200.0,
+          76400.0,
+          74200.0,
+          74600.0
+        ],
+        "stored": 76238.09999999999,
+        "stored_side": "inside",
+        "model_price": 76238.09999999999,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-03-04",
+        "session_role": "exit_session",
+        "ohlc": [
+          70000.0,
+          71900.0,
+          65000.0,
+          71600.0
+        ],
+        "stored": 69965.0,
+        "stored_side": "inside",
+        "model_price": 69965.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/prior-267270.KS-2025-02-26.svg"
     },
@@ -400,7 +745,16 @@
       "period": "prior",
       "symbol": "092870.KQ",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2025-03-05",
+        "fill": "2025-03-06",
+        "exit": "2025-03-11",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-03-05",
+      "fill_date": "2025-03-06",
+      "exit_date": "2025-03-11",
       "order": {
         "entry": 12620,
         "stop": 11626,
@@ -466,6 +820,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-03-06",
+        "session_role": "entry_session",
+        "ohlc": [
+          12620.0,
+          12640.0,
+          11920.0,
+          11950.0
+        ],
+        "stored": 12620.0,
+        "stored_side": "inside",
+        "model_price": 12620.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-03-11",
+        "session_role": "exit_session",
+        "ohlc": [
+          11400.0,
+          11940.0,
+          11350.0,
+          11890.0
+        ],
+        "stored": 11394.3,
+        "stored_side": "inside",
+        "model_price": 11394.300000000001,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/prior-092870.KQ-2025-03-05.svg"
     },
@@ -477,7 +866,16 @@
       "period": "prior",
       "symbol": "005930.KS",
       "pattern": "trend_recovery_v1",
+      "dates": {
+        "signal": "2025-03-27",
+        "fill": "2025-03-28",
+        "exit": "2025-03-31",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-03-27",
+      "fill_date": "2025-03-28",
+      "exit_date": "2025-03-31",
       "order": {
         "entry": 61800,
         "stop": 59500,
@@ -543,6 +941,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-03-28",
+        "session_role": "entry_session",
+        "ohlc": [
+          60700.0,
+          61100.0,
+          60000.0,
+          60200.0
+        ],
+        "stored": 60730.35,
+        "stored_side": "inside",
+        "model_price": 60730.35,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-03-31",
+        "session_role": "exit_session",
+        "ohlc": [
+          59500.0,
+          59700.0,
+          57800.0,
+          57800.0
+        ],
+        "stored": 59470.25,
+        "stored_side": "inside",
+        "model_price": 59470.25,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/prior-005930.KS-2025-03-27.svg"
     },
@@ -555,7 +988,16 @@
       "period": "prior",
       "symbol": "452190.KQ",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2025-03-28",
+        "fill": "2025-03-31",
+        "exit": "2025-03-31",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-03-28",
+      "fill_date": "2025-03-31",
+      "exit_date": "2025-03-31",
       "order": {
         "entry": 6050,
         "stop": 5580,
@@ -621,6 +1063,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-03-31",
+        "session_role": "entry_session",
+        "ohlc": [
+          5800.0,
+          5900.0,
+          5420.0,
+          5430.0
+        ],
+        "stored": 5802.9,
+        "stored_side": "inside",
+        "model_price": 5802.9,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-03-31",
+        "session_role": "exit_session",
+        "ohlc": [
+          5800.0,
+          5900.0,
+          5420.0,
+          5430.0
+        ],
+        "stored": 5577.21,
+        "stored_side": "inside",
+        "model_price": 5577.21,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/prior-452190.KQ-2025-03-28.svg"
     },
@@ -632,7 +1109,16 @@
       "period": "prior",
       "symbol": "064350.KS",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2025-03-31",
+        "fill": "2025-04-02",
+        "exit": "2025-04-02",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-03-31",
+      "fill_date": "2025-04-02",
+      "exit_date": "2025-04-02",
       "order": {
         "entry": 105000,
         "stop": 97850,
@@ -696,6 +1182,41 @@
         "notes": []
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-04-02",
+        "session_role": "entry_session",
+        "ohlc": [
+          106900.0,
+          107200.0,
+          97200.0,
+          99000.0
+        ],
+        "stored": 105000.0,
+        "stored_side": "inside",
+        "model_price": 105000.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-04-02",
+        "session_role": "exit_session",
+        "ohlc": [
+          106900.0,
+          107200.0,
+          97200.0,
+          99000.0
+        ],
+        "stored": 97801.075,
+        "stored_side": "inside",
+        "model_price": 97801.07500000001,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/prior-064350.KS-2025-03-31.svg"
     },
@@ -707,7 +1228,16 @@
       "period": "prior",
       "symbol": "272210.KS",
       "pattern": "breakout_retest_v1",
+      "dates": {
+        "signal": "2025-05-16",
+        "fill": "2025-05-19",
+        "exit": "2025-06-09",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-05-16",
+      "fill_date": "2025-05-19",
+      "exit_date": "2025-06-09",
       "order": {
         "entry": 47350,
         "stop": 42246,
@@ -773,6 +1303,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-05-19",
+        "session_role": "entry_session",
+        "ohlc": [
+          46550.0,
+          48200.0,
+          44850.0,
+          45300.0
+        ],
+        "stored": 46573.274999999994,
+        "stored_side": "inside",
+        "model_price": 46573.274999999994,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-06-09",
+        "session_role": "exit_session",
+        "ohlc": [
+          44350.0,
+          44350.0,
+          41550.0,
+          42800.0
+        ],
+        "stored": 42224.877,
+        "stored_side": "inside",
+        "model_price": 42224.877,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/prior-272210.KS-2025-05-16.svg"
     },
@@ -785,7 +1350,16 @@
       "period": "prior",
       "symbol": "203650.KQ",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2025-05-20",
+        "fill": "2025-05-21",
+        "exit": "2025-06-19",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-05-20",
+      "fill_date": "2025-05-21",
+      "exit_date": "2025-06-19",
       "order": {
         "entry": 1755,
         "stop": 1683,
@@ -851,8 +1425,166 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-05-21",
+        "session_role": "entry_session",
+        "ohlc": [
+          1752.5,
+          1825.0,
+          1752.5,
+          1772.5
+        ],
+        "stored": 1753.3762499999998,
+        "stored_side": "inside",
+        "model_price": 1753.3762499999998,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-06-19",
+        "session_role": "exit_session",
+        "ohlc": [
+          1982.5,
+          2005.0,
+          1955.0,
+          1995.0
+        ],
+        "stored": 1994.0025,
+        "stored_side": "inside",
+        "model_price": 1994.0025,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/prior-203650.KQ-2025-05-20.svg"
+    },
+    {
+      "id": "prior-393210.KQ-2025-06-09",
+      "tags": [
+        "exit_below_low",
+        "model_outside_tape"
+      ],
+      "period": "prior",
+      "symbol": "393210.KQ",
+      "pattern": "trend_recovery_v1",
+      "dates": {
+        "signal": "2025-06-09",
+        "fill": "2025-06-10",
+        "exit": "2025-06-13",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
+      "signal_date": "2025-06-09",
+      "fill_date": "2025-06-10",
+      "exit_date": "2025-06-13",
+      "order": {
+        "entry": 7440,
+        "stop": 6680,
+        "target": 8590,
+        "quantity": 1294
+      },
+      "fill": {
+        "date": "2025-06-10",
+        "price": 7440,
+        "fee": 9627.36
+      },
+      "exit": {
+        "date": "2025-06-13",
+        "price": 6676.66,
+        "reason": "stop",
+        "net_pnl": -1006028.9180399999,
+        "ambiguous_bar": false
+      },
+      "cancelled": null,
+      "status": "closed",
+      "signal_bar": {
+        "date": "2025-06-09",
+        "open": 7250.0,
+        "high": 7690.0,
+        "low": 7110.0,
+        "close": 7440.0,
+        "volume": 987831,
+        "available_at": 1749450600,
+        "symbol": "393210.KQ"
+      },
+      "fill_bar": {
+        "date": "2025-06-10",
+        "open": 7580.0,
+        "high": 7580.0,
+        "low": 7090.0,
+        "close": 7170.0,
+        "volume": 454142,
+        "available_at": 1749537000,
+        "symbol": "393210.KQ"
+      },
+      "exit_bar": {
+        "date": "2025-06-13",
+        "open": 7080.0,
+        "high": 7140.0,
+        "low": 6680.0,
+        "close": 6740.0,
+        "volume": 380993,
+        "available_at": 1749796200,
+        "symbol": "393210.KQ"
+      },
+      "independent": {
+        "status": "closed",
+        "reason": "stop",
+        "fill": 7440.0,
+        "fill_date": "2025-06-10",
+        "exit": 6676.660000000001,
+        "exit_date": "2025-06-13",
+        "ambiguous_bar": false,
+        "same_day_exit": false,
+        "held": 4,
+        "notes": []
+      },
+      "worst": "assumption_dependent",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-06-10",
+        "session_role": "entry_session",
+        "ohlc": [
+          7580.0,
+          7580.0,
+          7090.0,
+          7170.0
+        ],
+        "stored": 7440.0,
+        "stored_side": "inside",
+        "model_price": 7440.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "assumption_dependent",
+        "detail": "exit matches the conservative model and that model is below_low the tape",
+        "code": "src/TradeSimulator.php:60-84",
+        "date": "2025-06-13",
+        "session_role": "exit_session",
+        "ohlc": [
+          7080.0,
+          7140.0,
+          6680.0,
+          6740.0
+        ],
+        "stored": 6676.66,
+        "stored_side": "below_low",
+        "model_price": 6676.660000000001,
+        "model_side": "below_low",
+        "model_also_outside": true
+      },
+      "uncertainty": [
+        "exit matches the conservative model and that model is below_low the tape"
+      ],
+      "chart": "charts/prior-393210.KQ-2025-06-09.svg"
     },
     {
       "id": "prior-079550.KS-2025-06-19",
@@ -863,7 +1595,16 @@
       "period": "prior",
       "symbol": "079550.KS",
       "pattern": "breakout_retest_v1",
+      "dates": {
+        "signal": "2025-06-19",
+        "fill": "2025-06-24",
+        "exit": "2025-06-24",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-06-19",
+      "fill_date": "2025-06-24",
+      "exit_date": "2025-06-24",
       "order": {
         "entry": 593000,
         "stop": 555092,
@@ -929,6 +1670,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-06-24",
+        "session_role": "entry_session",
+        "ohlc": [
+          576000.0,
+          589000.0,
+          536000.0,
+          554000.0
+        ],
+        "stored": 576288.0,
+        "stored_side": "inside",
+        "model_price": 576288.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-06-24",
+        "session_role": "exit_session",
+        "ohlc": [
+          576000.0,
+          589000.0,
+          536000.0,
+          554000.0
+        ],
+        "stored": 554814.454,
+        "stored_side": "inside",
+        "model_price": 554814.454,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/prior-079550.KS-2025-06-19.svg"
     },
@@ -941,7 +1717,16 @@
       "period": "prior",
       "symbol": "071050.KS",
       "pattern": "breakout_retest_v1",
+      "dates": {
+        "signal": "2025-06-20",
+        "fill": "2025-06-23",
+        "exit": "2025-07-11",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-06-20",
+      "fill_date": "2025-06-23",
+      "exit_date": "2025-07-11",
       "order": {
         "entry": 131900,
         "stop": 122964,
@@ -1007,6 +1792,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-06-23",
+        "session_role": "entry_session",
+        "ohlc": [
+          131800.0,
+          133700.0,
+          128400.0,
+          132000.0
+        ],
+        "stored": 131865.9,
+        "stored_side": "inside",
+        "model_price": 131865.9,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-07-11",
+        "session_role": "exit_session",
+        "ohlc": [
+          155000.0,
+          161700.0,
+          155000.0,
+          158000.0
+        ],
+        "stored": 159400.0,
+        "stored_side": "inside",
+        "model_price": 159400.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/prior-071050.KS-2025-06-20.svg"
     },
@@ -1018,7 +1838,16 @@
       "period": "prior",
       "symbol": "419050.KQ",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2025-06-25",
+        "fill": "2025-06-26",
+        "exit": "2025-07-02",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-06-25",
+      "fill_date": "2025-06-26",
+      "exit_date": "2025-07-02",
       "order": {
         "entry": 1763,
         "stop": 1681,
@@ -1084,6 +1913,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-06-26",
+        "session_role": "entry_session",
+        "ohlc": [
+          1760.0,
+          1762.0,
+          1724.0,
+          1743.0
+        ],
+        "stored": 1760.8799999999999,
+        "stored_side": "inside",
+        "model_price": 1760.8799999999999,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-07-02",
+        "session_role": "exit_session",
+        "ohlc": [
+          1708.0,
+          1718.0,
+          1675.0,
+          1705.0
+        ],
+        "stored": 1680.1595,
+        "stored_side": "inside",
+        "model_price": 1680.1595,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/prior-419050.KQ-2025-06-25.svg"
     },
@@ -1095,7 +1959,16 @@
       "period": "prior",
       "symbol": "080220.KQ",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2025-07-08",
+        "fill": "2025-07-09",
+        "exit": "2025-08-01",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-07-08",
+      "fill_date": "2025-07-09",
+      "exit_date": "2025-08-01",
       "order": {
         "entry": 15730,
         "stop": 14221,
@@ -1161,6 +2034,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-07-09",
+        "session_role": "entry_session",
+        "ohlc": [
+          15680.0,
+          15740.0,
+          15290.0,
+          15360.0
+        ],
+        "stored": 15687.839999999998,
+        "stored_side": "inside",
+        "model_price": 15687.839999999998,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-08-01",
+        "session_role": "exit_session",
+        "ohlc": [
+          14850.0,
+          14940.0,
+          14190.0,
+          14280.0
+        ],
+        "stored": 14213.8895,
+        "stored_side": "inside",
+        "model_price": 14213.889500000001,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/prior-080220.KQ-2025-07-08.svg"
     },
@@ -1172,7 +2080,16 @@
       "period": "prior",
       "symbol": "071050.KS",
       "pattern": "breakout_retest_v1",
+      "dates": {
+        "signal": "2025-07-11",
+        "fill": "2025-07-14",
+        "exit": "2025-07-18",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-07-11",
+      "fill_date": "2025-07-14",
+      "exit_date": "2025-07-18",
       "order": {
         "entry": 158000,
         "stop": 147507,
@@ -1238,6 +2155,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-07-14",
+        "session_role": "entry_session",
+        "ohlc": [
+          157300.0,
+          164000.0,
+          155800.0,
+          163600.0
+        ],
+        "stored": 157378.65,
+        "stored_side": "inside",
+        "model_price": 157378.65,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-07-18",
+        "session_role": "exit_session",
+        "ohlc": [
+          152700.0,
+          153200.0,
+          146000.0,
+          148900.0
+        ],
+        "stored": 147433.2465,
+        "stored_side": "inside",
+        "model_price": 147433.2465,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/prior-071050.KS-2025-07-11.svg"
     },
@@ -1249,7 +2201,16 @@
       "period": "prior",
       "symbol": "005830.KS",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2025-08-05",
+        "fill": "2025-08-06",
+        "exit": "2025-09-03",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-08-05",
+      "fill_date": "2025-08-06",
+      "exit_date": "2025-09-03",
       "order": {
         "entry": 125500,
         "stop": 120784,
@@ -1315,6 +2276,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-08-06",
+        "session_role": "entry_session",
+        "ohlc": [
+          124300.0,
+          128500.0,
+          123300.0,
+          128200.0
+        ],
+        "stored": 124362.15,
+        "stored_side": "inside",
+        "model_price": 124362.15,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-09-03",
+        "session_role": "exit_session",
+        "ohlc": [
+          141500.0,
+          141800.0,
+          135600.0,
+          136600.0
+        ],
+        "stored": 136531.7,
+        "stored_side": "inside",
+        "model_price": 136531.7,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/prior-005830.KS-2025-08-05.svg"
     },
@@ -1326,7 +2322,16 @@
       "period": "prior",
       "symbol": "082740.KS",
       "pattern": "breakout_retest_v1",
+      "dates": {
+        "signal": "2025-08-08",
+        "fill": "2025-08-11",
+        "exit": "2025-08-29",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-08-08",
+      "fill_date": "2025-08-11",
+      "exit_date": "2025-08-29",
       "order": {
         "entry": 39900,
         "stop": 36027,
@@ -1390,6 +2395,41 @@
         "notes": []
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-08-11",
+        "session_role": "entry_session",
+        "ohlc": [
+          39900.0,
+          39900.0,
+          38300.0,
+          39050.0
+        ],
+        "stored": 39900.0,
+        "stored_side": "inside",
+        "model_price": 39900.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-08-29",
+        "session_role": "exit_session",
+        "ohlc": [
+          41250.0,
+          48600.0,
+          41100.0,
+          47500.0
+        ],
+        "stored": 48100.0,
+        "stored_side": "inside",
+        "model_price": 48100.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/prior-082740.KS-2025-08-08.svg"
     },
@@ -1401,7 +2441,16 @@
       "period": "recent",
       "symbol": "356680.KQ",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2025-10-10",
+        "fill": "2025-10-13",
+        "exit": "2025-10-14",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-10-10",
+      "fill_date": "2025-10-13",
+      "exit_date": "2025-10-14",
       "order": {
         "entry": 8200,
         "stop": 7480,
@@ -1467,6 +2516,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-10-13",
+        "session_role": "entry_session",
+        "ohlc": [
+          7900.0,
+          8170.0,
+          7880.0,
+          7980.0
+        ],
+        "stored": 7903.95,
+        "stored_side": "inside",
+        "model_price": 7903.95,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-10-14",
+        "session_role": "exit_session",
+        "ohlc": [
+          8520.0,
+          9500.0,
+          8240.0,
+          8620.0
+        ],
+        "stored": 9450.0,
+        "stored_side": "inside",
+        "model_price": 9450.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-356680.KQ-2025-10-10.svg"
     },
@@ -1479,7 +2563,16 @@
       "period": "recent",
       "symbol": "456010.KQ",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2025-10-21",
+        "fill": "2025-10-22",
+        "exit": "2025-10-28",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-10-21",
+      "fill_date": "2025-10-22",
+      "exit_date": "2025-10-28",
       "order": {
         "entry": 14800,
         "stop": 13860,
@@ -1545,6 +2638,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-10-22",
+        "session_role": "entry_session",
+        "ohlc": [
+          14620.0,
+          16080.0,
+          14140.0,
+          15290.0
+        ],
+        "stored": 14627.31,
+        "stored_side": "inside",
+        "model_price": 14627.31,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-10-28",
+        "session_role": "exit_session",
+        "ohlc": [
+          16450.0,
+          19240.0,
+          16090.0,
+          17550.0
+        ],
+        "stored": 18950.0,
+        "stored_side": "inside",
+        "model_price": 18950.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-456010.KQ-2025-10-21.svg"
     },
@@ -1552,12 +2680,22 @@
       "id": "recent-005935.KS-2025-10-27",
       "tags": [
         "gap_entry",
-        "slip_above_high"
+        "entry_above_high",
+        "model_outside_tape"
       ],
       "period": "recent",
       "symbol": "005935.KS",
       "pattern": "breakout_retest_v1",
+      "dates": {
+        "signal": "2025-10-27",
+        "fill": "2025-10-28",
+        "exit": "2025-11-05",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-10-27",
+      "fill_date": "2025-10-28",
+      "exit_date": "2025-11-05",
       "order": {
         "entry": 79800,
         "stop": 75658,
@@ -1623,8 +2761,44 @@
         ]
       },
       "worst": "assumption_dependent",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "assumption_dependent",
+        "detail": "entry matches the conservative model and that model is above_high the tape",
+        "code": "src/TradeSimulator.php:60-84",
+        "date": "2025-10-28",
+        "session_role": "entry_session",
+        "ohlc": [
+          79500.0,
+          79500.0,
+          77500.0,
+          77700.0
+        ],
+        "stored": 79539.75,
+        "stored_side": "above_high",
+        "model_price": 79539.75,
+        "model_side": "above_high",
+        "model_also_outside": true
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-11-05",
+        "session_role": "exit_session",
+        "ohlc": [
+          78200.0,
+          79600.0,
+          74300.0,
+          78000.0
+        ],
+        "stored": 75620.171,
+        "stored_side": "inside",
+        "model_price": 75620.171,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [
-        "5bp slip on the open prints above that session high; the tape never shows that price"
+        "entry matches the conservative model and that model is above_high the tape"
       ],
       "chart": "charts/recent-005935.KS-2025-10-27.svg"
     },
@@ -1636,7 +2810,16 @@
       "period": "recent",
       "symbol": "034730.KS",
       "pattern": "breakout_retest_v1",
+      "dates": {
+        "signal": "2025-10-29",
+        "fill": "2025-10-30",
+        "exit": "2025-11-05",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-10-29",
+      "fill_date": "2025-10-30",
+      "exit_date": "2025-11-05",
       "order": {
         "entry": 250000,
         "stop": 238250,
@@ -1702,6 +2885,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-10-30",
+        "session_role": "entry_session",
+        "ohlc": [
+          249500.0,
+          251500.0,
+          243000.0,
+          247500.0
+        ],
+        "stored": 249624.75,
+        "stored_side": "inside",
+        "model_price": 249624.75,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-11-05",
+        "session_role": "exit_session",
+        "ohlc": [
+          247000.0,
+          247000.0,
+          230500.0,
+          237500.0
+        ],
+        "stored": 238130.875,
+        "stored_side": "inside",
+        "model_price": 238130.875,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-034730.KS-2025-10-29.svg"
     },
@@ -1713,7 +2931,16 @@
       "period": "recent",
       "symbol": "240810.KQ",
       "pattern": "breakout_retest_v1",
+      "dates": {
+        "signal": "2025-10-29",
+        "fill": "2025-10-30",
+        "exit": "2025-11-19",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-10-29",
+      "fill_date": "2025-10-30",
+      "exit_date": "2025-11-19",
       "order": {
         "entry": 65800,
         "stop": 59291,
@@ -1779,6 +3006,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-10-30",
+        "session_role": "entry_session",
+        "ohlc": [
+          64900.0,
+          68800.0,
+          64300.0,
+          65000.0
+        ],
+        "stored": 64932.45,
+        "stored_side": "inside",
+        "model_price": 64932.45,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-11-19",
+        "session_role": "exit_session",
+        "ohlc": [
+          61000.0,
+          61800.0,
+          57700.0,
+          61100.0
+        ],
+        "stored": 59261.3545,
+        "stored_side": "inside",
+        "model_price": 59261.3545,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-240810.KQ-2025-10-29.svg"
     },
@@ -1790,7 +3052,16 @@
       "period": "recent",
       "symbol": "000500.KS",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2025-11-20",
+        "fill": "2025-11-21",
+        "exit": "2025-12-18",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-11-20",
+      "fill_date": "2025-11-21",
+      "exit_date": "2025-12-18",
       "order": {
         "entry": 39222,
         "stop": 35220,
@@ -1856,6 +3127,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-11-21",
+        "session_role": "entry_session",
+        "ohlc": [
+          36611.109375,
+          38055.5546875,
+          36388.890625,
+          37333.33203125
+        ],
+        "stored": 36629.4149296875,
+        "stored_side": "inside",
+        "model_price": 36629.4149296875,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-12-18",
+        "session_role": "exit_session",
+        "ohlc": [
+          44666.66796875,
+          46000.0,
+          44055.5546875,
+          45555.5546875
+        ],
+        "stored": 45532.77691,
+        "stored_side": "inside",
+        "model_price": 45532.77691015625,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-000500.KS-2025-11-20.svg"
     },
@@ -1867,7 +3173,16 @@
       "period": "recent",
       "symbol": "108490.KQ",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2025-11-24",
+        "fill": "2025-11-25",
+        "exit": "2025-12-04",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-11-24",
+      "fill_date": "2025-11-25",
+      "exit_date": "2025-12-04",
       "order": {
         "entry": 206500,
         "stop": 184094,
@@ -1931,18 +3246,64 @@
         "notes": []
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-11-25",
+        "session_role": "entry_session",
+        "ohlc": [
+          210000.0,
+          210500.0,
+          195000.0,
+          195000.0
+        ],
+        "stored": 206500.0,
+        "stored_side": "inside",
+        "model_price": 206500.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2025-12-04",
+        "session_role": "exit_session",
+        "ohlc": [
+          269500.0,
+          301000.0,
+          262500.0,
+          288000.0
+        ],
+        "stored": 294500.0,
+        "stored_side": "inside",
+        "model_price": 294500.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-108490.KQ-2025-11-24.svg"
     },
     {
       "id": "recent-068270.KS-2025-12-08",
       "tags": [
-        "gap_entry"
+        "gap_entry",
+        "exit_below_low",
+        "model_outside_tape"
       ],
       "period": "recent",
       "symbol": "068270.KS",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2025-12-08",
+        "fill": "2025-12-09",
+        "exit": "2025-12-26",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2025-12-08",
+      "fill_date": "2025-12-09",
+      "exit_date": "2025-12-26",
       "order": {
         "entry": 178190,
         "stop": 171459,
@@ -2007,8 +3368,46 @@
           "gap-through limit: fill is min(limit, open*(1+5bp))"
         ]
       },
-      "worst": "pass",
-      "uncertainty": [],
+      "worst": "assumption_dependent",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2025-12-09",
+        "session_role": "entry_session",
+        "ohlc": [
+          177714.28125,
+          178380.953125,
+          176571.421875,
+          178380.953125
+        ],
+        "stored": 177803.13839062498,
+        "stored_side": "inside",
+        "model_price": 177803.13839062498,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "assumption_dependent",
+        "detail": "exit matches the conservative model and that model is below_low the tape",
+        "code": "src/TradeSimulator.php:60-84",
+        "date": "2025-12-26",
+        "session_role": "exit_session",
+        "ohlc": [
+          173047.625,
+          173619.046875,
+          171428.578125,
+          171428.578125
+        ],
+        "stored": 171373.2705,
+        "stored_side": "below_low",
+        "model_price": 171373.2705,
+        "model_side": "below_low",
+        "model_also_outside": true
+      },
+      "uncertainty": [
+        "exit matches the conservative model and that model is below_low the tape"
+      ],
       "chart": "charts/recent-068270.KS-2025-12-08.svg"
     },
     {
@@ -2019,7 +3418,16 @@
       "period": "recent",
       "symbol": "319660.KQ",
       "pattern": "trend_recovery_v1",
+      "dates": {
+        "signal": "2026-01-14",
+        "fill": "2026-01-15",
+        "exit": "2026-01-20",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-01-14",
+      "fill_date": "2026-01-15",
+      "exit_date": "2026-01-20",
       "order": {
         "entry": 42700,
         "stop": 40450,
@@ -2085,18 +3493,64 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2026-01-15",
+        "session_role": "entry_session",
+        "ohlc": [
+          41850.0,
+          42600.0,
+          40600.0,
+          41250.0
+        ],
+        "stored": 41870.924999999996,
+        "stored_side": "inside",
+        "model_price": 41870.924999999996,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2026-01-20",
+        "session_role": "exit_session",
+        "ohlc": [
+          41450.0,
+          41600.0,
+          39750.0,
+          40050.0
+        ],
+        "stored": 40429.775,
+        "stored_side": "inside",
+        "model_price": 40429.775,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-319660.KQ-2026-01-14.svg"
     },
     {
       "id": "recent-036540.KQ-2026-01-26",
       "tags": [
-        "gap_entry"
+        "gap_entry",
+        "exit_below_low",
+        "model_outside_tape"
       ],
       "period": "recent",
       "symbol": "036540.KQ",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2026-01-26",
+        "fill": "2026-01-27",
+        "exit": "2026-01-29",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-01-26",
+      "fill_date": "2026-01-27",
+      "exit_date": "2026-01-29",
       "order": {
         "entry": 5480,
         "stop": 4987,
@@ -2162,8 +3616,46 @@
           "later-session open already through target; target is taken at the limit"
         ]
       },
-      "worst": "pass",
-      "uncertainty": [],
+      "worst": "assumption_dependent",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2026-01-27",
+        "session_role": "entry_session",
+        "ohlc": [
+          5450.0,
+          5880.0,
+          5400.0,
+          5810.0
+        ],
+        "stored": 5452.724999999999,
+        "stored_side": "inside",
+        "model_price": 5452.724999999999,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "assumption_dependent",
+        "detail": "exit matches the conservative model and that model is below_low the tape",
+        "code": "src/TradeSimulator.php:60-84",
+        "date": "2026-01-29",
+        "session_role": "exit_session",
+        "ohlc": [
+          7270.0,
+          7280.0,
+          6580.0,
+          6860.0
+        ],
+        "stored": 6530.0,
+        "stored_side": "below_low",
+        "model_price": 6530.0,
+        "model_side": "below_low",
+        "model_also_outside": true
+      },
+      "uncertainty": [
+        "exit matches the conservative model and that model is below_low the tape"
+      ],
       "chart": "charts/recent-036540.KQ-2026-01-26.svg"
     },
     {
@@ -2175,7 +3667,16 @@
       "period": "recent",
       "symbol": "072950.KQ",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2026-01-30",
+        "fill": "2026-02-02",
+        "exit": "2026-02-10",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-01-30",
+      "fill_date": "2026-02-02",
+      "exit_date": "2026-02-10",
       "order": {
         "entry": 5590,
         "stop": 5253,
@@ -2241,6 +3742,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2026-02-02",
+        "session_role": "entry_session",
+        "ohlc": [
+          5570.0,
+          5720.0,
+          5450.0,
+          5570.0
+        ],
+        "stored": 5572.785,
+        "stored_side": "inside",
+        "model_price": 5572.785,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2026-02-10",
+        "session_role": "exit_session",
+        "ohlc": [
+          6100.0,
+          6410.0,
+          6010.0,
+          6260.0
+        ],
+        "stored": 6380.0,
+        "stored_side": "inside",
+        "model_price": 6380.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-072950.KQ-2026-01-30.svg"
     },
@@ -2252,7 +3788,16 @@
       "period": "recent",
       "symbol": "000270.KS",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2026-02-04",
+        "fill": "2026-02-05",
+        "exit": "2026-02-25",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-02-04",
+      "fill_date": "2026-02-05",
+      "exit_date": "2026-02-25",
       "order": {
         "entry": 156800,
         "stop": 144040,
@@ -2318,6 +3863,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2026-02-05",
+        "session_role": "entry_session",
+        "ohlc": [
+          156700.0,
+          161250.0,
+          154800.0,
+          156200.0
+        ],
+        "stored": 156778.35,
+        "stored_side": "inside",
+        "model_price": 156778.35,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2026-02-25",
+        "session_role": "exit_session",
+        "ohlc": [
+          175700.0,
+          199900.0,
+          175500.0,
+          196100.0
+        ],
+        "stored": 177000.0,
+        "stored_side": "inside",
+        "model_price": 177000.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-000270.KS-2026-02-04.svg"
     },
@@ -2329,7 +3909,16 @@
       "period": "recent",
       "symbol": "071090.KS",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2026-02-09",
+        "fill": "2026-02-10",
+        "exit": "2026-03-04",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-02-09",
+      "fill_date": "2026-02-10",
+      "exit_date": "2026-03-04",
       "order": {
         "entry": 3720,
         "stop": 3437,
@@ -2395,6 +3984,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2026-02-10",
+        "session_role": "entry_session",
+        "ohlc": [
+          3715.0,
+          3785.0,
+          3695.0,
+          3775.0
+        ],
+        "stored": 3716.8574999999996,
+        "stored_side": "inside",
+        "model_price": 3716.8574999999996,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2026-03-04",
+        "session_role": "exit_session",
+        "ohlc": [
+          3510.0,
+          3540.0,
+          3125.0,
+          3165.0
+        ],
+        "stored": 3435.2815,
+        "stored_side": "inside",
+        "model_price": 3435.2815,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-071090.KS-2026-02-09.svg"
     },
@@ -2406,7 +4030,16 @@
       "period": "recent",
       "symbol": "007810.KS",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2026-02-12",
+        "fill": "2026-02-13",
+        "exit": "2026-03-04",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-02-12",
+      "fill_date": "2026-02-13",
+      "exit_date": "2026-03-04",
       "order": {
         "entry": 58300,
         "stop": 49230,
@@ -2472,6 +4105,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2026-02-13",
+        "session_role": "entry_session",
+        "ohlc": [
+          57300.0,
+          61000.0,
+          55900.0,
+          58400.0
+        ],
+        "stored": 57328.649999999994,
+        "stored_side": "inside",
+        "model_price": 57328.649999999994,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2026-03-04",
+        "session_role": "exit_session",
+        "ohlc": [
+          49400.0,
+          52300.0,
+          44800.0,
+          45100.0
+        ],
+        "stored": 49205.385,
+        "stored_side": "inside",
+        "model_price": 49205.385,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-007810.KS-2026-02-12.svg"
     },
@@ -2484,7 +4152,16 @@
       "period": "recent",
       "symbol": "108490.KQ",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2026-02-19",
+        "fill": "2026-02-20",
+        "exit": "2026-03-04",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-02-19",
+      "fill_date": "2026-02-20",
+      "exit_date": "2026-03-04",
       "order": {
         "entry": 284000,
         "stop": 257607,
@@ -2551,6 +4228,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2026-02-20",
+        "session_role": "entry_session",
+        "ohlc": [
+          283500.0,
+          285000.0,
+          277000.0,
+          279500.0
+        ],
+        "stored": 283641.75,
+        "stored_side": "inside",
+        "model_price": 283641.75,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2026-03-04",
+        "session_role": "exit_session",
+        "ohlc": [
+          240000.0,
+          249000.0,
+          201000.0,
+          207500.0
+        ],
+        "stored": 239880.0,
+        "stored_side": "inside",
+        "model_price": 239880.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-108490.KQ-2026-02-19.svg"
     },
@@ -2562,7 +4274,16 @@
       "period": "recent",
       "symbol": "000500.KS",
       "pattern": "trend_recovery_v1",
+      "dates": {
+        "signal": "2026-03-06",
+        "fill": "2026-03-09",
+        "exit": "2026-04-03",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-03-06",
+      "fill_date": "2026-03-09",
+      "exit_date": "2026-04-03",
       "order": {
         "entry": 55722,
         "stop": 48166,
@@ -2628,6 +4349,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2026-03-09",
+        "session_role": "entry_session",
+        "ohlc": [
+          50722.22265625,
+          52777.77734375,
+          50111.109375,
+          51500.0
+        ],
+        "stored": 50747.58376757812,
+        "stored_side": "inside",
+        "model_price": 50747.58376757812,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2026-04-03",
+        "session_role": "exit_session",
+        "ohlc": [
+          57777.77734375,
+          58777.77734375,
+          56055.5546875,
+          57888.890625
+        ],
+        "stored": 57859.94618,
+        "stored_side": "inside",
+        "model_price": 57859.946179687504,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-000500.KS-2026-03-06.svg"
     },
@@ -2639,7 +4395,16 @@
       "period": "recent",
       "symbol": "034730.KS",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2026-03-10",
+        "fill": "2026-03-11",
+        "exit": "2026-03-31",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-03-10",
+      "fill_date": "2026-03-11",
+      "exit_date": "2026-03-31",
       "order": {
         "entry": 351000,
         "stop": 311235,
@@ -2705,6 +4470,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2026-03-11",
+        "session_role": "entry_session",
+        "ohlc": [
+          401500.0,
+          402500.0,
+          351000.0,
+          359500.0
+        ],
+        "stored": 351000.0,
+        "stored_side": "inside",
+        "model_price": 351000.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2026-03-31",
+        "session_role": "exit_session",
+        "ohlc": [
+          308500.0,
+          320500.0,
+          298000.0,
+          301000.0
+        ],
+        "stored": 308345.75,
+        "stored_side": "inside",
+        "model_price": 308345.75,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-034730.KS-2026-03-10.svg"
     },
@@ -2716,7 +4516,16 @@
       "period": "recent",
       "symbol": "006400.KS",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2026-03-18",
+        "fill": "2026-03-19",
+        "exit": "2026-04-09",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-03-18",
+      "fill_date": "2026-03-19",
+      "exit_date": "2026-04-09",
       "order": {
         "entry": 405000,
         "stop": 369557,
@@ -2783,18 +4592,64 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2026-03-19",
+        "session_role": "entry_session",
+        "ohlc": [
+          397000.0,
+          414000.0,
+          396000.0,
+          402500.0
+        ],
+        "stored": 397198.5,
+        "stored_side": "inside",
+        "model_price": 397198.5,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2026-04-09",
+        "session_role": "exit_session",
+        "ohlc": [
+          475000.0,
+          493500.0,
+          469000.0,
+          480000.0
+        ],
+        "stored": 473500.0,
+        "stored_side": "inside",
+        "model_price": 473500.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-006400.KS-2026-03-18.svg"
     },
     {
       "id": "recent-005490.KS-2026-04-08",
       "tags": [
-        "gap_entry"
+        "gap_entry",
+        "exit_below_low",
+        "model_outside_tape"
       ],
       "period": "recent",
       "symbol": "005490.KS",
       "pattern": "trend_recovery_v1",
+      "dates": {
+        "signal": "2026-04-08",
+        "fill": "2026-04-09",
+        "exit": "2026-04-28",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-04-08",
+      "fill_date": "2026-04-09",
+      "exit_date": "2026-04-28",
       "order": {
         "entry": 362500,
         "stop": 327000,
@@ -2860,8 +4715,46 @@
           "later-session open already through target; target is taken at the limit"
         ]
       },
-      "worst": "pass",
-      "uncertainty": [],
+      "worst": "assumption_dependent",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2026-04-09",
+        "session_role": "entry_session",
+        "ohlc": [
+          360000.0,
+          370000.0,
+          357500.0,
+          367000.0
+        ],
+        "stored": 360180.0,
+        "stored_side": "inside",
+        "model_price": 360180.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "assumption_dependent",
+        "detail": "exit matches the conservative model and that model is below_low the tape",
+        "code": "src/TradeSimulator.php:60-84",
+        "date": "2026-04-28",
+        "session_role": "exit_session",
+        "ohlc": [
+          442000.0,
+          482000.0,
+          441000.0,
+          466500.0
+        ],
+        "stored": 427500.0,
+        "stored_side": "below_low",
+        "model_price": 427500.0,
+        "model_side": "below_low",
+        "model_also_outside": true
+      },
+      "uncertainty": [
+        "exit matches the conservative model and that model is below_low the tape"
+      ],
       "chart": "charts/recent-005490.KS-2026-04-08.svg"
     },
     {
@@ -2872,7 +4765,16 @@
       "period": "recent",
       "symbol": "011070.KS",
       "pattern": "breakout_retest_v1",
+      "dates": {
+        "signal": "2026-04-15",
+        "fill": "2026-04-16",
+        "exit": "2026-04-22",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-04-15",
+      "fill_date": "2026-04-16",
+      "exit_date": "2026-04-22",
       "order": {
         "entry": 383000,
         "stop": 352821,
@@ -2938,6 +4840,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2026-04-16",
+        "session_role": "entry_session",
+        "ohlc": [
+          379500.0,
+          384000.0,
+          372000.0,
+          379000.0
+        ],
+        "stored": 379689.75,
+        "stored_side": "inside",
+        "model_price": 379689.75,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2026-04-22",
+        "session_role": "exit_session",
+        "ohlc": [
+          453000.0,
+          505000.0,
+          446500.0,
+          500000.0
+        ],
+        "stored": 469500.0,
+        "stored_side": "inside",
+        "model_price": 469500.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-011070.KS-2026-04-15.svg"
     },
@@ -2950,7 +4887,16 @@
       "period": "recent",
       "symbol": "036540.KQ",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2026-05-14",
+        "fill": "2026-05-18",
+        "exit": "2026-05-22",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-05-14",
+      "fill_date": "2026-05-18",
+      "exit_date": "2026-05-22",
       "order": {
         "entry": 8280,
         "stop": 7493,
@@ -3016,6 +4962,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2026-05-18",
+        "session_role": "entry_session",
+        "ohlc": [
+          8000.0,
+          8950.0,
+          7700.0,
+          8500.0
+        ],
+        "stored": 8004.0,
+        "stored_side": "inside",
+        "model_price": 8004.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2026-05-22",
+        "session_role": "exit_session",
+        "ohlc": [
+          8920.0,
+          10960.0,
+          8760.0,
+          10250.0
+        ],
+        "stored": 10450.0,
+        "stored_side": "inside",
+        "model_price": 10450.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-036540.KQ-2026-05-14.svg"
     },
@@ -3023,12 +5004,22 @@
       "id": "recent-203650.KQ-2026-05-19",
       "tags": [
         "gap_entry",
-        "slip_above_high"
+        "entry_above_high",
+        "model_outside_tape"
       ],
       "period": "recent",
       "symbol": "203650.KQ",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2026-05-19",
+        "fill": "2026-05-20",
+        "exit": "2026-05-27",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-05-19",
+      "fill_date": "2026-05-20",
+      "exit_date": "2026-05-27",
       "order": {
         "entry": 3355,
         "stop": 2583,
@@ -3095,8 +5086,44 @@
         ]
       },
       "worst": "assumption_dependent",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "assumption_dependent",
+        "detail": "entry matches the conservative model and that model is above_high the tape",
+        "code": "src/TradeSimulator.php:60-84",
+        "date": "2026-05-20",
+        "session_role": "entry_session",
+        "ohlc": [
+          3260.0,
+          3260.0,
+          2980.0,
+          3105.0
+        ],
+        "stored": 3261.6299999999997,
+        "stored_side": "above_high",
+        "model_price": 3261.6299999999997,
+        "model_side": "above_high",
+        "model_also_outside": true
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2026-05-27",
+        "session_role": "exit_session",
+        "ohlc": [
+          4810.0,
+          4810.0,
+          3650.0,
+          3800.0
+        ],
+        "stored": 4675.0,
+        "stored_side": "inside",
+        "model_price": 4675.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [
-        "5bp slip on the open prints above that session high; the tape never shows that price"
+        "entry matches the conservative model and that model is above_high the tape"
       ],
       "chart": "charts/recent-203650.KQ-2026-05-19.svg"
     },
@@ -3104,12 +5131,23 @@
       "id": "recent-000500.KS-2026-06-01",
       "tags": [
         "gap_entry",
-        "gap_stop"
+        "gap_stop",
+        "exit_below_low",
+        "model_outside_tape"
       ],
       "period": "recent",
       "symbol": "000500.KS",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2026-06-01",
+        "fill": "2026-06-04",
+        "exit": "2026-06-08",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-06-01",
+      "fill_date": "2026-06-04",
+      "exit_date": "2026-06-08",
       "order": {
         "entry": 204444,
         "stop": 154000,
@@ -3175,8 +5213,46 @@
           "gap through stop: exit is min(stop, open)*(1-5bp)"
         ]
       },
-      "worst": "pass",
-      "uncertainty": [],
+      "worst": "assumption_dependent",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2026-06-04",
+        "session_role": "entry_session",
+        "ohlc": [
+          203333.328125,
+          203611.109375,
+          186111.109375,
+          188055.5625
+        ],
+        "stored": 203434.99478906248,
+        "stored_side": "inside",
+        "model_price": 203434.99478906248,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "assumption_dependent",
+        "detail": "exit matches the conservative model and that model is below_low the tape",
+        "code": "src/TradeSimulator.php:60-84",
+        "date": "2026-06-08",
+        "session_role": "exit_session",
+        "ohlc": [
+          145833.328125,
+          171666.671875,
+          145833.328125,
+          158888.890625
+        ],
+        "stored": 145760.411461,
+        "stored_side": "below_low",
+        "model_price": 145760.4114609375,
+        "model_side": "below_low",
+        "model_also_outside": true
+      },
+      "uncertainty": [
+        "exit matches the conservative model and that model is below_low the tape"
+      ],
       "chart": "charts/recent-000500.KS-2026-06-01.svg"
     },
     {
@@ -3188,7 +5264,16 @@
       "period": "recent",
       "symbol": "011070.KS",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2026-06-15",
+        "fill": "2026-06-17",
+        "exit": "2026-06-26",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-06-15",
+      "fill_date": "2026-06-17",
+      "exit_date": "2026-06-26",
       "order": {
         "entry": 1209000,
         "stop": 933457,
@@ -3255,6 +5340,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2026-06-17",
+        "session_role": "entry_session",
+        "ohlc": [
+          1207000.0,
+          1305000.0,
+          1202000.0,
+          1248000.0
+        ],
+        "stored": 1207603.5,
+        "stored_side": "inside",
+        "model_price": 1207603.5,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2026-06-26",
+        "session_role": "exit_session",
+        "ohlc": [
+          923000.0,
+          1005000.0,
+          901000.0,
+          931000.0
+        ],
+        "stored": 922538.5,
+        "stored_side": "inside",
+        "model_price": 922538.5,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-011070.KS-2026-06-15.svg"
     },
@@ -3266,7 +5386,16 @@
       "period": "recent",
       "symbol": "000500.KS",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2026-07-22",
+        "fill": "2026-07-23",
+        "exit": "2026-07-28",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-07-22",
+      "fill_date": "2026-07-23",
+      "exit_date": "2026-07-28",
       "order": {
         "entry": 209500,
         "stop": 163388,
@@ -3332,6 +5461,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2026-07-23",
+        "session_role": "entry_session",
+        "ohlc": [
+          201000.0,
+          221500.0,
+          196000.0,
+          217000.0
+        ],
+        "stored": 201100.5,
+        "stored_side": "inside",
+        "model_price": 201100.5,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2026-07-28",
+        "session_role": "exit_session",
+        "ohlc": [
+          174000.0,
+          174000.0,
+          149000.0,
+          151800.0
+        ],
+        "stored": 163306.306,
+        "stored_side": "inside",
+        "model_price": 163306.306,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-000500.KS-2026-07-22.svg"
     },
@@ -3339,12 +5503,22 @@
       "id": "recent-028050.KS-2026-09-03",
       "tags": [
         "gap_entry",
-        "slip_above_high"
+        "entry_above_high",
+        "model_outside_tape"
       ],
       "period": "recent",
       "symbol": "028050.KS",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2026-09-03",
+        "fill": "2026-09-04",
+        "exit": "2026-09-08",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-09-03",
+      "fill_date": "2026-09-04",
+      "exit_date": "2026-09-08",
       "order": {
         "entry": 46100,
         "stop": 42911,
@@ -3410,8 +5584,44 @@
         ]
       },
       "worst": "assumption_dependent",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "assumption_dependent",
+        "detail": "entry matches the conservative model and that model is above_high the tape",
+        "code": "src/TradeSimulator.php:60-84",
+        "date": "2026-09-04",
+        "session_role": "entry_session",
+        "ohlc": [
+          46050.0,
+          46050.0,
+          44950.0,
+          45850.0
+        ],
+        "stored": 46073.024999999994,
+        "stored_side": "above_high",
+        "model_price": 46073.024999999994,
+        "model_side": "above_high",
+        "model_also_outside": true
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2026-09-08",
+        "session_role": "exit_session",
+        "ohlc": [
+          48550.0,
+          51600.0,
+          48350.0,
+          49150.0
+        ],
+        "stored": 51400.0,
+        "stored_side": "inside",
+        "model_price": 51400.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [
-        "5bp slip on the open prints above that session high; the tape never shows that price"
+        "entry matches the conservative model and that model is above_high the tape"
       ],
       "chart": "charts/recent-028050.KS-2026-09-03.svg"
     },
@@ -3423,7 +5633,16 @@
       "period": "recent",
       "symbol": "115440.KQ",
       "pattern": "trend_recovery_v1",
+      "dates": {
+        "signal": "2026-09-09",
+        "fill": "2026-09-10",
+        "exit": "2026-09-23",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-09-09",
+      "fill_date": "2026-09-10",
+      "exit_date": "2026-09-23",
       "order": {
         "entry": 8200,
         "stop": 6830,
@@ -3487,6 +5706,41 @@
         "notes": []
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2026-09-10",
+        "session_role": "entry_session",
+        "ohlc": [
+          8370.0,
+          8370.0,
+          7760.0,
+          8020.0
+        ],
+        "stored": 8200.0,
+        "stored_side": "inside",
+        "model_price": 8200.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2026-09-23",
+        "session_role": "exit_session",
+        "ohlc": [
+          10510.0,
+          12120.0,
+          10130.0,
+          12120.0
+        ],
+        "stored": 11750.0,
+        "stored_side": "inside",
+        "model_price": 11750.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-115440.KQ-2026-09-09.svg"
     },
@@ -3498,7 +5752,16 @@
       "period": "recent",
       "symbol": "003230.KS",
       "pattern": "trend_pullback_v1",
+      "dates": {
+        "signal": "2026-09-14",
+        "fill": "2026-09-15",
+        "exit": "2026-09-23",
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-09-14",
+      "fill_date": "2026-09-15",
+      "exit_date": "2026-09-23",
       "order": {
         "entry": 1310000,
         "stop": 1221457,
@@ -3564,6 +5827,41 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2026-09-15",
+        "session_role": "entry_session",
+        "ohlc": [
+          1308000.0,
+          1315000.0,
+          1270000.0,
+          1277000.0
+        ],
+        "stored": 1308654.0,
+        "stored_side": "inside",
+        "model_price": 1308654.0,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "exit is inside the session OHLC",
+        "date": "2026-09-23",
+        "session_role": "exit_session",
+        "ohlc": [
+          1238000.0,
+          1238000.0,
+          1205000.0,
+          1215000.0
+        ],
+        "stored": 1220846.2715,
+        "stored_side": "inside",
+        "model_price": 1220846.2715,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
       "uncertainty": [],
       "chart": "charts/recent-003230.KS-2026-09-14.svg"
     },
@@ -3575,7 +5873,16 @@
       "period": "recent",
       "symbol": "092870.KQ",
       "pattern": "breakout_retest_v1",
+      "dates": {
+        "signal": "2026-10-01",
+        "fill": "2026-10-02",
+        "exit": null,
+        "cancel": null,
+        "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date"
+      },
       "signal_date": "2026-10-01",
+      "fill_date": "2026-10-02",
+      "exit_date": null,
       "order": {
         "entry": 53100,
         "stop": 45202,
@@ -3621,6 +5928,28 @@
         ]
       },
       "worst": "pass",
+      "model_match": "pass",
+      "entry_ohlc": {
+        "verdict": "pass",
+        "detail": "entry is inside the session OHLC",
+        "date": "2026-10-02",
+        "session_role": "entry_session",
+        "ohlc": [
+          53000.0,
+          54000.0,
+          50600.0,
+          52600.0
+        ],
+        "stored": 53026.5,
+        "stored_side": "inside",
+        "model_price": 53026.5,
+        "model_side": "inside",
+        "model_also_outside": false
+      },
+      "exit_ohlc": {
+        "verdict": "pass",
+        "detail": "no exit"
+      },
       "uncertainty": [],
       "chart": "charts/recent-092870.KQ-2026-10-01.svg"
     }

@@ -89,6 +89,99 @@ def verdict(kind: str, detail: str, **extra) -> dict:
     return row
 
 
+def tape_side(price: float, bar: dict) -> str:
+    if price < bar["low"] - 1e-9:
+        return "below_low"
+    if price > bar["high"] + 1e-9:
+        return "above_high"
+    return "inside"
+
+
+def stored_status_of(indep: dict) -> str:
+    return {
+        "closed": "closed",
+        "open": "open",
+        "pending": "pending",
+        "unfilled": "cancelled",
+        "cancelled_before_entry": "cancelled",
+    }[indep["status"]]
+
+
+def model_match_check(order: dict, indep: dict | None) -> dict:
+    """Stored fill/exit/cancel vs independent_path. This is what a price+pnl rewrite must fail."""
+    if indep is None:
+        return verdict("insufficient_data", "no independent path")
+    diffs = []
+    want_status = stored_status_of(indep)
+    if order["status"] != want_status:
+        diffs.append(f"status {order['status']} != {want_status}")
+    fill, exit_, cancel = order.get("fill"), order.get("exit"), order.get("cancelled")
+    if want_status in ("closed", "open"):
+        if fill is None:
+            diffs.append("missing stored fill")
+        else:
+            if fill.get("date") != indep.get("fill_date"):
+                diffs.append(f"fill date {fill.get('date')} != {indep.get('fill_date')}")
+            if indep.get("fill") is None or not near(float(fill["price"]), float(indep["fill"])):
+                diffs.append(f"fill price {fill.get('price')} != {indep.get('fill')}")
+    elif fill is not None:
+        diffs.append("stored fill on a cancel/pending order")
+    if want_status == "closed":
+        if exit_ is None:
+            diffs.append("missing stored exit")
+        else:
+            if exit_.get("date") != indep.get("exit_date"):
+                diffs.append(f"exit date {exit_.get('date')} != {indep.get('exit_date')}")
+            if indep.get("exit") is None or not near(float(exit_["price"]), float(indep["exit"])):
+                diffs.append(f"exit price {exit_.get('price')} != {indep.get('exit')}")
+            if exit_.get("reason") != indep.get("reason"):
+                diffs.append(f"exit reason {exit_.get('reason')} != {indep.get('reason')}")
+    elif exit_ is not None:
+        diffs.append("stored exit on a non-closed order")
+    if want_status == "cancelled":
+        if cancel is None:
+            diffs.append("missing stored cancel")
+        else:
+            if indep.get("cancel_date") and cancel.get("date") != indep.get("cancel_date"):
+                diffs.append(f"cancel date {cancel.get('date')} != {indep.get('cancel_date')}")
+            if cancel.get("reason") != indep.get("reason"):
+                diffs.append(f"cancel reason {cancel.get('reason')} != {indep.get('reason')}")
+    elif cancel is not None:
+        diffs.append("stored cancel on an active order")
+    if diffs:
+        return verdict("error", "; ".join(diffs), code="independent_path vs trades.json", diffs=diffs)
+    return verdict("pass", "stored date, price, reason and status match independent_path",
+                   code="docs/research/account-replay-fill-audit.py independent_path")
+
+
+def tape_range_check(label: str, stored: float | None, model: float | None, bar: dict | None, date: str | None) -> dict:
+    if stored is None:
+        return verdict("pass", f"no {label}")
+    if bar is None:
+        return verdict("insufficient_data", f"{label}-day bar missing", date=date)
+    stored_side = tape_side(stored, bar)
+    model_side = tape_side(model, bar) if model is not None else None
+    rec = {
+        "date": date, "session_role": f"{label}_session",
+        "ohlc": [bar["open"], bar["high"], bar["low"], bar["close"]],
+        "stored": stored, "stored_side": stored_side,
+        "model_price": model, "model_side": model_side,
+        "model_also_outside": model_side not in (None, "inside"),
+    }
+    if stored_side == "inside":
+        extra = ""
+        if rec["model_also_outside"]:
+            extra = "; conservative model price is also outside the tape (stored print stayed inside)"
+        return verdict("pass", f"{label} is inside the session OHLC" + extra, **rec)
+    if model is not None and near(stored, model) and rec["model_also_outside"]:
+        return verdict(
+            "assumption_dependent",
+            f"{label} matches the conservative model and that model is {model_side} the tape",
+            code="src/TradeSimulator.php:60-84", **rec,
+        )
+    return verdict("error", f"{label} is {stored_side} the tape and is not the model price", **rec)
+
+
 def independent_path(order: dict, after: list[dict]) -> dict:
     """Apply the documented fill rules to the bars after the signal close.
 
@@ -107,7 +200,11 @@ def independent_path(order: dict, after: list[dict]) -> dict:
     for i, bar in enumerate(after):
         if filled_i is None:
             if i >= TTL:
-                return {"status": "unfilled", "reason": "unfilled", "bars_seen": i, "notes": notes}
+                # TradeSimulator returns unfilled once count>=TTL, i.e. on the 3rd
+                # post-signal session. PaperPortfolio emits that session as cancel_date.
+                # Extra later bars must not shift the date (the 4th bar is not the cancel).
+                return {"status": "unfilled", "reason": "unfilled", "cancel_date": after[TTL - 1]["date"],
+                        "bars_seen": TTL, "notes": notes}
             pre_gap = bar["open"] <= stop or bar["open"] >= target or bar["high"] >= target
             if pre_gap:
                 amb = bar["high"] >= target and bar["low"] <= entry
@@ -156,7 +253,8 @@ def independent_path(order: dict, after: list[dict]) -> dict:
             "held": len(after) - filled_i, "notes": notes,
         }
     if len(after) >= TTL:
-        return {"status": "unfilled", "reason": "unfilled", "bars_seen": len(after), "notes": notes}
+        return {"status": "unfilled", "reason": "unfilled", "cancel_date": after[TTL - 1]["date"],
+                "bars_seen": len(after), "notes": notes}
     return {"status": "pending", "bars_seen": len(after), "notes": notes}
 
 
@@ -166,8 +264,8 @@ def check_order(period: str, last_day: str, order: dict, bars: list[dict] | None
     checks = {}
     if bars is None:
         missing = f"{DATASETS[period] / 'bars' / (symbol + '.json')}"
-        for key in ("lookahead", "chronology", "first_fillable", "limit_price", "ttl",
-                    "entry_ohlc", "gap_prices", "same_day_exit", "same_bar_priority", "fees", "leftover"):
+        for key in ("lookahead", "model_match", "entry_ohlc", "exit_ohlc", "chronology", "first_fillable",
+                    "limit_price", "ttl", "gap_prices", "same_day_exit", "same_bar_priority", "fees", "leftover"):
             checks[key] = verdict("insufficient_data", "bars file missing", file=missing)
         return {
             "period": period, "symbol": symbol, "signal_date": signal, "status": order["status"],
@@ -181,23 +279,28 @@ def check_order(period: str, last_day: str, order: dict, bars: list[dict] | None
     before = [b for b in bars if b["date"] <= signal]
     indep = independent_path(order, after) if signal_bar else None
 
-    # 1. Lookahead: signal uses bars with available_at <= signal close. Fill window is strictly later.
+    # 1. Date partition only. This is not a replay of ChartPlanEngine inputs.
     if signal_bar is None:
         checks["lookahead"] = verdict("insufficient_data", "no completed signal-day bar", file=bars_path)
     else:
         leak = [b["date"] for b in after if b["available_at"] <= signal_bar["available_at"]]
         checks["lookahead"] = verdict(
             "error" if leak else "pass",
-            "signal window is bars with date<=signal; fill window is date>signal",
-            code="bin/paper/AccountReplay.php:214-222 (past rows available_at<=session); src/TradeSimulator.php:36",
+            "date split only: bars with date<=signal vs date>signal. ChartPlanEngine was not run and its input array was not rebuilt",
+            code="bin/paper/AccountReplay.php:214-222 filters available_at<=session; this check only compares dates",
             signal_bars=len(before), fill_window=len(after), leaked_dates=leak,
-            scope="Confirms the bar set, not that ChartPlanEngine levels only used that set",
+            scope="date_partition_only",
         )
 
     fill = order.get("fill")
     exit_ = order.get("exit")
     cancel = order.get("cancelled")
     status = order["status"]
+    checks["model_match"] = model_match_check(order, indep)
+    checks["entry_ohlc"] = tape_range_check("entry", float(fill["price"]) if fill else None, (indep or {}).get("fill"),
+                                            by_day.get(fill["date"]) if fill else None, fill["date"] if fill else None)
+    checks["exit_ohlc"] = tape_range_check("exit", float(exit_["price"]) if exit_ else None, (indep or {}).get("exit"),
+                                           by_day.get(exit_["date"]) if exit_ else None, exit_["date"] if exit_ else None)
 
     # 2. Chronology
     dates = [signal]
@@ -271,31 +374,6 @@ def check_order(period: str, last_day: str, order: dict, bars: list[dict] | None
         else:
             checks["ttl"] = verdict("pass", "TTL is 3 completed sessions after the signal",
                                     code="src/TradeSimulator.php:43-49; plan order_valid_bars default 3")
-
-    # 7. Entry inside OHLC
-    if fill:
-        fb = by_day.get(fill["date"])
-        if fb is None:
-            checks["entry_ohlc"] = verdict("insufficient_data", "fill-day bar missing", date=fill["date"])
-        elif fill["price"] < fb["low"] - 1e-6 or fill["price"] > fb["high"] + 1e-6:
-            modeled = min(float(order["entry"]), fb["open"] * (1 + SLIP))
-            if near(fill["price"], modeled) and fill["price"] > fb["high"]:
-                checks["entry_ohlc"] = verdict(
-                    "assumption_dependent",
-                    "5bp slip on the open prints above that session high; the tape never shows that price",
-                    ohlc=[fb["open"], fb["high"], fb["low"], fb["close"]], fill=fill["price"],
-                    code="src/TradeSimulator.php:61",
-                )
-            else:
-                checks["entry_ohlc"] = verdict("error", "fill price is outside the session OHLC",
-                                               ohlc=[fb["open"], fb["high"], fb["low"], fb["close"]], fill=fill["price"])
-        elif fb["low"] > float(order["entry"]) + 1e-9:
-            checks["entry_ohlc"] = verdict("error", "session never traded at or below the limit", low=fb["low"], limit=order["entry"])
-        else:
-            checks["entry_ohlc"] = verdict("pass", "limit was reachable and fill is inside the bar",
-                                           code="src/TradeSimulator.php:56-61")
-    else:
-        checks["entry_ohlc"] = verdict("pass", "no fill")
 
     # 8. Gap prices
     gap_notes = []
@@ -459,8 +537,12 @@ def check_order(period: str, last_day: str, order: dict, bars: list[dict] | None
         cases.append("same_day_exit")
     if worst == "error":
         cases.append("audit_exception")
-    if fill and by_day.get(fill["date"]) and fill["price"] > by_day[fill["date"]]["high"] + 1e-6:
-        cases.append("slip_above_high")
+    if checks["entry_ohlc"].get("stored_side") == "above_high":
+        cases.append("entry_above_high")
+    if checks["exit_ohlc"].get("stored_side") == "below_low":
+        cases.append("exit_below_low")
+    if checks["entry_ohlc"].get("model_also_outside") or checks["exit_ohlc"].get("model_also_outside"):
+        cases.append("model_outside_tape")
 
     return {
         "period": period, "symbol": symbol, "signal_date": signal, "status": status,
@@ -616,7 +698,16 @@ def main() -> None:
             "period": r["period"],
             "symbol": r["symbol"],
             "pattern": r["pattern"],
+            "dates": {
+                "signal": r["signal_date"],
+                "fill": (r.get("fill") or {}).get("date"),
+                "exit": (r.get("exit") or {}).get("date"),
+                "cancel": (r.get("cancelled") or {}).get("date"),
+                "note": "signal is the close of the signal session; fill/exit/cancel are later session dates, not the signal date",
+            },
             "signal_date": r["signal_date"],
+            "fill_date": (r.get("fill") or {}).get("date"),
+            "exit_date": (r.get("exit") or {}).get("date"),
             "order": {"entry": r["entry"], "stop": r["stop"], "target": r["target"], "quantity": r["quantity"]},
             "fill": r["fill"],
             "exit": r["exit"],
@@ -627,6 +718,9 @@ def main() -> None:
             "exit_bar": r.get("exit_bar"),
             "independent": r.get("independent"),
             "worst": r["worst"],
+            "model_match": r["checks"]["model_match"]["verdict"],
+            "entry_ohlc": r["checks"]["entry_ohlc"],
+            "exit_ohlc": r["checks"]["exit_ohlc"],
             "uncertainty": [c["detail"] for c in r["checks"].values() if c["verdict"] in ("assumption_dependent", "insufficient_data", "error")],
             "chart": chart_rel,
         })
@@ -669,7 +763,9 @@ def main() -> None:
         "orders": slim,
         "hashes": hashes,
         "rules": {
-            "lookahead": "AccountReplay.day keeps rows with available_at<=session; TradeSimulator keeps bars with available_at>signal_at",
+            "lookahead": "Date partition only (date<=signal vs date>signal). ChartPlanEngine inputs were not rebuilt.",
+            "model_match": "independent_path date/price/reason/status vs stored trades.json",
+            "tape_range": "stored and model prices vs that session's [low, high]; model-outside-tape is recorded separately",
             "order_type": "buy limit, never above entry; gap improvement open*(1+5bp) then min with limit",
             "ttl": "3 sessions",
             "hold": "20 bars including the fill bar",
@@ -683,7 +779,7 @@ def main() -> None:
     (OUT / "cases.json").write_text(json.dumps({
         "schema": 1, "kind": "historical_account_fill_cases_v1", "count": len(case_rows), "cases": case_rows,
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
-    write_report(doc, case_rows, observed, expected, count_note, worst_counts, check_counts, hashes)
+    write_report(doc, case_rows, all_rows, observed, worst_counts, check_counts)
     write_design(hashes)
     print(json.dumps({
         "orders": observed, "count_note": count_note, "order_verdicts": dict(worst_counts),
@@ -691,11 +787,14 @@ def main() -> None:
     }, ensure_ascii=False, indent=2))
 
 
-def write_report(doc, cases, observed, expected, count_note, worst_counts, check_counts, hashes) -> None:
+def write_report(doc, cases, all_rows, observed, worst_counts, check_counts) -> None:
     err_n = worst_counts.get("error", 0)
     amb_n = worst_counts.get("assumption_dependent", 0)
     miss_n = worst_counts.get("insufficient_data", 0)
     pass_n = worst_counts.get("pass", 0)
+    model_err = sum(1 for r in all_rows if r["checks"]["model_match"]["verdict"] == "error")
+    entry_out = [r for r in all_rows if r["checks"]["entry_ohlc"].get("stored_side") not in (None, "inside") and r.get("fill")]
+    exit_out = [r for r in all_rows if r["checks"]["exit_ohlc"].get("stored_side") not in (None, "inside") and r.get("exit")]
     lines = [
         "# 연구 계좌 체결 가정 검토",
         "",
@@ -704,21 +803,38 @@ def write_report(doc, cases, observed, expected, count_note, worst_counts, check
         "## 확인된 오류와 일봉으로 확정할 수 없는 가정",
         "",
     ]
-    if err_n == 0:
+    if err_n == 0 and model_err == 0:
         lines += [
-            f"**확인된 오류: {err_n}건.** 123건의 주문에서, 일봉으로 사실 관계를 가를 수 있는 항목(시각 순서, 지정가 도달, TTL, 수수료 위치, 마지막 보유)은 저장된 결과와 모순되지 않았습니다.",
+            f"**확인된 오류: {err_n}건.** 저장 결과와 독립 경로(`independent_path`)의 체결일·청산일·가격·사유·취소일·취소 사유가 123건 모두 같았습니다. 가격과 손익을 함께 바꾼 사본은 `model_match`에서 걸립니다. 기존 full-v2는 덮어쓰지 않았습니다.",
             "",
         ]
     else:
-        lines += [f"**확인된 오류: {err_n}건.** 아래 주문 표와 `orders.json`의 `worst=error`를 보세요. 기존 full-v2 결과는 덮어쓰지 않았습니다.", ""]
+        lines += [f"**확인된 오류: {err_n}건** (그중 모형 불일치 {model_err}건). `orders.json`의 `worst=error`와 `checks.model_match`를 보세요. 기존 full-v2는 덮어쓰지 않았습니다.", ""]
     lines += [
-        f"**일봉으로 확정할 수 없는 가정: 주문 {amb_n}건.** 이번 123건에서는 같은 봉 손절·목표 충돌이 없었고, 가정 의존 3건은 모두 시가×1.0005가 당일 고가를 넘는 진입입니다 (005935.KS 2025-10-27, 203650.KQ 2026-05-19, 028050.KS 2026-09-03). 검사 항목 기준으로는 가정 의존 {check_counts.get('assumption_dependent', 0)}건입니다.",
+        f"**일봉으로 확정할 수 없는 가정: 주문 {amb_n}건.** 모형과 저장 값은 같으나 그 가격이 당일 [저가, 고가] 밖입니다. 고가 밖 진입 {len(entry_out)}건, 저가 밖 청산 {len(exit_out)}건. 운영 엔진을 바꿔 이 가격을 없애지 않았습니다.",
         "",
-        "- 같은 봉에서 손절과 목표가 모두 닿으면 장중 순서를 알 수 없습니다. 코드는 손절을 쓰고 `ambiguous_bar`를 남깁니다 (`src/TradeSimulator.php` 75–78행).",
-        "- 갭으로 지정가보다 유리하게 열리면 체결가는 `open × (1+5bp)`와 지정가의 최솟값입니다. 5bp는 모형이며 호가 창에 없습니다. 시가가 그날 고가면 이 값이 고가를 넘을 수 있습니다.",
-        "- 손절 갭은 `min(stop, open) × (1−5bp)`입니다. 목표 갭(다음 세션 시가가 목표 이상)은 목표 지정가로 나갑니다. 목표 쪽에는 슬리피지를 넣지 않습니다.",
-        "- 수수료 10bp는 현금 출납에만 붙고, 슬리피지 5bp는 가격 안에만 있습니다. 같은 항목을 두 번 빼지 않습니다.",
-        "- 데이터셋 가격 기준은 `yahoo_chart_quote_ohlcv_daily_adjustment_unverified`입니다. 수정주가 여부는 이 검사에서 단정하지 않습니다.",
+        "아래 날짜는 **청산일 또는 체결일**입니다. 신호일이 아닙니다.",
+        "",
+    ]
+    if entry_out:
+        lines.append("고가 밖 진입 (체결일):")
+        for r in entry_out:
+            e = r["checks"]["entry_ohlc"]
+            lines.append(f"- {r['period']} `{r['symbol']}` 체결일 {r['fill']['date']} (신호일 {r['signal_date']}): 저장 {e['stored']}, 당일 H {e['ohlc'][1]}, 모형도 범위 밖={e.get('model_also_outside')}")
+        lines.append("")
+    if exit_out:
+        lines.append("저가 밖 청산 (청산일):")
+        for r in exit_out:
+            e = r["checks"]["exit_ohlc"]
+            lines.append(f"- {r['period']} `{r['symbol']}` 청산일 {r['exit']['date']} 사유 {r['exit']['reason']} (신호일 {r['signal_date']}): 저장 {e['stored']}, 당일 L {e['ohlc'][2]}, 모형도 범위 밖={e.get('model_also_outside')}")
+        lines.append("")
+    lines += [
+        "- 손절·시간 청산의 5bp 슬리피지는 시가 또는 종가보다 낮아질 수 있고, 그 값이 당일 저가보다 낮을 수 있습니다.",
+        "- 목표가 갭(다음 세션 시가≥목표)은 목표 지정가로 나가므로 당일 저가보다 낮을 수 있습니다.",
+        "- 시가×1.0005 진입은 당일 고가보다 높을 수 있습니다.",
+        "- 같은 봉 손절·목표 순서는 일봉으로 확정하지 않습니다.",
+        "- 미래봉 항목은 날짜를 신호일 이전/이후로 나눈 확인입니다. ChartPlanEngine 입력 배열을 재구성하지 않았습니다.",
+        "- 데이터셋 가격 기준은 `yahoo_chart_quote_ohlcv_daily_adjustment_unverified`입니다.",
         f"- 자료 부족: 주문 {miss_n}건, 검사 항목 {check_counts.get('insufficient_data', 0)}건.",
         "",
         f"주문별 최악 판정: 통과 {pass_n}, 오류 {err_n}, 가정 의존 {amb_n}, 자료 부족 {miss_n}. 검사 항목 합계 {sum(check_counts.values())} (통과 {check_counts.get('pass', 0)} / 오류 {check_counts.get('error', 0)} / 가정 의존 {check_counts.get('assumption_dependent', 0)} / 자료 부족 {check_counts.get('insufficient_data', 0)}).",
@@ -733,33 +849,41 @@ def write_report(doc, cases, observed, expected, count_note, worst_counts, check
         "",
         "| 항목 | 코드 | 독립 확인 | 범위 |",
         "|---|---|---|---|",
-        "| 신호에 미래 봉 | `AccountReplay.php` 214–222행: `available_at<=session`만 계획에 씀. `TradeSimulator.php` 36행: 체결은 `available_at>signal_at` | 신호일 봉 존재, 체결·청산일이 신호일 이후 | 봉 집합만. 패턴 숫자가 그 봉만으로 나왔는지는 ChartPlanEngine에 맡기며 여기서 재계산하지 않음 |",
-        "| 날짜 순서·최초 체결 | 시뮬레이터는 신호 다음 세션부터 TTL 3 | 지정가에 닿는 첫 세션과 저장된 체결일 | 일봉 low≤지정가면 그 세션은 체결 가능 |",
-        "| 주문 유형 | 매수 지정가, 지정가 위 체결 없음 | 체결가 ≤ 지정가, OHLC 안 | 장중 어느 시각에 닿았는지는 모름 |",
-        "| 갭 | 진입 `min(limit, open×1.0005)`, 손절 `min(stop,open)×0.9995`, 이후 시가≥목표는 목표가 | 해당 시가와 저장된 가격 | 5bp는 가정 |",
-        "| 진입 당일 청산 | 체결 봉에서도 손절·목표 검사. 다만 시가≥목표이면 진입 전에 취소 | 체결일과 청산일, 그 봉의 OHLC | 같은 봉 경로 불명 |",
-        "| 같은 봉 충돌 | 이후 세션 시가≥목표면 목표, 아니면 손절 | OHLC가 둘 다 닿았는지, 저장된 사유 | 장중 순서는 가정 |",
-        "| 수수료·슬리피지 | 현금 10bp×2, 가격 안 5bp | `fee`와 `net_pnl` 재계산 | 중복 차감 여부만 |",
+        "| 기존 모형과 일치 | `independent_path` | 체결일·가격, 청산일·가격·사유, 취소일·사유 | 저장된 값이 모형과 같은지. 일봉 안에 있는지는 아님 |",
+        "| 일봉 범위 | 해당 세션 OHLC | 저장 가격과 모형 가격이 [저가, 고가] 안인지 | 모형도 범위 밖이면 `model_also_outside` |",
+        "| 신호 날짜 구분 | `AccountReplay.php` 214–222행은 종가 이하 봉만 계획에 씀 | 신호일 봉 존재, 체결·청산일이 신호일 이후 | **날짜 구분만.** 엔진 입력을 검증한 것이 아님 |",
+        "| 날짜 순서·최초 체결 | TTL 3 | 지정가에 닿는 첫 세션 | 장중 시각은 모름 |",
+        "| 주문 유형 | 매수 지정가 | 체결가 ≤ 지정가 | 지정가 위 매수는 오류 |",
+        "| 갭 | 진입 `min(limit, open×1.0005)`, 손절 `min(stop,open)×0.9995`, 이후 시가≥목표는 목표가 | 모형 가격 | 5bp와 목표 지정가는 가정 |",
+        "| 진입 당일 청산 | 체결 봉에서도 손절·목표 | 체결일과 청산일 | 같은 봉 경로 불명 |",
+        "| 같은 봉 충돌 | 이후 시가≥목표면 목표, 아니면 손절 | OHLC가 둘 다 닿았는지 | 장중 순서는 가정 |",
+        "| 수수료 | 현금 10bp×2, 슬리피지는 가격 안 | `fee`와 `net_pnl` | 중복 차감 여부 |",
         "| 마지막 보유·대기 | 강제 청산 없음 | 종료 105, 보유 5, 대기 1 | 마지막 날 이후 봉은 쓰지 않음 |",
         "",
         "## 상세 사례",
         "",
-        f"합집합 {len(cases)}건 (기간별 순이익 상위 5 + 갭 진입/손절 + 같은 봉 충돌 + 당일 청산 + 검증 예외, 중복 제거). 차트는 원본 봉입니다. 파란 구간은 신호일 종가까지, 주황 구간은 그 이후 체결입니다.",
+        f"합집합 {len(cases)}건 (기간별 순이익 상위 5 + 갭 진입/손절 + 범위 밖 체결 + 당일 청산 + 검증 예외, 중복 제거). 차트는 원본 봉입니다. 파란 구간은 신호일 종가까지, 주황 구간은 그 이후 체결입니다. 날짜 칸을 신호일·체결일·청산일(또는 취소일)로 나눠 적습니다. 신호일은 종가 판정일입니다.",
         "",
-        "| 사례 | 태그 | 신호일 | 진입/청산 | 진입가·청산가 | 봉(신호/체결/청산) | 불확실성 | 차트 |",
-        "|---|---|---|---|---|---|---|---|",
+        "| 사례 | 태그 | 신호일 | 체결일 | 청산일·취소일 | 진입가·청산가 | 모형일치 | 범위 | 차트 |",
+        "|---|---|---|---|---|---|---|---|---|",
     ]
     for c in cases:
         f = c.get("fill") or {}
         x = c.get("exit") or {}
-        sb, fb, xb = c.get("signal_bar"), c.get("fill_bar"), c.get("exit_bar")
-        def ohlc(b):
-            return "—" if not b else f"{b['date']} O{b['open']} H{b['high']} L{b['low']} C{b['close']}"
-        unc = c["uncertainty"][0] if c["uncertainty"] else "없음"
+        entry_side = (c.get("entry_ohlc") or {}).get("stored_side", "—")
+        exit_side = (c.get("exit_ohlc") or {}).get("stored_side", "—")
+        rng = f"진입 {entry_side}, 청산 {exit_side}"
+        cancel_day = (c.get("dates") or {}).get("cancel") or (c.get("cancelled") or {}).get("date")
+        if c.get("exit_date"):
+            when = c["exit_date"]
+        elif cancel_day:
+            when = f"cancelled {cancel_day}"
+        else:
+            when = c["status"]
         lines.append(
             f"| {c['period']} `{c['symbol']}` | {', '.join(c['tags'])} | {c['signal_date']} | "
-            f"{f.get('date', '—')} / {x.get('date', c['status'])} | {money(f.get('price'))} / {money(x.get('price'))} | "
-            f"{ohlc(sb)} / {ohlc(fb)} / {ohlc(xb)} | {unc} | [{c['chart']}]({c['chart']}) |"
+            f"{c.get('fill_date') or '—'} | {when} | "
+            f"{money(f.get('price'))} / {money(x.get('price'))} | {c.get('model_match')} | {rng} | [{c['chart']}]({c['chart']}) |"
         )
     lines += [
         "",
@@ -853,5 +977,149 @@ php bin/paper_account_replay.php export --period=prior --dataset-dir=DATASET_PRI
     (OUT / "experiment-design.md").write_text(text, encoding="utf-8", newline="\n")
 
 
+def _weekdays(start: str, n: int) -> list[str]:
+    d = datetime.fromisoformat(start)
+    out = []
+    while len(out) < n:
+        if d.weekday() < 5:
+            out.append(d.strftime("%Y-%m-%d"))
+        d += timedelta(days=1)
+    return out
+
+
+def fixture_time_exit() -> tuple[dict, list[dict], str]:
+    """Synthetic 032820-like time exit: 20th bar closes at 2240, model exit is 2240*0.9995."""
+    days = _weekdays("2024-10-15", 21)
+    signal, fill_day, last = days[0], days[1], days[-1]
+    bars = []
+    for i, day in enumerate(days):
+        if i == 0:
+            o, h, l, c = 2200, 2300, 2180, 2250
+        elif i == 1:
+            o, h, l, c = 2285, 2320, 2260, 2290
+        elif i == 20:
+            o, h, l, c = 2245, 2260, 2230, 2240
+        else:
+            o, h, l, c = 2260, 2300, 2220, 2270
+        bars.append({"date": day, "open": o, "high": h, "low": l, "close": c, "volume": 1, "available_at": close_ts(day)})
+    fill_px = 2285.0
+    exit_px = 2240.0 * (1 - SLIP)
+    qty = 5854
+    order = {
+        "symbol": "032820.KQ", "signal_date": signal, "pattern": "trend_pullback_v1",
+        "quantity": qty, "entry": 2285, "stop": 2118, "target": 2650,
+        "fill": {"date": fill_day, "price": fill_px, "fee": qty * fill_px * FEE},
+        "exit": {"date": last, "price": exit_px, "reason": "time",
+                 "net_pnl": qty * exit_px * (1 - FEE) - qty * fill_px * (1 + FEE), "ambiguous_bar": False},
+        "cancelled": None, "status": "closed",
+    }
+    return order, bars, last
+
+
+def fixture_stop_below_low() -> tuple[dict, list[dict], str]:
+    days = _weekdays("2025-06-09", 3)
+    signal, fill_day, exit_day = days
+    bars = [
+        {"date": signal, "open": 7400, "high": 7500, "low": 7300, "close": 7450, "volume": 1, "available_at": close_ts(signal)},
+        {"date": fill_day, "open": 7440, "high": 7500, "low": 7400, "close": 7460, "volume": 1, "available_at": close_ts(fill_day)},
+        {"date": exit_day, "open": 6680, "high": 6700, "low": 6680, "close": 6690, "volume": 1, "available_at": close_ts(exit_day)},
+    ]
+    fill_px, stop, qty = 7440.0, 6680.0, 1294
+    exit_px = stop * (1 - SLIP)
+    order = {
+        "symbol": "393210.KQ", "signal_date": signal, "pattern": "trend_recovery_v1",
+        "quantity": qty, "entry": 7440, "stop": stop, "target": 8590,
+        "fill": {"date": fill_day, "price": fill_px, "fee": qty * fill_px * FEE},
+        "exit": {"date": exit_day, "price": exit_px, "reason": "stop",
+                 "net_pnl": qty * exit_px * (1 - FEE) - qty * fill_px * (1 + FEE), "ambiguous_bar": False},
+        "cancelled": None, "status": "closed",
+    }
+    return order, bars, exit_day
+
+
+def fixture_unfilled() -> tuple[dict, list[dict], str]:
+    """TTL expiry: 3rd post-signal session is the cancel. Extra later bars must not move it."""
+    days = _weekdays("2025-05-14", 6)
+    signal, last = days[0], days[-1]
+    bars = []
+    for day in days:
+        bars.append({"date": day, "open": 570000, "high": 580000, "low": 560000, "close": 575000,
+                     "volume": 1, "available_at": close_ts(day)})
+    cancel_day = days[3]  # signal + 3 completed sessions
+    order = {
+        "symbol": "298040.KS", "signal_date": signal, "pattern": "breakout_retest_v1",
+        "quantity": 24, "entry": 556000, "stop": 516200, "target": 670000,
+        "fill": None, "exit": None,
+        "cancelled": {"date": cancel_day, "reason": "unfilled"},
+        "status": "cancelled",
+    }
+    return order, bars, last
+
+
+def run_check(order: dict, bars: list[dict], last_day: str) -> dict:
+    return check_order("prior", last_day, order, bars, "fixture")
+
+
+def tamper_cancel_caught(order: dict, bars: list[dict], last_day: str) -> dict:
+    base = run_check(order, bars, last_day)
+    if base["checks"]["model_match"]["verdict"] != "pass":
+        raise AssertionError("unfilled fixture itself must match the model")
+    if base["independent"]["cancel_date"] != order["cancelled"]["date"]:
+        raise AssertionError("TTL cancel must stay on the 3rd post-signal session")
+    out = {}
+    date_only = json.loads(json.dumps(order))
+    date_only["cancelled"]["date"] = "2025-05-20"
+    out["date"] = run_check(date_only, bars, last_day)["checks"]["model_match"]["verdict"]
+    reason_only = json.loads(json.dumps(order))
+    reason_only["cancelled"]["reason"] = "cancelled_before_entry"
+    out["reason"] = run_check(reason_only, bars, last_day)["checks"]["model_match"]["verdict"]
+    return out
+
+
+def tamper_caught(order: dict, bars: list[dict], last_day: str) -> dict:
+    """Each rewrite must make model_match fail, including price+pnl together."""
+    base = run_check(order, bars, last_day)
+    if base["checks"]["model_match"]["verdict"] != "pass":
+        raise AssertionError("fixture itself must match the model")
+    out = {}
+    price_only = json.loads(json.dumps(order))
+    price_only["exit"]["price"] = float(order["exit"]["price"]) * 1.02
+    out["price"] = run_check(price_only, bars, last_day)["checks"]["model_match"]["verdict"]
+    date_only = json.loads(json.dumps(order))
+    date_only["exit"]["date"] = "2024-11-11"
+    out["date"] = run_check(date_only, bars, last_day)["checks"]["model_match"]["verdict"]
+    reason_only = json.loads(json.dumps(order))
+    reason_only["exit"]["reason"] = "stop"
+    out["reason"] = run_check(reason_only, bars, last_day)["checks"]["model_match"]["verdict"]
+    both = json.loads(json.dumps(order))
+    both["exit"]["price"] = float(order["exit"]["price"]) * 1.02
+    both["exit"]["net_pnl"] = (order["quantity"] * both["exit"]["price"] * (1 - FEE)
+                               - order["quantity"] * order["fill"]["price"] * (1 + FEE))
+    out["price_and_pnl"] = run_check(both, bars, last_day)["checks"]["model_match"]["verdict"]
+    return out
+
+
 if __name__ == "__main__":
-    main()
+    if len(__import__("sys").argv) > 1 and __import__("sys").argv[1] == "--self-test":
+        order, bars, last = fixture_time_exit()
+        caught = tamper_caught(order, bars, last)
+        if any(v != "error" for v in caught.values()):
+            raise SystemExit("tamper was not caught: " + json.dumps(caught))
+        stop_o, stop_b, stop_last = fixture_stop_below_low()
+        stop_r = run_check(stop_o, stop_b, stop_last)
+        if stop_r["checks"]["model_match"]["verdict"] != "pass":
+            raise SystemExit("stop fixture must match the model")
+        if stop_r["checks"]["exit_ohlc"]["verdict"] != "assumption_dependent":
+            raise SystemExit("stop below low must be tape-assumption, not a model error")
+        cancel_o, cancel_b, cancel_last = fixture_unfilled()
+        cancel_caught = tamper_cancel_caught(cancel_o, cancel_b, cancel_last)
+        if any(v != "error" for v in cancel_caught.values()):
+            raise SystemExit("cancel tamper was not caught: " + json.dumps(cancel_caught))
+        print(json.dumps({
+            "tamper": caught,
+            "stop_below_low": stop_r["checks"]["exit_ohlc"]["verdict"],
+            "cancel_tamper": cancel_caught,
+        }, indent=2))
+    else:
+        main()
+

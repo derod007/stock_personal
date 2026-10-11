@@ -1,0 +1,23 @@
+{
+  "sessions": 244,
+  "first_session": "2025-10-10",
+  "last_session": "2026-10-08",
+  "equity_return_pct": 18.16889226921239,
+  "gross_open_market_value": 45998850.0,
+  "gross_unrealized_pnl": 141392.8545000106,
+  "net_unrealized_pnl_after_estimated_sell_cost": 95394.00450000726,
+  "quality_blocked_unique_symbol_days": 428,
+  "quality_reason_counts": {
+    "insufficient_history": 367,
+    "missing_session": 132,
+    "invalid_recent_ohlcv": 61
+  },
+  "ready_signal_outcomes": {
+    "order": 67,
+    "position_limit": 37,
+    "already_active": 8,
+    "data_quality": 1,
+    "cash_or_risk_or_sector_limit": 1
+  },
+  "max_close_marked_sector_share": 0.3611020849919249
+}

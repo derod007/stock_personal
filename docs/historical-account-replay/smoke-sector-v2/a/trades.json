@@ -1,0 +1,134 @@
+{
+    "trades": [
+        {
+            "symbol": "068270.KS",
+            "signal_date": "2024-10-10",
+            "pattern": "trend_recovery_v1",
+            "sector": "bio",
+            "quantity": 117,
+            "entry": 169457,
+            "stop": 166317,
+            "target": 182278,
+            "planned_risk": 416385.3729554997,
+            "reserved_cash": 19846295.468999997,
+            "fill": {
+                "date": "2024-10-11",
+                "price": 169457,
+                "fee": 19826.469
+            },
+            "exit": {
+                "date": "2024-10-17",
+                "price": 166233.8415,
+                "reason": "stop",
+                "net_pnl": -416385.3729554936,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "203650.KQ",
+            "signal_date": "2024-10-10",
+            "pattern": "trend_pullback_v1",
+            "sector": "indust",
+            "quantity": 10771,
+            "entry": 1590,
+            "stop": 1501,
+            "target": 1735,
+            "planned_risk": 999987.712864499,
+            "reserved_cash": 17143015.889999997,
+            "fill": {
+                "date": "2024-10-11",
+                "price": 1590,
+                "fee": 17125.89
+            },
+            "exit": {
+                "date": "2024-11-04",
+                "price": 1735,
+                "reason": "target",
+                "net_pnl": 1525981.4250000045,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "032820.KQ",
+            "signal_date": "2024-10-15",
+            "pattern": "trend_pullback_v1",
+            "sector": "auto",
+            "quantity": 5854,
+            "entry": 2285,
+            "stop": 2118,
+            "target": 2650,
+            "planned_risk": 1009586.348613999,
+            "reserved_cash": 13389766.389999999,
+            "fill": {
+                "date": "2024-10-16",
+                "price": 2285,
+                "fee": 13376.39
+            },
+            "exit": {
+                "date": "2024-11-12",
+                "price": 2238.88,
+                "reason": "time",
+                "net_pnl": -296469.27351999655,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "356680.KQ",
+            "signal_date": "2024-11-05",
+            "pattern": "trend_pullback_v1",
+            "sector": "soft",
+            "quantity": 1838,
+            "entry": 4970,
+            "stop": 4434,
+            "target": 5920,
+            "planned_risk": 1006523.3231539981,
+            "reserved_cash": 9143994.86,
+            "fill": {
+                "date": "2024-11-06",
+                "price": 4970,
+                "fee": 9134.86
+            },
+            "exit": {
+                "date": "2024-11-15",
+                "price": 4431.783,
+                "reason": "stop",
+                "net_pnl": -1006523.3231539987,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "086790.KS",
+            "signal_date": "2024-11-06",
+            "pattern": "trend_pullback_v1",
+            "sector": "fin",
+            "quantity": 328,
+            "entry": 61900,
+            "stop": 59044,
+            "target": 69200,
+            "planned_risk": 986111.1647839963,
+            "reserved_cash": 20323503.2,
+            "fill": {
+                "date": "2024-11-07",
+                "price": 61900,
+                "fee": 20303.2
+            },
+            "exit": {
+                "date": "2024-11-15",
+                "price": 59014.478,
+                "reason": "stop",
+                "net_pnl": -986111.1647839956,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        }
+    ]
+}

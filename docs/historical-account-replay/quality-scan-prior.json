@@ -1,0 +1,81 @@
+{
+    "dataset": "kr-saved-scan-20251008",
+    "sessions": 242,
+    "symbols": 137,
+    "symbol_sessions": 33154,
+    "blocked_symbol_sessions": 664,
+    "blocked_share": 0.02,
+    "sessions_with_a_blocked_symbol": 146,
+    "max_blocked_in_one_session": 9,
+    "by_reason": {
+        "insufficient_history": {
+            "symbol_sessions": 228,
+            "distinct_symbols": 3,
+            "distinct_sessions": 146
+        },
+        "invalid_recent_ohlcv": {
+            "symbol_sessions": 436,
+            "distinct_symbols": 7,
+            "distinct_sessions": 76
+        },
+        "missing_session": {
+            "symbol_sessions": 104,
+            "distinct_symbols": 9,
+            "distinct_sessions": 87
+        }
+    },
+    "symbols_ever_blocked": 10,
+    "most_blocked_symbols": {
+        "303810.KQ": {
+            "blocked_sessions": 146,
+            "first": "2024-10-08",
+            "last": "2025-05-15"
+        },
+        "006400.KS": {
+            "blocked_sessions": 76,
+            "first": "2024-10-14",
+            "last": "2025-02-05"
+        },
+        "457370.KQ": {
+            "blocked_sessions": 68,
+            "first": "2024-10-08",
+            "last": "2025-01-15"
+        },
+        "007660.KS": {
+            "blocked_sessions": 62,
+            "first": "2024-10-14",
+            "last": "2025-01-10"
+        },
+        "047920.KQ": {
+            "blocked_sessions": 62,
+            "first": "2024-10-14",
+            "last": "2025-01-10"
+        },
+        "086520.KQ": {
+            "blocked_sessions": 62,
+            "first": "2024-10-14",
+            "last": "2025-01-10"
+        },
+        "009830.KS": {
+            "blocked_sessions": 58,
+            "first": "2024-11-07",
+            "last": "2025-02-05"
+        },
+        "012450.KS": {
+            "blocked_sessions": 58,
+            "first": "2024-11-07",
+            "last": "2025-02-05"
+        },
+        "068270.KS": {
+            "blocked_sessions": 58,
+            "first": "2024-11-07",
+            "last": "2025-02-05"
+        },
+        "062040.KS": {
+            "blocked_sessions": 14,
+            "first": "2024-10-08",
+            "last": "2024-10-28"
+        }
+    },
+    "note": "A held position on a blocked session halts the account under the existing rule; a pending order is cancelled."
+}

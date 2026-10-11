@@ -1,0 +1,17 @@
+{
+    "account": "hist-smoke-kr-recovery-v1-20251008-sa",
+    "events": [
+        92,
+        92
+    ],
+    "normalized_sha256": [
+        "2253b12103d20065293ca296693532c1a135f3f1b4eb5dfc93bdda20c31db238",
+        "2253b12103d20065293ca296693532c1a135f3f1b4eb5dfc93bdda20c31db238"
+    ],
+    "state_hash": [
+        "de9dae5ab2f0d358c84c5667fae716917532d6a03224f4110294d2a235d6e1b4",
+        "de9dae5ab2f0d358c84c5667fae716917532d6a03224f4110294d2a235d6e1b4"
+    ],
+    "identical": true,
+    "note": "Events are compared without their wall-clock write time and hash chain; the state hash covers cash, orders, positions, marks and snapshots."
+}

@@ -1,0 +1,71 @@
+{
+    "account": "hist-smoke-kr-recovery-v1-20261009-vb",
+    "initial_cash": 100000000,
+    "cash": 64356732.109641984,
+    "reserved_cash": 0,
+    "equity": 108982619.42214198,
+    "realized_pnl": 5739495.2538410155,
+    "closed_trades": 12,
+    "wins": 4,
+    "losses": 8,
+    "open_positions": [
+        {
+            "symbol": "000500.KS",
+            "quantity": 253,
+            "entry_fill": 36629.4149296875,
+            "mark_close": 46111.109375,
+            "mark_session": 1765521000,
+            "unrealized_pnl_after_sell_cost": 2377935.3420149796,
+            "bars_held": 16
+        },
+        {
+            "symbol": "010120.KS",
+            "quantity": 109,
+            "entry_fill": 93400,
+            "mark_close": 101200,
+            "mark_session": 1765521000,
+            "unrealized_pnl_after_sell_cost": 828988.5999999996,
+            "bars_held": 11
+        },
+        {
+            "symbol": "322000.KS",
+            "quantity": 7,
+            "entry_fill": 54200,
+            "mark_close": 57500,
+            "mark_session": 1765521000,
+            "unrealized_pnl_after_sell_cost": 22318.100000000035,
+            "bars_held": 11
+        },
+        {
+            "symbol": "068270.KS",
+            "quantity": 121,
+            "entry_fill": 177803.13839062498,
+            "mark_close": 177904.765625,
+            "mark_session": 1765521000,
+            "unrealized_pnl_after_sell_cost": -30743.76102651283,
+            "bars_held": 4
+        }
+    ],
+    "pending_orders": [],
+    "unrealized_pnl_open_positions": 3198498.2809884665,
+    "max_close_drawdown": 0.053961017366967345,
+    "last_session": 1765521000,
+    "last_day": "2025-12-12",
+    "halted": false,
+    "halt_reason": null,
+    "event_counts": {
+        "account_started": 1,
+        "day_log": 46,
+        "equity": 46,
+        "exit": 12,
+        "fill": 16,
+        "order": 16
+    },
+    "research": {
+        "dataset": "kr-saved-scan-20261009",
+        "start_day": "2025-10-08",
+        "plan_source": "engine",
+        "sector_source": "explicit_map",
+        "smoke": true
+    }
+}

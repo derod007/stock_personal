@@ -1,0 +1,56 @@
+{
+    "dataset": "kr-saved-scan-20261009",
+    "sessions": 244,
+    "symbols": 143,
+    "symbol_sessions": 34892,
+    "blocked_symbol_sessions": 428,
+    "blocked_share": 0.0123,
+    "sessions_with_a_blocked_symbol": 174,
+    "max_blocked_in_one_session": 4,
+    "by_reason": {
+        "insufficient_history": {
+            "symbol_sessions": 367,
+            "distinct_symbols": 4,
+            "distinct_sessions": 114
+        },
+        "invalid_recent_ohlcv": {
+            "symbol_sessions": 61,
+            "distinct_symbols": 1,
+            "distinct_sessions": 61
+        },
+        "missing_session": {
+            "symbol_sessions": 132,
+            "distinct_symbols": 5,
+            "distinct_sessions": 56
+        }
+    },
+    "symbols_ever_blocked": 5,
+    "most_blocked_symbols": {
+        "490470.KQ": {
+            "blocked_sessions": 114,
+            "first": "2025-10-10",
+            "last": "2026-03-27"
+        },
+        "478340.KQ": {
+            "blocked_sessions": 107,
+            "first": "2025-10-10",
+            "last": "2026-03-18"
+        },
+        "486990.KQ": {
+            "blocked_sessions": 76,
+            "first": "2025-10-10",
+            "last": "2026-01-28"
+        },
+        "014950.KQ": {
+            "blocked_sessions": 70,
+            "first": "2025-10-10",
+            "last": "2026-01-20"
+        },
+        "009830.KS": {
+            "blocked_sessions": 61,
+            "first": "2026-03-27",
+            "last": "2026-06-25"
+        }
+    },
+    "note": "A held position on a blocked session halts the account under the existing rule; a pending order is cancelled."
+}

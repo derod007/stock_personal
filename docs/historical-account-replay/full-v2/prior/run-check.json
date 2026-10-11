@@ -1,0 +1,12 @@
+{
+    "account": "hist-kr-recovery-v1-20251008",
+    "processed_sessions": 242,
+    "pending_before": 242,
+    "halted": false,
+    "last_session": 1759386600,
+    "last_day": "2025-10-02",
+    "untouched": {
+        "dataset_files": true,
+        "operational_state_files": true
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "window": [
+        "2025-10-10",
+        "2025-12-12"
+    ],
+    "population_pullbacks_in_window": 25,
+    "same_signal_and_levels": 25,
+    "levels_or_pattern_differ": [],
+    "missing_from_account_signals": [],
+    "outcome_of_matched_signals": {
+        "already_active": 2,
+        "order": 12,
+        "position_limit": 11
+    },
+    "account_signals_not_in_population": {
+        "trend_pullback_repeat_or_unlisted": 0,
+        "other_patterns": 10
+    }
+}

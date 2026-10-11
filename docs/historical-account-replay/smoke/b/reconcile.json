@@ -1,0 +1,41 @@
+{
+    "pass": true,
+    "checks": {
+        "cash_positions_fees_pnl_rebuilt_from_events": {
+            "pass": true,
+            "detail": "cash, reserved cash, realised P&L, fees and equity rebuilt for 46 sessions"
+        },
+        "state_matches_rebuild": {
+            "pass": true,
+            "detail": "cash 64890674.93/64890674.93 realised 5739495.25/5739495.25 closed 12/12"
+        },
+        "open_orders_and_positions_match": {
+            "pass": true,
+            "detail": "4 open orders/positions"
+        },
+        "sessions_unique_and_logged": {
+            "pass": true,
+            "detail": "46 equity points, 46 day logs"
+        },
+        "no_duplicate_orders": {
+            "pass": true,
+            "detail": "16 orders"
+        },
+        "order_size_and_risk_within_limits": {
+            "pass": true,
+            "detail": "16 orders checked"
+        },
+        "marks_equal_dataset_closes": {
+            "pass": true,
+            "detail": "115 marks checked"
+        },
+        "orders_and_trades_equal_independent_simulator": {
+            "pass": true,
+            "detail": "16 orders re-simulated, 0 skipped (data-quality cancel or halted)"
+        },
+        "no_forced_liquidation": {
+            "pass": true,
+            "detail": "exit reasons: {\"target\":4,\"stop\":8}"
+        }
+    }
+}

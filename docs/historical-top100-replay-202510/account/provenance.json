@@ -1,0 +1,32 @@
+{
+    "schema": 1,
+    "kind": "dated_krx_amount_top100_replay_v1",
+    "label": "KRX 일별 거래대금 TOP100 연구",
+    "account": "hist-kr-dated-top100-v1-202510",
+    "period": "oct2025",
+    "depends_on_pr": 73,
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "code_sha256_lf": {
+        "bin/paper/DatedTop100Replay.php": "30ca1b9491e9450b7037e6d9a7dd98962bc23b582c024cccb4656378c711059e",
+        "bin/paper/HistoryResearch.php": "478f0f919d75dc319a76745649f51cdc3d57404f20187541f12f2108472206da",
+        "bin/paper/StrategyVersion.php": "fcdf4fdbe42edae5dd8031037a66aa966eefbc9ba9ad9d7a6b5667c96d8af858",
+        "bin/paper/ResearchCashFee.php": "1464624d46abb84893ca18be12b8eafb2c155fd6e01306e30d41adb3abe0e1de",
+        "config/paper-history-kr-dated-top100-202510.json": "ef8359bdc9f3ee772bd6f4fc3f482e34a308b5924b3e94ae3adf55d96bf225ab",
+        "config/paper-kr-recovery-v1.json": "dc092bc8e3939a5de22eb25ed79a442666928f46b30d672dd48afd0e7ecd7bb4",
+        "config/paper-strategy-files.json": "8ed84ba6ed1e2020f33d2951a7836c1db8ef4cd92457568e47e9af0daa3c8fdd"
+    },
+    "config_hash": "ab3947272edbb1d13b38f50e14b5305de30c87a594ee3750c5eeedbae0875232",
+    "candidates_sha256": "1be93ed0111ff75034a3b10c86aeddbf403f072de9736a5c1a79278022b18f93",
+    "dataset": {
+        "name": "kr-dated-amount-top100-202510",
+        "files": {
+            "dataset.json": "41d2707de4d05db00645ceb796eff026085490b9ff1193073797b15676f5e8dd",
+            "universe.json": "90c7dbd29c83795d0ce9c3a0c9723184b59b311e722775173d8d477a38a3f44c"
+        },
+        "missing": 7,
+        "hold": 28
+    },
+    "journal_sha256": "0913dcd0ca7db7f355f3d97df8c7a1de7398578d5b3f06764300473d9ddf0443",
+    "journal_normalized_sha256": "131f14c8f195a309fbf10c07dcb015058ccb7fd4a14d4fe1af2837676cd60279",
+    "note": "운영 다음 TOP100과 동일하다고 보지 않는다. 한 달 실행으로 수익성이 검증됐다고 보지 않는다."
+}

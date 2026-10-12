@@ -1,0 +1,101 @@
+{
+  "ok": true,
+  "generated_at": "2026-10-12 22:16:54",
+  "day_count": 18,
+  "union_unique_symbols": 305,
+  "name_changes_in_union": [],
+  "selected_files": [
+    {
+      "file": "20251001_top100.json",
+      "sha256": "363a08c7e25f87c3b18288fa4f64501e6a8b51c2309f198532fda349bcbad548",
+      "n": 100
+    },
+    {
+      "file": "20251002_top100.json",
+      "sha256": "08490c1e8557b34ef3f0fa504fd39c47c151f48d52da7f17dd5eb6735c1c7e0c",
+      "n": 100
+    },
+    {
+      "file": "20251010_top100.json",
+      "sha256": "10cd89b19072acbc50eb4a5207c388240da69bf18b3c5adc91439d149ad8ac83",
+      "n": 100
+    },
+    {
+      "file": "20251013_top100.json",
+      "sha256": "1f8fd3ad85455b590eae642e33aa4c16862e9ce90a69264b20929a0eb96e7260",
+      "n": 100
+    },
+    {
+      "file": "20251014_top100.json",
+      "sha256": "d6079fe3722bcf1b9955a1a26e46065f6541f0e3c39e9d6276cc6fd018cbac2f",
+      "n": 100
+    },
+    {
+      "file": "20251015_top100.json",
+      "sha256": "60a7d896ae84a83607a1e8773edea28768e930a6a0638fccbe049b689a74d1ce",
+      "n": 100
+    },
+    {
+      "file": "20251016_top100.json",
+      "sha256": "4a1a71f58584f4c20b8952be77cefb2d470d8f337d32ea51ed2d16416b99cc71",
+      "n": 100
+    },
+    {
+      "file": "20251017_top100.json",
+      "sha256": "b067895fcb817bf4d12a06096a08fccc59f29d4733009693efc500de73308470",
+      "n": 100
+    },
+    {
+      "file": "20251020_top100.json",
+      "sha256": "0c2ef9c117a29f3a26518b3312da61f77bbb9cf55611a51c908a06b1f70f84e9",
+      "n": 100
+    },
+    {
+      "file": "20251021_top100.json",
+      "sha256": "98f7a3c8c3c56ddff66b343cb78184193f14fe0f242cbaaab8ce498682bf6316",
+      "n": 100
+    },
+    {
+      "file": "20251022_top100.json",
+      "sha256": "765ee2eb6ad5ee5d17767ca5411a396396fe225e7f87f7c6be041690a86b2dc0",
+      "n": 100
+    },
+    {
+      "file": "20251023_top100.json",
+      "sha256": "70f1439101b969795be7483be3bff227e4fd776a734b241cb7a4f9200b95839b",
+      "n": 100
+    },
+    {
+      "file": "20251024_top100.json",
+      "sha256": "31e0bcc1ca4875d37d619c5453fa4eef7b15fb3a9ae2a5dc9d9b982b9ff9f39c",
+      "n": 100
+    },
+    {
+      "file": "20251027_top100.json",
+      "sha256": "e8b43f33d7ce756012def72a28bed8dd73ab41fd0b03ad657f2946fc6de7cee7",
+      "n": 100
+    },
+    {
+      "file": "20251028_top100.json",
+      "sha256": "e0a9859e287ced13727d0ac0adbeee0eb9803638df422f018666567877c55562",
+      "n": 100
+    },
+    {
+      "file": "20251029_top100.json",
+      "sha256": "a1d427e2aa4e1bd0d59506c0d71ad3fb985ec58a086328059b6718e9a4e70f90",
+      "n": 100
+    },
+    {
+      "file": "20251030_top100.json",
+      "sha256": "bf8a04430acc2a5123522b3af4a94253c61639ef080d9440947dc94be32aae32",
+      "n": 100
+    },
+    {
+      "file": "20251031_top100.json",
+      "sha256": "cd0b7e9206109d491674d9b22153c8d513f44a8e81e9154f09e0618f77655012",
+      "n": 100
+    }
+  ],
+  "raw_file_count": 36,
+  "issues": []
+}

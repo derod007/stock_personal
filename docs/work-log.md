@@ -1,3 +1,15 @@
+## 2026-10-12 22:29 · Cursor · 끝
+- 한 일: PR #73 날짜별 KRX 거래대금 TOP100을 기존 재현 도구에 연결. 별도 연구 계좌 18세션 실행. 키·원본·운영 캐시·전략·full-v2 안 건드림. 병합 없음
+- 파일: bin/paper/DatedTop100Replay.php, bin/paper_dated_top100_replay.php, tests/dated_top100_replay.php, config/paper-history-kr-dated-top100-202510.json, docs/research/dated-amount-top100-replay.py, docs/historical-top100-replay-202510/, docs/work-log.md
+- 커밋: 새 PR(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-12 22:12 · Cursor · 진행
+- 한 일: PR #73 2025-10 날짜별 KRX 거래대금 TOP100을 기존 재현 도구에 연결하고 별도 연구 계좌로 18세션만 실행. 운영·전략·full-v2·원본 보호. 병합 없음
+- 파일: 작업 중
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-12 22:03 · Cursor · 끝
 - 한 일: API 활용 승인 후 2025-10 18거래일 KOSPI·KOSDAQ 거래대금 TOP100 수집·검증. 합집합 305종목. 키·원본은 Git에 안 넣음. 운영 변경·병합 없음
 - 파일: docs/research/historical-amount-top100-pilot.py, docs/historical-top100-pilot/report.md, docs/historical-top100-pilot/evidence.json, docs/historical-top100-pilot/spot-top10.json, docs/work-log.md

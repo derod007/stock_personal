@@ -1,0 +1,2505 @@
+{
+    "schema": 1,
+    "kind": "research_sector_map_v2",
+    "assumption": "현재 네이버 모바일 업종 JSON에서 읽은 업종명을 SectorMap::bucketOf로 분류해 2025-10에 같이 적용한다. 당시 업종을 복원한 것이 아니다.",
+    "unclassified_bucket": "unclassified",
+    "unclassified_is_one_shared_bucket": true,
+    "rule": "ChartEntryLab\\SectorMap::bucketOf",
+    "source": "docs/historical-top100-replay-202510/sector-collection.json",
+    "counts": {
+        "symbols": 305,
+        "secured": 298,
+        "unconfirmed": 7
+    },
+    "bucket_counts": {
+        "auto": 38,
+        "bio": 40,
+        "consumer": 15,
+        "energy": 59,
+        "fin": 15,
+        "indust": 36,
+        "other": 11,
+        "semi": 47,
+        "soft": 34,
+        "trans": 3,
+        "unclassified": 7
+    },
+    "unconfirmed_reasons": {
+        "not_a_kr_symbol": 2,
+        "http_status": 5
+    },
+    "unconfirmed": [
+        {
+            "symbol": "0008Z0.KQ",
+            "name": "에스엔시스",
+            "reason": "not_a_kr_symbol",
+            "detail": ""
+        },
+        {
+            "symbol": "008500.KS",
+            "name": "일정실업",
+            "reason": "http_status",
+            "detail": "HTTP 409"
+        },
+        {
+            "symbol": "010620.KS",
+            "name": "HD현대미포",
+            "reason": "http_status",
+            "detail": "HTTP 409"
+        },
+        {
+            "symbol": "012510.KS",
+            "name": "더존비즈온",
+            "reason": "http_status",
+            "detail": "HTTP 409"
+        },
+        {
+            "symbol": "042670.KS",
+            "name": "HD현대인프라코어",
+            "reason": "http_status",
+            "detail": "HTTP 409"
+        },
+        {
+            "symbol": "450140.KS",
+            "name": "코오롱모빌리티그룹",
+            "reason": "http_status",
+            "detail": "HTTP 409"
+        },
+        {
+            "symbol": "45014K.KS",
+            "name": "코오롱모빌리티그룹우",
+            "reason": "not_a_kr_symbol",
+            "detail": ""
+        }
+    ],
+    "sectors": {
+        "000100.KS": "bio",
+        "000150.KS": "other",
+        "000155.KS": "other",
+        "000250.KQ": "bio",
+        "000270.KS": "auto",
+        "000660.KS": "semi",
+        "000720.KS": "indust",
+        "000810.KS": "fin",
+        "000880.KS": "other",
+        "0008Z0.KQ": "unclassified",
+        "000910.KS": "indust",
+        "000990.KS": "semi",
+        "001440.KS": "energy",
+        "001520.KS": "indust",
+        "003160.KS": "semi",
+        "003230.KS": "consumer",
+        "003280.KS": "trans",
+        "003490.KS": "auto",
+        "003530.KS": "fin",
+        "003535.KS": "fin",
+        "003670.KS": "energy",
+        "005070.KS": "energy",
+        "005290.KQ": "semi",
+        "005380.KS": "auto",
+        "005385.KS": "auto",
+        "005387.KS": "auto",
+        "005490.KS": "energy",
+        "005690.KS": "energy",
+        "005930.KS": "semi",
+        "005935.KS": "semi",
+        "005950.KS": "energy",
+        "006260.KS": "energy",
+        "006340.KS": "energy",
+        "006400.KS": "energy",
+        "006800.KS": "fin",
+        "006910.KQ": "energy",
+        "007390.KQ": "bio",
+        "007540.KS": "consumer",
+        "007660.KS": "semi",
+        "008500.KS": "unclassified",
+        "008930.KS": "bio",
+        "009150.KS": "semi",
+        "009420.KS": "bio",
+        "009520.KQ": "energy",
+        "009540.KS": "auto",
+        "009830.KS": "energy",
+        "010120.KS": "energy",
+        "010130.KS": "energy",
+        "010140.KS": "auto",
+        "010170.KQ": "soft",
+        "010580.KS": "auto",
+        "010620.KS": "unclassified",
+        "010950.KS": "energy",
+        "011070.KS": "semi",
+        "011200.KS": "trans",
+        "011500.KS": "energy",
+        "011790.KS": "energy",
+        "012330.KS": "auto",
+        "012450.KS": "auto",
+        "012510.KS": "unclassified",
+        "014280.KS": "indust",
+        "014940.KQ": "auto",
+        "014950.KQ": "bio",
+        "015760.KS": "energy",
+        "016360.KS": "fin",
+        "017510.KQ": "energy",
+        "017670.KS": "soft",
+        "017800.KS": "indust",
+        "018260.KS": "soft",
+        "019990.KQ": "indust",
+        "022100.KS": "soft",
+        "023160.KQ": "indust",
+        "025620.KS": "consumer",
+        "025980.KQ": "consumer",
+        "027050.KQ": "consumer",
+        "028050.KS": "indust",
+        "028260.KS": "other",
+        "028300.KQ": "bio",
+        "030530.KQ": "semi",
+        "032820.KQ": "auto",
+        "032830.KS": "fin",
+        "032940.KQ": "consumer",
+        "033340.KQ": "consumer",
+        "033530.KS": "auto",
+        "033780.KS": "other",
+        "034020.KS": "indust",
+        "034220.KS": "semi",
+        "034230.KS": "consumer",
+        "034730.KS": "energy",
+        "035420.KS": "soft",
+        "035510.KS": "soft",
+        "035720.KS": "soft",
+        "035900.KQ": "soft",
+        "036810.KQ": "semi",
+        "036930.KQ": "semi",
+        "039030.KQ": "semi",
+        "039490.KS": "fin",
+        "041190.KQ": "fin",
+        "042520.KQ": "bio",
+        "042600.KQ": "other",
+        "042660.KS": "auto",
+        "042670.KS": "unclassified",
+        "042700.KS": "semi",
+        "047050.KS": "other",
+        "047400.KS": "auto",
+        "047770.KQ": "consumer",
+        "047810.KS": "auto",
+        "048550.KQ": "other",
+        "049630.KQ": "semi",
+        "050890.KQ": "soft",
+        "051910.KS": "energy",
+        "051980.KQ": "soft",
+        "052400.KQ": "soft",
+        "052690.KS": "energy",
+        "054540.KQ": "auto",
+        "055550.KS": "fin",
+        "056080.KQ": "indust",
+        "058470.KQ": "semi",
+        "058610.KQ": "energy",
+        "059090.KQ": "semi",
+        "059270.KQ": "indust",
+        "060250.KQ": "soft",
+        "060370.KQ": "indust",
+        "062040.KS": "energy",
+        "062970.KQ": "soft",
+        "064260.KQ": "soft",
+        "064350.KS": "auto",
+        "064400.KS": "soft",
+        "064820.KQ": "fin",
+        "066570.KS": "consumer",
+        "066970.KS": "energy",
+        "067310.KQ": "semi",
+        "068270.KS": "bio",
+        "071050.KS": "fin",
+        "071970.KS": "auto",
+        "072470.KQ": "auto",
+        "075580.KS": "auto",
+        "075970.KQ": "energy",
+        "077360.KQ": "semi",
+        "077970.KS": "auto",
+        "078590.KQ": "auto",
+        "078600.KQ": "semi",
+        "079550.KS": "auto",
+        "080220.KQ": "semi",
+        "081000.KS": "energy",
+        "082740.KS": "auto",
+        "083650.KQ": "energy",
+        "085310.KS": "auto",
+        "086280.KS": "trans",
+        "086390.KQ": "semi",
+        "086520.KQ": "energy",
+        "086790.KS": "fin",
+        "087010.KQ": "bio",
+        "088800.KQ": "soft",
+        "089010.KQ": "semi",
+        "089030.KQ": "semi",
+        "090360.KQ": "indust",
+        "090430.KS": "consumer",
+        "090710.KQ": "indust",
+        "092460.KQ": "auto",
+        "093370.KS": "energy",
+        "095500.KQ": "semi",
+        "096770.KS": "energy",
+        "097230.KS": "indust",
+        "098070.KQ": "energy",
+        "098460.KQ": "semi",
+        "100090.KS": "energy",
+        "101170.KQ": "indust",
+        "101670.KQ": "energy",
+        "103140.KS": "energy",
+        "103590.KS": "energy",
+        "105560.KS": "fin",
+        "105840.KS": "indust",
+        "107600.KQ": "energy",
+        "107640.KQ": "energy",
+        "108490.KQ": "indust",
+        "114190.KQ": "semi",
+        "117730.KQ": "indust",
+        "119850.KQ": "energy",
+        "123690.KS": "consumer",
+        "124500.KQ": "soft",
+        "125490.KQ": "auto",
+        "126730.KQ": "energy",
+        "126880.KQ": "energy",
+        "128940.KS": "bio",
+        "131970.KQ": "semi",
+        "136150.KQ": "energy",
+        "137400.KQ": "energy",
+        "138610.KQ": "bio",
+        "141080.KQ": "bio",
+        "160190.KQ": "indust",
+        "161000.KS": "energy",
+        "161580.KQ": "semi",
+        "166090.KQ": "semi",
+        "170790.KQ": "soft",
+        "172670.KQ": "semi",
+        "181710.KS": "soft",
+        "187660.KQ": "bio",
+        "196170.KQ": "bio",
+        "199430.KQ": "indust",
+        "204620.KQ": "fin",
+        "207940.KS": "bio",
+        "214150.KQ": "bio",
+        "214450.KQ": "bio",
+        "215100.KQ": "other",
+        "218410.KQ": "soft",
+        "222800.KQ": "semi",
+        "225190.KQ": "semi",
+        "226950.KQ": "bio",
+        "229640.KS": "energy",
+        "234030.KQ": "semi",
+        "237690.KQ": "bio",
+        "240810.KQ": "semi",
+        "247540.KQ": "energy",
+        "248170.KS": "consumer",
+        "249420.KS": "bio",
+        "253590.KQ": "semi",
+        "257720.KQ": "soft",
+        "263800.KQ": "soft",
+        "267250.KS": "auto",
+        "267260.KS": "energy",
+        "267270.KS": "indust",
+        "267320.KQ": "energy",
+        "272210.KS": "auto",
+        "277810.KQ": "indust",
+        "278470.KS": "consumer",
+        "282880.KQ": "indust",
+        "287840.KQ": "bio",
+        "290650.KQ": "bio",
+        "298040.KS": "energy",
+        "298380.KQ": "bio",
+        "307950.KS": "soft",
+        "310210.KQ": "bio",
+        "316140.KS": "fin",
+        "317450.KS": "bio",
+        "317830.KQ": "indust",
+        "317870.KQ": "other",
+        "319400.KQ": "indust",
+        "319660.KQ": "semi",
+        "329180.KS": "auto",
+        "333430.KQ": "auto",
+        "336260.KS": "energy",
+        "340930.KQ": "semi",
+        "347850.KQ": "bio",
+        "348340.KQ": "indust",
+        "348370.KQ": "energy",
+        "352820.KS": "soft",
+        "353200.KS": "semi",
+        "356680.KQ": "soft",
+        "356860.KQ": "semi",
+        "356890.KQ": "soft",
+        "364950.KQ": "semi",
+        "373220.KS": "energy",
+        "376900.KQ": "bio",
+        "377300.KS": "soft",
+        "380550.KQ": "bio",
+        "381620.KQ": "indust",
+        "382900.KQ": "energy",
+        "388720.KQ": "indust",
+        "389020.KQ": "soft",
+        "393970.KQ": "energy",
+        "394800.KQ": "bio",
+        "397030.KQ": "bio",
+        "402340.KS": "semi",
+        "403870.KQ": "semi",
+        "413390.KQ": "energy",
+        "413630.KQ": "indust",
+        "419120.KQ": "soft",
+        "424870.KQ": "bio",
+        "430690.KQ": "soft",
+        "437730.KQ": "auto",
+        "439260.KS": "auto",
+        "440110.KQ": "semi",
+        "443060.KS": "auto",
+        "445180.KQ": "semi",
+        "448900.KQ": "auto",
+        "450080.KS": "energy",
+        "450140.KS": "unclassified",
+        "45014K.KS": "unclassified",
+        "450950.KQ": "bio",
+        "452190.KQ": "energy",
+        "452280.KQ": "indust",
+        "454910.KS": "indust",
+        "455180.KQ": "semi",
+        "455900.KQ": "bio",
+        "456010.KQ": "soft",
+        "456160.KQ": "bio",
+        "457190.KS": "energy",
+        "459510.KQ": "indust",
+        "460930.KQ": "auto",
+        "460940.KQ": "bio",
+        "461030.KQ": "bio",
+        "463020.KQ": "soft",
+        "466100.KQ": "indust",
+        "468530.KQ": "bio",
+        "474650.KQ": "indust",
+        "475150.KS": "energy",
+        "475400.KQ": "indust",
+        "475580.KQ": "other",
+        "476040.KQ": "bio",
+        "476060.KQ": "bio",
+        "483650.KS": "consumer",
+        "484590.KQ": "auto",
+        "488280.KQ": "soft",
+        "489790.KS": "soft"
+    },
+    "rows": {
+        "000100.KS": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "제약",
+            "industry_code": "261",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "000150.KS": {
+            "status": "secured",
+            "bucket": "other",
+            "sector_name": "복합기업",
+            "industry_code": "276",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "000155.KS": {
+            "status": "secured",
+            "bucket": "other",
+            "sector_name": "복합기업",
+            "industry_code": "276",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "000250.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "제약",
+            "industry_code": "261",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "000270.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "자동차",
+            "industry_code": "273",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "000660.KS": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "000720.KS": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "건설",
+            "industry_code": "279",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "000810.KS": {
+            "status": "secured",
+            "bucket": "fin",
+            "sector_name": "손해보험",
+            "industry_code": "315",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "000880.KS": {
+            "status": "secured",
+            "bucket": "other",
+            "sector_name": "복합기업",
+            "industry_code": "276",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "0008Z0.KQ": {
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "not_a_kr_symbol"
+        },
+        "000910.KS": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "건축자재",
+            "industry_code": "289",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "000990.KS": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "001440.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기장비",
+            "industry_code": "306",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "001520.KS": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "건축자재",
+            "industry_code": "289",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "003160.KS": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "003230.KS": {
+            "status": "secured",
+            "bucket": "consumer",
+            "sector_name": "식품",
+            "industry_code": "268",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "003280.KS": {
+            "status": "secured",
+            "bucket": "trans",
+            "sector_name": "해운사",
+            "industry_code": "323",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "003490.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "항공사",
+            "industry_code": "305",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "003530.KS": {
+            "status": "secured",
+            "bucket": "fin",
+            "sector_name": "증권",
+            "industry_code": "321",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "003535.KS": {
+            "status": "secured",
+            "bucket": "fin",
+            "sector_name": "증권",
+            "industry_code": "321",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "003670.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "화학",
+            "industry_code": "272",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "005070.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "화학",
+            "industry_code": "272",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "005290.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "005380.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "자동차",
+            "industry_code": "273",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "005385.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "자동차",
+            "industry_code": "273",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "005387.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "자동차",
+            "industry_code": "273",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "005490.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "철강",
+            "industry_code": "304",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "005690.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "화학",
+            "industry_code": "272",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "005930.KS": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "005935.KS": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "005950.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "화학",
+            "industry_code": "272",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "006260.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기장비",
+            "industry_code": "306",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "006340.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기장비",
+            "industry_code": "306",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "006400.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기제품",
+            "industry_code": "283",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "006800.KS": {
+            "status": "secured",
+            "bucket": "fin",
+            "sector_name": "증권",
+            "industry_code": "321",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "006910.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기장비",
+            "industry_code": "306",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "007390.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "생물공학",
+            "industry_code": "286",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "007540.KS": {
+            "status": "secured",
+            "bucket": "consumer",
+            "sector_name": "식품",
+            "industry_code": "268",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "007660.KS": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "008500.KS": {
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "http_status"
+        },
+        "008930.KS": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "제약",
+            "industry_code": "261",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "009150.KS": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "전자장비와기기",
+            "industry_code": "282",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "009420.KS": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "제약",
+            "industry_code": "261",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "009520.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "철강",
+            "industry_code": "304",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "009540.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "조선",
+            "industry_code": "291",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "009830.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "에너지장비및서비스",
+            "industry_code": "295",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "010120.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기장비",
+            "industry_code": "306",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "010130.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "비철금속",
+            "industry_code": "322",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "010140.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "조선",
+            "industry_code": "291",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "010170.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "통신장비",
+            "industry_code": "294",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "010580.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "자동차부품",
+            "industry_code": "270",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "010620.KS": {
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "http_status"
+        },
+        "010950.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "석유와가스",
+            "industry_code": "313",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "011070.KS": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "전자장비와기기",
+            "industry_code": "282",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "011200.KS": {
+            "status": "secured",
+            "bucket": "trans",
+            "sector_name": "해운사",
+            "industry_code": "323",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "011500.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "화학",
+            "industry_code": "272",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "011790.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "화학",
+            "industry_code": "272",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "012330.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "자동차부품",
+            "industry_code": "270",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "012450.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "우주항공과국방",
+            "industry_code": "284",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "012510.KS": {
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "http_status"
+        },
+        "014280.KS": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "건축제품",
+            "industry_code": "320",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "014940.KQ": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "조선",
+            "industry_code": "291",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "014950.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "제약",
+            "industry_code": "261",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "015760.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기유틸리티",
+            "industry_code": "325",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "016360.KS": {
+            "status": "secured",
+            "bucket": "fin",
+            "sector_name": "증권",
+            "industry_code": "321",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "017510.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기장비",
+            "industry_code": "306",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "017670.KS": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "무선통신서비스",
+            "industry_code": "333",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "017800.KS": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "018260.KS": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "IT서비스",
+            "industry_code": "267",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "019990.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "022100.KS": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "IT서비스",
+            "industry_code": "267",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "023160.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "025620.KS": {
+            "status": "secured",
+            "bucket": "consumer",
+            "sector_name": "화장품",
+            "industry_code": "266",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "025980.KQ": {
+            "status": "secured",
+            "bucket": "consumer",
+            "sector_name": "호텔,레스토랑,레저",
+            "industry_code": "317",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "027050.KQ": {
+            "status": "secured",
+            "bucket": "consumer",
+            "sector_name": "화장품",
+            "industry_code": "266",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "028050.KS": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "건설",
+            "industry_code": "279",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "028260.KS": {
+            "status": "secured",
+            "bucket": "other",
+            "sector_name": "복합기업",
+            "industry_code": "276",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "028300.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "건강관리장비와용품",
+            "industry_code": "281",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "030530.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "032820.KQ": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "우주항공과국방",
+            "industry_code": "284",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "032830.KS": {
+            "status": "secured",
+            "bucket": "fin",
+            "sector_name": "생명보험",
+            "industry_code": "330",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "032940.KQ": {
+            "status": "secured",
+            "bucket": "consumer",
+            "sector_name": "화장품",
+            "industry_code": "266",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "033340.KQ": {
+            "status": "secured",
+            "bucket": "consumer",
+            "sector_name": "섬유,의류,신발,호화품",
+            "industry_code": "274",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "033530.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "자동차부품",
+            "industry_code": "270",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "033780.KS": {
+            "status": "secured",
+            "bucket": "other",
+            "sector_name": "담배",
+            "industry_code": "275",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "034020.KS": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "034220.KS": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "디스플레이패널",
+            "industry_code": "327",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "034230.KS": {
+            "status": "secured",
+            "bucket": "consumer",
+            "sector_name": "호텔,레스토랑,레저",
+            "industry_code": "317",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "034730.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "석유와가스",
+            "industry_code": "313",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "035420.KS": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "양방향미디어와서비스",
+            "industry_code": "300",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "035510.KS": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "IT서비스",
+            "industry_code": "267",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "035720.KS": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "양방향미디어와서비스",
+            "industry_code": "300",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "035900.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "방송과엔터테인먼트",
+            "industry_code": "285",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "036810.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "036930.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "039030.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "039490.KS": {
+            "status": "secured",
+            "bucket": "fin",
+            "sector_name": "증권",
+            "industry_code": "321",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "041190.KQ": {
+            "status": "secured",
+            "bucket": "fin",
+            "sector_name": "창업투자",
+            "industry_code": "277",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "042520.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "건강관리장비와용품",
+            "industry_code": "281",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "042600.KQ": {
+            "status": "secured",
+            "bucket": "other",
+            "sector_name": "가정용기기와용품",
+            "industry_code": "298",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "042660.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "조선",
+            "industry_code": "291",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "042670.KS": {
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "http_status"
+        },
+        "042700.KS": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "047050.KS": {
+            "status": "secured",
+            "bucket": "other",
+            "sector_name": "무역회사와판매업체",
+            "industry_code": "334",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "047400.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "자동차부품",
+            "industry_code": "270",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "047770.KQ": {
+            "status": "secured",
+            "bucket": "consumer",
+            "sector_name": "섬유,의류,신발,호화품",
+            "industry_code": "274",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "047810.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "우주항공과국방",
+            "industry_code": "284",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "048550.KQ": {
+            "status": "secured",
+            "bucket": "other",
+            "sector_name": "광고",
+            "industry_code": "310",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "049630.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "핸드셋",
+            "industry_code": "292",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "050890.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "통신장비",
+            "industry_code": "294",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "051910.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "화학",
+            "industry_code": "272",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "051980.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "통신장비",
+            "industry_code": "294",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "052400.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "IT서비스",
+            "industry_code": "267",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "052690.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기유틸리티",
+            "industry_code": "325",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "054540.KQ": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "조선",
+            "industry_code": "291",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "055550.KS": {
+            "status": "secured",
+            "bucket": "fin",
+            "sector_name": "은행",
+            "industry_code": "301",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "056080.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "058470.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "058610.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기제품",
+            "industry_code": "283",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "059090.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "059270.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "060250.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "IT서비스",
+            "industry_code": "267",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "060370.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "건설",
+            "industry_code": "279",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "062040.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기장비",
+            "industry_code": "306",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "062970.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "통신장비",
+            "industry_code": "294",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "064260.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "IT서비스",
+            "industry_code": "267",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "064350.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "우주항공과국방",
+            "industry_code": "284",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "064400.KS": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "IT서비스",
+            "industry_code": "267",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "064820.KQ": {
+            "status": "secured",
+            "bucket": "fin",
+            "sector_name": "증권",
+            "industry_code": "321",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "066570.KS": {
+            "status": "secured",
+            "bucket": "consumer",
+            "sector_name": "전자제품",
+            "industry_code": "307",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "066970.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기제품",
+            "industry_code": "283",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "067310.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "068270.KS": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "제약",
+            "industry_code": "261",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "071050.KS": {
+            "status": "secured",
+            "bucket": "fin",
+            "sector_name": "증권",
+            "industry_code": "321",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "071970.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "조선",
+            "industry_code": "291",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "072470.KQ": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "자동차부품",
+            "industry_code": "270",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "075580.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "조선",
+            "industry_code": "291",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "075970.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "비철금속",
+            "industry_code": "322",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "077360.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "077970.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "조선",
+            "industry_code": "291",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "078590.KQ": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "자동차부품",
+            "industry_code": "270",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "078600.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "전자장비와기기",
+            "industry_code": "282",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "079550.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "우주항공과국방",
+            "industry_code": "284",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "080220.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "081000.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "비철금속",
+            "industry_code": "322",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "082740.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "조선",
+            "industry_code": "291",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "083650.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "에너지장비및서비스",
+            "industry_code": "295",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "085310.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "조선",
+            "industry_code": "291",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "086280.KS": {
+            "status": "secured",
+            "bucket": "trans",
+            "sector_name": "항공화물운송과물류",
+            "industry_code": "326",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "086390.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "086520.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "화학",
+            "industry_code": "272",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "086790.KS": {
+            "status": "secured",
+            "bucket": "fin",
+            "sector_name": "은행",
+            "industry_code": "301",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "087010.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "생물공학",
+            "industry_code": "286",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "088800.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "통신장비",
+            "industry_code": "294",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "089010.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "전자장비와기기",
+            "industry_code": "282",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "089030.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "090360.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "090430.KS": {
+            "status": "secured",
+            "bucket": "consumer",
+            "sector_name": "화장품",
+            "industry_code": "266",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "090710.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "092460.KQ": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "조선",
+            "industry_code": "291",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "093370.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "화학",
+            "industry_code": "272",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "095500.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "디스플레이장비및부품",
+            "industry_code": "269",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "096770.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "석유와가스",
+            "industry_code": "313",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "097230.KS": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "건설",
+            "industry_code": "279",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "098070.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "에너지장비및서비스",
+            "industry_code": "295",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "098460.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "전자장비와기기",
+            "industry_code": "282",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "100090.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "에너지장비및서비스",
+            "industry_code": "295",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "101170.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "101670.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기제품",
+            "industry_code": "283",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "103140.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "비철금속",
+            "industry_code": "322",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "103590.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기장비",
+            "industry_code": "306",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "105560.KS": {
+            "status": "secured",
+            "bucket": "fin",
+            "sector_name": "은행",
+            "industry_code": "301",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "105840.KS": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "107600.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기제품",
+            "industry_code": "283",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "107640.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기장비",
+            "industry_code": "306",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "108490.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "114190.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "전자장비와기기",
+            "industry_code": "282",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "117730.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "119850.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기장비",
+            "industry_code": "306",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "123690.KS": {
+            "status": "secured",
+            "bucket": "consumer",
+            "sector_name": "화장품",
+            "industry_code": "266",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "124500.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "IT서비스",
+            "industry_code": "267",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "125490.KQ": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "자동차부품",
+            "industry_code": "270",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "126730.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기제품",
+            "industry_code": "283",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "126880.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "석유와가스",
+            "industry_code": "313",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "128940.KS": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "제약",
+            "industry_code": "261",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "131970.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "136150.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "에너지장비및서비스",
+            "industry_code": "295",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "137400.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기제품",
+            "industry_code": "283",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "138610.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "건강관리장비와용품",
+            "industry_code": "281",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "141080.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "제약",
+            "industry_code": "261",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "160190.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "161000.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "화학",
+            "industry_code": "272",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "161580.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "전자장비와기기",
+            "industry_code": "282",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "166090.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "170790.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "통신장비",
+            "industry_code": "294",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "172670.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "181710.KS": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "IT서비스",
+            "industry_code": "267",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "187660.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "제약",
+            "industry_code": "261",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "196170.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "생물공학",
+            "industry_code": "286",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "199430.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "204620.KQ": {
+            "status": "secured",
+            "bucket": "fin",
+            "sector_name": "기타금융",
+            "industry_code": "319",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "207940.KS": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "제약",
+            "industry_code": "261",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "214150.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "건강관리장비와용품",
+            "industry_code": "281",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "214450.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "건강관리장비와용품",
+            "industry_code": "281",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "215100.KQ": {
+            "status": "secured",
+            "bucket": "other",
+            "sector_name": "교육서비스",
+            "industry_code": "290",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "218410.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "통신장비",
+            "industry_code": "294",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "222800.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "전자장비와기기",
+            "industry_code": "282",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "225190.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "전자장비와기기",
+            "industry_code": "282",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "226950.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "생명과학도구및서비스",
+            "industry_code": "262",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "229640.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기장비",
+            "industry_code": "306",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "234030.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "237690.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "제약",
+            "industry_code": "261",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "240810.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "247540.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기제품",
+            "industry_code": "283",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "248170.KS": {
+            "status": "secured",
+            "bucket": "consumer",
+            "sector_name": "식품",
+            "industry_code": "268",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "249420.KS": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "제약",
+            "industry_code": "261",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "253590.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "257720.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "인터넷과카탈로그소매",
+            "industry_code": "308",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "263800.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "IT서비스",
+            "industry_code": "267",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "267250.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "조선",
+            "industry_code": "291",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "267260.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기장비",
+            "industry_code": "306",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "267270.KS": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "267320.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기제품",
+            "industry_code": "283",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "272210.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "우주항공과국방",
+            "industry_code": "284",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "277810.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "278470.KS": {
+            "status": "secured",
+            "bucket": "consumer",
+            "sector_name": "화장품",
+            "industry_code": "266",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "282880.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "287840.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "제약",
+            "industry_code": "261",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "290650.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "건강관리장비와용품",
+            "industry_code": "281",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "298040.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기장비",
+            "industry_code": "306",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "298380.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "생물공학",
+            "industry_code": "286",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "307950.KS": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "IT서비스",
+            "industry_code": "267",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "310210.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "제약",
+            "industry_code": "261",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "316140.KS": {
+            "status": "secured",
+            "bucket": "fin",
+            "sector_name": "은행",
+            "industry_code": "301",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "317450.KS": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "제약",
+            "industry_code": "261",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "317830.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "317870.KQ": {
+            "status": "secured",
+            "bucket": "other",
+            "sector_name": "가정용기기와용품",
+            "industry_code": "298",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "319400.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "319660.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "329180.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "조선",
+            "industry_code": "291",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "333430.KQ": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "조선",
+            "industry_code": "291",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "336260.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "에너지장비및서비스",
+            "industry_code": "295",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "340930.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "전자장비와기기",
+            "industry_code": "282",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "347850.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "생물공학",
+            "industry_code": "286",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "348340.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "348370.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기제품",
+            "industry_code": "283",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "352820.KS": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "방송과엔터테인먼트",
+            "industry_code": "285",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "353200.KS": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "전자장비와기기",
+            "industry_code": "282",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "356680.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "소프트웨어",
+            "industry_code": "287",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "356860.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "356890.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "IT서비스",
+            "industry_code": "267",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "364950.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "전자장비와기기",
+            "industry_code": "282",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "373220.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기제품",
+            "industry_code": "283",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "376900.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "건강관리장비와용품",
+            "industry_code": "281",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "377300.KS": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "IT서비스",
+            "industry_code": "267",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "380550.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "건강관리기술",
+            "industry_code": "288",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "381620.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "382900.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기제품",
+            "industry_code": "283",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "388720.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "389020.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "통신장비",
+            "industry_code": "294",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "393970.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기제품",
+            "industry_code": "283",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "394800.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "건강관리기술",
+            "industry_code": "288",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "397030.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "제약",
+            "industry_code": "261",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "402340.KS": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "403870.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "413390.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기제품",
+            "industry_code": "283",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "413630.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "419120.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "소프트웨어",
+            "industry_code": "287",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "424870.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "제약",
+            "industry_code": "261",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "430690.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "소프트웨어",
+            "industry_code": "287",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "437730.KQ": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "자동차부품",
+            "industry_code": "270",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "439260.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "조선",
+            "industry_code": "291",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "440110.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "443060.KS": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "조선",
+            "industry_code": "291",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "445180.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "반도체와반도체장비",
+            "industry_code": "278",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "448900.KQ": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "자동차부품",
+            "industry_code": "270",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "450080.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기제품",
+            "industry_code": "283",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "450140.KS": {
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "http_status"
+        },
+        "45014K.KS": {
+            "status": "unconfirmed",
+            "bucket": "unclassified",
+            "reason": "not_a_kr_symbol"
+        },
+        "450950.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "건강관리장비와용품",
+            "industry_code": "281",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "452190.KQ": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "전기제품",
+            "industry_code": "283",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "452280.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "454910.KS": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "455180.KQ": {
+            "status": "secured",
+            "bucket": "semi",
+            "sector_name": "전자장비와기기",
+            "industry_code": "282",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "455900.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "건강관리장비와용품",
+            "industry_code": "281",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "456010.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "통신장비",
+            "industry_code": "294",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "456160.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "제약",
+            "industry_code": "261",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "457190.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "화학",
+            "industry_code": "272",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "459510.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "460930.KQ": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "조선",
+            "industry_code": "291",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "460940.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "건강관리장비와용품",
+            "industry_code": "281",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "461030.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "생명과학도구및서비스",
+            "industry_code": "262",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "463020.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "IT서비스",
+            "industry_code": "267",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "466100.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "468530.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "생물공학",
+            "industry_code": "286",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "474650.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "475150.KS": {
+            "status": "secured",
+            "bucket": "energy",
+            "sector_name": "에너지장비및서비스",
+            "industry_code": "295",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "475400.KQ": {
+            "status": "secured",
+            "bucket": "indust",
+            "sector_name": "기계",
+            "industry_code": "299",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "475580.KQ": {
+            "status": "secured",
+            "bucket": "other",
+            "sector_name": "교육서비스",
+            "industry_code": "290",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "476040.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "생물공학",
+            "industry_code": "286",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "476060.KQ": {
+            "status": "secured",
+            "bucket": "bio",
+            "sector_name": "제약",
+            "industry_code": "261",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "483650.KS": {
+            "status": "secured",
+            "bucket": "consumer",
+            "sector_name": "화장품",
+            "industry_code": "266",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "484590.KQ": {
+            "status": "secured",
+            "bucket": "auto",
+            "sector_name": "우주항공과국방",
+            "industry_code": "284",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "488280.KQ": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "IT서비스",
+            "industry_code": "267",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        },
+        "489790.KS": {
+            "status": "secured",
+            "bucket": "soft",
+            "sector_name": "통신장비",
+            "industry_code": "294",
+            "source": "m.stock.naver.com/api/stock/{code}/integration"
+        }
+    }
+}

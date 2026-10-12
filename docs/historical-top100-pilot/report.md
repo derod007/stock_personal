@@ -67,7 +67,11 @@
 
 - 접근 응답 코드·본문 머리·샘플 해시.  
 - 제외 규칙 픽스처.  
-- 선정 로직: KONEX 제외, 이름 제외, 대금 내림·코드 오름, 종가×거래량 미사용.
+- 선정 로직: KONEX 제외, 이름 제외, 대금 내림·코드 오름, 종가×거래량 미사용.  
+- 수집 가드: KOSPI·KOSDAQ가 모두 정상(HTTP 200, JSON, 비어 있지 않은 `OutBlock_1`, `BAS_DD`=요청일)일 때만 TOP100 저장.  
+- 한쪽 실패·날짜 불일치·손상된 캐시는 선정 차단. 실패한 날짜의 옛 선정 파일은 집계하지 않음.  
+- HTTP·JSON·권한·빈 응답을 구분. 빈 응답은 `empty_unconfirmed`이며 휴장 확정이 아님.  
+- 인증키 없으면 `skipped_no_auth_key`, 수집 미실행.
 
 못 한 일(전 종목 원본 없음):
 
@@ -76,7 +80,7 @@
 - 월 첫·중간·마지막 거래일 상위 10을 원천과 대조.  
 - 합집합 고유 종목 수 → **0** (선정 파일 없음).
 
-거래일 후보(추정, 키 확보 후 빈 응답으로 재확인): 18일.  
+거래일 후보(추정): 18일. 빈 응답만으로 휴장이라고 보지 않습니다.  
 2025-10-01, 02, 10, 13–17, 20–24, 27–31.  
 빼 둔 날: 주말, 개천절(3), 추석·대체(5–8), 한글날(9).
 
@@ -108,14 +112,20 @@ python -m unittest tests.test_historical_amount_top100_pilot
 php tests/amount_exclude.php
 ```
 
-전 종목 수집(승인된 개인 키, Git·로그에 키를 넣지 말 것):
+전 종목 수집은 **승인된 개인 키**가 있을 때만 실행됩니다. 키가 없으면 `collect_ran: false`, `collect_status: skipped_no_auth_key`입니다. 키를 Git·채팅·명령 기록에 남기지 마세요.
 
+Windows PowerShell:
+
+```powershell
+$env:KRX_AUTH_KEY = Read-Host 'KRX AUTH KEY'
+python docs\research\historical-amount-top100-pilot.py --collect
+Remove-Item Env:KRX_AUTH_KEY
 ```
-KRX_AUTH_KEY=... python docs/research/historical-amount-top100-pilot.py --collect
-```
+
+`Read-Host`로 세션에만 넣고, 호출이 끝나면 환경 변수를 지웁니다. 한 줄에 키를 붙여 넣으면 PowerShell 기록에 남을 수 있습니다.
 
 원본 위치: `data/raw/research/historical-amount-top100-202510/` (`.gitignore`의 `/data/raw/`). 운영 캐시 `data/raw/cache`는 건드리지 않습니다.
 
 ## 다음에 필요한 것
 
-KRX Data Marketplace 계정과 Open API 주식(및 가능하면 증권상품) 활용 승인. 키가 있으면 같은 도구가 일자별 원본을 받아 제외·TOP100·해시를 저장합니다. 그 다음에도 운영 다음 실시간 순위와 숫자를 한 날이라도 대조하기 전에는 **가능**으로 올리지 말아야 합니다.
+KRX Data Marketplace 계정과 Open API 주식(및 가능하면 증권상품) 활용 승인. 키가 있으면 같은 도구가 일자별 원본을 받아, **양쪽 시장이 검증된 날만** 제외·TOP100·해시를 저장합니다. 그 다음에도 운영 다음 실시간 순위와 숫자를 한 날이라도 대조하기 전에는 **가능**으로 올리지 말아야 합니다.

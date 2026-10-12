@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12 21:28:00",
+  "generated_at": "2026-10-12 21:46:40",
   "inputs": {
     "leaders_php": "C:\\Users\\acdun\\Desktop\\dev\\noramu\\src\\KrAmountLeadersClient.php",
     "leaders_php_sha256": "8de0f63934fc2e3494708cd5bd37d0b1c21a9eb8cbd9f34325be2ad8f24f26d7",
@@ -14,7 +14,9 @@
     "exclude": "KrAmountLeadersClient::excludedFromAmountRank name rule",
     "rank": "amount_won desc, code asc for ties",
     "topn": 100,
-    "listing_basis": "that day's Open API rows, not today's ticker list"
+    "listing_basis": "that day's Open API rows, not today's ticker list",
+    "select_requires": "both KOSPI and KOSDAQ validate: http 200, json, non-empty OutBlock_1, BAS_DD=request date",
+    "empty_is_not_holiday": true
   },
   "scanner": {
     "code": "src/KrAmountLeadersClient.php",
@@ -134,7 +136,8 @@
       "정보데이터시스템 getJsonData는 이 환경에서 LOGOUT/400 이었다.",
       "Open API 본호출은 인증키 없이 401 Unauthorized Key 이었다.",
       "공개 샘플 키는 본호출에서 Unauthorized API Call 이었다.",
-      "KOSPI·KOSDAQ 샘플 응답은 각 10행이며 전 종목이 아니다."
+      "KOSPI·KOSDAQ 샘플 응답은 각 10행이며 전 종목이 아니다.",
+      "인증키 없음. 수집 미실행(skipped_no_auth_key). 근사 TOP100을 만들지 않았다."
     ],
     "assumptions": [
       "2025-10 거래일 후보는 주말·공휴일을 뺀 목록이며, 키 확보 후 빈 응답으로 휴장일을 재확인해야 한다.",
@@ -170,9 +173,21 @@
         "amount_equals_close_times_volume": false
       }
     ],
-    "close_times_volume_mismatch_count": 8
+    "close_times_volume_mismatch_count": 3
   },
-  "collect": null,
+  "collect": {
+    "ran": false,
+    "status": "skipped_no_auth_key",
+    "reason": "KRX_AUTH_KEY / KRX_API_KEY 없음",
+    "requests": 0,
+    "retries": 0,
+    "errors": [],
+    "days": [],
+    "ok_dates": [],
+    "blocked_dates": [],
+    "selected_files_counted": [],
+    "stale_selected_ignored": []
+  },
   "selected_files": [],
   "union_unique_codes": 0,
   "union_codes_preview": [],
@@ -230,7 +245,8 @@
       "정보데이터시스템 getJsonData는 이 환경에서 LOGOUT/400 이었다.",
       "Open API 본호출은 인증키 없이 401 Unauthorized Key 이었다.",
       "공개 샘플 키는 본호출에서 Unauthorized API Call 이었다.",
-      "KOSPI·KOSDAQ 샘플 응답은 각 10행이며 전 종목이 아니다."
+      "KOSPI·KOSDAQ 샘플 응답은 각 10행이며 전 종목이 아니다.",
+      "인증키 없음. 수집 미실행(skipped_no_auth_key). 근사 TOP100을 만들지 않았다."
     ],
     "assumptions": [
       "2025-10 거래일 후보는 주말·공휴일을 뺀 목록이며, 키 확보 후 빈 응답으로 휴장일을 재확인해야 한다.",
@@ -247,11 +263,17 @@
     "공식 거래대금 필드(ACC_TRDVAL)와 일별 전 종목 API는 확인했다.",
     "본호출은 인증키·활용 승인이 필요하고, 정보데이터시스템 JSON은 로그인이 필요하다. 우회하지 않았다.",
     "샘플 10행으로 TOP100을 만들지 않았다.",
-    "운영 다음은 실시간 accTradePrice라, 키를 받아도 동일 TOP100이라고 단정할 수 없다."
+    "운영 다음은 실시간 accTradePrice라, 키를 받아도 동일 TOP100이라고 단정할 수 없다.",
+    "인증키가 없어 수집은 실행하지 않았다."
   ],
   "replay": {
     "probe": "python docs/research/historical-amount-top100-pilot.py --probe",
-    "collect": "KRX_AUTH_KEY=... python docs/research/historical-amount-top100-pilot.py --collect",
-    "tests": "python -m unittest tests.test_historical_amount_top100_pilot"
+    "tests": "python -m unittest tests.test_historical_amount_top100_pilot",
+    "collect_powershell": [
+      "$env:KRX_AUTH_KEY = Read-Host 'KRX AUTH KEY'",
+      "python docs\\research\\historical-amount-top100-pilot.py --collect",
+      "Remove-Item Env:KRX_AUTH_KEY"
+    ],
+    "do_not_put_key_in_git_or_logs": true
   }
 }

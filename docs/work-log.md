@@ -1,3 +1,15 @@
+## 2026-10-12 21:47 · Cursor · 끝
+- 한 일: PR #72 수집 가드. 양쪽 시장 검증 통과일만 TOP100. HTTP·JSON·권한·빈 응답 구분, 빈 응답은 휴장 아님. 재개 시 원본 해시·구조·기준일 확인. 키 없으면 skipped_no_auth_key. 전체 수집·병합·운영 변경 없음
+- 파일: docs/research/historical-amount-top100-pilot.py, tests/test_historical_amount_top100_pilot.py, docs/historical-top100-pilot/report.md, docs/historical-top100-pilot/evidence.json, docs/work-log.md
+- 커밋: PR #72에 추가(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-12 21:43 · Cursor · 진행
+- 한 일: PR #72 수집 검증 보완. 양쪽 시장 정상일만 TOP100 저장. 오류 종류 구분, 빈 응답을 휴장으로 보지 않음. 재개 시 원본 검증. 운영 변경·병합·전체 수집 없음
+- 파일: 작업 중
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-12 21:28 · Cursor · 끝
 - 한 일: 2025-10 거래대금 TOP100 복원 파일럿. 운영 스캐너 규칙 정리. KRX 전종목 JSON은 로그인 필요, Open API 본호출은 인증키 필요. 샘플 10행만 스키마 확인, 근사 TOP100 안 만듦. 계좌 재현·운영 변경·병합 안 함
 - 파일: docs/research/historical-amount-top100-pilot.py, tests/test_historical_amount_top100_pilot.py, docs/historical-top100-pilot/report.md, docs/historical-top100-pilot/evidence.json, docs/work-log.md

@@ -1,4 +1,6 @@
 import importlib.util
+import json
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -85,6 +87,148 @@ class HistoricalTop100PilotTest(unittest.TestCase):
         self.assertEqual(days[0], "20251001")
         self.assertEqual(days[-1], "20251031")
         self.assertEqual(len(days), 18)
+
+    def _row(self, day, code, name, market, amount):
+        return {
+            "BAS_DD": day,
+            "ISU_CD": code,
+            "ISU_NM": name,
+            "MKT_NM": market,
+            "ACC_TRDVAL": str(amount),
+        }
+
+    def _body(self, day, market="KOSPI"):
+        if market == "KOSPI":
+            rows = [self._row(day, "005930", "삼성전자", "KOSPI", 1000)]
+        else:
+            rows = [self._row(day, "035420", "NAVER", "KOSDAQ", 900)]
+        return json.dumps({"OutBlock_1": rows}, ensure_ascii=False).encode("utf-8")
+
+    def _collect(self, tmp, fetch, days=None):
+        root = Path(tmp)
+        return self.m.collect_month(
+            "test-key",
+            sleep_s=0,
+            days=days or ["20251002"],
+            raw_dir=root / "raw",
+            selected_dir=root / "selected",
+            fetch_market=fetch,
+        )
+
+    def test_validate_distinguishes_http_json_auth_empty_and_not_holiday(self):
+        self.assertEqual(self.m.classify_http_status(500, b"x"), "http")
+        self.assertEqual(self.m.classify_http_status(401, b"Unauthorized Key"), "auth")
+        self.assertEqual(self.m.classify_http_status(403, b""), "auth")
+        empty = self.m.validate_openapi_body(b'{"OutBlock_1":[]}', "20251002")
+        self.assertFalse(empty["ok"])
+        self.assertEqual(empty["kind"], "empty")
+        bad_json = self.m.validate_openapi_body(b"{", "20251002")
+        self.assertEqual(bad_json["kind"], "json")
+        auth_body = self.m.validate_openapi_body(
+            b'{"respCode":"401","respMsg":"Unauthorized Key"}', "20251002"
+        )
+        self.assertEqual(auth_body["kind"], "auth")
+
+    def test_one_market_http_failure_blocks_selection(self):
+        def fetch(day, market):
+            if market == "kosdaq_equity":
+                return 500, b"server error"
+            return 200, self._body(day, "KOSPI")
+        with tempfile.TemporaryDirectory() as tmp:
+            out = self._collect(tmp, fetch)
+            self.assertTrue(out["ran"])
+            self.assertEqual(out["ok_dates"], [])
+            self.assertEqual(out["days"][0]["status"], "http")
+            self.assertFalse(out["days"][0]["select"])
+            self.assertFalse((Path(tmp) / "selected" / "20251002_top100.json").exists())
+
+    def test_date_mismatch_blocks_selection(self):
+        def fetch(day, market):
+            if market == "kosdaq_equity":
+                return 200, self._body("20251001", "KOSDAQ")
+            return 200, self._body(day, "KOSPI")
+        with tempfile.TemporaryDirectory() as tmp:
+            out = self._collect(tmp, fetch)
+            self.assertEqual(out["days"][0]["status"], "date_mismatch")
+            self.assertFalse(out["days"][0]["select"])
+            self.assertEqual(out["ok_dates"], [])
+            self.assertFalse((Path(tmp) / "selected" / "20251002_top100.json").exists())
+
+    def test_corrupt_cache_blocks_selection(self):
+        def fetch(day, market):
+            if market == "kospi_equity":
+                return 200, b"not-json"
+            return 200, self._body(day, "KOSDAQ")
+        with tempfile.TemporaryDirectory() as tmp:
+            raw = Path(tmp) / "raw"
+            raw.mkdir()
+            (raw / "20251002_kospi_equity.json").write_bytes(b"<<<broken")
+            (raw / "20251002_kosdaq_equity.json").write_bytes(self._body("20251002", "KOSDAQ"))
+            out = self._collect(tmp, fetch)
+            kinds = out["days"][0]["market_kinds"]
+            self.assertEqual(kinds["kospi_equity"], "json")
+            self.assertFalse(out["days"][0]["select"])
+            self.assertEqual(out["ok_dates"], [])
+            counted, union = self.m.counted_selected_files(out, Path(tmp) / "selected")
+            self.assertEqual(counted, [])
+            self.assertEqual(union, set())
+
+    def test_stale_selected_file_not_counted_on_failed_day(self):
+        def fetch(day, market):
+            if market == "kospi_equity":
+                return 401, b'{"respMsg":"Unauthorized Key","respCode":"401"}'
+            return 200, self._body(day, "KOSDAQ")
+        with tempfile.TemporaryDirectory() as tmp:
+            selected = Path(tmp) / "selected"
+            selected.mkdir()
+            stale = selected / "20251002_top100.json"
+            stale.write_text(json.dumps({
+                "date": "20251002",
+                "top100": [{"code": "005930", "name": "삼성전자"}],
+                "eligible_count": 1,
+                "excluded_count": 0,
+            }), encoding="utf-8")
+            out = self._collect(tmp, fetch)
+            self.assertIn("20251002_top100.json", out["stale_selected_ignored"])
+            self.assertEqual(out["selected_files_counted"], [])
+            counted, union = self.m.counted_selected_files(out, selected)
+            self.assertEqual(counted, [])
+            self.assertEqual(union, set())
+
+    def test_both_markets_ok_writes_top100(self):
+        def fetch(day, market):
+            mkt = "KOSPI" if market == "kospi_equity" else "KOSDAQ"
+            return 200, self._body(day, mkt)
+        with tempfile.TemporaryDirectory() as tmp:
+            out = self._collect(tmp, fetch)
+            self.assertEqual(out["ok_dates"], ["20251002"])
+            self.assertTrue(out["days"][0]["select"])
+            path = Path(tmp) / "selected" / "20251002_top100.json"
+            self.assertTrue(path.is_file())
+            payload = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(payload["markets_validated"], ["kospi_equity", "kosdaq_equity"])
+            counted, union = self.m.counted_selected_files(out, Path(tmp) / "selected")
+            self.assertEqual(len(counted), 1)
+            self.assertEqual(union, {"005930", "035420"})
+
+    def test_both_empty_is_not_holiday(self):
+        empty = json.dumps({"OutBlock_1": []}).encode("utf-8")
+        def fetch(day, market):
+            return 200, empty
+        with tempfile.TemporaryDirectory() as tmp:
+            out = self._collect(tmp, fetch)
+            self.assertEqual(out["days"][0]["status"], "empty_unconfirmed")
+            self.assertFalse(out["days"][0]["holiday_confirmed"])
+            self.assertFalse(out["days"][0]["select"])
+
+    def test_no_auth_key_skipped_status(self):
+        skipped = self.m.skipped_collect()
+        self.assertFalse(skipped["ran"])
+        self.assertEqual(skipped["status"], "skipped_no_auth_key")
+        self.assertEqual(skipped["ok_dates"], [])
+        counted, union = self.m.counted_selected_files(skipped, Path("."))
+        self.assertEqual(counted, [])
+        self.assertEqual(union, set())
 
 
 if __name__ == "__main__":

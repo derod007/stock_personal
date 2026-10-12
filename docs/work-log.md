@@ -1,3 +1,15 @@
+## 2026-10-12 22:03 · Cursor · 끝
+- 한 일: API 활용 승인 후 2025-10 18거래일 KOSPI·KOSDAQ 거래대금 TOP100 수집·검증. 합집합 305종목. 키·원본은 Git에 안 넣음. 운영 변경·병합 없음
+- 파일: docs/research/historical-amount-top100-pilot.py, docs/historical-top100-pilot/report.md, docs/historical-top100-pilot/evidence.json, docs/historical-top100-pilot/spot-top10.json, docs/work-log.md
+- 커밋: PR #72에 추가(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-12 21:57 · Cursor · 진행
+- 한 일: API 활용 신청 후 인증키로 2025-10 거래대금 수집 재시도. 키는 Git에 안 넣음. 운영 변경·병합 없음
+- 파일: 작업 중
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-12 21:54 · Cursor · 끝
 - 한 일: 인증키를 gitignore 경로에만 저장하고 2025-10 수집 시도. 본호출 401 Unauthorized API Call이라 첫날에서 중단. TOP100 없음. 키는 Git에 안 넣음. 병합 없음
 - 파일: docs/research/historical-amount-top100-pilot.py, docs/historical-top100-pilot/report.md, docs/historical-top100-pilot/evidence.json, docs/work-log.md

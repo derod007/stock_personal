@@ -720,31 +720,89 @@ def scanner_rules() -> dict[str, Any]:
     }
 
 
-def year_estimate() -> dict[str, Any]:
+def year_estimate(
+    collect: dict[str, Any] | None = None,
+    union_n: int = 0,
+) -> dict[str, Any]:
     month_days = assumed_trading_days()
-    return {
-        "month_candidate_days": month_days,
-        "month_candidate_day_count": len(month_days),
-        "assumptions": [
+    n_month = len(month_days)
+    year_days = 247
+    measured_req = (collect or {}).get("requests")
+    measured_bytes = (collect or {}).get("bytes")
+    started = (collect or {}).get("started")
+    finished = (collect or {}).get("finished")
+    measured_seconds: float | None = None
+    if collect and collect.get("ran") and started and finished:
+        fmt = "%Y-%m-%d %H:%M:%S"
+        try:
+            measured_seconds = (
+                datetime.strptime(str(finished), fmt) - datetime.strptime(str(started), fmt)
+            ).total_seconds()
+        except ValueError:
+            measured_seconds = None
+    scale = year_days / n_month if n_month else 0
+    if measured_req:
+        year_equity_requests = round(measured_req * scale)
+        year_sleep = round((measured_seconds or 0) * scale, 1) if measured_seconds else round(year_equity_requests * 1.2, 1)
+        mb = (measured_bytes or 0) / 1_000_000
+        year_mb = round(mb * scale, 1)
+        assumptions = [
+            "1년 거래일 247일(근사).",
+            "하루 주권 2호출(KOSPI+KOSDAQ). ETF/ETN 확인 시 +2.",
+            f"응답 크기: 2025-10 실측 {n_month}일 {measured_req}요청 약 {mb:.1f}MB. 1년은 이 비율로 환산.",
+        ]
+        out_size = {
+            "year_equity_requests": year_equity_requests,
+            "year_equity_plus_etp_requests": year_equity_requests * 2,
+            "year_seconds_equity": year_sleep,
+            "year_raw_size_mb": year_mb,
+            "measured_month_requests": measured_req,
+            "measured_month_bytes": measured_bytes,
+            "measured_month_seconds": measured_seconds,
+            "measured_month_mb": round(mb, 1),
+        }
+    else:
+        assumptions = [
             "1년 거래일 247일(근사).",
             "하루 주권 2호출(KOSPI+KOSDAQ). ETF/ETN 확인 시 +2.",
             "호출 간격 1.2초, 오류 재시도 여유 포함.",
             "응답 크기: 샘플 10행≈3KB. 전 종목은 시장당 수백~2천행으로 가정해 하루 0.5–1.5MB.",
-        ],
-        "year_equity_requests": 247 * 2,
-        "year_equity_plus_etp_requests": 247 * 4,
-        "year_sleep_seconds_equity": round(247 * 2 * 1.2, 1),
-        "year_raw_size_mb_low": 247 * 0.5,
-        "year_raw_size_mb_high": 247 * 1.5,
+        ]
+        out_size = {
+            "year_equity_requests": year_days * 2,
+            "year_equity_plus_etp_requests": year_days * 4,
+            "year_sleep_seconds_equity": round(year_days * 2 * 1.2, 1),
+            "year_raw_size_mb_low": year_days * 0.5,
+            "year_raw_size_mb_high": year_days * 1.5,
+        }
+    daily_bar_estimate: dict[str, Any] = {
+        "note": "이번 파일럿은 일봉을 받지 않는다.",
+        "if_year_unique_600_to_1200": "600–1200회. 운영 캐시에 쓰지 말 것.",
+    }
+    if union_n:
+        daily_bar_estimate["month_union_unique"] = union_n
+        daily_bar_estimate["if_month_union_one_range_each"] = (
+            f"{union_n}회. 1년 합집합은 더 클 수 있어 미확정. 운영 캐시에 쓰지 말 것."
+        )
+    else:
+        daily_bar_estimate["note"] = (
+            "이번 파일럿은 일봉을 받지 않는다. TOP100 합집합을 세기 전에는 종목 수를 확정하지 않는다."
+        )
+        daily_bar_estimate["if_month_unique_200_to_400"] = "Yahoo 구간 1요청/종목 가정 시 200–400회."
+    return {
+        "month_candidate_days": month_days,
+        "month_candidate_day_count": n_month,
+        "assumptions": assumptions,
+        **out_size,
         "daily_bars_not_collected": True,
-        "daily_bar_estimate": {
-            "note": "이번 파일럿은 일봉을 받지 않는다. TOP100 합집합을 재기 전에는 종목 수를 확정하지 않는다.",
-            "if_month_unique_200_to_400": "Yahoo 구간 1요청/종목 가정 시 200–400회.",
-            "if_year_unique_600_to_1200": "600–1200회. 운영 캐시에 쓰지 말 것.",
-        },
+        "daily_bar_estimate": daily_bar_estimate,
         "uncertainties": [
             "Open API 일 한도·버스트 403.",
-            "카테고리별 활용 승인 대기.",
+            (
+                "주식 일별매매정보는 승인됨. ETF/ETN 카테고리는 이번 수집에 쓰지 않음."
+                if collect and collect.get("ran") and collect.get("ok_dates")
+                else "카테고리별 활용 승인 대기."
+            ),
             "NXT·시간외 포함 여부.",
             "주권 API만 쓰면 ETF는 목록에 없지만, 운영 다음은 ETF를 받은 뒤 이름으로 뺀다.",
         ],
@@ -777,8 +835,34 @@ def counted_selected_files(collect: dict[str, Any] | None, selected_dir: Path) -
     return selected_files, union
 
 
+STALE_UNAPPROVED_FACT = (
+    "개인 인증키로 본호출을 시도했다. 응답은 401 Unauthorized API Call이며 "
+    "해당 API 활용 승인이 없는 상태로 본다."
+)
+PRIOR_UNAPPROVED_FACT = (
+    "활용 승인 전 개인 인증키 본호출은 401 Unauthorized API Call 이었다."
+)
+COLLECT_OK_FACT = (
+    "활용 승인 후 개인 인증키로 주권 본호출이 200을 반환했고, "
+    "양쪽 시장이 검증된 날만 TOP100을 저장했다."
+)
+
+
+def refresh_probe_facts(probe: dict[str, Any], collect: dict[str, Any] | None) -> None:
+    facts = list(probe.get("facts") or [])
+    if collect and collect.get("ran") and collect.get("ok_dates"):
+        facts = [f for f in facts if f != STALE_UNAPPROVED_FACT]
+        if PRIOR_UNAPPROVED_FACT not in facts:
+            facts.append(PRIOR_UNAPPROVED_FACT)
+        if not any(f.startswith(COLLECT_OK_FACT) for f in facts):
+            n = len(collect.get("ok_dates") or [])
+            facts.append(COLLECT_OK_FACT + f" 후보 {n}거래일.")
+    probe["facts"] = facts
+
+
 def build_evidence(probe: dict[str, Any], collect: dict[str, Any] | None) -> dict[str, Any]:
     selected_files, union = counted_selected_files(collect, RAW_ROOT / "selected")
+    refresh_probe_facts(probe, collect)
     sample_not_universe = True
     for name in ("kospi_equity", "kosdaq_equity"):
         n = probe.get("sample_sets", {}).get(name, {}).get("n")
@@ -792,11 +876,16 @@ def build_evidence(probe: dict[str, Any], collect: dict[str, Any] | None) -> dic
         "운영 다음은 실시간 accTradePrice라, 키를 받아도 동일 TOP100이라고 단정할 수 없다.",
     ]
     if collect and collect.get("ran") and collect.get("ok_dates"):
-        conclusion_why.append("인증키로 양쪽 시장이 검증된 거래일만 TOP100을 저장했다. 운영과 동일인지는 다음·시간외·NXT 정의 대조가 남는다.")
+        n = len(collect.get("ok_dates") or [])
+        conclusion_why.append(
+            f"인증키로 {n}거래일 모두 양쪽 시장이 검증된 뒤에만 TOP100을 저장했다. "
+            f"합집합 고유 {len(union)}종목. 운영과 동일인지는 다음·시간외·NXT 정의 대조가 남는다."
+        )
     if collect and collect.get("status") == "skipped_no_auth_key":
         conclusion_why.append("인증키가 없어 수집은 실행하지 않았다.")
     if collect and collect.get("status") == "stopped_auth":
         conclusion_why.append("인증키는 있었으나 Open API가 Unauthorized API Call이라 나머지 날짜를 호출하지 않았다.")
+    ye = year_estimate(collect, len(union))
     return {
         "generated_at": now_kst(),
         "inputs": {
@@ -823,11 +912,11 @@ def build_evidence(probe: dict[str, Any], collect: dict[str, Any] | None) -> dic
         "selected_files": selected_files,
         "union_unique_codes": len(union),
         "union_codes_preview": sorted(union)[:30],
-        "year_estimate": year_estimate(),
+        "year_estimate": ye,
         "sample_is_not_universe": sample_not_universe,
         "facts_vs_assumptions": {
             "facts": probe.get("facts", []),
-            "assumptions": probe.get("assumptions", []) + year_estimate()["assumptions"],
+            "assumptions": probe.get("assumptions", []) + ye["assumptions"],
         },
         "conclusion": conclusion,
         "conclusion_why": conclusion_why,

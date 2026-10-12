@@ -1,3 +1,25 @@
+## 2026-10-13 · Codex · 끝
+- 한 일: PR #76 주문 감사 보완. 저장 로그 7개 필드 대조 및 완료봉 엔진·품질 재계산, 근거 누락 시 실패. 변조 검사 32개와 기존 재현 검사 32개 통과. 기존 장부·provenance·운영 소스 보존
+- 한계: v2 원본·저널은 사용자 PC에 있어 68건 엔진 재검증 대기. 읽기 전용 verify 명령을 order-audit-review.md에 기록
+- 파일: DatedOrderAudit.php, DatedTop100Replay.php, paper_dated_top100_replay.php, dated_order_audit.php, CI, 보고서
+- 병합: 하지 않음
+
+## 2026-10-13 · Codex · 진행
+- 한 일: PR #76 주문 감사의 패턴명 존재 검사 교체. 당일까지의 완료봉으로 최종 추천·품질 재계산, 저장 로그 대조, 변조 테스트 추가. 기존 장부 보존
+- 병합: 하지 않음
+
+## 2026-10-13 03:58 · Cursor · 끝
+- 한 일: 1년 v2 TOP100 연구 계좌 244세션 재현·검증. 10월 도구를 프로필로 확장하고 기존 10월 장부 회귀 확인. 운영 계좌·병합 없음
+- 파일: bin/paper/DatedTop100Replay.php, bin/paper_dated_top100_replay.php, tests/dated_top100_replay.php, config/paper-history-kr-dated-top100-20251008-20261008.json, docs/historical-top100-replay-20251008-20261008/, docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
+## 2026-10-13 03:41 · Cursor · 진행
+- 한 일: main(ab88384)에서 1년 v2 TOP100 연구 계좌 재현. 기존 10월 도구를 기간·데이터셋 지정 가능하게 확장. 운영 계좌·병합 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-13 03:27 · Cursor · 끝
 - 한 일: PR #75 운영 NaverDailyQuotes를 main과 같게 복원, 영문 종목코드는 연구 krCode로 분리, 933 전체 섹터 맵 고정. 재수집·계좌 재현·병합 없음
 - 파일: src/NaverDailyQuotes.php, bin/paper/HistoryResearch.php, bin/paper/DatedTop100Prep.php, bin/paper_dated_top100_prep.php, bin/paper/SectorFreeze.php, bin/paper/DatedTop100Replay.php, bin/paper_sector_collect.php, tests/dated_top100_prep.php, tests/dated_top100_replay.php, tests/sector_freeze.php, docs/historical-top100-20251008-20261008/, docs/work-log.md

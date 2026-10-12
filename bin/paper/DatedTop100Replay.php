@@ -17,13 +17,22 @@ final class PaperDatedTop100Replay
 {
     public const VERSION='dated_krx_amount_top100_replay_v1';
     public const RESEARCH_CONFIG='config/paper-history-kr-dated-top100-202510.json';
+    public const RESEARCH_CONFIG_YEAR='config/paper-history-kr-dated-top100-20251008-20261008.json';
     public const LABEL='KRX 일별 거래대금 TOP100 연구';
     public const DATASET='kr-dated-amount-top100-202510';
+    public const DATASET_YEAR='kr-dated-amount-top100-20251008-20261008-v2';
     public const CANDIDATES='docs/historical-top100-replay-202510/candidates.json';
+    public const CANDIDATES_YEAR='docs/historical-top100-20251008-20261008/candidates.json';
     public const UNIVERSE='docs/historical-top100-replay-202510/universe.json';
     public const PERIOD='oct2025';
+    public const PERIOD_YEAR='20251008-20261008';
     public const EVAL_START='2025-10-01';
     public const AS_OF='2025-10-31';
+    public const PROFILE_OCT='oct2025';
+    public const PROFILE_YEAR='year-20251008-20261008';
+    public const STRATEGY_FINGERPRINT='934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465';
+    public const YEAR_SECTOR_MAP='docs/historical-top100-20251008-20261008/sector-map-full-v2.json';
+    public const YEAR_SECTOR_MAP_SHA256='08afb0b6f0be0106624364406d29a5a33851c65331e431467629f71600da1e8b';
     public const CODE=['bin/paper/DatedTop100Replay.php','bin/paper_dated_top100_replay.php','tests/dated_top100_replay.php',
         'config/paper-history-kr-dated-top100-202510.json','config/paper-kr-recovery-v1.json','config/paper-strategy-files.json',
         'bin/paper/HistoryResearch.php','bin/paper/StrategyVersion.php','bin/paper/ResearchCashFee.php','bin/paper/AccountReplay.php'];
@@ -31,11 +40,32 @@ final class PaperDatedTop100Replay
         'bin/paper/ResearchCashFee.php','config/paper-history-kr-dated-top100-202510.json','config/paper-kr-recovery-v1.json',
         'config/paper-strategy-files.json'];
 
-    public static function configs(string $root):array
+    public static function configs(string $root,string $researchConfig=self::RESEARCH_CONFIG):array
     {
-        $rc=json_decode((string)file_get_contents($root.'/'.self::RESEARCH_CONFIG),true,512,JSON_THROW_ON_ERROR);
+        $rc=json_decode((string)file_get_contents($root.'/'.$researchConfig),true,512,JSON_THROW_ON_ERROR);
         $base=json_decode((string)file_get_contents($root.'/'.$rc['base_config']),true,512,JSON_THROW_ON_ERROR);
         return ['research'=>$rc,'base'=>$base];
+    }
+
+    /** @return array<string,mixed> */
+    public static function profile(string $name):array
+    {
+        if($name===self::PROFILE_OCT||$name===''){
+            return ['name'=>self::PROFILE_OCT,'research_config'=>self::RESEARCH_CONFIG,'dataset'=>self::DATASET,
+                'candidates'=>self::CANDIDATES,'universe'=>self::UNIVERSE,'period'=>self::PERIOD,
+                'eval_start'=>self::EVAL_START,'as_of'=>self::AS_OF,'run_start'=>self::EVAL_START,'run_through'=>self::AS_OF,
+                'expected_sessions'=>18,'expected_union'=>305,'sector_map'=>null,'sector_map_sha256'=>null,
+                'depends_on_pr'=>73,'confirm_sessions'=>18,'docs'=>'docs/historical-top100-replay-202510'];
+        }
+        if($name===self::PROFILE_YEAR){
+            return ['name'=>self::PROFILE_YEAR,'research_config'=>self::RESEARCH_CONFIG_YEAR,'dataset'=>self::DATASET_YEAR,
+                'candidates'=>self::CANDIDATES_YEAR,'universe'=>'docs/historical-top100-20251008-20261008/universe-v2.json',
+                'period'=>self::PERIOD_YEAR,'eval_start'=>'2025-10-08','as_of'=>'2026-10-08',
+                'run_start'=>'2025-10-10','run_through'=>'2026-10-08','expected_sessions'=>244,'expected_union'=>933,
+                'sector_map'=>self::YEAR_SECTOR_MAP,'sector_map_sha256'=>self::YEAR_SECTOR_MAP_SHA256,
+                'depends_on_pr'=>75,'confirm_sessions'=>244,'docs'=>'docs/historical-top100-replay-20251008-20261008'];
+        }
+        throw new InvalidArgumentException('Unknown dated TOP100 profile '.$name);
     }
 
     public static function sessionClose(string $day):int
@@ -45,7 +75,7 @@ final class PaperDatedTop100Replay
         return (new DateTimeImmutable($day.' 15:30:00',new DateTimeZone('Asia/Seoul')))->getTimestamp();
     }
 
-    public static function loadCandidates(string $path):array
+    public static function loadCandidates(string $path,int $expectedSessions=18,int $expectedUnion=305):array
     {
         $j=json_decode((string)file_get_contents($path),true,512,JSON_THROW_ON_ERROR);
         if(($j['kind']??'')!=='dated_krx_amount_top100_candidates_v1')throw new RuntimeException('Not a dated TOP100 candidate file');
@@ -62,8 +92,8 @@ final class PaperDatedTop100Replay
             $byTs[self::sessionClose($day)]=['day'=>$day,'symbols'=>array_keys($symbols),'rows'=>$rec['rows'],'source_sha256'=>$rec['source_sha256']??null];
         }
         ksort($byTs);
-        if(count($byTs)!==18)throw new RuntimeException('Expected 18 dated sessions, got '.count($byTs));
-        if(count($union)!==305)throw new RuntimeException('Expected 305 union symbols, got '.count($union));
+        if(count($byTs)!==$expectedSessions)throw new RuntimeException('Expected '.$expectedSessions.' dated sessions, got '.count($byTs));
+        if(count($union)!==$expectedUnion)throw new RuntimeException('Expected '.$expectedUnion.' union symbols, got '.count($union));
         $ending=self::lineEndingHashes($path);
         return ['file'=>$path,'file_sha256'=>hash_file('sha256',$path),'file_sha256_lf'=>$ending['sha256_lf'],
             'file_ending'=>$ending['ending'],'days'=>$j['days'],'by_session'=>$byTs,'union'=>array_keys($union),'raw'=>$j];
@@ -102,14 +132,15 @@ final class PaperDatedTop100Replay
     }
 
     /** Include collected bars even when dataset quality is hold. Failed downloads stay as empty rows, not a rank-101 fill. */
-    public static function loadDataset(string $dir,array $candidates):array
+    public static function loadDataset(string $dir,array $candidates,?string $expectDataset=null,?string $evalStart=null,?string $asOf=null):array
     {
         $dir=rtrim(str_replace('\\','/',$dir),'/');
+        $expectDataset??=self::DATASET;$evalStart??=self::EVAL_START;$asOf??=self::AS_OF;
         $problems=PaperHistoryResearch::verify($dir);
         if($problems)throw new RuntimeException('Dataset verify failed: '.implode('; ',$problems));
         $ds=PaperHistoryResearch::readJson($dir.'/dataset.json')??throw new RuntimeException('dataset.json missing');
         $uni=PaperHistoryResearch::readJson($dir.'/universe.json')??throw new RuntimeException('universe.json missing');
-        if(($ds['dataset']??'')!==self::DATASET)throw new RuntimeException('Dataset id is not '.self::DATASET);
+        if(($ds['dataset']??'')!==$expectDataset)throw new RuntimeException('Dataset id is not '.$expectDataset);
         $symbols=[];$missing=[];$hold=[];
         foreach($uni['rows'] as $u){
             if(($u['status']??'')!=='included')continue;
@@ -139,8 +170,8 @@ final class PaperDatedTop100Replay
             }
         }
         ksort($symbols);
-        return ['dataset'=>$ds['dataset'],'dir'=>$dir,'start_day'=>self::EVAL_START,'as_of_day'=>self::AS_OF,
-            'as_of_ts'=>self::sessionClose(self::AS_OF),'symbols'=>$symbols,'missing'=>$missing,'hold'=>$hold,
+        return ['dataset'=>$ds['dataset'],'dir'=>$dir,'start_day'=>$evalStart,'as_of_day'=>$asOf,
+            'as_of_ts'=>self::sessionClose($asOf),'symbols'=>$symbols,'missing'=>$missing,'hold'=>$hold,
             'files'=>['dataset.json'=>(string)hash_file('sha256',$dir.'/dataset.json'),'universe.json'=>(string)hash_file('sha256',$dir.'/universe.json')]];
     }
 
@@ -159,11 +190,27 @@ final class PaperDatedTop100Replay
         return $out;
     }
 
-    public static function runtimeCodeHashes():array
+    public static function runtimeCodeHashes(array $extra=[]):array
     {
         $root=dirname(__DIR__,2);$out=[];
-        foreach(self::RUNTIME_CODE as $p)$out[$p]=PaperStrategyVersion::fileHash($root.'/'.$p);
+        foreach(array_values(array_unique(array_merge(self::RUNTIME_CODE,$extra))) as $p)$out[$p]=PaperStrategyVersion::fileHash($root.'/'.$p);
         return $out;
+    }
+
+    public static function pinSectorMap(string $path,string $wantSha):array
+    {
+        $got=PaperStrategyVersion::fileHash($path);
+        if(!hash_equals($wantSha,$got))throw new RuntimeException('Sector map hash mismatch');
+        $map=json_decode((string)file_get_contents($path),true,512,JSON_THROW_ON_ERROR);
+        if(!is_array($map['sectors']??null))throw new InvalidArgumentException('Sector map needs {"sectors":{symbol:bucket}}');
+        return $map+['_file_sha256_lf'=>$got];
+    }
+
+    /** Read-only: compare stored logs and recompute the final plan from the supplied frozen dataset. */
+    public static function auditNewOrders(array $journal,array $candidates,?array $data=null):array
+    {
+        require_once __DIR__.'/DatedOrderAudit.php';
+        return PaperDatedOrderAudit::audit($journal,$candidates,$data);
     }
 
     public static function run(array $data,array $config,string $journalPath,array $candidates,array $opts=[]):array
@@ -179,6 +226,7 @@ final class PaperDatedTop100Replay
         $sectors=self::sectorMap($data,$opts['sector_map']??null);
         $sectorHash=hash('sha256',PaperJournal::encode($sectors));
         $version=PaperStrategyVersion::current();
+        if($version!==self::STRATEGY_FINGERPRINT)throw new RuntimeException('Operational strategy fingerprint changed');
         $pinned=PaperScanUniverse::pinned($config);$configHash=hash('sha256',PaperJournal::encode($pinned));
         $bars=[];foreach($data['symbols'] as $symbol=>$d)$bars[$symbol]=$d['bars_sha256'];
         $sessions=[];
@@ -195,7 +243,7 @@ final class PaperDatedTop100Replay
             'smoke'=>!empty($opts['smoke']),'missing_symbols'=>$data['missing'],'hold_symbols'=>$data['hold'],
             'cash_fee_bps'=>ResearchCashFee::feeBps($config),'slippage_bps'=>ResearchCashFee::SLIP_BPS,
             'research_fee_sha256'=>ResearchCashFee::hashes(dirname(__DIR__,2)),
-            'code_sha256_lf'=>self::runtimeCodeHashes()];
+            'code_sha256_lf'=>self::runtimeCodeHashes($opts['runtime_code_extra']??[])];
         $journal=new PaperJournal($journalPath);
         $existing=$journal->read();
         if($existing!==null)self::assertCompatible($existing['state'],$meta,$configHash,$version);

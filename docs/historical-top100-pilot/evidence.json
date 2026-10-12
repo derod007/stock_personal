@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12 21:46:40",
+  "generated_at": "2026-10-12 21:53:04",
   "inputs": {
     "leaders_php": "C:\\Users\\acdun\\Desktop\\dev\\noramu\\src\\KrAmountLeadersClient.php",
     "leaders_php_sha256": "8de0f63934fc2e3494708cd5bd37d0b1c21a9eb8cbd9f34325be2ad8f24f26d7",
@@ -137,7 +137,7 @@
       "Open API 본호출은 인증키 없이 401 Unauthorized Key 이었다.",
       "공개 샘플 키는 본호출에서 Unauthorized API Call 이었다.",
       "KOSPI·KOSDAQ 샘플 응답은 각 10행이며 전 종목이 아니다.",
-      "인증키 없음. 수집 미실행(skipped_no_auth_key). 근사 TOP100을 만들지 않았다."
+      "개인 인증키로 본호출을 시도했다. 응답은 401 Unauthorized API Call이며 해당 API 활용 승인이 없는 상태로 본다."
     ],
     "assumptions": [
       "2025-10 거래일 후보는 주말·공휴일을 뺀 목록이며, 키 확보 후 빈 응답으로 휴장일을 재확인해야 한다.",
@@ -176,17 +176,67 @@
     "close_times_volume_mismatch_count": 3
   },
   "collect": {
-    "ran": false,
-    "status": "skipped_no_auth_key",
-    "reason": "KRX_AUTH_KEY / KRX_API_KEY 없음",
-    "requests": 0,
+    "ran": true,
+    "status": "stopped_auth",
+    "started": "2026-10-12 21:53:01",
+    "requests": 2,
     "retries": 0,
-    "errors": [],
-    "days": [],
+    "errors": [
+      {
+        "date": "20251001",
+        "market": "kospi_equity",
+        "kind": "auth",
+        "status": 401,
+        "head": "{\"respMsg\":\"Unauthorized API Call\",\"respCode\":\"401\"}"
+      },
+      {
+        "date": "20251001",
+        "market": "kosdaq_equity",
+        "kind": "auth",
+        "status": 401,
+        "head": "{\"respMsg\":\"Unauthorized API Call\",\"respCode\":\"401\"}"
+      }
+    ],
+    "days": [
+      {
+        "date": "20251001",
+        "files": [
+          {
+            "market": "kospi_equity",
+            "ok": false,
+            "kind": "auth",
+            "reuse": false,
+            "sha256": "a5193871d0b3d7288174d924179340dbe1650a42652b426b5304e9d426f68cfa",
+            "bytes": 52,
+            "http_status": 401
+          },
+          {
+            "market": "kosdaq_equity",
+            "ok": false,
+            "kind": "auth",
+            "reuse": false,
+            "sha256": "a5193871d0b3d7288174d924179340dbe1650a42652b426b5304e9d426f68cfa",
+            "bytes": 52,
+            "http_status": 401
+          }
+        ],
+        "select": false,
+        "status": "auth",
+        "market_kinds": {
+          "kospi_equity": "auth",
+          "kosdaq_equity": "auth"
+        },
+        "holiday_confirmed": false
+      }
+    ],
+    "bytes": 104,
     "ok_dates": [],
-    "blocked_dates": [],
+    "blocked_dates": [
+      "20251001"
+    ],
     "selected_files_counted": [],
-    "stale_selected_ignored": []
+    "stale_selected_ignored": [],
+    "finished": "2026-10-12 21:53:04"
   },
   "selected_files": [],
   "union_unique_codes": 0,
@@ -246,7 +296,7 @@
       "Open API 본호출은 인증키 없이 401 Unauthorized Key 이었다.",
       "공개 샘플 키는 본호출에서 Unauthorized API Call 이었다.",
       "KOSPI·KOSDAQ 샘플 응답은 각 10행이며 전 종목이 아니다.",
-      "인증키 없음. 수집 미실행(skipped_no_auth_key). 근사 TOP100을 만들지 않았다."
+      "개인 인증키로 본호출을 시도했다. 응답은 401 Unauthorized API Call이며 해당 API 활용 승인이 없는 상태로 본다."
     ],
     "assumptions": [
       "2025-10 거래일 후보는 주말·공휴일을 뺀 목록이며, 키 확보 후 빈 응답으로 휴장일을 재확인해야 한다.",
@@ -264,7 +314,7 @@
     "본호출은 인증키·활용 승인이 필요하고, 정보데이터시스템 JSON은 로그인이 필요하다. 우회하지 않았다.",
     "샘플 10행으로 TOP100을 만들지 않았다.",
     "운영 다음은 실시간 accTradePrice라, 키를 받아도 동일 TOP100이라고 단정할 수 없다.",
-    "인증키가 없어 수집은 실행하지 않았다."
+    "인증키는 있었으나 Open API가 Unauthorized API Call이라 나머지 날짜를 호출하지 않았다."
   ],
   "replay": {
     "probe": "python docs/research/historical-amount-top100-pilot.py --probe",

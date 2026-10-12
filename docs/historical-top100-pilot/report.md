@@ -112,9 +112,17 @@ python -m unittest tests.test_historical_amount_top100_pilot
 php tests/amount_exclude.php
 ```
 
-전 종목 수집은 **승인된 개인 키**가 있을 때만 실행됩니다. 키가 없으면 `collect_ran: false`, `collect_status: skipped_no_auth_key`입니다. 키를 Git·채팅·명령 기록에 남기지 마세요.
+인증키는 Git 밖 `data/raw/research/historical-amount-top100-202510/.krx-auth-key`에만 둡니다. 도구는 환경 변수 또는 이 파일을 읽고, 키 값은 로그·Git에 쓰지 않습니다.
 
-Windows PowerShell:
+2026-10-12 수집 시도: 키는 인식됐지만(`Unauthorized Key`가 아님) 주식·코스닥·ETF·ETN 본호출이 모두 **401 Unauthorized API Call**이었습니다. 첫 날짜에서 `stopped_auth`로 중단했고 TOP100은 만들지 않았습니다. 키 자체 오류가 아니라, 해당 API **활용 신청·관리자 승인이 없는 상태**로 보입니다. Open API 포털에서 유가증권·코스닥 일별매매정보 활용을 승인한 뒤 같은 `--collect`를 다시 실행하면 됩니다.
+
+Windows PowerShell. 키가 gitignore 파일에 있으면 환경 변수 없이 `--collect`만 실행해도 됩니다.
+
+```powershell
+python docs\research\historical-amount-top100-pilot.py --collect
+```
+
+환경 변수로 넣을 때는 기록에 남지 않게:
 
 ```powershell
 $env:KRX_AUTH_KEY = Read-Host 'KRX AUTH KEY'
@@ -122,10 +130,8 @@ python docs\research\historical-amount-top100-pilot.py --collect
 Remove-Item Env:KRX_AUTH_KEY
 ```
 
-`Read-Host`로 세션에만 넣고, 호출이 끝나면 환경 변수를 지웁니다. 한 줄에 키를 붙여 넣으면 PowerShell 기록에 남을 수 있습니다.
-
 원본 위치: `data/raw/research/historical-amount-top100-202510/` (`.gitignore`의 `/data/raw/`). 운영 캐시 `data/raw/cache`는 건드리지 않습니다.
 
 ## 다음에 필요한 것
 
-KRX Data Marketplace 계정과 Open API 주식(및 가능하면 증권상품) 활용 승인. 키가 있으면 같은 도구가 일자별 원본을 받아, **양쪽 시장이 검증된 날만** 제외·TOP100·해시를 저장합니다. 그 다음에도 운영 다음 실시간 순위와 숫자를 한 날이라도 대조하기 전에는 **가능**으로 올리지 말아야 합니다.
+Open API 포털에서 **주식 일별매매정보(유가증권·코스닥)** 활용 신청이 승인되어야 합니다. 키가 있어도 이 승인이 없으면 본호출은 401입니다. 승인 뒤에는 같은 도구가 일자별 원본을 받아, **양쪽 시장이 검증된 날만** TOP100을 저장합니다. 운영 다음 실시간 순위와 한 날이라도 대조하기 전에는 **가능**으로 올리지 말아야 합니다.

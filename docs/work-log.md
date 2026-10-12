@@ -1,3 +1,15 @@
+## 2026-10-12 21:54 · Cursor · 끝
+- 한 일: 인증키를 gitignore 경로에만 저장하고 2025-10 수집 시도. 본호출 401 Unauthorized API Call이라 첫날에서 중단. TOP100 없음. 키는 Git에 안 넣음. 병합 없음
+- 파일: docs/research/historical-amount-top100-pilot.py, docs/historical-top100-pilot/report.md, docs/historical-top100-pilot/evidence.json, docs/work-log.md
+- 커밋: PR #72에 추가(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-12 21:51 · Cursor · 진행
+- 한 일: Git 밖 인증키로 2025-10 거래대금 수집 실행. 키는 gitignore 경로에만 저장. 운영 캐시·병합 없음
+- 파일: 작업 중
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-12 21:47 · Cursor · 끝
 - 한 일: PR #72 수집 가드. 양쪽 시장 검증 통과일만 TOP100. HTTP·JSON·권한·빈 응답 구분, 빈 응답은 휴장 아님. 재개 시 원본 해시·구조·기준일 확인. 키 없으면 skipped_no_auth_key. 전체 수집·병합·운영 변경 없음
 - 파일: docs/research/historical-amount-top100-pilot.py, tests/test_historical_amount_top100_pilot.py, docs/historical-top100-pilot/report.md, docs/historical-top100-pilot/evidence.json, docs/work-log.md

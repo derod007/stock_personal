@@ -24,6 +24,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
 RAW_ROOT = ROOT / "data" / "raw" / "research" / "historical-amount-top100-202510"
+KEY_FILE = RAW_ROOT / ".krx-auth-key"
 DOCS = ROOT / "docs" / "historical-top100-pilot"
 LEADERS_PHP = ROOT / "src" / "KrAmountLeadersClient.php"
 KST = timezone(timedelta(hours=9))
@@ -61,6 +62,15 @@ ETF_PREFIXES = [
 
 def now_kst() -> str:
     return datetime.now(KST).strftime("%Y-%m-%d %H:%M:%S")
+
+
+def load_auth_key() -> str:
+    env = (os.environ.get("KRX_AUTH_KEY") or os.environ.get("KRX_API_KEY") or "").strip()
+    if env:
+        return env
+    if KEY_FILE.is_file():
+        return KEY_FILE.read_text(encoding="utf-8").strip()
+    return ""
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -663,6 +673,9 @@ def collect_month(
                 summary["stale_selected_ignored"].append(selected_path.name)
             summary["blocked_dates"].append(day)
             summary["days"].append(day_rec)
+            if decision["status"] == "auth" and fetch_market is None:
+                summary["status"] = "stopped_auth"
+                break
             continue
         day_rows: list[dict[str, Any]] = []
         for market in EQUITY_MARKETS:
@@ -782,6 +795,8 @@ def build_evidence(probe: dict[str, Any], collect: dict[str, Any] | None) -> dic
         conclusion_why.append("인증키로 양쪽 시장이 검증된 거래일만 TOP100을 저장했다. 운영과 동일인지는 다음·시간외·NXT 정의 대조가 남는다.")
     if collect and collect.get("status") == "skipped_no_auth_key":
         conclusion_why.append("인증키가 없어 수집은 실행하지 않았다.")
+    if collect and collect.get("status") == "stopped_auth":
+        conclusion_why.append("인증키는 있었으나 Open API가 Unauthorized API Call이라 나머지 날짜를 호출하지 않았다.")
     return {
         "generated_at": now_kst(),
         "inputs": {
@@ -884,7 +899,7 @@ def main() -> int:
         except (OSError, json.JSONDecodeError):
             probe = {}
 
-    key = (os.environ.get("KRX_AUTH_KEY") or os.environ.get("KRX_API_KEY") or "").strip()
+    key = load_auth_key()
     if args.collect:
         if not key:
             collect = skipped_collect()

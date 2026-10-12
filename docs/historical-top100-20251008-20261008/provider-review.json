@@ -1,0 +1,2874 @@
+{
+    "schema": 1,
+    "kind": "dated_top100_provider_review_v1",
+    "label": "KRX 일별 거래대금 TOP100 연구",
+    "generated_at": "2026-10-13 02:24:37",
+    "started": "2026-10-13 02:23:10",
+    "probe_root_gitignored": "C:\\Users\\acdun\\Desktop\\dev\\noramu/data/raw/research/historical-amount-top100-20251008-20261008-provider-probe-v1",
+    "existing_dataset_not_overwritten": true,
+    "frozen_hashes_not_rewritten": true,
+    "no_rank_101_fill": true,
+    "symbols": [
+        {
+            "kind": "unmapped",
+            "code": "0001A0",
+            "symbol": "0001A0.KQ",
+            "name": "덕양에너젠",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0001A0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0001A0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 168
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0001A0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0001A0.KQ",
+                            "shortname": "dyenergen",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0001A0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0004V0",
+            "symbol": "0004V0.KQ",
+            "name": "엔비알모션",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0004V0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0004V0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 180
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0004V0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0004V0.KQ",
+                            "shortname": "NBR Motion",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0004V0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0007C0",
+            "symbol": "0007C0.KQ",
+            "name": "아크릴",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0007C0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0007C0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 198
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0007C0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0007C0.KQ",
+                            "shortname": "Acryl",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0007C0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0007J0",
+            "symbol": "0007J0.KQ",
+            "name": "인벤테라",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0007J0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0007J0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 128
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0007J0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0007J0.KQ",
+                            "shortname": "Inventera",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0007J0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "00088K",
+            "symbol": "00088K.KS",
+            "name": "한화3우B",
+            "market": "KOSPI",
+            "code_class": "preferred_or_class_letter_suffix",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/00088K.KS?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "00088K.KS",
+                        "exchange": "KSC",
+                        "currency": "KRW",
+                        "bar_count": 244
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=00088K",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "00088K.KS",
+                            "shortname": "HANWHA(3PB)",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=00088K&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0008Z0",
+            "symbol": "0008Z0.KQ",
+            "name": "에스엔시스",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0008Z0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0008Z0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 244
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0008Z0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0008Z0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0009K0",
+            "symbol": "0009K0.KQ",
+            "name": "에임드바이오",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0009K0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0009K0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 206
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0009K0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0009K0.KQ",
+                            "shortname": "Aimed Bio",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0009K0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0010F0",
+            "symbol": "0010F0.KQ",
+            "name": "보원케미칼",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0010F0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0010F0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 126
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0010F0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0010F0.KQ",
+                            "shortname": "BOWON CHEMICAL",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0010F0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0010S0",
+            "symbol": "0010S0.KQ",
+            "name": "와이즈플래닛컴퍼니",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0010S0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0010S0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 10
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0010S0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0010S0.KQ",
+                            "shortname": "WISE PLANET COMPANY",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0010S0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0011A0",
+            "symbol": "0011A0.KQ",
+            "name": "액스비스",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0011A0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0011A0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 146
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0011A0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0011A0.KQ",
+                            "shortname": "AXBIS",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0011A0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0011T0",
+            "symbol": "0011T0.KQ",
+            "name": "채비",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0011T0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0011T0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 109
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0011T0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0011T0.KQ",
+                            "shortname": "CHAEVI",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0011T0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0013V0",
+            "symbol": "0013V0.KQ",
+            "name": "삼진식품",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0013V0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0013V0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 194
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0013V0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0013V0.KQ",
+                            "shortname": "Samjinfood",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0013V0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0015G0",
+            "symbol": "0015G0.KQ",
+            "name": "그린광학",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0015G0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0015G0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 216
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0015G0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0015G0.KQ",
+                            "shortname": "Green Optics",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0015G0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0015N0",
+            "symbol": "0015N0.KQ",
+            "name": "아로마티카",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0015N0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0015N0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 206
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0015N0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0015N0.KQ",
+                            "shortname": "AROMATICA",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0015N0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0015S0",
+            "symbol": "0015S0.KQ",
+            "name": "페스카로",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0015S0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0015S0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 202
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0015S0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0015S0.KQ",
+                            "shortname": "FESCARO",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0015S0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0017J0",
+            "symbol": "0017J0.KQ",
+            "name": "세미티에스",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0017J0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0017J0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 82
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0017J0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0017J0.KQ",
+                            "shortname": "SEMI-TS",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0017J0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0035S0",
+            "symbol": "0035S0.KQ",
+            "name": "빅웨이브로보틱스",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0035S0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0035S0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 8
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0035S0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0035S0.KQ",
+                            "shortname": "Bigwave Robotics",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0035S0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0039P0",
+            "symbol": "0039P0.KQ",
+            "name": "매드업",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0039P0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0039P0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 68
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0039P0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0039P0.KQ",
+                            "shortname": "Madup",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0039P0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "00680K",
+            "symbol": "00680K.KS",
+            "name": "미래에셋증권2우B",
+            "market": "KOSPI",
+            "code_class": "preferred_or_class_letter_suffix",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/00680K.KS?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "00680K.KS",
+                        "exchange": "KSC",
+                        "currency": "KRW",
+                        "bar_count": 244
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=00680K",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "00680K.KS",
+                            "shortname": "MIRAE ASSET SEC(2PB)",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=00680K&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0082N0",
+            "symbol": "0082N0.KQ",
+            "name": "카나프테라퓨틱스",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0082N0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0082N0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 140
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0082N0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0082N0.KQ",
+                            "shortname": "Kanaph Therapeutics",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0082N0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0088M0",
+            "symbol": "0088M0.KQ",
+            "name": "메쥬",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0088M0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0088M0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 133
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0088M0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0088M0.KQ",
+                            "shortname": "MEZOO",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0088M0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0117P0",
+            "symbol": "0117P0.KQ",
+            "name": "피스피스스튜디오",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0117P0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0117P0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 85
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0117P0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0117P0.KQ",
+                            "shortname": "PIECE PEACE STUDIO",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0117P0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0120G0",
+            "symbol": "0120G0.KS",
+            "name": "삼양바이오팜",
+            "market": "KOSPI",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0120G0.KS?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0120G0.KS",
+                        "exchange": "KSC",
+                        "currency": "KRW",
+                        "bar_count": 214
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0120G0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0120G0.KS",
+                            "shortname": "Samyang Biopharm",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0120G0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0126Z0",
+            "symbol": "0126Z0.KS",
+            "name": "삼성에피스홀딩스",
+            "market": "KOSPI",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0126Z0.KS?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0126Z0.KS",
+                        "exchange": "KSC",
+                        "currency": "KRW",
+                        "bar_count": 213
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0126Z0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0126Z0.KS",
+                            "shortname": "SAMSUNG EPIS HOLDINGS",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0126Z0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0155E0",
+            "symbol": "0155E0.KQ",
+            "name": "해치텍",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0155E0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0155E0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 31
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0155E0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0155E0.KQ",
+                            "shortname": "HAECHITECH",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0155E0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0156T0",
+            "symbol": "0156T0.KQ",
+            "name": "에이치엘지노믹스",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0156T0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0156T0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 51
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0156T0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0156T0.KQ",
+                            "shortname": "HL GENOMICS",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0156T0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0161M0",
+            "symbol": "0161M0.KQ",
+            "name": "네오사피엔스",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0161M0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0161M0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 11
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0161M0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0161M0.KQ",
+                            "shortname": "Neosapience",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0161M0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0218L0",
+            "symbol": "0218L0.KQ",
+            "name": "네오뷰",
+            "market": "KOSDAQ",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0218L0.KQ?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0218L0.KQ",
+                        "exchange": "KOE",
+                        "currency": "KRW",
+                        "bar_count": 51
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0218L0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0218L0.KQ",
+                            "shortname": "Neovue",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0218L0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0220W0",
+            "symbol": "0220W0.KS",
+            "name": "한화머시너리앤서비스홀딩스",
+            "market": "KOSPI",
+            "code_class": "alphanumeric_short_code",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0220W0.KS?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0220W0.KS",
+                        "exchange": "KSC",
+                        "currency": "KRW",
+                        "bar_count": 30
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0220W0",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0220W0.KS",
+                            "shortname": "Hanwha M&S",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0220W0&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "0220WL",
+            "symbol": "0220WL.KS",
+            "name": "한화머시너리앤서비스홀딩스3우B",
+            "market": "KOSPI",
+            "code_class": "preferred_or_class_letter_suffix",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/0220WL.KS?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "0220WL.KS",
+                        "exchange": "KSC",
+                        "currency": "KRW",
+                        "bar_count": 30
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0220WL",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "0220WL.KS",
+                            "shortname": "Hanwha M&S(3P)",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=0220WL&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "unmapped",
+            "code": "45014K",
+            "symbol": "45014K.KS",
+            "name": "코오롱모빌리티그룹우",
+            "market": "KOSPI",
+            "code_class": "preferred_or_class_letter_suffix",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/45014K.KS?range=1y&interval=1d",
+                    "http_code": 404,
+                    "error": null,
+                    "supported": false,
+                    "parsed": {
+                        "ok": false,
+                        "reason": "chart_error"
+                    },
+                    "price_basis": null
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=45014K",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=45014K&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "not_secured",
+            "reason": "No Yahoo chart result and no Naver daily table on page 1. Not filled with rank 101."
+        },
+        {
+            "kind": "unmapped",
+            "code": "45226K",
+            "symbol": "45226K.KS",
+            "name": "한화갤러리아우",
+            "market": "KOSPI",
+            "code_class": "preferred_or_class_letter_suffix",
+            "yahoo_six_digit": false,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/45226K.KS?range=1y&interval=1d",
+                    "http_code": 200,
+                    "error": null,
+                    "supported": true,
+                    "parsed": {
+                        "ok": true,
+                        "symbol": "45226K.KS",
+                        "exchange": "KSC",
+                        "currency": "KRW",
+                        "bar_count": 244
+                    },
+                    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=45226K",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "45226K.KS",
+                            "shortname": "HANWHA GALLERIA(1P)",
+                            "quoteType": "EQUITY"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=45226K&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "yahoo_chart_supported_not_imported",
+            "reason": "Yahoo chart returned a result. Not written into the frozen 5y dataset."
+        },
+        {
+            "kind": "yahoo_404",
+            "code": "010620",
+            "symbol": "010620.KS",
+            "name": "HD현대미포",
+            "market": null,
+            "code_class": "six_digit",
+            "yahoo_six_digit": true,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/010620.KS?range=1y&interval=1d",
+                    "http_code": 404,
+                    "error": null,
+                    "supported": false,
+                    "parsed": {
+                        "ok": false,
+                        "reason": "chart_error"
+                    },
+                    "price_basis": null
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=010620",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=010620&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "not_secured",
+            "reason": "No Yahoo chart result and no Naver daily table on page 1. Not filled with rank 101."
+        },
+        {
+            "kind": "yahoo_404",
+            "code": "012510",
+            "symbol": "012510.KS",
+            "name": "더존비즈온",
+            "market": null,
+            "code_class": "six_digit",
+            "yahoo_six_digit": true,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/012510.KS?range=1y&interval=1d",
+                    "http_code": 404,
+                    "error": null,
+                    "supported": false,
+                    "parsed": {
+                        "ok": false,
+                        "reason": "chart_error"
+                    },
+                    "price_basis": null
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=012510",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=012510&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "not_secured",
+            "reason": "No Yahoo chart result and no Naver daily table on page 1. Not filled with rank 101."
+        },
+        {
+            "kind": "yahoo_404",
+            "code": "042670",
+            "symbol": "042670.KS",
+            "name": "HD현대인프라코어",
+            "market": null,
+            "code_class": "six_digit",
+            "yahoo_six_digit": true,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/042670.KS?range=1y&interval=1d",
+                    "http_code": 404,
+                    "error": null,
+                    "supported": false,
+                    "parsed": {
+                        "ok": false,
+                        "reason": "chart_error"
+                    },
+                    "price_basis": null
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=042670",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=042670&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "not_secured",
+            "reason": "No Yahoo chart result and no Naver daily table on page 1. Not filled with rank 101."
+        },
+        {
+            "kind": "yahoo_404",
+            "code": "082640",
+            "symbol": "082640.KS",
+            "name": "동양생명",
+            "market": null,
+            "code_class": "six_digit",
+            "yahoo_six_digit": true,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/082640.KS?range=1y&interval=1d",
+                    "http_code": 404,
+                    "error": null,
+                    "supported": false,
+                    "parsed": {
+                        "ok": false,
+                        "reason": "chart_error"
+                    },
+                    "price_basis": null
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=082640",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=082640&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "not_secured",
+            "reason": "No Yahoo chart result and no Naver daily table on page 1. Not filled with rank 101."
+        },
+        {
+            "kind": "yahoo_404",
+            "code": "152550",
+            "symbol": "152550.KS",
+            "name": "한국ANKOR유전",
+            "market": null,
+            "code_class": "six_digit",
+            "yahoo_six_digit": true,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/152550.KS?range=1y&interval=1d",
+                    "http_code": 404,
+                    "error": null,
+                    "supported": false,
+                    "parsed": {
+                        "ok": false,
+                        "reason": "chart_error"
+                    },
+                    "price_basis": null
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=152550",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [
+                        {
+                            "symbol": "ZEMMOX",
+                            "shortname": null,
+                            "quoteType": "MUTUALFUND"
+                        },
+                        {
+                            "symbol": "ZEMMPX",
+                            "shortname": null,
+                            "quoteType": "MUTUALFUND"
+                        },
+                        {
+                            "symbol": "ZEMMQX",
+                            "shortname": null,
+                            "quoteType": "MUTUALFUND"
+                        }
+                    ],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=152550&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "not_secured",
+            "reason": "No Yahoo chart result and no Naver daily table on page 1. Not filled with rank 101."
+        },
+        {
+            "kind": "yahoo_404",
+            "code": "450140",
+            "symbol": "450140.KS",
+            "name": "코오롱모빌리티그룹",
+            "market": null,
+            "code_class": "six_digit",
+            "yahoo_six_digit": true,
+            "successor_not_attached": true,
+            "attempts": [
+                {
+                    "provider": "yahoo_chart_v8",
+                    "url": "https://query1.finance.yahoo.com/v8/finance/chart/450140.KS?range=1y&interval=1d",
+                    "http_code": 404,
+                    "error": null,
+                    "supported": false,
+                    "parsed": {
+                        "ok": false,
+                        "reason": "chart_error"
+                    },
+                    "price_basis": null
+                },
+                {
+                    "provider": "yahoo_search",
+                    "url": "https://query2.finance.yahoo.com/v1/finance/search?q=450140",
+                    "http_code": 200,
+                    "error": null,
+                    "quotes": [],
+                    "identity_confirmed": false,
+                    "note": "Search hits are not used as OHLCV. Successor or lookalike symbols are not attached."
+                },
+                {
+                    "provider": "naver_sise_day_page1",
+                    "url": "https://finance.naver.com/item/sise_day.naver?code=450140&page=1",
+                    "http_code": 410,
+                    "error": null,
+                    "html_table_present": false,
+                    "price_basis": null,
+                    "not_mixed_into_yahoo_dataset": true
+                }
+            ],
+            "outcome": "not_secured",
+            "reason": "No Yahoo chart result and no Naver daily table on page 1. Not filled with rank 101."
+        }
+    ],
+    "outcomes": {
+        "yahoo_chart_supported_not_imported": 31,
+        "not_secured": 7
+    },
+    "request_count": 114,
+    "requests": [
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0001A0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0001A0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0001A0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0004V0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0004V0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0004V0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0007C0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0007C0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0007C0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0007J0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0007J0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0007J0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/00088K.KS?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=00088K",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=00088K&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0008Z0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0008Z0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0008Z0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0009K0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0009K0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0009K0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0010F0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0010F0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0010F0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0010S0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0010S0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0010S0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0011A0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0011A0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0011A0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0011T0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0011T0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0011T0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0013V0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0013V0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0013V0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0015G0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0015G0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0015G0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0015N0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0015N0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0015N0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0015S0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0015S0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0015S0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0017J0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0017J0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0017J0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0035S0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0035S0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0035S0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0039P0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0039P0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0039P0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/00680K.KS?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=00680K",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=00680K&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0082N0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0082N0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0082N0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0088M0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0088M0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0088M0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0117P0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0117P0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0117P0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0120G0.KS?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0120G0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0120G0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0126Z0.KS?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0126Z0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0126Z0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0155E0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0155E0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0155E0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0156T0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0156T0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0156T0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0161M0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0161M0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0161M0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0218L0.KQ?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0218L0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0218L0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0220W0.KS?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0220W0",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0220W0&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/0220WL.KS?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=0220WL",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=0220WL&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/45014K.KS?range=1y&interval=1d",
+            "http_code": 404,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=45014K",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=45014K&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/45226K.KS?range=1y&interval=1d",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=45226K",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=45226K&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/010620.KS?range=1y&interval=1d",
+            "http_code": 404,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=010620",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=010620&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/012510.KS?range=1y&interval=1d",
+            "http_code": 404,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=012510",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=012510&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/042670.KS?range=1y&interval=1d",
+            "http_code": 404,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=042670",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=042670&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/082640.KS?range=1y&interval=1d",
+            "http_code": 404,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=082640",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=082640&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/152550.KS?range=1y&interval=1d",
+            "http_code": 404,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=152550",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=152550&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query1.finance.yahoo.com/v8/finance/chart/450140.KS?range=1y&interval=1d",
+            "http_code": 404,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://query2.finance.yahoo.com/v1/finance/search?q=450140",
+            "http_code": 200,
+            "error": null,
+            "attempt": 1
+        },
+        {
+            "url": "https://finance.naver.com/item/sise_day.naver?code=450140&page=1",
+            "http_code": 410,
+            "error": null,
+            "attempt": 1
+        }
+    ],
+    "note": [
+        "숫자 6자리가 아니라고 수집을 생략하지 않았다.",
+        "검색으로 나온 다른 심볼 가격을 연결하지 않았다.",
+        "네이버 일별 시세와 Yahoo chart를 한 시계열로 붙이지 않았다."
+    ],
+    "unmapped_appearances": {
+        "unique_symbols": 32,
+        "appearances": 260,
+        "distinct_days": 140,
+        "by_symbol": {
+            "0001A0.KQ": {
+                "n": 8,
+                "first": "2026-01-30",
+                "last": "2026-04-29"
+            },
+            "0004V0.KQ": {
+                "n": 9,
+                "first": "2026-01-14",
+                "last": "2026-04-06"
+            },
+            "0007C0.KQ": {
+                "n": 16,
+                "first": "2025-12-16",
+                "last": "2026-04-14"
+            },
+            "0007J0.KQ": {
+                "n": 4,
+                "first": "2026-04-02",
+                "last": "2026-04-07"
+            },
+            "00088K.KS": {
+                "n": 1,
+                "first": "2026-01-14",
+                "last": "2026-01-14"
+            },
+            "0008Z0.KQ": {
+                "n": 1,
+                "first": "2025-10-27",
+                "last": "2025-10-27"
+            },
+            "0009K0.KQ": {
+                "n": 28,
+                "first": "2025-12-04",
+                "last": "2026-03-16"
+            },
+            "0010F0.KQ": {
+                "n": 6,
+                "first": "2026-04-03",
+                "last": "2026-09-29"
+            },
+            "0010S0.KQ": {
+                "n": 4,
+                "first": "2026-09-23",
+                "last": "2026-09-30"
+            },
+            "0011A0.KQ": {
+                "n": 6,
+                "first": "2026-03-09",
+                "last": "2026-09-11"
+            },
+            "0011T0.KQ": {
+                "n": 5,
+                "first": "2026-04-29",
+                "last": "2026-05-08"
+            },
+            "0013V0.KQ": {
+                "n": 5,
+                "first": "2025-12-22",
+                "last": "2026-02-13"
+            },
+            "0015G0.KQ": {
+                "n": 21,
+                "first": "2025-11-17",
+                "last": "2026-04-22"
+            },
+            "0015N0.KQ": {
+                "n": 10,
+                "first": "2025-11-27",
+                "last": "2026-09-14"
+            },
+            "0015S0.KQ": {
+                "n": 12,
+                "first": "2025-12-10",
+                "last": "2026-01-28"
+            },
+            "0017J0.KQ": {
+                "n": 2,
+                "first": "2026-06-10",
+                "last": "2026-06-16"
+            },
+            "0035S0.KQ": {
+                "n": 5,
+                "first": "2026-09-29",
+                "last": "2026-10-06"
+            },
+            "0039P0.KQ": {
+                "n": 19,
+                "first": "2026-07-01",
+                "last": "2026-09-28"
+            },
+            "00680K.KS": {
+                "n": 1,
+                "first": "2025-12-23",
+                "last": "2025-12-23"
+            },
+            "0082N0.KQ": {
+                "n": 5,
+                "first": "2026-03-16",
+                "last": "2026-03-20"
+            },
+            "0088M0.KQ": {
+                "n": 3,
+                "first": "2026-03-26",
+                "last": "2026-03-30"
+            },
+            "0117P0.KQ": {
+                "n": 2,
+                "first": "2026-06-08",
+                "last": "2026-06-09"
+            },
+            "0120G0.KS": {
+                "n": 5,
+                "first": "2025-11-26",
+                "last": "2025-12-02"
+            },
+            "0126Z0.KS": {
+                "n": 55,
+                "first": "2025-11-24",
+                "last": "2026-08-31"
+            },
+            "0155E0.KQ": {
+                "n": 8,
+                "first": "2026-08-25",
+                "last": "2026-09-21"
+            },
+            "0156T0.KQ": {
+                "n": 2,
+                "first": "2026-07-24",
+                "last": "2026-07-27"
+            },
+            "0161M0.KQ": {
+                "n": 7,
+                "first": "2026-09-21",
+                "last": "2026-10-07"
+            },
+            "0218L0.KQ": {
+                "n": 1,
+                "first": "2026-07-27",
+                "last": "2026-07-27"
+            },
+            "0220W0.KS": {
+                "n": 6,
+                "first": "2026-08-25",
+                "last": "2026-09-14"
+            },
+            "0220WL.KS": {
+                "n": 1,
+                "first": "2026-08-25",
+                "last": "2026-08-25"
+            },
+            "45014K.KS": {
+                "n": 1,
+                "first": "2025-10-17",
+                "last": "2025-10-17"
+            },
+            "45226K.KS": {
+                "n": 1,
+                "first": "2025-12-26",
+                "last": "2025-12-26"
+            }
+        }
+    },
+    "yahoo_404_appearances": {
+        "unique_symbols": 6,
+        "appearances": 55,
+        "distinct_days": 46,
+        "by_symbol": {
+            "010620.KS": {
+                "n": 24,
+                "first": "2025-10-13",
+                "last": "2025-11-26"
+            },
+            "012510.KS": {
+                "n": 5,
+                "first": "2025-11-07",
+                "last": "2026-03-31"
+            },
+            "042670.KS": {
+                "n": 7,
+                "first": "2025-10-21",
+                "last": "2025-12-26"
+            },
+            "082640.KS": {
+                "n": 1,
+                "first": "2026-02-20",
+                "last": "2026-02-20"
+            },
+            "152550.KS": {
+                "n": 5,
+                "first": "2026-03-05",
+                "last": "2026-04-03"
+            },
+            "450140.KS": {
+                "n": 13,
+                "first": "2025-10-17",
+                "last": "2025-12-10"
+            }
+        }
+    }
+}

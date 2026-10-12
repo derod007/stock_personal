@@ -208,6 +208,24 @@ final class PaperSectorFreeze
             throw new InvalidArgumentException('Unclassified symbols do not share one bucket');
     }
 
+    /**
+     * An explicit replay map must list every candidate-union symbol and no others.
+     * A partial admitted-only map is rejected.
+     * @param list<string> $union
+     */
+    public static function assertCoversUnion(array $union,array $map):void
+    {
+        self::assertReplayMap($map);
+        $want=array_values(array_unique($union));
+        sort($want);
+        $have=array_keys($map['sectors']??[]);
+        sort($have);
+        if($want===$have)return;
+        $missing=array_values(array_diff($want,$have));
+        $extra=array_values(array_diff($have,$want));
+        throw new InvalidArgumentException('Sector map must match the candidate union exactly (missing '.count($missing).', extra '.count($extra).')');
+    }
+
     /** @return array<string,true> */
     private static function savedScanSymbols(array $files):array
     {

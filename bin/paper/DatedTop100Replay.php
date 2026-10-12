@@ -171,6 +171,11 @@ final class PaperDatedTop100Replay
         ResearchCashFee::feeBps($config);
         $chunk=max(1,(int)($opts['chunk']??8));$provider=$opts['plan_provider']??null;
         $startDay=$opts['start']??self::EVAL_START;$throughDay=$opts['through']??self::AS_OF;
+        if(($opts['sector_map']??null)!==null){
+            $union=$candidates['union']??[];
+            if($union===[])throw new InvalidArgumentException('An explicit sector map needs the candidate union');
+            PaperSectorFreeze::assertCoversUnion($union,$opts['sector_map']);
+        }
         $sectors=self::sectorMap($data,$opts['sector_map']??null);
         $sectorHash=hash('sha256',PaperJournal::encode($sectors));
         $version=PaperStrategyVersion::current();

@@ -74,8 +74,15 @@ final class PaperHistoryResearch
 
     private static function safeName(string $symbol):string
     {
-        if(!preg_match('/^\d{6}\.(KS|KQ)$/D',$symbol))throw new InvalidArgumentException('Invalid symbol '.$symbol);
+        if(!preg_match('/^[0-9A-Za-z]{6}\.(KS|KQ)$/D',$symbol))throw new InvalidArgumentException('Invalid symbol '.$symbol);
         return $symbol;
+    }
+
+    /** Research-only KR listing code. Operational NaverDailyQuotes::codeOf stays digit-only. */
+    public static function krCode(string $symbol):?string
+    {
+        if(preg_match('/^([0-9A-Za-z]{6})(?:\.(?:KS|KQ))?$/D',trim($symbol),$m)===1)return $m[1];
+        return null;
     }
 
     public static function day(int $ts):string
@@ -401,18 +408,34 @@ final class PaperHistoryResearch
 
     // ---- 3. collection ---------------------------------------------------------------------------------------
 
+    /** Research-only curl attempt log. Collection behavior is unchanged. */
+    public static array $httpAttempts=[];
+
+    public static function resetHttpAttempts():void
+    {
+        self::$httpAttempts=[];
+    }
+
     /** Raw HTTP with a few bounded retries. Returns the exact body so its hash can be kept. */
     public static function httpGet(string $url):array
     {
         $ua='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
         $last='';
         for($attempt=1;$attempt<=3;$attempt++){
+            $rec=['url'=>$url,'attempt'=>$attempt,'at'=>time()];
             $ch=curl_init($url);
             curl_setopt_array($ch,[CURLOPT_RETURNTRANSFER=>true,CURLOPT_FOLLOWLOCATION=>true,CURLOPT_TIMEOUT=>30,CURLOPT_ENCODING=>'',
                 CURLOPT_HTTPHEADER=>['User-Agent: '.$ua,'Accept: application/json,text/plain,*/*','Accept-Language: en-US,en;q=0.9,ko;q=0.8']]);
             $body=curl_exec($ch);
-            if($body===false){$last=curl_error($ch);curl_close($ch);usleep(400000*$attempt);continue;}
+            if($body===false){
+                $last=curl_error($ch);curl_close($ch);
+                $rec['error']=$last;
+                self::$httpAttempts[]=$rec;
+                usleep(400000*$attempt);continue;
+            }
             $code=(int)curl_getinfo($ch,CURLINFO_HTTP_CODE);curl_close($ch);
+            $rec['http_code']=$code;
+            self::$httpAttempts[]=$rec;
             if($code===429||$code===503){$last='HTTP '.$code;usleep(800000*$attempt);continue;}
             return ['body'=>(string)$body,'http_code'=>$code,'fetched_at'=>time()];
         }

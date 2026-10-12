@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "dataset": "kr-dated-amount-top100-20251008-20261008",
+  "label": "KRX 일별 거래대금 TOP100 연구",
+  "evaluation_start": "2025-10-08",
+  "as_of": "2026-10-08",
+  "prep_bars": 240,
+  "min_bars": 60,
+  "primary_range": "5y",
+  "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified",
+  "union_is_collection_list_only": true,
+  "account_replay": false,
+  "actions": {
+    "imported": 334,
+    "collected": 561,
+    "failed": 6,
+    "incomplete_import_tries": 19,
+    "unmapped_provider_symbols": 32
+  },
+  "seconds": 871.6,
+  "yahoo_requests": 561,
+  "bars_bytes": 127652179,
+  "summary": {
+    "requested": 901,
+    "collected": 895,
+    "failed": 6,
+    "not_attempted": 0,
+    "quality_ok": 0,
+    "quality_ok_with_warnings": 811,
+    "quality_hold": 84,
+    "history_short_for_240": 94,
+    "insufficient_history": 10,
+    "price_jump_beyond_daily_limit": 74,
+    "provider_history_exhausted": 60,
+    "with_close_repair": 144
+  },
+  "failed": [
+    {"symbol": "010620.KS", "name": "HD현대미포", "error": "Yahoo HTTP 404"},
+    {"symbol": "012510.KS", "name": "더존비즈온", "error": "Yahoo HTTP 404"},
+    {"symbol": "042670.KS", "name": "HD현대인프라코어", "error": "Yahoo HTTP 404"},
+    {"symbol": "082640.KS", "name": "동양생명", "error": "Yahoo HTTP 404"},
+    {"symbol": "152550.KS", "name": "한국ANKOR유전", "error": "Yahoo HTTP 404"},
+    {"symbol": "450140.KS", "name": "코오롱모빌리티그룹", "error": "Yahoo HTTP 404"}
+  ],
+  "reuse_sources_read_only": ["kr-saved-scan-20261009", "kr-saved-scan-20251008", "kr-dated-amount-top100-202510"],
+  "oct2025_dataset_not_overwritten": true,
+  "no_rank_101_fill": true,
+  "quality_note": "inspectRows hold/warnings are dataset-wide at as_of. PaperQuality at a judgment session stays separate so a later issue does not by itself wipe an earlier good session."
+}

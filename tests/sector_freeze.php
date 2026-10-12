@@ -74,4 +74,8 @@ sf($v2['sectors']['000660.KS']==='unclassified'&&$v2['symbols']['000660.KS']['re
 sf(count(array_unique(array_intersect_key($v2['sectors'],array_flip(['000660.KS']))))===1&&$v2['collection']['report']==='x','v2 keeps the shared unclassified bucket and the collection note');
 cache($v2Dir,'051910',['sector'=>'화학','sector_bucket'=>'energy','name'=>'LG화학']);
 sf((function()use($v2Dir,$prior,$recent,$scanFile){try{PaperSectorFreeze::build($v2Dir,['prior'=>$prior,'recent'=>$recent],[$scanFile],PaperSectorFreeze::KIND_V2);return false;}catch(Throwable){return true;}})(),'a v2 row without provenance is refused');
+$okMap=['kind'=>PaperSectorFreeze::KIND_V2,'assumption'=>'당시 업종을 복원한 것이 아니다.','unclassified_bucket'=>'unclassified','unclassified_is_one_shared_bucket'=>true,
+    'sectors'=>['005930.KS'=>'semi','000660.KS'=>'unclassified'],'unconfirmed'=>[['symbol'=>'000660.KS']]];
+PaperSectorFreeze::assertCoversUnion(['000660.KS','005930.KS'],$okMap);
+sf((function()use($okMap){try{PaperSectorFreeze::assertCoversUnion(['005930.KS','000660.KS','051910.KS'],$okMap);return false;}catch(Throwable){return true;}})(),'a map that omits a union symbol is refused');
 echo "SECTOR_FREEZE_PASS\n";

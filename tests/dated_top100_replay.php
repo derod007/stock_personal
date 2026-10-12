@@ -87,6 +87,9 @@ $data=dmk(['A1.KS','B2.KS','C3.KS'],PREP+8);
 $cand=dcand([PREP=>['A1.KS','B2.KS'],PREP+1=>['A1.KS','B2.KS'],PREP+2=>['C3.KS','B2.KS'],PREP+3=>['C3.KS','B2.KS']]);
 $plans=['A1.KS'=>[PREP=>dplan(PREP),PREP+1=>dplan(PREP+1),PREP+2=>dplan(PREP+2)],
     'B2.KS'=>[PREP=>dplan(PREP)],'C3.KS'=>[PREP=>dplan(PREP),PREP+1=>dplan(PREP+1)]];
+$partialMap=['kind'=>PaperSectorFreeze::KIND_V2,'assumption'=>'당시 업종을 복원한 것이 아니다.','unclassified_bucket'=>'unclassified',
+    'unclassified_is_one_shared_bucket'=>true,'sectors'=>['A1.KS'=>'semi'],'unconfirmed'=>[]];
+dcheck(dthrows(fn()=>dgo($data,dcfg(),$plans,$cand,['sector_map'=>$partialMap]),'must match the candidate union'),'a partial sector map is refused for a dated replay');
 [$r,$j]=dgo($data,dcfg(),$plans,$cand,['start'=>PaperHistoryResearch::day(dts(PREP)),'through'=>PaperHistoryResearch::day(dts(PREP+3))]);
 $logs=devs($j,'day_log');
 $ready=[];foreach($logs as $d)foreach($d['signals'] as $sg)$ready[$d['date']][]=$sg['symbol'];

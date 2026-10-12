@@ -1,0 +1,360 @@
+{
+  "ok": true,
+  "generated_at": "2026-10-13 00:47:10",
+  "from": "2025-10-08",
+  "to": "2026-10-08",
+  "day_count": 244,
+  "ok_day_count": 244,
+  "blocked_dates": [],
+  "union_unique_symbols": 933,
+  "name_changes_in_union": [
+    {
+      "symbol": "267270.KS",
+      "from": "HD현대건설기계",
+      "to": "HD건설기계",
+      "date": "20260126"
+    },
+    {
+      "symbol": "232680.KQ",
+      "from": "라온테크",
+      "to": "라온로보틱스",
+      "date": "20260129"
+    },
+    {
+      "symbol": "187660.KQ",
+      "from": "현대ADM",
+      "to": "페니트리움바이오",
+      "date": "20260331"
+    },
+    {
+      "symbol": "079550.KS",
+      "from": "LIG넥스원",
+      "to": "LIG디펜스앤에어로스페이스",
+      "date": "20260414"
+    },
+    {
+      "symbol": "138360.KQ",
+      "from": "협진",
+      "to": "앤로보틱스",
+      "date": "20260428"
+    },
+    {
+      "symbol": "036570.KS",
+      "from": "엔씨소프트",
+      "to": "NC",
+      "date": "20260429"
+    },
+    {
+      "symbol": "007820.KQ",
+      "from": "에스엠코어",
+      "to": "엠엑스로보틱스",
+      "date": "20260818"
+    },
+    {
+      "symbol": "396300.KQ",
+      "from": "세아메카닉스",
+      "to": "HT로보틱스",
+      "date": "20260923"
+    },
+    {
+      "symbol": "307750.KQ",
+      "from": "국전약품",
+      "to": "국전",
+      "date": "20261008"
+    }
+  ],
+  "provider_unmapped_symbols": [
+    {
+      "code": "0001A0",
+      "symbol": "0001A0.KQ",
+      "name": "덕양에너젠",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0004V0",
+      "symbol": "0004V0.KQ",
+      "name": "엔비알모션",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0007C0",
+      "symbol": "0007C0.KQ",
+      "name": "아크릴",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0007J0",
+      "symbol": "0007J0.KQ",
+      "name": "인벤테라",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "00088K",
+      "symbol": "00088K.KS",
+      "name": "한화3우B",
+      "market": "KOSPI",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0008Z0",
+      "symbol": "0008Z0.KQ",
+      "name": "에스엔시스",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0009K0",
+      "symbol": "0009K0.KQ",
+      "name": "에임드바이오",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0010F0",
+      "symbol": "0010F0.KQ",
+      "name": "보원케미칼",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0010S0",
+      "symbol": "0010S0.KQ",
+      "name": "와이즈플래닛컴퍼니",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0011A0",
+      "symbol": "0011A0.KQ",
+      "name": "액스비스",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0011T0",
+      "symbol": "0011T0.KQ",
+      "name": "채비",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0013V0",
+      "symbol": "0013V0.KQ",
+      "name": "삼진식품",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0015G0",
+      "symbol": "0015G0.KQ",
+      "name": "그린광학",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0015N0",
+      "symbol": "0015N0.KQ",
+      "name": "아로마티카",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0015S0",
+      "symbol": "0015S0.KQ",
+      "name": "페스카로",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0017J0",
+      "symbol": "0017J0.KQ",
+      "name": "세미티에스",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0035S0",
+      "symbol": "0035S0.KQ",
+      "name": "빅웨이브로보틱스",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0039P0",
+      "symbol": "0039P0.KQ",
+      "name": "매드업",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "00680K",
+      "symbol": "00680K.KS",
+      "name": "미래에셋증권2우B",
+      "market": "KOSPI",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0082N0",
+      "symbol": "0082N0.KQ",
+      "name": "카나프테라퓨틱스",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0088M0",
+      "symbol": "0088M0.KQ",
+      "name": "메쥬",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0117P0",
+      "symbol": "0117P0.KQ",
+      "name": "피스피스스튜디오",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0120G0",
+      "symbol": "0120G0.KS",
+      "name": "삼양바이오팜",
+      "market": "KOSPI",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0126Z0",
+      "symbol": "0126Z0.KS",
+      "name": "삼성에피스홀딩스",
+      "market": "KOSPI",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0155E0",
+      "symbol": "0155E0.KQ",
+      "name": "해치텍",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0156T0",
+      "symbol": "0156T0.KQ",
+      "name": "에이치엘지노믹스",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0161M0",
+      "symbol": "0161M0.KQ",
+      "name": "네오사피엔스",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0218L0",
+      "symbol": "0218L0.KQ",
+      "name": "네오뷰",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0220W0",
+      "symbol": "0220W0.KS",
+      "name": "한화머시너리앤서비스홀딩스",
+      "market": "KOSPI",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0220WL",
+      "symbol": "0220WL.KS",
+      "name": "한화머시너리앤서비스홀딩스3우B",
+      "market": "KOSPI",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "45014K",
+      "symbol": "45014K.KS",
+      "name": "코오롱모빌리티그룹우",
+      "market": "KOSPI",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "45226K",
+      "symbol": "45226K.KS",
+      "name": "한화갤러리아우",
+      "market": "KOSPI",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    }
+  ],
+  "selected_file_count": 244,
+  "raw_file_count": 488,
+  "independent_rerank_ok_count": 244,
+  "issues": []
+}

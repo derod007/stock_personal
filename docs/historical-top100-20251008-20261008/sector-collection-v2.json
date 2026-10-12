@@ -1,0 +1,292 @@
+{
+    "schema": 1,
+    "kind": "sector_collection_v2",
+    "assumption": "현재 운영 섹터 캐시에 저장된 업종명을 SectorMap::bucketOf로 분류해 두 기간에 같이 적용한다. 당시 업종을 복원한 것이 아니다.",
+    "collected_at": "2026-10-13T02:59:04+09:00",
+    "why_not_sector_map": "finance.naver.com/item/main.naver answers 302 to stock.naver.com, which has no upjong link. SectorMap stores \"기타\" and a null name for every symbol.",
+    "endpoints": {
+        "industry_list": "https://m.stock.naver.com/api/stocks/industry?page=%d&pageSize=100",
+        "stock": "https://m.stock.naver.com/api/stock/%s/integration"
+    },
+    "industry_list": {
+        "groups": 79,
+        "total_count": 79,
+        "pages": 1,
+        "sha256": "f8a00b4703e796f0c4c125e50bb7e314cba3c42624512ea7c6baca150727e8fb",
+        "ok": true,
+        "failure": null
+    },
+    "research_cache_dir": "C:/Users/acdun/Desktop/dev/stock-personal-paper/history-sector/dated-top100-20251008-20261008-v2",
+    "counts": {
+        "symbols": 31,
+        "secured": 31,
+        "unconfirmed": 0
+    },
+    "failure_reasons": [],
+    "bucket_counts": {
+        "auto": 3,
+        "bio": 7,
+        "consumer": 4,
+        "energy": 3,
+        "fin": 1,
+        "indust": 1,
+        "other": 5,
+        "semi": 4,
+        "soft": 3
+    },
+    "operational_caches_unchanged": true,
+    "operational_cache_fingerprints": {
+        "data/cache/sector": "34478df6a33b06220ef438d0957bb89b3cdd2a9dd0280d85c80140226918df8e",
+        "data/raw/cache/sector": "03bfaa802eadacc9116dfd5724036150a2f20a8929c4a17a800f425d6fc2e080"
+    },
+    "symbols": {
+        "0001A0.KQ": {
+            "status": "secured",
+            "sector_name": "석유와가스",
+            "bucket": "energy",
+            "industry_code": "313",
+            "response_sha256": "e5737b05aa37e90e930d31db87bdf725a72e40a004bcd78467f2acc8a1ee67a3",
+            "attempts": 1
+        },
+        "0004V0.KQ": {
+            "status": "secured",
+            "sector_name": "기계",
+            "bucket": "indust",
+            "industry_code": "299",
+            "response_sha256": "fed4bf504c9abb5268b92ee334420871bcab14c602c632523e5bad95c3fd67a4",
+            "attempts": 1
+        },
+        "0007C0.KQ": {
+            "status": "secured",
+            "sector_name": "IT서비스",
+            "bucket": "soft",
+            "industry_code": "267",
+            "response_sha256": "6a385956fa062bd6e2b8b5d23fa2546731eb571a7a229d32da390569cd4cf324",
+            "attempts": 1
+        },
+        "0007J0.KQ": {
+            "status": "secured",
+            "sector_name": "제약",
+            "bucket": "bio",
+            "industry_code": "261",
+            "response_sha256": "ed53a23af6c94951aa9387a5dc331659ca09410b58b3a7c8fb44f033c855791e",
+            "attempts": 1
+        },
+        "00088K.KS": {
+            "status": "secured",
+            "sector_name": "복합기업",
+            "bucket": "other",
+            "industry_code": "276",
+            "response_sha256": "f07002d13c8e255b6542b32b900736a782cec4087fb084e3dd40cfc5090c38a8",
+            "attempts": 1
+        },
+        "0008Z0.KQ": {
+            "status": "secured",
+            "sector_name": "조선",
+            "bucket": "auto",
+            "industry_code": "291",
+            "response_sha256": "dc577ab628033caaeaf93ea7f446844c9d6bf78d1e4cee97ee54188b634d99e6",
+            "attempts": 1
+        },
+        "0009K0.KQ": {
+            "status": "secured",
+            "sector_name": "생물공학",
+            "bucket": "bio",
+            "industry_code": "286",
+            "response_sha256": "882623867ed7158b46dbb931d2625cb14688f1a6bf018616841aaad616474539",
+            "attempts": 1
+        },
+        "0010F0.KQ": {
+            "status": "secured",
+            "sector_name": "화학",
+            "bucket": "energy",
+            "industry_code": "272",
+            "response_sha256": "3b97c567586717451488b500d6591425e384ff33072ad3a8979174b85300008d",
+            "attempts": 1
+        },
+        "0010S0.KQ": {
+            "status": "secured",
+            "sector_name": "가정용품",
+            "bucket": "other",
+            "industry_code": "297",
+            "response_sha256": "43d70f718e34318af4df77be6dad128d9fe96ba6514052ff20fcaff067ece449",
+            "attempts": 1
+        },
+        "0011A0.KQ": {
+            "status": "secured",
+            "sector_name": "전자장비와기기",
+            "bucket": "semi",
+            "industry_code": "282",
+            "response_sha256": "6a9bacb1323432260bcb6e1054454ba44a730abb7030da9f0a35f80432e7c793",
+            "attempts": 1
+        },
+        "0011T0.KQ": {
+            "status": "secured",
+            "sector_name": "전기제품",
+            "bucket": "energy",
+            "industry_code": "283",
+            "response_sha256": "5a5ffd5c001284494fb5940d254c9ca5a7603923826c6b4914a187245beb5a6e",
+            "attempts": 1
+        },
+        "0013V0.KQ": {
+            "status": "secured",
+            "sector_name": "식품",
+            "bucket": "consumer",
+            "industry_code": "268",
+            "response_sha256": "f964ec45ed25085438da63d00436da2e0e3049860f10c2d59d3a60c522137bb1",
+            "attempts": 1
+        },
+        "0015G0.KQ": {
+            "status": "secured",
+            "sector_name": "우주항공과국방",
+            "bucket": "auto",
+            "industry_code": "284",
+            "response_sha256": "8ec0e631eaa34bb13d0b7afe4570e5cfa3c5965b02cd5a408119eac7fc1479e2",
+            "attempts": 1
+        },
+        "0015N0.KQ": {
+            "status": "secured",
+            "sector_name": "화장품",
+            "bucket": "consumer",
+            "industry_code": "266",
+            "response_sha256": "9b3157b0e1e7b873988dd17cd420e39e4ec0dc9fbf7287166922aae7c012df56",
+            "attempts": 1
+        },
+        "0015S0.KQ": {
+            "status": "secured",
+            "sector_name": "자동차부품",
+            "bucket": "auto",
+            "industry_code": "270",
+            "response_sha256": "aea8d3fe9ec008d6c4377644acec52ffb66107303ffdb49b5849649fd3094a18",
+            "attempts": 1
+        },
+        "0017J0.KQ": {
+            "status": "secured",
+            "sector_name": "반도체와반도체장비",
+            "bucket": "semi",
+            "industry_code": "278",
+            "response_sha256": "ab1f16961b1acded95e48c37cf024ae7f0400f56cc94ce96395e6d28a45e3149",
+            "attempts": 1
+        },
+        "0035S0.KQ": {
+            "status": "secured",
+            "sector_name": "IT서비스",
+            "bucket": "soft",
+            "industry_code": "267",
+            "response_sha256": "7439d42712175ad9f57fdafc4ee905b49749fbfc3895a80e273f6e3accc0cb42",
+            "attempts": 1
+        },
+        "0039P0.KQ": {
+            "status": "secured",
+            "sector_name": "광고",
+            "bucket": "other",
+            "industry_code": "310",
+            "response_sha256": "d63e2a5c9374e10dfef3b2f4971e30530506588de3e8ba480ea54da3a0fec6a3",
+            "attempts": 1
+        },
+        "00680K.KS": {
+            "status": "secured",
+            "sector_name": "증권",
+            "bucket": "fin",
+            "industry_code": "321",
+            "response_sha256": "5c06bc3d15dcafdade4c697812447135dfb485fa407ff35c602581a718dc5863",
+            "attempts": 1
+        },
+        "0082N0.KQ": {
+            "status": "secured",
+            "sector_name": "제약",
+            "bucket": "bio",
+            "industry_code": "261",
+            "response_sha256": "8c1b71651f6a15b7a89d80f37e200338ff0e469997bc6af086c328592d097b2a",
+            "attempts": 1
+        },
+        "0088M0.KQ": {
+            "status": "secured",
+            "sector_name": "건강관리장비와용품",
+            "bucket": "bio",
+            "industry_code": "281",
+            "response_sha256": "97d52592991bd59beb6eac90354d93c75d9d7532b7fb8b2ddf0c3b1cd5abff3c",
+            "attempts": 1
+        },
+        "0117P0.KQ": {
+            "status": "secured",
+            "sector_name": "섬유,의류,신발,호화품",
+            "bucket": "consumer",
+            "industry_code": "274",
+            "response_sha256": "9cc412f6f901a997ed1824e8ba1927753e410a6b6e61b17d3d4e74bce65c009d",
+            "attempts": 1
+        },
+        "0120G0.KS": {
+            "status": "secured",
+            "sector_name": "건강관리장비와용품",
+            "bucket": "bio",
+            "industry_code": "281",
+            "response_sha256": "cab5b6dfb00f4a7f72da1c80d5e71bebf0695498f8c95a58ce6b58c18b63e596",
+            "attempts": 1
+        },
+        "0126Z0.KS": {
+            "status": "secured",
+            "sector_name": "제약",
+            "bucket": "bio",
+            "industry_code": "261",
+            "response_sha256": "ed2f69a0fa21610b175426ecbe11c56310e052c34c8eda8b9bd1a08e7752d55d",
+            "attempts": 1
+        },
+        "0155E0.KQ": {
+            "status": "secured",
+            "sector_name": "반도체와반도체장비",
+            "bucket": "semi",
+            "industry_code": "278",
+            "response_sha256": "b2b7b2a9d0dc949f1a53ff8fba2d4c930fb7e72ef95aae0382aa818b3d160615",
+            "attempts": 1
+        },
+        "0156T0.KQ": {
+            "status": "secured",
+            "sector_name": "제약",
+            "bucket": "bio",
+            "industry_code": "261",
+            "response_sha256": "126da83b444d0c08d6ba4d34a9012ad148d35c80f92ad08e9ca42c981cce62ba",
+            "attempts": 1
+        },
+        "0161M0.KQ": {
+            "status": "secured",
+            "sector_name": "소프트웨어",
+            "bucket": "soft",
+            "industry_code": "287",
+            "response_sha256": "01a93053f0e9082da54299da3202fb1c68c9a743d66c4b1a5acdb80dff2e0a49",
+            "attempts": 1
+        },
+        "0218L0.KQ": {
+            "status": "secured",
+            "sector_name": "디스플레이장비및부품",
+            "bucket": "semi",
+            "industry_code": "269",
+            "response_sha256": "b7014acc4888c1ef34602766d5adccafa8e05f196ece13eda363b2a74505edee",
+            "attempts": 1
+        },
+        "0220W0.KS": {
+            "status": "secured",
+            "sector_name": "복합기업",
+            "bucket": "other",
+            "industry_code": "276",
+            "response_sha256": "1104b8145da20557ba4d46ffecd5ce1cab765a2f208f542dfab4c028f8d0a78f",
+            "attempts": 1
+        },
+        "0220WL.KS": {
+            "status": "secured",
+            "sector_name": "복합기업",
+            "bucket": "other",
+            "industry_code": "276",
+            "response_sha256": "82961707e6d2da117cd210fbba0390466bf33d12c522111204aeea91446c311c",
+            "attempts": 1
+        },
+        "45226K.KS": {
+            "status": "secured",
+            "sector_name": "백화점과일반상점",
+            "bucket": "consumer",
+            "industry_code": "264",
+            "response_sha256": "e55bdf6476aa3f2cf2fb063b6e1a4df922053d339c5e5981d71eddff05cd9eb5",
+            "attempts": 1
+        }
+    }
+}

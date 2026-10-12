@@ -230,6 +230,105 @@ class HistoricalTop100PilotTest(unittest.TestCase):
         self.assertEqual(counted, [])
         self.assertEqual(union, set())
 
+    def test_range_calendar_skips_documented_closures_not_weekends_only(self):
+        days = self.m.candidate_trading_days(self.m.RANGE_FROM, self.m.RANGE_TO)
+        self.assertEqual(days[0], "20251010")
+        self.assertEqual(days[-1], "20261008")
+        for blocked in (
+            "20251008", "20251009", "20251225", "20251231",
+            "20260101", "20260217", "20260302", "20260501", "20260603",
+            "20260717", "20260817", "20260925", "20261005",
+        ):
+            self.assertNotIn(blocked, days)
+        self.assertIn("20251010", days)
+        self.assertIn("20251230", days)
+        self.assertIn("20261008", days)
+        self.assertNotIn("20261009", days)
+        self.assertEqual(self.m.assumed_trading_days(2025, 10)[0], "20251001")
+        self.assertEqual(len(self.m.assumed_trading_days(2025, 10)), 18)
+        overlap = self.m.oct2025_overlap_days(days)
+        self.assertEqual(overlap[0], "20251010")
+        self.assertNotIn("20251001", overlap)
+        self.assertNotIn("20251002", overlap)
+
+    def test_copy_verified_oct_never_writes_source_and_requires_hash(self):
+        m = self.m
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            src = root / "src"
+            dest_raw = root / "dest" / "raw"
+            dest_sel = root / "dest" / "selected"
+            (src / "raw").mkdir(parents=True)
+            (src / "selected").mkdir(parents=True)
+            body = json.dumps({
+                "OutBlock_1": [{"BAS_DD": "20251010", "ISU_CD": "005930", "ISU_NM": "Samsung", "ACC_TRDVAL": "1"}]
+            }).encode("utf-8")
+            (src / "raw" / "20251010_kospi_equity.json").write_bytes(body)
+            (src / "raw" / "20251010_kosdaq_equity.json").write_bytes(body)
+            sel = b'{"date":"20251010","top100":[]}'
+            (src / "selected" / "20251010_top100.json").write_bytes(sel)
+            src_mtime = (src / "raw" / "20251010_kospi_equity.json").stat().st_mtime_ns
+            expected_raw = {name: m.sha256_bytes((src / "raw" / name).read_bytes())
+                            for name in ("20251010_kospi_equity.json", "20251010_kosdaq_equity.json")}
+            expected_sel = {"20251010_top100.json": m.sha256_bytes(sel)}
+            missing = m.copy_if_hash_matches(
+                src / "raw" / "20251010_kospi_equity.json",
+                dest_raw / "20251010_kospi_equity.json",
+                "",
+            )
+            self.assertEqual(missing, "missing_baseline")
+            mismatch = m.copy_if_hash_matches(
+                src / "raw" / "20251010_kospi_equity.json",
+                dest_raw / "20251010_kospi_equity.json",
+                "0" * 64,
+            )
+            self.assertEqual(mismatch, "source_mismatch")
+            self.assertFalse(dest_raw.exists())
+            copied = m.copy_if_hash_matches(
+                src / "raw" / "20251010_kospi_equity.json",
+                dest_raw / "20251010_kospi_equity.json",
+                expected_raw["20251010_kospi_equity.json"],
+            )
+            self.assertEqual(copied, "copied")
+            reused = m.copy_if_hash_matches(
+                src / "raw" / "20251010_kospi_equity.json",
+                dest_raw / "20251010_kospi_equity.json",
+                expected_raw["20251010_kospi_equity.json"],
+            )
+            self.assertEqual(reused, "reused")
+            self.assertEqual((src / "raw" / "20251010_kospi_equity.json").stat().st_mtime_ns, src_mtime)
+            self.assertEqual(
+                (src / "raw" / "20251010_kospi_equity.json").read_bytes(),
+                dest_raw.joinpath("20251010_kospi_equity.json").read_bytes(),
+            )
+            del expected_sel, expected_raw
+
+    def test_resume_reuses_valid_raw_without_refetch(self):
+        calls = []
+        def fetch(day, market):
+            calls.append((day, market))
+            return 200, self._body(day, "KOSPI" if market == "kospi_equity" else "KOSDAQ")
+        with tempfile.TemporaryDirectory() as tmp:
+            first = self._collect(tmp, fetch, days=["20251010"])
+            self.assertEqual(first["ok_dates"], ["20251010"])
+            self.assertEqual(len(calls), 2)
+            second = self._collect(tmp, fetch, days=["20251010"])
+            self.assertEqual(second["ok_dates"], ["20251010"])
+            self.assertTrue(second["days"][0]["files"][0]["reuse"])
+            self.assertTrue(second["days"][0]["files"][1]["reuse"])
+            self.assertEqual(len(calls), 2)
+
+    def test_independent_rerank_matches_selected_top100(self):
+        def fetch(day, market):
+            mkt = "KOSPI" if market == "kospi_equity" else "KOSDAQ"
+            return 200, self._body(day, mkt)
+        with tempfile.TemporaryDirectory() as tmp:
+            self._collect(tmp, fetch, days=["20251010"])
+            raw_dir = Path(tmp) / "raw"
+            selected = json.loads((Path(tmp) / "selected" / "20251010_top100.json").read_text(encoding="utf-8"))
+            rerank = self.m.rerank_from_raw_files("20251010", raw_dir)
+            self.assertEqual(self.m.top100_signature(rerank), self.m.top100_signature(selected))
+
 
 if __name__ == "__main__":
     unittest.main()

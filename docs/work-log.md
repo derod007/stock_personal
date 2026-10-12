@@ -1,3 +1,51 @@
+## 2026-10-13 03:27 · Cursor · 끝
+- 한 일: PR #75 운영 NaverDailyQuotes를 main과 같게 복원, 영문 종목코드는 연구 krCode로 분리, 933 전체 섹터 맵 고정. 재수집·계좌 재현·병합 없음
+- 파일: src/NaverDailyQuotes.php, bin/paper/HistoryResearch.php, bin/paper/DatedTop100Prep.php, bin/paper_dated_top100_prep.php, bin/paper/SectorFreeze.php, bin/paper/DatedTop100Replay.php, bin/paper_sector_collect.php, tests/dated_top100_prep.php, tests/dated_top100_replay.php, tests/sector_freeze.php, docs/historical-top100-20251008-20261008/, docs/work-log.md
+- 커밋: PR #75에 추가(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-13 03:21 · Cursor · 진행
+- 한 일: PR #75 운영 NaverDailyQuotes 복원·연구 전용 코드 분리, 933 전체 섹터 맵. 재수집·계좌 재현·병합 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
+## 2026-10-13 03:03 · Cursor · 끝
+- 한 일: PR #75 계좌 실행 전 데이터 준비. Yahoo 31종 v2 편입(5y 31회), 895 해시 복사, 24400 고유 분할, 중간·최종 이탈 잠재 누락 집계, 편입 섹터 맵. 계좌 재현·병합 없음
+- 파일: bin/paper/DatedTop100Prep.php, bin/paper_dated_top100_prep.php, bin/paper/HistoryResearch.php, src/NaverDailyQuotes.php, tests/dated_top100_prep.php, docs/historical-top100-20251008-20261008/, docs/work-log.md
+- 커밋: PR #75에 추가(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-13 02:50 · Cursor · 진행
+- 한 일: PR #75 계좌 실행 전 데이터 준비 마무리. Yahoo 31종 v2 편입, 24400 분할 집계, 중간 이탈 봉 검사. 계좌 재현·병합 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
+## 2026-10-13 02:40 · Cursor · 끝
+- 한 일: PR #75 해시 검증을 거래일 목록 기준으로 분리, 미매핑/404 프로브, 날짜별 품질 집계, Yahoo 요청 수 정정. 원본·고정 해시 보존. 계좌 재현·병합 없음
+- 파일: docs/research/dated-amount-top100-range.py, docs/research/dated-amount-top100-provider-review.py, bin/paper/DatedTop100Prep.php, bin/paper_dated_top100_prep.php, bin/paper/HistoryResearch.php, tests/test_dated_amount_top100_range.py, tests/test_dated_amount_top100_provider_review.py, tests/dated_top100_prep.php, docs/historical-top100-20251008-20261008/, .github/workflows/pattern-replay.yml, docs/work-log.md
+- 커밋: PR #75에 추가(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-13 02:15 · Cursor · 진행
+- 한 일: PR #75 해시 검증·미매핑/404 확인·날짜별 누락 집계·Yahoo 요청 수 정정. 기존 원본·고정 해시 보존. 계좌 재현·병합 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
+## 2026-10-13 01:04 · Cursor · 끝
+- 한 일: 2025-10-08~2026-10-08 날짜별 KRX 거래대금 TOP100 244일 수집·검증, 합집합 933 일봉 준비. 계좌 재현·병합 없음
+- 파일: docs/research/historical-amount-top100-pilot.py, docs/research/dated-amount-top100-range.py, bin/paper/DatedTop100Prep.php, bin/paper_dated_top100_prep.php, tests/dated_top100_prep.php, tests/test_dated_amount_top100_range.py, tests/test_historical_amount_top100_pilot.py, docs/historical-top100-20251008-20261008/, .github/workflows/pattern-replay.yml, docs/work-log.md
+- 커밋: 새 PR(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-13 00:24 · Cursor · 진행
+- 한 일: 최신 main에서 2025-10-08~2026-10-08 날짜별 KRX 거래대금 TOP100·일봉 준비. 계좌 재현·병합 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-13 00:01 · Cursor · 끝
 - 한 일: PR #74 재현 근거·검증 빈틈 보완. 후보 LF/CRLF 해시 연결, PR #73 선정·원본 해시 필수 비교, 순위 이탈 대기주문 체결·만료 테스트, 보고서 문구 정정
 - 파일: bin/paper/DatedTop100Replay.php, bin/paper_dated_top100_replay.php, tests/dated_top100_replay.php, tests/test_dated_amount_top100_replay.py, docs/research/dated-amount-top100-replay.py, docs/historical-top100-replay-202510/report.md, docs/historical-top100-replay-202510/evidence.json, docs/historical-top100-replay-202510/input-validation.json, docs/historical-top100-replay-202510/account/input-hash-link.json, .github/workflows/pattern-replay.yml, docs/work-log.md

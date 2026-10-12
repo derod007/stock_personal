@@ -55,7 +55,7 @@
 | 신규 수집 | 561 |
 | Yahoo 404 | 6 |
 | 심볼 미매핑(수집 안 함) | 32 |
-| Yahoo 요청 | 561 |
+| Yahoo 요청(이전 보고) | 561 (신규 수집 성공만) |
 | 시간 | 871.6초 |
 | 봉 파일 | 약 127.7MB |
 | 경고 포함 통과 | 811 |
@@ -78,25 +78,76 @@ Yahoo 404: `010620.KS` HD현대미포, `012510.KS` 더존비즈온, `042670.KS` 
 
 미확인 38: 심볼 미매핑 32, 네이버 HTTP 409 6(위 Yahoo 404와 동일). 다음 계좌 실행 때 이 38종은 `unclassified`로 남습니다.
 
+## 보완 (PR #75)
+
+기존 원본·`file-hashes.json`·10월 연구 결과는 덮어쓰지 않았습니다. 계좌 재현·추천·수익률은 하지 않았습니다.
+
+### 해시 검증
+
+검사 대상은 `ok_dates`가 아니라 확정 거래일 목록입니다. `--validate`는 읽기 전용이며 기준 해시를 재생성하지 않습니다. 고정 파일이 없으면 로컬 수집 기록으로 대신하지 않습니다.
+
+거래일 244 · 성공 244 · 선정 244 · 원본 488이 대응합니다. `hash-verify.json`: 누락 0, 불일치 0, `rewrote_file_hashes=false`.
+
+### 미매핑 32종 · Yahoo 404 6종
+
+미매핑 32종은 140일에 260건 등장했습니다. 숫자 6자리가 아니라고 잘못된 종목이라고 보지 않았고, Yahoo chart에 실제 심볼을 넣었습니다. 별도 경로 `data/raw/research/historical-amount-top100-20251008-20261008-provider-probe-v1`(Git 밖). 기존 봉 데이터셋에 넣지 않았습니다.
+
+| 결과 | 수 | 비고 |
+|---|---|---|
+| Yahoo chart 응답(미수입) | 31 | 알파벳 단축코드·우선주 접미. 1y 봉 수는 종목마다 다름 |
+| 미확보 | 7 | 미매핑 1 + 기존 404 6. 101위로 채우지 않음 |
+
+미확보: `45014K.KS` 코오롱모빌리티그룹우, `010620.KS` HD현대미포, `012510.KS` 더존비즈온, `042670.KS` HD현대인프라코어, `082640.KS` 동양생명, `152550.KS` 한국ANKOR유전, `450140.KS` 코오롱모빌리티그룹. 보통주·우선주 가격을 서로 연결하지 않았습니다. 네이버 일별 시세는 HTTP 410이라 Yahoo와 붙이지 않았습니다. 프로브 HTTP 114회(심볼당 chart·search·naver, 재시도 없음).
+
+### 날짜별 누락
+
+데이터셋 전체 보류 84종을 기간에서 일괄 제외하지 않았습니다. 각 날짜 TOP100은 당일까지의 봉만으로 `PaperQuality`(최소 60봉)와 점프를 봤습니다.
+
+| 사유 | 건수(종목×일) | 고유 종목 | 고유 세션 |
+|---|---|---|---|
+| 분석 가능 | 23533 | 866 | 244 |
+| 심볼 미매핑 | 260 | 32 | 140 |
+| 자료 없음 | 55 | 6 | 46 |
+| 봉 부족 | 505 | 48 | 194 |
+| 세션 봉 없음 | 13 | 9 | 12 |
+| 가격 이상 | 880 | 71 | 243 |
+| 기타 차단 | 46 | 4 | 40 |
+
+첫 거래일 2025-10-10은 분석 가능 96입니다. 가격 이상은 그 날짜까지의 점프만 세며, 이후 점프가 있는 7종은 과거 정상 세션을 지우지 않았습니다. TOP100 이탈 후 보유·대기용 봉 검사 80104건 중 누락 1026건(고유 9종, 210세션). 추천·매매·수익률은 계산하지 않았습니다.
+
+### Yahoo 요청 수
+
+이전 561은 **이번 수집에서 성공한 신규 종목**만 센 값입니다. 재수집하지 않았습니다.
+
+| 항목 | 확정 | 미확정 |
+|---|---|---|
+| 신규 성공 요청 기록 | 561 | |
+| 실패 종목 `attempts` 합 | 6 (각 1, 요청 배열 없음) | 실패 curl의 http_code는 당시 로그에 없음 |
+| 이번 수집 HTTP 하한 | 567 | `httpGet` 내부 429/503 재시도 |
+| import 334의 요청 기록 | 원본 데이터셋에서 복사. 이번 Yahoo 호출 아님 | |
+| index 파일 895 | import 포함 | |
+
+이후 수집은 `HistoryResearch::httpGet`에서 curl마다 계수합니다.
+
 ## 검증
 
-`python -m unittest tests.test_historical_amount_top100_pilot tests.test_dated_amount_top100_range`  
+`python -m unittest tests.test_historical_amount_top100_pilot tests.test_dated_amount_top100_range tests.test_dated_amount_top100_provider_review`  
 `php tests/dated_top100_prep.php`
 
-기간 지정, 빈 응답≠휴장, 해시 누락 실패, 재개 시 정상 원본 재사용, 독립 재정렬을 확인했습니다.
+기간 지정, 빈 응답≠휴장, 해시 누락·빈 ok_dates·일부 누락·잘못된 원본/선정 해시 실패, 재개 시 정상 원본 재사용, 독립 재정렬, 이후 점프가 과거 세션을 지우지 않음을 확인했습니다.
 
 ## 재현
 
 인증키·원본 JSON은 Git에 없습니다. 봉은 `PAPER_STATE_DIR/history-research/kr-dated-amount-top100-20251008-20261008`.
 
 ```
-python -m unittest tests.test_historical_amount_top100_pilot tests.test_dated_amount_top100_range
+python -m unittest tests.test_historical_amount_top100_pilot tests.test_dated_amount_top100_range tests.test_dated_amount_top100_provider_review
 php tests/dated_top100_prep.php
 python docs/research/historical-amount-top100-pilot.py --collect --from=2025-10-08 --to=2026-10-08
 python docs/research/dated-amount-top100-range.py --validate
-php bin/paper_dated_top100_prep.php universe
-php -d memory_limit=768M bin/paper_dated_top100_prep.php collect
-php bin/paper_dated_top100_prep.php quality
+php bin/paper_dated_top100_prep.php yahoo-requests
+php -d memory_limit=512M bin/paper_dated_top100_prep.php coverage
+php bin/paper_dated_top100_prep.php provider-review
 ```
 
 해시는 `evidence.json`. 운영 전략 파일은 이 작업에서 바꾸지 않았습니다.

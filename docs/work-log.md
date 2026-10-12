@@ -1,3 +1,15 @@
+## 2026-10-13 02:40 · Cursor · 끝
+- 한 일: PR #75 해시 검증을 거래일 목록 기준으로 분리, 미매핑/404 프로브, 날짜별 품질 집계, Yahoo 요청 수 정정. 원본·고정 해시 보존. 계좌 재현·병합 없음
+- 파일: docs/research/dated-amount-top100-range.py, docs/research/dated-amount-top100-provider-review.py, bin/paper/DatedTop100Prep.php, bin/paper_dated_top100_prep.php, bin/paper/HistoryResearch.php, tests/test_dated_amount_top100_range.py, tests/test_dated_amount_top100_provider_review.py, tests/dated_top100_prep.php, docs/historical-top100-20251008-20261008/, .github/workflows/pattern-replay.yml, docs/work-log.md
+- 커밋: PR #75에 추가(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-13 02:15 · Cursor · 진행
+- 한 일: PR #75 해시 검증·미매핑/404 확인·날짜별 누락 집계·Yahoo 요청 수 정정. 기존 원본·고정 해시 보존. 계좌 재현·병합 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-13 01:04 · Cursor · 끝
 - 한 일: 2025-10-08~2026-10-08 날짜별 KRX 거래대금 TOP100 244일 수집·검증, 합집합 933 일봉 준비. 계좌 재현·병합 없음
 - 파일: docs/research/historical-amount-top100-pilot.py, docs/research/dated-amount-top100-range.py, bin/paper/DatedTop100Prep.php, bin/paper_dated_top100_prep.php, tests/dated_top100_prep.php, tests/test_dated_amount_top100_range.py, tests/test_historical_amount_top100_pilot.py, docs/historical-top100-20251008-20261008/, .github/workflows/pattern-replay.yml, docs/work-log.md

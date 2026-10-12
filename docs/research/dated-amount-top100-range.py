@@ -21,6 +21,7 @@ PILOT_PATH = ROOT / "docs" / "research" / "historical-amount-top100-pilot.py"
 DOCS = ROOT / "docs" / "historical-top100-20251008-20261008"
 KST = timezone(timedelta(hours=9))
 YAHOO_SIX = re.compile(r"^\d{6}\.(KS|KQ)$")
+EQUITY_MARKETS = ("kospi_equity", "kosdaq_equity")
 
 
 def load_pilot():
@@ -82,9 +83,96 @@ def frozen_from_collect(collect: dict[str, Any]) -> tuple[dict[str, str], dict[s
     return selected, raw
 
 
-def validate_inputs(pilot: Any) -> dict[str, Any]:
-    days = pilot.candidate_trading_days(pilot.RANGE_FROM, pilot.RANGE_TO)
-    raw_root = pilot.RANGE_RAW_ROOT
+def required_selected_names(days: list[str]) -> list[str]:
+    return [f"{day}_top100.json" for day in days]
+
+
+def required_raw_names(days: list[str]) -> list[str]:
+    return [f"{day}_{market}.json" for day in days for market in EQUITY_MARKETS]
+
+
+def load_frozen_hashes(hash_path: Path) -> tuple[dict[str, str], dict[str, str], list[dict[str, Any]]]:
+    """Read-only baseline. Missing or damaged files are issues; local collect logs are not a substitute."""
+    issues: list[dict[str, Any]] = []
+    if not hash_path.is_file():
+        return {}, {}, [{"issue": "frozen_hashes_missing", "file": str(hash_path)}]
+    try:
+        frozen = json.loads(hash_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        return {}, {}, [{"issue": "frozen_hashes_damaged", "file": str(hash_path), "detail": str(exc)}]
+    selected = frozen.get("selected")
+    raw = frozen.get("raw")
+    if not isinstance(selected, dict) or not isinstance(raw, dict) or selected == {} or raw == {}:
+        return {}, {}, [{"issue": "frozen_hashes_damaged", "file": str(hash_path)}]
+    return {str(k): str(v) for k, v in selected.items()}, {str(k): str(v) for k, v in raw.items()}, issues
+
+
+def correspondence_issues(
+    days: list[str],
+    ok_dates: list[str] | None,
+    expected_selected: dict[str, str],
+    expected_raw: dict[str, str],
+    hash_mode: str,
+) -> list[dict[str, Any]]:
+    """Trading-day list is the source of required files. ok_dates is checked against it, not the other way around."""
+    issues: list[dict[str, Any]] = []
+    required_selected = required_selected_names(days)
+    required_raw = required_raw_names(days)
+    if ok_dates is None:
+        issues.append({"issue": "collect_summary_missing"})
+        return issues
+    if ok_dates == []:
+        issues.append({"issue": "ok_dates_empty"})
+    seen: set[str] = set()
+    for day in ok_dates:
+        if day in seen:
+            issues.append({"date": day, "issue": "ok_dates_duplicate"})
+        seen.add(day)
+        if day not in days:
+            issues.append({"date": day, "issue": "ok_date_outside_range"})
+    missing = [day for day in days if day not in seen]
+    for day in missing:
+        issues.append({"date": day, "issue": "success_date_missing"})
+    if ok_dates != days:
+        issues.append({"issue": "ok_dates_mismatch", "expected_n": len(days), "got_n": len(ok_dates)})
+    if hash_mode == "verify":
+        if sorted(expected_selected.keys()) != sorted(required_selected):
+            issues.append({
+                "issue": "frozen_selected_count_mismatch",
+                "expected_n": len(required_selected),
+                "got_n": len(expected_selected),
+            })
+        if sorted(expected_raw.keys()) != sorted(required_raw):
+            issues.append({
+                "issue": "frozen_raw_count_mismatch",
+                "expected_n": len(required_raw),
+                "got_n": len(expected_raw),
+            })
+    return issues
+
+
+def raise_issues(issues: list[dict[str, Any]]) -> None:
+    if issues:
+        raise SystemExit(json.dumps(
+            {"ok": False, "issues": issues[:80], "issue_count": len(issues)},
+            ensure_ascii=False,
+            indent=2,
+        ))
+
+
+def validate_inputs(
+    pilot: Any,
+    *,
+    days: list[str] | None = None,
+    docs: Path | None = None,
+    raw_root: Path | None = None,
+    hash_mode: str = "verify",
+) -> dict[str, Any]:
+    if hash_mode not in {"verify", "freeze"}:
+        raise SystemExit("hash_mode must be verify or freeze")
+    days = list(days) if days is not None else list(pilot.candidate_trading_days(pilot.RANGE_FROM, pilot.RANGE_TO))
+    docs = docs or DOCS
+    raw_root = raw_root or pilot.RANGE_RAW_ROOT
     selected_dir = raw_root / "selected"
     raw_dir = raw_root / "raw"
     issues: list[dict[str, Any]] = []
@@ -94,23 +182,28 @@ def validate_inputs(pilot: Any) -> dict[str, Any]:
     selected_hashes: list[dict[str, Any]] = []
     raw_hashes: list[dict[str, Any]] = []
     rerank_ok: list[str] = []
-    summary_path = DOCS / "collect-summary.json"
-    local_summary = raw_root / "collect-summary.json"
-    hash_path = DOCS / "file-hashes.json"
-    docs_sum = json.loads(summary_path.read_text(encoding="utf-8")) if summary_path.is_file() else {}
-    local = json.loads(local_summary.read_text(encoding="utf-8")) if local_summary.is_file() else {}
-    collect = local.get("collect") if isinstance(local.get("collect"), dict) else {}
-    expected_selected, expected_raw = frozen_from_collect(collect)
-    if hash_path.is_file():
-        frozen = json.loads(hash_path.read_text(encoding="utf-8"))
-        if frozen.get("selected"):
-            expected_selected = {str(k): str(v) for k, v in frozen["selected"].items()}
-        if frozen.get("raw"):
-            expected_raw = {str(k): str(v) for k, v in frozen["raw"].items()}
-    ok_dates = list(collect.get("ok_dates") or docs_sum.get("ok_dates") or [])
-    blocked = list(collect.get("blocked_dates") or docs_sum.get("blocked_dates") or [])
-    if local.get("candidate_days") and local["candidate_days"] != days:
-        issues.append({"issue": "candidate_days_mismatch", "expected": days, "got": local.get("candidate_days")})
+    summary_path = docs / "collect-summary.json"
+    hash_path = docs / "file-hashes.json"
+    docs_sum: dict[str, Any] = {}
+    ok_dates: list[str] | None
+    if not summary_path.is_file():
+        ok_dates = None
+        blocked: list[str] = []
+    else:
+        docs_sum = json.loads(summary_path.read_text(encoding="utf-8"))
+        raw_ok = docs_sum.get("ok_dates")
+        ok_dates = list(raw_ok) if isinstance(raw_ok, list) else None
+        if ok_dates is None:
+            issues.append({"issue": "collect_summary_missing"})
+        blocked = list(docs_sum.get("blocked_dates") or [])
+    expected_selected: dict[str, str] = {}
+    expected_raw: dict[str, str] = {}
+    if hash_mode == "verify":
+        expected_selected, expected_raw, hash_issues = load_frozen_hashes(hash_path)
+        issues.extend(hash_issues)
+    elif hash_path.is_file():
+        issues.append({"issue": "freeze_refused_existing", "file": str(hash_path)})
+    issues.extend(correspondence_issues(days, ok_dates, expected_selected, expected_raw, hash_mode))
     for day in days:
         sel_path = selected_dir / f"{day}_top100.json"
         if day in blocked:
@@ -166,16 +259,23 @@ def validate_inputs(pilot: Any) -> dict[str, Any]:
         dates[day] = {"n": len(rows), "sha256": sha, "rows": rows}
     got_selected = {x["file"]: x["sha256"] for x in selected_hashes}
     got_raw = {x["file"]: x["sha256"] for x in raw_hashes}
-    required_selected = [f"{day}_top100.json" for day in (ok_dates or [])]
-    required_raw = [f"{day}_{m}.json" for day in (ok_dates or []) for m in ("kospi_equity", "kosdaq_equity")]
-    issues.extend(required_hash_issues(
-        got_selected, expected_selected, required_selected,
-        "selected_hash_missing", "selected_hash_mismatch",
-    ))
-    issues.extend(required_hash_issues(
-        got_raw, expected_raw, required_raw,
-        "raw_hash_missing", "raw_hash_mismatch",
-    ))
+    required_selected = required_selected_names(days)
+    required_raw = required_raw_names(days)
+    if len(got_selected) != len(days):
+        issues.append({"issue": "selected_file_count_mismatch", "expected_n": len(days), "got_n": len(got_selected)})
+    if len(got_raw) != len(days) * 2:
+        issues.append({"issue": "raw_file_count_mismatch", "expected_n": len(days) * 2, "got_n": len(got_raw)})
+    if hash_mode == "verify":
+        issues.extend(required_hash_issues(
+            got_selected, expected_selected, required_selected,
+            "selected_hash_missing", "selected_hash_mismatch",
+        ))
+        issues.extend(required_hash_issues(
+            got_raw, expected_raw, required_raw,
+            "raw_hash_missing", "raw_hash_mismatch",
+        ))
+    raise_issues(issues)
+    ok_dates = list(ok_dates or [])
     symbols = []
     for symbol, info in sorted(union.items()):
         yahoo_ok = bool(YAHOO_SIX.fullmatch(symbol))
@@ -188,8 +288,6 @@ def validate_inputs(pilot: Any) -> dict[str, Any]:
             "hold_reason": None if yahoo_ok else "yahoo_chart_symbol_pattern_not_six_digits",
             "not_judged_invalid_listing": not yahoo_ok,
         })
-    if issues:
-        raise SystemExit(json.dumps({"ok": False, "issues": issues[:80], "issue_count": len(issues)}, ensure_ascii=False, indent=2))
     return {
         "schema": 1,
         "kind": "dated_krx_amount_top100_v1",
@@ -209,6 +307,8 @@ def validate_inputs(pilot: Any) -> dict[str, Any]:
         "selected_files": selected_hashes,
         "raw_files": raw_hashes,
         "independent_rerank_ok_dates": rerank_ok,
+        "hash_mode": hash_mode,
+        "hash_path": str(hash_path),
         "dates": dates,
         "universe_rows": symbols,
         "note": [
@@ -216,6 +316,7 @@ def validate_inputs(pilot: Any) -> dict[str, Any]:
             "누락·손상된 날짜를 다른 날 목록이나 고정 종목군으로 대체하지 않는다.",
             "운영 다음 실시간 TOP100과 동일하다고 보지 않는다.",
             "숫자 6자리가 아니라고 잘못된 종목이라고 단정하지 않는다. Yahoo chart 심볼 패턴만 구분한다.",
+            "검증은 확정 거래일 목록으로 필수 파일을 만들고, 고정 해시를 덮어쓰지 않는다.",
         ],
     }
 
@@ -280,47 +381,65 @@ def public_candidates(validated: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--validate", action="store_true")
-    args = parser.parse_args()
-    if not args.validate:
-        args.validate = True
-    pilot = load_pilot()
-    validated = validate_inputs(pilot)
-    DOCS.mkdir(parents=True, exist_ok=True)
-    write_json(DOCS / "candidates.json", public_candidates(validated))
-    write_json(DOCS / "universe.json", universe_payload(validated))
-    write_json(DOCS / "file-hashes.json", {
+def freeze_hash_payload(validated: dict[str, Any]) -> dict[str, Any]:
+    return {
         "schema": 1,
         "kind": "dated_krx_amount_top100_file_hashes_v1",
         "from": validated["from"],
         "to": validated["to"],
         "selected": {x["file"]: x["sha256"] for x in validated["selected_files"]},
         "raw": {x["file"]: x["sha256"] for x in validated["raw_files"]},
-        "note": "Raw JSON stays gitignored. Missing or changed hashes fail validation.",
-    })
-    write_json(DOCS / "input-validation.json", {
-        "ok": True,
-        "generated_at": validated["generated_at"],
-        "from": validated["from"],
-        "to": validated["to"],
-        "day_count": validated["day_count"],
-        "ok_day_count": validated["ok_day_count"],
-        "blocked_dates": validated["blocked_dates"],
-        "union_unique_symbols": validated["union_unique_symbols"],
-        "name_changes_in_union": validated["name_changes_in_union"],
-        "provider_unmapped_symbols": validated["provider_unmapped_symbols"],
-        "selected_file_count": len(validated["selected_files"]),
-        "raw_file_count": len(validated["raw_files"]),
-        "independent_rerank_ok_count": len(validated["independent_rerank_ok_dates"]),
-        "issues": [],
-    })
+        "note": "Raw JSON stays gitignored. Missing or changed hashes fail validation. Verify does not regenerate this file.",
+    }
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--validate", action="store_true", help="read-only verify; does not rewrite file-hashes.json")
+    parser.add_argument("--freeze-hashes", action="store_true", help="write file-hashes.json only when it does not already exist")
+    parser.add_argument("--write-public", action="store_true", help="rewrite candidates/universe/input-validation.json")
+    args = parser.parse_args()
+    if not args.validate and not args.freeze_hashes:
+        args.validate = True
+    if args.validate and args.freeze_hashes:
+        raise SystemExit("use either --validate or --freeze-hashes")
+    pilot = load_pilot()
+    hash_mode = "freeze" if args.freeze_hashes else "verify"
+    validated = validate_inputs(pilot, hash_mode=hash_mode)
+    DOCS.mkdir(parents=True, exist_ok=True)
+    hash_path = DOCS / "file-hashes.json"
+    if hash_mode == "freeze":
+        if hash_path.is_file():
+            raise SystemExit("file-hashes.json already exists; verify will not overwrite it")
+        write_json(hash_path, freeze_hash_payload(validated))
+    if args.write_public:
+        write_json(DOCS / "candidates.json", public_candidates(validated))
+        write_json(DOCS / "universe.json", universe_payload(validated))
+        write_json(DOCS / "input-validation.json", {
+            "ok": True,
+            "generated_at": validated["generated_at"],
+            "from": validated["from"],
+            "to": validated["to"],
+            "day_count": validated["day_count"],
+            "ok_day_count": validated["ok_day_count"],
+            "blocked_dates": validated["blocked_dates"],
+            "union_unique_symbols": validated["union_unique_symbols"],
+            "name_changes_in_union": validated["name_changes_in_union"],
+            "provider_unmapped_symbols": validated["provider_unmapped_symbols"],
+            "selected_file_count": len(validated["selected_files"]),
+            "raw_file_count": len(validated["raw_files"]),
+            "independent_rerank_ok_count": len(validated["independent_rerank_ok_dates"]),
+            "issues": [],
+        })
     print(json.dumps({
         "ok": True,
+        "hash_mode": hash_mode,
+        "rewrote_file_hashes": hash_mode == "freeze",
         "days": validated["day_count"],
         "ok_dates": validated["ok_day_count"],
         "blocked": validated["blocked_dates"],
+        "selected_files": len(validated["selected_files"]),
+        "raw_files": len(validated["raw_files"]),
         "union_unique_symbols": validated["union_unique_symbols"],
         "name_changes": len(validated["name_changes_in_union"]),
         "unmapped": len(validated["provider_unmapped_symbols"]),

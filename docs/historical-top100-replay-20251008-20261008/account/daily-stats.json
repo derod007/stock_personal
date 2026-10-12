@@ -1,0 +1,23 @@
+{
+    "days": 244,
+    "top100_each_session": true,
+    "analyzable_range": [
+        88,
+        100
+    ],
+    "evaluated_range": [
+        100,
+        104
+    ],
+    "signal_outcomes": {
+        "already_active": 5,
+        "cash_or_risk_or_sector_limit": 2,
+        "order": 68,
+        "position_limit": 28
+    },
+    "quality_blocked_symbol_sessions": {
+        "insufficient_history": 793,
+        "invalid_recent_ohlcv": 48,
+        "missing_session": 83
+    }
+}

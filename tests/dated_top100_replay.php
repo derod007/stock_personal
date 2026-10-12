@@ -177,4 +177,28 @@ PaperDatedTop100Replay::run($dataR,$cfgBad,djpath($cfgBad['id']),$candR,['plan_p
 $changed=$candR;$changed['file_sha256']=str_repeat('c',64);
 dcheck(dthrows(fn()=>PaperDatedTop100Replay::run($dataR,$cfgBad,djpath($cfgBad['id']),$changed,['plan_provider'=>dprovider($plR),'start'=>PaperHistoryResearch::day(dts(PREP)),'through'=>PaperHistoryResearch::day(dts(PREP+4)),'smoke'=>true]),'Research input changed'),'a changed candidate file is refused on resume');
 
+$oct=PaperDatedTop100Replay::profile(PaperDatedTop100Replay::PROFILE_OCT);
+$year=PaperDatedTop100Replay::profile(PaperDatedTop100Replay::PROFILE_YEAR);
+dcheck($oct['expected_sessions']===18&&$oct['expected_union']===305&&$oct['dataset']===PaperDatedTop100Replay::DATASET,'October profile keeps 18 sessions and 305 names');
+dcheck($year['expected_sessions']===244&&$year['expected_union']===933&&$year['dataset']===PaperDatedTop100Replay::DATASET_YEAR,'year profile is the v2 244-session dataset');
+dcheck($year['dataset']!==$oct['dataset']&&$year['period']!==$oct['period'],'year replay does not reuse the October dataset or account period');
+$octCand=$root.'/'.$oct['candidates'];
+if(is_file($octCand)){
+    $loaded=PaperDatedTop100Replay::loadCandidates($octCand,(int)$oct['expected_sessions'],(int)$oct['expected_union']);
+    dcheck(count($loaded['by_session'])===18&&count($loaded['union'])===305,'October candidates still load as 18/305');
+    dcheck(dthrows(fn()=>PaperDatedTop100Replay::loadCandidates($octCand,244,933),'Expected 244'),'October candidates are not accepted as the year profile');
+}
+$yearCand=$root.'/'.$year['candidates'];
+$yearMap=$root.'/'.$year['sector_map'];
+if(is_file($yearCand)&&is_file($yearMap)){
+    $yc=PaperDatedTop100Replay::loadCandidates($yearCand,(int)$year['expected_sessions'],(int)$year['expected_union']);
+    dcheck(count($yc['by_session'])===244&&count($yc['union'])===933,'year candidates load as 244/933');
+    $map=PaperDatedTop100Replay::pinSectorMap($yearMap,(string)$year['sector_map_sha256']);
+    unset($map['_file_sha256_lf']);
+    PaperSectorFreeze::assertCoversUnion($yc['union'],$map);
+    dcheck(true,'pinned full sector map covers the 933-name union');
+    $partial=$root.'/docs/historical-top100-20251008-20261008/sector-map-v2.json';
+    dcheck(is_file($partial)&&dthrows(fn()=>PaperDatedTop100Replay::pinSectorMap($partial,(string)$year['sector_map_sha256']),'hash mismatch'),'the 31-name map is not the pinned full map');
+}
+
 echo "OK dated top100 replay tests\n";

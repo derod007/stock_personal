@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "kind": "dated_krx_amount_top100_year_replay_v1",
+  "label": "KRX 일별 거래대금 TOP100 연구",
+  "depends_on_pr": 75,
+  "base": "ab88384",
+  "generated_at": "2026-10-13 03:58:00",
+  "note": [
+    "운영 다음 실시간 TOP100과 동일하다고 보지 않는다.",
+    "1년 실행으로 수익성이 검증됐다고 보지 않는다.",
+    "당시 업종을 복원한 것이 아니다.",
+    "데이터셋 전체 품질 보류만으로 기간 전체에서 종목을 제외하지 않았다."
+  ],
+  "input": {
+    "profile": "year-20251008-20261008",
+    "days": 244,
+    "union_unique_symbols": 933,
+    "candidates": "docs/historical-top100-20251008-20261008/candidates.json",
+    "candidates_sha256": "94060187ee061fad7815e1597e7ef9fd159899a8446232650e1fab6b1d5fc8f5",
+    "sector_map": "docs/historical-top100-20251008-20261008/sector-map-full-v2.json",
+    "sector_map_sha256_lf": "08afb0b6f0be0106624364406d29a5a33851c65331e431467629f71600da1e8b",
+    "partial_31_map_rejected": true
+  },
+  "bars": {
+    "dataset": "kr-dated-amount-top100-20251008-20261008-v2",
+    "dataset_json_sha256": "2151bc4531ae4d39a1fa60010ee5d9f76727c12a98880759c652bea44c6a5fec",
+    "universe_json_sha256": "13840c1a432392f7c8adc0db4602adccdd3864199e3da314864a7a44147b2fa3",
+    "missing": 7,
+    "quality_hold": 92,
+    "year_collect_and_universe_refused": true,
+    "source_datasets_not_overwritten": [
+      "kr-dated-amount-top100-20251008-20261008",
+      "kr-dated-amount-top100-202510",
+      "kr-saved-scan-20261009",
+      "kr-saved-scan-20251008"
+    ]
+  },
+  "account": {
+    "id": "hist-kr-dated-top100-v1-20251008-20261008",
+    "initial_cash": 100000000,
+    "sessions": 244,
+    "halted": false,
+    "halt_reason": null,
+    "last_day": "2026-10-08",
+    "cash": 72010238.89048705,
+    "equity": 112430308.89048705,
+    "realized_pnl": 12396872.02733714,
+    "unrealized_pnl_open_positions": -6983.206849994138,
+    "max_close_drawdown": 0.09828889411877495,
+    "orders": 68,
+    "fills": 59,
+    "cancelled": 9,
+    "exits": {"target": 19, "stop": 32, "time": 5},
+    "open_positions": 3,
+    "pending_orders": 0,
+    "signal_outcomes": {
+      "order": 68,
+      "position_limit": 28,
+      "already_active": 5,
+      "cash_or_risk_or_sector_limit": 2
+    },
+    "quality_blocked_symbol_sessions": {
+      "insufficient_history": 793,
+      "missing_session": 83,
+      "invalid_recent_ohlcv": 48
+    },
+    "analyzable_range": [88, 100],
+    "evaluated_range": [100, 104],
+    "top100_each_session": 100,
+    "reconcile_pass": true,
+    "new_orders_on_session_top100_and_final_recommendation": true,
+    "new_order_mismatches": []
+  },
+  "october_regression": {
+    "official_account_not_rewritten": "hist-kr-dated-top100-v1-202510",
+    "smoke_account": "hist-smoke-kr-dated-top100-v1-202510-octrepro",
+    "cash": 82755489.70,
+    "equity": 101622379.70,
+    "orders": 10,
+    "fills": 9,
+    "cancelled": 1,
+    "exits": 5,
+    "open_positions": 4,
+    "matched_official_ledger": true
+  },
+  "hashes": {
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "config_hash": "bf1e3dfa16b0be17099b59c4c19d769476e260c0be69752f24de6a0edc9933d2",
+    "journal_sha256": "6ee9385c1c6e6c02ba331141a036b332585123330712c6ae4139aa83a0523b50",
+    "journal_normalized_sha256": "5581a694795f3f7500fcc9cb51d5559a210c3cd9dc1337e48c7adea452dae057",
+    "code_sha256_lf": {
+      "bin/paper/DatedTop100Replay.php": "80d87cbd64b593c553b14c3fa73d22b65f5c6c737b281cdb56dc2b6351de435e",
+      "bin/paper/HistoryResearch.php": "5ab0be3bb53fc4c84a1efece30eff475a933e62479c7eca54985a718f758e701",
+      "bin/paper/StrategyVersion.php": "fcdf4fdbe42edae5dd8031037a66aa966eefbc9ba9ad9d7a6b5667c96d8af858",
+      "bin/paper/ResearchCashFee.php": "1464624d46abb84893ca18be12b8eafb2c155fd6e01306e30d41adb3abe0e1de",
+      "config/paper-history-kr-dated-top100-202510.json": "ef8359bdc9f3ee772bd6f4fc3f482e34a308b5924b3e94ae3adf55d96bf225ab",
+      "config/paper-kr-recovery-v1.json": "dc092bc8e3939a5de22eb25ed79a442666928f46b30d672dd48afd0e7ecd7bb4",
+      "config/paper-strategy-files.json": "8ed84ba6ed1e2020f33d2951a7836c1db8ef4cd92457568e47e9af0daa3c8fdd",
+      "config/paper-history-kr-dated-top100-20251008-20261008.json": "dd8c2de66a4e057fa89609140e4da9590e39bb8c71026d1bd124961004ca5d43"
+    }
+  },
+  "checks": {
+    "unit_tests": "php tests/dated_top100_replay.php",
+    "rerun_adds_nothing": true,
+    "split_vs_batch_smoke_equal": true,
+    "split_vs_batch_sessions": ["2025-10-10", "2025-10-13", "2025-10-14"],
+    "future_bars_blocked_in_unit_tests": true,
+    "unpriced_position_still_halts_in_unit_tests": true,
+    "partial_sector_map_rejected": true,
+    "year_collect_and_universe_refused": true,
+    "union_933_not_used_as_daily_candidates": true,
+    "no_forced_liquidation": true,
+    "operational_files_untouched": true,
+    "october_official_account_untouched": true,
+    "candidates_journal_sha256_preserved": "94060187ee061fad7815e1597e7ef9fd159899a8446232650e1fab6b1d5fc8f5",
+    "candidates_git_lf_sha256": "ece25f22de2f8e1fd2c99550110568b1769b577abc6dc607b17e5d227b8672b5",
+    "candidates_crlf_from_lf_sha256": "94060187ee061fad7815e1597e7ef9fd159899a8446232650e1fab6b1d5fc8f5"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "journal_candidates_sha256_preserved": true,
+  "file": "docs/historical-top100-20251008-20261008/candidates.json",
+  "recorded": "94060187ee061fad7815e1597e7ef9fd159899a8446232650e1fab6b1d5fc8f5",
+  "sha256_raw": "94060187ee061fad7815e1597e7ef9fd159899a8446232650e1fab6b1d5fc8f5",
+  "sha256_lf": "ece25f22de2f8e1fd2c99550110568b1769b577abc6dc607b17e5d227b8672b5",
+  "sha256_crlf": "94060187ee061fad7815e1597e7ef9fd159899a8446232650e1fab6b1d5fc8f5",
+  "pass": true,
+  "note": "recorded is the journal hash_file value. Working copy is CRLF; Git blob may be LF."
+}

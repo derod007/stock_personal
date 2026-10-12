@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "kind": "dated_top100_year_replay_input_validation",
+  "label": "KRX 일별 거래대금 TOP100 연구",
+  "profile": "year-20251008-20261008",
+  "depends_on_pr": 75,
+  "pass": true,
+  "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+  "sessions": 244,
+  "union": 933,
+  "candidates": "docs/historical-top100-20251008-20261008/candidates.json",
+  "candidates_sha256": "94060187ee061fad7815e1597e7ef9fd159899a8446232650e1fab6b1d5fc8f5",
+  "dataset": "kr-dated-amount-top100-20251008-20261008-v2",
+  "dataset_files": {
+    "dataset.json": "2151bc4531ae4d39a1fa60010ee5d9f76727c12a98880759c652bea44c6a5fec",
+    "universe.json": "13840c1a432392f7c8adc0db4602adccdd3864199e3da314864a7a44147b2fa3"
+  },
+  "missing_symbols": 7,
+  "dataset_quality_hold": 92,
+  "sector_map": "docs/historical-top100-20251008-20261008/sector-map-full-v2.json",
+  "sector_map_sha256_lf": "08afb0b6f0be0106624364406d29a5a33851c65331e431467629f71600da1e8b",
+  "partial_31_map_rejected": true,
+  "account_replay_at_validation": false
+}

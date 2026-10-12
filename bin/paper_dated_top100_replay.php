@@ -14,17 +14,18 @@ foreach(array_slice($argv,2) as $a){
     if(!preg_match('/^--([a-z-]+)=(.*)$/s',$a,$m))throw new InvalidArgumentException('Unknown argument '.$a);
     $o[$m[1]]=$m[2];
 }
-if(!in_array($cmd,['plan','universe','collect','run','status','verify','verify-inputs','log','export','compare'],true))
-    throw new InvalidArgumentException('Commands: universe collect plan run status verify verify-inputs log export compare');
+if(!in_array($cmd,['plan','universe','collect','run','status','verify','verify-inputs','validate','log','export','compare'],true))
+    throw new InvalidArgumentException('Commands: universe collect plan run status verify verify-inputs validate log export compare');
 if(isset($o['state-dir']))putenv('PAPER_STATE_DIR='.$o['state-dir']);
 $root=dirname(__DIR__);
-$cfgs=PaperDatedTop100Replay::configs($root);$research=$cfgs['research'];
+$profile=PaperDatedTop100Replay::profile($o['profile']??PaperDatedTop100Replay::PROFILE_OCT);
+$cfgs=PaperDatedTop100Replay::configs($root,$profile['research_config']);$research=$cfgs['research'];
 $enc=static fn(array $v):string=>PaperHistoryResearch::encode($v,true)."\n";
 $out=static function(array $v)use($enc):void{echo $enc($v);};
-$candPath=$o['candidates']??$root.'/'.PaperDatedTop100Replay::CANDIDATES;
-$uniPath=$o['universe']??$root.'/'.PaperDatedTop100Replay::UNIVERSE;
+$candPath=$o['candidates']??$root.'/'.$profile['candidates'];
+$uniPath=$o['universe']??$root.'/'.$profile['universe'];
 $stateRoot=PaperAccountReplay::stateRoot();
-$period=PaperDatedTop100Replay::PERIOD;
+$period=$profile['period'];
 $smoke=$o['smoke-label']??null;
 $id=PaperAccountReplay::accountId($research,$period,$smoke);
 $config=PaperAccountReplay::accountConfig($cfgs['base'],$id,$research);
@@ -32,11 +33,13 @@ $dir=PaperAccountReplay::accountDir($stateRoot,$research,$id);
 $journalPath=PaperAccountReplay::journalPath($dir);
 
 if($cmd==='universe'){
+    if($profile['name']!==PaperDatedTop100Replay::PROFILE_OCT)throw new RuntimeException('universe is only for the October 2025 dataset');
     $ds=PaperDatedTop100Replay::initDataset($stateRoot,$uniPath);
     $out(['dataset'=>$ds['dataset'],'dir'=>$ds['dir'],'universe_sha256'=>$ds['universe_sha256'],'as_of'=>$ds['as_of']['day'],'evaluation_start'=>$ds['evaluation_start_day']]);
     exit(0);
 }
 if($cmd==='collect'){
+    if($profile['name']!==PaperDatedTop100Replay::PROFILE_OCT)throw new RuntimeException('collect is only for the October 2025 dataset; the year v2 bars are already prepared');
     $dsDir=PaperHistoryResearch::datasetDir($stateRoot,PaperDatedTop100Replay::DATASET);
     $ds=PaperHistoryResearch::readJson($dsDir.'/dataset.json')??throw new RuntimeException('Run universe first');
     $uni=PaperHistoryResearch::readJson($dsDir.'/universe.json')??throw new RuntimeException('universe.json missing');
@@ -90,23 +93,32 @@ if($cmd==='collect'){
     exit(($manifest['summary']['failed']??0)>0||($manifest['summary']['not_attempted']??0)>0?2:0);
 }
 
-$candidates=PaperDatedTop100Replay::loadCandidates($candPath);
-$datasetDir=$o['dataset-dir']??PaperHistoryResearch::datasetDir($stateRoot,PaperDatedTop100Replay::DATASET);
-$sectorMap=null;
-if(isset($o['sector-map'])){
-    $sectorMap=json_decode((string)file_get_contents($o['sector-map']),true,512,JSON_THROW_ON_ERROR);
-    if(!is_array($sectorMap['sectors']??null))throw new InvalidArgumentException('Sector map needs {"sectors":{symbol:bucket}}');
+$candidates=PaperDatedTop100Replay::loadCandidates($candPath,(int)$profile['expected_sessions'],(int)$profile['expected_union']);
+$datasetDir=$o['dataset-dir']??PaperHistoryResearch::datasetDir($stateRoot,$profile['dataset']);
+$sectorMap=null;$sectorMapFileSha=null;
+$sectorPath=$o['sector-map']??($profile['sector_map']!==null?$root.'/'.$profile['sector_map']:null);
+if($sectorPath!==null){
+    if($profile['sector_map_sha256']!==null){
+        $sectorMap=PaperDatedTop100Replay::pinSectorMap($sectorPath,(string)$profile['sector_map_sha256']);
+        $sectorMapFileSha=$sectorMap['_file_sha256_lf'];
+        unset($sectorMap['_file_sha256_lf']);
+    }else{
+        $sectorMap=json_decode((string)file_get_contents($sectorPath),true,512,JSON_THROW_ON_ERROR);
+        if(!is_array($sectorMap['sectors']??null))throw new InvalidArgumentException('Sector map needs {"sectors":{symbol:bucket}}');
+        $sectorMapFileSha=PaperStrategyVersion::fileHash($sectorPath);
+    }
     if(in_array($sectorMap['kind']??'',[PaperSectorFreeze::KIND,PaperSectorFreeze::KIND_V2],true))PaperSectorFreeze::assertReplayMap($sectorMap);
 }
-$start=$o['start']??PaperDatedTop100Replay::EVAL_START;
-$through=$o['through']??PaperDatedTop100Replay::AS_OF;
+$start=$o['start']??$profile['run_start'];
+$through=$o['through']??$profile['run_through'];
+$runtimeExtra=$profile['name']===PaperDatedTop100Replay::PROFILE_YEAR?[PaperDatedTop100Replay::RESEARCH_CONFIG_YEAR]:[];
 $readJournal=static function()use($journalPath):array{
     $j=(new PaperJournal($journalPath))->read();
     if($j===null)throw new RuntimeException('Research account has no journal yet: '.$journalPath);
     return $j;
 };
 if($cmd==='plan'){
-    $data=PaperDatedTop100Replay::loadDataset($datasetDir,$candidates);
+    $data=PaperDatedTop100Replay::loadDataset($datasetDir,$candidates,$profile['dataset'],$profile['eval_start'],$profile['as_of']);
     $sessions=array_values(array_filter(PaperDatedTop100Replay::sessions($candidates),function($ts)use($candidates,$start,$through){
         $day=$candidates['by_session'][$ts]['day'];return $day>=$start&&$day<=$through;
     }));
@@ -122,17 +134,19 @@ if($cmd==='plan'){
 }
 if($cmd==='run'){
     if($smoke===null){
-        if(($o['confirm-full-run']??'')!=='after-code-review')throw new RuntimeException('Pass --confirm-full-run=after-code-review for the 18-session research account');
+        if(($o['confirm-full-run']??'')!=='after-code-review')throw new RuntimeException('Pass --confirm-full-run=after-code-review for the '.$profile['confirm_sessions'].'-session research account');
         if($sectorMap===null&&($o['sectors']??'')!=='all-unclassified')throw new RuntimeException('Choose --sector-map= or --sectors=all-unclassified');
+        if($profile['sector_map_sha256']!==null&&$sectorMap===null)throw new RuntimeException('This profile requires the pinned full sector map');
     }else{
         if(!isset($o['start'])||!isset($o['through']))throw new InvalidArgumentException('Smoke accounts need --start and --through');
     }
-    $data=PaperDatedTop100Replay::loadDataset($datasetDir,$candidates);
+    $data=PaperDatedTop100Replay::loadDataset($datasetDir,$candidates,$profile['dataset'],$profile['eval_start'],$profile['as_of']);
     $guard=static fn():array=>['dataset_tree'=>PaperAccountReplay::treeHash($data['dir']),'operational_top_level'=>PaperAccountReplay::topLevelHash($stateRoot)];
     $before=$guard();
     $r=PaperDatedTop100Replay::run($data,$config,$journalPath,$candidates,[
         'through'=>$through,'start'=>$start,'chunk'=>(int)($o['chunk']??8),
-        'sector_map'=>$sectorMap,'sector_map_file_sha256'=>isset($o['sector-map'])?PaperStrategyVersion::fileHash($o['sector-map']):null,
+        'sector_map'=>$sectorMap,'sector_map_file_sha256'=>$sectorMapFileSha,
+        'runtime_code_extra'=>$runtimeExtra,
         'smoke'=>$smoke!==null]);
     $after=$guard();
     $r['untouched']=['dataset_files'=>$before['dataset_tree']===$after['dataset_tree'],'operational_state_files'=>$before['operational_top_level']===$after['operational_top_level']];
@@ -149,6 +163,28 @@ if($cmd==='verify-inputs'){
     }
     $link=PaperDatedTop100Replay::linkRecordedHash($candPath,$recorded);
     $out($link);exit($link['pass']?0:1);
+}
+if($cmd==='validate'){
+    $fp=PaperStrategyVersion::current($root);
+    $mapIssues=[];
+    if($profile['sector_map_sha256']!==null){
+        if($sectorMap===null)$mapIssues[]='sector map missing';
+        else{
+            try{PaperSectorFreeze::assertCoversUnion($candidates['union'],$sectorMap);}
+            catch(Throwable $e){$mapIssues[]=$e->getMessage();}
+        }
+    }
+    $data=PaperDatedTop100Replay::loadDataset($datasetDir,$candidates,$profile['dataset'],$profile['eval_start'],$profile['as_of']);
+    $rep=['profile'=>$profile['name'],'label'=>PaperDatedTop100Replay::LABEL,'account_replay'=>false,
+        'strategy_fingerprint'=>$fp,'strategy_fingerprint_ok'=>$fp===PaperDatedTop100Replay::STRATEGY_FINGERPRINT,
+        'sessions'=>count($candidates['by_session']),'union'=>count($candidates['union']),
+        'expected_sessions'=>$profile['expected_sessions'],'expected_union'=>$profile['expected_union'],
+        'candidates_sha256'=>$candidates['file_sha256'],'dataset'=>$data['dataset'],'dataset_files'=>$data['files'],
+        'missing'=>count($data['missing']),'hold'=>count($data['hold']),
+        'sector_map_sha256_lf'=>$sectorMapFileSha,'sector_map_issues'=>$mapIssues,
+        'pass'=>$fp===PaperDatedTop100Replay::STRATEGY_FINGERPRINT&&count($candidates['by_session'])===(int)$profile['expected_sessions']
+            &&count($candidates['union'])===(int)$profile['expected_union']&&$mapIssues===[]];
+    $out($rep);exit($rep['pass']?0:1);
 }
 if($cmd==='compare'){
     if(empty($o['other-state-dir']))throw new InvalidArgumentException('--other-state-dir required');
@@ -167,12 +203,13 @@ if($cmd==='log'){
     foreach(PaperAccountReplay::dailyLog($j,$o['from']??null,$o['to']??null) as $r)echo PaperHistoryResearch::encode($r)."\n";
     exit(0);
 }
-$data=PaperDatedTop100Replay::loadDataset($datasetDir,$candidates);
+$data=PaperDatedTop100Replay::loadDataset($datasetDir,$candidates,$profile['dataset'],$profile['eval_start'],$profile['as_of']);
 $rec=PaperAccountReplay::reconcile($j,$data);
 if($cmd==='verify'){
     $recorded=(string)($j['state']['research']['candidates_sha256']??'');
     $rec['candidate_git_link']=PaperDatedTop100Replay::linkRecordedHash($candPath,$recorded);
-    $out($rec);exit($rec['pass']&&$rec['candidate_git_link']['pass']?0:1);
+    $rec['new_orders']=PaperDatedTop100Replay::auditNewOrders($j,$candidates);
+    $out($rec);exit($rec['pass']&&$rec['candidate_git_link']['pass']&&$rec['new_orders']['pass']?0:1);
 }
 if($cmd==='export'){
     $to=rtrim($o['out']??'','/\\');if($to==='')throw new InvalidArgumentException('--out required');
@@ -184,14 +221,16 @@ if($cmd==='export'){
     $lines='';foreach(PaperAccountReplay::dailyLog($j) as $r)$lines.=PaperHistoryResearch::encode($r)."\n";
     PaperHistoryResearch::writeFile($to.'/daily-log.jsonl',$lines);
     $prov=['schema'=>1,'kind'=>PaperDatedTop100Replay::VERSION,'label'=>PaperDatedTop100Replay::LABEL,'account'=>$id,'period'=>$period,
-        'depends_on_pr'=>73,'strategy_fingerprint'=>PaperStrategyVersion::current(),
-        'code_sha256_lf'=>PaperDatedTop100Replay::runtimeCodeHashes(),
+        'depends_on_pr'=>$profile['depends_on_pr'],'strategy_fingerprint'=>PaperStrategyVersion::current(),
+        'code_sha256_lf'=>PaperDatedTop100Replay::runtimeCodeHashes($runtimeExtra),
         'config_hash'=>hash('sha256',PaperJournal::encode(ChartEntryLab\PaperScanUniverse::pinned($config))),
         'candidates_sha256'=>$candidates['file_sha256'],
         'dataset'=>['name'=>$data['dataset'],'files'=>$data['files'],'missing'=>count($data['missing']),'hold'=>count($data['hold'])],
         'journal_sha256'=>is_file($journalPath)?hash_file('sha256',$journalPath):null,
         'journal_normalized_sha256'=>PaperAccountReplay::normalizedHash($j),
-        'note'=>'운영 다음 TOP100과 동일하다고 보지 않는다. 한 달 실행으로 수익성이 검증됐다고 보지 않는다.'];
+        'note'=>$profile['name']===PaperDatedTop100Replay::PROFILE_YEAR
+            ?'운영 다음 TOP100과 동일하다고 보지 않는다. 1년 실행으로 수익성이 검증됐다고 보지 않는다.'
+            :'운영 다음 TOP100과 동일하다고 보지 않는다. 한 달 실행으로 수익성이 검증됐다고 보지 않는다.'];
     PaperHistoryResearch::writeFile($to.'/provenance.json',$enc($prov));
     $out(['written'=>$to,'reconcile_pass'=>$rec['pass'],'days'=>substr_count($lines,"\n")]);
     exit($rec['pass']?0:1);

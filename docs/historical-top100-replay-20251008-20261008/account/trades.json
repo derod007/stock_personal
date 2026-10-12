@@ -1,0 +1,1691 @@
+{
+    "trades": [
+        {
+            "symbol": "054540.KQ",
+            "signal_date": "2025-10-13",
+            "pattern": "trend_pullback_v1",
+            "sector": "auto",
+            "quantity": 536,
+            "entry": 12390,
+            "stop": 10555,
+            "target": 16400,
+            "planned_risk": 998684.4312599998,
+            "reserved_cash": 6647681.039999999,
+            "fill": {
+                "date": "2025-10-14",
+                "price": 12366.179999999998,
+                "fee": 6628.27248
+            },
+            "exit": {
+                "date": "2025-10-16",
+                "price": 16400,
+                "reason": "target",
+                "net_pnl": 2146708.847520001,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "290650.KQ",
+            "signal_date": "2025-10-16",
+            "pattern": "trend_pullback_v1",
+            "sector": "bio",
+            "quantity": 125,
+            "entry": 52700,
+            "stop": 44650,
+            "target": 67900,
+            "planned_risk": 1021206.5843749997,
+            "reserved_cash": 6594087.499999999,
+            "fill": {
+                "date": "2025-10-17",
+                "price": 52700,
+                "fee": 6587.5
+            },
+            "exit": {
+                "date": "2025-11-13",
+                "price": 49525.225,
+                "reason": "time",
+                "net_pnl": -409625.02812499925,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "333430.KQ",
+            "signal_date": "2025-10-16",
+            "pattern": "trend_pullback_v1",
+            "sector": "auto",
+            "quantity": 732,
+            "entry": 8300,
+            "stop": 6924,
+            "target": 10430,
+            "planned_risk": 1020907.6178159993,
+            "reserved_cash": 6081675.6,
+            "fill": {
+                "date": "2025-10-17",
+                "price": 8300,
+                "fee": 6075.6
+            },
+            "exit": {
+                "date": "2025-11-06",
+                "price": 6920.538,
+                "reason": "stop",
+                "net_pnl": -1020907.6178160002,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "376900.KQ",
+            "signal_date": "2025-10-20",
+            "pattern": "breakout_retest_v1",
+            "sector": "bio",
+            "quantity": 169,
+            "entry": 37300,
+            "stop": 31457,
+            "target": 48450,
+            "planned_risk": 1001742.3913834988,
+            "reserved_cash": 6310003.699999999,
+            "fill": {
+                "date": "2025-10-21",
+                "price": 37300,
+                "fee": 6303.7
+            },
+            "exit": {
+                "date": "2025-11-17",
+                "price": 48450,
+                "reason": "target",
+                "net_pnl": 1869858.250000001,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "032820.KQ",
+            "signal_date": "2025-10-24",
+            "pattern": "trend_pullback_v1",
+            "sector": "auto",
+            "quantity": 26,
+            "entry": 4420,
+            "stop": 4069,
+            "target": 4950,
+            "planned_risk": 9399.558102999976,
+            "reserved_cash": 115034.91999999998,
+            "fill": {
+                "date": "2025-10-27",
+                "price": 4420,
+                "fee": 114.92
+            },
+            "exit": {
+                "date": "2025-10-29",
+                "price": 4950,
+                "reason": "target",
+                "net_pnl": 13536.38000000002,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "240810.KQ",
+            "signal_date": "2025-10-29",
+            "pattern": "breakout_retest_v1",
+            "sector": "semi",
+            "quantity": 1,
+            "entry": 65800,
+            "stop": 59291,
+            "target": 78000,
+            "planned_risk": 6663.706854499986,
+            "reserved_cash": 65865.79999999999,
+            "fill": {
+                "date": "2025-10-30",
+                "price": 64932.45,
+                "fee": 64.93245
+            },
+            "exit": {
+                "date": "2025-11-19",
+                "price": 59261.3545,
+                "reason": "stop",
+                "net_pnl": -5795.289304499987,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "066970.KS",
+            "signal_date": "2025-11-11",
+            "pattern": "trend_pullback_v1",
+            "sector": "energy",
+            "quantity": 69,
+            "entry": 127100,
+            "stop": 113328,
+            "target": 149000,
+            "planned_risk": 970763.438183999,
+            "reserved_cash": 8778669.899999999,
+            "fill": {
+                "date": "2025-11-12",
+                "price": 127100,
+                "fee": 8769.9
+            },
+            "exit": {
+                "date": "2025-11-24",
+                "price": 113271.336,
+                "reason": "stop",
+                "net_pnl": -970763.4381839987,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "000720.KS",
+            "signal_date": "2025-11-13",
+            "pattern": "trend_pullback_v1",
+            "sector": "indust",
+            "quantity": 183,
+            "entry": 65200,
+            "stop": 59765,
+            "target": 76400,
+            "planned_risk": 1022936.6240024981,
+            "reserved_cash": 11943531.599999998,
+            "fill": {
+                "date": "2025-11-14",
+                "price": 63731.85,
+                "fee": 11662.928549999999
+            },
+            "exit": {
+                "date": "2025-11-19",
+                "price": 59735.1175,
+                "reason": "stop",
+                "net_pnl": -753996.5025524981,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "001440.KS",
+            "signal_date": "2025-11-20",
+            "pattern": "trend_pullback_v1",
+            "sector": "energy",
+            "quantity": 463,
+            "entry": 24100,
+            "stop": 21959,
+            "target": 28650,
+            "planned_risk": 1017686.7419914983,
+            "reserved_cash": 11169458.299999999,
+            "fill": {
+                "date": "2025-11-21",
+                "price": 22911.449999999997,
+                "fee": 10608.001349999999
+            },
+            "exit": {
+                "date": "2025-11-24",
+                "price": 21948.0205,
+                "reason": "stop",
+                "net_pnl": -466837.79334149696,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "108490.KQ",
+            "signal_date": "2025-11-24",
+            "pattern": "trend_pullback_v1",
+            "sector": "indust",
+            "quantity": 43,
+            "entry": 206500,
+            "stop": 184094,
+            "target": 294500,
+            "planned_risk": 984207.6049789983,
+            "reserved_cash": 8888379.499999998,
+            "fill": {
+                "date": "2025-11-25",
+                "price": 206500,
+                "fee": 8879.5
+            },
+            "exit": {
+                "date": "2025-12-04",
+                "price": 294500,
+                "reason": "target",
+                "net_pnl": 3762457.000000002,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "010120.KS",
+            "signal_date": "2025-11-27",
+            "pattern": "trend_pullback_v1",
+            "sector": "energy",
+            "quantity": 107,
+            "entry": 93400,
+            "stop": 84217,
+            "target": 107800,
+            "planned_risk": 1006087.1228905002,
+            "reserved_cash": 10003793.799999999,
+            "fill": {
+                "date": "2025-11-28",
+                "price": 93400,
+                "fee": 9993.800000000001
+            },
+            "exit": {
+                "date": "2025-12-26",
+                "price": 90954.5,
+                "reason": "time",
+                "net_pnl": -281394.431499999,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "277810.KQ",
+            "signal_date": "2025-11-27",
+            "pattern": "trend_pullback_v1",
+            "sector": "indust",
+            "quantity": 31,
+            "entry": 383500,
+            "stop": 352921,
+            "target": 509000,
+            "planned_risk": 976242.8562244972,
+            "reserved_cash": 11900388.499999998,
+            "fill": null,
+            "exit": null,
+            "cancelled": {
+                "date": "2025-12-02",
+                "reason": "unfilled"
+            },
+            "status": "cancelled"
+        },
+        {
+            "symbol": "009150.KS",
+            "signal_date": "2025-12-03",
+            "pattern": "breakout_retest_v1",
+            "sector": "semi",
+            "quantity": 50,
+            "entry": 261000,
+            "stop": 241078,
+            "target": 300000,
+            "planned_risk": 1027224.8230499986,
+            "reserved_cash": 13063049.999999998,
+            "fill": {
+                "date": "2025-12-04",
+                "price": 259129.5,
+                "fee": 12956.475
+            },
+            "exit": {
+                "date": "2026-01-05",
+                "price": 269865,
+                "reason": "time",
+                "net_pnl": 510325.27500000224,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "068270.KS",
+            "signal_date": "2025-12-08",
+            "pattern": "trend_pullback_v1",
+            "sector": "bio",
+            "quantity": 118,
+            "entry": 178190,
+            "stop": 171459,
+            "target": 193809,
+            "planned_risk": 845622.5469189936,
+            "reserved_cash": 21047446.419999998,
+            "fill": {
+                "date": "2025-12-09",
+                "price": 177803.13839062498,
+                "fee": 20980.77033009375
+            },
+            "exit": {
+                "date": "2025-12-26",
+                "price": 171373.2705,
+                "reason": "stop",
+                "net_pnl": -799927.2273428403,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "249420.KS",
+            "signal_date": "2025-12-10",
+            "pattern": "trend_recovery_v1",
+            "sector": "bio",
+            "quantity": 52,
+            "entry": 32500,
+            "stop": 27300,
+            "target": 45500,
+            "planned_risk": 274218.6901999996,
+            "reserved_cash": 1691689.9999999998,
+            "fill": null,
+            "exit": null,
+            "cancelled": {
+                "date": "2025-12-15",
+                "reason": "unfilled"
+            },
+            "status": "cancelled"
+        },
+        {
+            "symbol": "066570.KS",
+            "signal_date": "2026-01-05",
+            "pattern": "trend_pullback_v1",
+            "sector": "consumer",
+            "quantity": 222,
+            "entry": 93000,
+            "stop": 89828,
+            "target": 102500,
+            "planned_risk": 754732.7530919935,
+            "reserved_cash": 20666645.999999996,
+            "fill": {
+                "date": "2026-01-06",
+                "price": 93000,
+                "fee": 20646
+            },
+            "exit": {
+                "date": "2026-01-09",
+                "price": 89783.086,
+                "reason": "stop",
+                "net_pnl": -754732.7530919947,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "084670.KS",
+            "signal_date": "2026-01-14",
+            "pattern": "trend_pullback_v1",
+            "sector": "trans",
+            "quantity": 54,
+            "entry": 72100,
+            "stop": 53315,
+            "target": 172800,
+            "planned_risk": 1022600.4754949994,
+            "reserved_cash": 3897293.3999999994,
+            "fill": {
+                "date": "2026-01-15",
+                "price": 72100,
+                "fee": 3893.4
+            },
+            "exit": {
+                "date": "2026-01-22",
+                "price": 53288.3425,
+                "reason": "stop",
+                "net_pnl": -1022600.4754949994,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "128820.KS",
+            "signal_date": "2026-01-14",
+            "pattern": "trend_pullback_v1",
+            "sector": "energy",
+            "quantity": 799,
+            "entry": 6996,
+            "stop": 5726,
+            "target": 12677,
+            "planned_risk": 1027180.1274629988,
+            "reserved_cash": 5595393.804,
+            "fill": {
+                "date": "2026-01-15",
+                "price": 6893.7679152832025,
+                "fee": 5508.120564311279
+            },
+            "exit": {
+                "date": "2026-01-21",
+                "price": 5723.137,
+                "reason": "stop",
+                "net_pnl": -945415.0083385902,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "049630.KQ",
+            "signal_date": "2026-01-15",
+            "pattern": "breakout_retest_v1",
+            "sector": "semi",
+            "quantity": 172,
+            "entry": 26850,
+            "stop": 21091,
+            "target": 37765,
+            "planned_risk": 1000605.8641739996,
+            "reserved_cash": 4622818.199999999,
+            "fill": {
+                "date": "2026-01-16",
+                "price": 26850,
+                "fee": 4618.2
+            },
+            "exit": {
+                "date": "2026-01-20",
+                "price": 37765,
+                "reason": "target",
+                "net_pnl": 1866266.2200000007,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "042700.KS",
+            "signal_date": "2026-01-27",
+            "pattern": "trend_pullback_v1",
+            "sector": "semi",
+            "quantity": 83,
+            "entry": 174800,
+            "stop": 162855,
+            "target": 201000,
+            "planned_risk": 1026212.089017499,
+            "reserved_cash": 14522908.399999999,
+            "fill": null,
+            "exit": null,
+            "cancelled": {
+                "date": "2026-01-29",
+                "reason": "cancelled_before_entry"
+            },
+            "status": "cancelled"
+        },
+        {
+            "symbol": "000880.KS",
+            "signal_date": "2026-02-03",
+            "pattern": "trend_pullback_v1",
+            "sector": "other",
+            "quantity": 69,
+            "entry": 155350,
+            "stop": 141009,
+            "target": 183644,
+            "planned_risk": 1014837.7166894979,
+            "reserved_cash": 10729869.149999999,
+            "fill": {
+                "date": "2026-02-04",
+                "price": 155350,
+                "fee": 10719.15
+            },
+            "exit": {
+                "date": "2026-02-25",
+                "price": 183644,
+                "reason": "target",
+                "net_pnl": 1928895.4140000008,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "000270.KS",
+            "signal_date": "2026-02-04",
+            "pattern": "trend_pullback_v1",
+            "sector": "auto",
+            "quantity": 78,
+            "entry": 156800,
+            "stop": 144040,
+            "target": 177000,
+            "planned_risk": 1024357.4624399972,
+            "reserved_cash": 12242630.399999999,
+            "fill": {
+                "date": "2026-02-05",
+                "price": 156778.35,
+                "fee": 12228.7113
+            },
+            "exit": {
+                "date": "2026-02-25",
+                "price": 177000,
+                "reason": "target",
+                "net_pnl": 1551253.9887000006,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "090710.KQ",
+            "signal_date": "2026-02-10",
+            "pattern": "trend_pullback_v1",
+            "sector": "indust",
+            "quantity": 326,
+            "entry": 14670,
+            "stop": 11570,
+            "target": 26600,
+            "planned_risk": 1021038.2640899995,
+            "reserved_cash": 4787202.42,
+            "fill": {
+                "date": "2026-02-11",
+                "price": 14670,
+                "fee": 4782.42
+            },
+            "exit": {
+                "date": "2026-03-04",
+                "price": 11564.215,
+                "reason": "stop",
+                "net_pnl": -1021038.2640900002,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "058610.KQ",
+            "signal_date": "2026-02-19",
+            "pattern": "trend_pullback_v1",
+            "sector": "energy",
+            "quantity": 3,
+            "entry": 139200,
+            "stop": 123262,
+            "target": 165700,
+            "planned_risk": 48786.094106999924,
+            "reserved_cash": 418017.6,
+            "fill": {
+                "date": "2026-02-20",
+                "price": 139200,
+                "fee": 417.6
+            },
+            "exit": {
+                "date": "2026-03-04",
+                "price": 123200.369,
+                "reason": "stop",
+                "net_pnl": -48786.09410699998,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "457190.KS",
+            "signal_date": "2026-02-25",
+            "pattern": "trend_pullback_v1",
+            "sector": "energy",
+            "quantity": 101,
+            "entry": 104100,
+            "stop": 93889,
+            "target": 124500,
+            "planned_risk": 1056044.5421054994,
+            "reserved_cash": 10524614.1,
+            "fill": null,
+            "exit": null,
+            "cancelled": {
+                "date": "2026-03-03",
+                "reason": "unfilled"
+            },
+            "status": "cancelled"
+        },
+        {
+            "symbol": "035420.KS",
+            "signal_date": "2026-02-26",
+            "pattern": "trend_pullback_v1",
+            "sector": "soft",
+            "quantity": 81,
+            "entry": 260500,
+            "stop": 248478,
+            "target": 292000,
+            "planned_risk": 1025062.5136409958,
+            "reserved_cash": 21121600.499999996,
+            "fill": {
+                "date": "2026-02-27",
+                "price": 260500,
+                "fee": 21100.5
+            },
+            "exit": {
+                "date": "2026-03-03",
+                "price": 248353.761,
+                "reason": "stop",
+                "net_pnl": -1025062.5136409961,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "263750.KQ",
+            "signal_date": "2026-03-09",
+            "pattern": "trend_recovery_v1",
+            "sector": "soft",
+            "quantity": 66,
+            "entry": 66100,
+            "stop": 50500,
+            "target": 98900,
+            "planned_risk": 1038960.4334999995,
+            "reserved_cash": 4366962.6,
+            "fill": {
+                "date": "2026-03-10",
+                "price": 66100,
+                "fee": 4362.6
+            },
+            "exit": {
+                "date": "2026-03-19",
+                "price": 47776.1,
+                "reason": "stop",
+                "net_pnl": -1216893.2225999995,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "000150.KS",
+            "signal_date": "2026-03-10",
+            "pattern": "trend_pullback_v1",
+            "sector": "other",
+            "quantity": 7,
+            "entry": 1053000,
+            "stop": 906842,
+            "target": 1295000,
+            "planned_risk": 1039995.667053,
+            "reserved_cash": 7378370.999999999,
+            "fill": null,
+            "exit": null,
+            "cancelled": {
+                "date": "2026-03-13",
+                "reason": "unfilled"
+            },
+            "status": "cancelled"
+        },
+        {
+            "symbol": "034730.KS",
+            "signal_date": "2026-03-10",
+            "pattern": "trend_pullback_v1",
+            "sector": "energy",
+            "quantity": 25,
+            "entry": 351000,
+            "stop": 311235,
+            "target": 424000,
+            "planned_risk": 1014567.4220624991,
+            "reserved_cash": 8783774.999999998,
+            "fill": {
+                "date": "2026-03-11",
+                "price": 351000,
+                "fee": 8775
+            },
+            "exit": {
+                "date": "2026-03-31",
+                "price": 308345.75,
+                "reason": "stop",
+                "net_pnl": -1082839.893749998,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "088350.KS",
+            "signal_date": "2026-03-11",
+            "pattern": "trend_pullback_v1",
+            "sector": "fin",
+            "quantity": 23,
+            "entry": 5100,
+            "stop": 3972,
+            "target": 7560,
+            "planned_risk": 26198.288321999986,
+            "reserved_cash": 117417.29999999999,
+            "fill": {
+                "date": "2026-03-12",
+                "price": 5042.5199999999995,
+                "fee": 115.97796
+            },
+            "exit": {
+                "date": "2026-04-08",
+                "price": 4817.59,
+                "reason": "time",
+                "net_pnl": -5400.172529999967,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "003280.KS",
+            "signal_date": "2026-03-13",
+            "pattern": "trend_pullback_v1",
+            "sector": "trans",
+            "quantity": 1657,
+            "entry": 2335,
+            "stop": 1720,
+            "target": 3290,
+            "planned_risk": 1027197.729979999,
+            "reserved_cash": 3872964.0949999997,
+            "fill": null,
+            "exit": null,
+            "cancelled": {
+                "date": "2026-03-17",
+                "reason": "cancelled_before_entry"
+            },
+            "status": "cancelled"
+        },
+        {
+            "symbol": "000270.KS",
+            "signal_date": "2026-03-17",
+            "pattern": "trend_pullback_v1",
+            "sector": "auto",
+            "quantity": 50,
+            "entry": 167300,
+            "stop": 147311,
+            "target": 212500,
+            "planned_risk": 1018859.6422249989,
+            "reserved_cash": 8373364.999999999,
+            "fill": null,
+            "exit": null,
+            "cancelled": {
+                "date": "2026-03-20",
+                "reason": "unfilled"
+            },
+            "status": "cancelled"
+        },
+        {
+            "symbol": "011070.KS",
+            "signal_date": "2026-03-19",
+            "pattern": "trend_recovery_v1",
+            "sector": "semi",
+            "quantity": 23,
+            "entry": 286000,
+            "stop": 242500,
+            "target": 353500,
+            "planned_risk": 1015441.4612499988,
+            "reserved_cash": 6584577.999999999,
+            "fill": {
+                "date": "2026-03-20",
+                "price": 286000,
+                "fee": 6578
+            },
+            "exit": {
+                "date": "2026-04-08",
+                "price": 353500,
+                "reason": "target",
+                "net_pnl": 1537791.500000001,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "006400.KS",
+            "signal_date": "2026-03-24",
+            "pattern": "trend_pullback_v1",
+            "sector": "energy",
+            "quantity": 37,
+            "entry": 397500,
+            "stop": 370957,
+            "target": 473500,
+            "planned_risk": 1017379.7507954974,
+            "reserved_cash": 14722207.499999998,
+            "fill": {
+                "date": "2026-03-26",
+                "price": 397500,
+                "fee": 14707.5
+            },
+            "exit": {
+                "date": "2026-04-09",
+                "price": 473500,
+                "reason": "target",
+                "net_pnl": 2779773.000000002,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "005880.KS",
+            "signal_date": "2026-03-31",
+            "pattern": "trend_pullback_v1",
+            "sector": "trans",
+            "quantity": 4604,
+            "entry": 2395,
+            "stop": 2181,
+            "target": 3235,
+            "planned_risk": 1011339.5453379974,
+            "reserved_cash": 11037606.579999998,
+            "fill": {
+                "date": "2026-04-01",
+                "price": 2266.1324999999997,
+                "fee": 10433.274029999999
+            },
+            "exit": {
+                "date": "2026-04-13",
+                "price": 3235,
+                "reason": "target",
+                "net_pnl": 4435338.755970003,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "005490.KS",
+            "signal_date": "2026-04-08",
+            "pattern": "trend_recovery_v1",
+            "sector": "energy",
+            "quantity": 29,
+            "entry": 362500,
+            "stop": 327000,
+            "target": 427500,
+            "planned_risk": 1054232.2584999977,
+            "reserved_cash": 10523012.499999998,
+            "fill": {
+                "date": "2026-04-09",
+                "price": 360180,
+                "fee": 10445.22
+            },
+            "exit": {
+                "date": "2026-04-28",
+                "price": 427500,
+                "reason": "target",
+                "net_pnl": 1929437.2800000012,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "010950.KS",
+            "signal_date": "2026-04-10",
+            "pattern": "trend_recovery_v1",
+            "sector": "energy",
+            "quantity": 100,
+            "entry": 120700,
+            "stop": 110000,
+            "target": 177100,
+            "planned_risk": 1098564.499999999,
+            "reserved_cash": 12082069.999999998,
+            "fill": {
+                "date": "2026-04-13",
+                "price": 120700,
+                "fee": 12070
+            },
+            "exit": {
+                "date": "2026-05-11",
+                "price": 109945,
+                "reason": "stop",
+                "net_pnl": -1098564.4999999981,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "010820.KS",
+            "signal_date": "2026-04-15",
+            "pattern": "breakout_retest_v1",
+            "sector": "auto",
+            "quantity": 938,
+            "entry": 12200,
+            "stop": 11052,
+            "target": 16930,
+            "planned_risk": 1103812.5806119994,
+            "reserved_cash": 11455043.6,
+            "fill": {
+                "date": "2026-04-16",
+                "price": 12056.025,
+                "fee": 11308.551449999999
+            },
+            "exit": {
+                "date": "2026-04-22",
+                "price": 16930,
+                "reason": "target",
+                "net_pnl": 4544599.658550002,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "011070.KS",
+            "signal_date": "2026-04-15",
+            "pattern": "breakout_retest_v1",
+            "sector": "semi",
+            "quantity": 1,
+            "entry": 383000,
+            "stop": 352821,
+            "target": 469500,
+            "planned_risk": 31091.055089499918,
+            "reserved_cash": 383382.99999999994,
+            "fill": {
+                "date": "2026-04-16",
+                "price": 379689.75,
+                "fee": 379.68975
+            },
+            "exit": {
+                "date": "2026-04-22",
+                "price": 469500,
+                "reason": "target",
+                "net_pnl": 88961.06025000004,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "010820.KS",
+            "signal_date": "2026-04-22",
+            "pattern": "breakout_retest_v1",
+            "sector": "auto",
+            "quantity": 474,
+            "entry": 16360,
+            "stop": 13948,
+            "target": 22090,
+            "planned_risk": 1160956.362323999,
+            "reserved_cash": 7762394.639999999,
+            "fill": {
+                "date": "2026-04-23",
+                "price": 15697.845,
+                "fee": 7440.77853
+            },
+            "exit": {
+                "date": "2026-04-27",
+                "price": 13941.026,
+                "reason": "stop",
+                "net_pnl": -846781.0308539979,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "263750.KQ",
+            "signal_date": "2026-04-22",
+            "pattern": "trend_pullback_v1",
+            "sector": "soft",
+            "quantity": 29,
+            "entry": 57700,
+            "stop": 51992,
+            "target": 77400,
+            "planned_risk": 169466.19811599993,
+            "reserved_cash": 1674973.2999999998,
+            "fill": {
+                "date": "2026-04-23",
+                "price": 57228.6,
+                "fee": 1659.6294
+            },
+            "exit": {
+                "date": "2026-05-11",
+                "price": 51966.004,
+                "reason": "stop",
+                "net_pnl": -155781.92751599965,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "010170.KQ",
+            "signal_date": "2026-04-27",
+            "pattern": "trend_pullback_v1",
+            "sector": "soft",
+            "quantity": 340,
+            "entry": 16020,
+            "stop": 12695,
+            "target": 22000,
+            "planned_risk": 1142419.0918499997,
+            "reserved_cash": 5452246.8,
+            "fill": {
+                "date": "2026-04-28",
+                "price": 16020,
+                "fee": 5446.8
+            },
+            "exit": {
+                "date": "2026-05-07",
+                "price": 22000,
+                "reason": "target",
+                "net_pnl": 2020273.2000000002,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "050890.KQ",
+            "signal_date": "2026-04-30",
+            "pattern": "trend_pullback_v1",
+            "sector": "soft",
+            "quantity": 634,
+            "entry": 17110,
+            "stop": 15399,
+            "target": 20000,
+            "planned_risk": 1110261.307516997,
+            "reserved_cash": 10858587.739999998,
+            "fill": null,
+            "exit": null,
+            "cancelled": {
+                "date": "2026-05-06",
+                "reason": "cancelled_before_entry"
+            },
+            "status": "cancelled"
+        },
+        {
+            "symbol": "000720.KS",
+            "signal_date": "2026-05-06",
+            "pattern": "trend_pullback_v1",
+            "sector": "indust",
+            "quantity": 139,
+            "entry": 163700,
+            "stop": 156192,
+            "target": 198400,
+            "planned_risk": 1098921.476655996,
+            "reserved_cash": 22777054.299999997,
+            "fill": {
+                "date": "2026-05-08",
+                "price": 163700,
+                "fee": 22754.3
+            },
+            "exit": {
+                "date": "2026-05-12",
+                "price": 156113.904,
+                "reason": "stop",
+                "net_pnl": -1098921.4766559973,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "017900.KS",
+            "signal_date": "2026-05-07",
+            "pattern": "trend_pullback_v1",
+            "sector": "semi",
+            "quantity": 936,
+            "entry": 10780,
+            "stop": 9556,
+            "target": 22450,
+            "planned_risk": 1169166.2317919992,
+            "reserved_cash": 10100170.079999998,
+            "fill": {
+                "date": "2026-05-08",
+                "price": 10780,
+                "fee": 10090.08
+            },
+            "exit": {
+                "date": "2026-05-20",
+                "price": 9551.222,
+                "reason": "stop",
+                "net_pnl": -1169166.2317919992,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "046970.KQ",
+            "signal_date": "2026-05-11",
+            "pattern": "trend_pullback_v1",
+            "sector": "other",
+            "quantity": 582,
+            "entry": 9900,
+            "stop": 7870,
+            "target": 16200,
+            "planned_risk": 1194090.0198299997,
+            "reserved_cash": 5767561.8,
+            "fill": {
+                "date": "2026-05-12",
+                "price": 9900,
+                "fee": 5761.8
+            },
+            "exit": {
+                "date": "2026-05-15",
+                "price": 7866.065,
+                "reason": "stop",
+                "net_pnl": -1194090.0198299997,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "115500.KQ",
+            "signal_date": "2026-05-13",
+            "pattern": "trend_pullback_v1",
+            "sector": "soft",
+            "quantity": 273,
+            "entry": 18830,
+            "stop": 14817,
+            "target": 27500,
+            "planned_risk": 1106755.1289794992,
+            "reserved_cash": 5145730.59,
+            "fill": {
+                "date": "2026-05-14",
+                "price": 18789.39,
+                "fee": 5129.50347
+            },
+            "exit": {
+                "date": "2026-05-15",
+                "price": 14809.5915,
+                "reason": "stop",
+                "net_pnl": -1095657.5124494997,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "001440.KS",
+            "signal_date": "2026-05-21",
+            "pattern": "trend_pullback_v1",
+            "sector": "energy",
+            "quantity": 154,
+            "entry": 56000,
+            "stop": 48870,
+            "target": 75900,
+            "planned_risk": 1117929.207009999,
+            "reserved_cash": 8632623.999999998,
+            "fill": {
+                "date": "2026-05-22",
+                "price": 56000,
+                "fee": 8624
+            },
+            "exit": {
+                "date": "2026-05-28",
+                "price": 48845.565,
+                "reason": "stop",
+                "net_pnl": -1117929.2070099972,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "006340.KS",
+            "signal_date": "2026-05-21",
+            "pattern": "trend_pullback_v1",
+            "sector": "energy",
+            "quantity": 387,
+            "entry": 15220,
+            "stop": 12353,
+            "target": 20300,
+            "planned_risk": 1122587.666194499,
+            "reserved_cash": 5896030.14,
+            "fill": {
+                "date": "2026-05-22",
+                "price": 15220,
+                "fee": 5890.14
+            },
+            "exit": {
+                "date": "2026-05-28",
+                "price": 12346.8235,
+                "reason": "stop",
+                "net_pnl": -1122587.6661944995,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "011070.KS",
+            "signal_date": "2026-05-21",
+            "pattern": "breakout_retest_v1",
+            "sector": "semi",
+            "quantity": 6,
+            "entry": 838000,
+            "stop": 662714,
+            "target": 1102000,
+            "planned_risk": 1062706.437857999,
+            "reserved_cash": 5033027.999999999,
+            "fill": {
+                "date": "2026-05-22",
+                "price": 838000,
+                "fee": 5028
+            },
+            "exit": {
+                "date": "2026-05-26",
+                "price": 1102000,
+                "reason": "target",
+                "net_pnl": 1572360.000000001,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "322000.KS",
+            "signal_date": "2026-05-22",
+            "pattern": "trend_pullback_v1",
+            "sector": "energy",
+            "quantity": 1,
+            "entry": 203000,
+            "stop": 171142,
+            "target": 256000,
+            "planned_risk": 32317.627428999956,
+            "reserved_cash": 203202.99999999997,
+            "fill": {
+                "date": "2026-05-26",
+                "price": 203000,
+                "fee": 203
+            },
+            "exit": {
+                "date": "2026-05-29",
+                "price": 171056.429,
+                "reason": "stop",
+                "net_pnl": -32317.627428999956,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "016360.KS",
+            "signal_date": "2026-06-01",
+            "pattern": "trend_pullback_v1",
+            "sector": "fin",
+            "quantity": 65,
+            "entry": 124500,
+            "stop": 107642,
+            "target": 163000,
+            "planned_risk": 1114354.0966349987,
+            "reserved_cash": 8100592.499999999,
+            "fill": {
+                "date": "2026-06-02",
+                "price": 124500,
+                "fee": 8092.5
+            },
+            "exit": {
+                "date": "2026-06-11",
+                "price": 107588.179,
+                "reason": "stop",
+                "net_pnl": -1114354.096634999,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "003550.KS",
+            "signal_date": "2026-06-15",
+            "pattern": "trend_pullback_v1",
+            "sector": "other",
+            "quantity": 49,
+            "entry": 118400,
+            "stop": 96378,
+            "target": 185900,
+            "planned_risk": 1091961.0217389998,
+            "reserved_cash": 5807401.6,
+            "fill": {
+                "date": "2026-06-16",
+                "price": 118059,
+                "fee": 5784.8910000000005
+            },
+            "exit": {
+                "date": "2026-06-26",
+                "price": 96329.811,
+                "reason": "stop",
+                "net_pnl": -1075235.3127389988,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "011070.KS",
+            "signal_date": "2026-06-15",
+            "pattern": "trend_pullback_v1",
+            "sector": "semi",
+            "quantity": 3,
+            "entry": 1209000,
+            "stop": 933457,
+            "target": 1788000,
+            "planned_risk": 834455.1563144991,
+            "reserved_cash": 3630626.9999999995,
+            "fill": {
+                "date": "2026-06-17",
+                "price": 1207603.5,
+                "fee": 3622.8105
+            },
+            "exit": {
+                "date": "2026-06-26",
+                "price": 922538.5,
+                "reason": "stop",
+                "net_pnl": -861585.4259999995,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "001740.KS",
+            "signal_date": "2026-06-25",
+            "pattern": "trend_pullback_v1",
+            "sector": "other",
+            "quantity": 576,
+            "entry": 10800,
+            "stop": 8933,
+            "target": 16240,
+            "planned_risk": 1089328.3392959991,
+            "reserved_cash": 6227020.799999999,
+            "fill": {
+                "date": "2026-06-26",
+                "price": 10505.25,
+                "fee": 6051.024
+            },
+            "exit": {
+                "date": "2026-07-03",
+                "price": 8928.5335,
+                "reason": "stop",
+                "net_pnl": -919382.5632959995,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "475150.KS",
+            "signal_date": "2026-07-13",
+            "pattern": "trend_recovery_v1",
+            "sector": "energy",
+            "quantity": 132,
+            "entry": 48050,
+            "stop": 40050,
+            "target": 61900,
+            "planned_risk": 1070269.8566999983,
+            "reserved_cash": 6348942.6,
+            "fill": {
+                "date": "2026-07-14",
+                "price": 48050,
+                "fee": 6342.6
+            },
+            "exit": {
+                "date": "2026-07-22",
+                "price": 61900,
+                "reason": "target",
+                "net_pnl": 1813686.6000000006,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "000500.KS",
+            "signal_date": "2026-07-22",
+            "pattern": "trend_pullback_v1",
+            "sector": "energy",
+            "quantity": 23,
+            "entry": 209500,
+            "stop": 163388,
+            "target": 326000,
+            "planned_risk": 1071029.5070379993,
+            "reserved_cash": 4823318.499999999,
+            "fill": {
+                "date": "2026-07-23",
+                "price": 201100.5,
+                "fee": 4625.3115
+            },
+            "exit": {
+                "date": "2026-07-28",
+                "price": 163306.306,
+                "reason": "stop",
+                "net_pnl": -877647.8185379999,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "073240.KS",
+            "signal_date": "2026-07-30",
+            "pattern": "trend_pullback_v1",
+            "sector": "auto",
+            "quantity": 1230,
+            "entry": 6080,
+            "stop": 5210,
+            "target": 7840,
+            "planned_risk": 1087187.6458499988,
+            "reserved_cash": 7485878.399999999,
+            "fill": {
+                "date": "2026-07-31",
+                "price": 6080,
+                "fee": 7478.400000000001
+            },
+            "exit": {
+                "date": "2026-08-06",
+                "price": 7840,
+                "reason": "target",
+                "net_pnl": 2147678.4000000013,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "475150.KS",
+            "signal_date": "2026-08-13",
+            "pattern": "trend_pullback_v1",
+            "sector": "energy",
+            "quantity": 65,
+            "entry": 57100,
+            "stop": 40383,
+            "target": 87700,
+            "planned_risk": 1094252.5300524996,
+            "reserved_cash": 3715211.4999999995,
+            "fill": {
+                "date": "2026-08-14",
+                "price": 57100,
+                "fee": 3711.5
+            },
+            "exit": {
+                "date": "2026-09-11",
+                "price": 51874.05,
+                "reason": "time",
+                "net_pnl": -346770.06324999966,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "078930.KS",
+            "signal_date": "2026-08-26",
+            "pattern": "breakout_retest_v1",
+            "sector": "energy",
+            "quantity": 58,
+            "entry": 127700,
+            "stop": 108979,
+            "target": 156500,
+            "planned_risk": 1102702.6126089988,
+            "reserved_cash": 7414006.6,
+            "fill": {
+                "date": "2026-08-27",
+                "price": 127700,
+                "fee": 7406.6
+            },
+            "exit": {
+                "date": "2026-09-22",
+                "price": 108924.5105,
+                "reason": "stop",
+                "net_pnl": -1102702.612608999,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "079650.KQ",
+            "signal_date": "2026-08-28",
+            "pattern": "trend_pullback_v1",
+            "sector": "indust",
+            "quantity": 1378,
+            "entry": 5070,
+            "stop": 4277,
+            "target": 6760,
+            "planned_risk": 1108578.0721469996,
+            "reserved_cash": 6993446.459999999,
+            "fill": {
+                "date": "2026-08-31",
+                "price": 5070,
+                "fee": 6986.46
+            },
+            "exit": {
+                "date": "2026-09-02",
+                "price": 6760,
+                "reason": "target",
+                "net_pnl": 2312518.2600000016,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "028050.KS",
+            "signal_date": "2026-09-03",
+            "pattern": "trend_pullback_v1",
+            "sector": "indust",
+            "quantity": 340,
+            "entry": 46100,
+            "stop": 42911,
+            "target": 51400,
+            "planned_risk": 1121811.3151299988,
+            "reserved_cash": 15689673.999999998,
+            "fill": {
+                "date": "2026-09-04",
+                "price": 46073.024999999994,
+                "fee": 15664.828499999998
+            },
+            "exit": {
+                "date": "2026-09-08",
+                "price": 51400,
+                "reason": "target",
+                "net_pnl": 1778030.671500003,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "003230.KS",
+            "signal_date": "2026-09-14",
+            "pattern": "trend_pullback_v1",
+            "sector": "consumer",
+            "quantity": 12,
+            "entry": 1310000,
+            "stop": 1221457,
+            "target": 1557000,
+            "planned_risk": 1100214.8972579967,
+            "reserved_cash": 15735719.999999998,
+            "fill": {
+                "date": "2026-09-15",
+                "price": 1308654,
+                "fee": 15703.848
+            },
+            "exit": {
+                "date": "2026-09-23",
+                "price": 1220846.2715,
+                "reason": "stop",
+                "net_pnl": -1084046.745257996,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "128940.KS",
+            "signal_date": "2026-09-14",
+            "pattern": "trend_pullback_v1",
+            "sector": "bio",
+            "quantity": 37,
+            "entry": 474000,
+            "stop": 445042,
+            "target": 564000,
+            "planned_risk": 1113675.597722996,
+            "reserved_cash": 17555537.999999996,
+            "fill": null,
+            "exit": null,
+            "cancelled": {
+                "date": "2026-09-17",
+                "reason": "unfilled"
+            },
+            "status": "cancelled"
+        },
+        {
+            "symbol": "006400.KS",
+            "signal_date": "2026-09-15",
+            "pattern": "trend_pullback_v1",
+            "sector": "energy",
+            "quantity": 3,
+            "entry": 547000,
+            "stop": 519142,
+            "target": 600000,
+            "planned_risk": 87550.36028699961,
+            "reserved_cash": 1642640.9999999998,
+            "fill": {
+                "date": "2026-09-16",
+                "price": 540270,
+                "fee": 1620.81
+            },
+            "exit": {
+                "date": "2026-09-23",
+                "price": 518882.429,
+                "reason": "stop",
+                "net_pnl": -67340.17028699978,
+                "ambiguous_bar": false
+            },
+            "cancelled": null,
+            "status": "closed"
+        },
+        {
+            "symbol": "108490.KQ",
+            "signal_date": "2026-10-01",
+            "pattern": "trend_pullback_v1",
+            "sector": "indust",
+            "quantity": 46,
+            "entry": 296500,
+            "stop": 272921,
+            "target": 352000,
+            "planned_risk": 1117098.2718169976,
+            "reserved_cash": 13652638.999999998,
+            "fill": {
+                "date": "2026-10-02",
+                "price": 296500,
+                "fee": 13639
+            },
+            "exit": null,
+            "cancelled": null,
+            "status": "open"
+        },
+        {
+            "symbol": "217590.KS",
+            "signal_date": "2026-10-02",
+            "pattern": "trend_recovery_v1",
+            "sector": "auto",
+            "quantity": 222,
+            "entry": 18440,
+            "stop": 13400,
+            "target": 28400,
+            "planned_risk": 1127434.3925999994,
+            "reserved_cash": 4097773.6799999997,
+            "fill": {
+                "date": "2026-10-06",
+                "price": 18359.175,
+                "fee": 4075.73685
+            },
+            "exit": null,
+            "cancelled": null,
+            "status": "open"
+        },
+        {
+            "symbol": "028050.KS",
+            "signal_date": "2026-10-06",
+            "pattern": "trend_pullback_v1",
+            "sector": "indust",
+            "quantity": 471,
+            "entry": 48050,
+            "stop": 46260,
+            "target": 55200,
+            "planned_risk": 898393.345769997,
+            "reserved_cash": 22654181.549999997,
+            "fill": {
+                "date": "2026-10-07",
+                "price": 48050,
+                "fee": 22631.55
+            },
+            "exit": null,
+            "cancelled": null,
+            "status": "open"
+        }
+    ]
+}

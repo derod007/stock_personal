@@ -1,0 +1,35 @@
+{
+  "days": 18,
+  "top100_each_session": 100,
+  "analyzable_range": [93, 97],
+  "evaluated_range": [100, 104],
+  "signal_outcomes": {
+    "order": 10,
+    "position_limit": 5,
+    "cash_or_risk_or_sector_limit": 1
+  },
+  "quality_blocked_symbol_sessions": {
+    "insufficient_history": 82,
+    "missing_session": 28
+  },
+  "rows": [
+    {"date": "2025-10-01", "top100": 100, "analyzable": 93, "evaluated": 100, "signals": 2, "held": 0, "pending": 2},
+    {"date": "2025-10-02", "top100": 100, "analyzable": 93, "evaluated": 101, "signals": 3, "held": 2, "pending": 2},
+    {"date": "2025-10-10", "top100": 100, "analyzable": 96, "evaluated": 102, "signals": 0, "held": 2, "pending": 1},
+    {"date": "2025-10-13", "top100": 100, "analyzable": 95, "evaluated": 102, "signals": 1, "held": 1, "pending": 2},
+    {"date": "2025-10-14", "top100": 100, "analyzable": 95, "evaluated": 102, "signals": 0, "held": 1, "pending": 0},
+    {"date": "2025-10-15", "top100": 100, "analyzable": 96, "evaluated": 101, "signals": 0, "held": 1, "pending": 0},
+    {"date": "2025-10-16", "top100": 100, "analyzable": 97, "evaluated": 100, "signals": 2, "held": 0, "pending": 2},
+    {"date": "2025-10-17", "top100": 100, "analyzable": 95, "evaluated": 101, "signals": 0, "held": 2, "pending": 0},
+    {"date": "2025-10-20", "top100": 100, "analyzable": 95, "evaluated": 102, "signals": 1, "held": 2, "pending": 1},
+    {"date": "2025-10-21", "top100": 100, "analyzable": 95, "evaluated": 102, "signals": 0, "held": 3, "pending": 0},
+    {"date": "2025-10-22", "top100": 100, "analyzable": 95, "evaluated": 101, "signals": 0, "held": 3, "pending": 0},
+    {"date": "2025-10-23", "top100": 100, "analyzable": 96, "evaluated": 103, "signals": 0, "held": 3, "pending": 0},
+    {"date": "2025-10-24", "top100": 100, "analyzable": 97, "evaluated": 103, "signals": 1, "held": 3, "pending": 1},
+    {"date": "2025-10-27", "top100": 100, "analyzable": 95, "evaluated": 103, "signals": 3, "held": 4, "pending": 0},
+    {"date": "2025-10-28", "top100": 100, "analyzable": 96, "evaluated": 102, "signals": 1, "held": 4, "pending": 0},
+    {"date": "2025-10-29", "top100": 100, "analyzable": 96, "evaluated": 103, "signals": 2, "held": 3, "pending": 1},
+    {"date": "2025-10-30", "top100": 100, "analyzable": 97, "evaluated": 104, "signals": 0, "held": 4, "pending": 0},
+    {"date": "2025-10-31", "top100": 100, "analyzable": 96, "evaluated": 104, "signals": 0, "held": 4, "pending": 0}
+  ]
+}

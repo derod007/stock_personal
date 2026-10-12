@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "kind": "dated_krx_amount_top100_replay_v1",
+  "label": "KRX 일별 거래대금 TOP100 연구",
+  "depends_on_pr": 73,
+  "generated_at": "2026-10-12 22:29:00",
+  "note": [
+    "운영 다음 실시간 TOP100과 동일하다고 보지 않는다.",
+    "한 달 실행으로 수익성이 검증됐다고 보지 않는다.",
+    "당시 업종을 복원한 것이 아니다."
+  ],
+  "input": {
+    "days": 18,
+    "union_unique_symbols": 305,
+    "name_changes_in_union": 0,
+    "identity_hold": ["0008Z0.KQ", "45014K.KS"],
+    "yahoo_404": ["008500.KS", "010620.KS", "012510.KS", "042670.KS", "450140.KS"],
+    "candidates": "docs/historical-top100-replay-202510/candidates.json"
+  },
+  "bars": {
+    "dataset": "kr-dated-amount-top100-202510",
+    "imported": 100,
+    "collected": 198,
+    "failed": 5,
+    "seconds": 289.2,
+    "requests": 198,
+    "bars_bytes": 43664045,
+    "quality_ok_with_warnings": 270,
+    "quality_hold": 28,
+    "source_datasets_not_overwritten": ["kr-saved-scan-20261009", "kr-saved-scan-20251008"]
+  },
+  "sectors": {
+    "secured": 298,
+    "unconfirmed": 7,
+    "assumption": "현재 네이버 모바일 업종 JSON을 2025-10에 같이 적용한다. 당시 업종을 복원한 것이 아니다."
+  },
+  "account": {
+    "id": "hist-kr-dated-top100-v1-202510",
+    "initial_cash": 100000000,
+    "sessions": 18,
+    "halted": false,
+    "cash": 82755489.69826199,
+    "equity": 101622379.69826199,
+    "realized_pnl": 1728576.2807120103,
+    "unrealized_pnl_open_positions": -125063.47244999779,
+    "max_close_drawdown": 0.01755591304907378,
+    "orders": 10,
+    "fills": 9,
+    "cancelled": 1,
+    "exits": {"target": 3, "stop": 2},
+    "open_positions": 4,
+    "pending_orders": 0,
+    "signal_outcomes": {"order": 10, "position_limit": 5, "cash_or_risk_or_sector_limit": 1},
+    "reconcile_pass": true
+  },
+  "checks": {
+    "unit_tests": "php tests/dated_top100_replay.php",
+    "input_hash_tests": "python -m unittest tests/test_dated_amount_top100_replay.py",
+    "rerun_adds_nothing": true,
+    "split_vs_batch_smoke_equal_after_stripping_account_id": true,
+    "future_bars_blocked_in_unit_tests": true,
+    "unpriced_position_still_halts_in_unit_tests": true,
+    "pending_dropout_fill_in_unit_tests": true,
+    "pending_dropout_unfilled_in_unit_tests": true,
+    "pr73_selected_and_raw_hashes_required": true,
+    "candidates_journal_sha256_preserved": "1be93ed0111ff75034a3b10c86aeddbf403f072de9736a5c1a79278022b18f93",
+    "candidates_git_lf_sha256": "b413a9f3df32ae2cd152e2d80ad2522b8bdf66e20c9beb196f325c75f957c884",
+    "candidates_crlf_from_lf_sha256": "1be93ed0111ff75034a3b10c86aeddbf403f072de9736a5c1a79278022b18f93",
+    "operational_files_untouched": true,
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465"
+  }
+}

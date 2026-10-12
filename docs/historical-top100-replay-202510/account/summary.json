@@ -1,0 +1,72 @@
+{
+    "account": "hist-kr-dated-top100-v1-202510",
+    "initial_cash": 100000000,
+    "cash": 82755489.69826199,
+    "reserved_cash": 0,
+    "equity": 101622379.69826199,
+    "realized_pnl": 1728576.2807120103,
+    "closed_trades": 5,
+    "wins": 3,
+    "losses": 2,
+    "open_positions": [
+        {
+            "symbol": "290650.KQ",
+            "quantity": 124,
+            "entry_fill": 52700,
+            "mark_close": 52800,
+            "mark_session": 1761892200,
+            "unrealized_pnl_after_sell_cost": -681.9999999990687,
+            "bars_held": 11
+        },
+        {
+            "symbol": "333430.KQ",
+            "quantity": 729,
+            "entry_fill": 8300,
+            "mark_close": 8060,
+            "mark_session": 1761892200,
+            "unrealized_pnl_after_sell_cost": -186886.43999999948,
+            "bars_held": 11
+        },
+        {
+            "symbol": "376900.KQ",
+            "quantity": 169,
+            "entry_fill": 37300,
+            "mark_close": 37750,
+            "mark_session": 1761892200,
+            "unrealized_pnl_after_sell_cost": 63366.550000000745,
+            "bars_held": 9
+        },
+        {
+            "symbol": "240810.KQ",
+            "quantity": 1,
+            "entry_fill": 64932.45,
+            "mark_close": 64200,
+            "mark_session": 1761892200,
+            "unrealized_pnl_after_sell_cost": -861.5824499999871,
+            "bars_held": 2
+        }
+    ],
+    "pending_orders": [],
+    "unrealized_pnl_open_positions": -125063.47244999779,
+    "max_close_drawdown": 0.01755591304907378,
+    "last_session": 1761892200,
+    "last_day": "2025-10-31",
+    "halted": false,
+    "halt_reason": null,
+    "event_counts": {
+        "account_started": 1,
+        "day_log": 18,
+        "equity": 18,
+        "exit": 5,
+        "fill": 9,
+        "order": 10,
+        "order_cancelled": 1
+    },
+    "research": {
+        "dataset": "kr-dated-amount-top100-202510",
+        "start_day": "2025-10-01",
+        "plan_source": "engine",
+        "sector_source": "explicit_map",
+        "smoke": false
+    }
+}

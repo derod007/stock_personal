@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "kind": "historical_dated_amount_top100_account_replay",
+  "label": "KRX 일별 거래대금 TOP100 연구",
+  "note": "운영 다음 실시간 TOP100과 동일하다고 보지 않는다. 한 달 실행으로 수익성을 검증한 것이 아니다.",
+  "depends_on_pr": 73,
+  "base_config": "config/paper-kr-recovery-v1.json",
+  "inherit_all_but": ["id"],
+  "state_subdir": "history-account",
+  "id_prefix": "hist-kr-dated-top100-v1-",
+  "smoke_id_prefix": "hist-smoke-kr-dated-top100-v1-",
+  "periods": {
+    "oct2025": {
+      "dataset": "kr-dated-amount-top100-202510",
+      "account_id": "hist-kr-dated-top100-v1-202510",
+      "evaluation_start": "2025-10-01",
+      "as_of": "2025-10-31"
+    }
+  },
+  "mode": "replay",
+  "carry_over": "none"
+}

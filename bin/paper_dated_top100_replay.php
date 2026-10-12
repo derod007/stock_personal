@@ -157,7 +157,7 @@ if($cmd==='run'){
 if($cmd==='verify-inputs'){
     $recorded=$o['recorded-sha']??null;
     if($recorded===null){
-        $provPath=$o['provenance']??$root.'/docs/historical-top100-replay-202510/account/provenance.json';
+        $provPath=$o['provenance']??$root.'/'.$profile['docs'].'/account/provenance.json';
         $prov=json_decode((string)file_get_contents($provPath),true,512,JSON_THROW_ON_ERROR);
         $recorded=(string)($prov['candidates_sha256']??'');
     }
@@ -208,7 +208,7 @@ $rec=PaperAccountReplay::reconcile($j,$data);
 if($cmd==='verify'){
     $recorded=(string)($j['state']['research']['candidates_sha256']??'');
     $rec['candidate_git_link']=PaperDatedTop100Replay::linkRecordedHash($candPath,$recorded);
-    $rec['new_orders']=PaperDatedTop100Replay::auditNewOrders($j,$candidates);
+    $rec['new_orders']=PaperDatedTop100Replay::auditNewOrders($j,$candidates,$data);
     $out($rec);exit($rec['pass']&&$rec['candidate_git_link']['pass']&&$rec['new_orders']['pass']?0:1);
 }
 if($cmd==='export'){

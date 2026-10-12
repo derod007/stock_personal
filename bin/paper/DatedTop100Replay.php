@@ -206,25 +206,11 @@ final class PaperDatedTop100Replay
         return $map+['_file_sha256_lf'=>$got];
     }
 
-    /**
-     * Every new order must come from a ready plan on that session's TOP100. Does not place orders.
-     * @return array{pass:bool,orders:int,mismatches:list<array<string,mixed>>}
-     */
-    public static function auditNewOrders(array $journal,array $candidates):array
+    /** Read-only: compare stored logs and recompute the final plan from the supplied frozen dataset. */
+    public static function auditNewOrders(array $journal,array $candidates,?array $data=null):array
     {
-        $mismatches=[];$n=0;
-        foreach($journal['events']??[] as $e){
-            if(($e['type']??'')!=='order')continue;
-            $n++;
-            $p=$e['payload']??[];
-            $sym=(string)($p['symbol']??'');
-            $session=(int)($p['session']??0);
-            $day=$candidates['by_session'][$session]['day']??PaperHistoryResearch::day($session);
-            $in=in_array($sym,$candidates['by_session'][$session]['symbols']??[],true);
-            $ready=($p['pattern']??null)!==null;
-            if(!$in||!$ready)$mismatches[]=['symbol'=>$sym,'day'=>$day,'in_dated_top100'=>$in,'has_signal_pattern'=>$ready];
-        }
-        return ['pass'=>$mismatches===[],'orders'=>$n,'mismatches'=>$mismatches];
+        require_once __DIR__.'/DatedOrderAudit.php';
+        return PaperDatedOrderAudit::audit($journal,$candidates,$data);
     }
 
     public static function run(array $data,array $config,string $journalPath,array $candidates,array $opts=[]):array

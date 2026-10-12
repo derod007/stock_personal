@@ -53,6 +53,12 @@ AUTH_HTTP = {401, 403}
 REQUIRED_ROW_FIELDS = ("BAS_DD", "ISU_CD", "ISU_NM", "ACC_TRDVAL")
 # 행정안전부 2025년 공휴일 후보. 빈 API 응답만으로 휴장이라고 확정하지 않는다.
 HOLIDAYS_2025_10 = {"20251003", "20251005", "20251006", "20251007", "20251008", "20251009"}
+CALENDAR_FILE = ROOT / "docs" / "historical-top100-20251008-20261008" / "trading-calendar.json"
+PILOT_EVIDENCE = ROOT / "docs" / "historical-top100-pilot" / "evidence.json"
+RANGE_FROM = date(2025, 10, 8)
+RANGE_TO = date(2026, 10, 8)
+RANGE_RAW_ROOT = ROOT / "data" / "raw" / "research" / "historical-amount-top100-20251008-20261008"
+RANGE_DOCS = ROOT / "docs" / "historical-top100-20251008-20261008"
 ETF_PREFIXES = [
     "KODEX", "TIGER", "KOSEF", "KINDEX", "KOACT", "ACE", "SOL ", "PLUS",
     "RISE", "HANARO", "ARIRANG", "KBSTAR", "TIMEFOLIO", "WON ", "1Q ",
@@ -142,6 +148,174 @@ def assumed_trading_days(year: int = 2025, month: int = 10) -> list[str]:
             days.append(key)
         d += timedelta(days=1)
     return days
+
+
+def ymd_compact(d: date) -> str:
+    return d.strftime("%Y%m%d")
+
+
+def parse_ymd(text: str) -> date:
+    raw = str(text).replace("-", "").replace(".", "").strip()
+    if len(raw) != 8 or not raw.isdigit():
+        raise SystemExit("invalid date " + text)
+    return date(int(raw[0:4]), int(raw[4:6]), int(raw[6:8]))
+
+
+def load_trading_calendar(path: Path | None = None) -> dict[str, Any]:
+    p = path or CALENDAR_FILE
+    if not p.is_file():
+        raise SystemExit("trading calendar missing: " + str(p))
+    return json.loads(p.read_text(encoding="utf-8"))
+
+
+def closed_weekdays(calendar: dict[str, Any] | None = None) -> dict[str, dict[str, Any]]:
+    cal = calendar if calendar is not None else load_trading_calendar()
+    closed = cal.get("closed_weekdays") or {}
+    return {str(k): v for k, v in closed.items()}
+
+
+def candidate_trading_days(
+    start: date,
+    end: date,
+    calendar: dict[str, Any] | None = None,
+) -> list[str]:
+    """Weekdays in [start, end] minus documented exchange closures. Empty API is not a holiday."""
+    if end < start:
+        raise SystemExit("range end before start")
+    closed = closed_weekdays(calendar)
+    days: list[str] = []
+    d = start
+    while d <= end:
+        key = ymd_compact(d)
+        if d.weekday() < 5 and key not in closed:
+            days.append(key)
+        d += timedelta(days=1)
+    return days
+
+
+def oct2025_overlap_days(days: list[str]) -> list[str]:
+    return [d for d in days if d.startswith("202510") and d in assumed_trading_days(2025, 10)]
+
+
+def frozen_pilot_hashes(pilot: dict[str, Any]) -> tuple[dict[str, str], dict[str, str]]:
+    selected: dict[str, str] = {}
+    raw: dict[str, str] = {}
+    for rec in pilot.get("selected_files") or []:
+        name = rec.get("file")
+        sha = rec.get("sha256")
+        if name and sha:
+            selected[str(name)] = str(sha)
+    for day in (pilot.get("collect") or {}).get("days") or []:
+        d = day.get("date")
+        sel_sha = day.get("selected_sha256")
+        sel_file = day.get("selected_file") or (f"{d}_top100.json" if d else None)
+        if sel_file and sel_sha:
+            selected[str(sel_file)] = str(sel_sha)
+        for rec in day.get("files") or []:
+            market = rec.get("market")
+            sha = rec.get("sha256")
+            if d and market and sha:
+                raw[f"{d}_{market}.json"] = str(sha)
+    return selected, raw
+
+
+def copy_if_hash_matches(src: Path, dest: Path, expected: str) -> str:
+    """Copy src to dest only when sha256 matches expected. Never writes src."""
+    if not expected:
+        return "missing_baseline"
+    if not src.is_file():
+        return "source_missing"
+    got = sha256_file(src)
+    if got != expected:
+        return "source_mismatch"
+    if dest.is_file():
+        if sha256_file(dest) == expected:
+            return "reused"
+        return "dest_mismatch"
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_bytes(src.read_bytes())
+    if sha256_file(dest) != expected:
+        return "copy_mismatch"
+    return "copied"
+
+
+def reuse_verified_oct(
+    days: list[str],
+    dest_raw: Path,
+    dest_selected: Path,
+    src_root: Path | None = None,
+    pilot_path: Path | None = None,
+) -> dict[str, Any]:
+    """Hash-check Oct 2025 files from PR #73 and copy into the new research folder. Source is read-only."""
+    src_root = src_root or RAW_ROOT
+    pilot_path = pilot_path or PILOT_EVIDENCE
+    if not pilot_path.is_file():
+        raise SystemExit("pilot evidence.json missing")
+    pilot = json.loads(pilot_path.read_text(encoding="utf-8"))
+    expected_selected, expected_raw = frozen_pilot_hashes(pilot)
+    overlap = oct2025_overlap_days(days)
+    out: dict[str, Any] = {
+        "source_raw": str(src_root / "raw"),
+        "source_selected": str(src_root / "selected"),
+        "overlap_days": overlap,
+        "copied": [],
+        "reused": [],
+        "issues": [],
+        "source_untouched": True,
+    }
+    src_raw = src_root / "raw"
+    src_sel = src_root / "selected"
+    before = {}
+    for p in list(src_raw.glob("*")) + list(src_sel.glob("*")):
+        if p.is_file():
+            before[str(p)] = (p.stat().st_mtime_ns, p.stat().st_size, sha256_file(p))
+    for day in overlap:
+        for market in EQUITY_MARKETS:
+            name = f"{day}_{market}.json"
+            status = copy_if_hash_matches(src_raw / name, dest_raw / name, expected_raw.get(name, ""))
+            rec = {"file": name, "kind": "raw", "status": status}
+            if status in {"copied", "reused"}:
+                out[status if status == "copied" else "reused"].append(rec)
+            else:
+                out["issues"].append(rec)
+        sel_name = f"{day}_top100.json"
+        status = copy_if_hash_matches(src_sel / sel_name, dest_selected / sel_name, expected_selected.get(sel_name, ""))
+        rec = {"file": sel_name, "kind": "selected", "status": status}
+        if status in {"copied", "reused"}:
+            out[status if status == "copied" else "reused"].append(rec)
+        else:
+            out["issues"].append(rec)
+    after = {}
+    for p in list(src_raw.glob("*")) + list(src_sel.glob("*")):
+        if p.is_file():
+            after[str(p)] = (p.stat().st_mtime_ns, p.stat().st_size, sha256_file(p))
+    if before != after:
+        out["source_untouched"] = False
+        out["issues"].append({"issue": "oct2025_source_changed"})
+    return out
+
+
+def rerank_from_raw_files(day: str, raw_dir: Path) -> dict[str, Any]:
+    rows: list[dict[str, Any]] = []
+    files: dict[str, str] = {}
+    for market in EQUITY_MARKETS:
+        path = raw_dir / f"{day}_{market}.json"
+        body = path.read_bytes()
+        parsed = validate_openapi_body(body, day)
+        if not parsed["ok"]:
+            raise SystemExit(f"independent rerank blocked {day} {market} {parsed['kind']}")
+        files[path.name] = parsed["sha256"]
+        rows.extend(rows_from_openapi_block(parsed["block"], product_source=f"krx_openapi_{market}"))
+    selected = select_top100(rows)
+    selected["date"] = day
+    selected["source"] = "independent_rerank_from_raw"
+    selected["markets_validated"] = list(EQUITY_MARKETS)
+    selected["raw_files"] = files
+    return selected
+
+
+def top100_signature(payload: dict[str, Any]) -> list[tuple[str, float]]:
+    return [(str(r.get("code")), float(r.get("amount_won"))) for r in payload.get("top100") or []]
 
 
 def http_get(url: str, headers: dict[str, str], timeout: int = 60) -> tuple[int, dict[str, str], bytes]:
@@ -961,7 +1135,7 @@ def write_json(path: Path, payload: dict[str, Any]) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="2025-10 KR amount TOP100 pilot. Does not write operational caches.",
+        description="KRX amount TOP100 collect. Default is the 2025-10 pilot. Does not write operational caches.",
         epilog=(
             "PowerShell collect: $env:KRX_AUTH_KEY = Read-Host 'KRX AUTH KEY'; "
             "python docs\\research\\historical-amount-top100-pilot.py --collect; "
@@ -970,23 +1144,65 @@ def main() -> int:
     )
     parser.add_argument("--probe", action="store_true")
     parser.add_argument("--collect", action="store_true")
+    parser.add_argument("--from", dest="date_from", default=None, help="YYYY-MM-DD or YYYYMMDD")
+    parser.add_argument("--to", dest="date_to", default=None, help="YYYY-MM-DD or YYYYMMDD")
+    parser.add_argument("--raw-root", default=None)
+    parser.add_argument("--docs", default=None)
+    parser.add_argument("--reuse-from", default=None, help="Oct 2025 gitignored raw root to copy after hash check")
+    parser.add_argument("--sleep", type=float, default=1.2)
     args = parser.parse_args()
+    range_mode = args.date_from is not None or args.date_to is not None
+    if range_mode and (not args.date_from or not args.date_to):
+        raise SystemExit("--from and --to are required together")
     if not args.probe and not args.collect:
-        args.probe = True
+        args.probe = not range_mode
+    if range_mode and args.probe:
+        raise SystemExit("range collect does not re-run the 2025-10 probe (that writes the Oct raw folder)")
 
-    RAW_ROOT.mkdir(parents=True, exist_ok=True)
-    DOCS.mkdir(parents=True, exist_ok=True)
+    start = parse_ymd(args.date_from) if args.date_from else date(2025, 10, 1)
+    end = parse_ymd(args.date_to) if args.date_to else date(2025, 10, 31)
+    days = candidate_trading_days(start, end) if range_mode else assumed_trading_days()
+    dest_root = Path(args.raw_root) if args.raw_root else (RANGE_RAW_ROOT if range_mode else RAW_ROOT)
+    dest_docs = Path(args.docs) if args.docs else (RANGE_DOCS if range_mode else DOCS)
+    if dest_root.resolve() == RAW_ROOT.resolve() and range_mode:
+        raise SystemExit("refusing to write a range collect into the Oct 2025 raw root")
+    if dest_docs.resolve() == DOCS.resolve() and range_mode:
+        raise SystemExit("refusing to overwrite the Oct 2025 pilot evidence")
+
+    dest_root.mkdir(parents=True, exist_ok=True)
+    dest_docs.mkdir(parents=True, exist_ok=True)
+    if not range_mode:
+        RAW_ROOT.mkdir(parents=True, exist_ok=True)
+        DOCS.mkdir(parents=True, exist_ok=True)
 
     probe: dict[str, Any] = {}
     if args.probe:
         probe = probe_access()
-    elif (DOCS / "evidence.json").is_file():
+    elif (dest_docs / "evidence.json").is_file():
         try:
-            prev = json.loads((DOCS / "evidence.json").read_text(encoding="utf-8"))
+            prev = json.loads((dest_docs / "evidence.json").read_text(encoding="utf-8"))
             if isinstance(prev.get("probe"), dict):
                 probe = prev["probe"]
         except (OSError, json.JSONDecodeError):
             probe = {}
+    if range_mode:
+        probe.setdefault("facts", [])
+        probe["facts"] = list(probe.get("facts") or [])
+        probe["facts"].append(
+            f"기간 {start.isoformat()}~{end.isoformat()} 거래일 후보는 달력 파일에서 확정했다. "
+            "빈 응답만으로 휴장이라고 보지 않는다."
+        )
+
+    reuse_report: dict[str, Any] | None = None
+    if args.collect and range_mode:
+        reuse_report = reuse_verified_oct(
+            days,
+            dest_root / "raw",
+            dest_root / "selected",
+            src_root=Path(args.reuse_from) if args.reuse_from else RAW_ROOT,
+        )
+        if reuse_report["issues"] or not reuse_report["source_untouched"]:
+            raise SystemExit(json.dumps({"ok": False, "reuse": reuse_report}, ensure_ascii=False, indent=2))
 
     key = load_auth_key()
     if args.collect:
@@ -996,9 +1212,61 @@ def main() -> int:
                 "인증키 없음. 수집 미실행(skipped_no_auth_key). 근사 TOP100을 만들지 않았다."
             )
         else:
-            collect = collect_month(key)
+            collect = collect_month(
+                key,
+                sleep_s=args.sleep,
+                days=days,
+                raw_dir=dest_root / "raw",
+                selected_dir=dest_root / "selected",
+            )
     else:
         collect = skipped_collect("이번 실행은 --collect가 아님. 수집 미실행.")
+    if reuse_report is not None:
+        collect["oct2025_reuse"] = reuse_report
+
+    if range_mode:
+        write_json(dest_root / "collect-summary.json", {
+            "generated_at": now_kst(),
+            "from": start.isoformat(),
+            "to": end.isoformat(),
+            "candidate_days": days,
+            "candidate_day_count": len(days),
+            "collect": collect,
+            "reuse": reuse_report,
+        })
+        write_json(dest_docs / "collect-summary.json", {
+            "generated_at": now_kst(),
+            "from": start.isoformat(),
+            "to": end.isoformat(),
+            "candidate_day_count": len(days),
+            "ok_dates": collect.get("ok_dates") or [],
+            "blocked_dates": collect.get("blocked_dates") or [],
+            "requests": collect.get("requests"),
+            "retries": collect.get("retries"),
+            "bytes": collect.get("bytes"),
+            "started": collect.get("started"),
+            "finished": collect.get("finished"),
+            "status": collect.get("status"),
+            "reuse": {
+                "overlap_days": (reuse_report or {}).get("overlap_days"),
+                "copied": len((reuse_report or {}).get("copied") or []),
+                "reused": len((reuse_report or {}).get("reused") or []),
+                "source_untouched": (reuse_report or {}).get("source_untouched"),
+            } if reuse_report else None,
+            "raw_root_gitignored": True,
+        })
+        print(json.dumps({
+            "ok": collect.get("status") != "stopped_auth",
+            "range": [start.isoformat(), end.isoformat()],
+            "candidate_days": len(days),
+            "ok_dates": len(collect.get("ok_dates") or []),
+            "blocked_dates": collect.get("blocked_dates") or [],
+            "requests": collect.get("requests"),
+            "retries": collect.get("retries"),
+            "reuse_copied": len((reuse_report or {}).get("copied") or []),
+            "docs": str(dest_docs / "collect-summary.json"),
+        }, ensure_ascii=False))
+        return 0 if collect.get("ran") and collect.get("status") != "stopped_auth" else 2
 
     evidence = build_evidence(probe, collect)
     write_json(RAW_ROOT / "evidence-local.json", evidence)

@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "kind": "dated_krx_amount_top100_prep_v1",
+  "label": "KRX 일별 거래대금 TOP100 연구",
+  "generated_at": "2026-10-13 01:04:00",
+  "from": "2025-10-08",
+  "to": "2026-10-08",
+  "depends_on_pr": 73,
+  "account_replay": false,
+  "note": [
+    "운영 다음 실시간 TOP100과 동일하다고 보지 않는다.",
+    "빈 Open API 응답만으로 휴장이라고 보지 않는다.",
+    "종가×거래량으로 거래대금을 만들지 않았다.",
+    "숫자 6자리가 아니라고 잘못된 종목이라고 단정하지 않는다.",
+    "계좌 재현·수익률 계산은 하지 않았다."
+  ],
+  "calendar": {
+    "file": "docs/historical-top100-20251008-20261008/trading-calendar.json",
+    "candidate_trading_days": 244,
+    "first": "20251010",
+    "last": "20261008",
+    "empty_response_is_not_holiday": true
+  },
+  "collect": {
+    "ok_dates": 244,
+    "blocked_dates": [],
+    "requests": 456,
+    "retries": 0,
+    "bytes": 203451468,
+    "started": "2026-10-13 00:29:19",
+    "finished": "2026-10-13 00:46:10",
+    "concurrency": 1,
+    "sleep_s": 1.2,
+    "oct2025_overlap_days": 16,
+    "oct2025_files_copied_after_hash_check": 48,
+    "oct2025_source_untouched": true,
+    "raw_root_gitignored": "data/raw/research/historical-amount-top100-20251008-20261008"
+  },
+  "selected": {
+    "union_unique_symbols": 933,
+    "included_yahoo_six_digit": 901,
+    "provider_symbol_unmapped": 32,
+    "name_changes_in_union": 9,
+    "independent_rerank_ok_dates": 244,
+    "file_hashes": "docs/historical-top100-20251008-20261008/file-hashes.json"
+  },
+  "bars": {
+    "dataset": "kr-dated-amount-top100-20251008-20261008",
+    "imported": 334,
+    "collected": 561,
+    "failed": 6,
+    "seconds": 871.6,
+    "yahoo_requests": 561,
+    "bars_bytes": 127652179,
+    "quality_ok_with_warnings": 811,
+    "quality_hold": 84,
+    "hold_reasons": {
+      "insufficient_history": 10,
+      "price_jump_beyond_daily_limit": 74
+    }
+  },
+  "sectors": {
+    "assumption": "현재 네이버 모바일 업종 JSON을 과거에 같이 적용한다. 당시 업종을 복원한 것이 아니다.",
+    "symbols": 933,
+    "secured": 895,
+    "unconfirmed": 38,
+    "unconfirmed_reasons": {
+      "not_a_kr_symbol": 32,
+      "http_status": 6
+    },
+    "operational_caches_unchanged": true
+  },
+  "hashes": {
+    "bin/paper/DatedTop100Prep.php": "51a0b4c160621cab49b50ae28054ac80d70d43ff8af7242e69dadbc1bd6d20bf",
+    "bin/paper_dated_top100_prep.php": "bdd170faff27496d6c406fe45df53a1e2007e071effc0dc2aed61d3cd1ae56eb",
+    "docs/research/historical-amount-top100-pilot.py": "a3b9ff7b02986b595aec2f26970fd72dc14f1a722d51fa180f6a6252cb52cc68",
+    "docs/research/dated-amount-top100-range.py": "7168966d5302b81c78161c61479ed7f3efaf47fc7bb5eb48123efa8bf8fa6547",
+    "src/KrAmountLeadersClient.php": "8de0f63934fc2e3494708cd5bd37d0b1c21a9eb8cbd9f34325be2ad8f24f26d7",
+    "docs/historical-top100-20251008-20261008/trading-calendar.json": "8a311ed538f016060260ba78c3c5247a625ebaae5961238d1a41949de2a4161e",
+    "docs/historical-top100-20251008-20261008/candidates.json": "94060187ee061fad7815e1597e7ef9fd159899a8446232650e1fab6b1d5fc8f5",
+    "docs/historical-top100-20251008-20261008/universe.json": "ca5d91ffc36e21f06acb94a41b3555a29b7aed0b6ea2a2e27da449b6dadc2ace"
+  },
+  "operational_strategy_untouched": true,
+  "full_v2_untouched": true,
+  "oct2025_research_untouched": true
+}

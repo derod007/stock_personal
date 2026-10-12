@@ -1,0 +1,38 @@
+[
+  {
+    "symbol": "010620.KS",
+    "name": "HD현대미포",
+    "market": "KOSPI",
+    "error": "Yahoo HTTP 404"
+  },
+  {
+    "symbol": "012510.KS",
+    "name": "더존비즈온",
+    "market": "KOSPI",
+    "error": "Yahoo HTTP 404"
+  },
+  {
+    "symbol": "042670.KS",
+    "name": "HD현대인프라코어",
+    "market": "KOSPI",
+    "error": "Yahoo HTTP 404"
+  },
+  {
+    "symbol": "082640.KS",
+    "name": "동양생명",
+    "market": "KOSPI",
+    "error": "Yahoo HTTP 404"
+  },
+  {
+    "symbol": "152550.KS",
+    "name": "한국ANKOR유전",
+    "market": "KOSPI",
+    "error": "Yahoo HTTP 404"
+  },
+  {
+    "symbol": "450140.KS",
+    "name": "코오롱모빌리티그룹",
+    "market": "KOSPI",
+    "error": "Yahoo HTTP 404"
+  }
+]

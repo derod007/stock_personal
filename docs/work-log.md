@@ -1,3 +1,15 @@
+## 2026-10-13 03:03 · Cursor · 끝
+- 한 일: PR #75 계좌 실행 전 데이터 준비. Yahoo 31종 v2 편입(5y 31회), 895 해시 복사, 24400 고유 분할, 중간·최종 이탈 잠재 누락 집계, 편입 섹터 맵. 계좌 재현·병합 없음
+- 파일: bin/paper/DatedTop100Prep.php, bin/paper_dated_top100_prep.php, bin/paper/HistoryResearch.php, src/NaverDailyQuotes.php, tests/dated_top100_prep.php, docs/historical-top100-20251008-20261008/, docs/work-log.md
+- 커밋: PR #75에 추가(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-13 02:50 · Cursor · 진행
+- 한 일: PR #75 계좌 실행 전 데이터 준비 마무리. Yahoo 31종 v2 편입, 24400 분할 집계, 중간 이탈 봉 검사. 계좌 재현·병합 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-13 02:40 · Cursor · 끝
 - 한 일: PR #75 해시 검증을 거래일 목록 기준으로 분리, 미매핑/404 프로브, 날짜별 품질 집계, Yahoo 요청 수 정정. 원본·고정 해시 보존. 계좌 재현·병합 없음
 - 파일: docs/research/dated-amount-top100-range.py, docs/research/dated-amount-top100-provider-review.py, bin/paper/DatedTop100Prep.php, bin/paper_dated_top100_prep.php, bin/paper/HistoryResearch.php, tests/test_dated_amount_top100_range.py, tests/test_dated_amount_top100_provider_review.py, tests/dated_top100_prep.php, docs/historical-top100-20251008-20261008/, .github/workflows/pattern-replay.yml, docs/work-log.md

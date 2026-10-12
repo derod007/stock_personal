@@ -74,7 +74,7 @@ final class PaperHistoryResearch
 
     private static function safeName(string $symbol):string
     {
-        if(!preg_match('/^\d{6}\.(KS|KQ)$/D',$symbol))throw new InvalidArgumentException('Invalid symbol '.$symbol);
+        if(!preg_match('/^[0-9A-Za-z]{6}\.(KS|KQ)$/D',$symbol))throw new InvalidArgumentException('Invalid symbol '.$symbol);
         return $symbol;
     }
 

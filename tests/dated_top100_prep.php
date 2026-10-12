@@ -55,12 +55,55 @@ $cand=['days'=>['2025-10-10','2025-10-13'],'by_session'=>[
 ]];
 $cov=PaperDatedTop100Prep::sessionCoverage($cand,$state);
 pcheck($cov['days'][0]['unmapped']===1&&$cov['days'][0]['no_bars']===1,'unmapped and missing bars are counted per session');
-pcheck($cov['days'][0]['price_jump']===0,'later jump is not applied to the earlier session');
-pcheck($cov['days'][1]['price_jump']===1,'jump is tagged on the session that already contains it');
+pcheck($cov['days'][0]['price_jump_warning']===0,'later jump is not applied to the earlier session');
+pcheck($cov['days'][1]['price_jump_warning']===1,'jump warning is tagged on the session that already contains it');
+pcheck($cov['partition']['analyzable']+$cov['partition']['blocked']===6&&$cov['partition']['sum_matches']===true,'each name-session is analyzable or blocked once');
 pcheck($cov['later_jump_does_not_wipe_earlier']['symbols_with_later_jump_and_earlier_clear']===1,'earlier clear sessions stay distinct from a later jump');
-pcheck($cov['post_dropout']['symbol_sessions_checked']===0,'no dropout gap on symbols still in both sessions');
+pcheck($cov['potential_holding_or_pending_bar_gaps']['final_dropout']['checked']===0,'no final dropout when the name stays in both sessions');
+
+$gapRows=[
+    ['rank'=>1,'code'=>'000001','symbol'=>'000001.KS','name'=>'n1','market'=>'KOSPI','amount_won'=>100],
+];
+$d1=PaperDatedTop100Prep::sessionClose('2025-10-10');
+$d2=PaperDatedTop100Prep::sessionClose('2025-10-13');
+$d3=PaperDatedTop100Prep::sessionClose('2025-10-14');
+$reentry=['days'=>['2025-10-10','2025-10-13','2025-10-14'],'by_session'=>[
+    $d1=>['day'=>'2025-10-10','rows'=>$gapRows],
+    $d2=>['day'=>'2025-10-13','rows'=>[['rank'=>1,'code'=>'000099','symbol'=>'000099.KS','name'=>'other','market'=>'KOSPI','amount_won'=>1]]],
+    $d3=>['day'=>'2025-10-14','rows'=>$gapRows],
+]];
+$reState=['000001.KS'=>['status'=>'included','state'=>'done','rows'=>$rows,'bars_sha256'=>str_repeat('a',64),'name'=>'n1']];
+$g=PaperDatedTop100Prep::sessionCoverage($reentry,$reState);
+pcheck($g['potential_holding_or_pending_bar_gaps']['intermediate_dropout']['checked']===1,'re-entry after an intermediate drop is a checked gap');
+pcheck($g['potential_holding_or_pending_bar_gaps']['intermediate_dropout']['potential_missing_bars']===0,'a bar on the intermediate session is not a potential miss');
+$missingMid=$rows;
+$reStateMiss=['000001.KS'=>['status'=>'included','state'=>'done','rows'=>array_values(array_filter($missingMid,fn($b)=>PaperHistoryResearch::day($b['available_at'])!=='2025-10-13')),'bars_sha256'=>str_repeat('a',64),'name'=>'n1']];
+$gm=PaperDatedTop100Prep::sessionCoverage($reentry,$reStateMiss);
+pcheck($gm['potential_holding_or_pending_bar_gaps']['intermediate_dropout']['potential_missing_bars']===1,'missing bar in the intermediate drop is a potential holding/pending gap');
+pcheck($gm['potential_holding_or_pending_bar_gaps']['intermediate_dropout']['unique_symbols']===1,'the re-entered name is the missing-bar symbol');
+pcheck($gm['potential_holding_or_pending_bar_gaps']['not_account_halt_count']===true,'potential gaps are not account halt counts');
+
+$id=PaperDatedTop100Prep::yahooIdentityOk(
+    ['symbol'=>'0001A0.KQ','market'=>'KOSDAQ'],
+    ['parsed'=>['ok'=>true,'symbol'=>'0001A0.KQ','exchange'=>'KOE','currency'=>'KRW','bar_count'=>168]]
+);
+pcheck($id['ok']===true&&$id['need_5y']===true&&$id['one_year_covers_eval_prep']===false,'Yahoo identity matches KRX listing and 1y is not the prep window');
+pcheck(PaperDatedTop100Prep::yahooIdentityOk(['symbol'=>'0001A0.KQ','market'=>'KOSDAQ'],['parsed'=>['symbol'=>'999999.KQ','exchange'=>'KOE','currency'=>'KRW','bar_count'=>10]])['ok']===false,'mismatched Yahoo symbol is not admitted');
+pcheck(PaperDatedTop100Prep::DATASET_V2!==PaperDatedTop100Prep::DATASET,'v2 dataset id does not overwrite v1');
 
 $ev=PaperDatedTop100Prep::yahooRequestEvidence($tmp);
 pcheck(($ev['confirmed']['included_symbols']??0)===0&&$ev['no_recollect']===true,'yahoo evidence does not recollect');
+
+$copySrc=$tmp.'/v1src';$copyDst=$tmp.'/v2dst';
+@mkdir($copySrc.'/bars',0770,true);@mkdir($copySrc.'/status',0770,true);
+$payload=PaperHistoryResearch::encode(['schema'=>1,'symbol'=>'000001.KS','rows'=>[]],true);
+$sha=hash('sha256',$payload);
+PaperHistoryResearch::writeFile($copySrc.'/bars/000001.KS.json',$payload);
+PaperHistoryResearch::writeFile($copySrc.'/status/000001.KS.json',PaperHistoryResearch::encode([
+    'schema'=>1,'symbol'=>'000001.KS','state'=>'done','bars_path'=>'bars/000001.KS.json','bars_sha256'=>$sha,'requests'=>[]],true));
+$srcBefore=hash_file('sha256',$copySrc.'/bars/000001.KS.json');
+pcheck(PaperDatedTop100Prep::copyVerifiedBars($copyDst,$copySrc,['symbol'=>'000001.KS'])==='copied','hash-verified bars are copied into v2');
+pcheck(hash_file('sha256',$copyDst.'/bars/000001.KS.json')===$srcBefore,'copied bars match the source bytes');
+pcheck(hash_file('sha256',$copySrc.'/bars/000001.KS.json')===$srcBefore,'source bars are not rewritten');
 
 echo "OK dated top100 prep tests\n";

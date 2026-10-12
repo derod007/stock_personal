@@ -129,25 +129,96 @@ Yahoo 404: `010620.KS` HD현대미포, `012510.KS` 더존비즈온, `042670.KS` 
 
 이후 수집은 `HistoryResearch::httpGet`에서 curl마다 계수합니다.
 
+## 품질 집계 (고유 분할)
+
+244일 × 100 = **24,400** 종목·세션. 각 칸은 분석 가능이거나 분석 불가 한 쪽이며, 합계가 24,400과 같아야 통과합니다. 불가 사유 태그는 한 칸에 여러 개가 붙을 수 있어 태그 합 ≠ 고유 불가 건수입니다.
+
+`PaperQuality::inspect`는 점프를 차단 사유로 쓰지 않습니다. 가격 점프는 `inspectRows` JUMP_LIMIT 경고이며, 점프가 처음 나타난 날부터만 `price_jump_warning`으로 붙입니다. 판정일 이후 봉·이상은 그 전 세션에 쓰지 않습니다.
+
+기존 보고 23,533 / 867 / 880의 관계:
+
+| 항목 | 건수 | 의미 |
+|---|---|---|
+| 분석 가능 | 23533 | `can_simulate=true`. 고유 분할 |
+| 분석 불가 | 867 | `can_simulate=false`. 고유 분할. 23533+867=24400 |
+| 불가 태그 합 | 879 | 미매핑 260 + 자료 없음 55 + 봉 부족 505 + 세션 봉 없음 13 + 기타 46. 고유 867보다 12 많음(한 세션에 사유 둘) |
+| 가격 점프 경고 | 880 | PaperQuality 차단이 아님. 분석 가능 칸에도 붙을 수 있음 |
+
+이전 표의 「가격 이상 880」은 이 경고 태그입니다. 분석 가능 23,533을 880만큼 줄인 값이 아닙니다. 기존 이탈 후 1,026은 **계좌 정지 건수가 아닙니다.** 실제 보유·대기 주문이 없는 준비 단계에서 본 **관리용 봉의 잠재 누락**(최종 이탈 이후)입니다.
+
+같은 코드로 v1 데이터셋을 다시 집계한 결과는 `asof-coverage-v1.json`(원본 `asof-coverage.json`은 덮어쓰지 않음). 분할 23,533 / 867, 합계 일치.
+
+## v2 데이터 준비
+
+별도 데이터셋 `kr-dated-amount-top100-20251008-20261008-v2`. v1 폴더·`file-hashes.json`·원본 JSON은 쓰지 않았습니다. 프로브 1y 응답을 5y 봉에 섞지 않았습니다. 101위로 보충하지 않았습니다. 계좌 재현·수익률은 하지 않았습니다.
+
+Yahoo chart가 응답한 미매핑 31종은 종목코드·시장(KSC/KOSPI, KOE/KOSDAQ)·통화 KRW가 KRX 기록과 같은지 확인한 뒤에만 넣었습니다. 1y 봉은 평가 기간+MA240 준비를 충족하지 않아 기존 `HistoryResearch` 5y 경로로만 31종을 받았습니다. 기존 895종은 상태 해시가 파일 바이트와 같은지 본 뒤 복사했습니다. 불일치 0.
+
+| 항목 | 값 |
+|---|---|
+| 편입 | 31, HTTP 31회(5y), 실패 0 |
+| 해시 복사 | 895, 불일치 0 |
+| v1 실패 상태 복사 | 6 (Yahoo 404) |
+| 미매핑 유지 | 1 (`45014K.KS` 코오롱모빌리티그룹우) |
+| 시간 | 45.3초 |
+| v1 지문 | 봉 895 · 상태 901 · dataset.json 불변 |
+
+5y 이후에도 상장 이력이 짧은 8종은 기준일 품질 보류(`insufficient_history`, 봉 7–50). 101위로 채우지 않았습니다: `0010S0.KQ` 와이즈플래닛컴퍼니, `0035S0.KQ` 빅웨이브로보틱스, `0155E0.KQ` 해치텍, `0156T0.KQ` 에이치엘지노믹스, `0161M0.KQ` 네오사피엔스, `0218L0.KQ` 네오뷰, `0220W0.KS` 한화머시너리앤서비스홀딩스, `0220WL.KS` 한화머시너리앤서비스홀딩스3우B.
+
+남은 자료 한계: 데이터셋 품질 보류 92(봉 부족 18, 점프 74), MA240 준비 부족 122, 공급자 이력 소진 88, Yahoo 404 6, 미매핑 1. Yahoo 잔여 호출 한도는 응답 헤더에 없어 미기록. 이번 추가 수집은 편입 31종의 5y뿐입니다.
+
+### v2 집계 변화
+
+| 항목 | v1 | v2 | 차 |
+|---|---|---|---|
+| 분석 가능 | 23533 | 23560 | +27 |
+| 분석 불가 | 867 | 840 | −27 |
+| 합계 | 24400 | 24400 | 0 |
+| 미매핑 | 260 | 1 | −259 |
+| 자료 없음 | 55 | 55 | 0 |
+| 봉 부족 | 505 | 737 | +232 |
+| 세션 봉 없음 | 13 | 27 | +14 |
+| 기타 차단 | 46 | 46 | 0 |
+| 점프 경고 | 880 | 880 | 0 |
+
+편입 31종의 TOP100 등장 259칸 가운데 27칸만 분석 가능이 되었습니다. 나머지는 최근 상장이라 그날까지 60봉이 없어 봉 부족으로 남습니다. 점프 경고는 늘지 않았습니다. 합계 일치 `sum_matches=true`.
+
+### 관리용 봉의 잠재 누락
+
+첫 등장 이후 TOP100이 아닌 날을 중간 이탈(재편입 전)과 최종 이탈 이후로 나눕니다. 실제 보유·대기 주문은 아직 없습니다.
+
+| 구분 | v1 검사 | v1 잠재 누락 | v2 검사 | v2 잠재 누락 |
+|---|---|---|---|---|
+| 중간 이탈 | 53648 | 187 (8종, 113일) | 54609 | 190 (10종, 113일) |
+| 최종 이탈 이후 | 80104 | 1026 (9종, 210일) | 82901 | 1026 (9종, 210일) |
+
+기존 1,026은 최종 이탈 이후 잠재 누락이며 계좌 정지 횟수가 아닙니다. 중간 이탈 후 재편입 고정 사례(D1 편입 → D2 이탈 → D3 재편입)에서 검사 1·봉 있으면 누락 0·중간 봉 없으면 잠재 누락 1을 확인했습니다.
+
+### 편입 종목 섹터
+
+현재 네이버 모바일 업종 JSON을 과거에 같이 적용합니다. 당시 업종을 복원한 것이 아닙니다. 편입 31종만 별도 `sector-map-v2.json`에 고정했습니다. 확보 31, 미확인 0. 운영 섹터 캐시는 변경 없습니다.
+
 ## 검증
 
 `python -m unittest tests.test_historical_amount_top100_pilot tests.test_dated_amount_top100_range tests.test_dated_amount_top100_provider_review`  
 `php tests/dated_top100_prep.php`
 
-기간 지정, 빈 응답≠휴장, 해시 누락·빈 ok_dates·일부 누락·잘못된 원본/선정 해시 실패, 재개 시 정상 원본 재사용, 독립 재정렬, 이후 점프가 과거 세션을 지우지 않음을 확인했습니다.
+기간 지정, 빈 응답≠휴장, 해시 누락·빈 ok_dates·일부 누락·잘못된 원본/선정 해시 실패, 재개 시 정상 원본 재사용, 독립 재정렬, 이후 점프가 과거 세션을 지우지 않음, 고유 분할 합계, 중간 이탈 재편입, Yahoo 정체성, v2 복사 시 원본 봉 불변을 확인했습니다. `v2-integrity.json`: 날짜별 100종, 24400 합계, 895 해시 일치, 편입 31 수집, 미래봉 미적용, 통과.
 
 ## 재현
 
-인증키·원본 JSON은 Git에 없습니다. 봉은 `PAPER_STATE_DIR/history-research/kr-dated-amount-top100-20251008-20261008`.
+인증키·원본 JSON은 Git에 없습니다. v1 봉은 `PAPER_STATE_DIR/history-research/kr-dated-amount-top100-20251008-20261008`. v2는 같은 위치의 `…-v2`.
 
 ```
 python -m unittest tests.test_historical_amount_top100_pilot tests.test_dated_amount_top100_range tests.test_dated_amount_top100_provider_review
 php tests/dated_top100_prep.php
-python docs/research/historical-amount-top100-pilot.py --collect --from=2025-10-08 --to=2026-10-08
 python docs/research/dated-amount-top100-range.py --validate
 php bin/paper_dated_top100_prep.php yahoo-requests
-php -d memory_limit=512M bin/paper_dated_top100_prep.php coverage
-php bin/paper_dated_top100_prep.php provider-review
+php bin/paper_dated_top100_prep.php universe-v2
+php bin/paper_dated_top100_prep.php collect-v2
+php -d memory_limit=512M bin/paper_dated_top100_prep.php coverage --out=docs/historical-top100-20251008-20261008/asof-coverage-v1.json
+php -d memory_limit=512M bin/paper_dated_top100_prep.php coverage --dataset=kr-dated-amount-top100-20251008-20261008-v2
+php bin/paper_dated_top100_prep.php sector-v2
 ```
 
-해시는 `evidence.json`. 운영 전략 파일은 이 작업에서 바꾸지 않았습니다.
+해시는 `evidence.json`. 운영 계좌·캐시·전략 지문·full-v2·10월 연구 결과는 이 작업에서 바꾸지 않았습니다.

@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "kind": "dated_top100_collect_v2_summary",
+  "dataset": "kr-dated-amount-top100-20251008-20261008-v2",
+  "source_v1": "kr-dated-amount-top100-20251008-20261008",
+  "account_replay": false,
+  "actions": {
+    "copied": 895,
+    "collected": 31,
+    "source_failed": 6,
+    "failed": 0,
+    "absent": 0,
+    "source_hash_mismatch": 0,
+    "unmapped": 1
+  },
+  "seconds": 45.3,
+  "http_attempts": 31,
+  "http_range": "5y",
+  "one_year_probe_not_mixed": true,
+  "bars_bytes_new": 1541125,
+  "v1_fingerprint_unchanged": true,
+  "v1": {
+    "dir": "C:/Users/acdun/Desktop/dev/stock-personal-paper/history-research/kr-dated-amount-top100-20251008-20261008",
+    "files": {
+      "dataset.json": "7bdcae8bb7cf1236070b779945f0d67a58502b27363a01f4d34b73d39e21e74c",
+      "universe.json": "d98f344093c5b89f46b2f47c832fb491a4281adfc72aa5578f70f9a5405b5871"
+    },
+    "status_files": 901,
+    "bars_files": 895
+  },
+  "summary": {
+    "requested": 932,
+    "collected": 926,
+    "failed": 6,
+    "not_attempted": 0,
+    "quality_ok": 0,
+    "quality_ok_with_warnings": 834,
+    "quality_hold": 92,
+    "history_short_for_240": 122,
+    "insufficient_history": 18,
+    "extension_requested": 0,
+    "provider_history_exhausted": 88,
+    "with_close_repair": 144
+  },
+  "still_unmapped": ["45014K.KS"],
+  "yahoo_404_copied_failed_status": 6,
+  "no_rank_101_fill": true,
+  "note": "v1 bars were hash-copied. Only identity-ok alphanumeric names were fetched. Probe 1y responses were not mixed into 5y bars."
+}

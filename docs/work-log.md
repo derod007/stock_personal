@@ -1,3 +1,15 @@
+## 2026-10-12 21:05 · Cursor · 끝
+- 한 일: 2026-10-12 예약 실행 읽기 전용 점검. 운영 스캐너는 data/raw/cache/sector만 사용. 당시 스캔 100종목 중 유효 업종 99, 자리표시자 기타 1(200000.KS). 엔벨로프 quality_blocked 12관찰=11종목은 2026-03-27 close>high. 10월 8일 11건 유지, 추가 1관찰은 한화솔루션 당일 세션. 운영 수정·재수집·계좌 재실행·병합 안 함
+- 파일: docs/research/daily-run-20261012-audit.py, docs/daily-run-20261012/report.md, docs/daily-run-20261012/evidence.json, docs/work-log.md
+- 커밋: 새 PR(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-12 20:56 · Cursor · 진행
+- 한 일: 2026-10-12 예약 실행 읽기 전용 점검. 업종 캐시와 엔벨로프 품질 보류 12건 원인만 확인. 운영 수정·재수집·계좌 재실행 없음
+- 파일: 작업 중
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-11 23:04 · Cursor · 끝
 - 한 일: PR #70 운영 전략 지문을 main과 같게 복원. 비용 변경은 ResearchCashFee로 분리. 새 상태 경로에서 6계좌 재실행. 기준 10bp는 full-v2와 일치, 이전 실험과 경제 숫자 동일. 병합 안 함
 - 파일: src/PaperPortfolio.php, bin/paper/ResearchCashFee.php, bin/paper/AccountReplay.php, tests/account_replay.php, docs/research/account-replay-fee-sensitivity.py, docs/historical-account-replay/fee-sensitivity-v2/, docs/work-log.md

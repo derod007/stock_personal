@@ -55,10 +55,17 @@
   },
   "checks": {
     "unit_tests": "php tests/dated_top100_replay.php",
+    "input_hash_tests": "python -m unittest tests/test_dated_amount_top100_replay.py",
     "rerun_adds_nothing": true,
     "split_vs_batch_smoke_equal_after_stripping_account_id": true,
     "future_bars_blocked_in_unit_tests": true,
     "unpriced_position_still_halts_in_unit_tests": true,
+    "pending_dropout_fill_in_unit_tests": true,
+    "pending_dropout_unfilled_in_unit_tests": true,
+    "pr73_selected_and_raw_hashes_required": true,
+    "candidates_journal_sha256_preserved": "1be93ed0111ff75034a3b10c86aeddbf403f072de9736a5c1a79278022b18f93",
+    "candidates_git_lf_sha256": "b413a9f3df32ae2cd152e2d80ad2522b8bdf66e20c9beb196f325c75f957c884",
+    "candidates_crlf_from_lf_sha256": "1be93ed0111ff75034a3b10c86aeddbf403f072de9736a5c1a79278022b18f93",
     "operational_files_untouched": true,
     "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465"
   }

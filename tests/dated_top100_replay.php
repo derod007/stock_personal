@@ -99,6 +99,33 @@ $orders=devs($j,'order');
 dcheck($orders[0]['symbol']==='A1.KS','the first order is the day-1 TOP100 name');
 dcheck(PaperAccountReplay::reconcile($j,$data)['pass'],'dated replay books reconcile');
 
+// Pending order leaves TOP100, then fills on the next bar.
+$dataF=dmk(['F1.KS','F2.KS'],PREP+6);
+$candF=dcand([PREP=>['F1.KS','F2.KS'],PREP+1=>['F2.KS'],PREP+2=>['F2.KS']]);
+[$r,$j]=dgo($dataF,dcfg(),['F1.KS'=>[PREP=>dplan(PREP)]],$candF,['start'=>PaperHistoryResearch::day(dts(PREP)),'through'=>PaperHistoryResearch::day(dts(PREP+2))]);
+$fills=devs($j,'fill');
+dcheck(count($fills)===1&&$fills[0]['symbol']==='F1.KS'&&$fills[0]['session']===dts(PREP+1),'a pending order fills after it leaves TOP100');
+$heldF=[];foreach(devs($j,'day_log') as $d)if(isset($d['held']['F1.KS']))$heldF[]=$d['held']['F1.KS']['in_dated_top100']??null;
+dcheck($heldF!==[]&&!in_array(true,$heldF,true),'the fill after drop-out is held with in_dated_top100=false');
+dcheck(PaperAccountReplay::reconcile($j,$dataF)['pass'],'drop-out fill reconciles');
+
+// Pending order leaves TOP100, then expires unfilled on the third bar.
+$dataX=dmk(['X1.KS','X2.KS'],PREP+8,['X1.KS'=>[PREP+1=>[103,104,102,103],PREP+2=>[103,104,102,103],PREP+3=>[103,104,102,103]]]);
+$candX=dcand([PREP=>['X1.KS','X2.KS'],PREP+1=>['X2.KS'],PREP+2=>['X2.KS'],PREP+3=>['X2.KS'],PREP+4=>['X2.KS']]);
+[$r,$j]=dgo($dataX,dcfg(),['X1.KS'=>[PREP=>dplan(PREP)]],$candX,['start'=>PaperHistoryResearch::day(dts(PREP)),'through'=>PaperHistoryResearch::day(dts(PREP+4))]);
+$cxlX=devs($j,'order_cancelled');
+dcheck(count($cxlX)===1&&$cxlX[0]['reason']==='unfilled'&&$cxlX[0]['session']===dts(PREP+3)&&devs($j,'fill')===[],'a pending order expires unfilled after it leaves TOP100');
+dcheck(PaperAccountReplay::reconcile($j,$dataX)['pass'],'drop-out unfilled expiry reconciles');
+
+$lf="{\n  \"a\": 1\n}\n";$crlf=str_replace("\n","\r\n",$lf);
+file_put_contents($tmp.'/cand-lf.json',$lf);file_put_contents($tmp.'/cand-crlf.json',$crlf);
+$recorded=hash('sha256',$crlf);
+$linkLf=PaperDatedTop100Replay::linkRecordedHash($tmp.'/cand-lf.json',$recorded);
+$linkCrlf=PaperDatedTop100Replay::linkRecordedHash($tmp.'/cand-crlf.json',$recorded);
+dcheck($linkLf['pass']&&$linkLf['match']==='crlf_from_lf'&&$linkLf['ending']==='lf','Git LF bytes link to a recorded CRLF hash');
+dcheck($linkCrlf['pass']&&$linkCrlf['match']==='raw'&&$linkCrlf['ending']==='crlf','a CRLF working copy matches the recorded raw hash');
+dcheck(!PaperDatedTop100Replay::linkRecordedHash($tmp.'/cand-lf.json',str_repeat('0',64))['pass'],'a different recorded hash does not link');
+
 // Missing bar on a pending order cancels; missing bar on a held position still halts.
 $dataP=dmk(['P1.KS','P2.KS'],PREP+6,[],['P1.KS'=>[PREP+1]]);
 $candP=dcand([PREP=>['P1.KS','P2.KS'],PREP+1=>['P1.KS','P2.KS'],PREP+2=>['P1.KS','P2.KS'],PREP+3=>['P2.KS']]);

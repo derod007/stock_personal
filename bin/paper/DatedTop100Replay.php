@@ -64,7 +64,41 @@ final class PaperDatedTop100Replay
         ksort($byTs);
         if(count($byTs)!==18)throw new RuntimeException('Expected 18 dated sessions, got '.count($byTs));
         if(count($union)!==305)throw new RuntimeException('Expected 305 union symbols, got '.count($union));
-        return ['file'=>$path,'file_sha256'=>hash_file('sha256',$path),'days'=>$j['days'],'by_session'=>$byTs,'union'=>array_keys($union),'raw'=>$j];
+        $ending=self::lineEndingHashes($path);
+        return ['file'=>$path,'file_sha256'=>hash_file('sha256',$path),'file_sha256_lf'=>$ending['sha256_lf'],
+            'file_ending'=>$ending['ending'],'days'=>$j['days'],'by_session'=>$byTs,'union'=>array_keys($union),'raw'=>$j];
+    }
+
+    /** Raw / LF / CRLF hashes of a file. Journal candidates_sha256 stays the raw hash_file value from the run. */
+    public static function lineEndingHashes(string $path):array
+    {
+        $bytes=file_get_contents($path);
+        if($bytes===false)throw new RuntimeException('Cannot read '.$path);
+        $lf=str_replace("\r\n","\n",$bytes);
+        $crlf=str_replace("\n","\r\n",$lf);
+        $hasCrlf=str_contains($bytes,"\r\n");
+        $hasBareLf=(bool)preg_match('/(?<!\r)\n/',$bytes);
+        $hasBareCr=(bool)preg_match('/\r(?!\n)/',$bytes);
+        $ending='lf';
+        if($hasCrlf&&!$hasBareLf&&!$hasBareCr)$ending='crlf';
+        elseif($hasCrlf||$hasBareCr)$ending='mixed';
+        return ['path'=>$path,'sha256_raw'=>hash('sha256',$bytes),'sha256_lf'=>hash('sha256',$lf),
+            'sha256_crlf'=>hash('sha256',$crlf),'ending'=>$ending];
+    }
+
+    /**
+     * Connect Git LF (or a CRLF working copy) to a recorded raw hash without rewriting the journal.
+     * Pass if recorded equals raw, CRLF(LF(bytes)), or LF(bytes).
+     */
+    public static function linkRecordedHash(string $path,string $recorded):array
+    {
+        $h=self::lineEndingHashes($path);
+        $match=null;
+        if($recorded!==''&&hash_equals($h['sha256_raw'],$recorded))$match='raw';
+        elseif($recorded!==''&&hash_equals($h['sha256_crlf'],$recorded))$match='crlf_from_lf';
+        elseif($recorded!==''&&hash_equals($h['sha256_lf'],$recorded))$match='lf_from_raw';
+        $h['recorded']=$recorded;$h['match']=$match;$h['pass']=$match!==null;
+        return $h;
     }
 
     /** Include collected bars even when dataset quality is hold. Failed downloads stay as empty rows, not a rank-101 fill. */

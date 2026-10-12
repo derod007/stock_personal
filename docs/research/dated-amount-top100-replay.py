@@ -30,6 +30,86 @@ def sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def line_ending_hashes(data: bytes) -> dict[str, str]:
+    lf = data.replace(b"\r\n", b"\n")
+    crlf = lf.replace(b"\n", b"\r\n")
+    has_crlf = b"\r\n" in data
+    has_bare_lf = bool(re.search(rb"(?<!\r)\n", data))
+    has_bare_cr = bool(re.search(rb"\r(?!\n)", data))
+    ending = "lf"
+    if has_crlf and not has_bare_lf and not has_bare_cr:
+        ending = "crlf"
+    elif has_crlf or has_bare_cr:
+        ending = "mixed"
+    return {
+        "sha256_raw": hashlib.sha256(data).hexdigest(),
+        "sha256_lf": hashlib.sha256(lf).hexdigest(),
+        "sha256_crlf": hashlib.sha256(crlf).hexdigest(),
+        "ending": ending,
+    }
+
+
+def link_recorded_hash(data: bytes, recorded: str) -> dict[str, Any]:
+    hashes = line_ending_hashes(data)
+    match = None
+    if recorded and hashes["sha256_raw"] == recorded:
+        match = "raw"
+    elif recorded and hashes["sha256_crlf"] == recorded:
+        match = "crlf_from_lf"
+    elif recorded and hashes["sha256_lf"] == recorded:
+        match = "lf_from_raw"
+    return {**hashes, "recorded": recorded, "match": match, "pass": match is not None}
+
+
+def frozen_hashes(pilot: dict[str, Any]) -> tuple[dict[str, str], dict[str, str]]:
+    """PR #73 evidence: selected_files plus collect.days selected_sha256 / files[].sha256.
+
+    collect.days wins when both lists name the same file.
+    """
+    selected: dict[str, str] = {}
+    raw: dict[str, str] = {}
+    for rec in pilot.get("selected_files") or []:
+        name = rec.get("file")
+        sha = rec.get("sha256")
+        if name and sha:
+            selected[str(name)] = str(sha)
+    for day in (pilot.get("collect") or {}).get("days") or []:
+        d = day.get("date")
+        sel_sha = day.get("selected_sha256")
+        sel_file = day.get("selected_file") or (f"{d}_top100.json" if d else None)
+        if sel_file and sel_sha:
+            selected[str(sel_file)] = str(sel_sha)
+        for rec in day.get("files") or []:
+            market = rec.get("market")
+            sha = rec.get("sha256")
+            if d and market and sha:
+                raw[f"{d}_{market}.json"] = str(sha)
+    return selected, raw
+
+
+def required_file_hash_issues(
+    got: dict[str, str],
+    expected: dict[str, str],
+    required: list[str],
+    missing_issue: str,
+    mismatch_issue: str,
+) -> list[dict[str, Any]]:
+    issues: list[dict[str, Any]] = []
+    for name in required:
+        if name not in expected or not expected[name]:
+            issues.append({"file": name, "issue": missing_issue})
+        elif name not in got:
+            continue
+        elif got[name] != expected[name]:
+            issues.append({
+                "file": name,
+                "issue": mismatch_issue,
+                "expected": expected[name],
+                "got": got[name],
+            })
+    return issues
+
+
 def yahoo_symbol(code: str, market: str) -> str:
     suffix = ".KQ" if market.upper() == "KOSDAQ" else ".KS"
     return code + suffix
@@ -71,6 +151,9 @@ def validate_inputs() -> dict[str, Any]:
         raise SystemExit("pilot evidence.json missing")
     pilot = json.loads(PILOT_EVIDENCE.read_text(encoding="utf-8"))
     collect = pilot.get("collect") or {}
+    expected_selected, expected_raw = frozen_hashes(pilot)
+    required_selected = [f"{day}_top100.json" for day in days]
+    required_raw = [f"{day}_{market}.json" for day in days for market in EQUITY_MARKETS]
     if collect.get("ok_dates") != days:
         issues.append({"issue": "ok_dates_mismatch", "expected": days, "got": collect.get("ok_dates")})
     for day in days:
@@ -128,11 +211,39 @@ def validate_inputs() -> dict[str, Any]:
                 issues.append({"date": day, "market": market, "issue": "bas_dd", "found": found})
             if not block:
                 issues.append({"date": day, "market": market, "issue": "empty_block"})
-        counted = {x["file"]: x["sha256"] for x in (pilot.get("selected_files") or [])}
-        if sel_path.name in counted and counted[sel_path.name] != sha:
-            issues.append({"date": day, "issue": "selected_hash_mismatch"})
+    got_selected = {x["file"]: x["sha256"] for x in selected_hashes}
+    got_raw = {x["file"]: x["sha256"] for x in raw_hashes}
+    issues.extend(required_file_hash_issues(
+        got_selected, expected_selected, required_selected,
+        "selected_hash_missing", "selected_hash_mismatch",
+    ))
+    issues.extend(required_file_hash_issues(
+        got_raw, expected_raw, required_raw,
+        "raw_hash_missing", "raw_hash_mismatch",
+    ))
+    provenance_path = DOCS / "account" / "provenance.json"
+    candidates_path = DOCS / "candidates.json"
+    candidates_git_link: dict[str, Any] | None = None
+    if not provenance_path.is_file():
+        issues.append({"issue": "candidates_recorded_hash_missing", "file": str(provenance_path)})
+    elif not candidates_path.is_file():
+        issues.append({"issue": "candidates_git_file_missing", "file": str(candidates_path)})
+    else:
+        prov = json.loads(provenance_path.read_text(encoding="utf-8"))
+        recorded = str(prov.get("candidates_sha256") or "")
+        if not recorded:
+            issues.append({"issue": "candidates_recorded_hash_missing", "file": str(provenance_path)})
+        else:
+            candidates_git_link = link_recorded_hash(candidates_path.read_bytes(), recorded)
+            candidates_git_link["file"] = "docs/historical-top100-replay-202510/candidates.json"
+            if not candidates_git_link["pass"]:
+                issues.append({"issue": "candidates_git_link_failed", **candidates_git_link})
     if issues:
-        raise SystemExit(json.dumps({"ok": False, "issues": issues}, ensure_ascii=False, indent=2))
+        raise SystemExit(json.dumps({
+            "ok": False,
+            "issues": issues,
+            "candidates_git_link": candidates_git_link,
+        }, ensure_ascii=False, indent=2))
     symbols = []
     for symbol, info in sorted(union.items()):
         yahoo_ok = bool(re.fullmatch(r"\d{6}\.(KS|KQ)", symbol))
@@ -158,6 +269,9 @@ def validate_inputs() -> dict[str, Any]:
         "name_changes_in_union": name_changes,
         "selected_files": selected_hashes,
         "raw_files": raw_hashes,
+        "pr73_selected_hashes": expected_selected,
+        "pr73_raw_hashes": expected_raw,
+        "candidates_git_link": candidates_git_link,
         "dates": dates,
         "universe_rows": symbols,
         "note": [
@@ -232,13 +346,30 @@ def public_candidates(validated: dict[str, Any]) -> dict[str, Any]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--validate", action="store_true")
+    parser.add_argument(
+        "--write-inputs",
+        action="store_true",
+        help="Rewrite Git candidates.json and universe.json. Off by default so journal hashes stay pinned.",
+    )
     args = parser.parse_args()
     if not args.validate:
         args.validate = True
     validated = validate_inputs()
     DOCS.mkdir(parents=True, exist_ok=True)
-    write_json(DOCS / "candidates.json", public_candidates(validated))
-    write_json(DOCS / "universe.json", universe_payload(validated))
+    written = [str(DOCS / "input-validation.json")]
+    if args.write_inputs:
+        write_json(DOCS / "candidates.json", public_candidates(validated))
+        write_json(DOCS / "universe.json", universe_payload(validated))
+        written.extend([str(DOCS / "candidates.json"), str(DOCS / "universe.json")])
+    link = validated["candidates_git_link"] or {}
+    public_link = {
+        "file": "docs/historical-top100-replay-202510/candidates.json",
+        "recorded": link.get("recorded"),
+        "sha256_lf": link.get("sha256_lf"),
+        "sha256_crlf": link.get("sha256_crlf"),
+        "pass": link.get("pass"),
+        "note": "recorded is the journal hash_file value. Git blob is sha256_lf. sha256_crlf is LF rewritten as CRLF.",
+    }
     write_json(DOCS / "input-validation.json", {
         "ok": True,
         "generated_at": validated["generated_at"],
@@ -247,14 +378,24 @@ def main() -> int:
         "name_changes_in_union": validated["name_changes_in_union"],
         "selected_files": validated["selected_files"],
         "raw_file_count": len(validated["raw_files"]),
+        "pr73_selected_count": len(validated["pr73_selected_hashes"]),
+        "pr73_raw_count": len(validated["pr73_raw_hashes"]),
+        "candidates_git_link": public_link,
         "issues": [],
     })
+    write_json(DOCS / "account" / "input-hash-link.json", {
+        "schema": 1,
+        "journal_candidates_sha256_preserved": True,
+        **public_link,
+    })
+    written.append(str(DOCS / "account" / "input-hash-link.json"))
     print(json.dumps({
         "ok": True,
         "days": validated["day_count"],
         "union_unique_symbols": validated["union_unique_symbols"],
         "name_changes": len(validated["name_changes_in_union"]),
-        "written": [str(DOCS / "candidates.json"), str(DOCS / "universe.json")],
+        "candidates_git_link": validated["candidates_git_link"],
+        "written": written,
     }, ensure_ascii=False))
     return 0
 

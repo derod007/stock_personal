@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "journal_candidates_sha256_preserved": true,
+  "file": "docs/historical-top100-replay-202510/candidates.json",
+  "recorded": "1be93ed0111ff75034a3b10c86aeddbf403f072de9736a5c1a79278022b18f93",
+  "sha256_lf": "b413a9f3df32ae2cd152e2d80ad2522b8bdf66e20c9beb196f325c75f957c884",
+  "sha256_crlf": "1be93ed0111ff75034a3b10c86aeddbf403f072de9736a5c1a79278022b18f93",
+  "pass": true,
+  "note": "recorded is the journal hash_file value. Git blob is sha256_lf. sha256_crlf is LF rewritten as CRLF."
+}

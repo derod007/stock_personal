@@ -14,8 +14,8 @@ foreach(array_slice($argv,2) as $a){
     if(!preg_match('/^--([a-z-]+)=(.*)$/s',$a,$m))throw new InvalidArgumentException('Unknown argument '.$a);
     $o[$m[1]]=$m[2];
 }
-if(!in_array($cmd,['plan','universe','collect','run','status','verify','log','export','compare'],true))
-    throw new InvalidArgumentException('Commands: universe collect plan run status verify log export compare');
+if(!in_array($cmd,['plan','universe','collect','run','status','verify','verify-inputs','log','export','compare'],true))
+    throw new InvalidArgumentException('Commands: universe collect plan run status verify verify-inputs log export compare');
 if(isset($o['state-dir']))putenv('PAPER_STATE_DIR='.$o['state-dir']);
 $root=dirname(__DIR__);
 $cfgs=PaperDatedTop100Replay::configs($root);$research=$cfgs['research'];
@@ -140,6 +140,16 @@ if($cmd==='run'){
     $out($r);
     exit($r['halted']?2:($r['untouched']['dataset_files']&&$r['untouched']['operational_state_files']?0:3));
 }
+if($cmd==='verify-inputs'){
+    $recorded=$o['recorded-sha']??null;
+    if($recorded===null){
+        $provPath=$o['provenance']??$root.'/docs/historical-top100-replay-202510/account/provenance.json';
+        $prov=json_decode((string)file_get_contents($provPath),true,512,JSON_THROW_ON_ERROR);
+        $recorded=(string)($prov['candidates_sha256']??'');
+    }
+    $link=PaperDatedTop100Replay::linkRecordedHash($candPath,$recorded);
+    $out($link);exit($link['pass']?0:1);
+}
 if($cmd==='compare'){
     if(empty($o['other-state-dir']))throw new InvalidArgumentException('--other-state-dir required');
     $a=$readJournal();
@@ -159,7 +169,11 @@ if($cmd==='log'){
 }
 $data=PaperDatedTop100Replay::loadDataset($datasetDir,$candidates);
 $rec=PaperAccountReplay::reconcile($j,$data);
-if($cmd==='verify'){$out($rec);exit($rec['pass']?0:1);}
+if($cmd==='verify'){
+    $recorded=(string)($j['state']['research']['candidates_sha256']??'');
+    $rec['candidate_git_link']=PaperDatedTop100Replay::linkRecordedHash($candPath,$recorded);
+    $out($rec);exit($rec['pass']&&$rec['candidate_git_link']['pass']?0:1);
+}
 if($cmd==='export'){
     $to=rtrim($o['out']??'','/\\');if($to==='')throw new InvalidArgumentException('--out required');
     $norm=str_replace('\\','/',$to);

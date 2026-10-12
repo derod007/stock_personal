@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12 21:46:40",
+  "generated_at": "2026-10-12 22:02:55",
   "inputs": {
     "leaders_php": "C:\\Users\\acdun\\Desktop\\dev\\noramu\\src\\KrAmountLeadersClient.php",
     "leaders_php_sha256": "8de0f63934fc2e3494708cd5bd37d0b1c21a9eb8cbd9f34325be2ad8f24f26d7",
@@ -137,7 +137,8 @@
       "Open API 본호출은 인증키 없이 401 Unauthorized Key 이었다.",
       "공개 샘플 키는 본호출에서 Unauthorized API Call 이었다.",
       "KOSPI·KOSDAQ 샘플 응답은 각 10행이며 전 종목이 아니다.",
-      "인증키 없음. 수집 미실행(skipped_no_auth_key). 근사 TOP100을 만들지 않았다."
+      "활용 승인 전 개인 인증키 본호출은 401 Unauthorized API Call 이었다.",
+      "활용 승인 후 개인 인증키로 주권 본호출이 200을 반환했고, 양쪽 시장이 검증된 날만 TOP100을 저장했다. 후보 18거래일."
     ],
     "assumptions": [
       "2025-10 거래일 후보는 주말·공휴일을 뺀 목록이며, 키 확보 후 빈 응답으로 휴장일을 재확인해야 한다.",
@@ -176,21 +177,994 @@
     "close_times_volume_mismatch_count": 3
   },
   "collect": {
-    "ran": false,
-    "status": "skipped_no_auth_key",
-    "reason": "KRX_AUTH_KEY / KRX_API_KEY 없음",
-    "requests": 0,
+    "ran": true,
+    "status": "ran",
+    "started": "2026-10-12 21:58:03",
+    "requests": 36,
     "retries": 0,
     "errors": [],
-    "days": [],
-    "ok_dates": [],
+    "days": [
+      {
+        "date": "20251001",
+        "files": [
+          {
+            "market": "kospi_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "f087796b3d551fb2955f2b9803d5da4058b68c8130bb7c38f539b41f396615c4",
+            "bytes": 298391,
+            "n": 959,
+            "found_dates": [
+              "20251001"
+            ],
+            "http_status": 200
+          },
+          {
+            "market": "kosdaq_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "859e635b813b8be9d96aa7dd69a2840bf7abb9f1c50b9a61cb3939c481baabb7",
+            "bytes": 590484,
+            "n": 1805,
+            "found_dates": [
+              "20251001"
+            ],
+            "http_status": 200
+          }
+        ],
+        "select": true,
+        "status": "ok",
+        "market_kinds": {
+          "kospi_equity": "ok",
+          "kosdaq_equity": "ok"
+        },
+        "holiday_confirmed": false,
+        "eligible": 2592,
+        "excluded": 76,
+        "top100": 100,
+        "selected_sha256": "363a08c7e25f87c3b18288fa4f64501e6a8b51c2309f198532fda349bcbad548",
+        "selected_file": "20251001_top100.json"
+      },
+      {
+        "date": "20251002",
+        "files": [
+          {
+            "market": "kospi_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "3bb02f2c376eb994f24f8565619ed046f98a72742216b1aa3f72a481abb5933f",
+            "bytes": 298207,
+            "n": 959,
+            "found_dates": [
+              "20251002"
+            ],
+            "http_status": 200
+          },
+          {
+            "market": "kosdaq_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "83d462732d1d39306489f38f894bd1b2bff66ef7a8251692c1311ab9d7325d50",
+            "bytes": 590247,
+            "n": 1805,
+            "found_dates": [
+              "20251002"
+            ],
+            "http_status": 200
+          }
+        ],
+        "select": true,
+        "status": "ok",
+        "market_kinds": {
+          "kospi_equity": "ok",
+          "kosdaq_equity": "ok"
+        },
+        "holiday_confirmed": false,
+        "eligible": 2592,
+        "excluded": 75,
+        "top100": 100,
+        "selected_sha256": "08490c1e8557b34ef3f0fa504fd39c47c151f48d52da7f17dd5eb6735c1c7e0c",
+        "selected_file": "20251002_top100.json"
+      },
+      {
+        "date": "20251010",
+        "files": [
+          {
+            "market": "kospi_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "30dd2d9ed8e5e57e1128280f9175a77d46898e8015483eb0ba28f3233c00fb0f",
+            "bytes": 299171,
+            "n": 959,
+            "found_dates": [
+              "20251010"
+            ],
+            "http_status": 200
+          },
+          {
+            "market": "kosdaq_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "53ba17af0c85b4b353ca42fec577f7ce157e4cd613ae2677e0a80bbe1df82b9c",
+            "bytes": 591515,
+            "n": 1804,
+            "found_dates": [
+              "20251010"
+            ],
+            "http_status": 200
+          }
+        ],
+        "select": true,
+        "status": "ok",
+        "market_kinds": {
+          "kospi_equity": "ok",
+          "kosdaq_equity": "ok"
+        },
+        "holiday_confirmed": false,
+        "eligible": 2590,
+        "excluded": 74,
+        "top100": 100,
+        "selected_sha256": "10cd89b19072acbc50eb4a5207c388240da69bf18b3c5adc91439d149ad8ac83",
+        "selected_file": "20251010_top100.json"
+      },
+      {
+        "date": "20251013",
+        "files": [
+          {
+            "market": "kospi_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "63f25490536a3ecff91ea075d9d707a241141d3c1a0967458bf1cedf88703a1c",
+            "bytes": 298851,
+            "n": 959,
+            "found_dates": [
+              "20251013"
+            ],
+            "http_status": 200
+          },
+          {
+            "market": "kosdaq_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "f8e225642a4d395fa44366d1114b3ca420cfc04149c39bfb292333cd0d8c6895",
+            "bytes": 591045,
+            "n": 1804,
+            "found_dates": [
+              "20251013"
+            ],
+            "http_status": 200
+          }
+        ],
+        "select": true,
+        "status": "ok",
+        "market_kinds": {
+          "kospi_equity": "ok",
+          "kosdaq_equity": "ok"
+        },
+        "holiday_confirmed": false,
+        "eligible": 2591,
+        "excluded": 73,
+        "top100": 100,
+        "selected_sha256": "1f8fd3ad85455b590eae642e33aa4c16862e9ce90a69264b20929a0eb96e7260",
+        "selected_file": "20251013_top100.json"
+      },
+      {
+        "date": "20251014",
+        "files": [
+          {
+            "market": "kospi_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "a3948a0729410569432f0feb067ed93982de1552e6953dc6d4f404c8960fd132",
+            "bytes": 298906,
+            "n": 959,
+            "found_dates": [
+              "20251014"
+            ],
+            "http_status": 200
+          },
+          {
+            "market": "kosdaq_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "700a94a2964ad5eb394603f1b9d4b16228c38513db5f71fabd9041a2faf4e04b",
+            "bytes": 591326,
+            "n": 1803,
+            "found_dates": [
+              "20251014"
+            ],
+            "http_status": 200
+          }
+        ],
+        "select": true,
+        "status": "ok",
+        "market_kinds": {
+          "kospi_equity": "ok",
+          "kosdaq_equity": "ok"
+        },
+        "holiday_confirmed": false,
+        "eligible": 2591,
+        "excluded": 73,
+        "top100": 100,
+        "selected_sha256": "d6079fe3722bcf1b9955a1a26e46065f6541f0e3c39e9d6276cc6fd018cbac2f",
+        "selected_file": "20251014_top100.json"
+      },
+      {
+        "date": "20251015",
+        "files": [
+          {
+            "market": "kospi_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "031452b01423c14d049534b2874be93f2711fffe464ce6dd561d57614905db85",
+            "bytes": 297951,
+            "n": 959,
+            "found_dates": [
+              "20251015"
+            ],
+            "http_status": 200
+          },
+          {
+            "market": "kosdaq_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "ae16e36bf80a0d1eafa1a7b86bf84864e6c3e5a4d4c55d5fe388fcf3b9f48bb3",
+            "bytes": 589266,
+            "n": 1803,
+            "found_dates": [
+              "20251015"
+            ],
+            "http_status": 200
+          }
+        ],
+        "select": true,
+        "status": "ok",
+        "market_kinds": {
+          "kospi_equity": "ok",
+          "kosdaq_equity": "ok"
+        },
+        "holiday_confirmed": false,
+        "eligible": 2589,
+        "excluded": 73,
+        "top100": 100,
+        "selected_sha256": "60a7d896ae84a83607a1e8773edea28768e930a6a0638fccbe049b689a74d1ce",
+        "selected_file": "20251015_top100.json"
+      },
+      {
+        "date": "20251016",
+        "files": [
+          {
+            "market": "kospi_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "be4c0aa57dc89aa6d661191afb7401cd15128d00fc5ccea598ce27d2f9e82509",
+            "bytes": 298596,
+            "n": 959,
+            "found_dates": [
+              "20251016"
+            ],
+            "http_status": 200
+          },
+          {
+            "market": "kosdaq_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "d54e30d8994556e60d7b753c58a4d68491df0dc62ca636cf1ce56a11948df09f",
+            "bytes": 590536,
+            "n": 1802,
+            "found_dates": [
+              "20251016"
+            ],
+            "http_status": 200
+          }
+        ],
+        "select": true,
+        "status": "ok",
+        "market_kinds": {
+          "kospi_equity": "ok",
+          "kosdaq_equity": "ok"
+        },
+        "holiday_confirmed": false,
+        "eligible": 2591,
+        "excluded": 71,
+        "top100": 100,
+        "selected_sha256": "4a1a71f58584f4c20b8952be77cefb2d470d8f337d32ea51ed2d16416b99cc71",
+        "selected_file": "20251016_top100.json"
+      },
+      {
+        "date": "20251017",
+        "files": [
+          {
+            "market": "kospi_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "a94d9aa3feccd3610608a2697155a204829dcda93459d82efd066811b36776ea",
+            "bytes": 299240,
+            "n": 959,
+            "found_dates": [
+              "20251017"
+            ],
+            "http_status": 200
+          },
+          {
+            "market": "kosdaq_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "138ac48c447769263236a40420b0fb496b05ffe4eca4c3dba23123dd6fb02276",
+            "bytes": 591351,
+            "n": 1802,
+            "found_dates": [
+              "20251017"
+            ],
+            "http_status": 200
+          }
+        ],
+        "select": true,
+        "status": "ok",
+        "market_kinds": {
+          "kospi_equity": "ok",
+          "kosdaq_equity": "ok"
+        },
+        "holiday_confirmed": false,
+        "eligible": 2591,
+        "excluded": 71,
+        "top100": 100,
+        "selected_sha256": "b067895fcb817bf4d12a06096a08fccc59f29d4733009693efc500de73308470",
+        "selected_file": "20251017_top100.json"
+      },
+      {
+        "date": "20251020",
+        "files": [
+          {
+            "market": "kospi_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "1c846a0c9ab2e27182cf2720c6bca804679efdc95ab8fe4d30f9fa892fa89b1d",
+            "bytes": 298305,
+            "n": 959,
+            "found_dates": [
+              "20251020"
+            ],
+            "http_status": 200
+          },
+          {
+            "market": "kosdaq_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "a4a4cdcf94903f523f82a633fa7df08dc78e22ad536f4b3da0a5053e6ef13262",
+            "bytes": 589289,
+            "n": 1802,
+            "found_dates": [
+              "20251020"
+            ],
+            "http_status": 200
+          }
+        ],
+        "select": true,
+        "status": "ok",
+        "market_kinds": {
+          "kospi_equity": "ok",
+          "kosdaq_equity": "ok"
+        },
+        "holiday_confirmed": false,
+        "eligible": 2590,
+        "excluded": 71,
+        "top100": 100,
+        "selected_sha256": "0c2ef9c117a29f3a26518b3312da61f77bbb9cf55611a51c908a06b1f70f84e9",
+        "selected_file": "20251020_top100.json"
+      },
+      {
+        "date": "20251021",
+        "files": [
+          {
+            "market": "kospi_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "7e479ade15bea8408ce2f4528e3417976dedfd1c431b3afd311936e7d9da8a7a",
+            "bytes": 298789,
+            "n": 959,
+            "found_dates": [
+              "20251021"
+            ],
+            "http_status": 200
+          },
+          {
+            "market": "kosdaq_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "10a72ac07b8da722a9aefd073e92a6c09a2d90324e49a70e3cf777c0d57243aa",
+            "bytes": 590281,
+            "n": 1802,
+            "found_dates": [
+              "20251021"
+            ],
+            "http_status": 200
+          }
+        ],
+        "select": true,
+        "status": "ok",
+        "market_kinds": {
+          "kospi_equity": "ok",
+          "kosdaq_equity": "ok"
+        },
+        "holiday_confirmed": false,
+        "eligible": 2590,
+        "excluded": 71,
+        "top100": 100,
+        "selected_sha256": "98f7a3c8c3c56ddff66b343cb78184193f14fe0f242cbaaab8ce498682bf6316",
+        "selected_file": "20251021_top100.json"
+      },
+      {
+        "date": "20251022",
+        "files": [
+          {
+            "market": "kospi_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "0338b0a90b75194825fd2033d5f82fb33fbb793f463fdefdd423fde1ccd775a7",
+            "bytes": 298177,
+            "n": 959,
+            "found_dates": [
+              "20251022"
+            ],
+            "http_status": 200
+          },
+          {
+            "market": "kosdaq_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "e18c933be7932ce8ce3449e57bf898ea70edef64ce735bec625540c872b0da1e",
+            "bytes": 589299,
+            "n": 1802,
+            "found_dates": [
+              "20251022"
+            ],
+            "http_status": 200
+          }
+        ],
+        "select": true,
+        "status": "ok",
+        "market_kinds": {
+          "kospi_equity": "ok",
+          "kosdaq_equity": "ok"
+        },
+        "holiday_confirmed": false,
+        "eligible": 2590,
+        "excluded": 71,
+        "top100": 100,
+        "selected_sha256": "765ee2eb6ad5ee5d17767ca5411a396396fe225e7f87f7c6be041690a86b2dc0",
+        "selected_file": "20251022_top100.json"
+      },
+      {
+        "date": "20251023",
+        "files": [
+          {
+            "market": "kospi_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "965e0268ad24b6431e4f86058664d5e90e7af0cf74be7bdf11e7d5e2d6043d05",
+            "bytes": 298838,
+            "n": 959,
+            "found_dates": [
+              "20251023"
+            ],
+            "http_status": 200
+          },
+          {
+            "market": "kosdaq_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "f76df9d6040c01c7e795334f4c6cd32eed0d04e98496fdfb7b7a6d78a24e4a42",
+            "bytes": 589798,
+            "n": 1801,
+            "found_dates": [
+              "20251023"
+            ],
+            "http_status": 200
+          }
+        ],
+        "select": true,
+        "status": "ok",
+        "market_kinds": {
+          "kospi_equity": "ok",
+          "kosdaq_equity": "ok"
+        },
+        "holiday_confirmed": false,
+        "eligible": 2589,
+        "excluded": 69,
+        "top100": 100,
+        "selected_sha256": "70f1439101b969795be7483be3bff227e4fd776a734b241cb7a4f9200b95839b",
+        "selected_file": "20251023_top100.json"
+      },
+      {
+        "date": "20251024",
+        "files": [
+          {
+            "market": "kospi_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "c3f0fc8f9aac4a93586c727c20a548b8df7d1c3942f59a93f06eba895331691d",
+            "bytes": 298557,
+            "n": 959,
+            "found_dates": [
+              "20251024"
+            ],
+            "http_status": 200
+          },
+          {
+            "market": "kosdaq_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "e0507b050f479abd9fb8c7ac8cb976b1bc9155e1f9a12229709787bd52ceb676",
+            "bytes": 589550,
+            "n": 1801,
+            "found_dates": [
+              "20251024"
+            ],
+            "http_status": 200
+          }
+        ],
+        "select": true,
+        "status": "ok",
+        "market_kinds": {
+          "kospi_equity": "ok",
+          "kosdaq_equity": "ok"
+        },
+        "holiday_confirmed": false,
+        "eligible": 2589,
+        "excluded": 69,
+        "top100": 100,
+        "selected_sha256": "31e0bcc1ca4875d37d619c5453fa4eef7b15fb3a9ae2a5dc9d9b982b9ff9f39c",
+        "selected_file": "20251024_top100.json"
+      },
+      {
+        "date": "20251027",
+        "files": [
+          {
+            "market": "kospi_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "7f48b968abd86ff85d5d2b2b03b7af4ace8cf5cc4d0b5c8b48d3ea0642fd05e0",
+            "bytes": 298298,
+            "n": 958,
+            "found_dates": [
+              "20251027"
+            ],
+            "http_status": 200
+          },
+          {
+            "market": "kosdaq_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "0c9a3df718a12b1af8b5cca0064fd1348f058c1552a7916604dc2c8e6ba2338b",
+            "bytes": 589641,
+            "n": 1801,
+            "found_dates": [
+              "20251027"
+            ],
+            "http_status": 200
+          }
+        ],
+        "select": true,
+        "status": "ok",
+        "market_kinds": {
+          "kospi_equity": "ok",
+          "kosdaq_equity": "ok"
+        },
+        "holiday_confirmed": false,
+        "eligible": 2590,
+        "excluded": 69,
+        "top100": 100,
+        "selected_sha256": "e8b43f33d7ce756012def72a28bed8dd73ab41fd0b03ad657f2946fc6de7cee7",
+        "selected_file": "20251027_top100.json"
+      },
+      {
+        "date": "20251028",
+        "files": [
+          {
+            "market": "kospi_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "e61a47879c21a41c1a083dd816f3bc29c172bdc176cc056b670210fae3e58d99",
+            "bytes": 298391,
+            "n": 958,
+            "found_dates": [
+              "20251028"
+            ],
+            "http_status": 200
+          },
+          {
+            "market": "kosdaq_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "06da814e2aa01bd6038e886203a0a5e464515f192a8f30fbb94f2fe5343f5f35",
+            "bytes": 589513,
+            "n": 1801,
+            "found_dates": [
+              "20251028"
+            ],
+            "http_status": 200
+          }
+        ],
+        "select": true,
+        "status": "ok",
+        "market_kinds": {
+          "kospi_equity": "ok",
+          "kosdaq_equity": "ok"
+        },
+        "holiday_confirmed": false,
+        "eligible": 2589,
+        "excluded": 69,
+        "top100": 100,
+        "selected_sha256": "e0a9859e287ced13727d0ac0adbeee0eb9803638df422f018666567877c55562",
+        "selected_file": "20251028_top100.json"
+      },
+      {
+        "date": "20251029",
+        "files": [
+          {
+            "market": "kospi_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "95392373676c04eb677e183ad078721494453faa24bce8436434593e0d30df88",
+            "bytes": 298685,
+            "n": 958,
+            "found_dates": [
+              "20251029"
+            ],
+            "http_status": 200
+          },
+          {
+            "market": "kosdaq_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "abf93fd2a418cfba9135ffc43d0532c4308a9ec89a8e59d952081b01dd0456c3",
+            "bytes": 590182,
+            "n": 1801,
+            "found_dates": [
+              "20251029"
+            ],
+            "http_status": 200
+          }
+        ],
+        "select": true,
+        "status": "ok",
+        "market_kinds": {
+          "kospi_equity": "ok",
+          "kosdaq_equity": "ok"
+        },
+        "holiday_confirmed": false,
+        "eligible": 2590,
+        "excluded": 69,
+        "top100": 100,
+        "selected_sha256": "a1d427e2aa4e1bd0d59506c0d71ad3fb985ec58a086328059b6718e9a4e70f90",
+        "selected_file": "20251029_top100.json"
+      },
+      {
+        "date": "20251030",
+        "files": [
+          {
+            "market": "kospi_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "05e237f90b5472d4531b5328a9ac70354c98ddd036f0198d7a33a82bba07bf86",
+            "bytes": 299097,
+            "n": 958,
+            "found_dates": [
+              "20251030"
+            ],
+            "http_status": 200
+          },
+          {
+            "market": "kosdaq_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "a043ec332c44eba73a2931a6d70a6758e1d517adf9d67637b57272d672b000d7",
+            "bytes": 591053,
+            "n": 1801,
+            "found_dates": [
+              "20251030"
+            ],
+            "http_status": 200
+          }
+        ],
+        "select": true,
+        "status": "ok",
+        "market_kinds": {
+          "kospi_equity": "ok",
+          "kosdaq_equity": "ok"
+        },
+        "holiday_confirmed": false,
+        "eligible": 2585,
+        "excluded": 69,
+        "top100": 100,
+        "selected_sha256": "bf8a04430acc2a5123522b3af4a94253c61639ef080d9440947dc94be32aae32",
+        "selected_file": "20251030_top100.json"
+      },
+      {
+        "date": "20251031",
+        "files": [
+          {
+            "market": "kospi_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "644039cd3f230f2d4d1a1eb34ed5364222e787f8b06e4e2116bae6e18cedd6b6",
+            "bytes": 298455,
+            "n": 958,
+            "found_dates": [
+              "20251031"
+            ],
+            "http_status": 200
+          },
+          {
+            "market": "kosdaq_equity",
+            "ok": true,
+            "kind": "ok",
+            "reuse": false,
+            "sha256": "091ee0af3873857b33e2d3738f8ab5279d1684f066a8b5d1e3a2349cde534fbf",
+            "bytes": 589508,
+            "n": 1801,
+            "found_dates": [
+              "20251031"
+            ],
+            "http_status": 200
+          }
+        ],
+        "select": true,
+        "status": "ok",
+        "market_kinds": {
+          "kospi_equity": "ok",
+          "kosdaq_equity": "ok"
+        },
+        "holiday_confirmed": false,
+        "eligible": 2585,
+        "excluded": 70,
+        "top100": 100,
+        "selected_sha256": "cd0b7e9206109d491674d9b22153c8d513f44a8e81e9154f09e0618f77655012",
+        "selected_file": "20251031_top100.json"
+      }
+    ],
+    "bytes": 15998789,
+    "ok_dates": [
+      "20251001",
+      "20251002",
+      "20251010",
+      "20251013",
+      "20251014",
+      "20251015",
+      "20251016",
+      "20251017",
+      "20251020",
+      "20251021",
+      "20251022",
+      "20251023",
+      "20251024",
+      "20251027",
+      "20251028",
+      "20251029",
+      "20251030",
+      "20251031"
+    ],
     "blocked_dates": [],
-    "selected_files_counted": [],
-    "stale_selected_ignored": []
+    "selected_files_counted": [
+      "20251001_top100.json",
+      "20251002_top100.json",
+      "20251010_top100.json",
+      "20251013_top100.json",
+      "20251014_top100.json",
+      "20251015_top100.json",
+      "20251016_top100.json",
+      "20251017_top100.json",
+      "20251020_top100.json",
+      "20251021_top100.json",
+      "20251022_top100.json",
+      "20251023_top100.json",
+      "20251024_top100.json",
+      "20251027_top100.json",
+      "20251028_top100.json",
+      "20251029_top100.json",
+      "20251030_top100.json",
+      "20251031_top100.json"
+    ],
+    "stale_selected_ignored": [],
+    "finished": "2026-10-12 21:59:15"
   },
-  "selected_files": [],
-  "union_unique_codes": 0,
-  "union_codes_preview": [],
+  "selected_files": [
+    {
+      "file": "20251001_top100.json",
+      "sha256": "363a08c7e25f87c3b18288fa4f64501e6a8b51c2309f198532fda349bcbad548",
+      "n": 100,
+      "eligible": 2592,
+      "excluded": 76
+    },
+    {
+      "file": "20251002_top100.json",
+      "sha256": "08490c1e8557b34ef3f0fa504fd39c47c151f48d52da7f17dd5eb6735c1c7e0c",
+      "n": 100,
+      "eligible": 2592,
+      "excluded": 75
+    },
+    {
+      "file": "20251010_top100.json",
+      "sha256": "10cd89b19072acbc50eb4a5207c388240da69bf18b3c5adc91439d149ad8ac83",
+      "n": 100,
+      "eligible": 2590,
+      "excluded": 74
+    },
+    {
+      "file": "20251013_top100.json",
+      "sha256": "1f8fd3ad85455b590eae642e33aa4c16862e9ce90a69264b20929a0eb96e7260",
+      "n": 100,
+      "eligible": 2591,
+      "excluded": 73
+    },
+    {
+      "file": "20251014_top100.json",
+      "sha256": "d6079fe3722bcf1b9955a1a26e46065f6541f0e3c39e9d6276cc6fd018cbac2f",
+      "n": 100,
+      "eligible": 2591,
+      "excluded": 73
+    },
+    {
+      "file": "20251015_top100.json",
+      "sha256": "60a7d896ae84a83607a1e8773edea28768e930a6a0638fccbe049b689a74d1ce",
+      "n": 100,
+      "eligible": 2589,
+      "excluded": 73
+    },
+    {
+      "file": "20251016_top100.json",
+      "sha256": "4a1a71f58584f4c20b8952be77cefb2d470d8f337d32ea51ed2d16416b99cc71",
+      "n": 100,
+      "eligible": 2591,
+      "excluded": 71
+    },
+    {
+      "file": "20251017_top100.json",
+      "sha256": "b067895fcb817bf4d12a06096a08fccc59f29d4733009693efc500de73308470",
+      "n": 100,
+      "eligible": 2591,
+      "excluded": 71
+    },
+    {
+      "file": "20251020_top100.json",
+      "sha256": "0c2ef9c117a29f3a26518b3312da61f77bbb9cf55611a51c908a06b1f70f84e9",
+      "n": 100,
+      "eligible": 2590,
+      "excluded": 71
+    },
+    {
+      "file": "20251021_top100.json",
+      "sha256": "98f7a3c8c3c56ddff66b343cb78184193f14fe0f242cbaaab8ce498682bf6316",
+      "n": 100,
+      "eligible": 2590,
+      "excluded": 71
+    },
+    {
+      "file": "20251022_top100.json",
+      "sha256": "765ee2eb6ad5ee5d17767ca5411a396396fe225e7f87f7c6be041690a86b2dc0",
+      "n": 100,
+      "eligible": 2590,
+      "excluded": 71
+    },
+    {
+      "file": "20251023_top100.json",
+      "sha256": "70f1439101b969795be7483be3bff227e4fd776a734b241cb7a4f9200b95839b",
+      "n": 100,
+      "eligible": 2589,
+      "excluded": 69
+    },
+    {
+      "file": "20251024_top100.json",
+      "sha256": "31e0bcc1ca4875d37d619c5453fa4eef7b15fb3a9ae2a5dc9d9b982b9ff9f39c",
+      "n": 100,
+      "eligible": 2589,
+      "excluded": 69
+    },
+    {
+      "file": "20251027_top100.json",
+      "sha256": "e8b43f33d7ce756012def72a28bed8dd73ab41fd0b03ad657f2946fc6de7cee7",
+      "n": 100,
+      "eligible": 2590,
+      "excluded": 69
+    },
+    {
+      "file": "20251028_top100.json",
+      "sha256": "e0a9859e287ced13727d0ac0adbeee0eb9803638df422f018666567877c55562",
+      "n": 100,
+      "eligible": 2589,
+      "excluded": 69
+    },
+    {
+      "file": "20251029_top100.json",
+      "sha256": "a1d427e2aa4e1bd0d59506c0d71ad3fb985ec58a086328059b6718e9a4e70f90",
+      "n": 100,
+      "eligible": 2590,
+      "excluded": 69
+    },
+    {
+      "file": "20251030_top100.json",
+      "sha256": "bf8a04430acc2a5123522b3af4a94253c61639ef080d9440947dc94be32aae32",
+      "n": 100,
+      "eligible": 2585,
+      "excluded": 69
+    },
+    {
+      "file": "20251031_top100.json",
+      "sha256": "cd0b7e9206109d491674d9b22153c8d513f44a8e81e9154f09e0618f77655012",
+      "n": 100,
+      "eligible": 2585,
+      "excluded": 70
+    }
+  ],
+  "union_unique_codes": 305,
+  "union_codes_preview": [
+    "000100",
+    "000150",
+    "000155",
+    "000250",
+    "000270",
+    "000660",
+    "000720",
+    "000810",
+    "000880",
+    "0008Z0",
+    "000910",
+    "000990",
+    "001440",
+    "001520",
+    "003160",
+    "003230",
+    "003280",
+    "003490",
+    "003530",
+    "003535",
+    "003670",
+    "005070",
+    "005290",
+    "005380",
+    "005385",
+    "005387",
+    "005490",
+    "005690",
+    "005930",
+    "005935"
+  ],
   "year_estimate": {
     "month_candidate_days": [
       "20251001",
@@ -216,23 +1190,26 @@
     "assumptions": [
       "1년 거래일 247일(근사).",
       "하루 주권 2호출(KOSPI+KOSDAQ). ETF/ETN 확인 시 +2.",
-      "호출 간격 1.2초, 오류 재시도 여유 포함.",
-      "응답 크기: 샘플 10행≈3KB. 전 종목은 시장당 수백~2천행으로 가정해 하루 0.5–1.5MB."
+      "응답 크기: 2025-10 실측 18일 36요청 약 16.0MB. 1년은 이 비율로 환산."
     ],
     "year_equity_requests": 494,
     "year_equity_plus_etp_requests": 988,
-    "year_sleep_seconds_equity": 592.8,
-    "year_raw_size_mb_low": 123.5,
-    "year_raw_size_mb_high": 370.5,
+    "year_seconds_equity": 988.0,
+    "year_raw_size_mb": 219.5,
+    "measured_month_requests": 36,
+    "measured_month_bytes": 15998789,
+    "measured_month_seconds": 72.0,
+    "measured_month_mb": 16.0,
     "daily_bars_not_collected": true,
     "daily_bar_estimate": {
-      "note": "이번 파일럿은 일봉을 받지 않는다. TOP100 합집합을 재기 전에는 종목 수를 확정하지 않는다.",
-      "if_month_unique_200_to_400": "Yahoo 구간 1요청/종목 가정 시 200–400회.",
-      "if_year_unique_600_to_1200": "600–1200회. 운영 캐시에 쓰지 말 것."
+      "note": "이번 파일럿은 일봉을 받지 않는다.",
+      "if_year_unique_600_to_1200": "600–1200회. 운영 캐시에 쓰지 말 것.",
+      "month_union_unique": 305,
+      "if_month_union_one_range_each": "305회. 1년 합집합은 더 클 수 있어 미확정. 운영 캐시에 쓰지 말 것."
     },
     "uncertainties": [
       "Open API 일 한도·버스트 403.",
-      "카테고리별 활용 승인 대기.",
+      "주식 일별매매정보는 승인됨. ETF/ETN 카테고리는 이번 수집에 쓰지 않음.",
       "NXT·시간외 포함 여부.",
       "주권 API만 쓰면 ETF는 목록에 없지만, 운영 다음은 ETF를 받은 뒤 이름으로 뺀다."
     ]
@@ -246,7 +1223,8 @@
       "Open API 본호출은 인증키 없이 401 Unauthorized Key 이었다.",
       "공개 샘플 키는 본호출에서 Unauthorized API Call 이었다.",
       "KOSPI·KOSDAQ 샘플 응답은 각 10행이며 전 종목이 아니다.",
-      "인증키 없음. 수집 미실행(skipped_no_auth_key). 근사 TOP100을 만들지 않았다."
+      "활용 승인 전 개인 인증키 본호출은 401 Unauthorized API Call 이었다.",
+      "활용 승인 후 개인 인증키로 주권 본호출이 200을 반환했고, 양쪽 시장이 검증된 날만 TOP100을 저장했다. 후보 18거래일."
     ],
     "assumptions": [
       "2025-10 거래일 후보는 주말·공휴일을 뺀 목록이며, 키 확보 후 빈 응답으로 휴장일을 재확인해야 한다.",
@@ -254,8 +1232,7 @@
       "ACC_TRDVAL이 정규장만인지, 시간외·NXT를 합친 것인지는 이번 명세서 전문을 받지 못해 단정하지 않는다.",
       "1년 거래일 247일(근사).",
       "하루 주권 2호출(KOSPI+KOSDAQ). ETF/ETN 확인 시 +2.",
-      "호출 간격 1.2초, 오류 재시도 여유 포함.",
-      "응답 크기: 샘플 10행≈3KB. 전 종목은 시장당 수백~2천행으로 가정해 하루 0.5–1.5MB."
+      "응답 크기: 2025-10 실측 18일 36요청 약 16.0MB. 1년은 이 비율로 환산."
     ]
   },
   "conclusion": "일부 제한",
@@ -264,7 +1241,7 @@
     "본호출은 인증키·활용 승인이 필요하고, 정보데이터시스템 JSON은 로그인이 필요하다. 우회하지 않았다.",
     "샘플 10행으로 TOP100을 만들지 않았다.",
     "운영 다음은 실시간 accTradePrice라, 키를 받아도 동일 TOP100이라고 단정할 수 없다.",
-    "인증키가 없어 수집은 실행하지 않았다."
+    "인증키로 18거래일 모두 양쪽 시장이 검증된 뒤에만 TOP100을 저장했다. 합집합 고유 305종목. 운영과 동일인지는 다음·시간외·NXT 정의 대조가 남는다."
   ],
   "replay": {
     "probe": "python docs/research/historical-amount-top100-pilot.py --probe",
@@ -275,5 +1252,40 @@
       "Remove-Item Env:KRX_AUTH_KEY"
     ],
     "do_not_put_key_in_git_or_logs": true
+  },
+  "verification": {
+    "ok_dates": [
+      "20251001",
+      "20251002",
+      "20251010",
+      "20251013",
+      "20251014",
+      "20251015",
+      "20251016",
+      "20251017",
+      "20251020",
+      "20251021",
+      "20251022",
+      "20251023",
+      "20251024",
+      "20251027",
+      "20251028",
+      "20251029",
+      "20251030",
+      "20251031"
+    ],
+    "issues": [],
+    "name_changes_in_union": [],
+    "spot_dates": [
+      "20251001",
+      "20251021",
+      "20251031"
+    ],
+    "spot_rebuild_matches_file": {
+      "20251001": true,
+      "20251021": true,
+      "20251031": true
+    },
+    "union_unique_codes": 305
   }
 }

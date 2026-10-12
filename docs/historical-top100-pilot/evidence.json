@@ -1,0 +1,279 @@
+{
+  "generated_at": "2026-10-12 21:46:40",
+  "inputs": {
+    "leaders_php": "C:\\Users\\acdun\\Desktop\\dev\\noramu\\src\\KrAmountLeadersClient.php",
+    "leaders_php_sha256": "8de0f63934fc2e3494708cd5bd37d0b1c21a9eb8cbd9f34325be2ad8f24f26d7",
+    "amount_exclude_test": "C:\\Users\\acdun\\Desktop\\dev\\noramu\\tests\\amount_exclude.php",
+    "raw_root": "C:\\Users\\acdun\\Desktop\\dev\\noramu\\data\\raw\\research\\historical-amount-top100-202510",
+    "raw_root_gitignored": true
+  },
+  "aggregation": {
+    "amount_field": "ACC_TRDVAL only",
+    "close_times_volume": "recorded as mismatch check, never used for rank",
+    "markets": "KOSPI+KOSDAQ. KONEX dropped.",
+    "exclude": "KrAmountLeadersClient::excludedFromAmountRank name rule",
+    "rank": "amount_won desc, code asc for ties",
+    "topn": 100,
+    "listing_basis": "that day's Open API rows, not today's ticker list",
+    "select_requires": "both KOSPI and KOSDAQ validate: http 200, json, non-empty OutBlock_1, BAS_DD=request date",
+    "empty_is_not_holiday": true
+  },
+  "scanner": {
+    "code": "src/KrAmountLeadersClient.php",
+    "sha256": "8de0f63934fc2e3494708cd5bd37d0b1c21a9eb8cbd9f34325be2ad8f24f26d7",
+    "primary_source": "https://finance.daum.net/api/trend/trade_volume fieldName=accTradePrice",
+    "fallback_source": "https://finance.naver.com/sise/sise_quant.naver amount column",
+    "markets": [
+      "KOSPI",
+      "KOSDAQ"
+    ],
+    "not_included": [
+      "KONEX",
+      "date_parameter"
+    ],
+    "amount_field": "accTradePrice (won). Daum path does not use close*volume.",
+    "exclude_when": "fetch row mapping, before final rank",
+    "exclude_rule": "KrAmountLeadersClient::excludedFromAmountRank",
+    "pagination": "up to 100 non-excluded rows per market, max 10 pages of 100, then merge and sort",
+    "sort": "amount_million desc, PHP usort. Equal amounts keep relative order (PHP 8 stable).",
+    "limit": 100,
+    "session": "scheduled 20:20 KST after regular close; live ranking not a dated archive",
+    "nxt_afterhours": "not specified in scanner code"
+  },
+  "probe": {
+    "at": "2026-10-12 21:27:56",
+    "steps": [
+      {
+        "id": "krx_mdcstat015_page",
+        "status": 200,
+        "bytes": 25356,
+        "note": "전종목 시세 화면 HTML. 조회 JSON은 별도."
+      },
+      {
+        "id": "krx_getJsonData_mdcstat01501",
+        "status": 400,
+        "bytes": 6,
+        "head": "LOGOUT",
+        "note": "로그인 세션 없이 호출. LOGOUT이면 비회원 조회 불가."
+      },
+      {
+        "id": "openapi_prod_no_key",
+        "status": 401,
+        "bytes": 47,
+        "head": "{\"respMsg\":\"Unauthorized Key\",\"respCode\":\"401\"}"
+      },
+      {
+        "id": "sample_kospi_equity",
+        "status": 200,
+        "bytes": 3147,
+        "n": 10
+      },
+      {
+        "id": "sample_kosdaq_equity",
+        "status": 200,
+        "bytes": 3433,
+        "n": 10
+      },
+      {
+        "id": "sample_konex_equity",
+        "status": 200,
+        "bytes": 3171,
+        "n": 10
+      },
+      {
+        "id": "sample_etf",
+        "status": 200,
+        "bytes": 4736,
+        "n": 10
+      },
+      {
+        "id": "sample_etn",
+        "status": 200,
+        "bytes": 4894,
+        "n": 10
+      }
+    ],
+    "sample_sets": {
+      "kospi_equity": {
+        "url": "https://data-dbg.krx.co.kr/svc/sample/apis/sto/stk_bydd_trd?basDd=20251002",
+        "status": 200,
+        "bytes": 3147,
+        "sha256": "6df8197276594c17a3b97dee80f9161f1aa4b501c535630091e6351d028f5c9e",
+        "n": 10
+      },
+      "kosdaq_equity": {
+        "url": "https://data-dbg.krx.co.kr/svc/sample/apis/sto/ksq_bydd_trd?basDd=20251002",
+        "status": 200,
+        "bytes": 3433,
+        "sha256": "1745faaa1276eec6e501aa338772d36a369b09cba8366706b153b8739e0103c5",
+        "n": 10
+      },
+      "konex_equity": {
+        "url": "https://data-dbg.krx.co.kr/svc/sample/apis/sto/knx_bydd_trd?basDd=20251002",
+        "status": 200,
+        "bytes": 3171,
+        "sha256": "b71b4d397dd8de1535d0ae160c40a62000b1c496eb265aff24d19df7f9c7b5c4",
+        "n": 10
+      },
+      "etf": {
+        "url": "https://data-dbg.krx.co.kr/svc/sample/apis/etp/etf_bydd_trd?basDd=20251002",
+        "status": 200,
+        "bytes": 4736,
+        "sha256": "6143b480d78eaa23748ebbd01ebb5ccfc94e311a906eead7a6b035a0ad142241",
+        "n": 10
+      },
+      "etn": {
+        "url": "https://data-dbg.krx.co.kr/svc/sample/apis/etp/etn_bydd_trd?basDd=20251002",
+        "status": 200,
+        "bytes": 4894,
+        "sha256": "e562a5859f0cdfd166f8ecb64d5e50920455f131349811b5d8b05b30a4904458",
+        "n": 10
+      }
+    },
+    "facts": [
+      "운영 스캐너는 finance.daum.net accTradePrice 실시간 순위이며 날짜 파라미터가 없다.",
+      "KRX Open API 샘플은 ACC_TRDVAL(원) 필드를 제공한다.",
+      "정보데이터시스템 getJsonData는 이 환경에서 LOGOUT/400 이었다.",
+      "Open API 본호출은 인증키 없이 401 Unauthorized Key 이었다.",
+      "공개 샘플 키는 본호출에서 Unauthorized API Call 이었다.",
+      "KOSPI·KOSDAQ 샘플 응답은 각 10행이며 전 종목이 아니다.",
+      "인증키 없음. 수집 미실행(skipped_no_auth_key). 근사 TOP100을 만들지 않았다."
+    ],
+    "assumptions": [
+      "2025-10 거래일 후보는 주말·공휴일을 뺀 목록이며, 키 확보 후 빈 응답으로 휴장일을 재확인해야 한다.",
+      "Open API 주식 일별매매정보는 주권만 포함한다고 안내되어 있다. ETF/ETN은 증권상품 API가 따로 있다.",
+      "ACC_TRDVAL이 정규장만인지, 시간외·NXT를 합친 것인지는 이번 명세서 전문을 받지 못해 단정하지 않는다."
+    ],
+    "close_times_volume_mismatches_in_sample": [
+      {
+        "code": "415640",
+        "name": "KB발해인프라",
+        "market": "KOSPI",
+        "sector_part": "",
+        "acc_trdval": 1037856700.0,
+        "close_times_volume": 1038239040.0,
+        "amount_equals_close_times_volume": false
+      },
+      {
+        "code": "432320",
+        "name": "KB스타리츠",
+        "market": "KOSPI",
+        "sector_part": "",
+        "acc_trdval": 157253612.0,
+        "close_times_volume": 157859110.0,
+        "amount_equals_close_times_volume": false
+      },
+      {
+        "code": "395400",
+        "name": "SK리츠",
+        "market": "KOSPI",
+        "sector_part": "",
+        "acc_trdval": 1109163366.0,
+        "close_times_volume": 1115462880.0,
+        "amount_equals_close_times_volume": false
+      }
+    ],
+    "close_times_volume_mismatch_count": 3
+  },
+  "collect": {
+    "ran": false,
+    "status": "skipped_no_auth_key",
+    "reason": "KRX_AUTH_KEY / KRX_API_KEY 없음",
+    "requests": 0,
+    "retries": 0,
+    "errors": [],
+    "days": [],
+    "ok_dates": [],
+    "blocked_dates": [],
+    "selected_files_counted": [],
+    "stale_selected_ignored": []
+  },
+  "selected_files": [],
+  "union_unique_codes": 0,
+  "union_codes_preview": [],
+  "year_estimate": {
+    "month_candidate_days": [
+      "20251001",
+      "20251002",
+      "20251010",
+      "20251013",
+      "20251014",
+      "20251015",
+      "20251016",
+      "20251017",
+      "20251020",
+      "20251021",
+      "20251022",
+      "20251023",
+      "20251024",
+      "20251027",
+      "20251028",
+      "20251029",
+      "20251030",
+      "20251031"
+    ],
+    "month_candidate_day_count": 18,
+    "assumptions": [
+      "1년 거래일 247일(근사).",
+      "하루 주권 2호출(KOSPI+KOSDAQ). ETF/ETN 확인 시 +2.",
+      "호출 간격 1.2초, 오류 재시도 여유 포함.",
+      "응답 크기: 샘플 10행≈3KB. 전 종목은 시장당 수백~2천행으로 가정해 하루 0.5–1.5MB."
+    ],
+    "year_equity_requests": 494,
+    "year_equity_plus_etp_requests": 988,
+    "year_sleep_seconds_equity": 592.8,
+    "year_raw_size_mb_low": 123.5,
+    "year_raw_size_mb_high": 370.5,
+    "daily_bars_not_collected": true,
+    "daily_bar_estimate": {
+      "note": "이번 파일럿은 일봉을 받지 않는다. TOP100 합집합을 재기 전에는 종목 수를 확정하지 않는다.",
+      "if_month_unique_200_to_400": "Yahoo 구간 1요청/종목 가정 시 200–400회.",
+      "if_year_unique_600_to_1200": "600–1200회. 운영 캐시에 쓰지 말 것."
+    },
+    "uncertainties": [
+      "Open API 일 한도·버스트 403.",
+      "카테고리별 활용 승인 대기.",
+      "NXT·시간외 포함 여부.",
+      "주권 API만 쓰면 ETF는 목록에 없지만, 운영 다음은 ETF를 받은 뒤 이름으로 뺀다."
+    ]
+  },
+  "sample_is_not_universe": true,
+  "facts_vs_assumptions": {
+    "facts": [
+      "운영 스캐너는 finance.daum.net accTradePrice 실시간 순위이며 날짜 파라미터가 없다.",
+      "KRX Open API 샘플은 ACC_TRDVAL(원) 필드를 제공한다.",
+      "정보데이터시스템 getJsonData는 이 환경에서 LOGOUT/400 이었다.",
+      "Open API 본호출은 인증키 없이 401 Unauthorized Key 이었다.",
+      "공개 샘플 키는 본호출에서 Unauthorized API Call 이었다.",
+      "KOSPI·KOSDAQ 샘플 응답은 각 10행이며 전 종목이 아니다.",
+      "인증키 없음. 수집 미실행(skipped_no_auth_key). 근사 TOP100을 만들지 않았다."
+    ],
+    "assumptions": [
+      "2025-10 거래일 후보는 주말·공휴일을 뺀 목록이며, 키 확보 후 빈 응답으로 휴장일을 재확인해야 한다.",
+      "Open API 주식 일별매매정보는 주권만 포함한다고 안내되어 있다. ETF/ETN은 증권상품 API가 따로 있다.",
+      "ACC_TRDVAL이 정규장만인지, 시간외·NXT를 합친 것인지는 이번 명세서 전문을 받지 못해 단정하지 않는다.",
+      "1년 거래일 247일(근사).",
+      "하루 주권 2호출(KOSPI+KOSDAQ). ETF/ETN 확인 시 +2.",
+      "호출 간격 1.2초, 오류 재시도 여유 포함.",
+      "응답 크기: 샘플 10행≈3KB. 전 종목은 시장당 수백~2천행으로 가정해 하루 0.5–1.5MB."
+    ]
+  },
+  "conclusion": "일부 제한",
+  "conclusion_why": [
+    "공식 거래대금 필드(ACC_TRDVAL)와 일별 전 종목 API는 확인했다.",
+    "본호출은 인증키·활용 승인이 필요하고, 정보데이터시스템 JSON은 로그인이 필요하다. 우회하지 않았다.",
+    "샘플 10행으로 TOP100을 만들지 않았다.",
+    "운영 다음은 실시간 accTradePrice라, 키를 받아도 동일 TOP100이라고 단정할 수 없다.",
+    "인증키가 없어 수집은 실행하지 않았다."
+  ],
+  "replay": {
+    "probe": "python docs/research/historical-amount-top100-pilot.py --probe",
+    "tests": "python -m unittest tests.test_historical_amount_top100_pilot",
+    "collect_powershell": [
+      "$env:KRX_AUTH_KEY = Read-Host 'KRX AUTH KEY'",
+      "python docs\\research\\historical-amount-top100-pilot.py --collect",
+      "Remove-Item Env:KRX_AUTH_KEY"
+    ],
+    "do_not_put_key_in_git_or_logs": true
+  }
+}

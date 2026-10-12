@@ -78,6 +78,13 @@ final class PaperHistoryResearch
         return $symbol;
     }
 
+    /** Research-only KR listing code. Operational NaverDailyQuotes::codeOf stays digit-only. */
+    public static function krCode(string $symbol):?string
+    {
+        if(preg_match('/^([0-9A-Za-z]{6})(?:\.(?:KS|KQ))?$/D',trim($symbol),$m)===1)return $m[1];
+        return null;
+    }
+
     public static function day(int $ts):string
     {
         return (new DateTimeImmutable('@'.$ts))->setTimezone(new DateTimeZone('Asia/Seoul'))->format('Y-m-d');

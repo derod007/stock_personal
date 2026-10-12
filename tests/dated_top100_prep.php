@@ -2,6 +2,7 @@
 declare(strict_types=1);
 require __DIR__.'/../bin/bootstrap.php';
 require __DIR__.'/../bin/paper/DatedTop100Prep.php';
+use ChartEntryLab\NaverDailyQuotes;
 
 function pcheck(bool $ok,string $why):void{if(!$ok)throw new RuntimeException('FAIL '.$why);echo "PASS $why\n";}
 
@@ -105,5 +106,47 @@ $srcBefore=hash_file('sha256',$copySrc.'/bars/000001.KS.json');
 pcheck(PaperDatedTop100Prep::copyVerifiedBars($copyDst,$copySrc,['symbol'=>'000001.KS'])==='copied','hash-verified bars are copied into v2');
 pcheck(hash_file('sha256',$copyDst.'/bars/000001.KS.json')===$srcBefore,'copied bars match the source bytes');
 pcheck(hash_file('sha256',$copySrc.'/bars/000001.KS.json')===$srcBefore,'source bars are not rewritten');
+
+pcheck(NaverDailyQuotes::codeOf('005930.KS')==='005930'&&PaperHistoryResearch::krCode('005930.KS')==='005930','six-digit codes stay the same in research and operations');
+pcheck(NaverDailyQuotes::codeOf('0001A0.KQ')===null,'operations still reject alphanumeric listing codes');
+pcheck(PaperHistoryResearch::krCode('0001A0.KQ')==='0001A0','research krCode accepts alphanumeric listings');
+
+$union=['AAA.KS','BBB.KS','CCC.KS'];
+$baseCol=['symbols'=>[
+    'AAA.KS'=>['status'=>'secured','bucket'=>'semi'],
+    'BBB.KS'=>['status'=>'unconfirmed','reason'=>'not_a_kr_symbol'],
+    'CCC.KS'=>['status'=>'unconfirmed','reason'=>'http_status'],
+]];
+$admitMap=['symbols'=>['BBB.KS'],'sectors'=>['BBB.KS'=>'bio']];
+$merged=PaperDatedTop100Prep::mergeUnionSectorMap($union,$baseCol,$admitMap);
+pcheck($merged['counts']['secured']===2&&$merged['counts']['unconfirmed']===1,'union merge keeps base names and admits the extra listing');
+pcheck($merged['sectors']['CCC.KS']==='unclassified'&&count($merged['unconfirmed'])===1,'unconfirmed names share unclassified');
+PaperSectorFreeze::assertCoversUnion($union,$merged);
+pcheck((static function()use($union,$admitMap){
+    try{PaperSectorFreeze::assertCoversUnion($union,['kind'=>PaperSectorFreeze::KIND_V2,'assumption'=>'당시 업종을 복원한 것이 아니다.','unclassified_bucket'=>'unclassified','unclassified_is_one_shared_bucket'=>true,'sectors'=>$admitMap['sectors'],'unconfirmed'=>[]]);return false;}
+    catch(Throwable){return true;}
+})(),'an admitted-only partial map is rejected for execution');
+pcheck((static function()use($union,$baseCol){
+    try{PaperDatedTop100Prep::mergeUnionSectorMap($union,$baseCol,['sectors'=>['BBB.KS'=>'fin','AAA.KS'=>'auto']]);return false;}
+    catch(Throwable){return true;}
+})(),'a bucket conflict is not overwritten');
+
+$docs=dirname(__DIR__).'/docs/historical-top100-20251008-20261008';
+if(is_file($docs.'/sector-map-v2.json')&&is_file($docs.'/sector-collection-v2.json')){
+    $am=json_decode((string)file_get_contents($docs.'/sector-map-v2.json'),true,512,JSON_THROW_ON_ERROR);
+    $ac=json_decode((string)file_get_contents($docs.'/sector-collection-v2.json'),true,512,JSON_THROW_ON_ERROR);
+    $off=PaperDatedTop100Prep::verifyAdmittedOffline($am,$ac);
+    pcheck($off['pass']===true&&$off['symbols']===31&&$off['recollected']===false,'stored 31-name codes and sectors still match without a recollect');
+}
+if(is_file($docs.'/sector-map-full-v2.json')&&is_file($docs.'/candidates.json')){
+    $full=json_decode((string)file_get_contents($docs.'/sector-map-full-v2.json'),true,512,JSON_THROW_ON_ERROR);
+    $real=PaperDatedTop100Prep::loadCandidates($docs.'/candidates.json');
+    PaperSectorFreeze::assertCoversUnion($real['union'],$full);
+    pcheck(($full['counts']['secured']??0)===926&&($full['counts']['unconfirmed']??0)===7&&count($full['sectors'])===933,'full map lists 933 names with 7 unclassified');
+    pcheck((static function()use($real,$am){
+        $partial=['kind'=>PaperSectorFreeze::KIND_V2,'assumption'=>'당시 업종을 복원한 것이 아니다.','unclassified_bucket'=>'unclassified','unclassified_is_one_shared_bucket'=>true,'sectors'=>$am['sectors']??[],'unconfirmed'=>[]];
+        try{PaperSectorFreeze::assertCoversUnion($real['union'],$partial);return false;}catch(Throwable){return true;}
+    })(),'the 31-name map is refused against the 933-name union');
+}
 
 echo "OK dated top100 prep tests\n";

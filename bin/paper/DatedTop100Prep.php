@@ -3,7 +3,7 @@ declare(strict_types=1);
 require_once dirname(__DIR__).'/bootstrap.php';
 require_once __DIR__.'/HistoryResearch.php';
 require_once __DIR__.'/DatedTop100Replay.php';
-use ChartEntryLab\{CandleClock,PaperQuality};
+use ChartEntryLab\{CandleClock,NaverDailyQuotes,PaperQuality};
 
 /**
  * Research only: prepare dated KRX amount TOP100 candidates and daily bars for 2025-10-08..2026-10-08.
@@ -18,6 +18,10 @@ final class PaperDatedTop100Prep
     public const CANDIDATES='docs/historical-top100-20251008-20261008/candidates.json';
     public const UNIVERSE='docs/historical-top100-20251008-20261008/universe.json';
     public const UNIVERSE_V2='docs/historical-top100-20251008-20261008/universe-v2.json';
+    public const SECTOR_COLLECTION='docs/historical-top100-20251008-20261008/sector-collection.json';
+    public const SECTOR_MAP_V2='docs/historical-top100-20251008-20261008/sector-map-v2.json';
+    public const SECTOR_MAP_FULL='docs/historical-top100-20251008-20261008/sector-map-full-v2.json';
+    public const SECTOR_COLLECTION_V2='docs/historical-top100-20251008-20261008/sector-collection-v2.json';
     public const EVAL_START='2025-10-08';
     public const AS_OF='2026-10-08';
     public const POLICY='dated_krx_amount_top100_20251008_20261008_v1';
@@ -216,6 +220,81 @@ final class PaperDatedTop100Prep
         $out['bars_sha256']=hash('sha256',$bytes);
         PaperHistoryResearch::writeFile($dest.'/status/'.$symbol.'.json',PaperHistoryResearch::encode($out,true));
         return 'copied';
+    }
+
+    /**
+     * Offline: admitted codes are research-only, and stored sector buckets still match the 31-name collection.
+     * Does not fetch.
+     */
+    public static function verifyAdmittedOffline(array $admittedMap,array $admittedCollection):array
+    {
+        $issues=[];$n=0;
+        foreach($admittedMap['symbols']??[] as $sym){
+            $n++;
+            $sym=(string)$sym;
+            if(NaverDailyQuotes::codeOf($sym)!==null)$issues[]=$sym.': operational codeOf accepted an alphanumeric listing';
+            $code=PaperHistoryResearch::krCode($sym);
+            if($code===null)$issues[]=$sym.': research krCode rejected the listing';
+            $mapB=$admittedMap['sectors'][$sym]??null;
+            $colB=$admittedCollection['symbols'][$sym]['bucket']??null;
+            if($mapB===null||$colB===null||$mapB!==$colB)$issues[]=$sym.': sector bucket mismatch';
+        }
+        return ['pass'=>$issues===[],'issues'=>$issues,'symbols'=>$n,'recollected'=>false];
+    }
+
+    /**
+     * Merge the 895-name collection with the 31-name map onto the candidate union.
+     * Does not rewrite the source files. Conflicts are refused, not overwritten.
+     *
+     * @param list<string> $union
+     */
+    public static function mergeUnionSectorMap(array $union,array $baseCollection,array $admittedMap,array $sourceMeta=[]):array
+    {
+        $want=array_values(array_unique($union));
+        sort($want);
+        if($want===[])throw new InvalidArgumentException('Candidate union is empty');
+        $baseRows=$baseCollection['symbols']??[];
+        $admit=$admittedMap['sectors']??[];
+        if(!is_array($baseRows)||!is_array($admit))throw new InvalidArgumentException('Sector sources need symbols/sectors');
+        $extraAdmit=array_values(array_diff(array_keys($admit),$want));
+        if($extraAdmit!==[])throw new RuntimeException('Admitted map has symbols outside the candidate union: '.implode(',',$extraAdmit));
+        $conflicts=[];$sectors=[];$unconfirmed=[];$fromBase=0;$fromAdmit=0;
+        foreach($want as $sym){
+            $base=$baseRows[$sym]??null;
+            $baseBucket=is_array($base)&&($base['status']??'')==='secured'?(string)($base['bucket']??''):'';
+            $baseOk=$baseBucket!==''&&$baseBucket!==PaperSectorFreeze::UNCLASSIFIED;
+            $admitBucket=isset($admit[$sym])?(string)$admit[$sym]:'';
+            $admitOk=$admitBucket!==''&&$admitBucket!==PaperSectorFreeze::UNCLASSIFIED;
+            if($baseOk&&$admitOk&&$baseBucket!==$admitBucket){
+                $conflicts[]=['symbol'=>$sym,'base'=>$baseBucket,'admitted'=>$admitBucket];
+                continue;
+            }
+            if($baseOk){$sectors[$sym]=$baseBucket;$fromBase++;}
+            elseif($admitOk){$sectors[$sym]=$admitBucket;$fromAdmit++;}
+            else{
+                $sectors[$sym]=PaperSectorFreeze::UNCLASSIFIED;
+                $unconfirmed[]=['symbol'=>$sym,'reason'=>is_array($base)?($base['reason']??'unconfirmed'):'missing_from_sources'];
+            }
+        }
+        if($conflicts!==[])throw new RuntimeException('Sector merge conflicts were not overwritten: '.json_encode($conflicts,JSON_UNESCAPED_UNICODE));
+        ksort($sectors);
+        $buckets=[];foreach($sectors as $b)$buckets[$b]=($buckets[$b]??0)+1;ksort($buckets);
+        $out=[
+            'schema'=>1,'kind'=>PaperSectorFreeze::KIND_V2,
+            'assumption'=>'현재 네이버 모바일 업종 JSON을 과거에 같이 적용한다. 당시 업종을 복원한 것이 아니다.',
+            'unclassified_bucket'=>PaperSectorFreeze::UNCLASSIFIED,'unclassified_is_one_shared_bucket'=>true,
+            'rule'=>'ChartEntryLab\\SectorMap::bucketOf',
+            'dataset'=>self::DATASET_V2,
+            'execution_path'=>self::SECTOR_MAP_FULL,
+            'sources_not_overwritten'=>true,'account_replay'=>false,
+            'sources'=>$sourceMeta,
+            'counts'=>['symbols'=>count($sectors),'secured'=>$fromBase+$fromAdmit,'from_base'=>$fromBase,'from_admitted'=>$fromAdmit,
+                'unconfirmed'=>count($unconfirmed)],
+            'bucket_counts'=>$buckets,
+            'sectors'=>$sectors,'unconfirmed'=>$unconfirmed,
+        ];
+        PaperSectorFreeze::assertCoversUnion($want,$out);
+        return $out;
     }
 
     /**

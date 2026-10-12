@@ -14,8 +14,8 @@ foreach(array_slice($argv,2) as $a){
     if(!preg_match('/^--([a-z-]+)=(.*)$/s',$a,$m))throw new InvalidArgumentException('Unknown argument '.$a);
     $o[$m[1]]=$m[2];
 }
-if(!in_array($cmd,['universe','collect','quality','coverage','yahoo-requests','provider-review','universe-v2','collect-v2','sector-v2'],true))
-    throw new InvalidArgumentException('Commands: universe collect quality coverage yahoo-requests provider-review universe-v2 collect-v2 sector-v2');
+if(!in_array($cmd,['universe','collect','quality','coverage','yahoo-requests','provider-review','universe-v2','collect-v2','sector-v2','sector-map-full'],true))
+    throw new InvalidArgumentException('Commands: universe collect quality coverage yahoo-requests provider-review universe-v2 collect-v2 sector-v2 sector-map-full');
 if(isset($o['state-dir']))putenv('PAPER_STATE_DIR='.$o['state-dir']);
 $root=dirname(__DIR__);
 $enc=static fn(array $v):string=>PaperHistoryResearch::encode($v,true)."\n";
@@ -132,6 +132,40 @@ if($cmd==='sector-v2'){
     $mapPath=$root.'/docs/historical-top100-20251008-20261008/sector-map-v2.json';
     PaperHistoryResearch::writeFile($mapPath,PaperHistoryResearch::encode($map,true));
     $out(['wrote'=>$mapPath,'secured'=>count($map['sectors']),'unconfirmed'=>count($map['unconfirmed']),'operational_caches_unchanged'=>true]);
+    exit(0);
+}
+if($cmd==='sector-map-full'){
+    $cand=PaperDatedTop100Prep::loadCandidates($candPath);
+    $basePath=$o['base']??$root.'/'.PaperDatedTop100Prep::SECTOR_COLLECTION;
+    $admitPath=$o['admitted']??$root.'/'.PaperDatedTop100Prep::SECTOR_MAP_V2;
+    $colV2Path=$root.'/'.PaperDatedTop100Prep::SECTOR_COLLECTION_V2;
+    $dest=$o['out']??$root.'/'.PaperDatedTop100Prep::SECTOR_MAP_FULL;
+    if(is_file($dest))throw new RuntimeException('Refusing to overwrite existing full sector map '.$dest);
+    foreach([$basePath,$admitPath] as $p){
+        if(!is_file($p))throw new RuntimeException('Missing sector source '.$p);
+    }
+    $baseBefore=hash_file('sha256',$basePath);
+    $admitBefore=hash_file('sha256',$admitPath);
+    $colV2Before=is_file($colV2Path)?hash_file('sha256',$colV2Path):null;
+    $base=json_decode((string)file_get_contents($basePath),true,512,JSON_THROW_ON_ERROR);
+    $admit=json_decode((string)file_get_contents($admitPath),true,512,JSON_THROW_ON_ERROR);
+    $colV2=is_file($colV2Path)?json_decode((string)file_get_contents($colV2Path),true,512,JSON_THROW_ON_ERROR):['symbols'=>[]];
+    $offline=PaperDatedTop100Prep::verifyAdmittedOffline($admit,$colV2);
+    if(!$offline['pass'])throw new RuntimeException('Admitted code/sector offline check failed: '.json_encode($offline['issues'],JSON_UNESCAPED_UNICODE));
+    $map=PaperDatedTop100Prep::mergeUnionSectorMap($cand['union'],$base,$admit,[
+        ['path'=>PaperDatedTop100Prep::SECTOR_COLLECTION,'sha256'=>$baseBefore,'role'=>'secured_895'],
+        ['path'=>PaperDatedTop100Prep::SECTOR_MAP_V2,'sha256'=>$admitBefore,'role'=>'admitted_31'],
+        ['path'=>PaperDatedTop100Prep::CANDIDATES,'sha256'=>$cand['file_sha256'],'role'=>'candidate_union'],
+    ]);
+    $bytes=PaperHistoryResearch::encode($map,true);
+    PaperHistoryResearch::writeFile($dest,$bytes);
+    if(hash_file('sha256',$basePath)!==$baseBefore||hash_file('sha256',$admitPath)!==$admitBefore)
+        throw new RuntimeException('A source sector file changed while the full map was written');
+    if($colV2Before!==null&&hash_file('sha256',$colV2Path)!==$colV2Before)
+        throw new RuntimeException('Admitted collection changed while the full map was written');
+    $out(['wrote'=>$dest,'sha256'=>hash('sha256',$bytes),'counts'=>$map['counts'],
+        'execution_path'=>PaperDatedTop100Prep::SECTOR_MAP_FULL,
+        'offline_admitted'=>$offline,'sources_unchanged'=>true,'account_replay'=>false]);
     exit(0);
 }
 if($cmd==='collect-v2'){

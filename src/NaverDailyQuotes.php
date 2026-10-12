@@ -39,7 +39,7 @@ final class NaverDailyQuotes
      */
     public static function codeOf(string $symbol): ?string
     {
-        if (preg_match('/^([0-9A-Za-z]{6})(?:\.(?:KS|KQ))?$/i', trim($symbol), $m) === 1) {
+        if (preg_match('/^(\d{6})(?:\.(?:KS|KQ))?$/i', trim($symbol), $m) === 1) {
             return $m[1];
         }
 

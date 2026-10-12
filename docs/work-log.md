@@ -1,3 +1,15 @@
+## 2026-10-13 03:27 · Cursor · 끝
+- 한 일: PR #75 운영 NaverDailyQuotes를 main과 같게 복원, 영문 종목코드는 연구 krCode로 분리, 933 전체 섹터 맵 고정. 재수집·계좌 재현·병합 없음
+- 파일: src/NaverDailyQuotes.php, bin/paper/HistoryResearch.php, bin/paper/DatedTop100Prep.php, bin/paper_dated_top100_prep.php, bin/paper/SectorFreeze.php, bin/paper/DatedTop100Replay.php, bin/paper_sector_collect.php, tests/dated_top100_prep.php, tests/dated_top100_replay.php, tests/sector_freeze.php, docs/historical-top100-20251008-20261008/, docs/work-log.md
+- 커밋: PR #75에 추가(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-13 03:21 · Cursor · 진행
+- 한 일: PR #75 운영 NaverDailyQuotes 복원·연구 전용 코드 분리, 933 전체 섹터 맵. 재수집·계좌 재현·병합 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-13 03:03 · Cursor · 끝
 - 한 일: PR #75 계좌 실행 전 데이터 준비. Yahoo 31종 v2 편입(5y 31회), 895 해시 복사, 24400 고유 분할, 중간·최종 이탈 잠재 누락 집계, 편입 섹터 맵. 계좌 재현·병합 없음
 - 파일: bin/paper/DatedTop100Prep.php, bin/paper_dated_top100_prep.php, bin/paper/HistoryResearch.php, src/NaverDailyQuotes.php, tests/dated_top100_prep.php, docs/historical-top100-20251008-20261008/, docs/work-log.md

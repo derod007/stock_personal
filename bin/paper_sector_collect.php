@@ -14,7 +14,7 @@ declare(strict_types=1);
  *   php bin/paper_sector_collect.php --out-dir=<research folder> --report=<json> [--symbols-from=<sector-map.json>] [--symbols=a,b]
  */
 require __DIR__.'/bootstrap.php';require __DIR__.'/paper/SectorFreeze.php';
-use ChartEntryLab\{NaverDailyQuotes,SectorMap};
+use ChartEntryLab\SectorMap;
 
 const UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
 const LIST_URL='https://m.stock.naver.com/api/stocks/industry?page=%d&pageSize=100';
@@ -104,7 +104,7 @@ $rules=new SectorMap($ruleDir);
 
 $rows=[];$failed=[];$secured=0;$first=true;
 foreach($symbols as $symbol){
-    $code=NaverDailyQuotes::codeOf($symbol);
+    $code=PaperHistoryResearch::krCode($symbol);
     $row=['symbol'=>$symbol];
     $file=$code!==null?$outDir.'/sector/sector_'.$code.'.json':null;
     $fail=static function(string $reason,string $detail='')use(&$rows,&$failed,$symbol,$file):void{

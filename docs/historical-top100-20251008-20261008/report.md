@@ -76,7 +76,9 @@ Yahoo 404: `010620.KS` HD현대미포, `012510.KS` 더존비즈온, `042670.KS` 
 | 확보 | 895 |
 | 미확인 | 38 |
 
-미확인 38: 심볼 미매핑 32, 네이버 HTTP 409 6(위 Yahoo 404와 동일). 다음 계좌 실행 때 이 38종은 `unclassified`로 남습니다.
+미확인 38: 심볼 미매핑 32, 네이버 HTTP 409 6(위 Yahoo 404와 동일). 이 목록은 `sector-collection.json`에 그대로 두었습니다.
+
+계좌 실행용 전체 맵은 아래 **전체 섹터 맵**입니다. `sector-map-v2.json`(31종)만 넘기면 거부됩니다.
 
 ## 보완 (PR #75)
 
@@ -198,12 +200,31 @@ Yahoo chart가 응답한 미매핑 31종은 종목코드·시장(KSC/KOSPI, KOE/
 
 현재 네이버 모바일 업종 JSON을 과거에 같이 적용합니다. 당시 업종을 복원한 것이 아닙니다. 편입 31종만 별도 `sector-map-v2.json`에 고정했습니다. 확보 31, 미확인 0. 운영 섹터 캐시는 변경 없습니다.
 
+### 운영 코드 분리
+
+`src/NaverDailyQuotes.php`는 최신 main과 같습니다. 숫자 6자리만 `codeOf`로 읽습니다. 영문 포함 종목코드는 연구 전용 `PaperHistoryResearch::krCode`만 씁니다. `src/SectorMap.php`는 바꾸지 않았습니다. 운영 전략 지문 `934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465` 유지. 편입 31종 봉·섹터는 재수집하지 않았고, 오프라인으로 코드·버킷이 저장된 수집 기록과 같음을 확인했습니다.
+
+### 전체 섹터 맵 (계좌 실행용)
+
+기존 `sector-collection.json`(895 확보)과 `sector-map-v2.json`(31 확보)을 합쳐 **새 파일**만 만들었습니다. 기존 자료·부분 맵은 덮어쓰지 않았습니다. 충돌은 없어서 임의로 고치지 않았습니다.
+
+실행 경로: `docs/historical-top100-20251008-20261008/sector-map-full-v2.json`  
+파일 해시: `08afb0b6f0be0106624364406d29a5a33851c65331e431467629f71600da1e8b`
+
+| 항목 | 값 |
+|---|---|
+| 합집합 | 933 |
+| 확보 | 926 (기존 895 + 편입 31) |
+| 미확인 | 7, 버킷 `unclassified` 하나 |
+
+미확인 7: Yahoo 404 6(`010620.KS`, `012510.KS`, `042670.KS`, `082640.KS`, `152550.KS`, `450140.KS`) + `45014K.KS`. `sector-map-v2.json`만 실행에 넘기면 후보 합집합 933과 키가 달라 거부됩니다.
+
 ## 검증
 
 `python -m unittest tests.test_historical_amount_top100_pilot tests.test_dated_amount_top100_range tests.test_dated_amount_top100_provider_review`  
 `php tests/dated_top100_prep.php`
 
-기간 지정, 빈 응답≠휴장, 해시 누락·빈 ok_dates·일부 누락·잘못된 원본/선정 해시 실패, 재개 시 정상 원본 재사용, 독립 재정렬, 이후 점프가 과거 세션을 지우지 않음, 고유 분할 합계, 중간 이탈 재편입, Yahoo 정체성, v2 복사 시 원본 봉 불변을 확인했습니다. `v2-integrity.json`: 날짜별 100종, 24400 합계, 895 해시 일치, 편입 31 수집, 미래봉 미적용, 통과.
+기간 지정, 빈 응답≠휴장, 해시 누락·빈 ok_dates·일부 누락·잘못된 원본/선정 해시 실패, 재개 시 정상 원본 재사용, 독립 재정렬, 이후 점프가 과거 세션을 지우지 않음, 고유 분할 합계, 중간 이탈 재편입, Yahoo 정체성, v2 복사 시 원본 봉 불변, 운영 `codeOf`는 숫자 6자리, 31종 오프라인 코드·섹터 일치, 부분 섹터 맵 거부를 확인했습니다. `v2-integrity.json`: 날짜별 100종, 24400 합계, 895 해시 일치, 편입 31 수집, 미래봉 미적용, 통과.
 
 ## 재현
 
@@ -219,6 +240,9 @@ php bin/paper_dated_top100_prep.php collect-v2
 php -d memory_limit=512M bin/paper_dated_top100_prep.php coverage --out=docs/historical-top100-20251008-20261008/asof-coverage-v1.json
 php -d memory_limit=512M bin/paper_dated_top100_prep.php coverage --dataset=kr-dated-amount-top100-20251008-20261008-v2
 php bin/paper_dated_top100_prep.php sector-v2
+php bin/paper_dated_top100_prep.php sector-map-full
+php tests/sector_freeze.php
+php tests/dated_top100_replay.php
 ```
 
 해시는 `evidence.json`. 운영 계좌·캐시·전략 지문·full-v2·10월 연구 결과는 이 작업에서 바꾸지 않았습니다.

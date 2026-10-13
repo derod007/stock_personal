@@ -1,0 +1,26 @@
+{
+    "case_id": "b7dbf7a4264beb21",
+    "index": 18,
+    "symbol": "035420.KS",
+    "name": "NAVER",
+    "session_date": "2026-02-26",
+    "session": 1772087400,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "23cc239c9fc79c88e5c3835bb9e83ffce3376019c21319f8d28983f133ca62db",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 336,
+    "first_date": "2024-10-08",
+    "last_available_at": 1772087400,
+    "indicator_input": {
+        "bars": 336,
+        "first_date": "2024-10-08",
+        "last_date": "2026-02-26",
+        "last_available_at": 1772087400,
+        "sha256": "6272193003f89df8c7877e3e524efdaf1c41f21f91a3116afb9e893fe3c3e9bc"
+    },
+    "charts": {
+        "d120": "a/b7dbf7a4264beb21-120.svg",
+        "d240": "a/b7dbf7a4264beb21-240.svg"
+    }
+}

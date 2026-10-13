@@ -1,0 +1,28 @@
+{
+    "case_id": "1d4c4540b169051c",
+    "status": "closed",
+    "trade": {
+        "symbol": "016360.KS",
+        "signal_date": "2026-06-01",
+        "quantity": 65,
+        "entry": 124500,
+        "stop": 107642,
+        "target": 163000,
+        "planned_risk": 1114354.0966349987,
+        "reserved_cash": 8100592.499999999,
+        "fill": {
+            "date": "2026-06-02",
+            "price": 124500,
+            "fee": 8092.5
+        },
+        "exit": {
+            "date": "2026-06-11",
+            "price": 107588.179,
+            "reason": "stop",
+            "net_pnl": -1114354.096634999,
+            "ambiguous_bar": false
+        }
+    },
+    "cost": "research fee 10bp each side, slippage 5bp; amounts below are the stored ledger, not a new run",
+    "chart": "c/1d4c4540b169051c.svg"
+}

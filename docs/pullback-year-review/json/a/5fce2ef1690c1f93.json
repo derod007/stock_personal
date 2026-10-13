@@ -1,0 +1,26 @@
+{
+    "case_id": "5fce2ef1690c1f93",
+    "index": 13,
+    "symbol": "128820.KS",
+    "name": "대성산업",
+    "session_date": "2026-01-14",
+    "session": 1768372200,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "4a14b9a90e6955852a817a86b7e6fda446eb68e1de3aa50b63de777ecbe708f7",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 1041,
+    "first_date": "2021-10-12",
+    "last_available_at": 1768372200,
+    "indicator_input": {
+        "bars": 1041,
+        "first_date": "2021-10-12",
+        "last_date": "2026-01-14",
+        "last_available_at": 1768372200,
+        "sha256": "b627a3d4baf6384bd6bec0da90a6fe694c364502fd8631fb9937fb07af4b2121"
+    },
+    "charts": {
+        "d120": "a/5fce2ef1690c1f93-120.svg",
+        "d240": "a/5fce2ef1690c1f93-240.svg"
+    }
+}

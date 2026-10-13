@@ -1,0 +1,26 @@
+{
+    "case_id": "1315d93f9f8b8e13",
+    "index": 4,
+    "symbol": "032820.KQ",
+    "name": "우리기술",
+    "session_date": "2025-10-24",
+    "session": 1761287400,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "c36bad1e9caba2319f091c3ce2286b5f148833f5334446f5bb637c5a94b8a89b",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 253,
+    "first_date": "2024-10-08",
+    "last_available_at": 1761287400,
+    "indicator_input": {
+        "bars": 253,
+        "first_date": "2024-10-08",
+        "last_date": "2025-10-24",
+        "last_available_at": 1761287400,
+        "sha256": "fc0242365c89f056a0cee8f9e90da0e96c2d65d4190c7d127624c5798067f646"
+    },
+    "charts": {
+        "d120": "a/1315d93f9f8b8e13-120.svg",
+        "d240": "a/1315d93f9f8b8e13-240.svg"
+    }
+}

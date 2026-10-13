@@ -1,0 +1,26 @@
+{
+    "case_id": "4eb1887671f29b8e",
+    "index": 30,
+    "symbol": "006340.KS",
+    "name": "대원전선",
+    "session_date": "2026-05-21",
+    "session": 1779345000,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "d849c295eea885d87118a24f841f33e3af769c4b8c59927e1f3b9d88d2b87a97",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 393,
+    "first_date": "2024-10-08",
+    "last_available_at": 1779345000,
+    "indicator_input": {
+        "bars": 393,
+        "first_date": "2024-10-08",
+        "last_date": "2026-05-21",
+        "last_available_at": 1779345000,
+        "sha256": "a7ffd8ef962097194c6460cbb4ecd8f53e66273b292d47c9ee7e5373431dc6c8"
+    },
+    "charts": {
+        "d120": "a/4eb1887671f29b8e-120.svg",
+        "d240": "a/4eb1887671f29b8e-240.svg"
+    }
+}

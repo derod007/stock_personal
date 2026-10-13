@@ -1,0 +1,26 @@
+{
+    "case_id": "54f8734576ae700d",
+    "index": 39,
+    "symbol": "079650.KQ",
+    "name": "서산",
+    "session_date": "2026-08-28",
+    "session": 1787898600,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "254f1b62ca1587ee7b1ca946598f14f21b9af5e623396f3c3a92d6152a69feeb",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 1193,
+    "first_date": "2021-10-12",
+    "last_available_at": 1787898600,
+    "indicator_input": {
+        "bars": 1193,
+        "first_date": "2021-10-12",
+        "last_date": "2026-08-28",
+        "last_available_at": 1787898600,
+        "sha256": "b275c767d6b002e6a4dfe7abd50a45b8dbf93f061210690900dd597b5851b07e"
+    },
+    "charts": {
+        "d120": "a/54f8734576ae700d-120.svg",
+        "d240": "a/54f8734576ae700d-240.svg"
+    }
+}

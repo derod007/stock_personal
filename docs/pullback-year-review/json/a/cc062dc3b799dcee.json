@@ -1,0 +1,26 @@
+{
+    "case_id": "cc062dc3b799dcee",
+    "index": 5,
+    "symbol": "066970.KS",
+    "name": "엘앤에프",
+    "session_date": "2025-11-11",
+    "session": 1762842600,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "528f3679d2a5778e02b242348361e64ddec4724bbb9ba8ee61122589330d4853",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 265,
+    "first_date": "2024-10-08",
+    "last_available_at": 1762842600,
+    "indicator_input": {
+        "bars": 265,
+        "first_date": "2024-10-08",
+        "last_date": "2025-11-11",
+        "last_available_at": 1762842600,
+        "sha256": "0f4f647c959237d2e93ae7ce9e1f0d884f2889da918a7afa55efe1f4edac4452"
+    },
+    "charts": {
+        "d120": "a/cc062dc3b799dcee-120.svg",
+        "d240": "a/cc062dc3b799dcee-240.svg"
+    }
+}

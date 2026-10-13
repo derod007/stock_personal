@@ -1,0 +1,26 @@
+{
+    "case_id": "9a97e143b7ecf58a",
+    "index": 24,
+    "symbol": "010170.KQ",
+    "name": "대한광통신",
+    "session_date": "2026-04-27",
+    "session": 1777271400,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "d7f285840acb691ea9a588f840edea60089af9cefc254f1afd2d4e10ba4a560c",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 377,
+    "first_date": "2024-10-08",
+    "last_available_at": 1777271400,
+    "indicator_input": {
+        "bars": 377,
+        "first_date": "2024-10-08",
+        "last_date": "2026-04-27",
+        "last_available_at": 1777271400,
+        "sha256": "5e25784bbabf9a7cdca0c3ea92f8c97f3448673bd34208db6cd2f0983fae3d88"
+    },
+    "charts": {
+        "d120": "a/9a97e143b7ecf58a-120.svg",
+        "d240": "a/9a97e143b7ecf58a-240.svg"
+    }
+}

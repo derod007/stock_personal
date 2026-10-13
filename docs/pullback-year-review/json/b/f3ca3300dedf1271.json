@@ -1,0 +1,288 @@
+{
+    "case_id": "f3ca3300dedf1271",
+    "symbol": "028050.KS",
+    "session_date": "2026-09-03",
+    "recomputed_from": "ChartPlanEngine on completed bars through the signal day only",
+    "independent_strategy_implementation": false,
+    "quality": {
+        "can_simulate": true,
+        "status": "warning",
+        "reasons": []
+    },
+    "pullback": {
+        "version": "trend_pullback_v1",
+        "status": "ready",
+        "ready": true,
+        "reason": "상승 추세 눌림 후 고점 회복 확인",
+        "entry": 46100,
+        "stop": 42911,
+        "target": 51400,
+        "reward_risk": 1.662,
+        "candidate": {
+            "low": 46595,
+            "mid": 47672,
+            "high": 48749,
+            "stop": 42911,
+            "target": 51400,
+            "source": "trend_pullback_ma20",
+            "reward_risk": {
+                "low": 1.304,
+                "mid": 0.783,
+                "high": 0.454
+            },
+            "rr_basis": "before_costs"
+        },
+        "order_valid_bars": 3,
+        "gates": {
+            "rising_structure": true,
+            "atr_valid": true,
+            "valid_zone": true,
+            "near_ma20": true,
+            "volume_contracted": true,
+            "recovery_close": true,
+            "bullish_candle": true,
+            "volume_recovery": true,
+            "fresh_confirmation": true
+        },
+        "volume_contracted": true,
+        "target_rule": "prior_20_bar_high",
+        "signal_at": 1788417000
+    },
+    "gates": {
+        "rising_structure": true,
+        "atr_valid": true,
+        "valid_zone": true,
+        "near_ma20": true,
+        "volume_contracted": true,
+        "recovery_close": true,
+        "bullish_candle": true,
+        "volume_recovery": true,
+        "fresh_confirmation": true
+    },
+    "windows": {
+        "rising_recent": {
+            "label": "추세 비교 최근 20봉",
+            "missing": false,
+            "bar_count": 20,
+            "first_date": "2026-08-06",
+            "last_date": "2026-09-03",
+            "first_at": 1785997800,
+            "last_at": 1788417000,
+            "min_low": 43450,
+            "min_low_date": "2026-08-25",
+            "min_low_at": 1787639400,
+            "max_high": 51400,
+            "max_high_date": "2026-08-06",
+            "max_high_at": 1785997800
+        },
+        "rising_prior": {
+            "label": "추세 비교 직전 20봉",
+            "missing": false,
+            "bar_count": 20,
+            "first_date": "2026-07-08",
+            "last_date": "2026-08-05",
+            "first_at": 1783492200,
+            "last_at": 1785911400,
+            "min_low": 38300,
+            "min_low_date": "2026-07-14",
+            "min_low_at": 1784010600,
+            "max_high": 49700,
+            "max_high_date": "2026-07-23",
+            "max_high_at": 1784788200
+        },
+        "ma20_closes": {
+            "label": "MA20 종가 20봉",
+            "missing": false,
+            "bar_count": 20,
+            "first_date": "2026-08-06",
+            "last_date": "2026-09-03",
+            "first_at": 1785997800,
+            "last_at": 1788417000,
+            "min_low": 43450,
+            "min_low_date": "2026-08-25",
+            "min_low_at": 1787639400,
+            "max_high": 51400,
+            "max_high_date": "2026-08-06",
+            "max_high_at": 1785997800
+        },
+        "old_ma_closes": {
+            "label": "직전 MA20 종가 20봉",
+            "missing": false,
+            "bar_count": 20,
+            "first_date": "2026-07-30",
+            "last_date": "2026-08-27",
+            "first_at": 1785393000,
+            "last_at": 1787812200,
+            "min_low": 38900,
+            "min_low_date": "2026-07-30",
+            "min_low_at": 1785393000,
+            "max_high": 51400,
+            "max_high_date": "2026-08-06",
+            "max_high_at": 1785997800
+        },
+        "near_ma20": {
+            "label": "근접 확인 직전 5봉",
+            "missing": false,
+            "bar_count": 5,
+            "first_date": "2026-08-27",
+            "last_date": "2026-09-02",
+            "first_at": 1787812200,
+            "last_at": 1788330600,
+            "min_low": 43500,
+            "min_low_date": "2026-09-02",
+            "min_low_at": 1788330600,
+            "max_high": 51000,
+            "max_high_date": "2026-08-27",
+            "max_high_at": 1787812200
+        },
+        "stop_window": {
+            "label": "손절 기준 최근 10봉",
+            "missing": false,
+            "bar_count": 10,
+            "first_date": "2026-08-21",
+            "last_date": "2026-09-03",
+            "first_at": 1787293800,
+            "last_at": 1788417000,
+            "min_low": 43450,
+            "min_low_date": "2026-08-25",
+            "min_low_at": 1787639400,
+            "max_high": 51000,
+            "max_high_date": "2026-08-27",
+            "max_high_at": 1787812200
+        },
+        "target_window": {
+            "label": "목표 기준 마지막 봉 제외 20봉",
+            "missing": false,
+            "bar_count": 20,
+            "first_date": "2026-08-05",
+            "last_date": "2026-09-02",
+            "first_at": 1785911400,
+            "last_at": 1788330600,
+            "min_low": 43450,
+            "min_low_date": "2026-08-25",
+            "min_low_at": 1787639400,
+            "max_high": 51400,
+            "max_high_date": "2026-08-06",
+            "max_high_at": 1785997800
+        },
+        "volume_base": {
+            "label": "거래량 기준 20봉",
+            "missing": false,
+            "bar_count": 20,
+            "first_date": "2026-07-31",
+            "last_date": "2026-08-28",
+            "first_at": 1785479400,
+            "last_at": 1787898600,
+            "min_low": 42150,
+            "min_low_date": "2026-08-03",
+            "min_low_at": 1785738600,
+            "max_high": 51400,
+            "max_high_date": "2026-08-06",
+            "max_high_at": 1785997800
+        },
+        "volume_pull": {
+            "label": "눌림 거래량 3봉",
+            "missing": false,
+            "bar_count": 3,
+            "first_date": "2026-08-31",
+            "last_date": "2026-09-02",
+            "first_at": 1788157800,
+            "last_at": 1788330600,
+            "min_low": 43500,
+            "min_low_date": "2026-09-02",
+            "min_low_at": 1788330600,
+            "max_high": 48000,
+            "max_high_date": "2026-08-31",
+            "max_high_at": 1788157800
+        },
+        "signal_bar": {
+            "label": "확인 봉",
+            "missing": false,
+            "bar_count": 1,
+            "first_date": "2026-09-03",
+            "last_date": "2026-09-03",
+            "first_at": 1788417000,
+            "last_at": 1788417000,
+            "min_low": 43800,
+            "min_low_date": "2026-09-03",
+            "min_low_at": 1788417000,
+            "max_high": 47000,
+            "max_high_date": "2026-09-03",
+            "max_high_at": 1788417000
+        },
+        "values": {
+            "ma20": 47672.5,
+            "old_ma20": 47402.5,
+            "atr14": 2692.8571,
+            "near_threshold": 49692.142825,
+            "stop_raw": 42911.42858,
+            "target_raw": 51400,
+            "base_volume": 1719342.8,
+            "pull_volume": 938479.6666666666,
+            "volume_ratio": 0.5458362734102046
+        },
+        "pullback_interval_start": "unrecorded",
+        "note": "코드는 눌림 시작 고점·저점을 저장하지 않는다. 위 구간은 TrendPullback이 실제로 쓰는 고정 창이다."
+    },
+    "context": {
+        "daily": "range",
+        "weekly": "range",
+        "weekly_bars": 99,
+        "weekly_asof": 1787898600,
+        "label": "주봉 횡보 / 일봉 횡보",
+        "warning": ""
+    },
+    "final_status": "ready",
+    "final_ready": true,
+    "selected_pattern": "trend_pullback_v1",
+    "common_reason": "상승 추세 눌림 후 고점 회복 확인",
+    "features_risk": {
+        "spike_dump_status": "none",
+        "top_pattern_status": "watch",
+        "top_pattern_phase": "top_watch",
+        "playbook": {
+            "action": "watchlist_buy_zone",
+            "size_hint": "아직 대기. 저점 안 깨고 다지며 거래량 확인 후 대기 후 5~10%",
+            "rules": [
+                "레버/인버스는 직접 사지 않고 본주 방향·차트 그림으로만 바꿔 대응",
+                "쫓아 사기 금지: 올라갈 때 사지 말고 내려올 때/그림 회복만",
+                "사기 전에 손절선(최근 저점) 필수 기록",
+                "한 번에 현금 전액 금지, 나눠서 최대 3회",
+                "애매하면 지금은 안 삼",
+                "불법과외1: 수렴 돌파만 보고 추격 금지 — 돌파 후 윗구간 박스 확인",
+                "불법과외1: 선호캔들(장대양→도지→거래량없는장대음→장대양)은 매물대 돌파 후에만",
+                "고점판독: 돌파 실패→고점 하향→파동 중심·하단 시험→상승 추세선 이탈이면 신규 매수 금지",
+                "손절은 2단으로: 타이트=당일 저가, 넓게=여러 번 걸린 가로 매물대",
+                "익절은 2단으로: 1차=직전 고점, 2차=같은 폭을 위로 한 번 더(또는 그 사이 가로 저항)"
+            ],
+            "reason": "028050.KS [account1]: 중간 가격대 근처(점수 67). 관심만 — 지금 전량 매수 권고 아님",
+            "entry_zone": {
+                "low": 45576,
+                "high": 49374,
+                "mid": 47475,
+                "rule": "half_retrace_±4%"
+            },
+            "invalidation": 45800,
+            "target_hint": {
+                "price": 49950,
+                "rule": "structure_swing_high",
+                "wide": 50600,
+                "wide_rule": "horizontal_resistance_9touch"
+            },
+            "blocked": false,
+            "profile": "account1"
+        }
+    },
+    "stored_levels": {
+        "entry": 46100,
+        "stop": 42911,
+        "target": 51400
+    },
+    "diffs": [],
+    "coordinates_missing": [
+        "pullback_interval_start"
+    ],
+    "charts": {
+        "annotated": "b/f3ca3300dedf1271.svg"
+    }
+}

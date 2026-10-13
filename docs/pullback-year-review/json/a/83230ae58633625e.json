@@ -1,0 +1,26 @@
+{
+    "case_id": "83230ae58633625e",
+    "index": 20,
+    "symbol": "088350.KS",
+    "name": "한화생명",
+    "session_date": "2026-03-11",
+    "session": 1773210600,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "45b48ce425f495abcd0166bd2b503859ed28a91c72444fe814abc3c66b7f436f",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 1077,
+    "first_date": "2021-10-12",
+    "last_available_at": 1773210600,
+    "indicator_input": {
+        "bars": 1077,
+        "first_date": "2021-10-12",
+        "last_date": "2026-03-11",
+        "last_available_at": 1773210600,
+        "sha256": "69769dea8b30518c16a884c2f22c9924e051957aec81e6eee2fde14c1ed6ecbd"
+    },
+    "charts": {
+        "d120": "a/83230ae58633625e-120.svg",
+        "d240": "a/83230ae58633625e-240.svg"
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "case_id": "a4e472969bd9f55d",
+    "index": 1,
+    "symbol": "054540.KQ",
+    "name": "삼영엠텍",
+    "session_date": "2025-10-13",
+    "session": 1760337000,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "7218a6eee7b2a22e39a7a66ff1cf20520b7ba2269b8fceb5c4bc2195bb2110f9",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 977,
+    "first_date": "2021-10-12",
+    "last_available_at": 1760337000,
+    "indicator_input": {
+        "bars": 977,
+        "first_date": "2021-10-12",
+        "last_date": "2025-10-13",
+        "last_available_at": 1760337000,
+        "sha256": "0f6f78271eae60d46a56ccfc2c422dd8b89051da7b27c6dfd19552440b856144"
+    },
+    "charts": {
+        "d120": "a/a4e472969bd9f55d-120.svg",
+        "d240": "a/a4e472969bd9f55d-240.svg"
+    }
+}

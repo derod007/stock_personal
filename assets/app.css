@@ -2720,6 +2720,16 @@ body.is-loading .panel--scan {
   text-underline-offset: 0.2em;
 }
 
+.t100-lines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.1rem 0.35rem;
+  align-items: baseline;
+}
+.t100-lines > span {
+  white-space: nowrap;
+}
+
 .paper-alert {
   margin: 0.75rem 0 0;
   padding: 0.7rem 0.85rem;

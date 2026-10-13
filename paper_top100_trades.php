@@ -4,11 +4,16 @@ require __DIR__.'/bin/bootstrap.php';
 require_once __DIR__.'/bin/paper/Chrome.php';
 require_once __DIR__.'/bin/paper/DatedTop100Trades.php';
 function t100h(mixed $v): string {return paper_esc($v);}
-function t100n(mixed $v,int $dec=2): string {
+function t100won(mixed $v): string {
     if($v===null || $v==='')return '—';
-    $s=number_format((float)$v,$dec,'.',',');
-    if($dec>0)$s=rtrim(rtrim($s,'0'),'.');
-    return $s;
+    return number_format((int)round((float)$v),0,'.',',');
+}
+function t100pct(mixed $v): string {
+    if($v===null || $v==='')return '—';
+    return number_format((float)$v,1,'.',',');
+}
+function t100fill(mixed $price,mixed $qty,mixed $amount): string {
+    return '<span class="t100-lines"><span>'.t100h(t100won($price)).'원 · '.t100h($qty).'주</span><span>'.t100h(t100won($amount)).'원</span></span>';
 }
 function t100pnl(?float $v): string {
     if($v===null)return '';
@@ -35,7 +40,7 @@ $reasons=['target'=>'목표','stop'=>'손절','time'=>'기간'];
     <div class="metric"><span class="metric__label">보유</span><strong class="metric__value"><?= t100h($r['open_count']) ?>건</strong></div>
     <div class="metric"><span class="metric__label">취소(체결 목록 제외)</span><strong class="metric__value"><?= t100h($r['cancel_count']) ?>건</strong></div>
   </div>
-  <p class="paper-note">청산 <?= t100h($r['closed_count']) ?>건의 비용 포함 실현손익 합계 <?= t100h(t100n($r['closed_net_pnl'],2)) ?>원<?= $r['summary_realized_pnl']!==null?' · 저장 summary 실현손익 '.t100h(t100n($r['summary_realized_pnl'],2)).'원':'' ?>. 거래 수익률을 더하거나 평균한 값은 계좌 수익률이 아닙니다. 보유 3건의 미실현손익은 이 합계에 넣지 않습니다.</p>
+  <p class="paper-note">청산 <?= t100h($r['closed_count']) ?>건의 비용 포함 실현손익 합계 <?= t100h(t100won($r['closed_net_pnl'])) ?>원<?= $r['summary_realized_pnl']!==null?' · 저장 summary 실현손익 '.t100h(t100won($r['summary_realized_pnl'])).'원':'' ?>. 거래 수익률을 더하거나 평균한 값은 계좌 수익률이 아닙니다. 보유 3건의 미실현손익은 이 합계에 넣지 않습니다. 화면의 원 금액은 반올림한 정수이며 저장 값은 그대로입니다.</p>
   <?php if($r['issues']): ?><p class="paper-alert">저장 건수 또는 실현손익 합계를 확인하세요: <?= t100h(implode(', ',$r['issues'])) ?></p><?php endif ?>
 </section>
 <section class="panel">
@@ -70,19 +75,19 @@ $reasons=['target'=>'목표','stop'=>'손절','time'=>'기간'];
     $reason=$t['exit_reason']===null?'—':($reasons[$t['exit_reason']]??paper_ko($t['exit_reason']));
     $statusLab=$t['status']==='open'?'보유 중':'청산 완료';
 ?>
-      <tr data-name="<?= t100h($t['name']) ?>" data-symbol="<?= t100h($t['symbol']) ?>" data-code="<?= t100h($t['code']) ?>" data-pattern="<?= t100h($t['pattern']) ?>" data-reason="<?= t100h($t['exit_reason']??'') ?>" data-status="<?= t100h($t['status']) ?>" data-buy_date="<?= t100h($t['buy_date']) ?>" data-net_pnl="<?= t100h($t['net_pnl']??'') ?>" data-net_return_pct="<?= t100h($t['net_return_pct']??'') ?>">
+      <tr data-name="<?= t100h($t['name']) ?>" data-symbol="<?= t100h($t['symbol']) ?>" data-code="<?= t100h($t['code']) ?>" data-pattern="<?= t100h($t['pattern']) ?>" data-reason="<?= t100h($t['exit_reason']??'') ?>" data-status="<?= t100h($t['status']) ?>" data-buy_date="<?= t100h($t['buy_date']) ?>" data-net_pnl="<?= t100h($t['net_pnl']??'') ?>" data-net_return_pct="<?= t100h($t['net_return_pct']??'') ?>" data-buy-price="<?= t100h(t100won($t['buy_price'])) ?>" data-buy-qty="<?= t100h($t['quantity']) ?>" data-buy-amount="<?= t100h(t100won($t['buy_amount'])) ?>" data-sell-price="<?= t100h($t['status']==='open'?'':t100won($t['sell_price'])) ?>" data-sell-qty="<?= t100h($t['status']==='open'?'':$t['sell_quantity']) ?>" data-sell-amount="<?= t100h($t['status']==='open'?'':t100won($t['sell_amount'])) ?>" data-mark="<?= t100h($t['status']==='open'?('평가일 '.($t['mark_date']??'—').' · '.t100won($t['mark_price']).'원 · 미실현 '.t100won($t['unrealized_pnl']).'원'):'') ?>">
         <td><?= t100h($t['name']) ?><span class="scan-code"><?= t100h($t['symbol']) ?></span></td>
         <td><?= t100h($pat) ?></td>
         <td class="mono"><?= t100h($t['signal_date']) ?></td>
         <td class="mono"><?= t100h($t['buy_date']) ?></td>
-        <td class="mono"><?= t100h(t100n($t['buy_price'],4)) ?>원 · <?= t100h($t['quantity']) ?>주 · <?= t100h(t100n($t['buy_amount'],0)) ?>원</td>
+        <td class="mono"><?= t100fill($t['buy_price'],$t['quantity'],$t['buy_amount']) ?></td>
         <td class="mono"><?= $t['status']==='open'?'미청산':t100h($t['sell_date']) ?></td>
-        <td class="mono"><?php if($t['status']==='open'): ?>미청산<?php else: ?><?= t100h(t100n($t['sell_price'],4)) ?>원 · <?= t100h($t['sell_quantity']) ?>주 · <?= t100h(t100n($t['sell_amount'],0)) ?>원<?php endif ?></td>
-        <td class="mono <?= t100pnl($t['net_pnl']) ?>"><?= $t['status']==='open'?'—':t100h(t100n($t['net_pnl'],2)).'원' ?></td>
-        <td class="mono <?= t100pnl($t['net_return_pct']) ?>"><?= $t['status']==='open'?'—':t100h(t100n($t['net_return_pct'],4)).'%' ?></td>
+        <td class="mono"><?php if($t['status']==='open'): ?>미청산<?php else: ?><?= t100fill($t['sell_price'],$t['sell_quantity'],$t['sell_amount']) ?><?php endif ?></td>
+        <td class="mono <?= t100pnl($t['net_pnl']) ?>"><?= $t['status']==='open'?'—':t100h(t100won($t['net_pnl'])).'원' ?></td>
+        <td class="mono <?= t100pnl($t['net_return_pct']) ?>"><?= $t['status']==='open'?'—':t100h(t100pct($t['net_return_pct'])).'%' ?></td>
         <td><?= $t['status']==='open'?'미청산':t100h($reason) ?></td>
         <td><?= t100h($statusLab) ?></td>
-        <td class="mono"><?php if($t['status']==='open'): ?>평가일 <?= t100h($t['mark_date']??'—') ?> · <?= t100h(t100n($t['mark_price'],4)) ?>원 · 미실현 <?= t100h(t100n($t['unrealized_pnl'],2)) ?>원<?php else: ?>—<?php endif ?></td>
+        <td class="mono"><?php if($t['status']==='open'): ?><span class="t100-lines"><span>평가일 <?= t100h($t['mark_date']??'—') ?> · <?= t100h(t100won($t['mark_price'])) ?>원</span><span>미실현 <?= t100h(t100won($t['unrealized_pnl'])) ?>원</span></span><?php else: ?>—<?php endif ?></td>
       </tr>
 <?php endforeach ?>
     </tbody>
@@ -155,10 +160,7 @@ $reasons=['target'=>'목표','stop'=>'손절','time'=>'기간'];
     visible().forEach(function(r){
       const c=r.cells;
       const name=r.dataset.name, code=r.dataset.symbol, open=r.dataset.status==='open';
-      const buy=c[4].innerText.split(' · ');
-      const sell=open?['미청산','','']:c[6].innerText.split(' · ');
-      const mark=open?c[11].innerText:'';
-      const row=[name,code,c[1].innerText,c[2].innerText,c[3].innerText,buy[0]||'',buy[1]||'',buy[2]||'',open?'미청산':c[5].innerText,sell[0]||'',sell[1]||'',sell[2]||'',open?'':c[7].innerText,open?'':c[8].innerText,c[9].innerText,c[10].innerText,open?mark:'','',''];
+      const row=[name,code,c[1].innerText,c[2].innerText,c[3].innerText,r.dataset.buyPrice||'',r.dataset.buyQty||'',r.dataset.buyAmount||'',open?'미청산':c[5].innerText,open?'미청산':(r.dataset.sellPrice||''),open?'':(r.dataset.sellQty||''),open?'':(r.dataset.sellAmount||''),open?'':c[7].innerText,open?'':c[8].innerText,c[9].innerText,c[10].innerText,open?(r.dataset.mark||''):'','',''];
       lines.push(row.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(','));
     });
     const blob=new Blob(['\ufeff'+lines.join('\n')],{type:'text/csv;charset=utf-8'});

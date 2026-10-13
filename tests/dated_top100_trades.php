@@ -91,7 +91,10 @@ t100check(str_contains($html,'취소 9건') && str_contains($html,'t100-cancel')
 t100check(str_contains($html,'id="t100-q"') && str_contains($html,'id="t100-pattern"') && str_contains($html,'id="t100-reason"') && str_contains($html,'id="t100-status"') && str_contains($html,'t100-csv'),'search, filters, and CSV control exist');
 t100check(!str_contains($html,'report-244') && !str_contains($html,'opportunity-v1'),'opportunity research is not mixed in');
 t100check(str_contains($html,'paper_universe.php') && str_contains($html,'고정 종목군 연구'),'fixed-universe research stays a separate link');
-t100check(str_contains($html,'12,366.18') && !str_contains($html,'12,366.18원 · 536주 · 12,390'),'planned entry is not shown as the fill price');
+t100check(str_contains($html,'12,366원') && str_contains($html,'536주') && !str_contains($html,'12,390원'),'planned entry is not shown as the fill price');
+t100check(str_contains($html,'t100-lines'),'fill cells wrap as one or two lines');
+$firstPct=null;foreach($r['fills'] as $row){if($row['symbol']==='054540.KQ' && $row['signal_date']==='2025-10-13'){$firstPct=$row['net_return_pct'];break;}}
+t100check($firstPct!==null && str_contains($html,number_format($firstPct,1,'.',',').'%'),'return percent shows one rounded decimal');
 
 ob_start();
 require $root.'/paper.php';

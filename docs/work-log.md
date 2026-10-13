@@ -1,3 +1,15 @@
+## 2026-10-13 23:58 · Cursor · 끝
+- 한 일: Python 바이트코드와 상승 눌림 A-input JSON을 gitignore. 추적 중이던 pyc는 인덱스만 제거
+- 파일: .gitignore, docs/work-log.md
+- 커밋: PR #83에 추가(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-13 23:58 · Cursor · 진행
+- 한 일: Python 바이트코드와 상승 눌림 A-input JSON을 gitignore. 추적 중이던 pyc는 인덱스만 제거
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-13 23:55 · Cursor · 끝
 - 한 일: PR #76 1년 KRX 일별 TOP100 연구 계좌 체결 59건 조회 화면. 저장 trades/summary만 읽고 56건 실현손익 합계 대조. 운영·계좌·원본·병합 없음
 - 파일: bin/paper/DatedTop100Trades.php, paper_top100_trades.php, tests/dated_top100_trades.php, bin/paper/Chrome.php, paper.php, paper_trades.php, assets/app.css, .github/workflows/pattern-replay.yml, docs/work-log.md

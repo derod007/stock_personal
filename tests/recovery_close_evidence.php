@@ -33,6 +33,11 @@ $market=PaperRecoveryCloseEvidence::marketChecks($mk,[],[$b(1),$b(2,110,125,100)
 ok($market['range_result']==='assumption_dependent','outside high separated from model match');
 $mk['shadow']['entry_fill']=100;
 ok(PaperRecoveryCloseEvidence::marketChecks($mk,[],[$b(1),$b(2,110,125,100)])['range_result']==='within_range','inside daily range');
+foreach([[5200,6760,false],[5200,3640,false],[5200,6761,true],[5200,3639,true],[5200,6759,false],[5200,3641,false]] as [$previous,$current,$expected]){
+    $pair=[$b(1,$previous,$previous,$previous,$previous),$b(2,$current,$current,$current,$current)];
+    $check=PaperRecoveryCloseEvidence::marketChecks($mk,[],$pair);
+    ok(($check['close_jumps_over_30pct']!==[])===$expected,'30 percent boundary '.$previous.' -> '.$current);
+}
 $bars=[];$start=new DateTimeImmutable('2025-10-06');
 for($i=0;$i<60;$i++){
     $close=$i<30?50+$i:80+($i-30)*.4;if($i>=55)$close=[88,86,84.5,84,85.5][$i-55];$close+=1000;

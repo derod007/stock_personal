@@ -1,0 +1,36 @@
+{
+  "report_sha256": "5731b946ab3683bb05a0402211016da84f7bd3190d42f7bedcce76e08eb7c9ea",
+  "selection": "Top 5 closed net returns; outcome-selected audit, not representative or blind. Keep overlapping SK Eternix signals.",
+  "cases": [
+    {
+      "date": "2026-07-09",
+      "symbol": "475150.KS",
+      "name": "SK이터닉스",
+      "net_return_pct": 45.5909
+    },
+    {
+      "date": "2026-07-07",
+      "symbol": "475150.KS",
+      "name": "SK이터닉스",
+      "net_return_pct": 45.5181
+    },
+    {
+      "date": "2026-06-08",
+      "symbol": "080220.KQ",
+      "name": "제주반도체",
+      "net_return_pct": 43.2734
+    },
+    {
+      "date": "2026-01-14",
+      "symbol": "038500.KQ",
+      "name": "삼표시멘트",
+      "net_return_pct": 36.5115
+    },
+    {
+      "date": "2026-04-03",
+      "symbol": "417200.KQ",
+      "name": "LS머트리얼즈",
+      "net_return_pct": 28.9285
+    }
+  ]
+}

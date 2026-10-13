@@ -37,6 +37,13 @@ jobs:
           php -l bin/paper_dated_top100_replay.php
           php tests/dated_top100_replay.php
           php tests/dated_order_audit.php
+          php -l bin/paper/OpportunityResearch.php
+          php -l bin/paper_opportunity_research.php
+          php tests/opportunity_research.php
+          php -l bin/paper/RecoveryCloseEvidence.php
+          php -l bin/paper_recovery_close_evidence.php
+          php tests/recovery_close_evidence.php
+          php bin/paper_opportunity_research.php inventory > /dev/null
           php -l bin/paper/PullbackYearReview.php
           php -l bin/paper_pullback_year_review.php
           php tests/pullback_year_review.php

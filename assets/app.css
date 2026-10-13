@@ -2705,8 +2705,10 @@ body.is-loading .panel--scan {
   line-height: 1.5;
 }
 
-.scan-table .pnl-plus { color: var(--success); }
-.scan-table .pnl-minus { color: var(--danger); }
+.scan-table .pnl-plus,
+.t100-settle .pnl-plus { color: var(--success); }
+.scan-table .pnl-minus,
+.t100-settle .pnl-minus { color: var(--danger); }
 .scan-table .t100-sort {
   display: inline;
   padding: 0;
@@ -2727,6 +2729,21 @@ body.is-loading .panel--scan {
   align-items: baseline;
 }
 .t100-lines > span {
+  white-space: nowrap;
+}
+
+.t100-dates > span {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.t100-dates input[type="date"] {
+  min-width: 9.6rem;
+}
+.t100-settle {
+  margin-top: 0.85rem;
+}
+.t100-settle .metric__value {
   white-space: nowrap;
 }
 

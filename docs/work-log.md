@@ -1,3 +1,15 @@
+## 2026-10-14 00:44 · Cursor · 끝
+- 한 일: 일별 TOP100 화면에 조회 기간 실현손익 합계·비용 가중 수익률 정산 표시
+- 파일: paper_top100_trades.php, bin/paper/DatedTop100Trades.php, tests/dated_top100_trades.php, assets/app.css, bin/paper/Chrome.php, docs/work-log.md
+- 커밋: PR #83에 추가(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-14 00:40 · Cursor · 진행
+- 한 일: 일별 TOP100 화면에 조회 기간 실현손익 합계·수익률 정산 표시
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-14 00:37 · Cursor · 끝
 - 한 일: 보유 평가 칸이 미실현 금액을 잘리지 않게 약간 넓힘
 - 파일: assets/app.css, bin/paper/Chrome.php, docs/work-log.md

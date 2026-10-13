@@ -340,7 +340,7 @@ function paper_open(array $opts): void
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title><?= paper_esc($title) ?></title>
-  <link rel="stylesheet" href="assets/app.css?v=20261014d">
+  <link rel="stylesheet" href="assets/app.css?v=20261014f">
   <link rel="stylesheet" href="assets/readability.css?v=20261008b">
   <script src="assets/readability.js?v=20261008" defer></script>
 </head>

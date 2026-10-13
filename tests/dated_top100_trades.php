@@ -36,6 +36,30 @@ foreach($r['fills'] as $row){
 t100check($closed===56 && $open===3,'56 closed and 3 open in the fill list');
 t100check(abs($closedPnl-(float)$r['summary_realized_pnl'])<=0.01,'closed net pnl equals stored summary realized_pnl');
 t100check(abs($closedPnl-$r['closed_net_pnl'])<=1e-9,'view closed sum matches walk');
+$closedCost=0.0;$returnSum=0.0;
+foreach($r['fills'] as $row){
+    if($row['status']!=='closed')continue;
+    $closedCost+=(float)$row['entry_cost'];
+    $returnSum+=(float)$row['net_return_pct'];
+}
+t100check($closedCost>0 && abs($closedCost-$r['closed_entry_cost'])<1e-6,'closed entry cost is the stored buy amount plus buy fee');
+t100check($r['closed_return_pct']!==null && abs($r['closed_return_pct']-100.0*$closedPnl/$closedCost)<1e-9,'full-period settlement return is cost-weighted, not a trade average');
+t100check(abs(($returnSum/56)-$r['closed_return_pct'])>0.01,'settlement return is not the average of trade returns');
+$full=PaperDatedTop100Trades::settle($r['fills'],'2025-10-08','2026-10-08','sell_date');
+t100check($full['shown']===59 && $full['closed']===56 && abs($full['net_pnl']-$closedPnl)<1e-9,'full sell-date window keeps 3 opens visible and 56 closed in realized');
+$novFrom='2025-11-01';$novTo='2025-11-30';
+$nov=PaperDatedTop100Trades::settle($r['fills'],$novFrom,$novTo,'sell_date');
+$novPnl=0.0;$novCost=0.0;$novClosed=0;$novShown=0;
+foreach($r['fills'] as $row){
+    if($row['status']==='open'){$novShown++;continue;}
+    $d=(string)$row['sell_date'];
+    if($d<$novFrom||$d>$novTo)continue;
+    $novShown++;$novClosed++;$novPnl+=(float)$row['net_pnl'];$novCost+=(float)$row['entry_cost'];
+}
+t100check($nov['closed']===$novClosed && $nov['shown']===$novShown && abs($nov['net_pnl']-$novPnl)<1e-9,'November sell-date window matches closed fills in that month');
+t100check($novCost>0 && $nov['return_pct']!==null && abs($nov['return_pct']-100.0*$novPnl/$novCost)<1e-9,'November settlement return uses cost of those closed fills only');
+$bought=PaperDatedTop100Trades::settle($r['fills'],'2025-10-08','2025-10-31','buy_date');
+t100check($bought['shown']>=1 && $bought['shown']===$bought['closed']+count(array_filter($r['fills'],fn($x)=>$x['status']==='open' && $x['buy_date']>='2025-10-08' && $x['buy_date']<='2025-10-31')),'buy-date window hides opens bought outside the range');
 $openSym=array_column(array_filter($r['fills'],fn($x)=>$x['status']==='open'),'symbol');
 sort($openSym);
 t100check($openSym===['028050.KS','108490.KQ','217590.KS'],'open symbols match stored summary');
@@ -88,7 +112,9 @@ t100check(str_contains($html,'과거 재현 연구 · 실제 거래 아님') && 
 t100check(str_contains($html,'거래 수익률을 더하거나 평균한 값은 계좌 수익률이 아닙니다'),'trade-return average is not presented as account return');
 t100check(str_contains($html,'삼성E&amp;A') && str_contains($html,'028050.KS') && str_contains($html,'미청산') && str_contains($html,'미실현'),'open position shows name, unsold, and mark fields');
 t100check(str_contains($html,'취소 9건') && str_contains($html,'t100-cancel'),'nine cancels are in a separate table');
-t100check(str_contains($html,'id="t100-q"') && str_contains($html,'id="t100-pattern"') && str_contains($html,'id="t100-reason"') && str_contains($html,'id="t100-status"') && str_contains($html,'t100-csv'),'search, filters, and CSV control exist');
+t100check(str_contains($html,'id="t100-q"') && str_contains($html,'id="t100-pattern"') && str_contains($html,'id="t100-reason"') && str_contains($html,'id="t100-status"') && str_contains($html,'t100-csv') && str_contains($html,'id="t100-from"') && str_contains($html,'id="t100-to"') && str_contains($html,'id="t100-date-field"'),'search, period, filters, and CSV control exist');
+t100check(str_contains($html,'id="t100-settle"') && str_contains($html,'실현손익 합계') && str_contains($html,'수익률 정산') && str_contains($html,'거래별 수익률을 평균하지 않았고'),'query-period realized sum and cost-weighted settlement are visible');
+t100check(str_contains($html,'data-entry_cost="') && str_contains($html,'data-sell_date="'),'rows expose cost and sell date for live settlement');
 t100check(!str_contains($html,'report-244') && !str_contains($html,'opportunity-v1'),'opportunity research is not mixed in');
 t100check(str_contains($html,'paper_universe.php') && str_contains($html,'고정 종목군 연구'),'fixed-universe research stays a separate link');
 t100check(str_contains($html,'12,366원') && str_contains($html,'536주') && !str_contains($html,'12,390원'),'planned entry is not shown as the fill price');

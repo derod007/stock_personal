@@ -55,8 +55,11 @@ final class PaperDatedTop100Trades
         foreach($fills as $n=>$row)$fills[$n]['display_id']=$n+1;
         $closed=array_values(array_filter($fills,fn($r)=>$r['status']==='closed'));
         $open=array_values(array_filter($fills,fn($r)=>$r['status']==='open'));
-        $closedPnl=0.0;
-        foreach($closed as $r)$closedPnl+=(float)$r['net_pnl'];
+        $closedPnl=0.0;$closedCost=0.0;
+        foreach($closed as $r){
+            $closedPnl+=(float)$r['net_pnl'];
+            $closedCost+=(float)$r['entry_cost'];
+        }
         $openSymbols=array_column($open,'symbol');
         $markSymbols=array_keys($marks);
         sort($openSymbols);sort($markSymbols);
@@ -88,6 +91,8 @@ final class PaperDatedTop100Trades
             'cancel_count'=>count($cancelled),
             'order_count'=>$orders,
             'closed_net_pnl'=>$closedPnl,
+            'closed_entry_cost'=>$closedCost,
+            'closed_return_pct'=>$closedCost>0.0?100.0*$closedPnl/$closedCost:null,
             'summary_realized_pnl'=>is_finite($realized)?$realized:null,
             'issues'=>$issues,
             'ok'=>$issues===[],
@@ -202,6 +207,45 @@ final class PaperDatedTop100Trades
     private static function fillOrder(array $a,array $b): int
     {
         return [$a['buy_date'],$a['symbol'],$a['signal_date']]<=>[$b['buy_date'],$b['symbol'],$b['signal_date']];
+    }
+
+    /**
+     * Filter fills for a view window. Realized sum uses closed rows only.
+     * Open rows stay visible when the window is keyed by sell_date (they have no sell date).
+     *
+     * @param list<array<string,mixed>> $fills
+     * @return array{shown:int,closed:int,net_pnl:float,entry_cost:float,return_pct:?float}
+     */
+    public static function settle(array $fills,?string $from,?string $to,string $field='sell_date'): array
+    {
+        if($field!=='buy_date' && $field!=='sell_date'){
+            throw new InvalidArgumentException('settle field must be buy_date or sell_date');
+        }
+        $from=$from===""?null:$from;
+        $to=$to===""?null:$to;
+        $shown=0;$closed=0;$pnl=0.0;$cost=0.0;
+        foreach($fills as $r){
+            if($field==='sell_date' && ($r['status']??'')==='open'){
+                $shown++;
+                continue;
+            }
+            $d=(string)($r[$field]??'');
+            if($d==='')continue;
+            if($from!==null && $d<$from)continue;
+            if($to!==null && $d>$to)continue;
+            $shown++;
+            if(($r['status']??'')!=='closed')continue;
+            $closed++;
+            $pnl+=(float)$r['net_pnl'];
+            $cost+=(float)$r['entry_cost'];
+        }
+        return [
+            'shown'=>$shown,
+            'closed'=>$closed,
+            'net_pnl'=>$pnl,
+            'entry_cost'=>$cost,
+            'return_pct'=>$cost>0.0?100.0*$pnl/$cost:null,
+        ];
     }
 
     public static function code(string $symbol): string

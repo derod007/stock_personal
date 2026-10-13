@@ -1,0 +1,172 @@
+<?php
+declare(strict_types=1);
+require __DIR__.'/bin/bootstrap.php';
+require_once __DIR__.'/bin/paper/Chrome.php';
+require_once __DIR__.'/bin/paper/DatedTop100Trades.php';
+function t100h(mixed $v): string {return paper_esc($v);}
+function t100n(mixed $v,int $dec=2): string {
+    if($v===null || $v==='')return '—';
+    $s=number_format((float)$v,$dec,'.',',');
+    if($dec>0)$s=rtrim(rtrim($s,'0'),'.');
+    return $s;
+}
+function t100pnl(?float $v): string {
+    if($v===null)return '';
+    return $v>0?'pnl-plus':($v<0?'pnl-minus':'');
+}
+$id=PaperDatedTop100Trades::ACCOUNT;
+$error=null;$r=null;
+try {$r=PaperDatedTop100Trades::load(__DIR__);}
+catch(Throwable $e){$error='저장 재현 결과를 읽지 못했습니다. 파일을 추정하지 않습니다.';}
+paper_open(['title'=>'KRX 일별 TOP100 연구 거래','page'=>'top100_trades','account'=>$id,'mode'=>'replay']);
+$patterns=['trend_pullback_v1'=>'상승 눌림','trend_recovery_v1'=>'추세 이탈 후 회복','breakout_retest_v1'=>'돌파 후 재지지'];
+$reasons=['target'=>'목표','stop'=>'손절','time'=>'기간'];
+?>
+<p class="paper-alert">과거 재현 연구 · 실제 거래 아님. KRX 일별 TOP100이며 운영 다음 실시간 TOP100과 다름.</p>
+<p class="paper-lede"><?= t100h($r['label']??'KRX 일별 거래대금 TOP100 연구') ?> · 계좌 <?= t100h($id) ?> · 기간 <?= t100h($r['period']??'2025-10-08~2026-10-08') ?>. 고정 종목군 연구·opportunity 독립 관찰과 섞지 않습니다. 계획 진입가·목표가를 체결가로 쓰지 않습니다.</p>
+<p><a href="paper.php?account=paper-kr-recovery-v1&amp;mode=replay">운영 모의 계좌</a> · <a href="paper_trades.php?account=paper-kr-recovery-v1&amp;mode=replay">운영 계좌 거래</a> · <a href="paper_universe.php">고정 종목군 연구</a></p>
+<?php if($error): ?>
+<section class="panel panel--error"><p><?= t100h($error) ?></p></section>
+<?php else: ?>
+<section class="panel panel--result">
+  <div class="metric-grid">
+    <div class="metric metric--accent"><span class="metric__label">체결</span><strong class="metric__value"><?= t100h($r['fill_count']) ?>건</strong></div>
+    <div class="metric"><span class="metric__label">청산</span><strong class="metric__value"><?= t100h($r['closed_count']) ?>건</strong></div>
+    <div class="metric"><span class="metric__label">보유</span><strong class="metric__value"><?= t100h($r['open_count']) ?>건</strong></div>
+    <div class="metric"><span class="metric__label">취소(체결 목록 제외)</span><strong class="metric__value"><?= t100h($r['cancel_count']) ?>건</strong></div>
+  </div>
+  <p class="paper-note">청산 <?= t100h($r['closed_count']) ?>건의 비용 포함 실현손익 합계 <?= t100h(t100n($r['closed_net_pnl'],2)) ?>원<?= $r['summary_realized_pnl']!==null?' · 저장 summary 실현손익 '.t100h(t100n($r['summary_realized_pnl'],2)).'원':'' ?>. 거래 수익률을 더하거나 평균한 값은 계좌 수익률이 아닙니다. 보유 3건의 미실현손익은 이 합계에 넣지 않습니다.</p>
+  <?php if($r['issues']): ?><p class="paper-alert">저장 건수 또는 실현손익 합계를 확인하세요: <?= t100h(implode(', ',$r['issues'])) ?></p><?php endif ?>
+</section>
+<section class="panel">
+  <h2 class="paper-section-title">체결된 거래</h2>
+  <p class="paper-note">매수금액 = 체결수량 × 매수 체결가. 체결가에는 기존 모형 슬리피지가 이미 들어 있어 다시 빼지 않습니다. 비용 포함 실현손익은 저장 청산 기록의 순손익입니다(매수·매도 수수료 반영). 거래 수익률(%) = 실현손익 ÷ (매수금액 + 매수수수료) × 100. 보유 중은 매도를 미청산으로 두고, 기간 말 평가일·평가가격·미실현손익을 따로 표시합니다.</p>
+  <form class="paper-filter" id="t100-filter" onsubmit="return false">
+    <label>종목 검색 <input id="t100-q" type="search" placeholder="이름 또는 코드"></label>
+    <label>패턴 <select id="t100-pattern"><option value="">전체</option><?php foreach($patterns as $k=>$lab): ?><option value="<?= t100h($k) ?>"><?= t100h($lab) ?></option><?php endforeach ?></select></label>
+    <label>청산 사유 <select id="t100-reason"><option value="">전체</option><?php foreach($reasons as $k=>$lab): ?><option value="<?= t100h($k) ?>"><?= t100h($lab) ?></option><?php endforeach ?></select></label>
+    <label>보유 여부 <select id="t100-status"><option value="">전체</option><option value="closed">청산 완료</option><option value="open">보유 중</option></select></label>
+    <button type="button" id="t100-csv">현재 표시 목록 CSV</button>
+  </form>
+  <p id="t100-shown" class="paper-note" role="status">지금 표시 <?= t100h($r['fill_count']) ?>건 · 기본 정렬 매수일순</p>
+  <div class="scan-table-wrap"><table class="scan-table" id="t100-table">
+    <thead><tr>
+      <th>종목</th>
+      <th>패턴</th>
+      <th>추천일</th>
+      <th><button type="button" class="t100-sort" data-sort="buy_date">매수 체결일</button></th>
+      <th>매수 체결가 · 수량 · 금액</th>
+      <th>매도 체결일</th>
+      <th>매도 체결가 · 수량 · 금액</th>
+      <th><button type="button" class="t100-sort" data-sort="net_pnl">실현손익(원)</button></th>
+      <th><button type="button" class="t100-sort" data-sort="net_return_pct">거래 수익률(%)</button></th>
+      <th>청산 사유</th>
+      <th>상태</th>
+      <th>기간 말 평가(보유)</th>
+    </tr></thead>
+    <tbody>
+<?php foreach($r['fills'] as $t):
+    $pat=$patterns[$t['pattern']]??paper_ko($t['pattern']);
+    $reason=$t['exit_reason']===null?'—':($reasons[$t['exit_reason']]??paper_ko($t['exit_reason']));
+    $statusLab=$t['status']==='open'?'보유 중':'청산 완료';
+?>
+      <tr data-name="<?= t100h($t['name']) ?>" data-symbol="<?= t100h($t['symbol']) ?>" data-code="<?= t100h($t['code']) ?>" data-pattern="<?= t100h($t['pattern']) ?>" data-reason="<?= t100h($t['exit_reason']??'') ?>" data-status="<?= t100h($t['status']) ?>" data-buy_date="<?= t100h($t['buy_date']) ?>" data-net_pnl="<?= t100h($t['net_pnl']??'') ?>" data-net_return_pct="<?= t100h($t['net_return_pct']??'') ?>">
+        <td><?= t100h($t['name']) ?><span class="scan-code"><?= t100h($t['symbol']) ?></span></td>
+        <td><?= t100h($pat) ?></td>
+        <td class="mono"><?= t100h($t['signal_date']) ?></td>
+        <td class="mono"><?= t100h($t['buy_date']) ?></td>
+        <td class="mono"><?= t100h(t100n($t['buy_price'],4)) ?>원 · <?= t100h($t['quantity']) ?>주 · <?= t100h(t100n($t['buy_amount'],0)) ?>원</td>
+        <td class="mono"><?= $t['status']==='open'?'미청산':t100h($t['sell_date']) ?></td>
+        <td class="mono"><?php if($t['status']==='open'): ?>미청산<?php else: ?><?= t100h(t100n($t['sell_price'],4)) ?>원 · <?= t100h($t['sell_quantity']) ?>주 · <?= t100h(t100n($t['sell_amount'],0)) ?>원<?php endif ?></td>
+        <td class="mono <?= t100pnl($t['net_pnl']) ?>"><?= $t['status']==='open'?'—':t100h(t100n($t['net_pnl'],2)).'원' ?></td>
+        <td class="mono <?= t100pnl($t['net_return_pct']) ?>"><?= $t['status']==='open'?'—':t100h(t100n($t['net_return_pct'],4)).'%' ?></td>
+        <td><?= $t['status']==='open'?'미청산':t100h($reason) ?></td>
+        <td><?= t100h($statusLab) ?></td>
+        <td class="mono"><?php if($t['status']==='open'): ?>평가일 <?= t100h($t['mark_date']??'—') ?> · <?= t100h(t100n($t['mark_price'],4)) ?>원 · 미실현 <?= t100h(t100n($t['unrealized_pnl'],2)) ?>원<?php else: ?>—<?php endif ?></td>
+      </tr>
+<?php endforeach ?>
+    </tbody>
+  </table></div>
+</section>
+<section class="panel">
+  <h2 class="paper-section-title">취소 <?= t100h($r['cancel_count']) ?>건</h2>
+  <p class="paper-note">체결되지 않은 주문입니다. 위 체결 목록·실현손익에 넣지 않습니다.</p>
+  <div class="scan-table-wrap"><table class="scan-table" id="t100-cancel">
+    <thead><tr><th>종목</th><th>패턴</th><th>추천일</th><th>취소일</th><th>사유</th></tr></thead>
+    <tbody>
+<?php foreach($r['cancelled'] as $c): ?>
+      <tr>
+        <td><?= t100h($c['name']) ?><span class="scan-code"><?= t100h($c['symbol']) ?></span></td>
+        <td><?= t100h($patterns[$c['pattern']]??paper_ko($c['pattern'])) ?></td>
+        <td class="mono"><?= t100h($c['signal_date']) ?></td>
+        <td class="mono"><?= t100h($c['cancel_date']) ?></td>
+        <td><?= t100h(paper_ko($c['cancel_reason'])) ?></td>
+      </tr>
+<?php endforeach ?>
+    </tbody>
+  </table></div>
+</section>
+<script>
+(function(){
+  const table=document.getElementById('t100-table');
+  if(!table)return;
+  const body=table.tBodies[0];
+  const rows=[].slice.call(body.rows);
+  const q=document.getElementById('t100-q');
+  const pattern=document.getElementById('t100-pattern');
+  const reason=document.getElementById('t100-reason');
+  const status=document.getElementById('t100-status');
+  const shown=document.getElementById('t100-shown');
+  let sortKey='buy_date', sortDir=1;
+  function visible(){return rows.filter(function(r){return r.style.display!=='none';});}
+  function apply(){
+    const needle=(q.value||'').trim().toLowerCase();
+    rows.forEach(function(r){
+      const hay=(r.dataset.name+' '+r.dataset.symbol+' '+r.dataset.code).toLowerCase();
+      const okQ=!needle||hay.indexOf(needle)!==-1;
+      const okP=!pattern.value||r.dataset.pattern===pattern.value;
+      const okR=!reason.value||r.dataset.reason===reason.value;
+      const okS=!status.value||r.dataset.status===status.value;
+      r.style.display=okQ&&okP&&okR&&okS?'':'none';
+    });
+    shown.textContent='지금 표시 '+visible().length+'건 · 정렬 '+({buy_date:'매수일',net_pnl:'손익',net_return_pct:'수익률'}[sortKey]||sortKey)+(sortDir>0?'순':' 역순');
+  }
+  function cmp(a,b){
+    const va=a.dataset[sortKey], vb=b.dataset[sortKey];
+    if(sortKey==='buy_date'){return sortDir*((va||'').localeCompare(vb||'')||(a.dataset.symbol||'').localeCompare(b.dataset.symbol||''));}
+    const na=va===''?null:Number(va), nb=vb===''?null:Number(vb);
+    if(na===null&&nb===null)return 0;
+    if(na===null)return 1;
+    if(nb===null)return -1;
+    return sortDir*(na-nb);
+  }
+  function sortRows(){rows.sort(cmp).forEach(function(r){body.appendChild(r);});apply();}
+  [q,pattern,reason,status].forEach(function(el){el.addEventListener('input',apply);el.addEventListener('change',apply);});
+  table.querySelectorAll('.t100-sort').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      const key=btn.getAttribute('data-sort');
+      if(sortKey===key)sortDir=-sortDir; else {sortKey=key;sortDir=key==='buy_date'?1:-1;}
+      sortRows();
+    });
+  });
+  document.getElementById('t100-csv').addEventListener('click',function(){
+    const cols=['종목명','코드','패턴','추천일','매수일','매수체결가','수량','매수금액','매도일','매도체결가','매도수량','매도금액','실현손익','거래수익률','청산사유','상태','평가일','평가가격','미실현손익'];
+    const lines=[cols.join(',')];
+    visible().forEach(function(r){
+      const c=r.cells;
+      const name=r.dataset.name, code=r.dataset.symbol, open=r.dataset.status==='open';
+      const buy=c[4].innerText.split(' · ');
+      const sell=open?['미청산','','']:c[6].innerText.split(' · ');
+      const mark=open?c[11].innerText:'';
+      const row=[name,code,c[1].innerText,c[2].innerText,c[3].innerText,buy[0]||'',buy[1]||'',buy[2]||'',open?'미청산':c[5].innerText,sell[0]||'',sell[1]||'',sell[2]||'',open?'':c[7].innerText,open?'':c[8].innerText,c[9].innerText,c[10].innerText,open?mark:'','',''];
+      lines.push(row.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(','));
+    });
+    const blob=new Blob(['\ufeff'+lines.join('\n')],{type:'text/csv;charset=utf-8'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='krx-ilbyeol-top100-trades.csv';a.click();
+    URL.revokeObjectURL(a.href);
+  });
+  apply();
+})();
+</script>
+<?php endif;
+paper_close();

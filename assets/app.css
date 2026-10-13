@@ -2705,6 +2705,21 @@ body.is-loading .panel--scan {
   line-height: 1.5;
 }
 
+.scan-table .pnl-plus { color: var(--success); }
+.scan-table .pnl-minus { color: var(--danger); }
+.scan-table .t100-sort {
+  display: inline;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-weight: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 .paper-alert {
   margin: 0.75rem 0 0;
   padding: 0.7rem 0.85rem;

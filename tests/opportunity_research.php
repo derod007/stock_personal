@@ -1,0 +1,83 @@
+<?php
+declare(strict_types=1);
+require __DIR__.'/../bin/bootstrap.php';
+require __DIR__.'/../bin/paper/OpportunityResearch.php';
+use ChartEntryLab\{ChartPlanEngine,CandleClock};
+function ck(bool $v,string $label):void {if(!$v)throw new RuntimeException($label);echo "PASS $label\n";}
+function rejects(callable $fn,string $label):void {try{$fn();}catch(RuntimeException $e){ck(true,$label);return;}throw new RuntimeException('Expected rejection: '.$label);}
+$bars=[];$start=new DateTimeImmutable('2025-10-06');
+for($i=0;$i<60;$i++){
+    $close=$i<30?50+$i:80+($i-30)*.4;if($i>=55)$close=[88,86,84.5,84,85.5][$i-55];$close+=1000;
+    $open=$i===59?1084.2:$close-.2;$day=$start->modify('+'.$i.' weekdays')->format('Y-m-d');$at=PaperDatedTop100Replay::sessionClose($day);
+    $bars[]=['time_kst'=>$day.' 15:30:00','available_at'=>$at,'open'=>$open,'high'=>$close+.8,'low'=>min($open,$close)-.4,'close'=>$close,'volume'=>$i>=56&&$i<=58?900:($i===59?1400:1000)];
+}
+$at=end($bars)['available_at'];$a=(new ChartPlanEngine())->analyze($bars,'005930.KS',$at);
+$pr=PaperOpportunityResearch::pullback($bars,$a['features']);PaperOpportunityResearch::checkPullback($pr,$a['plan']['diagnostics']['patterns']['trend_pullback']);
+ck(PaperOpportunityResearch::single($pr)&&$pr['failed']===['volume_contracted'],'real engine volume-only missing');
+$strict=$bars;for($i=56;$i<=58;$i++)$strict[$i]['volume']=500;
+$sa=(new ChartPlanEngine())->analyze($strict,'005930.KS',$at);$sp=PaperOpportunityResearch::pullback($strict,$sa['features']);
+PaperOpportunityResearch::checkPullback($sp,$sa['plan']['diagnostics']['patterns']['trend_pullback']);ck($sp['failed']===[]&&!PaperOpportunityResearch::single($sp),'zero failure is not near miss');
+$two=$bars;$two[59]['open']=1086;
+$ta=(new ChartPlanEngine())->analyze($two,'005930.KS',$at);$tp=PaperOpportunityResearch::pullback($two,$ta['features']);
+ck(in_array('bullish_candle',$tp['failed'],true)&&in_array('volume_contracted',$tp['failed'],true)&&!PaperOpportunityResearch::single($tp),'two failed conditions do not count as one');
+ck(!PaperOpportunityResearch::single(PaperOpportunityResearch::pullback(array_slice($bars,0,20),[])),'unknown/short history not a failure');
+$info=['rows'=>$bars,'bars_sha256'=>'fixture','name'=>'fixture'];$before=PaperOpportunityResearch::inspect($info,'005930.KS',$at,'fixture');
+ck($before['analysis']!==null,'fixture passes quality');
+$after=$info;$after['rows'][]=['available_at'=>$at+86400,'open'=>1,'high'=>1,'low'=>1,'close'=>1,'volume'=>0];
+ck(PaperOpportunityResearch::inspect($after,'005930.KS',$at,'fixture')===$before,'future bar does not change detector input');
+$bad=$info;$bad['rows'][59]['close']=999999;ck(PaperOpportunityResearch::inspect($bad,'005930.KS',$at,'fixture')['analysis']===null,'bad OHLC cannot become candidate');
+$rr=['version'=>'trend_recovery_v1','status'=>'rejected_rr','signal_at'=>$at,'entry'=>100,'stop'=>90,'target'=>110];
+ck(PaperOpportunityResearch::rrOnly($rr,$at)!==null,'completed RR-only structure counted');
+foreach(['no_setup','await_confirmation','expired','invalidated','no_upper_target'] as $st)ck(PaperOpportunityResearch::rrOnly(array_replace($rr,['status'=>$st]),$at)===null,'state not invented as RR-only '.$st);
+ck(PaperOpportunityResearch::rrOnly($rr,$at+86400)===null,'old confirmation not current candidate');
+$context=$a;$context['plan']['context']=['daily'=>'down','weekly'=>'down'];
+ck(in_array('context_wait',PaperPatternReplay::blockers($context,$pr['plan']),true),'context guard survives diagnostic');
+$context=$a;$context['features']['spike_dump_status']='warning';ck(in_array('spike_dump',PaperPatternReplay::blockers($context,$pr['plan']),true),'spike guard survives diagnostic');
+$day=PaperHistoryResearch::day($at);$next=PaperHistoryResearch::day($at+86400);
+$data=['dataset'=>'fixture','symbols'=>['005930.KS'=>$info]];$cand=['by_session'=>[$at=>['day'=>$day,'symbols'=>['005930.KS']]]];
+$dr=PaperOpportunityResearch::day($data,$cand,$at,[]);
+ck(count($dr['near_misses'])===1&&$dr['near_misses'][0]['potential_new'],'day diagnostic identifies new potential only');
+$data['symbols']['005930.KS']['rows']=$strict;$want=$sa['plan'];$want['outcome']='position_limit';
+$cap=PaperOpportunityResearch::day($data,$cand,$at,['005930.KS'=>$want]);
+ck(count($cap['capacity'])===1&&$cap['baseline_signals_verified']===1,'capacity requires reproduced final recommendation');
+$wrong=$want;$wrong['entry']++;
+rejects(fn()=>PaperOpportunityResearch::day($data,$cand,$at,['005930.KS'=>$wrong]),'stored price mismatch fails day');
+rejects(fn()=>PaperOpportunityResearch::day($data,$cand,$at,[]),'missing baseline recommendation fails day');
+$plan=['ready'=>true,'entry'=>100,'stop'=>90,'target'=>120,'signal_at'=>0,'order_valid_bars'=>3];
+$b=static fn(int $t,float $low=99,float $high=110,float $open=100):array=>['available_at'=>$t,'open'=>$open,'high'=>$high,'low'=>$low,'close'=>105,'volume'=>100];
+$f=PaperOpportunityResearch::future([$b(1),$b(3)],'005930.KS',0,[1,2,3]);ck($f[1]===null&&count($f)===3,'missing exchange day not compressed');
+$sim=PaperOpportunityResearch::shadow($plan,$f);ck($sim['status']==='future_quality_blocked'&&$sim['net_return_pct']===null,'missing after entry remains unknown');
+ck(PaperOpportunityResearch::future([$b(1),$b(1)],'005930.KS',0,[1])[0]===null,'duplicate future session blocked');
+ck(PaperOpportunityResearch::future([array_replace($b(1),['is_complete'=>false])],'005930.KS',0,[1])[0]===null,'unfinished future session blocked');
+ck(PaperOpportunityResearch::shadow($plan,[$b(1,89),null])['status']==='closed','gap after completed trade does not erase result');
+ck(PaperOpportunityResearch::shadow($plan,[])['status']==='pending','no future is pending');
+ck(PaperOpportunityResearch::shadow($plan,[$b(1)])['status']==='incomplete','open position is incomplete');
+$unfilled=PaperOpportunityResearch::shadow($plan,[$b(1,104,110,105),$b(2,104,110,105),$b(3,104,110,105),null]);
+ck($unfilled['status']==='unfilled'&&$unfilled['observation_end_at']===3,'three unfilled bars expire before later missing bar');
+ck(PaperOpportunityResearch::shadow($plan,[$b(1,95,125)])['status']==='cancelled_before_entry','target before unopened entry cancellation retained');
+$stats=PaperOpportunityResearch::stats([['shadow'=>['status'=>'closed','net_return_pct'=>10]],['shadow'=>['status'=>'incomplete','net_return_pct'=>null]]]);
+ck($stats['closed']===1&&$stats['mean_net_return_pct']===10,'unfinished result not zero in mean');
+$days=['2026-01-05','2026-01-06','2026-01-07','2026-01-08'];
+$r=['date'=>$days[0],'session'=>PaperDatedTop100Replay::sessionClose($days[0]),'symbol'=>'X','pattern'=>'trend_pullback_v1','plan'=>$plan,'shadow'=>['status'=>'pending','observation_end_at'=>null]];
+$rows=[$r,array_replace($r,['date'=>$days[1],'session'=>PaperDatedTop100Replay::sessionClose($days[1])]),array_replace($r,['date'=>$days[3],'session'=>PaperDatedTop100Replay::sessionClose($days[3])])];
+$labels=PaperOpportunityResearch::label($rows,$days);
+ck(array_column($labels,'episode_first')===[true,false,true],'exact repeated plan groups only consecutive dates');
+ck($labels[1]['overlaps_prior_same_symbol'],'overlapping observation flagged');
+$tmp=sys_get_temp_dir().'/opportunity-test-'.bin2hex(random_bytes(5));mkdir($tmp);
+try{
+ $id=['code'=>'v1'];ck(PaperOpportunityResearch::checkpoint($tmp,$id,$days)===[],'new checkpoint');
+ $payload=['date'=>$days[0],'counts'=>[],'baseline_signals_verified'=>0,'pattern_states'=>[],'pullback_eligibility'=>[],'capacity'=>[],'near_misses'=>[]];
+ $file=$tmp.'/day-'.$days[0].'.json';PaperOpportunityResearch::writeNew($file,['payload'=>$payload,'sha256'=>PaperOpportunityResearch::hash($payload)]);
+ $resume=PaperOpportunityResearch::checkpoint($tmp,$id,$days);ck($resume===[$days[0]=>$payload],'resume preserves completed day');
+ ck(PaperOpportunityResearch::summarize($resume,$days)===PaperOpportunityResearch::summarize([$days[0]=>$payload],$days),'resumed and one-shot summary equal');
+ $hash=hash_file('sha256',$file);PaperOpportunityResearch::checkpoint($tmp,$id,$days);ck(hash_file('sha256',$file)===$hash,'read/resume does not rewrite');
+ rejects(fn()=>PaperOpportunityResearch::checkpoint($tmp,['code'=>'changed'],$days),'changed research identity rejected');
+ rejects(fn()=>PaperOpportunityResearch::writeNew($file,[]),'existing file overwrite rejected');
+ $e=PaperOpportunityResearch::read($file);$e['payload']['baseline_signals_verified']=99;file_put_contents($file,PaperOpportunityResearch::encode($e));
+ rejects(fn()=>PaperOpportunityResearch::checkpoint($tmp,$id,$days),'checkpoint corruption detected');
+}finally{foreach(glob($tmp.'/*') as $f)unlink($f);rmdir($tmp);}
+$c=PaperDatedTop100Replay::loadCandidates(__DIR__.'/../'.PaperDatedTop100Replay::CANDIDATES_YEAR,244,933);
+$baseline=PaperOpportunityResearch::baseline(__DIR__.'/../docs/historical-top100-replay-20251008-20261008/account/daily-log.jsonl',$c);
+ck(count($baseline['capacity'])===28,'actual frozen 28 recommendations extracted');
+ck(PaperStrategyVersion::current()===PaperDatedTop100Replay::STRATEGY_FINGERPRINT,'operating fingerprint unchanged');
+echo "OK\n";

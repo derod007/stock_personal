@@ -69,7 +69,8 @@ final class PaperRecoveryCloseEvidence
         foreach(array_merge($past,array_values(array_filter($future,static fn($b)=>$b!==null))) as $b){
             $t=$b['available_at'];$by[$t]=$b;
             if($b['low']>min($b['open'],$b['close'])||$b['high']<max($b['open'],$b['close'])||$b['low']>$b['high'])$bad[]=$t;
-            if($last!==null&&$last['close']>0&&abs($b['close']/$last['close']-1)>.30)$jumps[]=['at'=>$t,'previous_close'=>$last['close'],'close'=>$b['close']];
+            // Relative machine-precision tolerance: exactly +/-30% is not a jump beyond 30%.
+            if($last!==null&&$last['close']>0&&abs($b['close']-$last['close'])>.30*$last['close']+1e-12*max(1.0,abs($last['close'])))$jumps[]=['at'=>$t,'previous_close'=>$last['close'],'close'=>$b['close']];
             if(isset($b['historical_close_repair'])||($b['close_source']??'yahoo_daily')!=='yahoo_daily')$repairs[]=$b;
             $last=$b;
         }

@@ -1,3 +1,15 @@
+## 2026-10-13 11:34 · Cursor · 끝
+- 한 일: PR #76 저장 장부의 상승 눌림 종료 42건 전체 A/B/C 검토 화면·차트 검증. PR #77은 미병합 참고만. 계좌 재실행·병합 없음
+- 파일: bin/paper/PullbackYearReview.php, bin/paper_pullback_year_review.php, tests/pullback_year_review.php, docs/pullback-year-review/, .github/workflows/pattern-replay.yml, docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
+## 2026-10-13 11:24 · Cursor · 진행
+- 한 일: PR #76 1년 연구 trend_pullback_v1 종료 42건 검토 자료 준비. PR #77은 참고만. 운영·장부·병합 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-13 · Codex · 끝
 - 한 일: PR #76 주문 감사 보완. 저장 로그 7개 필드 대조 및 완료봉 엔진·품질 재계산, 근거 누락 시 실패. 변조 검사 32개와 기존 재현 검사 32개 통과. 기존 장부·provenance·운영 소스 보존
 - 한계: v2 원본·저널은 사용자 PC에 있어 68건 엔진 재검증 대기. 읽기 전용 verify 명령을 order-audit-review.md에 기록

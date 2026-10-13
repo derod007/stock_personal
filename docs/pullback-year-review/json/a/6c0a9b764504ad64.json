@@ -1,0 +1,26 @@
+{
+    "case_id": "6c0a9b764504ad64",
+    "index": 16,
+    "symbol": "090710.KQ",
+    "name": "휴림로봇",
+    "session_date": "2026-02-10",
+    "session": 1770705000,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "889eba7659a3c2ed63ab753a40fd2184f1ce88605ce1ef1ce8103515dec1ee99",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 1060,
+    "first_date": "2021-10-12",
+    "last_available_at": 1770705000,
+    "indicator_input": {
+        "bars": 1060,
+        "first_date": "2021-10-12",
+        "last_date": "2026-02-10",
+        "last_available_at": 1770705000,
+        "sha256": "abb7d9eaea6ab34d6435b00b3cfccb247e1271772b54dbadc52da196307e79d5"
+    },
+    "charts": {
+        "d120": "a/6c0a9b764504ad64-120.svg",
+        "d240": "a/6c0a9b764504ad64-240.svg"
+    }
+}

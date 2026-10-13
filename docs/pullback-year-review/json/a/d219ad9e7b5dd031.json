@@ -1,0 +1,26 @@
+{
+    "case_id": "d219ad9e7b5dd031",
+    "index": 37,
+    "symbol": "073240.KS",
+    "name": "금호타이어",
+    "session_date": "2026-07-30",
+    "session": 1785393000,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "daffdb49bdbf97a525b85e62ce33c05f22b35396114da84fc0b2c0335cff3a71",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 1173,
+    "first_date": "2021-10-12",
+    "last_available_at": 1785393000,
+    "indicator_input": {
+        "bars": 1173,
+        "first_date": "2021-10-12",
+        "last_date": "2026-07-30",
+        "last_available_at": 1785393000,
+        "sha256": "40b94dd0d7a4d5effea03b29ce2a8d9b304702eb75709b3d4ddcf7db98a0ccb4"
+    },
+    "charts": {
+        "d120": "a/d219ad9e7b5dd031-120.svg",
+        "d240": "a/d219ad9e7b5dd031-240.svg"
+    }
+}

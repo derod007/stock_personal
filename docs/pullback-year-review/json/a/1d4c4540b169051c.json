@@ -1,0 +1,26 @@
+{
+    "case_id": "1d4c4540b169051c",
+    "index": 32,
+    "symbol": "016360.KS",
+    "name": "삼성증권",
+    "session_date": "2026-06-01",
+    "session": 1780295400,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "010d3f1cc0ee4d06d03fbce46a27fcc1c5fdd037ca0ad12860f45f7226683b8b",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 1132,
+    "first_date": "2021-10-12",
+    "last_available_at": 1780295400,
+    "indicator_input": {
+        "bars": 1132,
+        "first_date": "2021-10-12",
+        "last_date": "2026-06-01",
+        "last_available_at": 1780295400,
+        "sha256": "c5bc32403792d5ce79dc59616508cdaf08737f5d4ab674e452cedb9fd8434dee"
+    },
+    "charts": {
+        "d120": "a/1d4c4540b169051c-120.svg",
+        "d240": "a/1d4c4540b169051c-240.svg"
+    }
+}

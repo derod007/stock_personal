@@ -1,0 +1,26 @@
+{
+    "case_id": "4dd529aa5bcce261",
+    "index": 33,
+    "symbol": "003550.KS",
+    "name": "LG",
+    "session_date": "2026-06-15",
+    "session": 1781505000,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "4ca812b24a903c6a27770b206a04b6112bf839dbf6972e4df6c1047055275b9c",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 1141,
+    "first_date": "2021-10-12",
+    "last_available_at": 1781505000,
+    "indicator_input": {
+        "bars": 1141,
+        "first_date": "2021-10-12",
+        "last_date": "2026-06-15",
+        "last_available_at": 1781505000,
+        "sha256": "648577c7d1aad1943a00319c28ed7a28bc349f8f56e91ab9a15526a8cd9c7de6"
+    },
+    "charts": {
+        "d120": "a/4dd529aa5bcce261-120.svg",
+        "d240": "a/4dd529aa5bcce261-240.svg"
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "case_id": "bfa2bb7006b03629",
+    "index": 27,
+    "symbol": "046970.KQ",
+    "name": "우리로",
+    "session_date": "2026-05-11",
+    "session": 1778481000,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "9fbaee50eb77f776f695a70301bc28a512c8328adc2386bf4cb5a1dec4f715fc",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 385,
+    "first_date": "2024-10-08",
+    "last_available_at": 1778481000,
+    "indicator_input": {
+        "bars": 385,
+        "first_date": "2024-10-08",
+        "last_date": "2026-05-11",
+        "last_available_at": 1778481000,
+        "sha256": "e5dc0c85d0ec99f147f7005281daff91198a37c6c1ecf4463a6a9fee08deb82e"
+    },
+    "charts": {
+        "d120": "a/bfa2bb7006b03629-120.svg",
+        "d240": "a/bfa2bb7006b03629-240.svg"
+    }
+}

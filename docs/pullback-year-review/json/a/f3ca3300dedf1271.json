@@ -1,0 +1,26 @@
+{
+    "case_id": "f3ca3300dedf1271",
+    "index": 40,
+    "symbol": "028050.KS",
+    "name": "삼성E&A",
+    "session_date": "2026-09-03",
+    "session": 1788417000,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "b8a46533e4f68bf38bd698768602388ddfb8050eb30fd7c26741cab9d26483b7",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 464,
+    "first_date": "2024-10-08",
+    "last_available_at": 1788417000,
+    "indicator_input": {
+        "bars": 464,
+        "first_date": "2024-10-08",
+        "last_date": "2026-09-03",
+        "last_available_at": 1788417000,
+        "sha256": "89e5e12392a16fb2f787cf34c380258855720d1644382968c113adb7a6b2677e"
+    },
+    "charts": {
+        "d120": "a/f3ca3300dedf1271-120.svg",
+        "d240": "a/f3ca3300dedf1271-240.svg"
+    }
+}

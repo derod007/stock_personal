@@ -1,0 +1,26 @@
+{
+    "case_id": "1b43b3fa0a18d94a",
+    "index": 3,
+    "symbol": "333430.KQ",
+    "name": "일승",
+    "session_date": "2025-10-16",
+    "session": 1760596200,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "4b6745d7970ca7771942de9a2e61acf011367914a8e28b9eb067a0dd1dec54a3",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 980,
+    "first_date": "2021-10-12",
+    "last_available_at": 1760596200,
+    "indicator_input": {
+        "bars": 980,
+        "first_date": "2021-10-12",
+        "last_date": "2025-10-16",
+        "last_available_at": 1760596200,
+        "sha256": "1742f026ad5d4fffb0fd2d4356b0b00d7de967208de77ffe64fb5ba32a36d7bb"
+    },
+    "charts": {
+        "d120": "a/1b43b3fa0a18d94a-120.svg",
+        "d240": "a/1b43b3fa0a18d94a-240.svg"
+    }
+}

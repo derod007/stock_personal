@@ -1,0 +1,438 @@
+{
+    "schema": 1,
+    "kind": "pullback_year_review_v1",
+    "label": "KRX 일별 거래대금 TOP100 연구",
+    "not_fully_blind": true,
+    "pr77": "open_unmerged_analysis_reference_only",
+    "expected": 42,
+    "count": 42,
+    "trades_path": "docs/historical-top100-replay-20251008-20261008/account/trades.json",
+    "trades_sha256": "6399c91be22939312f5c9d70dbd1dbd1fb758a1100475c3ff1c316b44f69d4b5",
+    "dataset": "kr-dated-amount-top100-20251008-20261008-v2",
+    "dataset_json_sha256": "2151bc4531ae4d39a1fa60010ee5d9f76727c12a98880759c652bea44c6a5fec",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "selection": "every closed trend_pullback_v1 row in stored trades.json; not sampled by PnL",
+    "cases": [
+        {
+            "index": 1,
+            "case_id": "a4e472969bd9f55d",
+            "symbol": "054540.KQ",
+            "name": "삼영엠텍",
+            "signal_date": "2025-10-13",
+            "session": 1760337000,
+            "bars_sha256": "7218a6eee7b2a22e39a7a66ff1cf20520b7ba2269b8fceb5c4bc2195bb2110f9",
+            "a_input_sha256": "0f6f78271eae60d46a56ccfc2c422dd8b89051da7b27c6dfd19552440b856144"
+        },
+        {
+            "index": 2,
+            "case_id": "3266da67b72d5414",
+            "symbol": "290650.KQ",
+            "name": "엘앤씨바이오",
+            "signal_date": "2025-10-16",
+            "session": 1760596200,
+            "bars_sha256": "75eeab088c9535bc7d55f52179d23931b606492a55c524597f3b34305ca63b04",
+            "a_input_sha256": "cb5ef9caedc22bd9555597fee902eef859b090e925133d38906240ecff795e2f"
+        },
+        {
+            "index": 3,
+            "case_id": "1b43b3fa0a18d94a",
+            "symbol": "333430.KQ",
+            "name": "일승",
+            "signal_date": "2025-10-16",
+            "session": 1760596200,
+            "bars_sha256": "4b6745d7970ca7771942de9a2e61acf011367914a8e28b9eb067a0dd1dec54a3",
+            "a_input_sha256": "1742f026ad5d4fffb0fd2d4356b0b00d7de967208de77ffe64fb5ba32a36d7bb"
+        },
+        {
+            "index": 4,
+            "case_id": "1315d93f9f8b8e13",
+            "symbol": "032820.KQ",
+            "name": "우리기술",
+            "signal_date": "2025-10-24",
+            "session": 1761287400,
+            "bars_sha256": "c36bad1e9caba2319f091c3ce2286b5f148833f5334446f5bb637c5a94b8a89b",
+            "a_input_sha256": "fc0242365c89f056a0cee8f9e90da0e96c2d65d4190c7d127624c5798067f646"
+        },
+        {
+            "index": 5,
+            "case_id": "cc062dc3b799dcee",
+            "symbol": "066970.KS",
+            "name": "엘앤에프",
+            "signal_date": "2025-11-11",
+            "session": 1762842600,
+            "bars_sha256": "528f3679d2a5778e02b242348361e64ddec4724bbb9ba8ee61122589330d4853",
+            "a_input_sha256": "0f4f647c959237d2e93ae7ce9e1f0d884f2889da918a7afa55efe1f4edac4452"
+        },
+        {
+            "index": 6,
+            "case_id": "bec010de7e0ceb8f",
+            "symbol": "000720.KS",
+            "name": "현대건설",
+            "signal_date": "2025-11-13",
+            "session": 1763015400,
+            "bars_sha256": "15de7f7102f67d2e87ae6e4117af493df6b4c607652ba572579e1ddfbfcd3148",
+            "a_input_sha256": "ce541b537f828e1605841bbd1571ab9e85ebe80754c2a6f7e289ed201cf47254"
+        },
+        {
+            "index": 7,
+            "case_id": "24a5ffe8459ff934",
+            "symbol": "001440.KS",
+            "name": "대한전선",
+            "signal_date": "2025-11-20",
+            "session": 1763620200,
+            "bars_sha256": "d232e2512545b74b59861f143ef4788de81c453ab6c19c1b3a6e134da68fdba3",
+            "a_input_sha256": "9db26c01c7608f24f6715fd3c39d8e3eefd41da490bc842dad28f5fe447a7658"
+        },
+        {
+            "index": 8,
+            "case_id": "397b8fa9fc486ab4",
+            "symbol": "108490.KQ",
+            "name": "로보티즈",
+            "signal_date": "2025-11-24",
+            "session": 1763965800,
+            "bars_sha256": "3fb1a4a49c4fd2a8c1206685f0a084a14e082936357129f05c07d41562969032",
+            "a_input_sha256": "f49e9e61bf4562f6abe4105dcf713560022871965693d6c69af0cba61e05da19"
+        },
+        {
+            "index": 9,
+            "case_id": "f9f072926594b3fd",
+            "symbol": "010120.KS",
+            "name": "LS ELECTRIC",
+            "signal_date": "2025-11-27",
+            "session": 1764225000,
+            "bars_sha256": "d178d1f1ce825bc422a7390ba08b520aafa05ead5dd8e7ed15e833d8762d51bb",
+            "a_input_sha256": "43bec428f9909f2a98f545543967f0c7f185cbb1019c26ad215450a57f33249e"
+        },
+        {
+            "index": 10,
+            "case_id": "478adefb2d5ad6bb",
+            "symbol": "068270.KS",
+            "name": "셀트리온",
+            "signal_date": "2025-12-08",
+            "session": 1765175400,
+            "bars_sha256": "92ca464546b2603cfee828c1a06398d69a946271de6985498002cc808b72071c",
+            "a_input_sha256": "e7a649801c1376782b22a33e375e911614b9bd9a5521cc46210421b70ea3a360"
+        },
+        {
+            "index": 11,
+            "case_id": "cd13d7a3ec6f8b8a",
+            "symbol": "066570.KS",
+            "name": "LG전자",
+            "signal_date": "2026-01-05",
+            "session": 1767594600,
+            "bars_sha256": "cb13f9303bdb713a3af014feec5b09e6c97e7b27622ba4df5ccc52d36f83f678",
+            "a_input_sha256": "736ead56a0657c9bd277e20ae503238b18e4a47d22c5b7dfebfc0dd5a45a5564"
+        },
+        {
+            "index": 12,
+            "case_id": "4f9f94b0735fea5f",
+            "symbol": "084670.KS",
+            "name": "동양고속",
+            "signal_date": "2026-01-14",
+            "session": 1768372200,
+            "bars_sha256": "3c3da655912dcb381f97dfd3719fd1c3e87325f4e2e40595de2da0e8076a261d",
+            "a_input_sha256": "8560a890e54e318059020df82b1136455a67bfb158b4b6a53f13f1c904201101"
+        },
+        {
+            "index": 13,
+            "case_id": "5fce2ef1690c1f93",
+            "symbol": "128820.KS",
+            "name": "대성산업",
+            "signal_date": "2026-01-14",
+            "session": 1768372200,
+            "bars_sha256": "4a14b9a90e6955852a817a86b7e6fda446eb68e1de3aa50b63de777ecbe708f7",
+            "a_input_sha256": "b627a3d4baf6384bd6bec0da90a6fe694c364502fd8631fb9937fb07af4b2121"
+        },
+        {
+            "index": 14,
+            "case_id": "08e8a5ee88e686d4",
+            "symbol": "000880.KS",
+            "name": "한화",
+            "signal_date": "2026-02-03",
+            "session": 1770100200,
+            "bars_sha256": "ee9f64d83e2998e95b3052a979220c9dd7f563745b12ebc348951355838746fb",
+            "a_input_sha256": "64e837bdff90b7cb73c54680476689e9dc28e29cb593c399dfa0a41ab92580a2"
+        },
+        {
+            "index": 15,
+            "case_id": "0f6a86a4e06bd33f",
+            "symbol": "000270.KS",
+            "name": "기아",
+            "signal_date": "2026-02-04",
+            "session": 1770186600,
+            "bars_sha256": "422797f735e6d703eb55e8f429b3a11f1e62ffdcce053130aba178df1e866bfd",
+            "a_input_sha256": "a9487c226541afa9e8b9839e3db065e9e85e2c578d2c28cd3c846aadeb4d89d6"
+        },
+        {
+            "index": 16,
+            "case_id": "6c0a9b764504ad64",
+            "symbol": "090710.KQ",
+            "name": "휴림로봇",
+            "signal_date": "2026-02-10",
+            "session": 1770705000,
+            "bars_sha256": "889eba7659a3c2ed63ab753a40fd2184f1ce88605ce1ef1ce8103515dec1ee99",
+            "a_input_sha256": "abb7d9eaea6ab34d6435b00b3cfccb247e1271772b54dbadc52da196307e79d5"
+        },
+        {
+            "index": 17,
+            "case_id": "4267601391ee3077",
+            "symbol": "058610.KQ",
+            "name": "에스피지",
+            "signal_date": "2026-02-19",
+            "session": 1771482600,
+            "bars_sha256": "90bc6aa0dd7be8506348cfb4965a83723361e529bba985235e67e15284a67ca4",
+            "a_input_sha256": "70df7ea57b8cebaaba09accaf2a0b49c5708f37f73cfd338e6bebafb2951ef46"
+        },
+        {
+            "index": 18,
+            "case_id": "b7dbf7a4264beb21",
+            "symbol": "035420.KS",
+            "name": "NAVER",
+            "signal_date": "2026-02-26",
+            "session": 1772087400,
+            "bars_sha256": "23cc239c9fc79c88e5c3835bb9e83ffce3376019c21319f8d28983f133ca62db",
+            "a_input_sha256": "6272193003f89df8c7877e3e524efdaf1c41f21f91a3116afb9e893fe3c3e9bc"
+        },
+        {
+            "index": 19,
+            "case_id": "1dc8e88a5bfcfa74",
+            "symbol": "034730.KS",
+            "name": "SK",
+            "signal_date": "2026-03-10",
+            "session": 1773124200,
+            "bars_sha256": "ff8a26dc5855a33d29780ebea2027f00458d48625e633754cd53a232aa1d93fa",
+            "a_input_sha256": "31034495b64efd851fd75b376b0f5bbd3c6456ec1c75315c8ed8f52fab30e730"
+        },
+        {
+            "index": 20,
+            "case_id": "83230ae58633625e",
+            "symbol": "088350.KS",
+            "name": "한화생명",
+            "signal_date": "2026-03-11",
+            "session": 1773210600,
+            "bars_sha256": "45b48ce425f495abcd0166bd2b503859ed28a91c72444fe814abc3c66b7f436f",
+            "a_input_sha256": "69769dea8b30518c16a884c2f22c9924e051957aec81e6eee2fde14c1ed6ecbd"
+        },
+        {
+            "index": 21,
+            "case_id": "9e4a875e2f0b1911",
+            "symbol": "006400.KS",
+            "name": "삼성SDI",
+            "signal_date": "2026-03-24",
+            "session": 1774333800,
+            "bars_sha256": "d727b12a05e856243f01bd79310bb8ac2b41bdd5f6a54f4fc520b08b42c2778a",
+            "a_input_sha256": "f961eaafc6f5dec3beac5d4bc787ebccf2b16f60e57e8d3bb944870e626e440e"
+        },
+        {
+            "index": 22,
+            "case_id": "0a39cc74434f5aff",
+            "symbol": "005880.KS",
+            "name": "대한해운",
+            "signal_date": "2026-03-31",
+            "session": 1774938600,
+            "bars_sha256": "042a0b6a9604d2422b1496cb20a41db6dd326fb0b78f3fb81e9be6b85c241af9",
+            "a_input_sha256": "076f64d8beb7b9bf10ee63f997212de7bc385df862d685f2edeb4f9a220dd507"
+        },
+        {
+            "index": 23,
+            "case_id": "d446aeaedf57da8f",
+            "symbol": "263750.KQ",
+            "name": "펄어비스",
+            "signal_date": "2026-04-22",
+            "session": 1776839400,
+            "bars_sha256": "ebea74c0511a269f8d546224dc608d67493c134f1f81d5c896ddae37d751aac2",
+            "a_input_sha256": "7a1155fa8f5b144a96f77b4a4fce2aef53b13771b36540be28488c856c5297ff"
+        },
+        {
+            "index": 24,
+            "case_id": "9a97e143b7ecf58a",
+            "symbol": "010170.KQ",
+            "name": "대한광통신",
+            "signal_date": "2026-04-27",
+            "session": 1777271400,
+            "bars_sha256": "d7f285840acb691ea9a588f840edea60089af9cefc254f1afd2d4e10ba4a560c",
+            "a_input_sha256": "5e25784bbabf9a7cdca0c3ea92f8c97f3448673bd34208db6cd2f0983fae3d88"
+        },
+        {
+            "index": 25,
+            "case_id": "933792f7c0be4f62",
+            "symbol": "000720.KS",
+            "name": "현대건설",
+            "signal_date": "2026-05-06",
+            "session": 1778049000,
+            "bars_sha256": "15de7f7102f67d2e87ae6e4117af493df6b4c607652ba572579e1ddfbfcd3148",
+            "a_input_sha256": "38019cc346d3d86bf3c1be64a331f3e0c40156fea2cfccfa6d38a2c5276daf77"
+        },
+        {
+            "index": 26,
+            "case_id": "8745143d850b6870",
+            "symbol": "017900.KS",
+            "name": "광전자",
+            "signal_date": "2026-05-07",
+            "session": 1778135400,
+            "bars_sha256": "fcd70cf7b5e7e101a9fa9cfe1895a034484389ccb5b92570a64eeb8b91158ea7",
+            "a_input_sha256": "c8a9676a296dc0b988236e838176834349eba3ef862724a9e7baf0f7fad00d55"
+        },
+        {
+            "index": 27,
+            "case_id": "bfa2bb7006b03629",
+            "symbol": "046970.KQ",
+            "name": "우리로",
+            "signal_date": "2026-05-11",
+            "session": 1778481000,
+            "bars_sha256": "9fbaee50eb77f776f695a70301bc28a512c8328adc2386bf4cb5a1dec4f715fc",
+            "a_input_sha256": "e5dc0c85d0ec99f147f7005281daff91198a37c6c1ecf4463a6a9fee08deb82e"
+        },
+        {
+            "index": 28,
+            "case_id": "619a665a503bf9d0",
+            "symbol": "115500.KQ",
+            "name": "케이씨에스",
+            "signal_date": "2026-05-13",
+            "session": 1778653800,
+            "bars_sha256": "53c7231958bb62aee8a88cb4acf7af0d5e10b04b52ba3e6994bccd2012d506d6",
+            "a_input_sha256": "f6801cb9177e91fa483c0e8845af7821a5a929a69f0f62492d39d8f99edbea13"
+        },
+        {
+            "index": 29,
+            "case_id": "5e10220ebcd6dda1",
+            "symbol": "001440.KS",
+            "name": "대한전선",
+            "signal_date": "2026-05-21",
+            "session": 1779345000,
+            "bars_sha256": "d232e2512545b74b59861f143ef4788de81c453ab6c19c1b3a6e134da68fdba3",
+            "a_input_sha256": "93e7fc309c598248ca321d16a7349ebee851fdcf333698eb6d0a08c0626d3fe2"
+        },
+        {
+            "index": 30,
+            "case_id": "4eb1887671f29b8e",
+            "symbol": "006340.KS",
+            "name": "대원전선",
+            "signal_date": "2026-05-21",
+            "session": 1779345000,
+            "bars_sha256": "d849c295eea885d87118a24f841f33e3af769c4b8c59927e1f3b9d88d2b87a97",
+            "a_input_sha256": "a7ffd8ef962097194c6460cbb4ecd8f53e66273b292d47c9ee7e5373431dc6c8"
+        },
+        {
+            "index": 31,
+            "case_id": "27ab1b065f03f120",
+            "symbol": "322000.KS",
+            "name": "HD현대에너지솔루션",
+            "signal_date": "2026-05-22",
+            "session": 1779431400,
+            "bars_sha256": "d4ae0718a67bd818f4c958b560339e7a4675d11708188de500ebbe9c6dbef164",
+            "a_input_sha256": "40a2491c8884a088afbf5d1dff8bf5b2b2502f01c547c2cc4266939cd41aa4c2"
+        },
+        {
+            "index": 32,
+            "case_id": "1d4c4540b169051c",
+            "symbol": "016360.KS",
+            "name": "삼성증권",
+            "signal_date": "2026-06-01",
+            "session": 1780295400,
+            "bars_sha256": "010d3f1cc0ee4d06d03fbce46a27fcc1c5fdd037ca0ad12860f45f7226683b8b",
+            "a_input_sha256": "c5bc32403792d5ce79dc59616508cdaf08737f5d4ab674e452cedb9fd8434dee"
+        },
+        {
+            "index": 33,
+            "case_id": "4dd529aa5bcce261",
+            "symbol": "003550.KS",
+            "name": "LG",
+            "signal_date": "2026-06-15",
+            "session": 1781505000,
+            "bars_sha256": "4ca812b24a903c6a27770b206a04b6112bf839dbf6972e4df6c1047055275b9c",
+            "a_input_sha256": "648577c7d1aad1943a00319c28ed7a28bc349f8f56e91ab9a15526a8cd9c7de6"
+        },
+        {
+            "index": 34,
+            "case_id": "6576eb9e933faa21",
+            "symbol": "011070.KS",
+            "name": "LG이노텍",
+            "signal_date": "2026-06-15",
+            "session": 1781505000,
+            "bars_sha256": "b0f9b5f1f15dcd98f0c753030fb962a1601149424862573083b01afd2e84688b",
+            "a_input_sha256": "089f5ccddcf2670d6108aa3101ee363ff3a70a66a6173c8bba177d186196e42d"
+        },
+        {
+            "index": 35,
+            "case_id": "f4e8d714445d1a18",
+            "symbol": "001740.KS",
+            "name": "SK네트웍스",
+            "signal_date": "2026-06-25",
+            "session": 1782369000,
+            "bars_sha256": "1bdfda7230b14af0ef82f6af2df105c78f6bf5380ed6438d5af088af5f93cca6",
+            "a_input_sha256": "1040f16731eebacd0e6be7a91aa894984197dc0182b28fffc34c91137b5e7411"
+        },
+        {
+            "index": 36,
+            "case_id": "fdfe720a271b1684",
+            "symbol": "000500.KS",
+            "name": "가온전선",
+            "signal_date": "2026-07-22",
+            "session": 1784701800,
+            "bars_sha256": "0e99f39874c3bb03b54a382a33b5949113852fdecbca97a4b9618688025feb94",
+            "a_input_sha256": "a175220b7dbd6f7a2604cec8f2a1982aef965ea7f20ee7acf892fe014cbc9828"
+        },
+        {
+            "index": 37,
+            "case_id": "d219ad9e7b5dd031",
+            "symbol": "073240.KS",
+            "name": "금호타이어",
+            "signal_date": "2026-07-30",
+            "session": 1785393000,
+            "bars_sha256": "daffdb49bdbf97a525b85e62ce33c05f22b35396114da84fc0b2c0335cff3a71",
+            "a_input_sha256": "40b94dd0d7a4d5effea03b29ce2a8d9b304702eb75709b3d4ddcf7db98a0ccb4"
+        },
+        {
+            "index": 38,
+            "case_id": "701abd672d3bc57e",
+            "symbol": "475150.KS",
+            "name": "SK이터닉스",
+            "signal_date": "2026-08-13",
+            "session": 1786602600,
+            "bars_sha256": "86705aed969f7507ccfaf8532868de9ca6a4a9218b76bd49f8319ef9154991f7",
+            "a_input_sha256": "0fcb5b37885749b5198c18c57355919f117003f5f341910328b33fcbde30bc59"
+        },
+        {
+            "index": 39,
+            "case_id": "54f8734576ae700d",
+            "symbol": "079650.KQ",
+            "name": "서산",
+            "signal_date": "2026-08-28",
+            "session": 1787898600,
+            "bars_sha256": "254f1b62ca1587ee7b1ca946598f14f21b9af5e623396f3c3a92d6152a69feeb",
+            "a_input_sha256": "b275c767d6b002e6a4dfe7abd50a45b8dbf93f061210690900dd597b5851b07e"
+        },
+        {
+            "index": 40,
+            "case_id": "f3ca3300dedf1271",
+            "symbol": "028050.KS",
+            "name": "삼성E&A",
+            "signal_date": "2026-09-03",
+            "session": 1788417000,
+            "bars_sha256": "b8a46533e4f68bf38bd698768602388ddfb8050eb30fd7c26741cab9d26483b7",
+            "a_input_sha256": "89e5e12392a16fb2f787cf34c380258855720d1644382968c113adb7a6b2677e"
+        },
+        {
+            "index": 41,
+            "case_id": "45d64cb4e6961ac4",
+            "symbol": "003230.KS",
+            "name": "삼양식품",
+            "signal_date": "2026-09-14",
+            "session": 1789367400,
+            "bars_sha256": "35d70142f128c78da279d272de3e86ffc85bde51751108e14998889936fb97cf",
+            "a_input_sha256": "0e5238e962c7ba61349ad30b764ffca6ae12bf4611f3d57f0b9d8049ee92778e"
+        },
+        {
+            "index": 42,
+            "case_id": "cb7091cebde33e0f",
+            "symbol": "006400.KS",
+            "name": "삼성SDI",
+            "signal_date": "2026-09-15",
+            "session": 1789453800,
+            "bars_sha256": "d727b12a05e856243f01bd79310bb8ac2b41bdd5f6a54f4fc520b08b42c2778a",
+            "a_input_sha256": "da093b9a4e0706e9fd032ce5942eb325a0c716bd2050d3fd59f6c76feefe489c"
+        }
+    ]
+}

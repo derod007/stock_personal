@@ -1,0 +1,26 @@
+{
+    "case_id": "478adefb2d5ad6bb",
+    "index": 10,
+    "symbol": "068270.KS",
+    "name": "셀트리온",
+    "session_date": "2025-12-08",
+    "session": 1765175400,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "92ca464546b2603cfee828c1a06398d69a946271de6985498002cc808b72071c",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 284,
+    "first_date": "2024-10-08",
+    "last_available_at": 1765175400,
+    "indicator_input": {
+        "bars": 284,
+        "first_date": "2024-10-08",
+        "last_date": "2025-12-08",
+        "last_available_at": 1765175400,
+        "sha256": "e7a649801c1376782b22a33e375e911614b9bd9a5521cc46210421b70ea3a360"
+    },
+    "charts": {
+        "d120": "a/478adefb2d5ad6bb-120.svg",
+        "d240": "a/478adefb2d5ad6bb-240.svg"
+    }
+}

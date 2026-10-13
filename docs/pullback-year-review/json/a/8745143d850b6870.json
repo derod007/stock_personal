@@ -1,0 +1,26 @@
+{
+    "case_id": "8745143d850b6870",
+    "index": 26,
+    "symbol": "017900.KS",
+    "name": "광전자",
+    "session_date": "2026-05-07",
+    "session": 1778135400,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "fcd70cf7b5e7e101a9fa9cfe1895a034484389ccb5b92570a64eeb8b91158ea7",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 1116,
+    "first_date": "2021-10-12",
+    "last_available_at": 1778135400,
+    "indicator_input": {
+        "bars": 1116,
+        "first_date": "2021-10-12",
+        "last_date": "2026-05-07",
+        "last_available_at": 1778135400,
+        "sha256": "c8a9676a296dc0b988236e838176834349eba3ef862724a9e7baf0f7fad00d55"
+    },
+    "charts": {
+        "d120": "a/8745143d850b6870-120.svg",
+        "d240": "a/8745143d850b6870-240.svg"
+    }
+}

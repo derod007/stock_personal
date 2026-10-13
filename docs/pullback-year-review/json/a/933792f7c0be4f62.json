@@ -1,0 +1,26 @@
+{
+    "case_id": "933792f7c0be4f62",
+    "index": 25,
+    "symbol": "000720.KS",
+    "name": "현대건설",
+    "session_date": "2026-05-06",
+    "session": 1778049000,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "15de7f7102f67d2e87ae6e4117af493df6b4c607652ba572579e1ddfbfcd3148",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 382,
+    "first_date": "2024-10-08",
+    "last_available_at": 1778049000,
+    "indicator_input": {
+        "bars": 382,
+        "first_date": "2024-10-08",
+        "last_date": "2026-05-06",
+        "last_available_at": 1778049000,
+        "sha256": "38019cc346d3d86bf3c1be64a331f3e0c40156fea2cfccfa6d38a2c5276daf77"
+    },
+    "charts": {
+        "d120": "a/933792f7c0be4f62-120.svg",
+        "d240": "a/933792f7c0be4f62-240.svg"
+    }
+}

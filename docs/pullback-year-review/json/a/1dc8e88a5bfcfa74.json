@@ -1,0 +1,26 @@
+{
+    "case_id": "1dc8e88a5bfcfa74",
+    "index": 19,
+    "symbol": "034730.KS",
+    "name": "SK",
+    "session_date": "2026-03-10",
+    "session": 1773124200,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "ff8a26dc5855a33d29780ebea2027f00458d48625e633754cd53a232aa1d93fa",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 343,
+    "first_date": "2024-10-08",
+    "last_available_at": 1773124200,
+    "indicator_input": {
+        "bars": 343,
+        "first_date": "2024-10-08",
+        "last_date": "2026-03-10",
+        "last_available_at": 1773124200,
+        "sha256": "31034495b64efd851fd75b376b0f5bbd3c6456ec1c75315c8ed8f52fab30e730"
+    },
+    "charts": {
+        "d120": "a/1dc8e88a5bfcfa74-120.svg",
+        "d240": "a/1dc8e88a5bfcfa74-240.svg"
+    }
+}

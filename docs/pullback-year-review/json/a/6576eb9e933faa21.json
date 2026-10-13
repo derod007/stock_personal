@@ -1,0 +1,26 @@
+{
+    "case_id": "6576eb9e933faa21",
+    "index": 34,
+    "symbol": "011070.KS",
+    "name": "LG이노텍",
+    "session_date": "2026-06-15",
+    "session": 1781505000,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "b0f9b5f1f15dcd98f0c753030fb962a1601149424862573083b01afd2e84688b",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 408,
+    "first_date": "2024-10-08",
+    "last_available_at": 1781505000,
+    "indicator_input": {
+        "bars": 408,
+        "first_date": "2024-10-08",
+        "last_date": "2026-06-15",
+        "last_available_at": 1781505000,
+        "sha256": "089f5ccddcf2670d6108aa3101ee363ff3a70a66a6173c8bba177d186196e42d"
+    },
+    "charts": {
+        "d120": "a/6576eb9e933faa21-120.svg",
+        "d240": "a/6576eb9e933faa21-240.svg"
+    }
+}

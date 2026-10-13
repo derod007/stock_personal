@@ -1,0 +1,26 @@
+{
+    "case_id": "45d64cb4e6961ac4",
+    "index": 41,
+    "symbol": "003230.KS",
+    "name": "삼양식품",
+    "session_date": "2026-09-14",
+    "session": 1789367400,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "35d70142f128c78da279d272de3e86ffc85bde51751108e14998889936fb97cf",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 471,
+    "first_date": "2024-10-08",
+    "last_available_at": 1789367400,
+    "indicator_input": {
+        "bars": 471,
+        "first_date": "2024-10-08",
+        "last_date": "2026-09-14",
+        "last_available_at": 1789367400,
+        "sha256": "0e5238e962c7ba61349ad30b764ffca6ae12bf4611f3d57f0b9d8049ee92778e"
+    },
+    "charts": {
+        "d120": "a/45d64cb4e6961ac4-120.svg",
+        "d240": "a/45d64cb4e6961ac4-240.svg"
+    }
+}

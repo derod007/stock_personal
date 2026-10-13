@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "repository_lf_sha256": {
+    "docs/historical-top100-20251008-20261008/candidates.json": "ece25f22de2f8e1fd2c99550110568b1769b577abc6dc607b17e5d227b8672b5",
+    "docs/historical-top100-20251008-20261008/sector-map-full-v2.json": "08afb0b6f0be0106624364406d29a5a33851c65331e431467629f71600da1e8b",
+    "docs/historical-top100-replay-20251008-20261008/account/summary.json": "b6e071fea937e3ca23a6b5ce939dc008cb4b5c8f63acd9d36cbbb7e0179bfa7a",
+    "docs/historical-top100-replay-20251008-20261008/account/trades.json": "6399c91be22939312f5c9d70dbd1dbd1fb758a1100475c3ff1c316b44f69d4b5",
+    "docs/historical-top100-replay-20251008-20261008/account/daily-log.jsonl": "e34c1581b1bf1dc089e206cf112a6ec8d18af5d2df74e041ac135e5c35af750c",
+    "docs/historical-top100-replay-20251008-20261008/account/provenance.json": "9ee84babbdc262377d5764cb500600555e0d07840234075fb597d654e084b7f1"
+  },
+  "dataset_sha256": {
+    "dataset.json": "2151bc4531ae4d39a1fa60010ee5d9f76727c12a98880759c652bea44c6a5fec",
+    "universe.json": "13840c1a432392f7c8adc0db4602adccdd3864199e3da314864a7a44147b2fa3"
+  },
+  "bars_hash": "ec62e93c9c301c51c95f14dde51a75632b151bc34813f74958e17f7b0c720736",
+  "bars_hash_source": "recovery-close-evidence-v1.json source_provenance; sha256 54fc7d3aad7d6005341bdce7a304fbea7a02d297e789a8d4284e7659043efa82"
+}

@@ -57,17 +57,17 @@ $reasons=['target'=>'목표','stop'=>'손절','time'=>'기간'];
   <div class="scan-table-wrap"><table class="scan-table" id="t100-table">
     <thead><tr>
       <th>종목</th>
-      <th>패턴</th>
+      <th class="t100-col-pattern">패턴</th>
       <th>추천일</th>
       <th><button type="button" class="t100-sort" data-sort="buy_date">매수 체결일</button></th>
       <th>매수 체결가 · 수량 · 금액</th>
       <th>매도 체결일</th>
       <th>매도 체결가 · 수량 · 금액</th>
-      <th><button type="button" class="t100-sort" data-sort="net_pnl">실현손익(원)</button></th>
-      <th><button type="button" class="t100-sort" data-sort="net_return_pct">거래 수익률(%)</button></th>
-      <th>청산 사유</th>
+      <th class="t100-col-pnl"><button type="button" class="t100-sort" data-sort="net_pnl">실현손익</button></th>
+      <th><button type="button" class="t100-sort" data-sort="net_return_pct">수익률</button></th>
+      <th>청산</th>
       <th>상태</th>
-      <th>기간 말 평가(보유)</th>
+      <th class="t100-col-mark" title="기간 말 평가(보유)">보유 평가</th>
     </tr></thead>
     <tbody>
 <?php foreach($r['fills'] as $t):
@@ -77,17 +77,17 @@ $reasons=['target'=>'목표','stop'=>'손절','time'=>'기간'];
 ?>
       <tr data-name="<?= t100h($t['name']) ?>" data-symbol="<?= t100h($t['symbol']) ?>" data-code="<?= t100h($t['code']) ?>" data-pattern="<?= t100h($t['pattern']) ?>" data-reason="<?= t100h($t['exit_reason']??'') ?>" data-status="<?= t100h($t['status']) ?>" data-buy_date="<?= t100h($t['buy_date']) ?>" data-net_pnl="<?= t100h($t['net_pnl']??'') ?>" data-net_return_pct="<?= t100h($t['net_return_pct']??'') ?>" data-buy-price="<?= t100h(t100won($t['buy_price'])) ?>" data-buy-qty="<?= t100h($t['quantity']) ?>" data-buy-amount="<?= t100h(t100won($t['buy_amount'])) ?>" data-sell-price="<?= t100h($t['status']==='open'?'':t100won($t['sell_price'])) ?>" data-sell-qty="<?= t100h($t['status']==='open'?'':$t['sell_quantity']) ?>" data-sell-amount="<?= t100h($t['status']==='open'?'':t100won($t['sell_amount'])) ?>" data-mark="<?= t100h($t['status']==='open'?('평가일 '.($t['mark_date']??'—').' · '.t100won($t['mark_price']).'원 · 미실현 '.t100won($t['unrealized_pnl']).'원'):'') ?>">
         <td><?= t100h($t['name']) ?><span class="scan-code"><?= t100h($t['symbol']) ?></span></td>
-        <td><?= t100h($pat) ?></td>
+        <td class="t100-col-pattern"><?= t100h($pat) ?></td>
         <td class="mono"><?= t100h($t['signal_date']) ?></td>
         <td class="mono"><?= t100h($t['buy_date']) ?></td>
         <td class="mono"><?= t100fill($t['buy_price'],$t['quantity'],$t['buy_amount']) ?></td>
         <td class="mono"><?= $t['status']==='open'?'미청산':t100h($t['sell_date']) ?></td>
         <td class="mono"><?php if($t['status']==='open'): ?>미청산<?php else: ?><?= t100fill($t['sell_price'],$t['sell_quantity'],$t['sell_amount']) ?><?php endif ?></td>
-        <td class="mono <?= t100pnl($t['net_pnl']) ?>"><?= $t['status']==='open'?'—':t100h(t100won($t['net_pnl'])).'원' ?></td>
+        <td class="mono t100-col-pnl <?= t100pnl($t['net_pnl']) ?>"><?= $t['status']==='open'?'—':t100h(t100won($t['net_pnl'])).'원' ?></td>
         <td class="mono <?= t100pnl($t['net_return_pct']) ?>"><?= $t['status']==='open'?'—':t100h(t100pct($t['net_return_pct'])).'%' ?></td>
         <td><?= $t['status']==='open'?'미청산':t100h($reason) ?></td>
         <td><?= t100h($statusLab) ?></td>
-        <td class="mono"><?php if($t['status']==='open'): ?><span class="t100-lines"><span>평가일 <?= t100h($t['mark_date']??'—') ?> · <?= t100h(t100won($t['mark_price'])) ?>원</span><span>미실현 <?= t100h(t100won($t['unrealized_pnl'])) ?>원</span></span><?php else: ?>—<?php endif ?></td>
+        <td class="mono t100-col-mark"><?php if($t['status']==='open'): ?><span class="t100-lines"><span><?= t100h($t['mark_date']??'—') ?></span><span><?= t100h(t100won($t['mark_price'])) ?>원</span><span>미실현 <?= t100h(t100won($t['unrealized_pnl'])) ?>원</span></span><?php else: ?>—<?php endif ?></td>
       </tr>
 <?php endforeach ?>
     </tbody>

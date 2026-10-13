@@ -1,3 +1,15 @@
+## 2026-10-14 00:35 · Cursor · 끝
+- 한 일: 일별 TOP100 표 너비 확대, 패턴·실현손익 한 줄, 보유 평가 칸 축소
+- 파일: paper_top100_trades.php, assets/app.css, bin/paper/Chrome.php, docs/work-log.md
+- 커밋: PR #83에 추가(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-14 00:33 · Cursor · 진행
+- 한 일: 일별 TOP100 표에서 패턴·실현손익 한 줄, 기간 말 평가 칸 축소
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-14 00:32 · Cursor · 끝
 - 한 일: 일별 TOP100 거래 화면 원 금액 정수 반올림, 수익률 소수 1자리 반올림, 체결 칸 1~2줄 접힘
 - 파일: paper_top100_trades.php, assets/app.css, tests/dated_top100_trades.php, docs/work-log.md

@@ -2730,6 +2730,27 @@ body.is-loading .panel--scan {
   white-space: nowrap;
 }
 
+.paper-app:has(#t100-table) .shell--wide {
+  width: min(1600px, calc(100% - 1.5rem));
+}
+#t100-table {
+  width: max-content;
+  min-width: 100%;
+}
+#t100-table .t100-col-pattern {
+  white-space: nowrap;
+}
+#t100-table .t100-col-pnl {
+  white-space: nowrap;
+}
+#t100-table .t100-col-mark {
+  width: 6.5rem;
+  max-width: 6.5rem;
+}
+#t100-table .t100-col-mark .t100-lines {
+  max-width: 6.5rem;
+}
+
 .paper-alert {
   margin: 0.75rem 0 0;
   padding: 0.7rem 0.85rem;

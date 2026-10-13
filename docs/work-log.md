@@ -1,3 +1,9 @@
+## 2026-10-14 00:37 · Cursor · 끝
+- 한 일: 보유 평가 칸이 미실현 금액을 잘리지 않게 약간 넓힘
+- 파일: assets/app.css, bin/paper/Chrome.php, docs/work-log.md
+- 커밋: PR #83에 추가(병합 안 함)
+- 롤백: 없음
+
 ## 2026-10-14 00:35 · Cursor · 끝
 - 한 일: 일별 TOP100 표 너비 확대, 패턴·실현손익 한 줄, 보유 평가 칸 축소
 - 파일: paper_top100_trades.php, assets/app.css, bin/paper/Chrome.php, docs/work-log.md

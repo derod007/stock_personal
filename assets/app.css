@@ -2744,11 +2744,12 @@ body.is-loading .panel--scan {
   white-space: nowrap;
 }
 #t100-table .t100-col-mark {
-  width: 6.5rem;
-  max-width: 6.5rem;
+  width: 8.5rem;
+  max-width: 8.5rem;
+  font-size: 0.82rem;
 }
 #t100-table .t100-col-mark .t100-lines {
-  max-width: 6.5rem;
+  max-width: 8.5rem;
 }
 
 .paper-alert {

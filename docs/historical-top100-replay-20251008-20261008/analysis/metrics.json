@@ -1,0 +1,331 @@
+{
+  "input_sha256": {
+    "trades.json": "6399c91be22939312f5c9d70dbd1dbd1fb758a1100475c3ff1c316b44f69d4b5",
+    "summary.json": "b6e071fea937e3ca23a6b5ce939dc008cb4b5c8f63acd9d36cbbb7e0179bfa7a",
+    "daily-log.jsonl": "e34c1581b1bf1dc089e206cf112a6ec8d18af5d2df74e041ac135e5c35af750c",
+    "candidates.json": "ece25f22de2f8e1fd2c99550110568b1769b577abc6dc607b17e5d227b8672b5"
+  },
+  "validation": {
+    "daily_equity_and_realized_reconciled": 244,
+    "orders_matched": 68,
+    "dd_contributions_reconciled": true
+  },
+  "total": {
+    "orders": 68,
+    "fills": 59,
+    "closed": 56,
+    "wins": 20,
+    "losses": 36,
+    "realized": 12396872.027337136,
+    "win_rate_pct": 35.714285714285715,
+    "profit_factor": 1.4394047336876306,
+    "mean_closed_return_pct": 1.3549714364827108
+  },
+  "funnel": {
+    "signals": 103,
+    "outcomes": {
+      "order": 68,
+      "position_limit": 28,
+      "cash_or_risk_or_sector_limit": 2,
+      "already_active": 5
+    },
+    "no_signal_sessions": 170,
+    "unique_signal_symbols": 75,
+    "unique_filled_symbols": 48,
+    "cancellations": {
+      "unfilled": 6,
+      "cancelled_before_entry": 3
+    },
+    "average_cash_pct": 86.52970707790699,
+    "average_unreserved_cash_pct": 83.63726080473796,
+    "four_active_sessions": 57,
+    "evaluated_with_held": 24602,
+    "blocked_unique_slots": 840,
+    "status_counts_with_held": {
+      "await_confirmation": 7405,
+      "await_retest": 1267,
+      "context_wait": 3413,
+      "expired": 386,
+      "invalidated": 575,
+      "no_setup": 1882,
+      "rejected_rr": 772,
+      "risk_blocked": 6954,
+      "wait_pullback": 769,
+      "ready": 103,
+      "not_in_dated_top100": 202,
+      "no_upper_target": 34
+    }
+  },
+  "patterns": {
+    "breakout_retest_v1": {
+      "orders": 9,
+      "fills": 9,
+      "closed": 9,
+      "wins": 6,
+      "losses": 3,
+      "realized": 8497091.53103251,
+      "win_rate_pct": 66.66666666666667,
+      "profit_factor": 5.345718346694274,
+      "mean_closed_return_pct": 14.841664934558032,
+      "signal_outcomes": {
+        "order": 9,
+        "position_limit": 6,
+        "cash_or_risk_or_sector_limit": 2
+      }
+    },
+    "trend_pullback_v1": {
+      "orders": 52,
+      "fills": 44,
+      "closed": 42,
+      "wins": 11,
+      "losses": 31,
+      "realized": 934322.8389046201,
+      "win_rate_pct": 26.19047619047619,
+      "profit_factor": 1.0390241973694032,
+      "mean_closed_return_pct": -2.169354136284113,
+      "signal_outcomes": {
+        "order": 52,
+        "position_limit": 19,
+        "already_active": 4
+      }
+    },
+    "trend_recovery_v1": {
+      "orders": 7,
+      "fills": 6,
+      "closed": 5,
+      "wins": 3,
+      "losses": 2,
+      "realized": 2965457.657400005,
+      "win_rate_pct": 60.0,
+      "profit_factor": 2.2807220051809587,
+      "mean_closed_return_pct": 6.683257951188451,
+      "signal_outcomes": {
+        "position_limit": 3,
+        "order": 7,
+        "already_active": 1
+      }
+    }
+  },
+  "monthly": [
+    {
+      "month": "2025-10",
+      "sessions": 16,
+      "signals": 11,
+      "fills": 6,
+      "realized": 2160245.227520001
+    },
+    {
+      "month": "2025-11",
+      "sessions": 20,
+      "signals": 14,
+      "fills": 5,
+      "realized": -1758067.419323492
+    },
+    {
+      "month": "2025-12",
+      "sessions": 21,
+      "signals": 4,
+      "fills": 2,
+      "realized": 2681135.3411571626
+    },
+    {
+      "month": "2026-01",
+      "sessions": 21,
+      "signals": 6,
+      "fills": 4,
+      "realized": -346156.74192558136
+    },
+    {
+      "month": "2026-02",
+      "sessions": 17,
+      "signals": 7,
+      "fills": 5,
+      "realized": 3480149.4027000014
+    },
+    {
+      "month": "2026-03",
+      "sessions": 21,
+      "signals": 20,
+      "fills": 5,
+      "realized": -4394619.988187994
+    },
+    {
+      "month": "2026-04",
+      "sessions": 22,
+      "signals": 15,
+      "fills": 8,
+      "realized": 14463720.051386012
+    },
+    {
+      "month": "2026-05",
+      "sessions": 18,
+      "signals": 9,
+      "fills": 8,
+      "realized": -4492382.96887699
+    },
+    {
+      "month": "2026-06",
+      "sessions": 21,
+      "signals": 4,
+      "fills": 4,
+      "realized": -3051174.835373997
+    },
+    {
+      "month": "2026-07",
+      "sessions": 22,
+      "signals": 3,
+      "fills": 3,
+      "realized": 16656.2181660012
+    },
+    {
+      "month": "2026-08",
+      "sessions": 20,
+      "signals": 3,
+      "fills": 3,
+      "realized": 2147678.4000000013
+    },
+    {
+      "month": "2026-09",
+      "sessions": 20,
+      "signals": 4,
+      "fills": 3,
+      "realized": 1489689.3400960101
+    },
+    {
+      "month": "2026-10",
+      "sessions": 5,
+      "signals": 3,
+      "fills": 3,
+      "realized": 0.0
+    }
+  ],
+  "concentration": [
+    {
+      "top": 1,
+      "pnl": 4544599.658550002,
+      "share_realized_pct": 36.65924475568042,
+      "share_gross_wins_pct": 11.19090781214224,
+      "remainder": 7852272.368787133
+    },
+    {
+      "top": 3,
+      "pnl": 12742395.414520007,
+      "share_realized_pct": 102.78718201188926,
+      "share_gross_wins_pct": 31.377675285759928,
+      "remainder": -345523.3871828716
+    },
+    {
+      "top": 5,
+      "pnl": 17834686.674520012,
+      "share_realized_pct": 143.86440898310155,
+      "share_gross_wins_pct": 43.91725331790282,
+      "remainder": -5437814.647182875
+    }
+  ],
+  "drawdown": {
+    "pct": 9.828889411877487,
+    "peak_date": "2026-05-11",
+    "peak_equity": 119576508.26581004,
+    "trough_date": "2026-07-03",
+    "trough_equity": 107823465.50577903,
+    "recovery_date": null,
+    "contributions": [
+      {
+        "symbol": "017900.KS",
+        "signal_date": "2026-05-07",
+        "pattern": "trend_pullback_v1",
+        "delta": -3424196.151791999,
+        "peak_contribution": 2255029.92,
+        "trough_contribution": -1169166.2317919992
+      },
+      {
+        "symbol": "000720.KS",
+        "signal_date": "2026-05-06",
+        "pattern": "trend_pullback_v1",
+        "delta": -1368067.1766559973,
+        "peak_contribution": 269145.7,
+        "trough_contribution": -1098921.4766559973
+      },
+      {
+        "symbol": "046970.KQ",
+        "signal_date": "2026-05-11",
+        "pattern": "trend_pullback_v1",
+        "delta": -1194090.0198299997,
+        "peak_contribution": 0.0,
+        "trough_contribution": -1194090.0198299997
+      },
+      {
+        "symbol": "006340.KS",
+        "signal_date": "2026-05-21",
+        "pattern": "trend_pullback_v1",
+        "delta": -1122587.6661944995,
+        "peak_contribution": 0.0,
+        "trough_contribution": -1122587.6661944995
+      },
+      {
+        "symbol": "001440.KS",
+        "signal_date": "2026-05-21",
+        "pattern": "trend_pullback_v1",
+        "delta": -1117929.2070099972,
+        "peak_contribution": 0.0,
+        "trough_contribution": -1117929.2070099972
+      },
+      {
+        "symbol": "016360.KS",
+        "signal_date": "2026-06-01",
+        "pattern": "trend_pullback_v1",
+        "delta": -1114354.096634999,
+        "peak_contribution": 0.0,
+        "trough_contribution": -1114354.096634999
+      },
+      {
+        "symbol": "115500.KQ",
+        "signal_date": "2026-05-13",
+        "pattern": "trend_pullback_v1",
+        "delta": -1095657.5124494997,
+        "peak_contribution": 0.0,
+        "trough_contribution": -1095657.5124494997
+      },
+      {
+        "symbol": "003550.KS",
+        "signal_date": "2026-06-15",
+        "pattern": "trend_pullback_v1",
+        "delta": -1075235.3127389988,
+        "peak_contribution": 0.0,
+        "trough_contribution": -1075235.3127389988
+      },
+      {
+        "symbol": "001740.KS",
+        "signal_date": "2026-06-25",
+        "pattern": "trend_pullback_v1",
+        "delta": -919382.5632959995,
+        "peak_contribution": 0.0,
+        "trough_contribution": -919382.5632959995
+      },
+      {
+        "symbol": "011070.KS",
+        "signal_date": "2026-06-15",
+        "pattern": "trend_pullback_v1",
+        "delta": -861585.4259999995,
+        "peak_contribution": 0.0,
+        "trough_contribution": -861585.4259999995
+      },
+      {
+        "symbol": "322000.KS",
+        "signal_date": "2026-05-22",
+        "pattern": "trend_pullback_v1",
+        "delta": -32317.627428999956,
+        "peak_contribution": 0.0,
+        "trough_contribution": -32317.627428999956
+      },
+      {
+        "symbol": "011070.KS",
+        "signal_date": "2026-05-21",
+        "pattern": "breakout_retest_v1",
+        "delta": 1572360.000000001,
+        "peak_contribution": 0.0,
+        "trough_contribution": 1572360.000000001
+      }
+    ]
+  }
+}

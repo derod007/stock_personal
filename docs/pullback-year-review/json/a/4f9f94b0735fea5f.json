@@ -1,0 +1,26 @@
+{
+    "case_id": "4f9f94b0735fea5f",
+    "index": 12,
+    "symbol": "084670.KS",
+    "name": "동양고속",
+    "session_date": "2026-01-14",
+    "session": 1768372200,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "3c3da655912dcb381f97dfd3719fd1c3e87325f4e2e40595de2da0e8076a261d",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 1041,
+    "first_date": "2021-10-12",
+    "last_available_at": 1768372200,
+    "indicator_input": {
+        "bars": 1041,
+        "first_date": "2021-10-12",
+        "last_date": "2026-01-14",
+        "last_available_at": 1768372200,
+        "sha256": "8560a890e54e318059020df82b1136455a67bfb158b4b6a53f13f1c904201101"
+    },
+    "charts": {
+        "d120": "a/4f9f94b0735fea5f-120.svg",
+        "d240": "a/4f9f94b0735fea5f-240.svg"
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "case_id": "08e8a5ee88e686d4",
+    "index": 14,
+    "symbol": "000880.KS",
+    "name": "한화",
+    "session_date": "2026-02-03",
+    "session": 1770100200,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "ee9f64d83e2998e95b3052a979220c9dd7f563745b12ebc348951355838746fb",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 1055,
+    "first_date": "2021-10-12",
+    "last_available_at": 1770100200,
+    "indicator_input": {
+        "bars": 1055,
+        "first_date": "2021-10-12",
+        "last_date": "2026-02-03",
+        "last_available_at": 1770100200,
+        "sha256": "64e837bdff90b7cb73c54680476689e9dc28e29cb593c399dfa0a41ab92580a2"
+    },
+    "charts": {
+        "d120": "a/08e8a5ee88e686d4-120.svg",
+        "d240": "a/08e8a5ee88e686d4-240.svg"
+    }
+}

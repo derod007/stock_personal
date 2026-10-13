@@ -1,0 +1,26 @@
+{
+    "case_id": "27ab1b065f03f120",
+    "index": 31,
+    "symbol": "322000.KS",
+    "name": "HD현대에너지솔루션",
+    "session_date": "2026-05-22",
+    "session": 1779431400,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "d4ae0718a67bd818f4c958b560339e7a4675d11708188de500ebbe9c6dbef164",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 394,
+    "first_date": "2024-10-08",
+    "last_available_at": 1779431400,
+    "indicator_input": {
+        "bars": 394,
+        "first_date": "2024-10-08",
+        "last_date": "2026-05-22",
+        "last_available_at": 1779431400,
+        "sha256": "40a2491c8884a088afbf5d1dff8bf5b2b2502f01c547c2cc4266939cd41aa4c2"
+    },
+    "charts": {
+        "d120": "a/27ab1b065f03f120-120.svg",
+        "d240": "a/27ab1b065f03f120-240.svg"
+    }
+}

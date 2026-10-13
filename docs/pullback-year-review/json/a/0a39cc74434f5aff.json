@@ -1,0 +1,26 @@
+{
+    "case_id": "0a39cc74434f5aff",
+    "index": 22,
+    "symbol": "005880.KS",
+    "name": "대한해운",
+    "session_date": "2026-03-31",
+    "session": 1774938600,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "042a0b6a9604d2422b1496cb20a41db6dd326fb0b78f3fb81e9be6b85c241af9",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 1091,
+    "first_date": "2021-10-12",
+    "last_available_at": 1774938600,
+    "indicator_input": {
+        "bars": 1091,
+        "first_date": "2021-10-12",
+        "last_date": "2026-03-31",
+        "last_available_at": 1774938600,
+        "sha256": "076f64d8beb7b9bf10ee63f997212de7bc385df862d685f2edeb4f9a220dd507"
+    },
+    "charts": {
+        "d120": "a/0a39cc74434f5aff-120.svg",
+        "d240": "a/0a39cc74434f5aff-240.svg"
+    }
+}

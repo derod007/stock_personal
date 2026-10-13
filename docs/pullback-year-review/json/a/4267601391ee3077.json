@@ -1,0 +1,26 @@
+{
+    "case_id": "4267601391ee3077",
+    "index": 17,
+    "symbol": "058610.KQ",
+    "name": "에스피지",
+    "session_date": "2026-02-19",
+    "session": 1771482600,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "90bc6aa0dd7be8506348cfb4965a83723361e529bba985235e67e15284a67ca4",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 1064,
+    "first_date": "2021-10-12",
+    "last_available_at": 1771482600,
+    "indicator_input": {
+        "bars": 1064,
+        "first_date": "2021-10-12",
+        "last_date": "2026-02-19",
+        "last_available_at": 1771482600,
+        "sha256": "70df7ea57b8cebaaba09accaf2a0b49c5708f37f73cfd338e6bebafb2951ef46"
+    },
+    "charts": {
+        "d120": "a/4267601391ee3077-120.svg",
+        "d240": "a/4267601391ee3077-240.svg"
+    }
+}

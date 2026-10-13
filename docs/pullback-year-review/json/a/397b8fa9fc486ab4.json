@@ -1,0 +1,26 @@
+{
+    "case_id": "397b8fa9fc486ab4",
+    "index": 8,
+    "symbol": "108490.KQ",
+    "name": "로보티즈",
+    "session_date": "2025-11-24",
+    "session": 1763965800,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "3fb1a4a49c4fd2a8c1206685f0a084a14e082936357129f05c07d41562969032",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 274,
+    "first_date": "2024-10-08",
+    "last_available_at": 1763965800,
+    "indicator_input": {
+        "bars": 274,
+        "first_date": "2024-10-08",
+        "last_date": "2025-11-24",
+        "last_available_at": 1763965800,
+        "sha256": "f49e9e61bf4562f6abe4105dcf713560022871965693d6c69af0cba61e05da19"
+    },
+    "charts": {
+        "d120": "a/397b8fa9fc486ab4-120.svg",
+        "d240": "a/397b8fa9fc486ab4-240.svg"
+    }
+}

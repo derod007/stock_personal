@@ -1,0 +1,26 @@
+{
+    "case_id": "5e10220ebcd6dda1",
+    "index": 29,
+    "symbol": "001440.KS",
+    "name": "대한전선",
+    "session_date": "2026-05-21",
+    "session": 1779345000,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "d232e2512545b74b59861f143ef4788de81c453ab6c19c1b3a6e134da68fdba3",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 393,
+    "first_date": "2024-10-08",
+    "last_available_at": 1779345000,
+    "indicator_input": {
+        "bars": 393,
+        "first_date": "2024-10-08",
+        "last_date": "2026-05-21",
+        "last_available_at": 1779345000,
+        "sha256": "93e7fc309c598248ca321d16a7349ebee851fdcf333698eb6d0a08c0626d3fe2"
+    },
+    "charts": {
+        "d120": "a/5e10220ebcd6dda1-120.svg",
+        "d240": "a/5e10220ebcd6dda1-240.svg"
+    }
+}

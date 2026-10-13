@@ -1,0 +1,26 @@
+{
+    "case_id": "619a665a503bf9d0",
+    "index": 28,
+    "symbol": "115500.KQ",
+    "name": "케이씨에스",
+    "session_date": "2026-05-13",
+    "session": 1778653800,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "53c7231958bb62aee8a88cb4acf7af0d5e10b04b52ba3e6994bccd2012d506d6",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 1120,
+    "first_date": "2021-10-12",
+    "last_available_at": 1778653800,
+    "indicator_input": {
+        "bars": 1120,
+        "first_date": "2021-10-12",
+        "last_date": "2026-05-13",
+        "last_available_at": 1778653800,
+        "sha256": "f6801cb9177e91fa483c0e8845af7821a5a929a69f0f62492d39d8f99edbea13"
+    },
+    "charts": {
+        "d120": "a/619a665a503bf9d0-120.svg",
+        "d240": "a/619a665a503bf9d0-240.svg"
+    }
+}

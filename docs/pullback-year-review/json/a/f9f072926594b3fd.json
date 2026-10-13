@@ -1,0 +1,26 @@
+{
+    "case_id": "f9f072926594b3fd",
+    "index": 9,
+    "symbol": "010120.KS",
+    "name": "LS ELECTRIC",
+    "session_date": "2025-11-27",
+    "session": 1764225000,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "d178d1f1ce825bc422a7390ba08b520aafa05ead5dd8e7ed15e833d8762d51bb",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 277,
+    "first_date": "2024-10-08",
+    "last_available_at": 1764225000,
+    "indicator_input": {
+        "bars": 277,
+        "first_date": "2024-10-08",
+        "last_date": "2025-11-27",
+        "last_available_at": 1764225000,
+        "sha256": "43bec428f9909f2a98f545543967f0c7f185cbb1019c26ad215450a57f33249e"
+    },
+    "charts": {
+        "d120": "a/f9f072926594b3fd-120.svg",
+        "d240": "a/f9f072926594b3fd-240.svg"
+    }
+}

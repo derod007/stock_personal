@@ -1,0 +1,26 @@
+{
+    "case_id": "f4e8d714445d1a18",
+    "index": 35,
+    "symbol": "001740.KS",
+    "name": "SK네트웍스",
+    "session_date": "2026-06-25",
+    "session": 1782369000,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "1bdfda7230b14af0ef82f6af2df105c78f6bf5380ed6438d5af088af5f93cca6",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 1149,
+    "first_date": "2021-10-12",
+    "last_available_at": 1782369000,
+    "indicator_input": {
+        "bars": 1149,
+        "first_date": "2021-10-12",
+        "last_date": "2026-06-25",
+        "last_available_at": 1782369000,
+        "sha256": "1040f16731eebacd0e6be7a91aa894984197dc0182b28fffc34c91137b5e7411"
+    },
+    "charts": {
+        "d120": "a/f4e8d714445d1a18-120.svg",
+        "d240": "a/f4e8d714445d1a18-240.svg"
+    }
+}

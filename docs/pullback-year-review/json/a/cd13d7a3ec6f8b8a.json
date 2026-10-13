@@ -1,0 +1,26 @@
+{
+    "case_id": "cd13d7a3ec6f8b8a",
+    "index": 11,
+    "symbol": "066570.KS",
+    "name": "LG전자",
+    "session_date": "2026-01-05",
+    "session": 1767594600,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "cb13f9303bdb713a3af014feec5b09e6c97e7b27622ba4df5ccc52d36f83f678",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 301,
+    "first_date": "2024-10-08",
+    "last_available_at": 1767594600,
+    "indicator_input": {
+        "bars": 301,
+        "first_date": "2024-10-08",
+        "last_date": "2026-01-05",
+        "last_available_at": 1767594600,
+        "sha256": "736ead56a0657c9bd277e20ae503238b18e4a47d22c5b7dfebfc0dd5a45a5564"
+    },
+    "charts": {
+        "d120": "a/cd13d7a3ec6f8b8a-120.svg",
+        "d240": "a/cd13d7a3ec6f8b8a-240.svg"
+    }
+}

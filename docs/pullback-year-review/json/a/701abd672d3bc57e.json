@@ -1,0 +1,26 @@
+{
+    "case_id": "701abd672d3bc57e",
+    "index": 38,
+    "symbol": "475150.KS",
+    "name": "SK이터닉스",
+    "session_date": "2026-08-13",
+    "session": 1786602600,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "86705aed969f7507ccfaf8532868de9ca6a4a9218b76bd49f8319ef9154991f7",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 450,
+    "first_date": "2024-10-08",
+    "last_available_at": 1786602600,
+    "indicator_input": {
+        "bars": 450,
+        "first_date": "2024-10-08",
+        "last_date": "2026-08-13",
+        "last_available_at": 1786602600,
+        "sha256": "0fcb5b37885749b5198c18c57355919f117003f5f341910328b33fcbde30bc59"
+    },
+    "charts": {
+        "d120": "a/701abd672d3bc57e-120.svg",
+        "d240": "a/701abd672d3bc57e-240.svg"
+    }
+}

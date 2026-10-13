@@ -44,6 +44,9 @@ jobs:
           php -l bin/paper_recovery_close_evidence.php
           php tests/recovery_close_evidence.php
           php bin/paper_opportunity_research.php inventory > /dev/null
+          php -l bin/paper/PullbackYearReview.php
+          php -l bin/paper_pullback_year_review.php
+          php tests/pullback_year_review.php
           php -l bin/paper/DatedTop100Prep.php
           php -l bin/paper_dated_top100_prep.php
           php tests/dated_top100_prep.php

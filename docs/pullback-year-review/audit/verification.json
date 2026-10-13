@@ -1,0 +1,13 @@
+{
+  "cases": 42,
+  "input_bars": 28068,
+  "A_charts": 84,
+  "B_charts": 42,
+  "B_price_markers": 126,
+  "svg_valid_candles_and_volume_bars": 15120,
+  "issues": 0,
+  "asof_case_metrics_unchanged": true,
+  "source_sha256": "d98e740d3a3d2eb152b23b18a3f2380f57ec106e61abe8fc90e6b49b05855e0d",
+  "tests_passed": 6,
+  "scope": "A OHLCV coordinates, B OHLCV and level-marker coordinates, independent pullback arithmetic; no future-price or common-risk reimplementation"
+}

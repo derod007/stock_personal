@@ -1,0 +1,26 @@
+{
+    "case_id": "d446aeaedf57da8f",
+    "index": 23,
+    "symbol": "263750.KQ",
+    "name": "펄어비스",
+    "session_date": "2026-04-22",
+    "session": 1776839400,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "ebea74c0511a269f8d546224dc608d67493c134f1f81d5c896ddae37d751aac2",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 1107,
+    "first_date": "2021-10-12",
+    "last_available_at": 1776839400,
+    "indicator_input": {
+        "bars": 1107,
+        "first_date": "2021-10-12",
+        "last_date": "2026-04-22",
+        "last_available_at": 1776839400,
+        "sha256": "7a1155fa8f5b144a96f77b4a4fce2aef53b13771b36540be28488c856c5297ff"
+    },
+    "charts": {
+        "d120": "a/d446aeaedf57da8f-120.svg",
+        "d240": "a/d446aeaedf57da8f-240.svg"
+    }
+}

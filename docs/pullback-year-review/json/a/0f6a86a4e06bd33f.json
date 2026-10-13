@@ -1,0 +1,26 @@
+{
+    "case_id": "0f6a86a4e06bd33f",
+    "index": 15,
+    "symbol": "000270.KS",
+    "name": "기아",
+    "session_date": "2026-02-04",
+    "session": 1770186600,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "422797f735e6d703eb55e8f429b3a11f1e62ffdcce053130aba178df1e866bfd",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 323,
+    "first_date": "2024-10-08",
+    "last_available_at": 1770186600,
+    "indicator_input": {
+        "bars": 323,
+        "first_date": "2024-10-08",
+        "last_date": "2026-02-04",
+        "last_available_at": 1770186600,
+        "sha256": "a9487c226541afa9e8b9839e3db065e9e85e2c578d2c28cd3c846aadeb4d89d6"
+    },
+    "charts": {
+        "d120": "a/0f6a86a4e06bd33f-120.svg",
+        "d240": "a/0f6a86a4e06bd33f-240.svg"
+    }
+}

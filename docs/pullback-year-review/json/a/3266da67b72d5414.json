@@ -1,0 +1,26 @@
+{
+    "case_id": "3266da67b72d5414",
+    "index": 2,
+    "symbol": "290650.KQ",
+    "name": "엘앤씨바이오",
+    "session_date": "2025-10-16",
+    "session": 1760596200,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "75eeab088c9535bc7d55f52179d23931b606492a55c524597f3b34305ca63b04",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 980,
+    "first_date": "2021-10-12",
+    "last_available_at": 1760596200,
+    "indicator_input": {
+        "bars": 980,
+        "first_date": "2021-10-12",
+        "last_date": "2025-10-16",
+        "last_available_at": 1760596200,
+        "sha256": "cb5ef9caedc22bd9555597fee902eef859b090e925133d38906240ecff795e2f"
+    },
+    "charts": {
+        "d120": "a/3266da67b72d5414-120.svg",
+        "d240": "a/3266da67b72d5414-240.svg"
+    }
+}

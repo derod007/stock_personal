@@ -1,0 +1,26 @@
+{
+    "case_id": "cb7091cebde33e0f",
+    "index": 42,
+    "symbol": "006400.KS",
+    "name": "삼성SDI",
+    "session_date": "2026-09-15",
+    "session": 1789453800,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "d727b12a05e856243f01bd79310bb8ac2b41bdd5f6a54f4fc520b08b42c2778a",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 472,
+    "first_date": "2024-10-08",
+    "last_available_at": 1789453800,
+    "indicator_input": {
+        "bars": 472,
+        "first_date": "2024-10-08",
+        "last_date": "2026-09-15",
+        "last_available_at": 1789453800,
+        "sha256": "da093b9a4e0706e9fd032ce5942eb325a0c716bd2050d3fd59f6c76feefe489c"
+    },
+    "charts": {
+        "d120": "a/cb7091cebde33e0f-120.svg",
+        "d240": "a/cb7091cebde33e0f-240.svg"
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "case_id": "fdfe720a271b1684",
+    "index": 36,
+    "symbol": "000500.KS",
+    "name": "가온전선",
+    "session_date": "2026-07-22",
+    "session": 1784701800,
+    "dataset_id": "kr-dated-amount-top100-20251008-20261008-v2",
+    "bars_sha256": "0e99f39874c3bb03b54a382a33b5949113852fdecbca97a4b9618688025feb94",
+    "commit": "113e5cbc9526e6beb60b1d9dceab7df245213aed",
+    "strategy_fingerprint": "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465",
+    "completed_bars": 434,
+    "first_date": "2024-10-08",
+    "last_available_at": 1784701800,
+    "indicator_input": {
+        "bars": 434,
+        "first_date": "2024-10-08",
+        "last_date": "2026-07-22",
+        "last_available_at": 1784701800,
+        "sha256": "a175220b7dbd6f7a2604cec8f2a1982aef965ea7f20ee7acf892fe014cbc9828"
+    },
+    "charts": {
+        "d120": "a/fdfe720a271b1684-120.svg",
+        "d240": "a/fdfe720a271b1684-240.svg"
+    }
+}

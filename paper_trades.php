@@ -16,7 +16,7 @@ catch(Throwable $e){$error='기록 읽기 또는 분석 오류입니다. 원본 
 paper_open(['title'=>'거래별 성과 분석','page'=>'trades','account'=>$id,'mode'=>$mode]);
 ?>
 <form class="paper-filter"><?php paper_account_field($id); ?><label>기록 종류 <select name="mode"><option value="forward" <?= $mode==='forward'?'selected':'' ?>>앞으로 기록</option><option value="replay" <?= $mode==='replay'?'selected':'' ?>>과거 재현</option></select></label><button>조회</button></form>
-<p class="paper-lede">모의 계좌에 저장된 체결·청산과 당시 진입 조건을 분석합니다. 현재 전략으로 과거 매매를 다시 계산하지 않습니다.</p>
+<p class="paper-lede">모의 계좌에 저장된 체결·청산과 당시 진입 조건을 분석합니다. 현재 전략으로 과거 매매를 다시 계산하지 않습니다. <a href="paper_top100_trades.php">KRX 일별 TOP100 연구 계좌의 체결 거래</a>는 저장 재현 결과만 보여 주며 이 화면의 운영 계좌와 섞지 않습니다.</p>
 <?php if($error): ?><section class="panel panel--error"><p><?= th($error) ?></p></section>
 <?php elseif(!$r): ?><section class="panel panel--idle"><p>아직 계좌 기록이 없습니다. 일일 수집·모의 계좌 갱신 이후 확인하세요.</p></section>
 <?php else: ?>

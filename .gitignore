@@ -13,3 +13,7 @@
 /data/paper-logs/
 /data/워뇨띠/
 /.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+docs/pullback-year-review/**/*-input.json

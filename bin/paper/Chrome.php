@@ -263,6 +263,7 @@ function paper_account_name(string $id): string
         'kr-identity' => '한국 · 같은 전략 확인',
         'us-volume95-v1' => '미국 · 거래량 95%',
         'kr-volume95-v1' => '한국 · 거래량 95%',
+        'hist-kr-dated-top100-v1-20251008-20261008' => 'KRX 일별 TOP100 연구 · 2025-10-08~2026-10-08',
         default => $id,
     };
 }
@@ -313,12 +314,18 @@ function paper_open(array $opts): void
         'revisions' => 'paper_revisions.php',
         'entry' => 'paper_entry.php',
         'rr' => 'paper_rr.php',
+        'top100_trades' => 'paper_top100_trades.php',
     ];
     $script = $scripts[$page] ?? 'paper.php';
     $isKr = str_contains($account, '-kr') || str_starts_with($experiment, 'kr-');
     if ($page === 'compare') {
         $usHref = 'paper_compare.php?experiment=us-identity&mode=' . rawurlencode($mode);
         $krHref = 'paper_compare.php?experiment=kr-identity&mode=' . rawurlencode($mode);
+    } elseif ($page === 'top100_trades') {
+        $q = 'account=paper-kr-recovery-v1&mode=replay';
+        $usHref = 'paper.php?account=paper-us&mode=replay';
+        $krHref = 'paper_top100_trades.php';
+        $isKr = true;
     } else {
         $usHref = $script . '?' . preg_replace('/account=[^&]*/', 'account=paper-us', $q);
         $krHref = $script . '?' . preg_replace('/account=[^&]*/', 'account=paper-kr', $q);
@@ -357,10 +364,10 @@ function paper_open(array $opts): void
     <nav class="paper-navigation" aria-label="모의 계좌 화면">
       <?php foreach ([
           '매일 확인'=>['account'=>'계좌 현황', 'changes'=>'오늘 변화', 'journey'=>'진입 확인 → 결과', 'trades'=>'계좌 거래', 'diagnostics'=>'실행 상태'],
-          '분석·연구'=>['weekly'=>'주간 요약', 'rr'=>'탈락 이유·연구', 'entry'=>'진입 조건 비교', 'compare'=>'전략 비교', 'revisions'=>'가격 자료 변경'],
+          '분석·연구'=>['weekly'=>'주간 요약', 'rr'=>'탈락 이유·연구', 'entry'=>'진입 조건 비교', 'compare'=>'전략 비교', 'revisions'=>'가격 자료 변경', 'top100_trades'=>'일별 TOP100 거래'],
       ] as $group=>$items): ?>
       <div class="paper-nav-group"><span><?= paper_esc($group) ?></span><div class="tabs paper-tabs">
-        <?php foreach ($items as $key=>$label): $href=$scripts[$key].'?'.($key==='compare'?'experiment='.rawurlencode($isKr?'kr-identity':'us-identity').'&mode='.rawurlencode($mode):$q); ?>
+        <?php foreach ($items as $key=>$label): $href=$key==='top100_trades'?'paper_top100_trades.php':($scripts[$key].'?'.($key==='compare'?'experiment='.rawurlencode($isKr?'kr-identity':'us-identity').'&mode='.rawurlencode($mode):$q)); ?>
         <a class="tabs__link<?= $on($key) ?>" href="<?= paper_esc($href) ?>"<?= $now($key) ?>><?= paper_esc($label) ?></a>
         <?php endforeach ?>
       </div></div>

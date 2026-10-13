@@ -1,3 +1,10 @@
+## 2026-10-13 · Codex · 완료
+- 한 일: PR #78 가격 ZIP의 42건·28,068 사례별 봉 검증, A 84장/B 42장 좌표·눌림 산식 독립 계산, 전체 판정일 차트 메모와 성과 비교. MA20 아래 신호 22건·깊은 이격 관찰 28건을 확인하되 새 필터 채택 안 함
+- 검증: 가격/MA/미래 시각/SVG/고정 지표 변조 실패 포함 6개 시험 통과. 운영·원본·기존 검토 자료 보존. 공통 위험 전체 독립 구현·청산 재감사는 아님. 병합하지 않음
+
+## 2026-10-13 · Codex · 진행
+- 한 일: 첨부 가격 ZIP으로 PR #78의 42건 가격·차트·눌림 코드 독립 계산 및 판정일 구조 검토. 기존 성과 노출 사실을 명시하고 운영·원본 보존
+
 ## 2026-10-13 11:34 · Cursor · 끝
 - 한 일: PR #76 저장 장부의 상승 눌림 종료 42건 전체 A/B/C 검토 화면·차트 검증. PR #77은 미병합 참고만. 계좌 재실행·병합 없음
 - 파일: bin/paper/PullbackYearReview.php, bin/paper_pullback_year_review.php, tests/pullback_year_review.php, docs/pullback-year-review/, .github/workflows/pattern-replay.yml, docs/work-log.md

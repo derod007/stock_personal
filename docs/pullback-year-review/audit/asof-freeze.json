@@ -1,0 +1,9 @@
+{
+  "phase": "before_joining_case_outcomes_in_this_review",
+  "not_blind": true,
+  "files": {
+    "protocol.md": "5d423f032e6f9c1f68dad4d4cdc291e0daef7aa134bffe15c65d10b5be354265",
+    "asof-metrics.json": "8ccde36bcabce2e9ce6615890b90f37aaec6aadf4a7063a30bd793ce386fef30",
+    "visual-notes.json": "5bc369b032f6486ad81554ff7e4cda5bb31fb567a5bfb61c74d1a59c2abae888"
+  }
+}

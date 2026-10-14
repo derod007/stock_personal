@@ -1,0 +1,116 @@
+{
+    "schema": 1,
+    "dataset": "kr-dated-amount-top100-20241008-20251002",
+    "label": "KRX 일별 거래대금 TOP100 연구",
+    "evaluation_start": "2024-10-08",
+    "as_of": "2025-10-02",
+    "prep_bars": 240,
+    "min_bars": 60,
+    "primary_range": "5y",
+    "price_basis": "yahoo_chart_quote_ohlcv_daily_adjustment_unverified",
+    "union_is_collection_list_only": true,
+    "account_replay": false,
+    "actions": {
+        "imported": 0,
+        "collected": 1231,
+        "failed": 13,
+        "incomplete_import_tries": 1855,
+        "unmapped_provider_symbols": 4
+    },
+    "seconds": 1867.7,
+    "yahoo_requests": 1231,
+    "http_attempts": 1244,
+    "bars_bytes": 289743700,
+    "summary": {
+        "requested": 1244,
+        "collected": 1231,
+        "failed": 13,
+        "not_attempted": 0,
+        "quality_ok": 0,
+        "quality_ok_with_warnings": 1121,
+        "quality_hold": 110,
+        "history_short_for_240": 164,
+        "insufficient_history": 17,
+        "extension_requested": 0,
+        "provider_history_exhausted": 155,
+        "with_close_repair": 176
+    },
+    "failed": [
+        {
+            "symbol": "005390.KS",
+            "name": "신성통상",
+            "error": "Yahoo HTTP 404"
+        },
+        {
+            "symbol": "008500.KS",
+            "name": "일정실업",
+            "error": "Yahoo HTTP 404"
+        },
+        {
+            "symbol": "010620.KS",
+            "name": "HD현대미포",
+            "error": "Yahoo HTTP 404"
+        },
+        {
+            "symbol": "012510.KS",
+            "name": "더존비즈온",
+            "error": "Yahoo HTTP 404"
+        },
+        {
+            "symbol": "029960.KQ",
+            "name": "코엔텍",
+            "error": "Yahoo HTTP 404"
+        },
+        {
+            "symbol": "031440.KS",
+            "name": "신세계푸드",
+            "error": "Yahoo HTTP 404"
+        },
+        {
+            "symbol": "042670.KS",
+            "name": "HD현대인프라코어",
+            "error": "Yahoo HTTP 404"
+        },
+        {
+            "symbol": "057050.KS",
+            "name": "현대홈쇼핑",
+            "error": "Yahoo HTTP 404"
+        },
+        {
+            "symbol": "138490.KS",
+            "name": "코오롱ENP",
+            "error": "Yahoo HTTP 404"
+        },
+        {
+            "symbol": "214610.KQ",
+            "name": "미코바이오메드",
+            "error": "Yahoo HTTP 404"
+        },
+        {
+            "symbol": "230360.KQ",
+            "name": "에코마케팅",
+            "error": "Yahoo HTTP 404"
+        },
+        {
+            "symbol": "335890.KQ",
+            "name": "비올",
+            "error": "Yahoo HTTP 404"
+        },
+        {
+            "symbol": "450140.KS",
+            "name": "코오롱모빌리티그룹",
+            "error": "Yahoo HTTP 404"
+        }
+    ],
+    "reuse_sources_read_only": [
+        "kr-saved-scan-20261009",
+        "kr-saved-scan-20251008",
+        "kr-dated-amount-top100-202510",
+        "kr-dated-amount-top100-20251008-20261008",
+        "kr-dated-amount-top100-20251008-20261008-v2"
+    ],
+    "existing_year_dataset_not_overwritten": true,
+    "oct2025_dataset_not_overwritten": true,
+    "no_rank_101_fill": true,
+    "quality_note": "inspectRows hold/warnings are dataset-wide at as_of. PaperQuality at a judgment session stays separate so a later issue does not by itself wipe an earlier good session."
+}

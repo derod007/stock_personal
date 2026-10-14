@@ -1,0 +1,61 @@
+{
+    "schema": 1,
+    "kind": "sector_collection_v2",
+    "assumption": "현재 운영 섹터 캐시에 저장된 업종명을 SectorMap::bucketOf로 분류해 두 기간에 같이 적용한다. 당시 업종을 복원한 것이 아니다.",
+    "collected_at": "2026-10-14T11:51:58+09:00",
+    "why_not_sector_map": "finance.naver.com/item/main.naver answers 302 to stock.naver.com, which has no upjong link. SectorMap stores \"기타\" and a null name for every symbol.",
+    "endpoints": {
+        "industry_list": "https://m.stock.naver.com/api/stocks/industry?page=%d&pageSize=100",
+        "stock": "https://m.stock.naver.com/api/stock/%s/integration"
+    },
+    "industry_list": {
+        "groups": 79,
+        "total_count": 79,
+        "pages": 1,
+        "sha256": "822c8b453b7cd3af8cd0c8753717237b8c4f6ee59ed12c5ce4f6d086cade5486",
+        "ok": true,
+        "failure": null
+    },
+    "research_cache_dir": "C:/Users/acdun/Desktop/dev/stock-personal-paper/history-sector/dated-top100-20241008-20251002-v2",
+    "counts": {
+        "symbols": 3,
+        "secured": 3,
+        "unconfirmed": 0
+    },
+    "failure_reasons": [],
+    "bucket_counts": {
+        "auto": 2,
+        "bio": 1
+    },
+    "operational_caches_unchanged": true,
+    "operational_cache_fingerprints": {
+        "data/cache/sector": null,
+        "data/raw/cache/sector": null
+    },
+    "symbols": {
+        "0008Z0.KQ": {
+            "status": "secured",
+            "sector_name": "조선",
+            "bucket": "auto",
+            "industry_code": "291",
+            "response_sha256": "b6c2f33a1c6c2fdaabb661f654b107384fc8543e54c5494392ad3116edb83e43",
+            "attempts": 1
+        },
+        "0010V0.KQ": {
+            "status": "secured",
+            "sector_name": "건강관리장비와용품",
+            "bucket": "bio",
+            "industry_code": "281",
+            "response_sha256": "a67fb6e96b1bd5986efa4bdb2f08e9ee88520bfda24e496d116bf6e928ed6178",
+            "attempts": 1
+        },
+        "18064K.KS": {
+            "status": "secured",
+            "sector_name": "항공사",
+            "bucket": "auto",
+            "industry_code": "305",
+            "response_sha256": "8a31268c47a409baefcf5b6f97230635748279b53ef97135a42b03847fff418c",
+            "attempts": 1
+        }
+    }
+}

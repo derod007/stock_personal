@@ -220,7 +220,28 @@ class DatedAmountTop100RangeTest(unittest.TestCase):
             before = (docs / "file-hashes.json").read_bytes()
             out = self._validate(docs, raw_root, hash_mode="verify")
             self.assertEqual(out["hash_mode"], "verify")
+            self.assertEqual(out["from"], "2025-10-08")
+            self.assertEqual(out["to"], "2026-10-08")
             self.assertEqual((docs / "file-hashes.json").read_bytes(), before)
+
+    def test_explicit_eval_window_is_not_first_last_trading_day(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            docs, raw_root, _ = self._layout(Path(tmp), ok_dates=self.days)
+            out = self.m.validate_inputs(
+                FakePilot(),
+                days=self.days,
+                docs=docs,
+                raw_root=raw_root,
+                hash_mode="verify",
+                date_from="2024-10-08",
+                date_to="2025-10-02",
+            )
+            self.assertEqual(out["from"], "2024-10-08")
+            self.assertEqual(out["to"], "2025-10-02")
+            self.assertEqual(
+                self.m.policy_id(out["from"], out["to"]),
+                "dated_krx_amount_top100_20241008_20251002_v1",
+            )
 
     def test_freeze_refuses_existing_hash_file(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -1,0 +1,100 @@
+{
+    "schema": 1,
+    "kind": "yahoo_request_evidence_v1",
+    "dataset": "kr-dated-amount-top100-20241008-20251002",
+    "confirmed": {
+        "included_symbols": 1244,
+        "collected_done": 1231,
+        "failed_symbols": 13,
+        "unmapped_skipped_before_http": 4,
+        "success_status_request_records": 1231,
+        "failed_status_attempts_sum": 13,
+        "failed_status_with_request_array": 0,
+        "raw_yahoo_index_files": 1231
+    },
+    "unconfirmed": {
+        "httpGet_inner_retries": "not_in_existing_status_or_index_logs",
+        "failed_symbol_curl_attempts": "status.attempts exists; per-curl http_code was not stored"
+    },
+    "failed": [
+        {
+            "symbol": "005390.KS",
+            "attempts": 1,
+            "error": "Yahoo HTTP 404 for 005390.KS",
+            "requests_recorded": 0
+        },
+        {
+            "symbol": "008500.KS",
+            "attempts": 1,
+            "error": "Yahoo HTTP 404 for 008500.KS",
+            "requests_recorded": 0
+        },
+        {
+            "symbol": "010620.KS",
+            "attempts": 1,
+            "error": "Yahoo HTTP 404 for 010620.KS",
+            "requests_recorded": 0
+        },
+        {
+            "symbol": "012510.KS",
+            "attempts": 1,
+            "error": "Yahoo HTTP 404 for 012510.KS",
+            "requests_recorded": 0
+        },
+        {
+            "symbol": "029960.KQ",
+            "attempts": 1,
+            "error": "Yahoo HTTP 404 for 029960.KQ",
+            "requests_recorded": 0
+        },
+        {
+            "symbol": "031440.KS",
+            "attempts": 1,
+            "error": "Yahoo HTTP 404 for 031440.KS",
+            "requests_recorded": 0
+        },
+        {
+            "symbol": "042670.KS",
+            "attempts": 1,
+            "error": "Yahoo HTTP 404 for 042670.KS",
+            "requests_recorded": 0
+        },
+        {
+            "symbol": "057050.KS",
+            "attempts": 1,
+            "error": "Yahoo HTTP 404 for 057050.KS",
+            "requests_recorded": 0
+        },
+        {
+            "symbol": "138490.KS",
+            "attempts": 1,
+            "error": "Yahoo HTTP 404 for 138490.KS",
+            "requests_recorded": 0
+        },
+        {
+            "symbol": "214610.KQ",
+            "attempts": 1,
+            "error": "Yahoo HTTP 404 for 214610.KQ",
+            "requests_recorded": 0
+        },
+        {
+            "symbol": "230360.KQ",
+            "attempts": 1,
+            "error": "Yahoo HTTP 404 for 230360.KQ",
+            "requests_recorded": 0
+        },
+        {
+            "symbol": "335890.KQ",
+            "attempts": 1,
+            "error": "Yahoo HTTP 404 for 335890.KQ",
+            "requests_recorded": 0
+        },
+        {
+            "symbol": "450140.KS",
+            "attempts": 1,
+            "error": "Yahoo HTTP 404 for 450140.KS",
+            "requests_recorded": 0
+        }
+    ],
+    "no_recollect": true
+}

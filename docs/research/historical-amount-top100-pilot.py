@@ -1149,6 +1149,7 @@ def main() -> int:
     parser.add_argument("--raw-root", default=None)
     parser.add_argument("--docs", default=None)
     parser.add_argument("--reuse-from", default=None, help="Oct 2025 gitignored raw root to copy after hash check")
+    parser.add_argument("--calendar", default=None, help="trading-calendar.json; default is the 2025-10-08..2026-10-08 file")
     parser.add_argument("--sleep", type=float, default=1.2)
     args = parser.parse_args()
     range_mode = args.date_from is not None or args.date_to is not None
@@ -1161,13 +1162,19 @@ def main() -> int:
 
     start = parse_ymd(args.date_from) if args.date_from else date(2025, 10, 1)
     end = parse_ymd(args.date_to) if args.date_to else date(2025, 10, 31)
-    days = candidate_trading_days(start, end) if range_mode else assumed_trading_days()
+    calendar = load_trading_calendar(Path(args.calendar)) if args.calendar else (load_trading_calendar() if range_mode else None)
+    days = candidate_trading_days(start, end, calendar) if range_mode else assumed_trading_days()
     dest_root = Path(args.raw_root) if args.raw_root else (RANGE_RAW_ROOT if range_mode else RAW_ROOT)
     dest_docs = Path(args.docs) if args.docs else (RANGE_DOCS if range_mode else DOCS)
     if dest_root.resolve() == RAW_ROOT.resolve() and range_mode:
         raise SystemExit("refusing to write a range collect into the Oct 2025 raw root")
     if dest_docs.resolve() == DOCS.resolve() and range_mode:
         raise SystemExit("refusing to overwrite the Oct 2025 pilot evidence")
+    if range_mode and (start, end) != (RANGE_FROM, RANGE_TO):
+        if dest_root.resolve() == RANGE_RAW_ROOT.resolve():
+            raise SystemExit("refusing to write a different range into the 20251008-20261008 raw root")
+        if dest_docs.resolve() == RANGE_DOCS.resolve():
+            raise SystemExit("refusing to overwrite the 20251008-20261008 docs")
 
     dest_root.mkdir(parents=True, exist_ok=True)
     dest_docs.mkdir(parents=True, exist_ok=True)

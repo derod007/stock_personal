@@ -1,0 +1,132 @@
+{
+  "ok": true,
+  "generated_at": "2026-10-14 04:55:26",
+  "from": "2024-10-08",
+  "to": "2025-10-02",
+  "day_count": 243,
+  "ok_day_count": 243,
+  "blocked_dates": [],
+  "union_unique_symbols": 1248,
+  "name_changes_in_union": [
+    {
+      "symbol": "474610.KQ",
+      "from": "알에프시스템즈",
+      "to": "RF시스템즈",
+      "date": "20241129"
+    },
+    {
+      "symbol": "200350.KQ",
+      "from": "래몽래인",
+      "to": "아티스트스튜디오",
+      "date": "20241204"
+    },
+    {
+      "symbol": "489790.KS",
+      "from": "한화인더스트리얼솔루션즈",
+      "to": "한화비전",
+      "date": "20250120"
+    },
+    {
+      "symbol": "357880.KQ",
+      "from": "비트나인",
+      "to": "SKAI",
+      "date": "20250417"
+    },
+    {
+      "symbol": "011780.KS",
+      "from": "금호석유",
+      "to": "금호석유화학",
+      "date": "20250509"
+    },
+    {
+      "symbol": "124500.KQ",
+      "from": "아이티센",
+      "to": "아이티센글로벌",
+      "date": "20250605"
+    },
+    {
+      "symbol": "332570.KQ",
+      "from": "와이팜",
+      "to": "PS일렉트로닉스",
+      "date": "20250611"
+    },
+    {
+      "symbol": "017800.KS",
+      "from": "현대엘리베이",
+      "to": "현대엘리베이터",
+      "date": "20250612"
+    },
+    {
+      "symbol": "450520.KQ",
+      "from": "인스웨이브시스템즈",
+      "to": "인스웨이브",
+      "date": "20250618"
+    },
+    {
+      "symbol": "419050.KQ",
+      "from": "삼기이브이",
+      "to": "삼기에너지솔루션즈",
+      "date": "20250730"
+    },
+    {
+      "symbol": "381620.KQ",
+      "from": "제닉스",
+      "to": "제닉스로보틱스",
+      "date": "20250901"
+    },
+    {
+      "symbol": "008970.KS",
+      "from": "동양철관",
+      "to": "KBI동양철관",
+      "date": "20250912"
+    },
+    {
+      "symbol": "208710.KQ",
+      "from": "바이오로그디바이스",
+      "to": "포톤",
+      "date": "20250930"
+    }
+  ],
+  "provider_unmapped_symbols": [
+    {
+      "code": "0008Z0",
+      "symbol": "0008Z0.KQ",
+      "name": "에스엔시스",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "0010V0",
+      "symbol": "0010V0.KQ",
+      "name": "제이피아이헬스케어",
+      "market": "KOSDAQ",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "18064K",
+      "symbol": "18064K.KS",
+      "name": "한진칼우",
+      "market": "KOSPI",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    },
+    {
+      "code": "45014K",
+      "symbol": "45014K.KS",
+      "name": "코오롱모빌리티그룹우",
+      "market": "KOSPI",
+      "status": "provider_symbol_unmapped",
+      "hold_reason": "yahoo_chart_symbol_pattern_not_six_digits",
+      "not_judged_invalid_listing": true
+    }
+  ],
+  "selected_file_count": 243,
+  "raw_file_count": 486,
+  "independent_rerank_ok_count": 243,
+  "issues": []
+}

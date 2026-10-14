@@ -1,3 +1,15 @@
+## 2026-10-14 12:15 · Cursor · 끝
+- 한 일: 2024-10-08~2025-10-02 KRX 일별 거래대금 TOP100 243일·합집합 1248 자료 준비. 계좌 재현·병합 없음
+- 파일: docs/historical-top100-20241008-20251002/, docs/research/historical-amount-top100-pilot.py, docs/research/dated-amount-top100-range.py, bin/paper/DatedTop100Prep.php, bin/paper_dated_top100_prep.php, tests/dated_top100_prep.php, tests/test_dated_amount_top100_range.py, tests/test_historical_amount_top100_pilot.py, docs/work-log.md
+- 커밋: 새 PR(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-14 04:25 · Cursor · 진행
+- 한 일: 2024-10-08~2025-10-02 KRX 일별 거래대금 TOP100 연구 자료 준비. 계좌 재현·병합 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-13 23:58 · Cursor · 끝
 - 한 일: Python 바이트코드와 상승 눌림 A-input JSON을 gitignore. 추적 중이던 pyc는 인덱스만 제거
 - 파일: .gitignore, docs/work-log.md

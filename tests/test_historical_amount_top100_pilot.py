@@ -250,6 +250,33 @@ class HistoricalTop100PilotTest(unittest.TestCase):
         self.assertEqual(overlap[0], "20251010")
         self.assertNotIn("20251001", overlap)
         self.assertNotIn("20251002", overlap)
+        self.assertEqual(len(days), 244)
+
+    def test_prior_calendar_skips_documented_closures_not_empty_api(self):
+        cal_path = ROOT / "docs" / "historical-top100-20241008-20251002" / "trading-calendar.json"
+        cal = json.loads(cal_path.read_text(encoding="utf-8"))
+        days = self.m.candidate_trading_days(
+            self.m.parse_ymd("2024-10-08"),
+            self.m.parse_ymd("2025-10-02"),
+            cal,
+        )
+        self.assertEqual(days[0], "20241008")
+        self.assertEqual(days[-1], "20251002")
+        for blocked in (
+            "20241009", "20241225", "20241231", "20250101",
+            "20250127", "20250128", "20250129", "20250130",
+            "20250303", "20250501", "20250505", "20250506",
+            "20250603", "20250606", "20250815",
+        ):
+            self.assertNotIn(blocked, days)
+        self.assertIn("20241008", days)
+        self.assertIn("20241230", days)
+        self.assertIn("20251001", days)
+        self.assertIn("20251002", days)
+        self.assertNotIn("20251003", days)
+        self.assertEqual(len(days), 243)
+        overlap = self.m.oct2025_overlap_days(days)
+        self.assertEqual(overlap, ["20251001", "20251002"])
 
     def test_copy_verified_oct_never_writes_source_and_requires_hash(self):
         m = self.m

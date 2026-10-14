@@ -1,0 +1,134 @@
+{
+  "schema": 1,
+  "kind": "krx_price_basis_prep_probe_v1",
+  "writes_eval_originals": false,
+  "full_collect": false,
+  "no_price_scaling": true,
+  "no_account_run": true,
+  "max_requests": 4,
+  "requests": 4,
+  "prep": {
+    "eval_start": "2024-10-08",
+    "eval_end": "2025-10-02",
+    "preparation_start_calendar": "2023-10-08",
+    "prep_bars_target": 240,
+    "source": "PaperHistoryResearch::PREP_BARS and evalStartDay(evalStart)",
+    "existing_eval_originals": {
+      "dir_exists": true,
+      "kospi_files": 243,
+      "kosdaq_files": 243,
+      "first_kospi": "20241008_kospi_equity.json",
+      "last_kospi": "20251002_kospi_equity.json",
+      "has_20231010": false,
+      "has_20241007": false,
+      "has_20241008": true
+    },
+    "extra_trading_days_estimate": {
+      "from": "2023-10-10",
+      "to": "2024-10-07",
+      "weekdays_minus_listed_holidays": 245,
+      "listed_holidays_skipped": [
+        "2023-12-25",
+        "2024-01-01",
+        "2024-02-09",
+        "2024-02-12",
+        "2024-03-01",
+        "2024-04-10",
+        "2024-05-01",
+        "2024-05-06",
+        "2024-05-15",
+        "2024-06-06",
+        "2024-08-15",
+        "2024-09-16",
+        "2024-09-17",
+        "2024-09-18",
+        "2024-10-03"
+      ],
+      "holiday_list_complete": false,
+      "empty_api_not_used_as_holiday": true,
+      "first": "2023-10-10",
+      "last": "2024-10-07"
+    },
+    "expected_full_collect_requests_if_later": 490,
+    "note": "Estimate is weekdays minus a listed holiday set. Not a KRX calendar collect."
+  },
+  "access": {
+    "openapi_coverage_official": "2010-01-04",
+    "auth_key_present": true,
+    "daily_limit_official": 10000,
+    "status": "ok",
+    "ok_probes": 4
+  },
+  "probes": [
+    {
+      "date": "20231010",
+      "market": "kospi_equity",
+      "reuse_existing_eval_original": false,
+      "http_status": 200,
+      "kind": "ok",
+      "ok": true,
+      "n": 952,
+      "bytes": 296474,
+      "sha256": "c8a83f956708ffb190549d6f310591d8c72f5610c83105deb438963feeea1b9b",
+      "found_dates": [
+        "20231010"
+      ],
+      "head": "[redacted body not in git]",
+      "saved_gitignored": true
+    },
+    {
+      "date": "20231010",
+      "market": "kosdaq_equity",
+      "reuse_existing_eval_original": false,
+      "http_status": 200,
+      "kind": "ok",
+      "ok": true,
+      "n": 1679,
+      "bytes": 550767,
+      "sha256": "b0d8a7ef122c7a1a3481278d40ab6bce1882598a8d3d884408e7db70bf3876f9",
+      "found_dates": [
+        "20231010"
+      ],
+      "head": "[redacted body not in git]",
+      "saved_gitignored": true
+    },
+    {
+      "date": "20241007",
+      "market": "kospi_equity",
+      "reuse_existing_eval_original": false,
+      "http_status": 200,
+      "kind": "ok",
+      "ok": true,
+      "n": 959,
+      "bytes": 297439,
+      "sha256": "1e8370851e06fc1b54180bbc287f087c73a5e59bd52e7a9547f4a9867646ab4f",
+      "found_dates": [
+        "20241007"
+      ],
+      "head": "[redacted body not in git]",
+      "saved_gitignored": true
+    },
+    {
+      "date": "20241007",
+      "market": "kosdaq_equity",
+      "reuse_existing_eval_original": false,
+      "http_status": 200,
+      "kind": "ok",
+      "ok": true,
+      "n": 1754,
+      "bytes": 572394,
+      "sha256": "58e2818c6907c57834480415ec1173f85b688b56aedea0267a6f3c9564bc1193",
+      "found_dates": [
+        "20241007"
+      ],
+      "head": "[redacted body not in git]",
+      "saved_gitignored": true
+    }
+  ],
+  "facts": [
+    "기존 KRX 원본은 평가 시작일 2024-10-08부터이며 준비 구간 2023-10-10·2024-10-07 파일은 없다.",
+    "준비 구간 끝(2024-10-07)과 시작 근처(2023-10-10) 양 시장 본호출이 비어 있지 않고 BAS_DD가 요청일과 같다.",
+    "전체 수집은 하지 않았다. 나중에 하면 추가 거래일 추정 245일 × 2시장 ≈ 490회."
+  ],
+  "unconfirmed": []
+}

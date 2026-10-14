@@ -200,6 +200,8 @@ def empty_day() -> dict[str, int]:
         "exact_ohlcv_close": 0,
         "volume_only_close": 0,
         "price_diff_close": 0,
+        "price_diff_close_only": 0,
+        "price_diff_ohl_also": 0,
         "close_equal_adj_equal_krx": 0,
         "close_equal_adj_differs_krx": 0,
         "adjclose_equals_krx_close": 0,
@@ -227,13 +229,17 @@ def classify_pair(krx: dict | None, y: dict | None) -> str:
         return "yahoo_absent"
     if y.get("close") is None and y.get("open") is None and y.get("high") is None and y.get("low") is None:
         return "yahoo_timestamp_null_ohlcv"
-    price_ok = all(eq(num(krx[k]), num(y[k]), PRICE_EPS) for k in ("open", "high", "low", "close"))
+    close_ok = eq(num(krx["close"]), num(y.get("close")), PRICE_EPS)
+    ohl_ok = all(eq(num(krx[k]), num(y.get(k)), PRICE_EPS) for k in ("open", "high", "low"))
+    price_ok = close_ok and ohl_ok
     vol_ok = eq(num(krx.get("volume")), num(y.get("volume")), VOL_EPS)
     if price_ok and vol_ok:
         return "exact_ohlcv_close"
     if price_ok and not vol_ok:
         return "volume_only_close"
-    return "price_diff_close"
+    if (not close_ok) and ohl_ok:
+        return "price_diff_close_only"
+    return "price_diff_ohl_also"
 
 
 def krx_fields(row: dict) -> dict[str, Any]:
@@ -339,8 +345,10 @@ def main() -> int:
             krx = krx_fields(raw_krx) if raw_krx else None
             yrow = ((yahoo_by.get(spec["symbol"]) or {}).get("days") or {}).get(day)
             kind = classify_pair(krx, yrow)
-            if kind in ("exact_ohlcv_close", "volume_only_close", "price_diff_close"):
+            if kind in ("exact_ohlcv_close", "volume_only_close", "price_diff_close_only", "price_diff_ohl_also"):
                 counts["comparable"] += 1
+            if kind in ("price_diff_close_only", "price_diff_ohl_also"):
+                counts["price_diff_close"] += 1
             counts[kind] += 1
 
             if krx and yrow and num(yrow.get("close")) is not None:
@@ -515,8 +523,13 @@ def main() -> int:
     }
 
     summary = {
-        "schema": 1,
-        "kind": "krx_yahoo_ohlcv_compare_v1",
+        "schema": 2,
+        "kind": "krx_yahoo_ohlcv_compare_v2",
+        "price_diff_split": {
+            "note": "price_diff_close is the parent of close-only vs OHL-also. No prices were scaled.",
+            "close_only": "open/high/low match, close differs",
+            "ohl_also": "at least one of open/high/low differs",
+        },
         "period": {
             "from": days[0],
             "to": days[-1],
@@ -544,6 +557,10 @@ def main() -> int:
             "null_rate_other_days": rate(rest, "yahoo_timestamp_null_ohlcv"),
             "price_diff_rate_sep18_19": rate(window, "price_diff_close"),
             "price_diff_rate_other_days": rate(rest, "price_diff_close"),
+            "close_only_rate_sep18_19": rate(window, "price_diff_close_only"),
+            "close_only_rate_other_days": rate(rest, "price_diff_close_only"),
+            "ohl_also_rate_sep18_19": rate(window, "price_diff_ohl_also"),
+            "ohl_also_rate_other_days": rate(rest, "price_diff_ohl_also"),
             "volume_only_rate_sep18_19": rate(window, "volume_only_close"),
             "volume_only_rate_other_days": rate(rest, "volume_only_close"),
             "top_days_yahoo_null": [{"date": d, "n": n} for d, n in top_null],
@@ -585,6 +602,8 @@ def main() -> int:
         "exact": totals["exact_ohlcv_close"],
         "volume_only": totals["volume_only_close"],
         "price_diff": totals["price_diff_close"],
+        "close_only": totals["price_diff_close_only"],
+        "ohl_also": totals["price_diff_ohl_also"],
         "yahoo_null": totals["yahoo_timestamp_null_ohlcv"],
         "yahoo_absent": totals["yahoo_absent"],
         "krx_absent": totals["krx_absent"],

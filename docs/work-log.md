@@ -1,3 +1,15 @@
+## 2026-10-14 14:43 · Cursor · 끝
+- 한 일: KRX TDD 원주가/수정주가 미확정 기록, 준비 구간 4회 접근 확인, 가격 불일치 종가만/OHL 집계. 전체 수집·보정·계좌 없음
+- 파일: docs/research/krx_yahoo_ohlcv_compare.py, docs/research/krx_price_basis_prep_probe.py, tests/test_krx_yahoo_ohlcv_compare.py, tests/test_krx_price_basis_prep_probe.py, docs/krx-price-basis-prep-20241008/, docs/work-log.md
+- 커밋: 새 PR(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-14 14:02 · Cursor · 진행
+- 한 일: KRX TDD 가격 기준·기업행사 공식 제공 여부와 MA240 준비 구간 접근 확인. 전체 수집·보정 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-14 13:55 · Cursor · 끝
 - 한 일: 2024-10-08~2025-10-02 1248종 KRX·Yahoo 원본 OHLCV 읽기 전용 집계. API·복구·계좌·병합 없음
 - 파일: docs/research/krx_yahoo_ohlcv_compare.py, docs/krx-yahoo-ohlcv-compare-20241008-20251002/summary.json, docs/krx-yahoo-ohlcv-compare-20241008-20251002/report.md, docs/work-log.md

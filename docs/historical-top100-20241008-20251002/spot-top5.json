@@ -1,0 +1,117 @@
+{
+    "schema": 1,
+    "kind": "dated_krx_amount_top100_spot_top5_v1",
+    "days": {
+        "2024-10-08": [
+            {
+                "rank": 1,
+                "code": "005930",
+                "name": "삼성전자",
+                "market": "KOSPI",
+                "amount_won": 1652788512596
+            },
+            {
+                "rank": 2,
+                "code": "000660",
+                "name": "SK하이닉스",
+                "market": "KOSPI",
+                "amount_won": 720348427108
+            },
+            {
+                "rank": 3,
+                "code": "489790",
+                "name": "한화인더스트리얼솔루션즈",
+                "market": "KOSPI",
+                "amount_won": 479857231100
+            },
+            {
+                "rank": 4,
+                "code": "087010",
+                "name": "펩트론",
+                "market": "KOSDAQ",
+                "amount_won": 362937440700
+            },
+            {
+                "rank": 5,
+                "code": "373220",
+                "name": "LG에너지솔루션",
+                "market": "KOSPI",
+                "amount_won": 348252123000
+            }
+        ],
+        "2025-04-08": [
+            {
+                "rank": 1,
+                "code": "005930",
+                "name": "삼성전자",
+                "market": "KOSPI",
+                "amount_won": 1382305707900
+            },
+            {
+                "rank": 2,
+                "code": "000660",
+                "name": "SK하이닉스",
+                "market": "KOSPI",
+                "amount_won": 847718116950
+            },
+            {
+                "rank": 3,
+                "code": "298380",
+                "name": "에이비엘바이오",
+                "market": "KOSDAQ",
+                "amount_won": 402896953450
+            },
+            {
+                "rank": 4,
+                "code": "012450",
+                "name": "한화에어로스페이스",
+                "market": "KOSPI",
+                "amount_won": 384305376000
+            },
+            {
+                "rank": 5,
+                "code": "035420",
+                "name": "NAVER",
+                "market": "KOSPI",
+                "amount_won": 249338709926
+            }
+        ],
+        "2025-10-02": [
+            {
+                "rank": 1,
+                "code": "005930",
+                "name": "삼성전자",
+                "market": "KOSPI",
+                "amount_won": 4472131514922
+            },
+            {
+                "rank": 2,
+                "code": "000660",
+                "name": "SK하이닉스",
+                "market": "KOSPI",
+                "amount_won": 2944922514970
+            },
+            {
+                "rank": 3,
+                "code": "035420",
+                "name": "NAVER",
+                "market": "KOSPI",
+                "amount_won": 560734537164
+            },
+            {
+                "rank": 4,
+                "code": "034020",
+                "name": "두산에너빌리티",
+                "market": "KOSPI",
+                "amount_won": 454867680550
+            },
+            {
+                "rank": 5,
+                "code": "317450",
+                "name": "명인제약",
+                "market": "KOSPI",
+                "amount_won": 409089736950
+            }
+        ]
+    }
+}

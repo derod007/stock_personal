@@ -1,0 +1,21 @@
+{
+    "schema": 1,
+    "dataset": "kr-dated-amount-top100-20241008-20251002-v2",
+    "account_replay": false,
+    "copied": 1231,
+    "source_failed": 13,
+    "collected": 3,
+    "failed": 0,
+    "unmapped": 1,
+    "seconds": 14.1,
+    "http_attempts": 3,
+    "v1_fingerprint_unchanged": true,
+    "admitted": [
+        "0008Z0.KQ",
+        "0010V0.KQ",
+        "18064K.KS"
+    ],
+    "still_unmapped": [
+        "45014K.KS"
+    ]
+}

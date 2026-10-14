@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "generated_at": "2026-10-14 04:55:26",
+  "frozen_file": "docs/historical-top100-20241008-20251002/file-hashes.json",
+  "frozen_sha256": "bdfe0190a53e20ceb1f54616129c7f2fb8ff5aaf46ce06b0d239bbdbf4e1f0b2",
+  "selected_n": 243,
+  "raw_n": 486,
+  "ok_dates_n": 243,
+  "files_missing": 0,
+  "files_mismatch": 0,
+  "rewrote_file_hashes": false,
+  "used_local_collect_as_baseline": false
+}

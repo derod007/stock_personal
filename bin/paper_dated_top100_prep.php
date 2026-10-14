@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 /**
- * Research only: dated KRX amount TOP100 bar prep for 2025-10-08..2026-10-08.
- * Writes <state>/history-research/kr-dated-amount-top100-20251008-20261008.
- * Never writes operational accounts, caches, strategy files, or the Oct 2025 dataset.
+ * Research only: dated KRX amount TOP100 bar prep.
+ * Default profile is 2025-10-08..2026-10-08. --profile=20241008-20251002 is a separate dataset.
+ * Never writes operational accounts, caches, strategy files, or another period's dataset.
  * Does not run an account replay.
  */
 require __DIR__.'/bootstrap.php';
@@ -11,6 +11,7 @@ require __DIR__.'/paper/DatedTop100Prep.php';
 
 $cmd=$argv[1]??'';$o=[];
 foreach(array_slice($argv,2) as $a){
+    if($a==='--retry-failed'){$o['retry-failed']='1';continue;}
     if(!preg_match('/^--([a-z-]+)=(.*)$/s',$a,$m))throw new InvalidArgumentException('Unknown argument '.$a);
     $o[$m[1]]=$m[2];
 }
@@ -18,15 +19,17 @@ if(!in_array($cmd,['universe','collect','quality','coverage','yahoo-requests','p
     throw new InvalidArgumentException('Commands: universe collect quality coverage yahoo-requests provider-review universe-v2 collect-v2 sector-v2 sector-map-full');
 if(isset($o['state-dir']))putenv('PAPER_STATE_DIR='.$o['state-dir']);
 $root=dirname(__DIR__);
+$spec=PaperDatedTop100Prep::spec($o['profile']??PaperDatedTop100Prep::PROFILE_RECENT);
 $enc=static fn(array $v):string=>PaperHistoryResearch::encode($v,true)."\n";
 $out=static function(array $v)use($enc):void{echo $enc($v);};
-$candPath=$o['candidates']??$root.'/'.PaperDatedTop100Prep::CANDIDATES;
-$uniPath=$o['universe']??$root.'/'.PaperDatedTop100Prep::UNIVERSE;
+$docsDir=$root.'/'.$spec['docs'];
+$candPath=$o['candidates']??$root.'/'.$spec['candidates'];
+$uniPath=$o['universe']??$root.'/'.$spec['universe'];
 $stateRoot=PaperAccountReplay::stateRoot();
-$datasetDir=$o['dataset-dir']??PaperHistoryResearch::datasetDir($stateRoot,$o['dataset']??PaperDatedTop100Prep::DATASET);
+$datasetDir=$o['dataset-dir']??PaperHistoryResearch::datasetDir($stateRoot,$o['dataset']??$spec['dataset']);
 
 if($cmd==='universe'){
-    $ds=PaperDatedTop100Prep::initDataset($stateRoot,$uniPath);
+    $ds=PaperDatedTop100Prep::initDataset($stateRoot,$uniPath,$spec);
     $out(['dataset'=>$ds['dataset'],'dir'=>$ds['dir'],'universe_sha256'=>$ds['universe_sha256'],
         'as_of'=>$ds['as_of']['day'],'evaluation_start'=>$ds['evaluation_start_day'],
         'prep_bars'=>PaperHistoryResearch::PREP_BARS,'min_bars'=>PaperHistoryResearch::MIN_BARS,
@@ -35,13 +38,13 @@ if($cmd==='universe'){
 }
 if($cmd==='quality'){
     $manifest=PaperHistoryResearch::manifest($datasetDir);
-    $out(['dataset'=>PaperDatedTop100Prep::DATASET,'summary'=>$manifest['summary'],
+    $out(['dataset'=>$spec['dataset'],'summary'=>$manifest['summary'],
         'window'=>$manifest['window']??null,'quality_at_as_of_distinct_from_dataset_warnings'=>true]);
     exit(0);
 }
 if($cmd==='yahoo-requests'){
-    $ev=PaperDatedTop100Prep::yahooRequestEvidence($datasetDir);
-    $dest=$o['out']??$root.'/docs/historical-top100-20251008-20261008/yahoo-request-evidence.json';
+    $ev=PaperDatedTop100Prep::yahooRequestEvidence($datasetDir,(string)$spec['dataset']);
+    $dest=$o['out']??$docsDir.'/yahoo-request-evidence.json';
     PaperHistoryResearch::writeFile($dest,PaperHistoryResearch::encode($ev,true));
     $out($ev+['wrote'=>$dest]);
     exit(0);
@@ -49,16 +52,16 @@ if($cmd==='yahoo-requests'){
 if($cmd==='provider-review'){
     $uni=PaperHistoryResearch::readJson($uniPath)??throw new RuntimeException('universe.json missing');
     $cand=PaperDatedTop100Prep::loadCandidates($candPath);
-    $barsSummary=json_decode((string)file_get_contents($root.'/docs/historical-top100-20251008-20261008/bars-summary.json'),true,512,JSON_THROW_ON_ERROR);
+    $barsSummary=json_decode((string)file_get_contents($docsDir.'/bars-summary.json'),true,512,JSON_THROW_ON_ERROR);
     $unmapped=array_values(array_filter($uni['rows'],fn($u)=>($u['status']??'')==='provider_symbol_unmapped'));
     $failed=array_map(fn($f)=>['kind'=>'yahoo_404','code'=>explode('.',$f['symbol'])[0],'symbol'=>$f['symbol'],'name'=>$f['name']??null,'market'=>$f['market']??null],$barsSummary['failed']??[]);
     foreach($unmapped as &$u)$u['kind']='unmapped';
     unset($u);
-    $probe=$o['probe-root']??$root.'/data/raw/research/historical-amount-top100-20251008-20261008-provider-probe-v1';
+    $probe=$o['probe-root']??$root.'/data/raw/research/historical-amount-top100-'.$spec['id'].'-provider-probe-v1';
     $review=PaperDatedTop100Prep::probeProviders(array_merge($unmapped,$failed),$probe,(int)($o['delay-ms']??800));
     $review['unmapped_appearances']=PaperDatedTop100Prep::appearanceCounts($cand,array_map(fn($u)=>$u['symbol'],$unmapped));
     $review['yahoo_404_appearances']=PaperDatedTop100Prep::appearanceCounts($cand,array_map(fn($f)=>$f['symbol'],$failed));
-    $dest=$o['out']??$root.'/docs/historical-top100-20251008-20261008/provider-review.json';
+    $dest=$o['out']??$docsDir.'/provider-review.json';
     PaperHistoryResearch::writeFile($dest,PaperHistoryResearch::encode($review,true));
     $out(['wrote'=>$dest,'request_count'=>$review['request_count'],'outcomes'=>$review['outcomes'],
         'unmapped_appearances'=>$review['unmapped_appearances']['appearances']??null,
@@ -89,8 +92,9 @@ if($cmd==='coverage'){
         $st['rows']=$bars['rows']??[];
         return $st;
     };
-    $cov=PaperDatedTop100Prep::sessionCoverage($cand,$state,PaperDatedTop100Prep::EVAL_START,$hydrate);
-    $dest=$o['out']??$root.'/docs/historical-top100-20251008-20261008/'.((($dsName=$o['dataset']??PaperDatedTop100Prep::DATASET)==PaperDatedTop100Prep::DATASET_V2)?'asof-coverage-v2.json':'asof-coverage.json');
+    $cov=PaperDatedTop100Prep::sessionCoverage($cand,$state,(string)$spec['eval_start'],$hydrate);
+    $dsName=$o['dataset']??$spec['dataset'];
+    $dest=$o['out']??$docsDir.'/'.($dsName===$spec['dataset_v2']?'asof-coverage-v2.json':'asof-coverage.json');
     PaperHistoryResearch::writeFile($dest,PaperHistoryResearch::encode($cov,true));
     $out(['wrote'=>$dest,'day_count'=>$cov['day_count'],'partition'=>$cov['partition'],
         'blocked_tags'=>$cov['blocked_tags'],
@@ -100,23 +104,23 @@ if($cmd==='coverage'){
 }
 if($cmd==='universe-v2'){
     $uni=json_decode((string)file_get_contents($uniPath),true,512,JSON_THROW_ON_ERROR);
-    $review=json_decode((string)file_get_contents($root.'/docs/historical-top100-20251008-20261008/provider-review.json'),true,512,JSON_THROW_ON_ERROR);
-    $v2=PaperDatedTop100Prep::universeV2FromReview($uni,$review);
-    $dest=$o['out']??$root.'/'.PaperDatedTop100Prep::UNIVERSE_V2;
+    $review=json_decode((string)file_get_contents($docsDir.'/provider-review.json'),true,512,JSON_THROW_ON_ERROR);
+    $v2=PaperDatedTop100Prep::universeV2FromReview($uni,$review,$spec);
+    $dest=$o['out']??$root.'/'.$spec['universe_v2'];
     PaperHistoryResearch::writeFile($dest,PaperHistoryResearch::encode($v2,true));
-    $ds=PaperDatedTop100Prep::initDatasetV2($stateRoot,$dest);
+    $ds=PaperDatedTop100Prep::initDatasetV2($stateRoot,$dest,$spec);
     $out(['wrote'=>$dest,'dataset'=>$ds['dataset'],'dir'=>$ds['dir'],'universe_sha256'=>$ds['universe_sha256'],
         'admitted'=>count($v2['counts']['v2_admitted']??[]),'still_unmapped'=>$v2['counts']['v2_still_unmapped']??[],
         'included'=>$v2['counts']['included'],'note'=>'v1 universe and dataset were not overwritten.']);
     exit(0);
 }
 if($cmd==='sector-v2'){
-    $v2path=$o['universe']??$root.'/'.PaperDatedTop100Prep::UNIVERSE_V2;
+    $v2path=$o['universe']??$root.'/'.$spec['universe_v2'];
     $v2=json_decode((string)file_get_contents($v2path),true,512,JSON_THROW_ON_ERROR);
     $admitted=$v2['counts']['v2_admitted']??[];
     if($admitted===[])throw new RuntimeException('universe-v2 has no admitted symbols');
-    $outDir=$o['out-dir']??PaperAccountReplay::stateRoot().'/history-sector/dated-top100-20251008-20261008-v2';
-    $report=$o['report']??$root.'/docs/historical-top100-20251008-20261008/sector-collection-v2.json';
+    $outDir=$o['out-dir']??PaperAccountReplay::stateRoot().'/history-sector/dated-top100-'.$spec['id'].'-v2';
+    $report=$o['report']??$root.'/'.$spec['sector_collection_v2'];
     $cmdLine=escapeshellarg(PHP_BINARY).' '.escapeshellarg($root.'/bin/paper_sector_collect.php')
         .' --out-dir='.escapeshellarg($outDir).' --report='.escapeshellarg($report)
         .' --symbols='.escapeshellarg(implode(',',$admitted));
@@ -124,22 +128,22 @@ if($cmd==='sector-v2'){
     if($code!==0)exit($code);
     $col=json_decode((string)file_get_contents($report),true,512,JSON_THROW_ON_ERROR);
     $map=['schema'=>1,'kind'=>'research_sector_map_v2','assumption'=>'현재 네이버 모바일 업종 JSON을 과거에 같이 적용한다. 당시 업종을 복원한 것이 아니다.',
-        'dataset'=>PaperDatedTop100Prep::DATASET_V2,'symbols'=>$admitted,'sectors'=>[],'unconfirmed'=>[]];
+        'dataset'=>$spec['dataset_v2'],'symbols'=>$admitted,'sectors'=>[],'unconfirmed'=>[]];
     foreach($col['symbols']??[] as $sym=>$row){
         if(($row['status']??'')==='secured')$map['sectors'][$sym]=$row['bucket'];
         else $map['unconfirmed'][]=['symbol'=>$sym,'reason'=>$row['reason']??null];
     }
-    $mapPath=$root.'/docs/historical-top100-20251008-20261008/sector-map-v2.json';
+    $mapPath=$root.'/'.$spec['sector_map_v2'];
     PaperHistoryResearch::writeFile($mapPath,PaperHistoryResearch::encode($map,true));
     $out(['wrote'=>$mapPath,'secured'=>count($map['sectors']),'unconfirmed'=>count($map['unconfirmed']),'operational_caches_unchanged'=>true]);
     exit(0);
 }
 if($cmd==='sector-map-full'){
     $cand=PaperDatedTop100Prep::loadCandidates($candPath);
-    $basePath=$o['base']??$root.'/'.PaperDatedTop100Prep::SECTOR_COLLECTION;
-    $admitPath=$o['admitted']??$root.'/'.PaperDatedTop100Prep::SECTOR_MAP_V2;
-    $colV2Path=$root.'/'.PaperDatedTop100Prep::SECTOR_COLLECTION_V2;
-    $dest=$o['out']??$root.'/'.PaperDatedTop100Prep::SECTOR_MAP_FULL;
+    $basePath=$o['base']??$root.'/'.$spec['sector_collection'];
+    $admitPath=$o['admitted']??$root.'/'.$spec['sector_map_v2'];
+    $colV2Path=$root.'/'.$spec['sector_collection_v2'];
+    $dest=$o['out']??$root.'/'.$spec['sector_map_full'];
     if(is_file($dest))throw new RuntimeException('Refusing to overwrite existing full sector map '.$dest);
     foreach([$basePath,$admitPath] as $p){
         if(!is_file($p))throw new RuntimeException('Missing sector source '.$p);
@@ -153,10 +157,10 @@ if($cmd==='sector-map-full'){
     $offline=PaperDatedTop100Prep::verifyAdmittedOffline($admit,$colV2);
     if(!$offline['pass'])throw new RuntimeException('Admitted code/sector offline check failed: '.json_encode($offline['issues'],JSON_UNESCAPED_UNICODE));
     $map=PaperDatedTop100Prep::mergeUnionSectorMap($cand['union'],$base,$admit,[
-        ['path'=>PaperDatedTop100Prep::SECTOR_COLLECTION,'sha256'=>$baseBefore,'role'=>'secured_895'],
-        ['path'=>PaperDatedTop100Prep::SECTOR_MAP_V2,'sha256'=>$admitBefore,'role'=>'admitted_31'],
-        ['path'=>PaperDatedTop100Prep::CANDIDATES,'sha256'=>$cand['file_sha256'],'role'=>'candidate_union'],
-    ]);
+        ['path'=>$spec['sector_collection'],'sha256'=>$baseBefore,'role'=>'secured_base'],
+        ['path'=>$spec['sector_map_v2'],'sha256'=>$admitBefore,'role'=>'admitted_v2'],
+        ['path'=>$spec['candidates'],'sha256'=>$cand['file_sha256'],'role'=>'candidate_union'],
+    ],$spec);
     $bytes=PaperHistoryResearch::encode($map,true);
     PaperHistoryResearch::writeFile($dest,$bytes);
     if(hash_file('sha256',$basePath)!==$baseBefore||hash_file('sha256',$admitPath)!==$admitBefore)
@@ -164,18 +168,18 @@ if($cmd==='sector-map-full'){
     if($colV2Before!==null&&hash_file('sha256',$colV2Path)!==$colV2Before)
         throw new RuntimeException('Admitted collection changed while the full map was written');
     $out(['wrote'=>$dest,'sha256'=>hash('sha256',$bytes),'counts'=>$map['counts'],
-        'execution_path'=>PaperDatedTop100Prep::SECTOR_MAP_FULL,
+        'execution_path'=>$spec['sector_map_full'],
         'offline_admitted'=>$offline,'sources_unchanged'=>true,'account_replay'=>false]);
     exit(0);
 }
 if($cmd==='collect-v2'){
-    $v1Dir=PaperHistoryResearch::datasetDir($stateRoot,PaperDatedTop100Prep::DATASET);
-    $v2Dir=PaperHistoryResearch::datasetDir($stateRoot,PaperDatedTop100Prep::DATASET_V2);
+    $v1Dir=PaperHistoryResearch::datasetDir($stateRoot,$spec['dataset']);
+    $v2Dir=PaperHistoryResearch::datasetDir($stateRoot,$spec['dataset_v2']);
     if($v1Dir===$v2Dir)throw new RuntimeException('v2 dataset must not be v1');
     $before=PaperDatedTop100Prep::datasetFingerprint($v1Dir);
     $ds=PaperHistoryResearch::readJson($v2Dir.'/dataset.json')??throw new RuntimeException('Run universe-v2 first');
     $uni=PaperHistoryResearch::readJson($v2Dir.'/universe.json')??throw new RuntimeException('universe.json missing');
-    if(($ds['dataset']??'')!==PaperDatedTop100Prep::DATASET_V2)throw new RuntimeException('Refusing to write a different dataset');
+    if(($ds['dataset']??'')!==$spec['dataset_v2'])throw new RuntimeException('Refusing to write a different dataset');
     $as=$ds['as_of']+['evaluation_start_day'=>$ds['evaluation_start_day'],'primary_range'=>$ds['primary_range']??'5y'];
     PaperHistoryResearch::resetHttpAttempts();
     $http=static fn(string $url):array=>PaperHistoryResearch::httpGet($url);
@@ -203,7 +207,7 @@ if($cmd==='collect-v2'){
             if($action==='source_failed'){
                 $src=PaperHistoryResearch::readStatus($v1Dir,$sym);
                 if(is_array($src)){
-                    $src['imported_from']=PaperDatedTop100Prep::DATASET;
+                    $src['imported_from']=$spec['dataset'];
                     PaperHistoryResearch::writeFile($v2Dir.'/status/'.$sym.'.json',PaperHistoryResearch::encode($src,true));
                 }
             }
@@ -217,7 +221,7 @@ if($cmd==='collect-v2'){
     if($after!==$before)throw new RuntimeException('v1 dataset changed during v2 collect');
     $manifest=PaperHistoryResearch::manifest($v2Dir);
     PaperHistoryResearch::writeFile($v2Dir.'/manifest.json',PaperHistoryResearch::encode($manifest,true));
-    $out(['dataset'=>PaperDatedTop100Prep::DATASET_V2,'actions'=>$count,'seconds'=>round(microtime(true)-$started,1),
+    $out(['dataset'=>$spec['dataset_v2'],'actions'=>$count,'seconds'=>round(microtime(true)-$started,1),
         'http_attempts'=>count(PaperHistoryResearch::$httpAttempts),'bars_bytes'=>$bytes,
         'v1_fingerprint_unchanged'=>true,'v1'=>$before,'summary'=>$manifest['summary'],
         'note'=>'No account replay. v1 bars were hash-copied. Only identity-ok alphanumeric names were fetched.']);
@@ -226,15 +230,15 @@ if($cmd==='collect-v2'){
 
 $ds=PaperHistoryResearch::readJson($datasetDir.'/dataset.json')??throw new RuntimeException('Run universe first');
 $uni=PaperHistoryResearch::readJson($datasetDir.'/universe.json')??throw new RuntimeException('universe.json missing');
-if(($ds['dataset']??'')!==PaperDatedTop100Prep::DATASET)throw new RuntimeException('Refusing to write a different dataset');
+if(($ds['dataset']??'')!==$spec['dataset'])throw new RuntimeException('Refusing to write a different dataset');
 $cand=PaperDatedTop100Prep::loadCandidates($candPath);
 $neededDays=$cand['days'];
 $as=$ds['as_of']+['evaluation_start_day'=>$ds['evaluation_start_day'],'primary_range'=>$ds['primary_range']??'5y'];
 $reuse=[];
 $reuseNames=isset($o['reuse-from'])?array_values(array_filter(array_map('trim',explode(',',$o['reuse-from']))))
-    :['kr-saved-scan-20261009','kr-saved-scan-20251008','kr-dated-amount-top100-202510'];
+    :$spec['reuse_from'];
 foreach($reuseNames as $name){
-    if($name===PaperDatedTop100Prep::DATASET)throw new RuntimeException('Refusing to reuse the destination dataset as a source');
+    if($name===$spec['dataset']||$name===$spec['dataset_v2'])throw new RuntimeException('Refusing to reuse the destination dataset as a source');
     $p=PaperHistoryResearch::datasetDir($stateRoot,$name);
     if(is_dir($p))$reuse[]=$p;
 }
@@ -274,7 +278,7 @@ foreach($included as $i=>$u){
 }
 $manifest=PaperHistoryResearch::manifest($datasetDir);
 PaperHistoryResearch::writeFile($datasetDir.'/manifest.json',PaperHistoryResearch::encode($manifest,true));
-$out(['dataset'=>PaperDatedTop100Prep::DATASET,'actions'=>$count,'seconds'=>round(microtime(true)-$started,1),
+$out(['dataset'=>$spec['dataset'],'actions'=>$count,'seconds'=>round(microtime(true)-$started,1),
     'requests'=>$requests,'http_attempts'=>count(PaperHistoryResearch::$httpAttempts),
     'http_attempts_including_retries'=>PaperHistoryResearch::$httpAttempts===[]?0:count(PaperHistoryResearch::$httpAttempts),
     'bars_bytes'=>$bytes,'aborted_after_repeated_failures'=>$consecutive>=8,

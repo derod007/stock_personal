@@ -160,6 +160,12 @@ def raise_issues(issues: list[dict[str, Any]]) -> None:
         ))
 
 
+def policy_id(date_from: str, date_to: str, version: str = "v1") -> str:
+    a = str(date_from).replace("-", "")
+    b = str(date_to).replace("-", "")
+    return f"dated_krx_amount_top100_{a}_{b}_{version}"
+
+
 def validate_inputs(
     pilot: Any,
     *,
@@ -167,10 +173,18 @@ def validate_inputs(
     docs: Path | None = None,
     raw_root: Path | None = None,
     hash_mode: str = "verify",
+    date_from: str | None = None,
+    date_to: str | None = None,
+    calendar: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     if hash_mode not in {"verify", "freeze"}:
         raise SystemExit("hash_mode must be verify or freeze")
-    days = list(days) if days is not None else list(pilot.candidate_trading_days(pilot.RANGE_FROM, pilot.RANGE_TO))
+    start = date_from or "2025-10-08"
+    end = date_to or "2026-10-08"
+    if days is None:
+        days = list(pilot.candidate_trading_days(pilot.parse_ymd(start), pilot.parse_ymd(end), calendar))
+    else:
+        days = list(days)
     docs = docs or DOCS
     raw_root = raw_root or pilot.RANGE_RAW_ROOT
     selected_dir = raw_root / "selected"
@@ -288,13 +302,15 @@ def validate_inputs(
             "hold_reason": None if yahoo_ok else "yahoo_chart_symbol_pattern_not_six_digits",
             "not_judged_invalid_listing": not yahoo_ok,
         })
+    range_from = str(docs_sum["from"]) if docs_sum.get("from") else start
+    range_to = str(docs_sum["to"]) if docs_sum.get("to") else end
     return {
         "schema": 1,
         "kind": "dated_krx_amount_top100_v1",
         "label": "KRX 일별 거래대금 TOP100 연구",
         "generated_at": now_kst(),
-        "from": "2025-10-08",
-        "to": "2026-10-08",
+        "from": range_from,
+        "to": range_to,
         "source_selected_gitignored": True,
         "days": days,
         "ok_dates": ok_dates,
@@ -337,9 +353,12 @@ def universe_payload(validated: dict[str, Any]) -> dict[str, Any]:
         }
     return {
         "schema": 1,
-        "policy": "dated_krx_amount_top100_20251008_20261008_v1",
+        "policy": policy_id(validated["from"], validated["to"]),
         "membership": "point_in_time_amount_top100_new_entries_only",
-        "note": "Symbols that appeared in a dated KRX equity ACC_TRDVAL TOP100 in 2025-10-08..2026-10-08. Not a live Daum scan.",
+        "note": (
+            "Symbols that appeared in a dated KRX equity ACC_TRDVAL TOP100 in "
+            f"{validated['from']}..{validated['to']}. Not a live Daum scan."
+        ),
         "sources": [{"kind": "selected_top100", "days": validated["ok_dates"], "gitignored": True}],
         "source_errors": [{"date": d, "issue": "blocked_or_missing"} for d in validated["blocked_dates"]],
         "invalid_symbol_rows": [],
@@ -398,24 +417,46 @@ def main() -> int:
     parser.add_argument("--validate", action="store_true", help="read-only verify; does not rewrite file-hashes.json")
     parser.add_argument("--freeze-hashes", action="store_true", help="write file-hashes.json only when it does not already exist")
     parser.add_argument("--write-public", action="store_true", help="rewrite candidates/universe/input-validation.json")
+    parser.add_argument("--from", dest="date_from", default=None)
+    parser.add_argument("--to", dest="date_to", default=None)
+    parser.add_argument("--docs", default=None)
+    parser.add_argument("--raw-root", default=None)
+    parser.add_argument("--calendar", default=None)
     args = parser.parse_args()
     if not args.validate and not args.freeze_hashes:
         args.validate = True
     if args.validate and args.freeze_hashes:
         raise SystemExit("use either --validate or --freeze-hashes")
+    if (args.date_from is None) != (args.date_to is None):
+        raise SystemExit("--from and --to are required together")
     pilot = load_pilot()
     hash_mode = "freeze" if args.freeze_hashes else "verify"
-    validated = validate_inputs(pilot, hash_mode=hash_mode)
-    DOCS.mkdir(parents=True, exist_ok=True)
-    hash_path = DOCS / "file-hashes.json"
+    docs = Path(args.docs) if args.docs else DOCS
+    raw_root = Path(args.raw_root) if args.raw_root else None
+    calendar = pilot.load_trading_calendar(Path(args.calendar)) if args.calendar else None
+    days = None
+    if args.date_from and args.date_to:
+        days = list(pilot.candidate_trading_days(pilot.parse_ymd(args.date_from), pilot.parse_ymd(args.date_to), calendar))
+    validated = validate_inputs(
+        pilot,
+        days=days,
+        docs=docs,
+        raw_root=raw_root,
+        hash_mode=hash_mode,
+        date_from=args.date_from,
+        date_to=args.date_to,
+        calendar=calendar,
+    )
+    docs.mkdir(parents=True, exist_ok=True)
+    hash_path = docs / "file-hashes.json"
     if hash_mode == "freeze":
         if hash_path.is_file():
             raise SystemExit("file-hashes.json already exists; verify will not overwrite it")
         write_json(hash_path, freeze_hash_payload(validated))
     if args.write_public:
-        write_json(DOCS / "candidates.json", public_candidates(validated))
-        write_json(DOCS / "universe.json", universe_payload(validated))
-        write_json(DOCS / "input-validation.json", {
+        write_json(docs / "candidates.json", public_candidates(validated))
+        write_json(docs / "universe.json", universe_payload(validated))
+        write_json(docs / "input-validation.json", {
             "ok": True,
             "generated_at": validated["generated_at"],
             "from": validated["from"],

@@ -13,6 +13,13 @@ pcheck(PaperDatedTop100Prep::classifyKrxCode('0001A0')==='alphanumeric_short_cod
 pcheck(PaperDatedTop100Prep::EVAL_START==='2025-10-08'&&PaperDatedTop100Prep::AS_OF==='2026-10-08','evaluation window is the requested range');
 pcheck(PaperHistoryResearch::PREP_BARS===240&&PaperHistoryResearch::MIN_BARS===60,'prep window is MA240 / quality 60 from engine code');
 pcheck(PaperDatedTop100Prep::DATASET!==PaperDatedTop100Replay::DATASET,'year dataset id does not overwrite Oct 2025');
+$recent=PaperDatedTop100Prep::spec();
+$prior=PaperDatedTop100Prep::spec(PaperDatedTop100Prep::PROFILE_PRIOR);
+pcheck($recent['eval_start']===PaperDatedTop100Prep::EVAL_START&&$recent['dataset']===PaperDatedTop100Prep::DATASET,'default spec keeps the recent year dataset');
+pcheck($prior['eval_start']==='2024-10-08'&&$prior['as_of']==='2025-10-02','prior spec is 2024-10-08..2025-10-02');
+pcheck($prior['dataset']==='kr-dated-amount-top100-20241008-20251002'&&$prior['dataset']!==$recent['dataset'],'prior dataset id is separate');
+pcheck($prior['dataset_v2']!==$recent['dataset_v2']&&$prior['docs']==='docs/historical-top100-20241008-20251002','prior docs and v2 id do not overwrite recent files');
+pcheck($prior['policy']==='dated_krx_amount_top100_20241008_20251002_v1','prior universe policy is period-specific');
 
 $tmp=sys_get_temp_dir().'/dated-top100-prep-'.getmypid();
 @mkdir($tmp,0770,true);

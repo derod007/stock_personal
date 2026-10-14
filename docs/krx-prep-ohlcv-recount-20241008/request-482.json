@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "kind": "krx_prep_bars_request_482_breakdown_v1",
+  "total_http_requests": 482,
+  "auto_retries": 0,
+  "auto_retry_definition": "historical-amount-top100-pilot._get_with_retry: HTTP가 200이 아니고 auth가 아니면 summary['retries']를 올리고 최대 3회 반복. collect.json의 retries 필드.",
+  "empty_http_200_is_not_auto_retry": true,
+  "parts": [
+    {
+      "id": "first_sequential",
+      "requests": 478,
+      "kind": "new_http",
+      "note": "1차 --collect. PR #89 20241007 2파일은 복사(HTTP 아님). 나머지 239일×2 - 재사용 2 + 20241001 빈 응답 2 = 478."
+    },
+    {
+      "id": "manual_rerequest_20241001",
+      "requests": 2,
+      "kind": "manual_rerequest",
+      "note": "2차 --collect. 자동 재시도가 아니다. 빈 캐시를 지운 뒤 같은 날짜를 사람이 다시 실행했다. HTTP 200 빈 본문은 _get_with_retry 조건(비-200)에 해당하지 않는다."
+    },
+    {
+      "id": "calendar_revision_20231013",
+      "requests": 2,
+      "kind": "new_http",
+      "note": "3차 --collect. 20241001을 공식 임시공휴일로 달력에서 뺀 뒤 20231013을 새로 받았다. 재시도가 아니다."
+    }
+  ],
+  "not_counted_as_http": {
+    "pr89_reuse_copy": 2,
+    "files": [
+      "20241007_kospi_equity.json",
+      "20241007_kosdaq_equity.json"
+    ]
+  }
+}

@@ -1,0 +1,1138 @@
+{
+  "schema": 1,
+  "price_basis": "KRX TDD 원본, 수정 여부 미확정",
+  "halt_status": "미확정",
+  "n": 113,
+  "rows": [
+    {
+      "symbol": "000545.KS",
+      "code": "000545",
+      "name": "흥국화재우",
+      "scope": "eval",
+      "n": 1,
+      "first": "2025-04-14",
+      "last": "2025-04-14",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "000670.KS",
+      "code": "000670",
+      "name": "영풍",
+      "scope": "eval",
+      "n": 9,
+      "first": "2025-04-14",
+      "last": "2025-04-24",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "001470.KS",
+      "code": "001470",
+      "name": "삼부토건",
+      "scope": "eval",
+      "n": 134,
+      "first": "2025-02-25",
+      "last": "2025-10-02",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "001530.KS",
+      "code": "001530",
+      "name": "DI동일",
+      "scope": "eval",
+      "n": 15,
+      "first": "2024-11-21",
+      "last": "2024-12-11",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "001570.KS",
+      "code": "001570",
+      "name": "금양",
+      "scope": "eval",
+      "n": 135,
+      "first": "2024-10-29",
+      "last": "2025-10-02",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "002410.KS",
+      "code": "002410",
+      "name": "범양건영",
+      "scope": "eval",
+      "n": 135,
+      "first": "2024-11-18",
+      "last": "2025-10-02",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "003620.KS",
+      "code": "003620",
+      "name": "KG모빌리티",
+      "scope": "eval",
+      "n": 18,
+      "first": "2025-04-10",
+      "last": "2025-05-08",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "004380.KS",
+      "code": "004380",
+      "name": "삼익THK",
+      "scope": "eval",
+      "n": 101,
+      "first": "2025-05-12",
+      "last": "2025-10-02",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "004710.KS",
+      "code": "004710",
+      "name": "한솔테크닉스",
+      "scope": "eval",
+      "n": 16,
+      "first": "2025-09-04",
+      "last": "2025-09-25",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "005390.KS",
+      "code": "005390",
+      "name": "신성통상",
+      "scope": "eval",
+      "n": 17,
+      "first": "2025-08-27",
+      "last": "2025-09-18",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "006490.KS",
+      "code": "006490",
+      "name": "인스코비",
+      "scope": "eval",
+      "n": 1,
+      "first": "2025-08-18",
+      "last": "2025-08-18",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "007070.KS",
+      "code": "007070",
+      "name": "GS리테일",
+      "scope": "eval",
+      "n": 17,
+      "first": "2024-11-28",
+      "last": "2024-12-20",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "007570.KS",
+      "code": "007570",
+      "name": "일양약품",
+      "scope": "eval",
+      "n": 16,
+      "first": "2025-09-11",
+      "last": "2025-10-02",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "008970.KS",
+      "code": "008970",
+      "name": "KBI동양철관",
+      "scope": "eval",
+      "n": 15,
+      "first": "2025-08-22",
+      "last": "2025-09-11",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "009410.KS",
+      "code": "009410",
+      "name": "태영건설",
+      "scope": "eval",
+      "n": 16,
+      "first": "2024-10-08",
+      "last": "2024-10-30",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "009620.KQ",
+      "code": "009620",
+      "name": "삼보산업",
+      "scope": "eval",
+      "n": 12,
+      "first": "2024-11-20",
+      "last": "2024-12-05",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "012170.KS",
+      "code": "012170",
+      "name": "아센디오",
+      "scope": "eval",
+      "n": 13,
+      "first": "2025-02-14",
+      "last": "2025-03-05",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "013580.KS",
+      "code": "013580",
+      "name": "계룡건설",
+      "scope": "eval",
+      "n": 1,
+      "first": "2025-04-22",
+      "last": "2025-04-22",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "014970.KQ",
+      "code": "014970",
+      "name": "삼륭물산",
+      "scope": "eval",
+      "n": 1,
+      "first": "2025-04-29",
+      "last": "2025-04-29",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "015020.KS",
+      "code": "015020",
+      "name": "이스타코",
+      "scope": "eval",
+      "n": 1,
+      "first": "2024-12-12",
+      "last": "2024-12-12",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "020710.KQ",
+      "code": "020710",
+      "name": "시공테크",
+      "scope": "eval",
+      "n": 1,
+      "first": "2025-04-18",
+      "last": "2025-04-18",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "023790.KQ",
+      "code": "023790",
+      "name": "동일스틸럭스",
+      "scope": "eval",
+      "n": 2,
+      "first": "2025-09-04",
+      "last": "2025-09-10",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "025560.KS",
+      "code": "025560",
+      "name": "미래산업",
+      "scope": "eval",
+      "n": 17,
+      "first": "2025-06-27",
+      "last": "2025-07-21",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "025950.KQ",
+      "code": "025950",
+      "name": "동신건설",
+      "scope": "eval",
+      "n": 1,
+      "first": "2024-12-11",
+      "last": "2024-12-11",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "029960.KQ",
+      "code": "029960",
+      "name": "코엔텍",
+      "scope": "eval",
+      "n": 11,
+      "first": "2025-05-28",
+      "last": "2025-06-13",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "042510.KQ",
+      "code": "042510",
+      "name": "라온시큐어",
+      "scope": "eval",
+      "n": 15,
+      "first": "2025-04-11",
+      "last": "2025-05-02",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "042940.KQ",
+      "code": "042940",
+      "name": "상지건설",
+      "scope": "eval",
+      "n": 7,
+      "first": "2024-10-08",
+      "last": "2025-05-12",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "047820.KQ",
+      "code": "047820",
+      "name": "초록뱀미디어",
+      "scope": "eval",
+      "n": 118,
+      "first": "2024-10-08",
+      "last": "2025-04-02",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "049470.KQ",
+      "code": "049470",
+      "name": "SGA",
+      "scope": "eval",
+      "n": 2,
+      "first": "2025-07-17",
+      "last": "2025-07-22",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "058470.KQ",
+      "code": "058470",
+      "name": "리노공업",
+      "scope": "eval",
+      "n": 11,
+      "first": "2025-04-10",
+      "last": "2025-04-24",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "062970.KQ",
+      "code": "062970",
+      "name": "한국첨단소재",
+      "scope": "eval",
+      "n": 2,
+      "first": "2024-12-30",
+      "last": "2025-01-06",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "065500.KQ",
+      "code": "065500",
+      "name": "오리엔트정공",
+      "scope": "eval",
+      "n": 2,
+      "first": "2024-12-11",
+      "last": "2024-12-16",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "066790.KQ",
+      "code": "066790",
+      "name": "씨씨에스",
+      "scope": "eval",
+      "n": 74,
+      "first": "2024-11-20",
+      "last": "2025-10-02",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "078130.KQ",
+      "code": "078130",
+      "name": "국일제지",
+      "scope": "eval",
+      "n": 190,
+      "first": "2024-10-08",
+      "last": "2025-07-18",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "084180.KQ",
+      "code": "084180",
+      "name": "수성웹툰",
+      "scope": "eval",
+      "n": 16,
+      "first": "2024-12-02",
+      "last": "2024-12-23",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "094820.KQ",
+      "code": "094820",
+      "name": "일진파워",
+      "scope": "eval",
+      "n": 27,
+      "first": "2025-06-16",
+      "last": "2025-07-22",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "101000.KQ",
+      "code": "101000",
+      "name": "KS인더스트리",
+      "scope": "eval",
+      "n": 1,
+      "first": "2025-09-22",
+      "last": "2025-09-22",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "109070.KS",
+      "code": "109070",
+      "name": "주성코퍼레이션",
+      "scope": "eval",
+      "n": 112,
+      "first": "2024-10-08",
+      "last": "2025-03-25",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "149980.KQ",
+      "code": "149980",
+      "name": "하이로닉",
+      "scope": "eval",
+      "n": 122,
+      "first": "2025-04-08",
+      "last": "2025-10-02",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "160190.KQ",
+      "code": "160190",
+      "name": "하이젠알앤엠",
+      "scope": "eval",
+      "n": 1,
+      "first": "2025-02-05",
+      "last": "2025-02-05",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "175250.KQ",
+      "code": "175250",
+      "name": "아이큐어",
+      "scope": "eval",
+      "n": 41,
+      "first": "2025-08-06",
+      "last": "2025-10-02",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "177350.KQ",
+      "code": "177350",
+      "name": "베셀",
+      "scope": "eval",
+      "n": 20,
+      "first": "2024-12-20",
+      "last": "2025-01-21",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "192250.KQ",
+      "code": "192250",
+      "name": "케이사인",
+      "scope": "eval",
+      "n": 14,
+      "first": "2024-10-14",
+      "last": "2024-10-31",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "200230.KQ",
+      "code": "200230",
+      "name": "텔콘RF제약",
+      "scope": "eval",
+      "n": 13,
+      "first": "2024-12-10",
+      "last": "2024-12-27",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "201490.KQ",
+      "code": "201490",
+      "name": "미투온",
+      "scope": "eval",
+      "n": 2,
+      "first": "2025-06-23",
+      "last": "2025-06-25",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "205500.KQ",
+      "code": "205500",
+      "name": "넥써쓰",
+      "scope": "eval",
+      "n": 1,
+      "first": "2024-12-27",
+      "last": "2024-12-27",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "208640.KQ",
+      "code": "208640",
+      "name": "썸에이지",
+      "scope": "eval",
+      "n": 1,
+      "first": "2025-08-12",
+      "last": "2025-08-12",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "208710.KQ",
+      "code": "208710",
+      "name": "포톤",
+      "scope": "eval",
+      "n": 13,
+      "first": "2025-04-28",
+      "last": "2025-05-19",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "210120.KQ",
+      "code": "210120",
+      "name": "캔버스엔",
+      "scope": "eval",
+      "n": 14,
+      "first": "2025-01-06",
+      "last": "2025-01-23",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "214610.KQ",
+      "code": "214610",
+      "name": "미코바이오메드",
+      "scope": "eval",
+      "n": 15,
+      "first": "2025-04-14",
+      "last": "2025-05-07",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "234920.KQ",
+      "code": "234920",
+      "name": "자이글",
+      "scope": "eval",
+      "n": 1,
+      "first": "2025-01-24",
+      "last": "2025-01-24",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "246250.KQ",
+      "code": "246250",
+      "name": "에스엘에스바이오",
+      "scope": "eval",
+      "n": 82,
+      "first": "2025-06-10",
+      "last": "2025-10-02",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "258790.KQ",
+      "code": "258790",
+      "name": "소프트캠프",
+      "scope": "eval",
+      "n": 30,
+      "first": "2025-06-24",
+      "last": "2025-08-04",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "278470.KS",
+      "code": "278470",
+      "name": "에이피알",
+      "scope": "eval",
+      "n": 9,
+      "first": "2024-10-18",
+      "last": "2024-10-30",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "288330.KQ",
+      "code": "288330",
+      "name": "브릿지바이오테라퓨틱스",
+      "scope": "eval",
+      "n": 2,
+      "first": "2025-06-27",
+      "last": "2025-07-02",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "294090.KQ",
+      "code": "294090",
+      "name": "이오플로우",
+      "scope": "eval",
+      "n": 133,
+      "first": "2025-03-24",
+      "last": "2025-10-02",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "308100.KQ",
+      "code": "308100",
+      "name": "형지글로벌",
+      "scope": "eval",
+      "n": 2,
+      "first": "2025-04-03",
+      "last": "2025-04-08",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "348370.KQ",
+      "code": "348370",
+      "name": "엔켐",
+      "scope": "eval",
+      "n": 1,
+      "first": "2024-11-06",
+      "last": "2024-11-06",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "355390.KQ",
+      "code": "355390",
+      "name": "크라우드웍스",
+      "scope": "eval",
+      "n": 14,
+      "first": "2025-01-06",
+      "last": "2025-01-23",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "377300.KS",
+      "code": "377300",
+      "name": "카카오페이",
+      "scope": "eval",
+      "n": 2,
+      "first": "2025-06-24",
+      "last": "2025-06-26",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "389140.KQ",
+      "code": "389140",
+      "name": "포바이포",
+      "scope": "eval",
+      "n": 1,
+      "first": "2025-04-21",
+      "last": "2025-04-21",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "389470.KQ",
+      "code": "389470",
+      "name": "인벤티지랩",
+      "scope": "eval",
+      "n": 2,
+      "first": "2025-05-08",
+      "last": "2025-05-12",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "412540.KQ",
+      "code": "412540",
+      "name": "제일엠앤에스",
+      "scope": "eval",
+      "n": 123,
+      "first": "2025-04-07",
+      "last": "2025-10-02",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "435570.KQ",
+      "code": "435570",
+      "name": "에르코스",
+      "scope": "eval",
+      "n": 1,
+      "first": "2025-04-10",
+      "last": "2025-04-10",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "450140.KS",
+      "code": "450140",
+      "name": "코오롱모빌리티그룹",
+      "scope": "eval",
+      "n": 2,
+      "first": "2025-09-24",
+      "last": "2025-09-29",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "45014K.KS",
+      "code": "45014K",
+      "name": "코오롱모빌리티그룹우",
+      "scope": "eval",
+      "n": 3,
+      "first": "2025-09-18",
+      "last": "2025-09-30",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "465770.KS",
+      "code": "465770",
+      "name": "STX그린로지스",
+      "scope": "eval",
+      "n": 1,
+      "first": "2025-07-03",
+      "last": "2025-07-03",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "900110.KQ",
+      "code": "900110",
+      "name": "이스트아시아홀딩스",
+      "scope": "eval",
+      "n": 18,
+      "first": "2025-09-01",
+      "last": "2025-09-24",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "950130.KQ",
+      "code": "950130",
+      "name": "엑세스바이오",
+      "scope": "eval",
+      "n": 30,
+      "first": "2025-08-18",
+      "last": "2025-09-26",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "001470.KS",
+      "code": "001470",
+      "name": "삼부토건",
+      "scope": "prep",
+      "n": 1,
+      "first": "2024-08-16",
+      "last": "2024-08-16",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "002310.KS",
+      "code": "002310",
+      "name": "아세아제지",
+      "scope": "prep",
+      "n": 9,
+      "first": "2024-04-05",
+      "last": "2024-04-18",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "008500.KS",
+      "code": "008500",
+      "name": "일정실업",
+      "scope": "prep",
+      "n": 109,
+      "first": "2023-10-13",
+      "last": "2024-03-21",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "009410.KS",
+      "code": "009410",
+      "name": "태영건설",
+      "scope": "prep",
+      "n": 137,
+      "first": "2024-03-14",
+      "last": "2024-10-07",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "012450.KS",
+      "code": "012450",
+      "name": "한화에어로스페이스",
+      "scope": "prep",
+      "n": 18,
+      "first": "2024-08-29",
+      "last": "2024-09-26",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "013310.KQ",
+      "code": "013310",
+      "name": "아진산업",
+      "scope": "prep",
+      "n": 30,
+      "first": "2024-01-09",
+      "last": "2024-02-21",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "019490.KS",
+      "code": "019490",
+      "name": "하이트론",
+      "scope": "prep",
+      "n": 15,
+      "first": "2023-10-13",
+      "last": "2024-09-24",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "021040.KQ",
+      "code": "021040",
+      "name": "대호특수강",
+      "scope": "prep",
+      "n": 20,
+      "first": "2024-08-23",
+      "last": "2024-09-24",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "025900.KQ",
+      "code": "025900",
+      "name": "동화기업",
+      "scope": "prep",
+      "n": 14,
+      "first": "2024-04-12",
+      "last": "2024-05-02",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "033340.KQ",
+      "code": "033340",
+      "name": "좋은사람들",
+      "scope": "prep",
+      "n": 193,
+      "first": "2023-10-13",
+      "last": "2024-07-24",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "033540.KQ",
+      "code": "033540",
+      "name": "파라텍",
+      "scope": "prep",
+      "n": 14,
+      "first": "2024-01-29",
+      "last": "2024-02-19",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "033790.KQ",
+      "code": "033790",
+      "name": "피노",
+      "scope": "prep",
+      "n": 1,
+      "first": "2024-05-09",
+      "last": "2024-05-09",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "042940.KQ",
+      "code": "042940",
+      "name": "상지건설",
+      "scope": "prep",
+      "n": 17,
+      "first": "2024-04-30",
+      "last": "2024-10-07",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "047560.KQ",
+      "code": "047560",
+      "name": "이스트소프트",
+      "scope": "prep",
+      "n": 1,
+      "first": "2024-01-22",
+      "last": "2024-01-22",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "047820.KQ",
+      "code": "047820",
+      "name": "초록뱀미디어",
+      "scope": "prep",
+      "n": 240,
+      "first": "2023-10-13",
+      "last": "2024-10-07",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "049470.KQ",
+      "code": "049470",
+      "name": "SGA",
+      "scope": "prep",
+      "n": 84,
+      "first": "2024-04-22",
+      "last": "2024-08-22",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "056090.KQ",
+      "code": "056090",
+      "name": "시지메드텍",
+      "scope": "prep",
+      "n": 161,
+      "first": "2023-10-13",
+      "last": "2024-06-10",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "060260.KQ",
+      "code": "060260",
+      "name": "뉴보텍",
+      "scope": "prep",
+      "n": 17,
+      "first": "2024-07-10",
+      "last": "2024-08-01",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "066790.KQ",
+      "code": "066790",
+      "name": "씨씨에스",
+      "scope": "prep",
+      "n": 2,
+      "first": "2023-11-13",
+      "last": "2024-02-15",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "077500.KS",
+      "code": "077500",
+      "name": "유니퀘스트",
+      "scope": "prep",
+      "n": 6,
+      "first": "2023-10-13",
+      "last": "2023-10-20",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "078130.KQ",
+      "code": "078130",
+      "name": "국일제지",
+      "scope": "prep",
+      "n": 240,
+      "first": "2023-10-13",
+      "last": "2024-10-07",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "082800.KQ",
+      "code": "082800",
+      "name": "비보존 제약",
+      "scope": "prep",
+      "n": 15,
+      "first": "2023-10-20",
+      "last": "2023-11-09",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "086520.KQ",
+      "code": "086520",
+      "name": "에코프로",
+      "scope": "prep",
+      "n": 11,
+      "first": "2024-04-09",
+      "last": "2024-04-24",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "090710.KQ",
+      "code": "090710",
+      "name": "휴림로봇",
+      "scope": "prep",
+      "n": 15,
+      "first": "2024-02-05",
+      "last": "2024-02-27",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "109070.KS",
+      "code": "109070",
+      "name": "주성코퍼레이션",
+      "scope": "prep",
+      "n": 240,
+      "first": "2023-10-13",
+      "last": "2024-10-07",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "109820.KQ",
+      "code": "109820",
+      "name": "진매트릭스",
+      "scope": "prep",
+      "n": 1,
+      "first": "2024-08-21",
+      "last": "2024-08-21",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "123330.KQ",
+      "code": "123330",
+      "name": "제닉",
+      "scope": "prep",
+      "n": 1,
+      "first": "2024-09-10",
+      "last": "2024-09-10",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "129890.KQ",
+      "code": "129890",
+      "name": "앱코",
+      "scope": "prep",
+      "n": 12,
+      "first": "2023-11-07",
+      "last": "2023-11-22",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "177350.KQ",
+      "code": "177350",
+      "name": "베셀",
+      "scope": "prep",
+      "n": 2,
+      "first": "2023-10-27",
+      "last": "2023-12-19",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "178320.KQ",
+      "code": "178320",
+      "name": "서진시스템",
+      "scope": "prep",
+      "n": 4,
+      "first": "2024-05-09",
+      "last": "2024-05-14",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "225190.KQ",
+      "code": "225190",
+      "name": "LK삼양",
+      "scope": "prep",
+      "n": 8,
+      "first": "2024-04-09",
+      "last": "2024-04-19",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "243840.KQ",
+      "code": "243840",
+      "name": "신흥에스이씨",
+      "scope": "prep",
+      "n": 12,
+      "first": "2024-04-09",
+      "last": "2024-04-25",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "290690.KQ",
+      "code": "290690",
+      "name": "소룩스",
+      "scope": "prep",
+      "n": 18,
+      "first": "2024-01-03",
+      "last": "2024-08-14",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "294090.KQ",
+      "code": "294090",
+      "name": "이오플로우",
+      "scope": "prep",
+      "n": 25,
+      "first": "2023-10-13",
+      "last": "2024-05-20",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "299660.KQ",
+      "code": "299660",
+      "name": "셀리드",
+      "scope": "prep",
+      "n": 2,
+      "first": "2024-08-13",
+      "last": "2024-08-20",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "302550.KQ",
+      "code": "302550",
+      "name": "리메드",
+      "scope": "prep",
+      "n": 12,
+      "first": "2023-12-07",
+      "last": "2023-12-22",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "304360.KQ",
+      "code": "304360",
+      "name": "에스바이오메딕스",
+      "scope": "prep",
+      "n": 2,
+      "first": "2024-04-19",
+      "last": "2024-04-24",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "317690.KQ",
+      "code": "317690",
+      "name": "퀀타매트릭스",
+      "scope": "prep",
+      "n": 2,
+      "first": "2024-08-02",
+      "last": "2024-08-06",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "321820.KQ",
+      "code": "321820",
+      "name": "아티스트유나이티드",
+      "scope": "prep",
+      "n": 2,
+      "first": "2023-12-14",
+      "last": "2023-12-19",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "355150.KQ",
+      "code": "355150",
+      "name": "코스텍시스",
+      "scope": "prep",
+      "n": 22,
+      "first": "2024-01-03",
+      "last": "2024-02-01",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "356890.KQ",
+      "code": "356890",
+      "name": "싸이버원",
+      "scope": "prep",
+      "n": 16,
+      "first": "2024-04-11",
+      "last": "2024-05-03",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "363260.KQ",
+      "code": "363260",
+      "name": "모비데이즈",
+      "scope": "prep",
+      "n": 15,
+      "first": "2024-04-30",
+      "last": "2024-05-23",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "413630.KQ",
+      "code": "413630",
+      "name": "씨피시스템",
+      "scope": "prep",
+      "n": 98,
+      "first": "2023-10-23",
+      "last": "2024-03-14",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    },
+    {
+      "symbol": "457190.KS",
+      "code": "457190",
+      "name": "이수스페셜티케미컬",
+      "scope": "prep",
+      "n": 6,
+      "first": "2024-04-23",
+      "last": "2024-04-30",
+      "kind": "ohl_zero_close_positive_volume_zero"
+    }
+  ]
+}

@@ -41,7 +41,7 @@ HEAD;
         $s=str_replace('        $last=($journal->read()', "        if(!empty(\$existing['state']['halted']))return ['account'=>\$config['id'],'processed_sessions'=>0,'halted'=>true,'last_session'=>\$existing['state']['last_session'],'halt_at'=>\$existing['state']['halt_at']??null];\n        \$last=(\$journal->read()",$s);
         $s=str_replace('        ResearchCashFee::advance($s,$date,$barSet,$snapshots,$log);',
             "        if(!PaperKrxAccountStudy::beforeAdvance(\$s,\$date,\$barSet,\$snapshots,\$data['breaks']??[],\$emit))return false;\n        ResearchCashFee::advance(\$s,\$date,\$barSet,\$snapshots,\$log);",$s);
-        return self::HEADER.$s."}\n";
+        return str_replace("\r\n","\n",self::HEADER).$s."}\n";
     }
     public static function assertAdapter(string $root):void
     {

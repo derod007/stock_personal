@@ -9,6 +9,31 @@ $cfg=PaperKrxAccountStudy::config($root,'baseline');$original=PaperDatedTop100Re
 test($cfg===array_replace($original,['id'=>$cfg['id']]),'only account ID changed');
 $tmp=sys_get_temp_dir().'/krx-account-study-'.bin2hex(random_bytes(5));mkdir($tmp);
 register_shutdown_function(function()use($tmp){$it=new RecursiveIteratorIterator(new RecursiveDirectoryIterator($tmp,FilesystemIterator::SKIP_DOTS),RecursiveIteratorIterator::CHILD_FIRST);foreach($it as $f)$f->isDir()?rmdir($f->getPathname()):unlink($f->getPathname());rmdir($tmp);});
+// Load the real class from a CRLF working copy in a separate PHP process.
+// Only dependency paths are redirected; HEADER itself is parsed from actual CRLF bytes.
+$win=$tmp.'/crlf';mkdir($win.'/bin/paper',0777,true);
+foreach(['KrxAccountStudy.php','KrxAccountReplay.php','DatedTop100Replay.php'] as $file){
+    $text=str_replace("\r\n","\n",file_get_contents($root.'/bin/paper/'.$file));
+    if($file==='KrxAccountStudy.php')foreach(['KrxContinuityReview.php','KrxAccountReplay.php'] as $dep)
+        $text=str_replace("require_once __DIR__.'/".$dep."';",'require_once '.var_export($root.'/bin/paper/'.$dep,true).';',$text);
+    file_put_contents($win.'/bin/paper/'.$file,str_replace("\n","\r\n",$text));
+}
+$probe=$win.'/probe.php';
+file_put_contents($probe, '<?php require __DIR__."/bin/paper/KrxAccountStudy.php";'
+    .'if(substr_count(PaperKrxAccountStudy::HEADER,"\r")!==14)throw new RuntimeException("Expected actual CRLF nowdoc");'
+    .'PaperKrxAccountStudy::assertAdapter(__DIR__);echo "CRLF_OK";');
+$probeRun=static function()use($probe):array{
+    $p=proc_open([PHP_BINARY,'-n',$probe],[1=>['pipe','w'],2=>['pipe','w']],$pipes);
+    if(!is_resource($p))throw new RuntimeException('Cannot run CRLF regression');
+    $out=stream_get_contents($pipes[1]);$err=stream_get_contents($pipes[2]);fclose($pipes[1]);fclose($pipes[2]);
+    return [proc_close($p),$out.$err];
+};
+[$exit,$text]=$probeRun();test($exit===0&&$text==='CRLF_OK','real CRLF class nowdoc and adapter pass');
+$adapter=$win.'/bin/paper/KrxAccountReplay.php';$originalAdapter=file_get_contents($adapter);
+file_put_contents($adapter,str_replace('krx_guarded_asof_engine','tampered_engine',$originalAdapter));
+[$exit,$text]=$probeRun();test($exit!==0&&str_contains($text,'Account adapter differs beyond declared edits'),'CRLF normalization still rejects code mutation');
+file_put_contents($adapter,str_replace("\r\n","\n",$originalAdapter));
+[$exit,$text]=$probeRun();test($exit===0&&$text==='CRLF_OK','CRLF header with LF adapter also passes');
 $bars=recovery_bars();$signal=end($bars)['available_at'];
 for($i=1;$i<=6;$i++){
  $day=(new DateTimeImmutable('@'.$signal))->setTimezone(new DateTimeZone('Asia/Seoul'))->modify('+'.$i.' weekdays')->format('Y-m-d');

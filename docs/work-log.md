@@ -1,3 +1,15 @@
+## 2026-10-14 13:55 · Cursor · 끝
+- 한 일: 2024-10-08~2025-10-02 1248종 KRX·Yahoo 원본 OHLCV 읽기 전용 집계. API·복구·계좌·병합 없음
+- 파일: docs/research/krx_yahoo_ohlcv_compare.py, docs/krx-yahoo-ohlcv-compare-20241008-20251002/summary.json, docs/krx-yahoo-ohlcv-compare-20241008-20251002/report.md, docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
+## 2026-10-14 13:46 · Cursor · 진행
+- 한 일: 이전 기간 1248종 v2 Yahoo 원본과 저장 KRX 양 시장 원본 OHLCV를 읽기 전용 대조. API·복구·계좌 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-14 · Codex · 끝
 - 이전 243세션 전용 실행 도구 추가. 최근 기준 장부는 읽기 전용 PR #76 대조, 이전 기준/대안은 별도 경로에서 전체 분할·일괄 실행 후 이벤트와 최종 상태 동일성 확인
 - #84·#85 의존성을 작업 브랜치에서 통합. 운영 src/config와 최근 실행 코드·고정 결과 변경 없음. main 병합 없음

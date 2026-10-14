@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "source_commit": "f3a1cc2d25b648cfc8ca6a65b3d58bbdeda54f90",
+  "repository_lf_sha256": {
+    "docs/historical-top100-20241008-20251002/candidates.json": "ca1f5bdea8a1caeab75197fafee4b17008d45bcdf7c694a331a6a6c7e9cd8fb2",
+    "docs/historical-top100-20241008-20251002/universe-v2.json": "f2f96d25c0e1eeba3f31909fb977083cfe5d6f02a77b8c901362fa09eb309a38",
+    "docs/historical-top100-20241008-20251002/sector-map-full-v2.json": "ab86e9725b1b18ca62da74b37a76c15f0fd0e51ce764bf3bea750e8bb9c911b2",
+    "docs/historical-top100-20241008-20251002/trading-calendar.json": "2c77d01e335cfd26fa575a0bb5a412ef8c05aab71edca4217b75c98a78d8bb98",
+    "docs/historical-top100-20241008-20251002/file-hashes.json": "e1bcd422bcb7993d78da06c84ba08cc02dd1c859854ba3bfc8234579912e4256",
+    "docs/historical-top100-20241008-20251002/evidence.json": "8e457b0e09e6eb2d2fb95238eb963ddddb11d8c370101220228cf991919207b9"
+  },
+  "local_freeze": "Dataset metadata and per-symbol verified bar hashes are frozen in inputs.json before the first replay. No raw bars are in Git."
+}

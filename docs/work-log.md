@@ -1,3 +1,13 @@
+## 2026-10-14 · Codex · 끝
+- 이전 243세션 전용 실행 도구 추가. 최근 기준 장부는 읽기 전용 PR #76 대조, 이전 기준/대안은 별도 경로에서 전체 분할·일괄 실행 후 이벤트와 최종 상태 동일성 확인
+- #84·#85 의존성을 작업 브랜치에서 통합. 운영 src/config와 최근 실행 코드·고정 결과 변경 없음. main 병합 없음
+- 검증: PHP 8.3.6 최근 회귀 80 + 이전 신규 30 통과(경고 0), dated TOP100 준비/재현, Python 관련 30테스트 통과
+- 실제 1248종목 자료는 사용자 로컬에 있으므로 전체 실행·수익 계산 미실시. 커서 안내: docs/recovery-close-prior-account/README.md
+
+## 2026-10-14 · Codex · 진행
+- 이전 243세션 recovery_close 연구 계좌 비교 추가. #84·#85는 작업 브랜치에서 통합하고 main 병합은 하지 않음
+- 최근 실행 도구·결과는 유지. 이전 기준/대안의 분할·일괄 대사와 최근 기준 장부 읽기 전용 확인 추가
+
 ## 2026-10-14 12:15 · Cursor · 끝
 - 한 일: 2024-10-08~2025-10-02 KRX 일별 거래대금 TOP100 243일·합집합 1248 자료 준비. 계좌 재현·병합 없음
 - 파일: docs/historical-top100-20241008-20251002/, docs/research/historical-amount-top100-pilot.py, docs/research/dated-amount-top100-range.py, bin/paper/DatedTop100Prep.php, bin/paper_dated_top100_prep.php, tests/dated_top100_prep.php, tests/test_dated_amount_top100_range.py, tests/test_historical_amount_top100_pilot.py, docs/work-log.md
@@ -9,6 +19,16 @@
 - 파일: docs/work-log.md
 - 커밋: 안 함
 - 롤백: 없음
+
+## 2026-10-14 · Codex · 끝
+- 상승 눌림 `recovery_close` 하나만 제외하는 연구 계좌 비교 도구 및 실행 안내 추가. 기준 244세션 장부·일별 로그·거래가 PR #76과 일치해야 대안 실행 허용
+- 추천 추가/누락, 패턴 교체, 수량 및 기존 이익 거래 변화 기록. 운영 src/config/지문/계좌/원본/기존 결과 변경 없음
+- 검증: PHP 8.3.6 새 테스트 80, dated TOP100 32, opportunity 41 통과. 실제 연구 판정 연결·이어하기·멱등·장부·미래봉 차단 확인
+- 한계: 1년 원본은 사용자 로컬에 있어 전체 실행 및 수익 비교 미실시. 새 PR 제출, 병합하지 않음
+
+## 2026-10-14 · Codex · 진행
+- `recovery_close` 한 조건만 제외하는 연구 전용 계좌 비교 개발. PR #76 기준 장부 재현을 대안 실행의 선행 조건으로 고정
+- 운영 전략·설정·계좌·원본·기존 연구 결과는 변경하지 않음. 전체 데이터 실행은 사용자 로컬에서 진행 예정
 
 ## 2026-10-13 23:58 · Cursor · 끝
 - 한 일: Python 바이트코드와 상승 눌림 A-input JSON을 gitignore. 추적 중이던 pyc는 인덱스만 제거

@@ -14,6 +14,17 @@
   "eval_to": "2025-10-02",
   "eval_sessions": 243,
   "pairs": 24300,
+  "eval_session_symbol_cap": 24300,
+  "count_units": {
+    "session_symbol_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+    "quality_90_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+    "judgment_day_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+    "overlap_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+    "unique_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300.",
+    "unique_quality_90_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300.",
+    "unique_judgment_day_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300.",
+    "overlap_unique_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300."
+  },
   "empty_top100_days": [],
   "engine_ranges": {
     "price_basis": "KRX TDD 원본, 수정 여부 미확정",
@@ -164,22 +175,38 @@
       "겹치지 않음": 12,
       "판단 불가": 0
     },
+    "count_units": {
+      "overlap_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+      "overlap_unique_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300."
+    },
     "overlap_symbols": 79,
     "overlap_sessions": 242,
     "overlap_pairs": 1063,
+    "overlap_unique_symbol_sessions": 1002,
     "same_day_top100_true": 6,
-    "note": "당일 TOP100만으로 영향 없음을 단정하지 않았다. 보유·대기 주문은 집계하지 않았다."
+    "note": "당일 TOP100만으로 영향 없음을 단정하지 않았다. 보유·대기 주문은 집계하지 않았다. overlap_pairs는 원인×종목×세션 연결 건수이고, overlap_unique_symbol_sessions는 (symbol, session) 고유 건수다."
   },
   "ohl_zero": {
     "kind": "ohl_zero",
     "scope": "이번 집계는 날짜별 TOP100 신규 추천 입력에 대한 것이다. 보유·대기 주문 안전성 검증이 아니다.",
     "future_events_do_not_block_past": true,
+    "count_units": {
+      "session_symbol_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+      "quality_90_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+      "judgment_day_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+      "unique_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300.",
+      "unique_quality_90_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300.",
+      "unique_judgment_day_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300."
+    },
     "events_overlapping": 2571,
     "symbols": 83,
     "sessions": 243,
     "session_symbol_pairs": 19253,
+    "unique_symbol_sessions": 1381,
     "quality_90_pairs": 2096,
+    "unique_quality_90_symbol_sessions": 499,
     "judgment_day_pairs": 0,
+    "unique_judgment_day_symbol_sessions": 0,
     "short_window_event_counts": {},
     "not_in_chart_valid": true
   },
@@ -187,12 +214,23 @@
     "kind": "no_row",
     "scope": "이번 집계는 날짜별 TOP100 신규 추천 입력에 대한 것이다. 보유·대기 주문 안전성 검증이 아니다.",
     "future_events_do_not_block_past": true,
+    "count_units": {
+      "session_symbol_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+      "quality_90_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+      "judgment_day_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+      "unique_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300.",
+      "unique_quality_90_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300.",
+      "unique_judgment_day_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300."
+    },
     "events_overlapping": 43034,
     "symbols": 174,
     "sessions": 243,
     "session_symbol_pairs": 692823,
+    "unique_symbol_sessions": 2975,
     "quality_90_pairs": 48310,
+    "unique_quality_90_symbol_sessions": 1207,
     "judgment_day_pairs": 0,
+    "unique_judgment_day_symbol_sessions": 0,
     "short_window_event_counts": {},
     "not_in_past_or_valid": true,
     "intermediate_gap_not_a_quality_reason": true

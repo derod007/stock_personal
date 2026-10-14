@@ -4,12 +4,23 @@
   "kind": "ohl_zero",
   "scope": "이번 집계는 날짜별 TOP100 신규 추천 입력에 대한 것이다. 보유·대기 주문 안전성 검증이 아니다.",
   "future_events_do_not_block_past": true,
+  "count_units": {
+    "session_symbol_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+    "quality_90_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+    "judgment_day_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+    "unique_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300.",
+    "unique_quality_90_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300.",
+    "unique_judgment_day_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300."
+  },
   "events_overlapping": 2571,
   "symbols": 83,
   "sessions": 243,
   "session_symbol_pairs": 19253,
+  "unique_symbol_sessions": 1381,
   "quality_90_pairs": 2096,
+  "unique_quality_90_symbol_sessions": 499,
   "judgment_day_pairs": 0,
+  "unique_judgment_day_symbol_sessions": 0,
   "short_window_event_counts": {},
   "rows": [
     {

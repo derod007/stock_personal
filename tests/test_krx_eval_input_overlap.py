@@ -107,6 +107,50 @@ class KrxEvalInputOverlapTest(unittest.TestCase):
         self.assertEqual(row["overlap_sessions"], 2)
         self.assertEqual(row["quality_90_sessions"], 1)
         self.assertEqual(row["judgment_day_sessions"], 0)
+        self.assertEqual(out["session_symbol_pairs"], 2)
+        self.assertEqual(out["unique_symbol_sessions"], 2)
+        self.assertEqual(out["quality_90_pairs"], 1)
+        self.assertEqual(out["unique_quality_90_symbol_sessions"], 1)
+
+    def test_two_causes_same_symbol_session_dedupes_unique_count(self):
+        top = {"2024-10-08": {"AAA.KS"}, "2024-10-10": {"AAA.KS"}}
+        days = ["2024-10-08", "2024-10-10"]
+        out = self.m.summarize_events(
+            "ohl_zero",
+            {"AAA.KS": ["2024-09-01", "2024-09-10"]},
+            top,
+            days,
+            None,
+        )
+        self.assertEqual(out["session_symbol_pairs"], 4)
+        self.assertEqual(out["unique_symbol_sessions"], 2)
+        self.assertEqual(out["quality_90_pairs"], 4)
+        self.assertEqual(out["unique_quality_90_symbol_sessions"], 2)
+        self.assertLessEqual(out["unique_symbol_sessions"], self.m.EVAL_SESSION_SYMBOL_CAP)
+        self.assertLessEqual(out["unique_symbol_sessions"], out["session_symbol_pairs"])
+        self.assertEqual(out["count_units"]["session_symbol_pairs"], self.m.COUNT_UNIT_LINKS)
+        self.assertEqual(out["count_units"]["unique_symbol_sessions"], self.m.COUNT_UNIT_UNIQUE)
+
+    def test_unique_symbol_sessions_cap(self):
+        self.assertEqual(self.m.EVAL_SESSION_SYMBOL_CAP, 24300)
+        self.assertEqual(self.m.unique_within_cap(24300), 24300)
+        self.assertEqual(self.m.unique_within_cap(0), 0)
+        with self.assertRaises(ValueError):
+            self.m.unique_within_cap(24301)
+
+    def test_two_breaks_same_symbol_session_dedupes_unique_count(self):
+        recs = [
+            {"symbol": "AAA.KS", "from": "2024-06-01", "to": "2024-06-02"},
+            {"symbol": "AAA.KS", "from": "2024-07-01", "to": "2024-07-02"},
+        ]
+        days = ["2024-10-08", "2024-10-10"]
+        top = {"2024-10-08": {"AAA.KS"}, "2024-10-10": {"AAA.KS"}}
+        classified = [self.m.classify_break(r, top, days) for r in recs]
+        links, unique, sessions = self.m.overlap_pair_counts(classified, days, top)
+        self.assertEqual(links, 4)
+        self.assertEqual(unique, 2)
+        self.assertEqual(len(sessions), 2)
+        self.assertLessEqual(unique, 24300)
 
     def test_missing_bars_are_not_reported_as_confirmed_counts(self):
         facts = self.m.read_engine_ranges(ROOT)
@@ -141,6 +185,20 @@ class KrxEvalInputOverlapCliTest(unittest.TestCase):
             self.assertTrue(summary["chart_plan_not_executed"])
             self.assertEqual(summary["price_basis"], m.PRICE_BASIS)
             self.assertEqual(sum(summary["breaks"]["counts"].values()), 96)
+            self.assertEqual(summary["eval_session_symbol_cap"], 24300)
+            unique = summary["breaks"]["overlap_unique_symbol_sessions"]
+            links = summary["breaks"]["overlap_pairs"]
+            self.assertLessEqual(unique, 24300)
+            self.assertLessEqual(unique, links)
+            self.assertGreater(unique, 0)
+            self.assertEqual(
+                summary["count_units"]["overlap_pairs"],
+                m.COUNT_UNIT_LINKS,
+            )
+            self.assertEqual(
+                summary["breaks"]["count_units"]["overlap_unique_symbol_sessions"],
+                m.COUNT_UNIT_UNIQUE,
+            )
 
 
 if __name__ == "__main__":

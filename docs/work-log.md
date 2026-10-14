@@ -1,3 +1,15 @@
+## 2026-10-14 23:32 · Cursor · 끝
+- 한 일: PR #93 연결 건수와 (종목, 세션) 고유 건수 분리, 상한 24300 검증 추가. 원본·전략·계좌 없음
+- 파일: docs/research/krx_eval_input_overlap.py, tests/test_krx_eval_input_overlap.py, docs/krx-eval-input-overlap-20241008-20251002/, docs/work-log.md
+- 커밋: PR #93에 추가(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-14 23:28 · Cursor · 진행
+- 한 일: PR #93 집계를 연결 건수와 (종목, 세션) 고유 건수로 분리. 원본·전략·계좌 보존
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-14 18:20 · Cursor · 끝
 - 한 일: 엔진 봉 범위를 코드에서 확인하고 평가 243일 TOP100 신규 입력과 단절 96·OHL=0·행없음 겹침을 집계. 원본·전략·계좌 없음
 - 파일: docs/research/krx_eval_input_overlap.py, tests/test_krx_eval_input_overlap.py, docs/krx-eval-input-overlap-20241008-20251002/, .github/workflows/pattern-replay.yml, docs/work-log.md

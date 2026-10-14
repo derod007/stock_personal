@@ -8,9 +8,14 @@
     "겹치지 않음": 12,
     "판단 불가": 0
   },
+  "count_units": {
+    "overlap_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+    "overlap_unique_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300."
+  },
   "overlap_symbols": 79,
   "overlap_sessions": 242,
   "overlap_pairs": 1063,
+  "overlap_unique_symbol_sessions": 1002,
   "same_day_top100_true": 6,
   "rows": [
     {
@@ -2126,5 +2131,5 @@
       "listed_absence_not_clearance": true
     }
   ],
-  "note": "당일 TOP100만으로 영향 없음을 단정하지 않았다. 보유·대기 주문은 집계하지 않았다."
+  "note": "당일 TOP100만으로 영향 없음을 단정하지 않았다. 보유·대기 주문은 집계하지 않았다. overlap_pairs는 원인×종목×세션 연결 건수이고, overlap_unique_symbol_sessions는 (symbol, session) 고유 건수다."
 }

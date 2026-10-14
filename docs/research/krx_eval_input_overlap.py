@@ -22,6 +22,23 @@ BARS_REL = Path("data") / "raw" / "research" / "krx-tdd-dataset-20231013-2025100
 QUALITY_RECENT_DAYS = 90
 DETECT_RATIO = 1.9
 DETECT_ADJACENT = 0.301
+EVAL_SESSION_SYMBOL_CAP = 24300
+COUNT_UNIT_LINKS = (
+    "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다."
+)
+COUNT_UNIT_UNIQUE = (
+    "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300."
+)
+COUNT_UNITS = {
+    "session_symbol_pairs": COUNT_UNIT_LINKS,
+    "quality_90_pairs": COUNT_UNIT_LINKS,
+    "judgment_day_pairs": COUNT_UNIT_LINKS,
+    "overlap_pairs": COUNT_UNIT_LINKS,
+    "unique_symbol_sessions": COUNT_UNIT_UNIQUE,
+    "unique_quality_90_symbol_sessions": COUNT_UNIT_UNIQUE,
+    "unique_judgment_day_symbol_sessions": COUNT_UNIT_UNIQUE,
+    "overlap_unique_symbol_sessions": COUNT_UNIT_UNIQUE,
+}
 SCOPE = (
     "이번 집계는 날짜별 TOP100 신규 추천 입력에 대한 것이다. "
     "보유·대기 주문 안전성 검증이 아니다."
@@ -56,6 +73,12 @@ def write_json(path: Path, payload: Any) -> None:
 
 def parse_day(s: str) -> date:
     return date.fromisoformat(s)
+
+
+def unique_within_cap(n: int, cap: int = EVAL_SESSION_SYMBOL_CAP) -> int:
+    if n > cap:
+        raise ValueError(f"unique (symbol, session) {n} exceeds cap {cap}")
+    return n
 
 
 def src(root: Path, key: str) -> str:
@@ -216,6 +239,25 @@ def classify_break(
     }
 
 
+def overlap_pair_counts(
+    classified: list[dict[str, Any]],
+    eval_days: list[str],
+    top100_days: dict[str, set[str]],
+) -> tuple[int, int, set[str]]:
+    links = 0
+    unique: set[tuple[str, str]] = set()
+    sessions: set[str] = set()
+    for c in classified:
+        if c["bucket"] != "평가 입력과 겹침":
+            continue
+        for d in eval_days:
+            if c["to"] <= d and c["symbol"] in top100_days.get(d, set()):
+                links += 1
+                unique.add((c["symbol"], d))
+                sessions.add(d)
+    return links, unique_within_cap(len(unique)), sessions
+
+
 def load_top100(candidates: dict[str, Any]) -> tuple[list[str], dict[str, set[str]]]:
     days = list(candidates["days"])
     by_day: dict[str, set[str]] = {}
@@ -288,6 +330,9 @@ def summarize_events(
     pair_n = 0
     quality90_n = 0
     judgment_n = 0
+    unique_pairs: set[tuple[str, str]] = set()
+    unique_q90: set[tuple[str, str]] = set()
+    unique_judgment: set[tuple[str, str]] = set()
     short_windows = defaultdict(int)
     for symbol, causes in by_symbol.items():
         sessions = [d for d in eval_days if symbol in top100_days.get(d, set())]
@@ -325,17 +370,34 @@ def summarize_events(
             judgment_n += len(on_d)
             pair_syms.add(symbol)
             pair_days.update(ov)
+            unique_pairs.update((symbol, d) for d in ov)
+            unique_q90.update((symbol, d) for d in q90)
+            unique_judgment.update((symbol, d) for d in on_d)
     records.sort(key=lambda r: (r["symbol"], r["cause_day"]))
+    unique_n = unique_within_cap(len(unique_pairs))
+    unique_q90_n = unique_within_cap(len(unique_q90))
+    unique_judgment_n = unique_within_cap(len(unique_judgment))
     return {
         "kind": kind,
         "scope": SCOPE,
         "future_events_do_not_block_past": True,
+        "count_units": {
+            "session_symbol_pairs": COUNT_UNIT_LINKS,
+            "quality_90_pairs": COUNT_UNIT_LINKS,
+            "judgment_day_pairs": COUNT_UNIT_LINKS,
+            "unique_symbol_sessions": COUNT_UNIT_UNIQUE,
+            "unique_quality_90_symbol_sessions": COUNT_UNIT_UNIQUE,
+            "unique_judgment_day_symbol_sessions": COUNT_UNIT_UNIQUE,
+        },
         "events_overlapping": len(records),
         "symbols": len(pair_syms),
         "sessions": len(pair_days),
         "session_symbol_pairs": pair_n,
+        "unique_symbol_sessions": unique_n,
         "quality_90_pairs": quality90_n,
+        "unique_quality_90_symbol_sessions": unique_q90_n,
         "judgment_day_pairs": judgment_n,
+        "unique_judgment_day_symbol_sessions": unique_judgment_n,
         "short_window_event_counts": dict(short_windows),
         "rows": records,
     }
@@ -429,9 +491,12 @@ def render_report(summary: dict[str, Any]) -> str:
         "",
         "## 2. 평가 243일 당일 TOP100 입력 겹침",
         "",
-        f"- 평가 세션: {summary['eval_sessions']}일, 일자×종목: {summary['pairs']}.",
+        "연결 건수는 원인×종목×평가세션을 합산한다. 같은 종목·세션에 원인이 둘이면 두 번 센다. "
+        f"고유 건수는 (symbol, session)을 한 번만 세며 상한은 {EVAL_SESSION_SYMBOL_CAP}이다.",
+        "",
+        f"- 평가 세션: {summary['eval_sessions']}일, 일자×종목 상한: {summary['pairs']}.",
         f"- 단절 96: 겹침 {br['counts']['평가 입력과 겹침']} / 겹치지 않음 {br['counts']['겹치지 않음']} / 판단 불가 {br['counts']['판단 불가']}.",
-        f"- 겹치는 단절의 종목 {br['overlap_symbols']} · 세션 {br['overlap_sessions']} · 일자×종목 {br['overlap_pairs']}.",
+        f"- 겹치는 단절: 종목 {br['overlap_symbols']} · 세션 {br['overlap_sessions']} · 연결 {br['overlap_pairs']} · 고유 (종목, 세션) {br.get('overlap_unique_symbol_sessions')}.",
         f"- 당일 TOP100만 본 PR #92 표(6/37/53)는 쓰지 않았다. 같은 날 TOP100은 {br.get('same_day_top100_true')}건뿐이나, 이후 TOP100 세션까지 보면 겹침이 {br['counts']['평가 입력과 겹침']}건이다.",
         "",
         "### OHL=0 행",
@@ -441,9 +506,10 @@ def render_report(summary: dict[str, Any]) -> str:
         lines.append(f"확정하지 않음: {ohl['blocked']}")
     else:
         lines += [
-            f"- 겹친 원인 날짜: {ohl['events_overlapping']} (종목 {ohl['symbols']}, 세션 {ohl['sessions']}, 일자×종목 {ohl['session_symbol_pairs']}).",
-            f"- PaperQuality 90력일 안: 일자×종목 {ohl['quality_90_pairs']}.",
-            f"- 판정일 당일 OHL=0: 일자×종목 {ohl['judgment_day_pairs']}. TOP100은 당일 거래대금 행에서 뽑히므로 당일 0거래대금 OHL=0이 0인 것은 선정 방식과 맞다. 과거 OHL=0은 별개다.",
+            f"- 겹친 원인 날짜: {ohl['events_overlapping']} (종목 {ohl['symbols']}, 세션 {ohl['sessions']}).",
+            f"- 연결 건수: {ohl['session_symbol_pairs']} · 고유 (종목, 세션): {ohl['unique_symbol_sessions']} (≤{EVAL_SESSION_SYMBOL_CAP}).",
+            f"- PaperQuality 90력일: 연결 {ohl['quality_90_pairs']} · 고유 {ohl['unique_quality_90_symbol_sessions']}.",
+            f"- 판정일 당일 OHL=0: 연결 {ohl['judgment_day_pairs']} · 고유 {ohl['unique_judgment_day_symbol_sessions']}. TOP100은 당일 거래대금 행에서 뽑히므로 당일 0거래대금 OHL=0이 0인 것은 선정 방식과 맞다. 과거 OHL=0은 별개다.",
             "- OHL=0은 `$valid`에 안 들어가 패턴·MA·손절·목표 계산 봉은 아니다. `$past` 비정상으로 최근 90력일이면 품질 차단.",
         ]
     lines += ["", "### 행 없음", ""]
@@ -451,8 +517,10 @@ def render_report(summary: dict[str, Any]) -> str:
         lines.append(f"확정하지 않음: {miss['blocked']}")
     else:
         lines += [
-            f"- 판정일까지의 달력에 행 없음이 있는 TOP100 입력: 원인 날짜 {miss['events_overlapping']} (종목 {miss['symbols']}, 세션 {miss['sessions']}, 일자×종목 {miss['session_symbol_pairs']}).",
-            f"- 판정일 당일 행 없음: 일자×종목 {miss['judgment_day_pairs']}. 당일 TOP100에 있으려면 당일 원본 행이 있어야 하므로 0이 정상이다. 과거 상장 전·이전 시장 공백은 입력 시계열 길이를 줄인다.",
+            f"- 판정일까지의 달력에 행 없음이 있는 TOP100 입력: 원인 날짜 {miss['events_overlapping']} (종목 {miss['symbols']}, 세션 {miss['sessions']}).",
+            f"- 연결 건수: {miss['session_symbol_pairs']} · 고유 (종목, 세션): {miss['unique_symbol_sessions']} (≤{EVAL_SESSION_SYMBOL_CAP}).",
+            f"- 최근 90력일 공백(연결 집계): {miss['quality_90_pairs']} · 고유 {miss['unique_quality_90_symbol_sessions']}. 중간 공백은 품질 사유가 아니다.",
+            f"- 판정일 당일 행 없음: 연결 {miss['judgment_day_pairs']} · 고유 {miss['unique_judgment_day_symbol_sessions']}. 당일 TOP100에 있으려면 당일 원본 행이 있어야 하므로 0이 정상이다. 과거 상장 전·이전 시장 공백은 입력 시계열 길이를 줄인다.",
             "- 중간 공백은 PaperQuality가 달력 대조를 하지 않아 품질 사유가 되지 않는다. 시계열이 짧아지거나 인접 완료봉 사이 간격만 남는다.",
         ]
     none_rows = [r for r in (br.get("rows") or summary.get("break_rows") or []) if r.get("bucket") == "겹치지 않음"]
@@ -533,20 +601,25 @@ def main() -> int:
     for c in classified:
         counts[c["bucket"]] += 1
     ov = [c for c in classified if c["bucket"] == "평가 입력과 겹침"]
-    ov_sessions: set[str] = set()
-    for c in ov:
-        for d in eval_days:
-            if c["to"] <= d and c["symbol"] in top100_days.get(d, set()):
-                ov_sessions.add(d)
+    overlap_links, overlap_unique, ov_sessions = overlap_pair_counts(classified, eval_days, top100_days)
     break_sum = {
         "n": 96,
         "counts": counts,
+        "count_units": {
+            "overlap_pairs": COUNT_UNIT_LINKS,
+            "overlap_unique_symbol_sessions": COUNT_UNIT_UNIQUE,
+        },
         "overlap_symbols": len({c["symbol"] for c in ov}),
         "overlap_sessions": len(ov_sessions),
-        "overlap_pairs": sum(c["overlap_sessions"] for c in ov),
+        "overlap_pairs": overlap_links,
+        "overlap_unique_symbol_sessions": overlap_unique,
         "same_day_top100_true": sum(1 for c in classified if c["to_in_eval_top100_same_day"]),
         "rows": classified,
-        "note": "당일 TOP100만으로 영향 없음을 단정하지 않았다. 보유·대기 주문은 집계하지 않았다.",
+        "note": (
+            "당일 TOP100만으로 영향 없음을 단정하지 않았다. 보유·대기 주문은 집계하지 않았다. "
+            "overlap_pairs는 원인×종목×세션 연결 건수이고, overlap_unique_symbol_sessions는 "
+            "(symbol, session) 고유 건수다."
+        ),
     }
 
     bars_dir = find_bars_dir(root, args.bars or None)
@@ -596,6 +669,8 @@ def main() -> int:
         "eval_to": eval_days[-1],
         "eval_sessions": len(eval_days),
         "pairs": pairs,
+        "eval_session_symbol_cap": EVAL_SESSION_SYMBOL_CAP,
+        "count_units": COUNT_UNITS,
         "empty_top100_days": empty,
         "engine_ranges": facts,
         "breaks": {k: v for k, v in break_sum.items() if k != "rows"},
@@ -621,7 +696,11 @@ def main() -> int:
         "pairs": pairs,
         "breaks": counts,
         "ohl_zero_events": ohl_out.get("events_overlapping"),
+        "ohl_zero_unique": ohl_out.get("unique_symbol_sessions"),
         "no_row_events": miss_out.get("events_overlapping"),
+        "no_row_unique": miss_out.get("unique_symbol_sessions"),
+        "breaks_links": break_sum.get("overlap_pairs"),
+        "breaks_unique": break_sum.get("overlap_unique_symbol_sessions"),
         "bars": str(bars_dir) if bars_dir else None,
         "docs": str(docs),
     }, ensure_ascii=False))

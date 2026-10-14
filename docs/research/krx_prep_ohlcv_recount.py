@@ -65,19 +65,26 @@ def znum(v: Any) -> float | None:
         return None
 
 
-def classify_row(rec: dict[str, Any]) -> str:
+def classify_volume(volume: Any) -> str:
+    if volume is None:
+        return "null"
+    if volume < 0:
+        return "negative"
+    if volume == 0:
+        return "zero"
+    return "positive"
+
+
+def classify_ohlc(rec: dict[str, Any]) -> str:
     o, h, l, c = rec.get("open"), rec.get("high"), rec.get("low"), rec.get("close")
-    v = rec.get("volume")
     if o is None or h is None or l is None or c is None:
         return "ohlc_null"
-    ohl_zero = o == 0 and h == 0 and l == 0
-    vol_zero = v is None or v == 0
-    if ohl_zero and c > 0 and vol_zero:
-        return "ohl_zero_close_positive_volume_zero"
-    if ohl_zero and c > 0 and not vol_zero:
-        return "ohl_zero_close_positive_volume_positive"
-    if ohl_zero and c == 0 and vol_zero:
-        return "ohlcv_all_zero"
+    if o == 0 and h == 0 and l == 0:
+        if c > 0:
+            return "ohl_zero_close_positive"
+        if c == 0:
+            return "ohlc_all_zero"
+        return "ohl_zero_close_non_positive"
     if any(x < 0 for x in (o, h, l, c)):
         return "ohlc_negative"
     if any(x <= 0 for x in (o, h, l, c)):
@@ -88,11 +95,33 @@ def classify_row(rec: dict[str, Any]) -> str:
         return "open_outside_hl"
     if c < l or c > h:
         return "close_outside_hl"
-    return "normal"
+    return "normal_ohlc"
+
+
+def classify_row(rec: dict[str, Any]) -> dict[str, Any]:
+    ohlc = classify_ohlc(rec)
+    volume = classify_volume(rec.get("volume"))
+    normal_ohlc = ohlc == "normal_ohlc"
+    normal_ohlcv = normal_ohlc and volume == "positive"
+    if ohlc == "ohl_zero_close_positive":
+        kind = f"ohl_zero_close_positive_volume_{volume}"
+    elif ohlc == "ohlc_all_zero" and volume == "zero":
+        kind = "ohlcv_all_zero"
+    elif normal_ohlc:
+        kind = "normal_ohlcv" if volume == "positive" else f"normal_ohlc_volume_{volume}"
+    else:
+        kind = ohlc
+    return {
+        "ohlc": ohlc,
+        "volume": volume,
+        "kind": kind,
+        "normal_ohlc": normal_ohlc,
+        "normal_ohlcv": normal_ohlcv,
+    }
 
 
 def is_abnormal(kind: str) -> bool:
-    return kind != "normal"
+    return kind not in {"normal", "normal_ohlcv"} and not str(kind).startswith("normal_ohlc_volume_")
 
 
 def empty_symbol(spec: dict[str, Any]) -> dict[str, Any]:
@@ -105,12 +134,14 @@ def empty_symbol(spec: dict[str, Any]) -> dict[str, Any]:
         "prep_days": 240,
         "eval_days": 243,
         "prep_assigned_rows": 0,
+        "prep_normal_ohlc": 0,
         "prep_normal_ohlcv": 0,
         "prep_abnormal_rows": 0,
         "prep_no_row": 0,
         "prep_other_market_only": 0,
         "prep_both_markets": 0,
         "eval_assigned_rows": 0,
+        "eval_normal_ohlc": 0,
         "eval_normal_ohlcv": 0,
         "eval_abnormal_rows": 0,
         "eval_no_row": 0,
@@ -145,7 +176,8 @@ def load_day_tables(cmpmod: Any, raw_dir: Path, compact: str) -> dict[str, dict[
             rec["ISU_NM"] = raw.get("ISU_NM")
             rec["MKT_NM"] = raw.get("MKT_NM")
             rec["SECT_TP_NM"] = raw.get("SECT_TP_NM")
-            rec["kind"] = classify_row(rec)
+            rec["class"] = classify_row(rec)
+            rec["kind"] = rec["class"]["kind"]
             tables[suffix][code] = rec
     return tables
 
@@ -220,11 +252,14 @@ def observe_day(
         return None
     row[f"{prefix}_assigned_rows"] += 1
     kind = rec_a["kind"]
+    cls = rec_a.get("class") or classify_row(rec_a)
     bump_kind(row[f"{prefix}_kind_counts"], kind)
     kind_tot[f"{prefix}_{kind}"] += 1
-    if kind == "normal":
+    if cls.get("normal_ohlc"):
+        row[f"{prefix}_normal_ohlc"] += 1
+    if cls.get("normal_ohlcv"):
         row[f"{prefix}_normal_ohlcv"] += 1
-    else:
+    if is_abnormal(kind):
         row[f"{prefix}_abnormal_rows"] += 1
         if spec["symbol"] in issue_syms:
             fname = f"{compact}_{assigned}.json"

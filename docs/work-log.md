@@ -1,3 +1,15 @@
+## 2026-10-14 17:02 · Cursor · 끝
+- 한 일: 거래량·OHLC/OHLCV 분류 세분, KRX 연구 데이터셋, 이전상장 3종 연결, 단절 96건 정리. 보정·계좌 없음
+- 파일: docs/research/krx_prep_ohlcv_recount.py, docs/research/krx_tdd_dataset.py, tests/test_krx_prep_ohlcv_recount.py, tests/test_krx_tdd_dataset.py, docs/krx-tdd-dataset-20231013-20251002/, docs/work-log.md
+- 커밋: 새 PR(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-14 16:47 · Cursor · 진행
+- 한 일: KRX 원본 분류 세분·연구 데이터셋·이전상장 확인. 보정·계좌 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-14 16:21 · Cursor · 끝
 - 한 일: 저장 KRX 원본 재집계. 0가격 분리, 이상 날짜 목록, 양 시장 대조, 단절 의심. 수집·보정·계좌 없음
 - 파일: docs/research/krx_prep_ohlcv_recount.py, tests/test_krx_prep_ohlcv_recount.py, docs/krx-prep-ohlcv-recount-20241008/, docs/work-log.md

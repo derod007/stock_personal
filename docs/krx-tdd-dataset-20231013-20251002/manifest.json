@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "price_basis": "KRX TDD 원본, 수정 여부 미확정",
+  "prep_raw": "C:\\Users\\acdun\\Desktop\\dev\\noramu-work-krx-prep-collect\\data\\raw\\research\\krx-prep-bars-before-20241008\\raw",
+  "eval_raw": "C:\\Users\\acdun\\Desktop\\dev\\noramu-work-top100-202410\\data\\raw\\research\\historical-amount-top100-20241008-20251002\\raw",
+  "bars": "C:\\Users\\acdun\\Desktop\\dev\\noramu-work-krx-tdd-dataset\\data\\raw\\research\\krx-tdd-dataset-20231013-20251002\\bars",
+  "calendar": {
+    "prep": [
+      "2023-10-13",
+      "2024-10-07",
+      240
+    ],
+    "eval": [
+      "2024-10-08",
+      "2025-10-02",
+      243
+    ]
+  },
+  "provenance_fields": [
+    "file",
+    "file_sha256",
+    "day",
+    "symbol",
+    "code",
+    "market_observed",
+    "suffix_observed",
+    "lookup"
+  ]
+}

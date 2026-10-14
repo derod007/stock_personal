@@ -1,3 +1,15 @@
+## 2026-10-14 15:47 · Cursor · 끝
+- 한 일: 평가 시작 전 240거래일 달력 고정, KRX 양 시장 원본 수집, 1248종 준비봉 품질 집계. 가격 보정·계좌 없음
+- 파일: docs/research/krx_prep_bars_collect.py, docs/research/krx_prep_bars_quality.py, tests/test_krx_prep_bars_collect.py, docs/krx-prep-bars-before-20241008/, docs/work-log.md
+- 커밋: 새 PR(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-14 14:52 · Cursor · 진행
+- 한 일: 평가 시작 전 240거래일 KRX 원본 수집. 가격 보정·계좌 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-14 14:43 · Cursor · 끝
 - 한 일: KRX TDD 원주가/수정주가 미확정 기록, 준비 구간 4회 접근 확인, 가격 불일치 종가만/OHL 집계. 전체 수집·보정·계좌 없음
 - 파일: docs/research/krx_yahoo_ohlcv_compare.py, docs/research/krx_price_basis_prep_probe.py, tests/test_krx_yahoo_ohlcv_compare.py, tests/test_krx_price_basis_prep_probe.py, docs/krx-price-basis-prep-20241008/, docs/work-log.md

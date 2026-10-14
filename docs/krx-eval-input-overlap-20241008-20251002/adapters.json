@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "rows": [
+    {
+      "id": "field_map",
+      "status": "가능",
+      "detail": "jsonl의 open/high/low/close/volume과 day→15:30 KST available_at 매핑은 가격 변환 없이 가능하다."
+    },
+    {
+      "id": "ohl_zero_in_past",
+      "status": "가능",
+      "detail": "OHL=0 원행은 $past에 남겨 PaperQuality가 비정상으로 보게 해야 한다. CandleClock은 OHLC<=0을 $valid에서 뺀다."
+    },
+    {
+      "id": "no_row_not_invented",
+      "status": "엔진 한계",
+      "detail": "행 없음은 봉을 만들지 않는다. PaperQuality는 중간 거래일 공백을 달력과 대조하지 않고, 당일 완료봉이 없으면 missing_session만 띄운다."
+    },
+    {
+      "id": "chart_plan_not_run",
+      "status": "이번 범위 밖",
+      "detail": "추천·손절·목표 숫자를 엔진으로 재계산하지 않았다. 계좌 실행 금지. 겹침은 입력 범위만 센다."
+    },
+    {
+      "id": "price_basis",
+      "status": "미확정",
+      "detail": "KRX TDD 원본, 수정 여부 미확정. DatedTop100Replay의 기존 PRICE_BASIS는 Yahoo 표기다. KRX 원본을 넣으려면 출처 표기 어댑터가 필요하고 가격 보정은 하지 않는다."
+    },
+    {
+      "id": "envelope",
+      "status": "추천 경로 아님",
+      "detail": "MA240은 EnvelopeResearch 전용이다. ChartPlanEngine 신규 추천 입력에 넣지 않는다."
+    },
+    {
+      "id": "holdings",
+      "status": "검증 안 함",
+      "detail": "이번 집계는 날짜별 TOP100 신규 추천 입력에 대한 것이다. 보유·대기 주문 안전성 검증이 아니다."
+    },
+    {
+      "id": "detection",
+      "status": "부분",
+      "detail": "단절 목록은 종가비 1.9 또는 인접 |r-1|>0.301만 잡는다. 목록에 없다고 기업행사·가격 기준 문제가 없는 것이 아니다."
+    }
+  ]
+}

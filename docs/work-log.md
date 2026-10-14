@@ -1,3 +1,15 @@
+## 2026-10-14 18:20 · Cursor · 끝
+- 한 일: 엔진 봉 범위를 코드에서 확인하고 평가 243일 TOP100 신규 입력과 단절 96·OHL=0·행없음 겹침을 집계. 원본·전략·계좌 없음
+- 파일: docs/research/krx_eval_input_overlap.py, tests/test_krx_eval_input_overlap.py, docs/krx-eval-input-overlap-20241008-20251002/, .github/workflows/pattern-replay.yml, docs/work-log.md
+- 커밋: 새 PR(병합 안 함)
+- 롤백: 없음
+
+## 2026-10-14 18:15 · Cursor · 진행
+- 한 일: 엔진 실제 봉 범위 확인 후 평가 TOP100 입력과 단절·OHL=0·행없음 겹침 집계. 원본·전략·계좌 보존
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-14 17:02 · Cursor · 끝
 - 한 일: 거래량·OHLC/OHLCV 분류 세분, KRX 연구 데이터셋, 이전상장 3종 연결, 단절 96건 정리. 보정·계좌 없음
 - 파일: docs/research/krx_prep_ohlcv_recount.py, docs/research/krx_tdd_dataset.py, tests/test_krx_prep_ohlcv_recount.py, tests/test_krx_tdd_dataset.py, docs/krx-tdd-dataset-20231013-20251002/, docs/work-log.md

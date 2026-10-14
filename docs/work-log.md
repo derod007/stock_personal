@@ -1,3 +1,12 @@
+## 2026-10-14 · Codex · 끝
+- 한 일: KRX 원본/JSONL 전행 대조 어댑터, 계좌 없는 기준·recovery_close 제외 추천 비교, 원인 경고·품질 분리, 누적 8→243세션/재개/보고 도구. PR #93 브랜치 기반.
+- 검증: 신규 PHP 37개, 기존 recovery_close_account·dated_top100_replay, overlap Python 13개 통과. 실제 원본은 이 환경에 없어 전체 실행 안 함; 누락 시 거부 확인.
+- 보존: src/config/운영 계좌/원본/기존 연구 미변경, 전략 지문 유지. 병합 없음. 로컬 8세션 안내는 docs/krx-signal-compare/README.md.
+
+## 2026-10-14 · Codex · 진행
+- 한 일: PR #93 고유 집계 확인 후 KRX 원본 대조 어댑터와 계좌 없는 기준/대안 추천 비교 도구 개발. 운영·원본·기존 연구 보존.
+- 범위: 연구 도구, 검증, 실행 안내. 가격 보정·계좌 실행·병합 없음.
+
 ## 2026-10-14 23:32 · Cursor · 끝
 - 한 일: PR #93 연결 건수와 (종목, 세션) 고유 건수 분리, 상한 24300 검증 추가. 원본·전략·계좌 없음
 - 파일: docs/research/krx_eval_input_overlap.py, tests/test_krx_eval_input_overlap.py, docs/krx-eval-input-overlap-20241008-20251002/, docs/work-log.md

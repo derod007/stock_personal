@@ -50,8 +50,17 @@ test(!$plan['ready']&&$plan['status']==='hold_cross_break_source','new recommend
 $mu=$nv;foreach($mu['events'] as &$e)if($e['type']==='order'){$e['payload']['pattern']='trend_pullback_v1';break;}unset($e);
 test(!PaperNoPullbackStudy::verify($mu,['data'=>$data,'reference'=>[],'candidates'=>$cand],true)['pass'],'forbidden pattern mutation rejected');
 $mirror=$tmp.'/np-mirror';mkdir($mirror.'/src',0777,true);mkdir($mirror.'/bin/paper',0777,true);
-foreach(['src/ChartPlanEngine.php','bin/paper/NoPullbackEngine.php'] as $f)file_put_contents($mirror.'/'.$f,str_replace("\n","\r\n",file_get_contents($root.'/'.$f)));
-PaperNoPullbackStudy::assertMirror($mirror);test(true,'CRLF engine source comparison passes');
+foreach(['LF','CRLF'] as $sourceEnding){
+    foreach(['src/ChartPlanEngine.php','bin/paper/NoPullbackEngine.php'] as $f){
+        $lf=str_replace("\r\n","\n",file_get_contents($root.'/'.$f));
+        $source=$sourceEnding==='CRLF'?str_replace("\n","\r\n",$lf):$lf;
+        // Normalize first: replacing LF directly in a Windows checkout creates CRCRLF.
+        $crlf=str_replace("\n","\r\n",str_replace("\r\n","\n",$source));
+        if(str_contains($crlf,"\r\r\n"))throw new RuntimeException('Invalid CRCRLF test fixture');
+        file_put_contents($mirror.'/'.$f,$crlf);
+    }
+    PaperNoPullbackStudy::assertMirror($mirror);test(true,$sourceEnding.' input creates valid CRLF mirror');
+}
 file_put_contents($mirror.'/bin/paper/NoPullbackEngine.php',"\n// changed",FILE_APPEND);
 try{PaperNoPullbackStudy::assertMirror($mirror);test(false,'mirror drift');}catch(RuntimeException $e){test(str_contains($e->getMessage(),'mirror changed'),'extra engine edit rejected');}
 

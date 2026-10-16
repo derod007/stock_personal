@@ -1,3 +1,13 @@
+## 2026-10-17 · Codex · 끝
+- 기존 RR 감사 저장에 종목별 조건 pass/fail/unknown·원본 수치·최종 상태·코드 해시 추가, 과거 감사 파일 읽기 전용 내보내기 도구와 2년 진단 절차 문서화
+- 파일: bin/paper/DecisionEvidence.php, bin/paper/RrAudit.php, bin/paper_decision_evidence.php, tests/decision_evidence.php, .github/workflows/php-tests.yml, docs/decision-evidence/README.md
+- 검증: git diff --check 통과. 로컬 PHP 없음으로 PHP 검증은 PR CI에서 확인 예정
+- 운영 조건·설정·예약·장부 변경, 계좌 재실행 및 main 병합 없음
+
+## 2026-10-17 · Codex · 진행
+- 종목별 추천 판단 근거를 기존 RR 감사 기록에 추가하고 저장 감사 파일을 읽는 진단 내보내기 도구 개발
+- 추천·주문 조건, 계좌 장부, 설정·예약 변경 및 계좌 재실행 없음
+
 ## 2026-10-14 · Codex · 끝
 - 이전 243세션 전용 실행 도구 추가. 최근 기준 장부는 읽기 전용 PR #76 대조, 이전 기준/대안은 별도 경로에서 전체 분할·일괄 실행 후 이벤트와 최종 상태 동일성 확인
 - #84·#85 의존성을 작업 브랜치에서 통합. 운영 src/config와 최근 실행 코드·고정 결과 변경 없음. main 병합 없음

@@ -40,6 +40,7 @@ jobs:
           php tests/rr_view.php
           php tests/followup.php
           php tests/rr_audit.php
+          php tests/decision_evidence.php
           php tests/rr_scan.php
           php tests/current_quote.php
           php tests/weekly.php

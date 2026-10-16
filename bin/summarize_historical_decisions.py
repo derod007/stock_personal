@@ -2,6 +2,7 @@
 import argparse, collections, hashlib, json, math
 from pathlib import Path
 
+def obj(v): return v if isinstance(v,dict) else {}
 def read(p): return json.loads(Path(p).read_text())
 def summarize(diagnosis, dataset, candidates):
     c=read(candidates);cal=c['days'];idx={d:i for i,d in enumerate(cal)}
@@ -11,12 +12,12 @@ def summarize(diagnosis, dataset, candidates):
         assert len(day['records'])==100
         for r in day['records']:
             rows[(r['date'],r['symbol'])]=r
-            states['quality_blocked' if not r['quality']['can_simulate'] else (r['final'].get('status') or 'unavailable')]+=1
+            states['quality_blocked' if not r['quality']['can_simulate'] else (obj(r['final']).get('status') or 'unavailable')]+=1
             quality.update(r['quality']['reasons']);signals+=r['recommendation_eligible']
-            for name,pat in r['patterns'].items():
+            for name,pat in obj(r['patterns']).items():
                 if not pat['selected']:continue
-                fails.update(name+':'+k for k,g in pat['gates'].items() if g['state']=='fail')
-                unknown.update(name+':'+k for k,g in pat['gates'].items() if g['state']=='unknown')
+                fails.update(name+':'+k for k,g in obj(pat['gates']).items() if g['state']=='fail')
+                unknown.update(name+':'+k for k,g in obj(pat['gates']).items() if g['state']=='unknown')
     assert len(rows)==len(cal)*100,'incomplete diagnosis'
     anchors=[];last={}
     for d in cal:
@@ -40,7 +41,7 @@ def summarize(diagnosis, dataset, candidates):
         r=rows[(d,sym)];entry=bs[0]['open'];hit=next((n+1 for n,b in enumerate(bs) if b['high']>=entry*1.15),None)
         stop=next((n+1 for n,b in enumerate(bs) if b['low']<=entry*.95),None)
         order='same_bar_unknown' if hit is not None and hit==stop else 'up_first' if hit is not None and (stop is None or hit<stop) else 'down_first' if stop is not None else 'neither'
-        state='quality_blocked' if not r['quality']['can_simulate'] else r['final'].get('status','unavailable')
+        state='quality_blocked' if not r['quality']['can_simulate'] else obj(r['final']).get('status','unavailable')
         episodes.append({'date':d,'symbol':sym,'name':r['name'],'state':state,'ready':r['recommendation_eligible'],
                          'hit15':hit is not None,'hit_day':hit,'end_return':(bs[-1]['close']/entry-1)*100,
                          'max_up':(max(b['high'] for b in bs)/entry-1)*100,'order_15_minus5':order})

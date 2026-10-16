@@ -1,3 +1,7 @@
+## 2026-10-17 · Codex · 진행
+- 첨부 두 기간 원본으로 계좌 호출 없는 과거 종목별 진단 도구·검증·집계 개발
+- PR #99 기반. 운영 조건·설정·예약·장부 변경 및 계좌 재실행 없음
+
 ## 2026-10-17 · Codex · 끝
 - 기존 RR 감사 저장에 종목별 조건 pass/fail/unknown·원본 수치·최종 상태·코드 해시 추가, 과거 감사 파일 읽기 전용 내보내기 도구와 2년 진단 절차 문서화
 - 파일: bin/paper/DecisionEvidence.php, bin/paper/RrAudit.php, bin/paper_decision_evidence.php, tests/decision_evidence.php, .github/workflows/php-tests.yml, docs/decision-evidence/README.md

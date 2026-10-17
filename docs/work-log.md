@@ -1,3 +1,15 @@
+## 2026-10-18 01:20 · Cursor · 끝
+- 한 일: PR #103 후속. TOP100 최초 진입 20세션 구간으로 즉시 vs 특징 대기 비교. 손절·목표 유지. 유리함 없음. 운영·원본·103 결과 변경 없음
+- 파일: docs/research/top100_pre_rise_episode.py, docs/top100-pre-rise-v2/protocol.md, docs/top100-pre-rise-v2/report.md, docs/top100-pre-rise-v2/README.md, tests/test_top100_pre_rise_episode.py, docs/work-log.md
+- 커밋: 연구 브랜치
+- 롤백: 없음
+
+## 2026-10-18 01:17 · Cursor · 진행
+- 한 일: PR #103 후속. TOP100 최초 진입 20세션 구간 관찰. 조건·손절·목표 최적화 없음. 운영·원본·103 결과 변경 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-18 00:52 · Cursor · 끝
 - 한 일: PR #101 main 위에 #87, #88–#98, #99–#100 병합. 연구 CLI만 101 운영 지문을 허용하고 KRX 어댑터를 재생성. 운영 보호청산·지문·예약 경로 유지
 - 파일: bin/paper/KrxAccountReplay.php, bin/paper/KrxAccountStudy.php, bin/paper/KrxSignalStudy.php, bin/paper/RecentNoPullbackStudy.php, tests/krx_account_study.php, docs/work-log.md, .github/workflows/php-tests.yml

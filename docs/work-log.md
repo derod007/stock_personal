@@ -1,3 +1,15 @@
+## 2026-10-18 01:12 · Cursor · 끝
+- 한 일: 2년 TOP100 전체에서 판단일 완료봉 단순 특징 3개 비교. unique 미포착 결정 표본에서 유리함 없음. 운영·계좌·원본 변경 없음
+- 파일: docs/research/top100_pre_rise.py, docs/top100-pre-rise-v1/protocol.md, docs/top100-pre-rise-v1/report.md, docs/top100-pre-rise-v1/README.md, tests/test_top100_pre_rise.py, docs/work-log.md
+- 커밋: 연구 브랜치
+- 롤백: 없음
+
+## 2026-10-18 01:04 · Cursor · 진행
+- 한 일: 2년 TOP100에서 기존 추천에 안 잡힌 상승의 판단일 차트 공통점 후보 연구. 운영·계좌·원본 변경 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-18 00:52 · Cursor · 끝
 - 한 일: PR #101 main 위에 #87, #88–#98, #99–#100 병합. 연구 CLI만 101 운영 지문을 허용하고 KRX 어댑터를 재생성. 운영 보호청산·지문·예약 경로 유지
 - 파일: bin/paper/KrxAccountReplay.php, bin/paper/KrxAccountStudy.php, bin/paper/KrxSignalStudy.php, bin/paper/RecentNoPullbackStudy.php, tests/krx_account_study.php, docs/work-log.md, .github/workflows/php-tests.yml

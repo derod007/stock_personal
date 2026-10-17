@@ -20,7 +20,7 @@ STOP = 0.95
 TARGET = 1.15
 LARGE_LOSS = -8.0
 GAP_ABS = 0.15
-VERSION = "top100_pre_rise_v2"
+VERSION = "top100_pre_rise_v2_rev1"
 PRICE_BASIS = "yahoo_chart_quote_ohlcv_daily_adjustment_unverified"
 FEATURES = ("close_near_20high", "higher_10bar_low", "ma20_above_ma60")
 KNOTS = (59, 40, 20, 10, 5, 1, 0)
@@ -127,6 +127,7 @@ def simulate(window: list[dict], entry: float) -> dict:
     stop_px = entry * STOP
     target_px = entry * TARGET
     hit15 = False
+    same_bar = False
     reason = "time"
     exit_px = window[-1]["close"] * SELL
     bars_held = len(window)
@@ -135,6 +136,7 @@ def simulate(window: list[dict], entry: float) -> dict:
             hit15 = True
         stopped = b["low"] <= stop_px
         targeted = b["high"] >= target_px
+        same_bar = stopped and targeted
         if stopped:
             fill = min(stop_px, b["open"]) * SELL
             reason, exit_px, bars_held = "stop", fill, i
@@ -149,22 +151,34 @@ def simulate(window: list[dict], entry: float) -> dict:
         "tradable_win": net > 0,
         "exit_reason": reason,
         "bars_held": bars_held,
-        "stop_then_target_same_bar": reason == "stop" and hit15,
+        "same_bar_stop_and_target": same_bar,
+        "intraday_order": "unknown" if same_bar else "not_same_bar",
+        "stop_first_is_model_assumption": True,
     }
 
 
 def unconstrained(window: list[dict], entry: float) -> dict:
     hit_i = None
-    worst = 0.0
+    before_hit_day = None
+    through_hit_day = None
+    running = 0.0
+    same_bar = False
     for i, b in enumerate(window, 1):
-        worst = min(worst, b["low"] / entry - 1)
+        running = min(running, b["low"] / entry - 1)
         if b["high"] >= entry * TARGET:
             hit_i = i
+            through_hit_day = running
+            same_bar = b["low"] <= entry * STOP
             break
+        before_hit_day = running
     return {
         "hit15": hit_i is not None,
         "bars_to_15": hit_i,
-        "max_dd_before_15_pct": worst * 100,
+        "max_dd_before_hit_day_pct": None if before_hit_day is None else before_hit_day * 100,
+        "max_dd_through_hit_day_pct": None if through_hit_day is None else through_hit_day * 100,
+        "max_dd_window_pct": running * 100,
+        "same_bar_stop_and_target": bool(hit_i and same_bar),
+        "intraday_order": "unknown" if (hit_i and same_bar) else "not_same_bar",
     }
 
 
@@ -298,6 +312,7 @@ def build_episodes(period: dict) -> list[dict]:
     episodes = []
     for sym, idxs in first_idx.items():
         used_until = -1
+        seq = 0
         if sym not in cache:
             cache[sym] = load_symbol(period["dataset"] / "bars" / f"{sym}.json")
         bars, quality = cache[sym]
@@ -305,17 +320,21 @@ def build_episodes(period: dict) -> list[dict]:
             if i <= used_until:
                 continue
             if i + HOLD >= len(days):
+                seq += 1
                 episodes.append(
                     {
                         "symbol": sym,
                         "anchor": days[i],
                         "skip": "incomplete_future_window",
-                        "first_entry_unverified": i < HOLD,
+                        "new_entry_status": "unknown",
+                        "left_censored": i < HOLD,
+                        "nonoverlap_seq": seq,
                     }
                 )
                 used_until = len(days)
                 continue
             used_until = i + HOLD
+            seq += 1
             anchor = days[i]
             follow = days[i + 1 : i + 1 + HOLD]
             span = days[i : i + 1 + HOLD]
@@ -326,7 +345,9 @@ def build_episodes(period: dict) -> list[dict]:
                 "symbol": sym,
                 "anchor": anchor,
                 "end": days[i + HOLD],
-                "first_entry_unverified": i < HOLD,
+                "new_entry_status": "unknown",
+                "left_censored": i < HOLD,
+                "nonoverlap_seq": seq,
                 "days_in_top100": in_top,
                 "left_top100": in_top < HOLD + 1,
                 "rec_known": bool(rec_days),
@@ -381,6 +402,9 @@ def build_episodes(period: dict) -> list[dict]:
                             trade = simulate(sub, sub[0]["open"])
                             trade = dict(trade)
                             trade["entry_offset"] = buy_i
+                            trade["entry_delay_bars"] = buy_i - 1
+                            trade["remaining_bars"] = len(sub)
+                            trade["hold_clipped_at_t20"] = True
                 row["features"][name] = {"timing": timing, "trade": trade}
             if imm["tradable_net_pct"] < LARGE_LOSS:
                 row["large_loss"] = {
@@ -423,7 +447,7 @@ def trade_stats(trades: list[dict]) -> dict:
         "mean_bars_held": round(sum(t["bars_held"] for t in trades) / len(trades), 2),
         "stop_n": sum(t["exit_reason"] == "stop" for t in trades),
         "target_n": sum(t["exit_reason"] == "target" for t in trades),
-        "stop_then_high_touch_n": sum(bool(t.get("stop_then_target_same_bar")) for t in trades),
+        "same_bar_stop_and_target_n": sum(bool(t.get("same_bar_stop_and_target")) for t in trades),
     }
 
 
@@ -452,22 +476,58 @@ def unc_stats(rows: list[dict]) -> dict:
     if not u:
         return {"n": 0}
     hits = [x for x in u if x["hit15"]]
+    before = [x["max_dd_before_hit_day_pct"] for x in hits if x["max_dd_before_hit_day_pct"] is not None]
+    through = [x["max_dd_through_hit_day_pct"] for x in hits if x["max_dd_through_hit_day_pct"] is not None]
     return {
         "n": len(u),
         "hit15_n": len(hits),
         "hit15_pct": round(len(hits) / len(u) * 100, 2),
         "median_bars_to_15": _median([x["bars_to_15"] for x in hits]),
-        "median_max_dd_before_15_pct": _median([x["max_dd_before_15_pct"] for x in hits]),
-        "dd_gt_5pct_then_hit15": sum(x["max_dd_before_15_pct"] < -5 for x in hits),
+        "median_max_dd_before_hit_day_pct": _median(before),
+        "median_max_dd_through_hit_day_pct": _median(through),
+        "hit_on_first_hold_bar_n": sum(x["bars_to_15"] == 1 for x in hits),
+        "same_bar_stop_and_target_n": sum(bool(x["same_bar_stop_and_target"]) for x in hits),
+        "dd_gt_5pct_before_hit_day_then_hit15": sum(
+            x["max_dd_before_hit_day_pct"] is not None and x["max_dd_before_hit_day_pct"] < -5 for x in hits
+        ),
+    }
+
+
+def pair_later(episodes: list[dict], name: str) -> dict:
+    rows = []
+    for e in episodes:
+        info = (e.get("features") or {}).get(name) or {}
+        trade = info.get("trade")
+        if info.get("timing") != "later" or not trade or not e.get("immediate"):
+            continue
+        rows.append(
+            {
+                "immediate_net": e["immediate"]["tradable_net_pct"],
+                "wait_net": trade["tradable_net_pct"],
+                "delta": trade["tradable_net_pct"] - e["immediate"]["tradable_net_pct"],
+                "delay": trade["entry_delay_bars"],
+                "remaining": trade["remaining_bars"],
+            }
+        )
+    if not rows:
+        return {"n": 0}
+    return {
+        "n": len(rows),
+        "mean_immediate_net_pct": _mean([r["immediate_net"] for r in rows]),
+        "mean_wait_net_pct": _mean([r["wait_net"] for r in rows]),
+        "mean_wait_minus_immediate_pct": _mean([r["delta"] for r in rows]),
+        "mean_entry_delay_bars": _mean([r["delay"] for r in rows]),
+        "mean_remaining_bars": _mean([r["remaining"] for r in rows]),
     }
 
 
 def summarize(period: dict, episodes: list[dict]) -> dict:
     scored = [e for e in episodes if e.get("immediate")]
-    verified = [e for e in scored if not e["first_entry_unverified"]]
-    unverified = [e for e in scored if e["first_entry_unverified"]]
-    rise = [e for e in scored if e["immediate"]["high_touch_15"]]
-    flat = [e for e in scored if not e["immediate"]["high_touch_15"]]
+    left_censored = [e for e in scored if e.get("left_censored")]
+    later_windows = [e for e in scored if (e.get("nonoverlap_seq") or 1) > 1]
+    rise = [e for e in scored if e.get("unconstrained") and e["unconstrained"]["hit15"]]
+    flat = [e for e in scored if e.get("unconstrained") and not e["unconstrained"]["hit15"]]
+    old_rise = [e for e in scored if e["immediate"].get("high_touch_15")]
     feat_block = {}
     for name in FEATURES:
         by = defaultdict(list)
@@ -480,8 +540,15 @@ def summarize(period: dict, episodes: list[dict]) -> dict:
         feat_block[name] = {
             "timing_n": {k: len(v) for k, v in sorted(by.items())},
             "first_day_immediate": trade_stats([e["immediate"] for e in by.get("first_day", [])]),
-            "later_trade": trade_stats([((e.get("features") or {}).get(name) or {}).get("trade") for e in by.get("later", []) if ((e.get("features") or {}).get(name) or {}).get("trade")]),
-            "never_immediate": trade_stats([e["immediate"] for e in by.get("never", [])]),
+            "later_paired": pair_later(scored, name),
+            "later_trade": trade_stats(
+                [
+                    ((e.get("features") or {}).get(name) or {}).get("trade")
+                    for e in by.get("later", [])
+                    if ((e.get("features") or {}).get(name) or {}).get("trade")
+                ]
+            ),
+            "never_n": len(by.get("never", [])),
             "all_feature_trades": trade_stats(trades),
         }
     losses = [e for e in scored if e.get("large_loss")]
@@ -500,19 +567,30 @@ def summarize(period: dict, episodes: list[dict]) -> dict:
         "top100_days": len(period["days"]),
         "episodes": len(episodes),
         "scored": len(scored),
-        "verified_first_entry": len(verified),
-        "unverified_first_entry": len(unverified),
+        "window_name": "nonoverlapping_top100_observation_window",
+        "new_entry_status": "unknown",
+        "left_censored_scored": len(left_censored),
+        "subsequent_nonoverlap_scored": len(later_windows),
         "left_top100_scored": sum(1 for e in scored if e.get("left_top100")),
         "caught_in_window": sum(1 for e in scored if e.get("caught_in_window")),
         "skips": dict(skip),
         "immediate": trade_stats([e["immediate"] for e in scored]),
-        "immediate_verified": trade_stats([e["immediate"] for e in verified]),
+        "immediate_left_censored": trade_stats([e["immediate"] for e in left_censored]),
+        "immediate_subsequent_nonoverlap": trade_stats([e["immediate"] for e in later_windows]),
         "unconstrained": unc_stats(scored),
         "stop_model_target_n": sum(e["immediate"]["exit_reason"] == "target" for e in scored),
         "unconstrained_hit15_n": sum(e["unconstrained"]["hit15"] for e in scored),
-        "stopped_but_unconstrained_hit15": sum(
-            e["immediate"]["exit_reason"] == "stop" and e["unconstrained"]["hit15"] for e in scored
+        "stopped_then_later_hit15": sum(
+            e["immediate"]["exit_reason"] == "stop"
+            and e["unconstrained"]["hit15"]
+            and not e["immediate"].get("same_bar_stop_and_target")
+            for e in scored
         ),
+        "same_bar_stop_and_target_n": sum(bool(e["immediate"].get("same_bar_stop_and_target")) for e in scored),
+        "chart_rise_n": len(rise),
+        "chart_rise_n_old_stop_path_label": len(old_rise),
+        "shape_rise_n_old_stop_path_label": sum(1 for e in scored if e.get("shape") and e["immediate"].get("high_touch_15")),
+        "shape_nonrise_n_old_stop_path_label": sum(1 for e in scored if e.get("shape") and not e["immediate"].get("high_touch_15")),
         "features": feat_block,
         "shape_rise": shape_stats(rise),
         "shape_nonrise": shape_stats(flat),
@@ -526,7 +604,9 @@ def summarize(period: dict, episodes: list[dict]) -> dict:
                     "tradable_net_pct": e["large_loss"]["tradable_net_pct"],
                     "evidence": e["large_loss"]["evidence"]["kind"],
                     "open_gaps_pct": e["large_loss"]["evidence"]["open_gaps_pct"],
-                    "first_entry_unverified": e["first_entry_unverified"],
+                    "left_censored": e.get("left_censored"),
+                    "nonoverlap_seq": e.get("nonoverlap_seq"),
+                    "new_entry_status": "unknown",
                 }
                 for e in sorted(losses, key=lambda x: x["large_loss"]["tradable_net_pct"])[:8]
             ],
@@ -534,8 +614,10 @@ def summarize(period: dict, episodes: list[dict]) -> dict:
         "limitations": [
             "Already-used periods; not independent validation",
             "Does not change v1 conditions, 5% stop, or 15% target",
-            "High-touch is not realized account PnL",
-            "First entry before period start is unverified when fewer than 20 in-period TOP100 lists exist",
+            "Chart-rise label is unconstrained.hit15 over the full hold window, not the stop-model path",
+            "Windows are non-overlapping TOP100 observation windows; in-period index>=20 is not a confirmed first entry",
+            "Wait entries hold only through T+20; never-true is not an entry filter",
+            "Same-bar stop and target: model assumes stop-first; actual intraday order is unknown",
             "Yahoo daily bars, adjustment unverified; not mixed with KRX TDD",
         ],
     }
@@ -566,17 +648,30 @@ def _fmt(s: dict) -> str:
 
 def render_report(report: dict) -> str:
     lines = [
-        "# TOP100 최초 진입 구간 관찰 v2",
+        "# 비중첩 TOP100 관찰 구간 v2 (rev1)",
         "",
-        "PR #103(v1) 일별 표본 결과는 유지한다. 조건·손절 5%·목표 15%를 최적화하지 않았다. 두 기간은 이미 썼으므로 독립 검증이 아니다. 운영·원본·계좌는 바꾸지 않았다.",
+        "PR #103 결과는 유지한다. 조건·손절 5%·목표 15%를 최적화하지 않았다. PR #104 초안 숫자는 `report-before-rev1.md`에 보존한다. 두 기간은 이미 썼으므로 독립 검증이 아니다. 운영·원본·계좌는 바꾸지 않았다.",
         "",
-        "관찰 단위는 종목별 최초 TOP100 등장 T부터 이후 20세션이다. 겹치는 구간은 세지 않는다. TOP100 이탈 후에도 같은 20세션은 관찰한다. 기간 초 20세션 안에 시작한 구간은 실제 최초 진입 미확정이다.",
+        "관찰 단위는 **비중첩 TOP100 관찰 구간**이다. 종목별 기간 안 첫 등장 T부터 이후 20세션(T..T+20)이며, 겹치면 다음 구간을 시작하지 않는다. 이것이 실제 신규 상장·최초 편입을 확인한다는 뜻이 아니다. 신규 진입 여부는 기간 전 TOP100 리스트가 없어 **전부 unknown**이다. 기간 초 20세션 안 시작은 `left_censored`(왼쪽 잘림)일 뿐, 인덱스 ≥20을 최초 진입 확인으로 쓰지 않는다.",
         "",
-        "즉시 매수는 T 다음 시가(T 당일 TOP100은 장 후에 확정). 특징 대기는 v1과 같은 세 특징이 구간 안 완료봉에서 처음 참인 날의 다음 시가. 보유는 구간 끝까지만.",
+        "즉시 매수는 T 다음 시가. 특징 대기는 처음 참인 날의 다음 시가이며 **보유는 T+20까지만**이다. 새 20봉을 연장하지 않는다. 차트 상승 라벨은 손절과 무관하게 관찰창 전체 `unconstrained.hit15`다. 거래 손익은 손절 모형으로 따로 둔다.",
+        "",
+        "같은 일봉에 손절가와 목표가가 모두 닿으면 거래 모형은 손절 우선이고, 실제 장중 순서는 **미확정**이다. 미충족은 구간이 끝난 뒤의 관찰이며 과거 진입 필터가 아니다.",
+        "",
+        "## 수정 전후 차이 (초안 대비)",
+        "",
+        "| 항목 | 초안 | rev1 |",
+        "|---|---|---|",
+        "| 차트 상승 라벨 | 손절 모형 경로의 high_touch_15 (손절 후 봉 제외) | 관찰창 전체 unconstrained.hit15 |",
+        "| 인덱스 ≥20 | 최초 진입 확인으로 표시 | 비중첩 다음 구간. 신규 진입은 unknown |",
+        "| 같은 봉 손절+목표 | 손절 우선만 기록 | 모형 가정과 장중 순서 미확정을 분리 |",
+        "| 최대하락 | 도달일 저가 포함 한 값 | 도달 전일 / 도달일 포함을 분리 |",
+        "| 미충족 | 즉시 매수 대조 경로로 제시 | 사후 건수만. 진입 필터 아님 |",
+        "| 나중 충족 | 대기 거래만 집계 | 같은 구간의 즉시 vs 대기를 짝지어 차이·지연·잔여봉 보고 |",
         "",
         "## 기간별 표본",
         "",
-        "| 기간 | 거래일 | 구간 | 결과 있음 | 최초진입 확인 | 최초진입 미확정 | TOP100 이탈 후도 관찰 | 구간 안 저장신호 | 기간말 부족 | 앵커봉없음 | 결과봉없음 |",
+        "| 기간 | 거래일 | 비중첩 구간 | 결과 있음 | 왼쪽 잘림 | 이후 비중첩 구간 | TOP100 이탈 후도 관찰 | 구간 안 저장신호 | 기간말 부족 | 앵커봉없음 | 결과봉없음 |",
         "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     periods = report["periods"]
@@ -586,15 +681,15 @@ def render_report(report: dict) -> str:
         p = periods[key]
         sk = p.get("skips") or {}
         lines.append(
-            f"| {p['label']} | {p['top100_days']} | {p['episodes']} | {p['scored']} | {p['verified_first_entry']} | "
-            f"{p['unverified_first_entry']} | {p['left_top100_scored']} | {p['caught_in_window']} | "
+            f"| {p['label']} | {p['top100_days']} | {p['episodes']} | {p['scored']} | {p['left_censored_scored']} | "
+            f"{p['subsequent_nonoverlap_scored']} | {p['left_top100_scored']} | {p['caught_in_window']} | "
             f"{sk.get('incomplete_future_window', 0)} | {sk.get('missing_anchor_bar', 0)} | {sk.get('missing_outcome_bar', 0)} |"
         )
     lines += [
         "",
-        "숫자: n / 고가도달% / 거래승률% / 비용반영 평균% / 손실평균% / 평균보유봉.",
+        "숫자: n / 손절모형 고가도달%(청산 전) / 거래승률% / 비용반영 평균% / 손실평균% / 평균보유봉.",
         "",
-        "## 즉시 매수 vs 특징 대기",
+        "## 즉시 매수",
         "",
         "| 기간 | 경로 | 숫자 |",
         "|---|---|---|",
@@ -603,16 +698,34 @@ def render_report(report: dict) -> str:
         if key not in periods:
             continue
         p = periods[key]
-        lines.append(f"| {p['label']} | 즉시(전체) | {_fmt(p['immediate'])} |")
-        lines.append(f"| {p['label']} | 즉시(최초진입 확인만) | {_fmt(p['immediate_verified'])} |")
-        for name in FEATURES:
-            f = p["features"][name]
-            lines.append(f"| {p['label']} | {name} 첫날충족·즉시와 동일시점 | {_fmt(f['first_day_immediate'])} |")
-            lines.append(f"| {p['label']} | {name} 나중충족·다음시가 | {_fmt(f['later_trade'])} |")
-            lines.append(f"| {p['label']} | {name} 미충족·즉시만 | {_fmt(f['never_immediate'])} |")
+        lines.append(f"| {p['label']} | 즉시(전체 비중첩 구간) | {_fmt(p['immediate'])} |")
+        lines.append(f"| {p['label']} | 즉시·왼쪽 잘림 | {_fmt(p['immediate_left_censored'])} |")
+        lines.append(f"| {p['label']} | 즉시·이후 비중첩 구간 | {_fmt(p['immediate_subsequent_nonoverlap'])} |")
     lines += [
         "",
-        "### 충족 시점 건수",
+        "## 나중 충족: 같은 구간 즉시 vs 대기 (T+20에서 보유 종료)",
+        "",
+        "대기 진입은 남은 봉만 보유한다. 첫날 충족은 즉시와 같은 시점(T+1)이라 짝 비교하지 않는다. never는 진입 필터가 아니므로 여기에 넣지 않는다.",
+        "",
+        "| 기간 | 특징 | n | 즉시 평균% | 대기 평균% | 대기−즉시 | 평균 지연봉 | 평균 잔여보유봉 |",
+        "|---|---|---:|---:|---:|---:|---:|---:|",
+    ]
+    for key in ("prior", "recent"):
+        if key not in periods:
+            continue
+        p = periods[key]
+        for name in FEATURES:
+            pr = p["features"][name]["later_paired"]
+            if not pr or pr.get("n", 0) == 0:
+                lines.append(f"| {p['label']} | {name} | 0 | | | | | |")
+                continue
+            lines.append(
+                f"| {p['label']} | {name} | {pr['n']} | {pr['mean_immediate_net_pct']} | {pr['mean_wait_net_pct']} | "
+                f"{pr['mean_wait_minus_immediate_pct']} | {pr['mean_entry_delay_bars']} | {pr['mean_remaining_bars']} |"
+            )
+    lines += [
+        "",
+        "### 충족 시점 건수 (사후 관찰, 진입 필터 아님)",
         "",
         "| 기간 | 특징 | first_day | later | never | 이력부족 |",
         "|---|---|---:|---:|---:|---:|",
@@ -630,8 +743,8 @@ def render_report(report: dict) -> str:
         "",
         "## 고정 5% 손절과 손절 없는 +15% 경로 (손절을 넓히지 않음)",
         "",
-        "| 기간 | 손절모형 목표청산 | 손절 없이 +15% 고가 | 손절모형은 손절·손절 없이 +15% | 손절 없이 +15%인 경우 도달봉 중앙값 | 그때까지 최대하락% 중앙값 | 5%보다 깊게 빠진 뒤 +15% |",
-        "|---|---:|---:|---:|---:|---:|---:|",
+        "| 기간 | 손절모형 목표청산 | 같은 봉 손절+목표(순서 미확정) | 손절 없이 +15% | 손절 후 며칠 뒤 +15% | 도달봉 중앙값 | 도달 전일 최대하락% 중앙값 | 도달일 포함 최대하락% 중앙값 | 전일까지 5% 초과 하락 후 +15% |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for key in ("prior", "recent"):
         if key not in periods:
@@ -639,16 +752,19 @@ def render_report(report: dict) -> str:
         p = periods[key]
         u = p["unconstrained"]
         lines.append(
-            f"| {p['label']} | {p['stop_model_target_n']} | {p['unconstrained_hit15_n']} | "
-            f"{p['stopped_but_unconstrained_hit15']} | {u.get('median_bars_to_15')} | "
-            f"{u.get('median_max_dd_before_15_pct')} | {u.get('dd_gt_5pct_then_hit15')} |"
+            f"| {p['label']} | {p['stop_model_target_n']} | {p['same_bar_stop_and_target_n']} | "
+            f"{p['unconstrained_hit15_n']} | {p['stopped_then_later_hit15']} | {u.get('median_bars_to_15')} | "
+            f"{u.get('median_max_dd_before_hit_day_pct')} | {u.get('median_max_dd_through_hit_day_pct')} | "
+            f"{u.get('dd_gt_5pct_before_hit_day_then_hit15')} |"
         )
     lines += [
         "",
-        "## 상승 vs 비상승, T까지 60봉 (즉시 경로 고가도달 라벨, 진입 신호 아님)",
+        "도달 전일 최대하락은 보유 2봉째 이후 +15%인 경우만이다. 1봉 만에 도달하면 전일 값이 없다. 같은 봉에 손절가와 목표가가 모두 있으면 거래 모형은 손절 우선이고 장중 순서는 미확정이다.",
         "",
-        "| 기간 | 구분 | n | 정규화종가 -59/-20/-5/0 | 조정깊이 중앙값 | 거래량비 10/50 중앙값 | 60봉 종가변화 중앙값 |",
-        "|---|---|---:|---|---:|---:|---:|",
+        "## 상승 vs 비상승, T까지 60봉 (차트 라벨 = unconstrained.hit15, 진입 신호 아님)",
+        "",
+        "| 기간 | 구분 | n | 초안 n (손절경로 라벨) | 정규화종가 -59/-20/-5/0 | 조정깊이 중앙값 | 거래량비 10/50 중앙값 | 60봉 종가변화 중앙값 |",
+        "|---|---|---:|---:|---|---:|---:|---:|",
     ]
     for key in ("prior", "recent"):
         if key not in periods:
@@ -660,8 +776,9 @@ def render_report(report: dict) -> str:
                 "n/a" if path.get(k) is None else f"{path[k]:.3f}"
                 for k in ("-59", "-20", "-5", "-0")
             )
+            old = p.get("shape_rise_n_old_stop_path_label") if lab == "상승" else p.get("shape_nonrise_n_old_stop_path_label")
             lines.append(
-                f"| {p['label']} | {lab} | {block.get('n', 0)} | {seq} | {block.get('median_pullback_depth')} | "
+                f"| {p['label']} | {lab} | {block.get('n', 0)} | {old} | {seq} | {block.get('median_pullback_depth')} | "
                 f"{block.get('median_vol_ratio_10_50')} | {block.get('median_close_change_60')} |"
             )
     lines += [
@@ -720,6 +837,8 @@ def render_report(report: dict) -> str:
         "|---|---|",
         "| PR #103 | 유지. 일별 unique 미포착 결론을 이 숫자로 바꾸지 않음 |",
         "| 손절 | 5% 고정. 손절 없이 +15%가 더 많아 보여도 넓히지 않음 |",
+        "| 같은 봉 | 모형은 손절 우선. 실제 순서는 미확정 |",
+        "| 대기 보유 | T+20에서 종료. 연장하지 않음 |",
         "| 가격 단절 | 큰 손실은 저장 근거만 표시. unknown은 미확정. 행 삭제 없음 |",
         "| 운영 | 반영하지 않음 |",
         "",
@@ -753,13 +872,16 @@ def main(argv=None) -> int:
                 "label",
                 "episodes",
                 "scored",
-                "verified_first_entry",
-                "unverified_first_entry",
+                "left_censored_scored",
+                "subsequent_nonoverlap_scored",
                 "skips",
                 "immediate",
                 "stop_model_target_n",
                 "unconstrained_hit15_n",
-                "stopped_but_unconstrained_hit15",
+                "stopped_then_later_hit15",
+                "same_bar_stop_and_target_n",
+                "chart_rise_n",
+                "chart_rise_n_old_stop_path_label",
                 "large_losses",
             )
         }

@@ -76,8 +76,12 @@ class EpisodeTests(unittest.TestCase):
             scored = [e for e in eps if e.get("immediate")]
             anchors = [e["anchor"] for e in scored]
             self.assertEqual(anchors, [session[0], session[21], session[42], session[63]])
-            self.assertTrue(scored[0]["first_entry_unverified"])
-            self.assertFalse(scored[1]["first_entry_unverified"])
+            self.assertTrue(scored[0]["left_censored"])
+            self.assertFalse(scored[1]["left_censored"])
+            for e in scored:
+                self.assertEqual(e["new_entry_status"], "unknown")
+            self.assertEqual(scored[0]["nonoverlap_seq"], 1)
+            self.assertEqual(scored[1]["nonoverlap_seq"], 2)
             self.assertTrue(any(e.get("skip") == "incomplete_future_window" for e in eps))
             self.assertEqual(sum(e.get("skip") == "incomplete_future_window" for e in eps), 1)
 
@@ -136,9 +140,11 @@ class EpisodeTests(unittest.TestCase):
         stopped = m.simulate(window, 100)
         free = m.unconstrained(window, 100)
         self.assertEqual(stopped["exit_reason"], "stop")
+        self.assertFalse(stopped["high_touch_15"])
         self.assertTrue(free["hit15"])
         self.assertEqual(free["bars_to_15"], 2)
-        self.assertLess(free["max_dd_before_15_pct"], -5)
+        self.assertLess(free["max_dd_before_hit_day_pct"], -5)
+        self.assertLess(free["max_dd_through_hit_day_pct"], free["max_dd_before_hit_day_pct"] + 0.0001)
         self.assertEqual(m.STOP, 0.95)
         self.assertEqual(m.TARGET, 1.15)
 
@@ -165,6 +171,90 @@ class EpisodeTests(unittest.TestCase):
         self.assertAlmostEqual(a["path"]["-0"], 1.0)
         self.assertLess(a["close_change_60"], leaked["close_change_60"])
         self.assertEqual(m.shape60(past)["close_change_60"], a["close_change_60"])
+
+    def test_stop_then_later_hit15_is_chart_rise(self):
+        dummy_shape = {
+            "path": {f"-{k}": 1.0 for k in m.KNOTS},
+            "pullback_depth": 0.1,
+            "vol_ratio_10_50": 1.0,
+            "close_change_60": 0.0,
+        }
+        window = [
+            {"open": 100, "high": 101, "low": 90, "close": 91, "volume": 1},
+            {"open": 91, "high": 101, "low": 90, "close": 92, "volume": 1},
+            {"open": 92, "high": 101, "low": 91, "close": 93, "volume": 1},
+            {"open": 93, "high": 101, "low": 92, "close": 94, "volume": 1},
+            {"open": 94, "high": 120, "low": 94, "close": 119, "volume": 1},
+        ] + [{"open": 119, "high": 120, "low": 118, "close": 119, "volume": 1} for _ in range(15)]
+        imm = m.simulate(window, 100)
+        unc = m.unconstrained(window, 100)
+        self.assertEqual(imm["exit_reason"], "stop")
+        self.assertFalse(imm["high_touch_15"])
+        self.assertTrue(unc["hit15"])
+        self.assertEqual(unc["bars_to_15"], 5)
+        e = {
+            "immediate": imm,
+            "unconstrained": unc,
+            "shape": dummy_shape,
+            "left_censored": False,
+            "nonoverlap_seq": 1,
+            "features": {},
+        }
+        out = m.summarize({"name": "x", "label": "x", "days": [], "dataset_name": "x", "candidates_sha256": "0", "signals_sha256": "0"}, [e])
+        self.assertEqual(out["shape_rise"]["n"], 1)
+        self.assertEqual(out["shape_nonrise"]["n"], 0)
+        self.assertEqual(out["stopped_then_later_hit15"], 1)
+        self.assertEqual(out["immediate"]["stop_n"], 1)
+
+    def test_same_bar_stop_and_target_order_unknown(self):
+        bar = {"open": 100, "high": 120, "low": 90, "close": 110, "volume": 1}
+        window = [bar] + [{"open": 110, "high": 111, "low": 109, "close": 110, "volume": 1} for _ in range(19)]
+        imm = m.simulate(window, 100)
+        unc = m.unconstrained(window, 100)
+        self.assertTrue(imm["same_bar_stop_and_target"])
+        self.assertEqual(imm["intraday_order"], "unknown")
+        self.assertTrue(imm["stop_first_is_model_assumption"])
+        self.assertEqual(imm["exit_reason"], "stop")
+        self.assertTrue(unc["same_bar_stop_and_target"])
+        self.assertEqual(unc["intraday_order"], "unknown")
+        self.assertIsNone(unc["max_dd_before_hit_day_pct"])
+        self.assertIsNotNone(unc["max_dd_through_hit_day_pct"])
+
+    def test_later_pair_clips_hold_at_t20_and_never_is_not_entry_filter(self):
+        later = {
+            "immediate": {"tradable_net_pct": 1.0, "high_touch_15": False, "tradable_win": True, "exit_reason": "time", "bars_held": 20, "same_bar_stop_and_target": False},
+            "unconstrained": {"hit15": False, "bars_to_15": None, "max_dd_before_hit_day_pct": -1, "max_dd_through_hit_day_pct": None, "max_dd_window_pct": -1, "same_bar_stop_and_target": False, "intraday_order": "not_same_bar"},
+            "features": {
+                "close_near_20high": {
+                    "timing": "later",
+                    "trade": {
+                        "tradable_net_pct": -0.5,
+                        "high_touch_15": False,
+                        "tradable_win": False,
+                        "exit_reason": "time",
+                        "bars_held": 5,
+                        "entry_offset": 16,
+                        "entry_delay_bars": 15,
+                        "remaining_bars": 5,
+                        "hold_clipped_at_t20": True,
+                        "same_bar_stop_and_target": False,
+                    },
+                }
+            },
+        }
+        never = {
+            "immediate": {"tradable_net_pct": 2.0, "high_touch_15": True, "tradable_win": True, "exit_reason": "target", "bars_held": 3, "same_bar_stop_and_target": False},
+            "unconstrained": {"hit15": True, "bars_to_15": 3, "max_dd_before_hit_day_pct": -1, "max_dd_through_hit_day_pct": -1, "max_dd_window_pct": -1, "same_bar_stop_and_target": False, "intraday_order": "not_same_bar"},
+            "features": {"close_near_20high": {"timing": "never", "trade": None}},
+        }
+        paired = m.pair_later([later, never], "close_near_20high")
+        self.assertEqual(paired["n"], 1)
+        self.assertEqual(paired["mean_entry_delay_bars"], 15)
+        self.assertEqual(paired["mean_remaining_bars"], 5)
+        self.assertAlmostEqual(paired["mean_wait_minus_immediate_pct"], -1.5)
+        out = m.summarize({"name": "x", "label": "x", "days": [], "dataset_name": "x", "candidates_sha256": "0", "signals_sha256": "0"}, [later, never])
+        self.assertNotIn("never_immediate", out["features"]["close_near_20high"])
+        self.assertEqual(out["features"]["close_near_20high"]["never_n"], 1)
 
 
 if __name__ == "__main__":

@@ -107,6 +107,7 @@ $result=$journal->transact(function(&$s,$emit)use($pinned,$evalSymbols,$mode,$ve
             return;
         }
     }
+    \ChartEntryLab\PaperForwardExitPolicy::adopt($s,$emit,$now);
     $s['history']=$raw;
     $first=$s['last_session']===0;
     foreach($dates as $date) {

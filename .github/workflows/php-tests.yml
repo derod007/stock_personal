@@ -19,6 +19,8 @@ jobs:
       - name: Regression
         run: |
           php tests/account_rollout.php
+          php tests/half_risk_protection.php
+          php tests/forward_protection.php
           php tests/rr_pattern_labels.php
           php tests/trend_recovery.php
           php tests/spike_dump.php

@@ -40,7 +40,7 @@ paper_open(['title'=>'거래별 성과 분석','page'=>'trades','account'=>$id,'
 <div class="scan-table-wrap"><table class="scan-table paper-kv"><tbody>
 <tr><th>진입 / 청산 거래일 (KST)</th><td><?= th(tt($f['session']).' / '.tt($x['session']??0)) ?></td></tr>
 <tr><th>수량 / 진입가 / 청산가</th><td><?= th($f['quantity'].' / '.tn($f['price'],4).' / '.tn($x['price']??null,4)) ?></td></tr>
-<tr><th>청산 사유 / 일봉 내 동시 도달</th><td><?= th(tl($x['reason']??'보유 중')) ?> / <?= $t['ambiguous_bar']?'있음 · 기존 모형의 우선순위 적용':'기록된 충돌 없음 (장중 순서 확정 아님)' ?></td></tr>
+<tr><th>청산 사유 / 일봉 내 동시 도달</th><td><?= th(($x['protection']['exit_reason']??'')==='half_risk_stop'?'위험폭 축소 손절':tl($x['reason']??'보유 중')) ?> / <?= $t['ambiguous_bar']?'있음 · 기존 모형의 우선순위 적용':'기록된 충돌 없음 (장중 순서 확정 아님)' ?></td></tr>
 <tr><th>가격 차이 손익 / 모형 수수료 / 순손익</th><td><?= th(tn($t['gross_pnl']).' / '.tn($t['fees']).' / '.tn($t['net_pnl'])) ?></td></tr>
 <tr><th>순수익률 / R</th><td><?= th(tn($t['net_return_pct'])) ?>% / <?= th(tn($t['net_r'])) ?></td></tr>
 <tr><th>보유 구간 관측 봉 / 품질</th><td><?= th($t['observed_holding_bars'].' / '.tl($t['excursion_status'])) ?></td></tr>

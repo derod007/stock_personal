@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "releases": {
+    "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465": {
+      "to": "2303a1b6c59353e3e53f5b49d011adb8e82a184e8cd9b31d86ed541c712b1c3f",
+      "policy": "preserve_existing_filled_orders",
+      "source_commit": "d893c343082d741238593b15b9d59b6d19456536",
+      "scope": "forward only; preserve held orders and historical snapshots; half_risk_v1 applies only to post-activation KR recovery fills"
+    }
+  }
+}

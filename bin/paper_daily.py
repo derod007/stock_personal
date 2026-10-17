@@ -47,7 +47,7 @@ def update(config_path, state_dir, runner=subprocess.run):
                             "--config=" + str(config_path)], cwd=ROOT, env=env, check=True,
                            timeout=60, capture_output=True, text=True, encoding="utf-8", errors="replace")
             record["account_preflight"] = json.loads(check.stdout)
-            if record["account_preflight"].get("account") != account or record["account_preflight"].get("status") not in ("new_account", "compatible"):
+            if record["account_preflight"].get("account") != account or record["account_preflight"].get("status") not in ("new_account", "compatible", "forward_upgrade_pending"):
                 raise ValueError("Invalid account preflight result")
             save_record(log, record)
         # Concurrent scheduler invocations never share mutable collection files.

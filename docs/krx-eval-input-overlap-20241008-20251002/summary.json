@@ -1,0 +1,286 @@
+{
+  "schema": 1,
+  "kind": "krx_eval_input_overlap_v1",
+  "price_basis": "KRX TDD 원본, 수정 여부 미확정",
+  "scope": "이번 집계는 날짜별 TOP100 신규 추천 입력에 대한 것이다. 보유·대기 주문 안전성 검증이 아니다.",
+  "no_collect": true,
+  "no_adjust": true,
+  "no_drop_bars": true,
+  "no_relax": true,
+  "no_account": true,
+  "no_merge": true,
+  "chart_plan_not_executed": true,
+  "eval_from": "2024-10-08",
+  "eval_to": "2025-10-02",
+  "eval_sessions": 243,
+  "pairs": 24300,
+  "eval_session_symbol_cap": 24300,
+  "count_units": {
+    "session_symbol_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+    "quality_90_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+    "judgment_day_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+    "overlap_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+    "unique_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300.",
+    "unique_quality_90_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300.",
+    "unique_judgment_day_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300.",
+    "overlap_unique_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300."
+  },
+  "empty_top100_days": [],
+  "engine_ranges": {
+    "price_basis": "KRX TDD 원본, 수정 여부 미확정",
+    "replay_truncates_to_240": false,
+    "replay_past_is_through_session": true,
+    "replay_new_entry_only_if_top100": true,
+    "chart_min_completed": 40,
+    "chart_uses_envelope_ma240": false,
+    "quality_min_completed": 60,
+    "quality_recent_invalid_days": 90,
+    "quality_checks_price_jump": false,
+    "feature_sma": [
+      5,
+      10,
+      20,
+      60
+    ],
+    "feature_has_ma240": false,
+    "feature_swing_bars": 20,
+    "feature_prior_swing_bars": 40,
+    "feature_rising_lows_lookback": 60,
+    "horizontal_lookback": 120,
+    "pullback_min": 45,
+    "pullback_structure_bars": 40,
+    "pullback_stop_bars": 10,
+    "pullback_target_bars": 20,
+    "retest_min": 40,
+    "retest_box_bars": 20,
+    "retest_breakout_search_back": 16,
+    "retest_atr_bars": 14,
+    "retest_overhead_high_uses_all_prior": true,
+    "recovery_starts_after_index": 59,
+    "recovery_episode_max_bars": 60,
+    "recovery_scans_full_series": true,
+    "context_daily_ma_period": 20,
+    "context_daily_slope": 5,
+    "context_weekly_ma_period": 20,
+    "context_weekly_slope": 3,
+    "spike_peak_lookback": 8,
+    "spike_pre_burst_support_bars": 20,
+    "top_pattern_peak_window": 65,
+    "top_pattern_min": 45,
+    "envelope_required_bars": 240,
+    "envelope_in_chart_plan": false,
+    "history_prep_bars": 240,
+    "history_min_bars": 60,
+    "history_jump_limit": 0.31,
+    "detect_ratio_1_9_is_partial": true,
+    "listed_break_absence_is_not_no_corporate_action": true,
+    "new_entry_input": "DatedTop100Replay는 판정일 세션 시각 이하 봉을 자르지 않고 $past에 넣는다. ChartPlanEngine은 CandleClock::completed($past) 전체($valid)를 받는다. 엔벨로프 MA240은 추천 경로가 아니다.",
+    "component_windows": [
+      {
+        "id": "replay_past",
+        "bars": "판정일까지 로드된 전 봉",
+        "path": "bin/paper/DatedTop100Replay.php",
+        "in_new_entry": true
+      },
+      {
+        "id": "chart_valid",
+        "bars": "OHLC>0 완료봉 전체, 최소 40",
+        "path": "src/ChartPlanEngine.php",
+        "in_new_entry": true
+      },
+      {
+        "id": "quality",
+        "bars": "완료 60 + 최근 90력일 비정상",
+        "path": "src/PaperQuality.php",
+        "in_new_entry": true
+      },
+      {
+        "id": "ma_feature",
+        "bars": "SMA5/10/20/60 (240 없음)",
+        "path": "src/FeatureEngine.php",
+        "in_new_entry": true
+      },
+      {
+        "id": "ma_context_daily",
+        "bars": "20+5",
+        "path": "src/TrendContext.php",
+        "in_new_entry": true
+      },
+      {
+        "id": "ma_context_weekly",
+        "bars": "주봉 20+3 (일봉 전체로 주봉 구성)",
+        "path": "src/TrendContext.php",
+        "in_new_entry": true
+      },
+      {
+        "id": "pullback_stop",
+        "bars": "최근 10저",
+        "path": "src/TrendPullback.php",
+        "in_new_entry": true
+      },
+      {
+        "id": "pullback_target",
+        "bars": "직전 20고",
+        "path": "src/TrendPullback.php",
+        "in_new_entry": true
+      },
+      {
+        "id": "retest_box",
+        "bars": "20",
+        "path": "src/BreakoutRetest.php",
+        "in_new_entry": true
+      },
+      {
+        "id": "retest_overhead",
+        "bars": "확인봉 이전 전체 고가",
+        "path": "src/BreakoutRetest.php",
+        "in_new_entry": true
+      },
+      {
+        "id": "recovery",
+        "bars": "인덱스 59부터 전체 시계열",
+        "path": "src/TrendRecovery.php",
+        "in_new_entry": true
+      },
+      {
+        "id": "spike_dump",
+        "bars": "고점 최근 8 + 급등 전 20",
+        "path": "src/SpikeDump.php",
+        "in_new_entry": true
+      },
+      {
+        "id": "top_pattern",
+        "bars": "최근 65 (미러는 전체 고저)",
+        "path": "src/NoramuTopPattern.php",
+        "in_new_entry": true
+      },
+      {
+        "id": "horizontal",
+        "bars": "120",
+        "path": "src/HorizontalLevels.php",
+        "in_new_entry": true
+      },
+      {
+        "id": "envelope_ma240",
+        "bars": "240",
+        "path": "bin/paper/EnvelopeResearch.php",
+        "in_new_entry": false
+      }
+    ]
+  },
+  "breaks": {
+    "n": 96,
+    "counts": {
+      "평가 입력과 겹침": 84,
+      "겹치지 않음": 12,
+      "판단 불가": 0
+    },
+    "count_units": {
+      "overlap_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+      "overlap_unique_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300."
+    },
+    "overlap_symbols": 79,
+    "overlap_sessions": 242,
+    "overlap_pairs": 1063,
+    "overlap_unique_symbol_sessions": 1002,
+    "same_day_top100_true": 6,
+    "note": "당일 TOP100만으로 영향 없음을 단정하지 않았다. 보유·대기 주문은 집계하지 않았다. overlap_pairs는 원인×종목×세션 연결 건수이고, overlap_unique_symbol_sessions는 (symbol, session) 고유 건수다."
+  },
+  "ohl_zero": {
+    "kind": "ohl_zero",
+    "scope": "이번 집계는 날짜별 TOP100 신규 추천 입력에 대한 것이다. 보유·대기 주문 안전성 검증이 아니다.",
+    "future_events_do_not_block_past": true,
+    "count_units": {
+      "session_symbol_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+      "quality_90_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+      "judgment_day_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+      "unique_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300.",
+      "unique_quality_90_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300.",
+      "unique_judgment_day_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300."
+    },
+    "events_overlapping": 2571,
+    "symbols": 83,
+    "sessions": 243,
+    "session_symbol_pairs": 19253,
+    "unique_symbol_sessions": 1381,
+    "quality_90_pairs": 2096,
+    "unique_quality_90_symbol_sessions": 499,
+    "judgment_day_pairs": 0,
+    "unique_judgment_day_symbol_sessions": 0,
+    "short_window_event_counts": {},
+    "not_in_chart_valid": true
+  },
+  "no_row": {
+    "kind": "no_row",
+    "scope": "이번 집계는 날짜별 TOP100 신규 추천 입력에 대한 것이다. 보유·대기 주문 안전성 검증이 아니다.",
+    "future_events_do_not_block_past": true,
+    "count_units": {
+      "session_symbol_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+      "quality_90_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+      "judgment_day_pairs": "원인×종목×평가세션 연결 건수. 같은 종목·세션에 원인이 둘이면 두 번 센다.",
+      "unique_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300.",
+      "unique_quality_90_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300.",
+      "unique_judgment_day_symbol_sessions": "(symbol, session) 중복 제거 고유 영향 건수. 상한은 평가 243일×TOP100=24300."
+    },
+    "events_overlapping": 43034,
+    "symbols": 174,
+    "sessions": 243,
+    "session_symbol_pairs": 692823,
+    "unique_symbol_sessions": 2975,
+    "quality_90_pairs": 48310,
+    "unique_quality_90_symbol_sessions": 1207,
+    "judgment_day_pairs": 0,
+    "unique_judgment_day_symbol_sessions": 0,
+    "short_window_event_counts": {},
+    "not_in_past_or_valid": true,
+    "intermediate_gap_not_a_quality_reason": true
+  },
+  "adapters": [
+    {
+      "id": "field_map",
+      "status": "가능",
+      "detail": "jsonl의 open/high/low/close/volume과 day→15:30 KST available_at 매핑은 가격 변환 없이 가능하다."
+    },
+    {
+      "id": "ohl_zero_in_past",
+      "status": "가능",
+      "detail": "OHL=0 원행은 $past에 남겨 PaperQuality가 비정상으로 보게 해야 한다. CandleClock은 OHLC<=0을 $valid에서 뺀다."
+    },
+    {
+      "id": "no_row_not_invented",
+      "status": "엔진 한계",
+      "detail": "행 없음은 봉을 만들지 않는다. PaperQuality는 중간 거래일 공백을 달력과 대조하지 않고, 당일 완료봉이 없으면 missing_session만 띄운다."
+    },
+    {
+      "id": "chart_plan_not_run",
+      "status": "이번 범위 밖",
+      "detail": "추천·손절·목표 숫자를 엔진으로 재계산하지 않았다. 계좌 실행 금지. 겹침은 입력 범위만 센다."
+    },
+    {
+      "id": "price_basis",
+      "status": "미확정",
+      "detail": "KRX TDD 원본, 수정 여부 미확정. DatedTop100Replay의 기존 PRICE_BASIS는 Yahoo 표기다. KRX 원본을 넣으려면 출처 표기 어댑터가 필요하고 가격 보정은 하지 않는다."
+    },
+    {
+      "id": "envelope",
+      "status": "추천 경로 아님",
+      "detail": "MA240은 EnvelopeResearch 전용이다. ChartPlanEngine 신규 추천 입력에 넣지 않는다."
+    },
+    {
+      "id": "holdings",
+      "status": "검증 안 함",
+      "detail": "이번 집계는 날짜별 TOP100 신규 추천 입력에 대한 것이다. 보유·대기 주문 안전성 검증이 아니다."
+    },
+    {
+      "id": "detection",
+      "status": "부분",
+      "detail": "단절 목록은 종가비 1.9 또는 인접 |r-1|>0.301만 잡는다. 목록에 없다고 기업행사·가격 기준 문제가 없는 것이 아니다."
+    }
+  ],
+  "detection": {
+    "ratio": 1.9,
+    "adjacent": 0.301,
+    "partial_only": true,
+    "not_a_corporate_action_clearance": true
+  }
+}

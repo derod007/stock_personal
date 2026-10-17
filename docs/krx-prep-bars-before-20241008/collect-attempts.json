@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "kind": "krx_prep_bars_collect_attempts_v1",
+  "price_basis": "KRX TDD 원본, 수정 여부 미확정",
+  "empty_response_is_not_holiday": true,
+  "no_yahoo_mix": true,
+  "no_ratio_adjust": true,
+  "no_account_run": true,
+  "total_requests": 482,
+  "total_retries": 0,
+  "attempts": [
+    {
+      "id": 1,
+      "file": "collect-attempt1.json",
+      "started": "2026-10-14 15:13:22",
+      "requests": 478,
+      "retries": 0,
+      "ok_dates": 239,
+      "blocked": ["20241001"],
+      "pr89_reuse_copied": 2,
+      "note": "첫 순차 수집. 달력에 있던 20241001 양 시장 HTTP 200·17바이트 빈 응답. 휴장으로 처리하지 않고 blocked/empty_unconfirmed로 남김."
+    },
+    {
+      "id": 2,
+      "file": "collect-attempt2.json",
+      "started": "2026-10-14 15:32:59",
+      "requests": 2,
+      "retries": 0,
+      "ok_dates": 239,
+      "blocked": ["20241001"],
+      "note": "빈 캐시 파일을 지운 뒤 20241001만 재요청. 다시 빈 응답. 빈 응답을 휴장 근거로 쓰지 않음."
+    },
+    {
+      "id": 3,
+      "file": "collect-attempt3.json",
+      "started": "2026-10-14 15:36:18",
+      "finished": "2026-10-14 15:36:27",
+      "requests": 2,
+      "retries": 0,
+      "ok_dates": 240,
+      "blocked": [],
+      "pr89_reuse_copied": 2,
+      "calendar_revision": "20241001을 국무회의 임시공휴일·거래소 휴장 안내로 closed_weekdays에 추가하고 240일을 2023-10-13~2024-10-07로 다시 고정. 빈 API를 휴장 근거로 쓰지 않음.",
+      "note": "신규 수집은 20231013 양 시장 2회. 기존 유효 원본은 재요청하지 않음. PR #89 20241007 2파일 해시 확인 후 재사용. 20231010은 240일 밖이라 건너뜀."
+    }
+  ]
+}

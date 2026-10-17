@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "kind": "krx_prep_bars_pr89_reuse_v1",
+  "price_basis": "KRX TDD 원본, 수정 여부 미확정",
+  "all_four_hash_ok": true,
+  "copied": [
+    {
+      "file": "20241007_kospi_equity.json",
+      "sha256": "1e8370851e06fc1b54180bbc287f087c73a5e59bd52e7a9547f4a9867646ab4f"
+    },
+    {
+      "file": "20241007_kosdaq_equity.json",
+      "sha256": "58e2818c6907c57834480415ec1173f85b688b56aedea0267a6f3c9564bc1193"
+    }
+  ],
+  "verified_not_copied": [
+    {
+      "file": "20231010_kospi_equity.json",
+      "sha256": "c8a83f956708ffb190549d6f310591d8c72f5610c83105deb438963feeea1b9b",
+      "reason": "20231010은 확정 240거래일(2023-10-13~2024-10-07) 밖"
+    },
+    {
+      "file": "20231010_kosdaq_equity.json",
+      "sha256": "b0d8a7ef122c7a1a3481278d40ab6bce1882598a8d3d884408e7db70bf3876f9",
+      "reason": "20231010은 확정 240거래일(2023-10-13~2024-10-07) 밖"
+    }
+  ]
+}

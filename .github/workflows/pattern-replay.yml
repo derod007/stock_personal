@@ -53,4 +53,4 @@ jobs:
           php -l bin/paper/DatedTop100Prep.php
           php -l bin/paper_dated_top100_prep.php
           php tests/dated_top100_prep.php
-          python3 -m unittest tests.test_historical_amount_top100_pilot tests.test_dated_amount_top100_range tests.test_dated_amount_top100_provider_review tests.test_dated_amount_top100_replay
+          python3 -m unittest tests.test_historical_amount_top100_pilot tests.test_dated_amount_top100_range tests.test_dated_amount_top100_provider_review tests.test_dated_amount_top100_replay tests.test_krx_prep_ohlcv_recount tests.test_krx_tdd_dataset tests.test_krx_eval_input_overlap

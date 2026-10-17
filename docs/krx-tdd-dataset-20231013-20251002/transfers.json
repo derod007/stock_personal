@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "link": "ISU_CD",
+  "name_not_used_to_join": true,
+  "rows": [
+    {
+      "code": "022100",
+      "name": "포스코DX",
+      "from_market": "KOSDAQ",
+      "from_suffix": "kosdaq_equity",
+      "to_market": "KOSPI",
+      "to_suffix": "kospi_equity",
+      "first_to_market_day": "2024-01-02",
+      "identity": "ISU_CD=022100. 이름 문자열은 조인 키가 아니다.",
+      "confirmed": true,
+      "sources": [
+        "KIND 사업보고서(2024-03-13) 주권상장: 유가증권시장 상장 2024년 01월 02일. https://kind.krx.co.kr/external/2024/03/13/001279/20240313003384/11011.htm"
+      ],
+      "counts": {
+        "assigned_rows": 429,
+        "linked_rows": 54,
+        "no_row_before_link": 54,
+        "no_row_after_link": 0,
+        "rows_after_link": 483
+      }
+    },
+    {
+      "code": "034230",
+      "name": "파라다이스",
+      "from_market": "KOSDAQ",
+      "from_suffix": "kosdaq_equity",
+      "to_market": "KOSPI",
+      "to_suffix": "kospi_equity",
+      "first_to_market_day": "2024-06-24",
+      "identity": "ISU_CD=034230. 회사 IR이 같은 코드를 이전상장 전후 종목으로 적는다.",
+      "confirmed": true,
+      "sources": [
+        "파라다이스 IR FAQ: 종목코드 034230. 2024년 6월 24일 유가증권시장(KOSPI)로 이전상장. https://www.paradise.co.kr/ko/invest/ir/irfaq",
+        "한국거래소 유가증권시장본부 안내를 인용한 보도: 2024-06-24 코스피 첫 거래. http://www.newswell.co.kr/news/articleView.html?idxno=9922"
+      ],
+      "counts": {
+        "assigned_rows": 313,
+        "linked_rows": 170,
+        "no_row_before_link": 170,
+        "no_row_after_link": 0,
+        "rows_after_link": 483
+      }
+    },
+    {
+      "code": "066970",
+      "name": "엘앤에프",
+      "from_market": "KOSDAQ",
+      "from_suffix": "kosdaq_equity",
+      "to_market": "KOSPI",
+      "to_suffix": "kospi_equity",
+      "first_to_market_day": "2024-01-29",
+      "identity": "ISU_CD=066970. 이름 문자열은 조인 키가 아니다.",
+      "confirmed": true,
+      "sources": [
+        "KIND 분기보고서(2024-05-16): 2024년 1월 29일 코스닥시장에서 유가증권시장으로 이전상장. 유가증권시장 상장 2024년 01월 29일. https://kind.krx.co.kr/external/2024/05/16/001206/20240516002828/11013.htm",
+        "KIND 신규상장 공시 접수번호 20240125000543. https://kind.krx.co.kr/common/disclsviewer.do?acptNo=20240125000543&docno=&method=searchInitInfo"
+      ],
+      "counts": {
+        "assigned_rows": 410,
+        "linked_rows": 73,
+        "no_row_before_link": 73,
+        "no_row_after_link": 0,
+        "rows_after_link": 483
+      }
+    }
+  ]
+}

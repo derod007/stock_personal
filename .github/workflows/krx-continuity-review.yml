@@ -1,0 +1,14 @@
+name: KRX selected-plan continuity review
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          php -l bin/paper/KrxContinuityReview.php
+          php -l bin/paper_krx_continuity_review.php
+          php tests/krx_continuity_review.php
+          php tests/krx_signal_compare.php

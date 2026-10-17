@@ -1,0 +1,16 @@
+name: KRX raw-price signal comparison
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          php -l bin/paper/KrxSignalStudy.php
+          php -l bin/paper_krx_signal_compare.php
+          php tests/krx_signal_compare.php
+          php tests/recovery_close_account.php
+          php tests/dated_top100_replay.php
+          python -m unittest tests.test_krx_eval_input_overlap

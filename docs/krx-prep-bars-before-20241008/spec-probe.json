@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "kind": "krx_openapi_spec_probe_v1",
+  "price_basis": "KRX TDD 원본, 수정 여부 미확정",
+  "pages": [
+    {
+      "url": "https://openapi.krx.co.kr/contents/OPP/USES/service/OPPUSES002_S2.cmd?BO_ID=JvJFzlAENzZlPBDNGAWC",
+      "status": 200,
+      "bytes": 39880,
+      "sha256": "760021d10ba0f5646112c5e60f600cb587b08c7d22c271f3685e702c93bf58e6",
+      "has_원주가": false,
+      "has_수정주가": false
+    },
+    {
+      "url": "https://openapi.krx.co.kr/contents/OPP/USES/service/OPPUSES002_S2.cmd?BO_ID=hZjGpkllgCBCWqeTsYFj",
+      "status": 200,
+      "bytes": 39863,
+      "sha256": "332fb6a390593c78003f1fe5555fab6a480db3c4b6abecd15544a83ad066ed48",
+      "has_원주가": false,
+      "has_수정주가": false
+    }
+  ],
+  "downloads": [
+    {
+      "url": "https://openapi.krx.co.kr/contents/OPP/USES/service/downloadApiDoc.cmd",
+      "method": "POST",
+      "bo_id": "JvJFzlAENzZlPBDNGAWC",
+      "api_path": "/svc/sample/apis/sto/stk_bydd_trd",
+      "status": 200,
+      "bytes": 6887,
+      "sha256": "99b7c706fbb2a6087c034f9cc18927f9934d6917438b7f28cebc084ea012080d",
+      "text_head": " API Spec 1.1. 유가증권 일별매매정보 1.2. Description 유가증권시장에 상장되어 있는 주권의 매매정보 제공 ('10년01월04일 데이터부터 제공) Server endpoint url : https://data-dbg.krx.co.kr/svc/apis/sto/stk_bydd_trd 1.3. request 1.3.1. InBlock_1 Name Type Description basDd string 기준일자 1.4. response 1.4.1. OutBlock_1 Name Type Description BAS_DD string 기준일자 ISU_CD string 종목코드 ISU_NM string 종목명 MKT_NM string 시장구분 SECT_TP_NM string 소속부 TDD_CLSPRC",
+      "has_원주가": false,
+      "has_수정주가": false,
+      "has_TDD_CLSPRC": true,
+      "tdd_fields": [
+        "TDD_CLSPRC",
+        "TDD_HGPRC",
+        "TDD_LWPRC",
+        "TDD_OPNPRC"
+      ],
+      "tdd_labels": [
+        "TDD_CLSPRC string 종가 CMPPREVDD_PRC string 대비 FLUC_RT string 등락률 TDD_OPNPRC string 시가 TDD_H",
+        "TDD_HGPRC string 고가 TDD_LWPRC string 저가 ACC_TRDVOL string 거래량 ACC_TRDVAL string 거래대금 MKTC",
+        "TDD_LWPRC string 저가 ACC_TRDVOL string 거래량 ACC_TRDVAL string 거래대금 MKTCAP string 시가총액 LIST_",
+        "TDD_OPNPRC string 시가 TDD_HGPRC string 고가 TDD_LWPRC string 저가 ACC_TRDVOL string 거래량 ACC_TRD"
+      ],
+      "saved_gitignored": "JvJFzlAENzZlPBDNGAWC.docx",
+      "kind": "binary_spec"
+    },
+    {
+      "url": "https://openapi.krx.co.kr/contents/OPP/USES/service/downloadApiDoc.cmd",
+      "method": "POST",
+      "bo_id": "hZjGpkllgCBCWqeTsYFj",
+      "api_path": "/svc/sample/apis/sto/ksq_bydd_trd",
+      "status": 200,
+      "bytes": 6892,
+      "sha256": "2c5c7b0fff6fb0b676fb262d537a89fce47a3d1e5f8bdd43f8374813f32157a4",
+      "text_head": " API Spec 1.1. 코스닥 일별매매정보 1.2. Description 코스닥시장에 상장되어 있는 주권의 매매정보 제공 ('10년01월04일 데이터부터 제공) Server endpoint url : https://data-dbg.krx.co.kr/svc/apis/sto/ksq_bydd_trd 1.3. request 1.3.1. InBlock_1 Name Type Description basDd string 기준일자 1.4. response 1.4.1. OutBlock_1 Name Type Description BAS_DD string 기준일자 ISU_CD string 종목코드 ISU_NM string 종목명 MKT_NM string 시장구분 SECT_TP_NM string 소속부 TDD_CLSPRC s",
+      "has_원주가": false,
+      "has_수정주가": false,
+      "has_TDD_CLSPRC": true,
+      "tdd_fields": [
+        "TDD_CLSPRC",
+        "TDD_HGPRC",
+        "TDD_LWPRC",
+        "TDD_OPNPRC"
+      ],
+      "tdd_labels": [
+        "TDD_CLSPRC string 종가 CMPPREVDD_PRC string 대비 FLUC_RT string 등락률 TDD_OPNPRC string 시가 TDD_H",
+        "TDD_HGPRC string 고가 TDD_LWPRC string 저가 ACC_TRDVOL string 거래량 ACC_TRDVAL string 거래대금 MKTC",
+        "TDD_LWPRC string 저가 ACC_TRDVOL string 거래량 ACC_TRDVAL string 거래대금 MKTCAP string 시가총액 LIST_",
+        "TDD_OPNPRC string 시가 TDD_HGPRC string 고가 TDD_LWPRC string 저가 ACC_TRDVOL string 거래량 ACC_TRD"
+      ],
+      "saved_gitignored": "hZjGpkllgCBCWqeTsYFj.docx",
+      "kind": "binary_spec"
+    }
+  ],
+  "quotes": [],
+  "status": "file_saved_tdd_fields_adjustment_unconfirmed",
+  "note": "Open API TDD 원주가/수정주가 문구가 없으면 미확정."
+}

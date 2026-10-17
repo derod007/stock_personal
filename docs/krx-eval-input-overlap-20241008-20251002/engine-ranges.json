@@ -1,0 +1,142 @@
+{
+  "price_basis": "KRX TDD 원본, 수정 여부 미확정",
+  "replay_truncates_to_240": false,
+  "replay_past_is_through_session": true,
+  "replay_new_entry_only_if_top100": true,
+  "chart_min_completed": 40,
+  "chart_uses_envelope_ma240": false,
+  "quality_min_completed": 60,
+  "quality_recent_invalid_days": 90,
+  "quality_checks_price_jump": false,
+  "feature_sma": [
+    5,
+    10,
+    20,
+    60
+  ],
+  "feature_has_ma240": false,
+  "feature_swing_bars": 20,
+  "feature_prior_swing_bars": 40,
+  "feature_rising_lows_lookback": 60,
+  "horizontal_lookback": 120,
+  "pullback_min": 45,
+  "pullback_structure_bars": 40,
+  "pullback_stop_bars": 10,
+  "pullback_target_bars": 20,
+  "retest_min": 40,
+  "retest_box_bars": 20,
+  "retest_breakout_search_back": 16,
+  "retest_atr_bars": 14,
+  "retest_overhead_high_uses_all_prior": true,
+  "recovery_starts_after_index": 59,
+  "recovery_episode_max_bars": 60,
+  "recovery_scans_full_series": true,
+  "context_daily_ma_period": 20,
+  "context_daily_slope": 5,
+  "context_weekly_ma_period": 20,
+  "context_weekly_slope": 3,
+  "spike_peak_lookback": 8,
+  "spike_pre_burst_support_bars": 20,
+  "top_pattern_peak_window": 65,
+  "top_pattern_min": 45,
+  "envelope_required_bars": 240,
+  "envelope_in_chart_plan": false,
+  "history_prep_bars": 240,
+  "history_min_bars": 60,
+  "history_jump_limit": 0.31,
+  "detect_ratio_1_9_is_partial": true,
+  "listed_break_absence_is_not_no_corporate_action": true,
+  "new_entry_input": "DatedTop100Replay는 판정일 세션 시각 이하 봉을 자르지 않고 $past에 넣는다. ChartPlanEngine은 CandleClock::completed($past) 전체($valid)를 받는다. 엔벨로프 MA240은 추천 경로가 아니다.",
+  "component_windows": [
+    {
+      "id": "replay_past",
+      "bars": "판정일까지 로드된 전 봉",
+      "path": "bin/paper/DatedTop100Replay.php",
+      "in_new_entry": true
+    },
+    {
+      "id": "chart_valid",
+      "bars": "OHLC>0 완료봉 전체, 최소 40",
+      "path": "src/ChartPlanEngine.php",
+      "in_new_entry": true
+    },
+    {
+      "id": "quality",
+      "bars": "완료 60 + 최근 90력일 비정상",
+      "path": "src/PaperQuality.php",
+      "in_new_entry": true
+    },
+    {
+      "id": "ma_feature",
+      "bars": "SMA5/10/20/60 (240 없음)",
+      "path": "src/FeatureEngine.php",
+      "in_new_entry": true
+    },
+    {
+      "id": "ma_context_daily",
+      "bars": "20+5",
+      "path": "src/TrendContext.php",
+      "in_new_entry": true
+    },
+    {
+      "id": "ma_context_weekly",
+      "bars": "주봉 20+3 (일봉 전체로 주봉 구성)",
+      "path": "src/TrendContext.php",
+      "in_new_entry": true
+    },
+    {
+      "id": "pullback_stop",
+      "bars": "최근 10저",
+      "path": "src/TrendPullback.php",
+      "in_new_entry": true
+    },
+    {
+      "id": "pullback_target",
+      "bars": "직전 20고",
+      "path": "src/TrendPullback.php",
+      "in_new_entry": true
+    },
+    {
+      "id": "retest_box",
+      "bars": "20",
+      "path": "src/BreakoutRetest.php",
+      "in_new_entry": true
+    },
+    {
+      "id": "retest_overhead",
+      "bars": "확인봉 이전 전체 고가",
+      "path": "src/BreakoutRetest.php",
+      "in_new_entry": true
+    },
+    {
+      "id": "recovery",
+      "bars": "인덱스 59부터 전체 시계열",
+      "path": "src/TrendRecovery.php",
+      "in_new_entry": true
+    },
+    {
+      "id": "spike_dump",
+      "bars": "고점 최근 8 + 급등 전 20",
+      "path": "src/SpikeDump.php",
+      "in_new_entry": true
+    },
+    {
+      "id": "top_pattern",
+      "bars": "최근 65 (미러는 전체 고저)",
+      "path": "src/NoramuTopPattern.php",
+      "in_new_entry": true
+    },
+    {
+      "id": "horizontal",
+      "bars": "120",
+      "path": "src/HorizontalLevels.php",
+      "in_new_entry": true
+    },
+    {
+      "id": "envelope_ma240",
+      "bars": "240",
+      "path": "bin/paper/EnvelopeResearch.php",
+      "in_new_entry": false
+    }
+  ]
+}

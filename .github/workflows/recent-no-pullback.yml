@@ -1,0 +1,14 @@
+name: Recent no pullback account study
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          php -l bin/paper/RecentNoPullbackStudy.php
+          php -l bin/paper_recent_no_pullback_study.php
+          php tests/recent_no_pullback_study.php
+          php tests/dated_top100_replay.php

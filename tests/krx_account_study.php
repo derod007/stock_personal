@@ -20,7 +20,7 @@ foreach(['KrxAccountStudy.php','KrxAccountReplay.php','DatedTop100Replay.php'] a
 }
 $probe=$win.'/probe.php';
 file_put_contents($probe, '<?php require __DIR__."/bin/paper/KrxAccountStudy.php";'
-    .'if(substr_count(PaperKrxAccountStudy::HEADER,"\r")!==14)throw new RuntimeException("Expected actual CRLF nowdoc");'
+    .'if(substr_count(PaperKrxAccountStudy::HEADER,"\r")!==15)throw new RuntimeException("Expected actual CRLF nowdoc");'
     .'PaperKrxAccountStudy::assertAdapter(__DIR__);echo "CRLF_OK";');
 $probeRun=static function()use($probe):array{
     $p=proc_open([PHP_BINARY,'-n',$probe],[1=>['pipe','w'],2=>['pipe','w']],$pipes);

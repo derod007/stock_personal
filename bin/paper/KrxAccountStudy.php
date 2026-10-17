@@ -28,6 +28,7 @@ final class PaperKrxAccountReplay
     public static function sessions(array $c):array{return PaperDatedTop100Replay::sessions($c);}
     public static function sectorMap(array $d,?array $m):array{return PaperDatedTop100Replay::sectorMap($d,$m);}
     public static function runtimeCodeHashes(array $e=[]):array{return PaperDatedTop100Replay::runtimeCodeHashes($e);}
+    public static function supportsRuntime(string $v):bool{return PaperDatedTop100Replay::supportsRuntime($v);}
 
 HEAD;
     public static function adapterSource(string $root):string

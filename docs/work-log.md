@@ -1,7 +1,7 @@
-## 2026-10-18 00:50 · Cursor · 진행
-- 한 일: PR #101이 들어 있는 main 위에 남은 연구 PR(#87, #88–#98, #99–#100)을 병합. 운영 보호청산·지문은 101 유지
-- 파일: docs/work-log.md
-- 커밋: 안 함
+## 2026-10-18 00:52 · Cursor · 끝
+- 한 일: PR #101 main 위에 #87, #88–#98, #99–#100 병합. 연구 CLI만 101 운영 지문을 허용하고 KRX 어댑터를 재생성. 운영 보호청산·지문·예약 경로 유지
+- 파일: bin/paper/KrxAccountReplay.php, bin/paper/KrxAccountStudy.php, bin/paper/KrxSignalStudy.php, bin/paper/RecentNoPullbackStudy.php, tests/krx_account_study.php, docs/work-log.md, .github/workflows/php-tests.yml
+- 커밋: 통합 브랜치
 - 롤백: 없음
 
 ## 2026-10-18 · Codex · 끝

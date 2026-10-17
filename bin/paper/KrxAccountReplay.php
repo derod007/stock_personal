@@ -12,6 +12,7 @@ final class PaperKrxAccountReplay
     public static function sessions(array $c):array{return PaperDatedTop100Replay::sessions($c);}
     public static function sectorMap(array $d,?array $m):array{return PaperDatedTop100Replay::sectorMap($d,$m);}
     public static function runtimeCodeHashes(array $e=[]):array{return PaperDatedTop100Replay::runtimeCodeHashes($e);}
+    public static function supportsRuntime(string $v):bool{return PaperDatedTop100Replay::supportsRuntime($v);}
     public static function run(array $data,array $config,string $journalPath,array $candidates,array $opts=[]):array
     {
         ResearchCashFee::feeBps($config);
@@ -25,7 +26,7 @@ final class PaperKrxAccountReplay
         $sectors=self::sectorMap($data,$opts['sector_map']??null);
         $sectorHash=hash('sha256',PaperJournal::encode($sectors));
         $version=PaperStrategyVersion::current();
-        if($version!==self::STRATEGY_FINGERPRINT)throw new RuntimeException('Operational strategy fingerprint changed');
+        if(!self::supportsRuntime($version))throw new RuntimeException('Operational strategy fingerprint changed');
         $pinned=PaperScanUniverse::pinned($config);$configHash=hash('sha256',PaperJournal::encode($pinned));
         $bars=[];foreach($data['symbols'] as $symbol=>$d)$bars[$symbol]=$d['bars_sha256'];
         $sessions=[];

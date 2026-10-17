@@ -58,7 +58,7 @@ final class PaperKrxSignalStudy
     public static function profile(string $root):array
     {
         PaperRecoveryCloseAccount::assertMirror($root);
-        if(PaperStrategyVersion::current($root)!==PaperDatedTop100Replay::STRATEGY_FINGERPRINT)
+        if(!PaperDatedTop100Replay::supportsRuntime(PaperStrategyVersion::current($root)))
             throw new RuntimeException('Operating strategy fingerprint changed');
         $fixed=self::json($root.'/'.self::DOC.'/frozen-inputs.json');
         foreach($fixed['repository_lf_sha256'] as $path=>$sha)

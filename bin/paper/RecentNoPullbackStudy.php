@@ -21,7 +21,7 @@ final class PaperRecentNoPullbackStudy
     public static function load(string $root,string $state):array
     {
         PaperNoPullbackStudy::assertMirror($root);
-        if(PaperStrategyVersion::current()!==PaperDatedTop100Replay::STRATEGY_FINGERPRINT)throw new RuntimeException('Strategy fingerprint changed');
+        if(!PaperDatedTop100Replay::supportsRuntime(PaperStrategyVersion::current()))throw new RuntimeException('Strategy fingerprint changed');
         if(PaperStrategyVersion::fileHash($root.'/'.self::FIXED)!==self::FIXED_SHA)throw new RuntimeException('Frozen input definition changed');
         $fixed=PaperRecoveryCloseAccount::read($root.'/'.self::FIXED);
         foreach($fixed['repository_lf_sha256'] as $file=>$sha)

@@ -68,6 +68,35 @@ class ShapeClusterTests(unittest.TestCase):
         j3 = m.judge(types([-1] * 6, [0] * 6, 0), types([-1] * 6, [0] * 6, 0))
         self.assertEqual(j3["label"], "근거 부족")
         self.assertEqual(j3["adoption"], "안 함")
+        j4 = m.judge(
+            types([-1, 5, 0, 0, 0, 0], [1.0, -1, 0, 0, 0, 0], 0.1),
+            types([-2, 4, 0, 0, 0, 0], [1.2, -0.5, 0, 0, 0, 0], 0.2),
+        )
+        self.assertEqual(j4["label"], "관찰 가치")
+        self.assertEqual(j4["types_hit_above_all_both_periods"], [1])
+        self.assertEqual(j4["types_pnl_above_all_both_periods"], [0])
+        self.assertEqual(j4["types_hit_and_pnl_both_periods"], [])
+
+    def test_leave_out_top_symbols_drops_best_contributor(self):
+        rows = [
+            {"symbol": "A", "net": 10.0},
+            {"symbol": "A", "net": 2.0},
+            {"symbol": "B", "net": 1.0},
+            {"symbol": "C", "net": -1.0},
+        ]
+        out = m.leave_out_top_symbols(rows, 1)
+        self.assertEqual(out["dropped"][0]["symbol"], "A")
+        self.assertEqual(out["n_left"], 2)
+        self.assertAlmostEqual(out["mean_net_pct"], 0.0)
+
+    def test_path_diversity_does_not_treat_all_as_flat(self):
+        rows = [
+            {"price": [1.0] * 60},
+            {"price": [0.7 + 0.01 * i for i in range(60)]},
+        ]
+        d = m.path_diversity(rows)
+        self.assertGreater(d["span_p75"], d["span_p25"])
+        self.assertGreater(d["span_ge_015_pct"], 0)
 
 
 if __name__ == "__main__":

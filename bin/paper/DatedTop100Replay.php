@@ -31,6 +31,12 @@ final class PaperDatedTop100Replay
     public const PROFILE_OCT='oct2025';
     public const PROFILE_YEAR='year-20251008-20261008';
     public const STRATEGY_FINGERPRINT='934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465';
+    // New journals use the actual runtime fingerprint; existing journals cannot migrate.
+    public const PROTECTION_RUNTIME='2303a1b6c59353e3e53f5b49d011adb8e82a184e8cd9b31d86ed541c712b1c3f';
+    public static function supportsRuntime(string $version):bool
+    {
+        return in_array($version,[self::STRATEGY_FINGERPRINT,self::PROTECTION_RUNTIME],true);
+    }
     public const YEAR_SECTOR_MAP='docs/historical-top100-20251008-20261008/sector-map-full-v2.json';
     public const YEAR_SECTOR_MAP_SHA256='08afb0b6f0be0106624364406d29a5a33851c65331e431467629f71600da1e8b';
     public const CODE=['bin/paper/DatedTop100Replay.php','bin/paper_dated_top100_replay.php','tests/dated_top100_replay.php',
@@ -226,7 +232,7 @@ final class PaperDatedTop100Replay
         $sectors=self::sectorMap($data,$opts['sector_map']??null);
         $sectorHash=hash('sha256',PaperJournal::encode($sectors));
         $version=PaperStrategyVersion::current();
-        if($version!==self::STRATEGY_FINGERPRINT)throw new RuntimeException('Operational strategy fingerprint changed');
+        if(!self::supportsRuntime($version))throw new RuntimeException('Operational strategy fingerprint changed');
         $pinned=PaperScanUniverse::pinned($config);$configHash=hash('sha256',PaperJournal::encode($pinned));
         $bars=[];foreach($data['symbols'] as $symbol=>$d)$bars[$symbol]=$d['bars_sha256'];
         $sessions=[];

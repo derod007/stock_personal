@@ -77,7 +77,9 @@ function dgo(array $data,array $cfg,array $plans,array $cand,array $opts=[]):arr
 function devs(array $j,string $type):array{return array_values(array_map(fn($e)=>$e['payload'],array_filter($j['events'],fn($e)=>$e['type']===$type)));}
 
 $fp='934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465';
-dcheck(PaperStrategyVersion::current($root)===$fp,'operational strategy fingerprint is unchanged');
+dcheck(PaperDatedTop100Replay::supportsRuntime(PaperStrategyVersion::current($root)),'recognized runtime; historical fingerprint stays pinned');
+dcheck(!PaperDatedTop100Replay::supportsRuntime(str_repeat('0',64)),'unknown runtime is refused');
+dcheck(PaperDatedTop100Replay::STRATEGY_FINGERPRINT===$fp,'historical fingerprint is not rewritten');
 $c=PaperAccountReplay::accountConfig($base,'hist-kr-dated-top100-v1-202510',$research);
 dcheck($c['id']==='hist-kr-dated-top100-v1-202510'&&$c===array_replace($base,['id'=>$c['id']]),'research account config equals paper-kr-recovery-v1 except its ID');
 dcheck(dthrows(fn()=>PaperAccountReplay::accountConfig($base,'paper-kr-recovery-v1',$research),'own ID prefix'),'the operational account ID is refused');

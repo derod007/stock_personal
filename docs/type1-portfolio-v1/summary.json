@@ -1,0 +1,179 @@
+{
+  "prior": {
+    "version": "type1_portfolio_v1",
+    "exploratory": true,
+    "model": "opening_sizing_entries_before_intraday_exits",
+    "config": {
+      "id": "paper-kr-recovery-v1",
+      "currency": "KRW",
+      "initial_cash": 100000000,
+      "max_positions": 4,
+      "risk_pct": 0.01,
+      "position_pct": 0.2,
+      "sector_pct": 0.4,
+      "total_risk_pct": 0.03,
+      "universe": "kr_amount_scan",
+      "scan_limit": 100,
+      "symbols": {},
+      "require_account_preflight": true
+    },
+    "sector_source": "explicit_map",
+    "hashes": {
+      "centers": "768c083a5c51cb452dad032f018a97b20527d07ff6fc1ab36559b53c406b4dfd",
+      "candidates": "ca1f5bdea8a1caeab75197fafee4b17008d45bcdf7c694a331a6a6c7e9cd8fb2",
+      "config": "dc092bc8e3939a5de22eb25ed79a442666928f46b30d672dd48afd0e7ecd7bb4",
+      "script": "30d56a98f94b4e0a14ad4ecc183cdf0bc41fa970154e71cf69c0133489b77cc2",
+      "sector_map": "ab86e9725b1b18ca62da74b37a76c15f0fd0e51ce764bf3bea750e8bb9c911b2",
+      "bars_manifest_sha256": "6036b0e69b215b7570b2a22617a699cbf948c628a010f39d0c6c4cd7e0d57420"
+    },
+    "skips": {
+      "insufficient_history": 153,
+      "missing_anchor": 80,
+      "period_end": 287
+    },
+    "signal_count": 3294,
+    "limitations": [
+      "Post-hoc selection; reused periods; not independent validation",
+      "Opening sizing differs from operating reserved limit-order engine",
+      "No future-bar eligibility filter; sample may differ from PR106",
+      "Unknown sectors share one bucket; supplied sector maps may be current-day mappings",
+      "End-of-day equity drawdown, not intraday drawdown",
+      "Daily stop-first ordering is an assumption; adjustment unverified"
+    ],
+    "full_period_comparable": false,
+    "common_through": "2024-10-11",
+    "results": {
+      "all_types": {
+        "status": "halted",
+        "halt": {
+          "day": "2024-10-14",
+          "reason": "missing_required_bar",
+          "symbols": [
+            "004870.KS",
+            "050110.KQ"
+          ]
+        },
+        "through": "2024-10-11",
+        "return_pct": null,
+        "max_drawdown_pct": 0.0,
+        "max_concurrent": 4,
+        "max_invested_pct": 57.124722995242436,
+        "signals": 3294,
+        "fills": 4,
+        "closed": 0,
+        "blocked": {
+          "cash_or_risk_or_sector_limit": 2,
+          "position_limit": 118
+        },
+        "research_id": "research-type1-portfolio-v1-historical-top100-20241008-20251002-all_types"
+      },
+      "type1": {
+        "status": "halted",
+        "halt": {
+          "day": "2025-09-19",
+          "reason": "missing_required_bar",
+          "symbols": [
+            "032640.KS",
+            "033780.KS",
+            "086280.KS"
+          ]
+        },
+        "through": "2025-09-18",
+        "return_pct": null,
+        "max_drawdown_pct": 11.678311412616239,
+        "max_concurrent": 4,
+        "max_invested_pct": 60.81941886664961,
+        "signals": 936,
+        "fills": 96,
+        "closed": 93,
+        "blocked": {
+          "cash_or_risk_or_sector_limit": 8,
+          "position_limit": 832
+        },
+        "research_id": "research-type1-portfolio-v1-historical-top100-20241008-20251002-type1"
+      }
+    },
+    "result_file_sha256": "2b6ca43c2c1f6df1d444b4123a73178c78986b622ff6c484162ff9f8ee4c337a"
+  },
+  "recent": {
+    "version": "type1_portfolio_v1",
+    "exploratory": true,
+    "model": "opening_sizing_entries_before_intraday_exits",
+    "config": {
+      "id": "paper-kr-recovery-v1",
+      "currency": "KRW",
+      "initial_cash": 100000000,
+      "max_positions": 4,
+      "risk_pct": 0.01,
+      "position_pct": 0.2,
+      "sector_pct": 0.4,
+      "total_risk_pct": 0.03,
+      "universe": "kr_amount_scan",
+      "scan_limit": 100,
+      "symbols": {},
+      "require_account_preflight": true
+    },
+    "sector_source": "explicit_map",
+    "hashes": {
+      "centers": "768c083a5c51cb452dad032f018a97b20527d07ff6fc1ab36559b53c406b4dfd",
+      "candidates": "ece25f22de2f8e1fd2c99550110568b1769b577abc6dc607b17e5d227b8672b5",
+      "config": "dc092bc8e3939a5de22eb25ed79a442666928f46b30d672dd48afd0e7ecd7bb4",
+      "script": "30d56a98f94b4e0a14ad4ecc183cdf0bc41fa970154e71cf69c0133489b77cc2",
+      "sector_map": "08afb0b6f0be0106624364406d29a5a33851c65331e431467629f71600da1e8b",
+      "bars_manifest_sha256": "9411e82cef935aaab13aad1093af39c2fd585d4f8f0f83b7e5bc626f7f8032aa"
+    },
+    "skips": {
+      "insufficient_history": 96,
+      "missing_anchor": 30,
+      "period_end": 236
+    },
+    "signal_count": 2647,
+    "limitations": [
+      "Post-hoc selection; reused periods; not independent validation",
+      "Opening sizing differs from operating reserved limit-order engine",
+      "No future-bar eligibility filter; sample may differ from PR106",
+      "Unknown sectors share one bucket; supplied sector maps may be current-day mappings",
+      "End-of-day equity drawdown, not intraday drawdown",
+      "Daily stop-first ordering is an assumption; adjustment unverified"
+    ],
+    "full_period_comparable": true,
+    "common_through": "2026-10-08",
+    "results": {
+      "all_types": {
+        "status": "completed",
+        "halt": null,
+        "through": "2026-10-08",
+        "return_pct": 12.626686634079377,
+        "max_drawdown_pct": 32.59180822592729,
+        "max_concurrent": 4,
+        "max_invested_pct": 62.16808583317351,
+        "signals": 2647,
+        "fills": 255,
+        "closed": 255,
+        "blocked": {
+          "position_limit": 2319,
+          "cash_or_risk_or_sector_limit": 73
+        },
+        "research_id": "research-type1-portfolio-v1-historical-top100-20251008-20261008-all_types"
+      },
+      "type1": {
+        "status": "completed",
+        "halt": null,
+        "through": "2026-10-08",
+        "return_pct": 40.56161580808706,
+        "max_drawdown_pct": 12.727852215850666,
+        "max_concurrent": 4,
+        "max_invested_pct": 62.42916196907854,
+        "signals": 1010,
+        "fills": 183,
+        "closed": 183,
+        "blocked": {
+          "position_limit": 797,
+          "cash_or_risk_or_sector_limit": 30
+        },
+        "research_id": "research-type1-portfolio-v1-historical-top100-20251008-20261008-type1"
+      }
+    },
+    "result_file_sha256": "167fa2d4a864f1cb0ba0270095a1dfe94f69a3a6332a959556c2a2265d9a0b34"
+  }
+}

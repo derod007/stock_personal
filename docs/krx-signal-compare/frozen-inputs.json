@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "source_pr93_commit": "9103bbbc1126e39ed9f4c00a49de6a610c468179",
+  "repository_lf_sha256": {
+    "docs/historical-top100-20241008-20251002/candidates.json": "ca1f5bdea8a1caeab75197fafee4b17008d45bcdf7c694a331a6a6c7e9cd8fb2",
+    "docs/krx-prep-bars-before-20241008/trading-days.json": "c5441f771e3fc29db98232193d0b3b4490f8b3efe81470551e0bacb37612f1d8",
+    "docs/krx-prep-bars-before-20241008/file-hashes.json": "2af53c47a8fda74874a6429802cac9293b1b231e59ef8d18ebe59665323d3964",
+    "docs/historical-top100-20241008-20251002/file-hashes.json": "e1bcd422bcb7993d78da06c84ba08cc02dd1c859854ba3bfc8234579912e4256",
+    "docs/krx-tdd-dataset-20231013-20251002/manifest.json": "c7496a4373bdb494b8e9180a9ed23ab17d1d67741e39dde63eed9437dd3caabd",
+    "docs/krx-tdd-dataset-20231013-20251002/symbol-index.json": "bdab78221a7a34262ddbd234b741326ec6aa7b6997c127009970d4325fc4bd28",
+    "docs/krx-tdd-dataset-20231013-20251002/transfers.json": "c93d948943e8c953693178b836d6db9696a235267b4144ead962e98bf887d9a8",
+    "docs/krx-tdd-dataset-20231013-20251002/price-breaks.json": "26f183a0e7838bd63312f12b49dc35bc18a0a82fef3f5e968d8edf2c6fc63df3"
+  }
+}

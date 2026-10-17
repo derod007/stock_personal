@@ -1,0 +1,308 @@
+{
+  "kind": "krx_continuity_review_v1",
+  "scope": "explicit_symbol_subset",
+  "complete": false,
+  "source_report_sha256": "a4ef3ec79bec8f0a6b2e542aac06eb3f0f27e27dcae9a8492d956b07d53c869d",
+  "source_inputs_sha256": "af5d967312fa10a8620cf3c5b71c05348e00ddacbf520794993923399c74fc37",
+  "stored_pairs_checked": 331,
+  "asof_pairs_recomputed": 9,
+  "summary": {
+    "case_pairs": 9,
+    "baseline": {
+      "original_eligible": 5,
+      "hold_cross_break_source": 2,
+      "hold_unresolved_provenance": 0,
+      "no_crossing_in_traced_scope": 3
+    },
+    "variant": {
+      "original_eligible": 9,
+      "hold_cross_break_source": 2,
+      "hold_unresolved_provenance": 0,
+      "no_crossing_in_traced_scope": 7
+    }
+  },
+  "code_sha256_lf": {
+    "bin/paper/KrxContinuityReview.php": "5410c9242132ea19a7a5e31b85b997d2a6ca398c8f117d372c4ca19ae84a7baf",
+    "bin/paper_krx_continuity_review.php": "a605ec5f1beaa8e22c9cea366643ceb414b37a590f05379c1faa40510c2b6b3e",
+    "docs/krx-continuity-review/protocol.md": "f2b2b470329c9d4f6d4c19ac177e42f7545e5620b9fda18aaae0b627ab64e91d",
+    "docs/krx-continuity-review/frozen-run.json": "fd700551dc21a1dfcddec2dcc80b5f4dc2986d46158a3e3642c195b965fc6d2b"
+  },
+  "generated_report_sha256": "904de3c48915ad3422afd69a865492638fcf9a4d7f89d8ada29eacaf9bbd3fb4",
+  "runtime": "PHP 8.3.6",
+  "integration_checks": [
+    "identical repeat preserves output bytes and mtime",
+    "altered report rejected",
+    "altered stored result rejected",
+    "altered JSONL rejected",
+    "full mode refuses incomplete 8-symbol pack",
+    "all 17 uploaded payload hashes preserved"
+  ],
+  "cases": [
+    {
+      "symbol": "314930.KQ",
+      "day": "2024-10-31",
+      "arms": {
+        "baseline": {
+          "status": "not_originally_eligible",
+          "target_sources": []
+        },
+        "variant": {
+          "status": "no_crossing_in_traced_scope",
+          "target_sources": [
+            {
+              "role": "target_high",
+              "from": "2024-10-11",
+              "through": "2024-10-11",
+              "first_index": 242,
+              "last_index": 242,
+              "field": "high",
+              "value": 24200.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "symbol": "086280.KS",
+      "day": "2025-02-21",
+      "arms": {
+        "baseline": {
+          "status": "no_crossing_in_traced_scope",
+          "target_sources": [
+            {
+              "role": "target_high",
+              "from": "2025-01-31",
+              "through": "2025-01-31",
+              "first_index": 315,
+              "last_index": 315,
+              "field": "high",
+              "value": 151000.0
+            }
+          ]
+        },
+        "variant": {
+          "status": "no_crossing_in_traced_scope",
+          "target_sources": [
+            {
+              "role": "target_high",
+              "from": "2025-01-31",
+              "through": "2025-01-31",
+              "first_index": 315,
+              "last_index": 315,
+              "field": "high",
+              "value": 151000.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "symbol": "278470.KS",
+      "day": "2025-05-09",
+      "arms": {
+        "baseline": {
+          "status": "hold_cross_break_source",
+          "target_sources": [
+            {
+              "role": "target_source",
+              "from": "2024-10-14",
+              "through": "2024-10-14",
+              "first_index": 151,
+              "last_index": 151,
+              "field": "high",
+              "value": 274500.0
+            }
+          ]
+        },
+        "variant": {
+          "status": "hold_cross_break_source",
+          "target_sources": [
+            {
+              "role": "target_source",
+              "from": "2024-10-14",
+              "through": "2024-10-14",
+              "first_index": 151,
+              "last_index": 151,
+              "field": "high",
+              "value": 274500.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "symbol": "089850.KQ",
+      "day": "2025-05-19",
+      "arms": {
+        "baseline": {
+          "status": "not_originally_eligible",
+          "target_sources": []
+        },
+        "variant": {
+          "status": "no_crossing_in_traced_scope",
+          "target_sources": [
+            {
+              "role": "target_high",
+              "from": "2025-04-29",
+              "through": "2025-04-29",
+              "first_index": 376,
+              "last_index": 376,
+              "field": "high",
+              "value": 11500.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "symbol": "430690.KQ",
+      "day": "2025-05-19",
+      "arms": {
+        "baseline": {
+          "status": "not_originally_eligible",
+          "target_sources": []
+        },
+        "variant": {
+          "status": "no_crossing_in_traced_scope",
+          "target_sources": [
+            {
+              "role": "target_high",
+              "from": "2025-04-29",
+              "through": "2025-04-29",
+              "first_index": 376,
+              "last_index": 376,
+              "field": "high",
+              "value": 7680.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "symbol": "408900.KQ",
+      "day": "2025-07-07",
+      "arms": {
+        "baseline": {
+          "status": "no_crossing_in_traced_scope",
+          "target_sources": [
+            {
+              "role": "target_high",
+              "from": "2025-06-20",
+              "through": "2025-06-20",
+              "first_index": 409,
+              "last_index": 409,
+              "field": "high",
+              "value": 5100.0
+            }
+          ]
+        },
+        "variant": {
+          "status": "no_crossing_in_traced_scope",
+          "target_sources": [
+            {
+              "role": "target_high",
+              "from": "2025-06-20",
+              "through": "2025-06-20",
+              "first_index": 409,
+              "last_index": 409,
+              "field": "high",
+              "value": 5100.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "symbol": "408900.KQ",
+      "day": "2025-08-04",
+      "arms": {
+        "baseline": {
+          "status": "no_crossing_in_traced_scope",
+          "target_sources": [
+            {
+              "role": "target_high",
+              "from": "2025-07-22",
+              "through": "2025-07-22",
+              "first_index": 431,
+              "last_index": 431,
+              "field": "high",
+              "value": 5620.0
+            }
+          ]
+        },
+        "variant": {
+          "status": "no_crossing_in_traced_scope",
+          "target_sources": [
+            {
+              "role": "target_high",
+              "from": "2025-07-22",
+              "through": "2025-07-22",
+              "first_index": 431,
+              "last_index": 431,
+              "field": "high",
+              "value": 5620.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "symbol": "462860.KQ",
+      "day": "2025-08-04",
+      "arms": {
+        "baseline": {
+          "status": "not_originally_eligible",
+          "target_sources": []
+        },
+        "variant": {
+          "status": "no_crossing_in_traced_scope",
+          "target_sources": [
+            {
+              "role": "target_high",
+              "from": "2025-07-10",
+              "through": "2025-07-10",
+              "first_index": 73,
+              "last_index": 73,
+              "field": "high",
+              "value": 6800.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "symbol": "437730.KQ",
+      "day": "2025-09-09",
+      "arms": {
+        "baseline": {
+          "status": "hold_cross_break_source",
+          "target_sources": [
+            {
+              "role": "target_source",
+              "from": "2024-06-26",
+              "through": "2024-06-26",
+              "first_index": 64,
+              "last_index": 64,
+              "field": "high",
+              "value": 27050.0
+            }
+          ]
+        },
+        "variant": {
+          "status": "hold_cross_break_source",
+          "target_sources": [
+            {
+              "role": "target_source",
+              "from": "2024-06-26",
+              "through": "2024-06-26",
+              "first_index": 64,
+              "last_index": 64,
+              "field": "high",
+              "value": 27050.0
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

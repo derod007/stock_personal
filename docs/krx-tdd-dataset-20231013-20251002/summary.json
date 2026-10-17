@@ -1,0 +1,131 @@
+{
+  "schema": 1,
+  "kind": "krx_tdd_dataset_v1",
+  "price_basis": "KRX TDD 원본, 수정 여부 미확정",
+  "no_fill": true,
+  "no_yahoo_mix": true,
+  "no_ratio_adjust": true,
+  "no_drop_zero_price_rows": true,
+  "no_exclude_past_for_future_anomaly": true,
+  "ma240_not_asserted": true,
+  "universe": 1248,
+  "prep_days": 240,
+  "eval_days": 243,
+  "bars_gitignored": "data/raw/research/krx-tdd-dataset-20231013-20251002/bars",
+  "status_totals": {
+    "prep_normal_ohlcv": 264977,
+    "prep_no_row": 32673,
+    "prep_ohl_zero": 1870,
+    "eval_normal_ohlcv": 290825,
+    "eval_no_row": 10442,
+    "eval_ohl_zero": 1997
+  },
+  "assigned_status_totals": {
+    "prep_normal_ohlcv": 264680,
+    "prep_no_row": 32970,
+    "prep_ohl_zero": 1870,
+    "eval_normal_ohlcv": 290825,
+    "eval_no_row": 10442,
+    "eval_ohl_zero": 1997
+  },
+  "kind_totals": {
+    "prep_normal_ohlcv": 264977,
+    "prep_volume_positive": 264977,
+    "prep_ohlc_normal_ohlc": 264977,
+    "prep_no_row": 32673,
+    "prep_ohl_zero_close_positive_volume_zero": 1870,
+    "prep_volume_zero": 1870,
+    "prep_ohlc_ohl_zero_close_positive": 1870,
+    "eval_normal_ohlcv": 290825,
+    "eval_volume_positive": 290825,
+    "eval_ohlc_normal_ohlc": 290825,
+    "eval_no_row": 10442,
+    "eval_ohl_zero_close_positive_volume_zero": 1997,
+    "eval_volume_zero": 1997,
+    "eval_ohlc_ohl_zero_close_positive": 1997
+  },
+  "symbols_prep_normal_ohlc_240": 1030,
+  "symbols_prep_normal_ohlcv_240": 1030,
+  "comparison_with_pr91": {
+    "pr91_prep_kind_normal_counted_as_normal_ohlcv": 264680,
+    "assigned_only_prep_normal_ohlc": 264680,
+    "assigned_only_prep_normal_ohlcv": 264680,
+    "linked_prep_normal_ohlc": 264977,
+    "linked_prep_normal_ohlcv": 264977,
+    "assigned_equals_pr91_normal": true,
+    "prep_normal_ohlc_equals_ohlcv": true,
+    "note": "PR #91 normal은 지정 suffix·OHLC 정상이면 거래량 0도 포함. 지정 suffix만 보면 정상 OHLC와 정상 OHLCV 건수가 같은지 비교한다. 연결 시계열은 확인된 이전상장 3종의 반대 시장 행을 더한 값이다."
+  },
+  "transfers": [
+    {
+      "code": "022100",
+      "name": "포스코DX",
+      "from_market": "KOSDAQ",
+      "from_suffix": "kosdaq_equity",
+      "to_market": "KOSPI",
+      "to_suffix": "kospi_equity",
+      "first_to_market_day": "2024-01-02",
+      "identity": "ISU_CD=022100. 이름 문자열은 조인 키가 아니다.",
+      "confirmed": true,
+      "sources": [
+        "KIND 사업보고서(2024-03-13) 주권상장: 유가증권시장 상장 2024년 01월 02일. https://kind.krx.co.kr/external/2024/03/13/001279/20240313003384/11011.htm"
+      ],
+      "counts": {
+        "assigned_rows": 429,
+        "linked_rows": 54,
+        "no_row_before_link": 54,
+        "no_row_after_link": 0,
+        "rows_after_link": 483
+      }
+    },
+    {
+      "code": "034230",
+      "name": "파라다이스",
+      "from_market": "KOSDAQ",
+      "from_suffix": "kosdaq_equity",
+      "to_market": "KOSPI",
+      "to_suffix": "kospi_equity",
+      "first_to_market_day": "2024-06-24",
+      "identity": "ISU_CD=034230. 회사 IR이 같은 코드를 이전상장 전후 종목으로 적는다.",
+      "confirmed": true,
+      "sources": [
+        "파라다이스 IR FAQ: 종목코드 034230. 2024년 6월 24일 유가증권시장(KOSPI)로 이전상장. https://www.paradise.co.kr/ko/invest/ir/irfaq",
+        "한국거래소 유가증권시장본부 안내를 인용한 보도: 2024-06-24 코스피 첫 거래. http://www.newswell.co.kr/news/articleView.html?idxno=9922"
+      ],
+      "counts": {
+        "assigned_rows": 313,
+        "linked_rows": 170,
+        "no_row_before_link": 170,
+        "no_row_after_link": 0,
+        "rows_after_link": 483
+      }
+    },
+    {
+      "code": "066970",
+      "name": "엘앤에프",
+      "from_market": "KOSDAQ",
+      "from_suffix": "kosdaq_equity",
+      "to_market": "KOSPI",
+      "to_suffix": "kospi_equity",
+      "first_to_market_day": "2024-01-29",
+      "identity": "ISU_CD=066970. 이름 문자열은 조인 키가 아니다.",
+      "confirmed": true,
+      "sources": [
+        "KIND 분기보고서(2024-05-16): 2024년 1월 29일 코스닥시장에서 유가증권시장으로 이전상장. 유가증권시장 상장 2024년 01월 29일. https://kind.krx.co.kr/external/2024/05/16/001206/20240516002828/11013.htm",
+        "KIND 신규상장 공시 접수번호 20240125000543. https://kind.krx.co.kr/common/disclsviewer.do?acptNo=20240125000543&docno=&method=searchInitInfo"
+      ],
+      "counts": {
+        "assigned_rows": 410,
+        "linked_rows": 73,
+        "no_row_before_link": 73,
+        "no_row_after_link": 0,
+        "rows_after_link": 483
+      }
+    }
+  ],
+  "price_breaks_assigned_n": 96,
+  "price_breaks_linked_n": 96,
+  "price_breaks_pr91_n": 96,
+  "confirmed_corporate_actions": 2,
+  "corporate_action_policy": "확인된 공시만 적는다. 배율 보정·임의 제외 규칙 없음."
+}

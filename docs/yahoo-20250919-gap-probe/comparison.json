@@ -1,0 +1,939 @@
+{
+  "schema": 1,
+  "kind": "yahoo_20250919_gap_probe_v1",
+  "generated_at_kst": "2026-10-14 13:39:39",
+  "scope": {
+    "days": [
+      "2025-09-18",
+      "2025-09-19",
+      "2025-09-22"
+    ],
+    "symbols": [
+      "298380.KQ",
+      "326030.KS",
+      "005930.KS",
+      "000660.KS"
+    ],
+    "writes_forbidden": [
+      "existing v1/v2 dataset bars/raw/cache",
+      "halted account hist-rc-prior-v1-baseline",
+      "operational src/config",
+      "bar insert",
+      "prior-day fill",
+      "date skip",
+      "halt lift",
+      "account rerun",
+      "merge"
+    ],
+    "probe_root_gitignored": "C:\\Users\\acdun\\Desktop\\dev\\noramu-work-yahoo-20250919-gap\\data\\raw\\research\\yahoo-20250919-gap-probe-v1",
+    "krx_original_dir": "C:\\Users\\acdun\\Desktop\\dev\\noramu-work-top100-202410\\data\\raw\\research\\historical-amount-top100-20241008-20251002\\raw",
+    "account_untouched": true,
+    "account_path": "C:\\Users\\acdun\\Desktop\\dev\\stock-personal-paper\\history-account\\hist-rc-prior-v1-baseline\\account-replay.json",
+    "account_sha256": "ee071a97fe45f8a11e39d4c07048aee3d5f8521800e4593c2bb7dc005e134a67",
+    "v2_dataset_untouched": true
+  },
+  "yahoo_window": {
+    "period1": 1757894400,
+    "period2": 1758672000,
+    "period1_utc": "2025-09-15T00:00:00+00:00",
+    "period2_utc": "2025-09-24T00:00:00+00:00",
+    "interval": "1d",
+    "short_includes_18_19_22": true
+  },
+  "finding_sep19_not_5y_only": true,
+  "finding_sep19_not_5y_only_detail": "Fresh short period1/period2 and fresh range=5y both keep a 2025-09-19 timestamp with null OHLCV for all four symbols. Stored v2 5y already had the same null day for the two halt names.",
+  "symbols": [
+    {
+      "symbol": "298380.KQ",
+      "name": "에이비엘바이오",
+      "market": "KOSDAQ",
+      "code": "298380",
+      "outcome": "krx_only",
+      "outcome_ko": "KRX에만 있음",
+      "yahoo_sep19": {
+        "short_period": {
+          "timestamp": 1758240000,
+          "timestamp_kst": "2025-09-19 09:00:00",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null,
+          "volume": null,
+          "adjclose": null,
+          "ohlcv_all_null": true
+        },
+        "fresh_5y": {
+          "timestamp": 1758240000,
+          "timestamp_kst": "2025-09-19 09:00:00",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null,
+          "volume": null,
+          "adjclose": null,
+          "ohlcv_all_null": true
+        },
+        "stored_v2_5y": {
+          "timestamp": 1758240000,
+          "timestamp_kst": "2025-09-19 09:00:00",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null,
+          "volume": null,
+          "adjclose": null,
+          "ohlcv_all_null": true
+        },
+        "timestamp_present_null_ohlcv_short": true,
+        "timestamp_present_null_ohlcv_fresh_5y": true,
+        "timestamp_present_null_ohlcv_stored_v2": true,
+        "null_only_in_5y": false
+      },
+      "krx_ohlcv": {
+        "2025-09-18": {
+          "BAS_DD": "20250918",
+          "ISU_CD": "298380",
+          "ISU_NM": "에이비엘바이오",
+          "MKT_NM": "KOSDAQ",
+          "open": 101500.0,
+          "high": 101900.0,
+          "low": 98500.0,
+          "close": 100300.0,
+          "volume": 496294.0,
+          "amount_won": 49548893450.0,
+          "cmpprevdd": 400.0,
+          "fluc_rt": "0.40"
+        },
+        "2025-09-19": {
+          "BAS_DD": "20250919",
+          "ISU_CD": "298380",
+          "ISU_NM": "에이비엘바이오",
+          "MKT_NM": "KOSDAQ",
+          "open": 99400.0,
+          "high": 109700.0,
+          "low": 99200.0,
+          "close": 108300.0,
+          "volume": 1602856.0,
+          "amount_won": 170609394950.0,
+          "cmpprevdd": 8000.0,
+          "fluc_rt": "7.98"
+        },
+        "2025-09-22": {
+          "BAS_DD": "20250922",
+          "ISU_CD": "298380",
+          "ISU_NM": "에이비엘바이오",
+          "MKT_NM": "KOSDAQ",
+          "open": 108600.0,
+          "high": 108900.0,
+          "low": 105400.0,
+          "close": 108300.0,
+          "volume": 557103.0,
+          "amount_won": 59653790950.0,
+          "cmpprevdd": 0.0,
+          "fluc_rt": "0.00"
+        }
+      },
+      "krx_files": {
+        "2025-09-18": {
+          "path": "C:\\Users\\acdun\\Desktop\\dev\\noramu-work-top100-202410\\data\\raw\\research\\historical-amount-top100-20241008-20251002\\raw\\20250918_kosdaq_equity.json",
+          "exists": true,
+          "sha256": "6754d1104a5a2230e47e9d6bbb6afd8f2f5d3693fa962fbb5d238e03e25992fb",
+          "bytes": 589306,
+          "found": true,
+          "block_rows": 1802
+        },
+        "2025-09-19": {
+          "path": "C:\\Users\\acdun\\Desktop\\dev\\noramu-work-top100-202410\\data\\raw\\research\\historical-amount-top100-20241008-20251002\\raw\\20250919_kosdaq_equity.json",
+          "exists": true,
+          "sha256": "5a3f0739263e33f305e5bb3199cc4dc9a202dd658fc40d5a04a7b2830d2d003c",
+          "bytes": 590488,
+          "found": true,
+          "block_rows": 1803
+        },
+        "2025-09-22": {
+          "path": "C:\\Users\\acdun\\Desktop\\dev\\noramu-work-top100-202410\\data\\raw\\research\\historical-amount-top100-20241008-20251002\\raw\\20250922_kosdaq_equity.json",
+          "exists": true,
+          "sha256": "cffd2ce8f22e166b4aef13c2a1047d613feda1dda1a4ccf641be52be094397d8",
+          "bytes": 590686,
+          "found": true,
+          "block_rows": 1803
+        }
+      },
+      "adjacent_scale_check": [
+        {
+          "day": "2025-09-18",
+          "yahoo_short_close": 98600.0,
+          "krx_close": 100300.0,
+          "krx_original_present": true,
+          "yahoo_over_krx": 0.9830508474576272,
+          "abs_diff": -1700.0,
+          "exact_equal": false
+        },
+        {
+          "day": "2025-09-22",
+          "yahoo_short_close": 108300.0,
+          "krx_close": 108300.0,
+          "krx_original_present": true,
+          "yahoo_over_krx": 1.0,
+          "abs_diff": 0.0,
+          "exact_equal": true
+        }
+      ],
+      "stored_v2_5y": {
+        "exists": true,
+        "index": {
+          "symbol": "298380.KQ",
+          "range": "5y",
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/298380.KQ?range=5y&interval=1d",
+          "sha256": "9082ae75dd0097b31324dcbc20b02da82eaa03ccdd5971610e80f6fc85032ed3",
+          "bytes": 72957,
+          "http_code": 200,
+          "fetched_at": 1791922848
+        },
+        "raw_exists": true,
+        "file_sha256": "9082ae75dd0097b31324dcbc20b02da82eaa03ccdd5971610e80f6fc85032ed3"
+      },
+      "stored_v1_5y_sha256": "9082ae75dd0097b31324dcbc20b02da82eaa03ccdd5971610e80f6fc85032ed3",
+      "v1_v2_stored_sha_equal": true,
+      "fresh_requests": {
+        "short_period": {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/298380.KQ?period1=1757894400&period2=1758672000&interval=1d",
+          "http_code": 200,
+          "fetched_at_kst": "2026-10-14 13:38:43",
+          "bytes": 1659,
+          "sha256": "5c04936441a94e63994a65cf945ea7bc97cc1f9f4443174573920811265866dd"
+        },
+        "range_5y": {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/298380.KQ?range=5y&interval=1d",
+          "http_code": 200,
+          "fetched_at_kst": "2026-10-14 13:38:44",
+          "bytes": 72971,
+          "sha256": "0e908bd9a13fa9afa085d9b139f61aaa43acac20d84cafbdf33a99c2c2567b71"
+        }
+      },
+      "yahoo_adjacent": {
+        "2025-09-18": {
+          "short": {
+            "timestamp": 1758153600,
+            "timestamp_kst": "2025-09-18 09:00:00",
+            "open": 101500.0,
+            "high": 101900.0,
+            "low": 98500.0,
+            "close": 98600.0,
+            "volume": 496294,
+            "adjclose": 98600.0,
+            "ohlcv_all_null": false
+          },
+          "fresh_5y": {
+            "timestamp": 1758153600,
+            "timestamp_kst": "2025-09-18 09:00:00",
+            "open": 101500.0,
+            "high": 101900.0,
+            "low": 98500.0,
+            "close": 98600.0,
+            "volume": 496294,
+            "adjclose": 98600.0,
+            "ohlcv_all_null": false
+          }
+        },
+        "2025-09-22": {
+          "short": {
+            "timestamp": 1758499200,
+            "timestamp_kst": "2025-09-22 09:00:00",
+            "open": 108600.0,
+            "high": 108900.0,
+            "low": 105400.0,
+            "close": 108300.0,
+            "volume": 557103,
+            "adjclose": 108300.0,
+            "ohlcv_all_null": false
+          },
+          "fresh_5y": {
+            "timestamp": 1758499200,
+            "timestamp_kst": "2025-09-22 09:00:00",
+            "open": 108600.0,
+            "high": 108900.0,
+            "low": 105400.0,
+            "close": 108300.0,
+            "volume": 557103,
+            "adjclose": 108300.0,
+            "ohlcv_all_null": false
+          }
+        }
+      }
+    },
+    {
+      "symbol": "326030.KS",
+      "name": "SK바이오팜",
+      "market": "KOSPI",
+      "code": "326030",
+      "outcome": "krx_only",
+      "outcome_ko": "KRX에만 있음",
+      "yahoo_sep19": {
+        "short_period": {
+          "timestamp": 1758240000,
+          "timestamp_kst": "2025-09-19 09:00:00",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null,
+          "volume": null,
+          "adjclose": null,
+          "ohlcv_all_null": true
+        },
+        "fresh_5y": {
+          "timestamp": 1758240000,
+          "timestamp_kst": "2025-09-19 09:00:00",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null,
+          "volume": null,
+          "adjclose": null,
+          "ohlcv_all_null": true
+        },
+        "stored_v2_5y": {
+          "timestamp": 1758240000,
+          "timestamp_kst": "2025-09-19 09:00:00",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null,
+          "volume": null,
+          "adjclose": null,
+          "ohlcv_all_null": true
+        },
+        "timestamp_present_null_ohlcv_short": true,
+        "timestamp_present_null_ohlcv_fresh_5y": true,
+        "timestamp_present_null_ohlcv_stored_v2": true,
+        "null_only_in_5y": false
+      },
+      "krx_ohlcv": {
+        "2025-09-18": {
+          "BAS_DD": "20250918",
+          "ISU_CD": "326030",
+          "ISU_NM": "SK바이오팜",
+          "MKT_NM": "KOSPI",
+          "open": 107700.0,
+          "high": 109000.0,
+          "low": 107300.0,
+          "close": 107900.0,
+          "volume": 123126.0,
+          "amount_won": 13289238950.0,
+          "cmpprevdd": 500.0,
+          "fluc_rt": "0.47"
+        },
+        "2025-09-19": {
+          "BAS_DD": "20250919",
+          "ISU_CD": "326030",
+          "ISU_NM": "SK바이오팜",
+          "MKT_NM": "KOSPI",
+          "open": 107700.0,
+          "high": 114000.0,
+          "low": 107100.0,
+          "close": 113500.0,
+          "volume": 492094.0,
+          "amount_won": 55282108450.0,
+          "cmpprevdd": 5600.0,
+          "fluc_rt": "5.19"
+        },
+        "2025-09-22": {
+          "BAS_DD": "20250922",
+          "ISU_CD": "326030",
+          "ISU_NM": "SK바이오팜",
+          "MKT_NM": "KOSPI",
+          "open": 114900.0,
+          "high": 114900.0,
+          "low": 110700.0,
+          "close": 111300.0,
+          "volume": 167640.0,
+          "amount_won": 18728166300.0,
+          "cmpprevdd": -2200.0,
+          "fluc_rt": "-1.94"
+        }
+      },
+      "krx_files": {
+        "2025-09-18": {
+          "path": "C:\\Users\\acdun\\Desktop\\dev\\noramu-work-top100-202410\\data\\raw\\research\\historical-amount-top100-20241008-20251002\\raw\\20250918_kospi_equity.json",
+          "exists": true,
+          "sha256": "34edee24093ec91e918bff6a6d4191102dcca4a86d9c6f1dee188254a8aa84e8",
+          "bytes": 298219,
+          "found": true,
+          "block_rows": 960
+        },
+        "2025-09-19": {
+          "path": "C:\\Users\\acdun\\Desktop\\dev\\noramu-work-top100-202410\\data\\raw\\research\\historical-amount-top100-20241008-20251002\\raw\\20250919_kospi_equity.json",
+          "exists": true,
+          "sha256": "85442908a24201a12af1bd33a3c6e1a6ea89ccfe59ad9f52563213c22d58c228",
+          "bytes": 299127,
+          "found": true,
+          "block_rows": 960
+        },
+        "2025-09-22": {
+          "path": "C:\\Users\\acdun\\Desktop\\dev\\noramu-work-top100-202410\\data\\raw\\research\\historical-amount-top100-20241008-20251002\\raw\\20250922_kospi_equity.json",
+          "exists": true,
+          "sha256": "5d024d2cb33ec2696674a5b0e5ae4c9063e061f8ec45334270a45d5949fb212d",
+          "bytes": 298904,
+          "found": true,
+          "block_rows": 960
+        }
+      },
+      "adjacent_scale_check": [
+        {
+          "day": "2025-09-18",
+          "yahoo_short_close": 107400.0,
+          "krx_close": 107900.0,
+          "krx_original_present": true,
+          "yahoo_over_krx": 0.995366079703429,
+          "abs_diff": -500.0,
+          "exact_equal": false
+        },
+        {
+          "day": "2025-09-22",
+          "yahoo_short_close": 111300.0,
+          "krx_close": 111300.0,
+          "krx_original_present": true,
+          "yahoo_over_krx": 1.0,
+          "abs_diff": 0.0,
+          "exact_equal": true
+        }
+      ],
+      "stored_v2_5y": {
+        "exists": true,
+        "index": {
+          "symbol": "326030.KS",
+          "range": "5y",
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/326030.KS?range=5y&interval=1d",
+          "sha256": "f3c2a47b93d6f3dc489614949cb1f3d7204b29799604d143845fbfc63c0f2170",
+          "bytes": 73247,
+          "http_code": 200,
+          "fetched_at": 1791922914
+        },
+        "raw_exists": true,
+        "file_sha256": "f3c2a47b93d6f3dc489614949cb1f3d7204b29799604d143845fbfc63c0f2170"
+      },
+      "stored_v1_5y_sha256": "f3c2a47b93d6f3dc489614949cb1f3d7204b29799604d143845fbfc63c0f2170",
+      "v1_v2_stored_sha_equal": true,
+      "fresh_requests": {
+        "short_period": {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/326030.KS?period1=1757894400&period2=1758672000&interval=1d",
+          "http_code": 200,
+          "fetched_at_kst": "2026-10-14 13:38:46",
+          "bytes": 1674,
+          "sha256": "a86f1897c6452939c88f9a4106d1256cd352c3a0ff3e81fdd375240aff1cc9ee"
+        },
+        "range_5y": {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/326030.KS?range=5y&interval=1d",
+          "http_code": 200,
+          "fetched_at_kst": "2026-10-14 13:38:48",
+          "bytes": 73248,
+          "sha256": "8ed71c86bc221c3919e5ea9a5d1121917ba0f1af6ad7146ba6df4796ae097cee"
+        }
+      },
+      "yahoo_adjacent": {
+        "2025-09-18": {
+          "short": {
+            "timestamp": 1758153600,
+            "timestamp_kst": "2025-09-18 09:00:00",
+            "open": 107700.0,
+            "high": 109000.0,
+            "low": 107300.0,
+            "close": 107400.0,
+            "volume": 123126,
+            "adjclose": 107400.0,
+            "ohlcv_all_null": false
+          },
+          "fresh_5y": {
+            "timestamp": 1758153600,
+            "timestamp_kst": "2025-09-18 09:00:00",
+            "open": 107700.0,
+            "high": 109000.0,
+            "low": 107300.0,
+            "close": 107400.0,
+            "volume": 123126,
+            "adjclose": 107400.0,
+            "ohlcv_all_null": false
+          }
+        },
+        "2025-09-22": {
+          "short": {
+            "timestamp": 1758499200,
+            "timestamp_kst": "2025-09-22 09:00:00",
+            "open": 114900.0,
+            "high": 114900.0,
+            "low": 110700.0,
+            "close": 111300.0,
+            "volume": 167640,
+            "adjclose": 111300.0,
+            "ohlcv_all_null": false
+          },
+          "fresh_5y": {
+            "timestamp": 1758499200,
+            "timestamp_kst": "2025-09-22 09:00:00",
+            "open": 114900.0,
+            "high": 114900.0,
+            "low": 110700.0,
+            "close": 111300.0,
+            "volume": 167640,
+            "adjclose": 111300.0,
+            "ohlcv_all_null": false
+          }
+        }
+      }
+    },
+    {
+      "symbol": "005930.KS",
+      "name": "삼성전자",
+      "market": "KOSPI",
+      "code": "005930",
+      "outcome": "krx_only",
+      "outcome_ko": "KRX에만 있음",
+      "yahoo_sep19": {
+        "short_period": {
+          "timestamp": 1758240000,
+          "timestamp_kst": "2025-09-19 09:00:00",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null,
+          "volume": null,
+          "adjclose": null,
+          "ohlcv_all_null": true
+        },
+        "fresh_5y": {
+          "timestamp": 1758240000,
+          "timestamp_kst": "2025-09-19 09:00:00",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null,
+          "volume": null,
+          "adjclose": null,
+          "ohlcv_all_null": true
+        },
+        "stored_v2_5y": {
+          "timestamp": 1758240000,
+          "timestamp_kst": "2025-09-19 09:00:00",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null,
+          "volume": null,
+          "adjclose": null,
+          "ohlcv_all_null": true
+        },
+        "timestamp_present_null_ohlcv_short": true,
+        "timestamp_present_null_ohlcv_fresh_5y": true,
+        "timestamp_present_null_ohlcv_stored_v2": true,
+        "null_only_in_5y": false
+      },
+      "krx_ohlcv": {
+        "2025-09-18": {
+          "BAS_DD": "20250918",
+          "ISU_CD": "005930",
+          "ISU_NM": "삼성전자",
+          "MKT_NM": "KOSPI",
+          "open": 79100.0,
+          "high": 80500.0,
+          "low": 78600.0,
+          "close": 80500.0,
+          "volume": 25619035.0,
+          "amount_won": 2046310025896.0,
+          "cmpprevdd": 2300.0,
+          "fluc_rt": "2.94"
+        },
+        "2025-09-19": {
+          "BAS_DD": "20250919",
+          "ISU_CD": "005930",
+          "ISU_NM": "삼성전자",
+          "MKT_NM": "KOSPI",
+          "open": 81100.0,
+          "high": 81200.0,
+          "low": 79600.0,
+          "close": 79700.0,
+          "volume": 20898386.0,
+          "amount_won": 1672547819584.0,
+          "cmpprevdd": -800.0,
+          "fluc_rt": "-0.99"
+        },
+        "2025-09-22": {
+          "BAS_DD": "20250922",
+          "ISU_CD": "005930",
+          "ISU_NM": "삼성전자",
+          "MKT_NM": "KOSPI",
+          "open": 81500.0,
+          "high": 84000.0,
+          "low": 81100.0,
+          "close": 83500.0,
+          "volume": 27529656.0,
+          "amount_won": 2288084255150.0,
+          "cmpprevdd": 3800.0,
+          "fluc_rt": "4.77"
+        }
+      },
+      "krx_files": {
+        "2025-09-18": {
+          "path": "C:\\Users\\acdun\\Desktop\\dev\\noramu-work-top100-202410\\data\\raw\\research\\historical-amount-top100-20241008-20251002\\raw\\20250918_kospi_equity.json",
+          "exists": true,
+          "sha256": "34edee24093ec91e918bff6a6d4191102dcca4a86d9c6f1dee188254a8aa84e8",
+          "bytes": 298219,
+          "found": true,
+          "block_rows": 960
+        },
+        "2025-09-19": {
+          "path": "C:\\Users\\acdun\\Desktop\\dev\\noramu-work-top100-202410\\data\\raw\\research\\historical-amount-top100-20241008-20251002\\raw\\20250919_kospi_equity.json",
+          "exists": true,
+          "sha256": "85442908a24201a12af1bd33a3c6e1a6ea89ccfe59ad9f52563213c22d58c228",
+          "bytes": 299127,
+          "found": true,
+          "block_rows": 960
+        },
+        "2025-09-22": {
+          "path": "C:\\Users\\acdun\\Desktop\\dev\\noramu-work-top100-202410\\data\\raw\\research\\historical-amount-top100-20241008-20251002\\raw\\20250922_kospi_equity.json",
+          "exists": true,
+          "sha256": "5d024d2cb33ec2696674a5b0e5ae4c9063e061f8ec45334270a45d5949fb212d",
+          "bytes": 298904,
+          "found": true,
+          "block_rows": 960
+        }
+      },
+      "adjacent_scale_check": [
+        {
+          "day": "2025-09-18",
+          "yahoo_short_close": 80300.0,
+          "krx_close": 80500.0,
+          "krx_original_present": true,
+          "yahoo_over_krx": 0.9975155279503105,
+          "abs_diff": -200.0,
+          "exact_equal": false
+        },
+        {
+          "day": "2025-09-22",
+          "yahoo_short_close": 83500.0,
+          "krx_close": 83500.0,
+          "krx_original_present": true,
+          "yahoo_over_krx": 1.0,
+          "abs_diff": 0.0,
+          "exact_equal": true
+        }
+      ],
+      "stored_v2_5y": {
+        "exists": true,
+        "index": {
+          "symbol": "005930.KS",
+          "range": "5y",
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/005930.KS?range=5y&interval=1d",
+          "sha256": "e7c00264f16c37ede47ae31532198e9a5e2d74b10b9f46757b9e8ade80c3faaa",
+          "bytes": 81446,
+          "http_code": 200,
+          "fetched_at": 1791921560
+        },
+        "raw_exists": true,
+        "file_sha256": "e7c00264f16c37ede47ae31532198e9a5e2d74b10b9f46757b9e8ade80c3faaa"
+      },
+      "stored_v1_5y_sha256": "e7c00264f16c37ede47ae31532198e9a5e2d74b10b9f46757b9e8ade80c3faaa",
+      "v1_v2_stored_sha_equal": true,
+      "fresh_requests": {
+        "short_period": {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/005930.KS?period1=1757894400&period2=1758672000&interval=1d",
+          "http_code": 200,
+          "fetched_at_kst": "2026-10-14 13:38:49",
+          "bytes": 1706,
+          "sha256": "8ae3ee614deb8b56ad7be0ddff5234ee88d170b9ca58d3947238f8a36bcbc3fc"
+        },
+        "range_5y": {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/005930.KS?range=5y&interval=1d",
+          "http_code": 200,
+          "fetched_at_kst": "2026-10-14 13:38:51",
+          "bytes": 81487,
+          "sha256": "01dba11d7258bb7dfd408fe6b18af367e1ccf47b31685643db72e1d8b4ddde4e"
+        }
+      },
+      "yahoo_adjacent": {
+        "2025-09-18": {
+          "short": {
+            "timestamp": 1758153600,
+            "timestamp_kst": "2025-09-18 09:00:00",
+            "open": 79100.0,
+            "high": 80500.0,
+            "low": 78600.0,
+            "close": 80300.0,
+            "volume": 25619035,
+            "adjclose": 79304.8046875,
+            "ohlcv_all_null": false
+          },
+          "fresh_5y": {
+            "timestamp": 1758153600,
+            "timestamp_kst": "2025-09-18 09:00:00",
+            "open": 79100.0,
+            "high": 80500.0,
+            "low": 78600.0,
+            "close": 80300.0,
+            "volume": 25619035,
+            "adjclose": 79304.8046875,
+            "ohlcv_all_null": false
+          }
+        },
+        "2025-09-22": {
+          "short": {
+            "timestamp": 1758499200,
+            "timestamp_kst": "2025-09-22 09:00:00",
+            "open": 81500.0,
+            "high": 84000.0,
+            "low": 81100.0,
+            "close": 83500.0,
+            "volume": 27529656,
+            "adjclose": 82465.140625,
+            "ohlcv_all_null": false
+          },
+          "fresh_5y": {
+            "timestamp": 1758499200,
+            "timestamp_kst": "2025-09-22 09:00:00",
+            "open": 81500.0,
+            "high": 84000.0,
+            "low": 81100.0,
+            "close": 83500.0,
+            "volume": 27529656,
+            "adjclose": 82465.140625,
+            "ohlcv_all_null": false
+          }
+        }
+      }
+    },
+    {
+      "symbol": "000660.KS",
+      "name": "SK하이닉스",
+      "market": "KOSPI",
+      "code": "000660",
+      "outcome": "krx_only",
+      "outcome_ko": "KRX에만 있음",
+      "yahoo_sep19": {
+        "short_period": {
+          "timestamp": 1758240000,
+          "timestamp_kst": "2025-09-19 09:00:00",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null,
+          "volume": null,
+          "adjclose": null,
+          "ohlcv_all_null": true
+        },
+        "fresh_5y": {
+          "timestamp": 1758240000,
+          "timestamp_kst": "2025-09-19 09:00:00",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null,
+          "volume": null,
+          "adjclose": null,
+          "ohlcv_all_null": true
+        },
+        "stored_v2_5y": {
+          "timestamp": 1758240000,
+          "timestamp_kst": "2025-09-19 09:00:00",
+          "open": null,
+          "high": null,
+          "low": null,
+          "close": null,
+          "volume": null,
+          "adjclose": null,
+          "ohlcv_all_null": true
+        },
+        "timestamp_present_null_ohlcv_short": true,
+        "timestamp_present_null_ohlcv_fresh_5y": true,
+        "timestamp_present_null_ohlcv_stored_v2": true,
+        "null_only_in_5y": false
+      },
+      "krx_ohlcv": {
+        "2025-09-18": {
+          "BAS_DD": "20250918",
+          "ISU_CD": "000660",
+          "ISU_NM": "SK하이닉스",
+          "MKT_NM": "KOSPI",
+          "open": 338500.0,
+          "high": 357000.0,
+          "low": 336500.0,
+          "close": 353000.0,
+          "volume": 4526286.0,
+          "amount_won": 1584129187659.0,
+          "cmpprevdd": 19500.0,
+          "fluc_rt": "5.85"
+        },
+        "2025-09-19": {
+          "BAS_DD": "20250919",
+          "ISU_CD": "000660",
+          "ISU_NM": "SK하이닉스",
+          "MKT_NM": "KOSPI",
+          "open": 351500.0,
+          "high": 360000.0,
+          "low": 348000.0,
+          "close": 353000.0,
+          "volume": 4385543.0,
+          "amount_won": 1546050743059.0,
+          "cmpprevdd": 0.0,
+          "fluc_rt": "0.00"
+        },
+        "2025-09-22": {
+          "BAS_DD": "20250922",
+          "ISU_CD": "000660",
+          "ISU_NM": "SK하이닉스",
+          "MKT_NM": "KOSPI",
+          "open": 349000.0,
+          "high": 359000.0,
+          "low": 345250.0,
+          "close": 351000.0,
+          "volume": 4377563.0,
+          "amount_won": 1541470671626.0,
+          "cmpprevdd": -2000.0,
+          "fluc_rt": "-0.57"
+        }
+      },
+      "krx_files": {
+        "2025-09-18": {
+          "path": "C:\\Users\\acdun\\Desktop\\dev\\noramu-work-top100-202410\\data\\raw\\research\\historical-amount-top100-20241008-20251002\\raw\\20250918_kospi_equity.json",
+          "exists": true,
+          "sha256": "34edee24093ec91e918bff6a6d4191102dcca4a86d9c6f1dee188254a8aa84e8",
+          "bytes": 298219,
+          "found": true,
+          "block_rows": 960
+        },
+        "2025-09-19": {
+          "path": "C:\\Users\\acdun\\Desktop\\dev\\noramu-work-top100-202410\\data\\raw\\research\\historical-amount-top100-20241008-20251002\\raw\\20250919_kospi_equity.json",
+          "exists": true,
+          "sha256": "85442908a24201a12af1bd33a3c6e1a6ea89ccfe59ad9f52563213c22d58c228",
+          "bytes": 299127,
+          "found": true,
+          "block_rows": 960
+        },
+        "2025-09-22": {
+          "path": "C:\\Users\\acdun\\Desktop\\dev\\noramu-work-top100-202410\\data\\raw\\research\\historical-amount-top100-20241008-20251002\\raw\\20250922_kospi_equity.json",
+          "exists": true,
+          "sha256": "5d024d2cb33ec2696674a5b0e5ae4c9063e061f8ec45334270a45d5949fb212d",
+          "bytes": 298904,
+          "found": true,
+          "block_rows": 960
+        }
+      },
+      "adjacent_scale_check": [
+        {
+          "day": "2025-09-18",
+          "yahoo_short_close": 355500.0,
+          "krx_close": 353000.0,
+          "krx_original_present": true,
+          "yahoo_over_krx": 1.0070821529745042,
+          "abs_diff": 2500.0,
+          "exact_equal": false
+        },
+        {
+          "day": "2025-09-22",
+          "yahoo_short_close": 351000.0,
+          "krx_close": 351000.0,
+          "krx_original_present": true,
+          "yahoo_over_krx": 1.0,
+          "abs_diff": 0.0,
+          "exact_equal": true
+        }
+      ],
+      "stored_v2_5y": {
+        "exists": true,
+        "index": {
+          "symbol": "000660.KS",
+          "range": "5y",
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/000660.KS?range=5y&interval=1d",
+          "sha256": "d8906faf3e6c175efb28b70af9755ebfb2971a5f6f29f73af47ad13be9ff31a5",
+          "bytes": 83279,
+          "http_code": 200,
+          "fetched_at": 1791921401
+        },
+        "raw_exists": true,
+        "file_sha256": "d8906faf3e6c175efb28b70af9755ebfb2971a5f6f29f73af47ad13be9ff31a5"
+      },
+      "stored_v1_5y_sha256": "d8906faf3e6c175efb28b70af9755ebfb2971a5f6f29f73af47ad13be9ff31a5",
+      "v1_v2_stored_sha_equal": true,
+      "fresh_requests": {
+        "short_period": {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/000660.KS?period1=1757894400&period2=1758672000&interval=1d",
+          "http_code": 200,
+          "fetched_at_kst": "2026-10-14 13:38:53",
+          "bytes": 1710,
+          "sha256": "80b3aabf2c8e729dd102234a70409cc3f93deee81683dcc2ec8dbf0f9a2cb6e0"
+        },
+        "range_5y": {
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/000660.KS?range=5y&interval=1d",
+          "http_code": 200,
+          "fetched_at_kst": "2026-10-14 13:38:54",
+          "bytes": 83429,
+          "sha256": "51ee56927f855da269b07a6900cc38431dec1d166aac8a1605d4d1d0e7186306"
+        }
+      },
+      "yahoo_adjacent": {
+        "2025-09-18": {
+          "short": {
+            "timestamp": 1758153600,
+            "timestamp_kst": "2025-09-18 09:00:00",
+            "open": 338500.0,
+            "high": 357000.0,
+            "low": 336500.0,
+            "close": 355500.0,
+            "volume": 4526286,
+            "adjclose": 354455.09375,
+            "ohlcv_all_null": false
+          },
+          "fresh_5y": {
+            "timestamp": 1758153600,
+            "timestamp_kst": "2025-09-18 09:00:00",
+            "open": 338500.0,
+            "high": 357000.0,
+            "low": 336500.0,
+            "close": 355500.0,
+            "volume": 4526286,
+            "adjclose": 354455.15625,
+            "ohlcv_all_null": false
+          }
+        },
+        "2025-09-22": {
+          "short": {
+            "timestamp": 1758499200,
+            "timestamp_kst": "2025-09-22 09:00:00",
+            "open": 349000.0,
+            "high": 359000.0,
+            "low": 345250.0,
+            "close": 351000.0,
+            "volume": 4377563,
+            "adjclose": 349968.3125,
+            "ohlcv_all_null": false
+          },
+          "fresh_5y": {
+            "timestamp": 1758499200,
+            "timestamp_kst": "2025-09-22 09:00:00",
+            "open": 349000.0,
+            "high": 359000.0,
+            "low": 345250.0,
+            "close": 351000.0,
+            "volume": 4377563,
+            "adjclose": 349968.34375,
+            "ohlcv_all_null": false
+          }
+        }
+      }
+    }
+  ],
+  "price_basis": {
+    "confirmed": [
+      "KRX 2025-09-19 both-market originals exist and contain TDD_OPNPRC/HGPRC/LWPRC/CLSPRC for the four codes",
+      "Yahoo fresh short and fresh 5y HTTP 200, SHA256 recorded, bodies saved outside existing dataset",
+      "Yahoo 2025-09-18 and 2025-09-22 closes are numeric in fresh short and fresh 5y",
+      "KRX 2025-09-18 and 2025-09-22 originals exist for both markets"
+    ],
+    "unconfirmed": [
+      "Whether Yahoo and KRX share the same corporate-action adjustment basis",
+      "Why Yahoo emits a session timestamp with null OHLCV on 2025-09-19",
+      "Whether KRX TDD_* is split/dividend adjusted",
+      "Whether a later Yahoo repair would match KRX"
+    ],
+    "do_not_conclude_from_few_matching_days": true
+  },
+  "no_recovery_decision": true
+}

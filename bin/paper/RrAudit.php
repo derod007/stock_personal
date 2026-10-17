@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require_once __DIR__.'/TrackingInput.php';
+require_once __DIR__.'/DecisionEvidence.php';
 
 use ChartEntryLab\CandleClock;
 use ChartEntryLab\PaperQuality;
@@ -172,8 +173,13 @@ final class PaperRrAudit
     public static function save(string $directory, array $report, array $records): array
     {
         if (!is_dir($directory) && !@mkdir($directory, 0770, true) && !is_dir($directory)) throw new RuntimeException('감사 로그 디렉터리 생성 실패');
+        // Add evidence only to the immutable sidecar, never to the scan recommendation or journal.
+        foreach($records as &$record)$record['decision_evidence']=PaperDecisionEvidence::fromRecord($record);
+        unset($record);
         $summary=self::summary($records);
         $bundle=['schema'=>1, 'version'=>self::VERSION, 'recorded_at'=>time(),
+            'decision_evidence_version'=>PaperDecisionEvidence::VERSION,
+            'decision_code_hashes'=>PaperDecisionEvidence::codeHashes(),
             'membership'=>'observed_scan_only', 'fetched_at'=>$report['fetched_at']??null,
             'scan_summary'=>$report['summary']??null, 'summary'=>$summary, 'records'=>$records];
         $name=gmdate('Ymd-His').'-'.bin2hex(random_bytes(6)).'.json';

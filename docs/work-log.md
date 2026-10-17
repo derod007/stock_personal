@@ -1,4 +1,10 @@
 ## 2026-10-18 · Codex · 끝
+- 저장 연구 inventory 읽기 전용 조회 통과(writes=false). 실행 버전 차단·고정 입력 해시 검사는 유지
+
+## 2026-10-18 · Codex · 진행
+- PR #101 저장 연구 inventory 조회를 실행 지문 제한과 분리. 실제 연구 CLI의 기존 버전 제한 유지
+
+## 2026-10-18 · Codex · 끝
 - PR #101 CI 후속: 연구의 과거 지문 상수/저장 결과 유지. 확인된 새 실행 지문만 별도 허용하며 새 연구 장부는 실제 지문 기록, 기존 장부 이어쓰기 차단
 - 합성 account replay·dated TOP100·최근/이전 recovery·opportunity·evidence 및 신규 보호/forward 검사 통과. 사용자 계좌 재실행·예약 실행·병합 없음
 

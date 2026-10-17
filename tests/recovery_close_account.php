@@ -5,7 +5,7 @@ use ChartEntryLab\{ChartPlanEngine,TrendPullback,PaperJournal};
 function rcheck(bool $v,string $label):void{if(!$v)throw new RuntimeException('FAIL '.$label);echo "PASS $label\n";}
 function rthrows(callable $f,string $label):void{try{$f();}catch(RuntimeException $e){rcheck(true,$label);return;}throw new RuntimeException('Expected exception '.$label);}
 $root=dirname(__DIR__);PaperRecoveryCloseAccount::assertMirror($root);rcheck(true,'static mirrors only contain the declared edit');
-rcheck(PaperStrategyVersion::current()===PaperDatedTop100Replay::STRATEGY_FINGERPRINT,'operational fingerprint unchanged');
+rcheck(PaperDatedTop100Replay::supportsRuntime(PaperStrategyVersion::current()),'recognized runtime; historical fingerprint stays pinned');
 $fixed=PaperRecoveryCloseAccount::read($root.'/docs/recovery-close-account/frozen-inputs.json');
 foreach($fixed['repository_lf_sha256'] as $f=>$h)rcheck(PaperStrategyVersion::fileHash($root.'/'.$f)===$h,'frozen LF input '.$f);
 $bars=[];$start=new DateTimeImmutable('2025-10-06');

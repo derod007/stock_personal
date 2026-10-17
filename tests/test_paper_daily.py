@@ -184,3 +184,21 @@ class DailyTests(unittest.TestCase):
             self.assertEqual(len(list(p.parent.iterdir())),1)
 
 if __name__=='__main__': unittest.main()
+
+class ForwardUpgradePreflightTests(unittest.TestCase):
+    def test_declared_forward_upgrade_reaches_account(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            config = root / 'config.json'
+            config.write_text(json.dumps({'id':'test','symbols':{'MU':'semi'},'require_account_preflight':True}))
+            calls=[]
+            def runner(cmd, **kw):
+                script=pathlib.Path(cmd[1]).name;calls.append(script)
+                if script=='paper_account_preflight.php':
+                    return SimpleNamespace(stdout=json.dumps({'account':'test','status':'forward_upgrade_pending','writes':False}))
+                if script=='paper_account.php':
+                    return SimpleNamespace(stdout=json.dumps({'account':'test','mode':'forward','halted':False}))
+                return SimpleNamespace(returncode=0)
+            self.assertEqual(daily.update(config,root/'state',runner),0)
+            self.assertEqual(calls[0],'paper_account_preflight.php')
+            self.assertIn('paper_account.php',calls)

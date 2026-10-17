@@ -67,7 +67,7 @@ final class PaperRecoveryClosePriorAccount
     }
     public static function assertIdentity(array $j,array $identity,string $arm):void
     {
-        $s=$j['state'];PaperStrategyVersion::verify($s,PaperDatedTop100Replay::STRATEGY_FINGERPRINT);
+        $s=$j['state'];PaperStrategyVersion::verify($s,PaperStrategyVersion::current());
         $cfg=\ChartEntryLab\PaperScanUniverse::pinned($identity['configs'][$arm]);
         self::demand(($s['config_hash']??null)===hash('sha256',PaperJournal::encode($cfg)),'Journal config identity differs');
         $want=['dataset'=>self::DATASET,'dataset_files'=>$identity['dataset_files'],'bars_sha256'=>$identity['bars_sha256'],

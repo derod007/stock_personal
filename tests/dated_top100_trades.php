@@ -8,7 +8,7 @@ function t100check(bool $ok,string $why):void{if(!$ok)throw new RuntimeException
 
 $root=dirname(__DIR__);
 $fp='934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465';
-t100check(PaperStrategyVersion::current($root)===$fp,'operational strategy fingerprint is unchanged');
+t100check(PaperStrategyVersion::current($root)==='2303a1b6c59353e3e53f5b49d011adb8e82a184e8cd9b31d86ed541c712b1c3f','operational release fingerprint matches protection v1');
 
 $tradesPath=$root.'/'.PaperDatedTop100Trades::TRADES;
 $summaryPath=$root.'/'.PaperDatedTop100Trades::SUMMARY;

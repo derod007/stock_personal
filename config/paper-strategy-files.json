@@ -11,6 +11,7 @@
   "src/HorizontalLevels.php",
   "src/NoramuLesson1.php",
   "src/NoramuTopPattern.php",
+  "src/PaperForwardExitPolicy.php",
   "src/PaperJournal.php",
   "src/PaperPortfolio.php",
   "src/PaperQuality.php",

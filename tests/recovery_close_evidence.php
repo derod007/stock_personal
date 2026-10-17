@@ -68,4 +68,4 @@ try{
     rejects(fn()=>PaperRecoveryCloseEvidence::inputPath($tmp,'../outside.json'),'missing path rejected');
     file_put_contents($tmp.'-outside.json','{}');rejects(fn()=>PaperRecoveryCloseEvidence::inputPath($tmp,'../'.basename($tmp).'-outside.json'),'existing outside path rejected');
 }finally{foreach(glob($tmp.'/*') as $f)unlink($f);rmdir($tmp);if(is_file($tmp.'-outside.json'))unlink($tmp.'-outside.json');}
-ok(PaperStrategyVersion::current()===PaperDatedTop100Replay::STRATEGY_FINGERPRINT,'operating fingerprint unchanged');
+ok(PaperDatedTop100Replay::supportsRuntime(PaperStrategyVersion::current()),'recognized runtime; historical fingerprint stays pinned');

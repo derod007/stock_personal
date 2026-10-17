@@ -40,6 +40,12 @@ final class TradeSimulator
         if ($trailing && (!is_finite($trailDistance) || $trailDistance <= 0)) {
             throw new \InvalidArgumentException('Trailing distance must be positive');
         }
+        $protectionMode = $plan['protection_mode'] ?? 'none';
+        if (!in_array($protectionMode, ['none', 'half_risk_v1'], true) || ($trailing && $protectionMode !== 'none')) {
+            throw new \InvalidArgumentException('Invalid or conflicting protection mode');
+        }
+        $protected = $protectionMode === 'half_risk_v1';
+        $initialStop = $stop;
         $ttl = (int) ($plan['order_valid_bars'] ?? 3);
         $filledAt = null;
         $fill = null;
@@ -62,6 +68,20 @@ final class TradeSimulator
                 $out['filled'] = true;
                 $out['entry_fill'] = $fill;
                 $out['entry_at'] = $bar['available_at'];
+                if ($protected) {
+                    $risk = $fill - $initialStop;
+                    $out['protection'] = ['policy'=>'half_risk_v1', 'initial_stop'=>$initialStop,
+                        'entry_fill'=>$fill, 'initial_risk'=>$risk, 'trigger_price'=>$fill+$risk,
+                        'new_stop'=>$fill-0.5*$risk, 'effective_stop'=>$initialStop,
+                        'trigger_at'=>null, 'trigger_close'=>null, 'active_at'=>null, 'state'=>'waiting'];
+                }
+            }
+            if ($protected && $out['protection']['trigger_at'] !== null
+                && $bar['available_at'] > $out['protection']['trigger_at'] && $out['protection']['active_at'] === null) {
+                $stop = max($stop, $out['protection']['new_stop']);
+                $out['protection']['active_at'] = $bar['available_at'];
+                $out['protection']['effective_stop'] = $stop;
+                $out['protection']['state'] = 'active';
             }
             $out['bars'] = $i - $filledAt + 1;
             $stopHit = $bar['low'] <= $stop;
@@ -84,11 +104,18 @@ final class TradeSimulator
                 $exit = (float) $bar['close'] * (1 - $this->slippageBps / 10000);
             }
             if ($exit !== null) {
+                if ($protected) $out['protection']['exit_reason'] = $why === 'stop' && $out['protection']['active_at'] !== null
+                    ? 'half_risk_stop' : $why;
                 $net = (($exit * (1 - $this->feeBps / 10000)) / ($fill * (1 + $this->feeBps / 10000)) - 1) * 100;
                 return array_replace($out, ['status' => 'closed', 'complete' => true, 'first_exit' => $why,
                     'exit_fill' => round($exit, 6), 'exit_at' => $bar['available_at'],
                     'hit_stop' => $why === 'stop', 'hit_target' => $why === 'target',
                     'net_return_pct' => round($net, 4), 'ret_close_pct' => round($net, 4)]);
+            }
+            if ($protected && $out['protection']['trigger_at'] === null && $bar['close'] >= $out['protection']['trigger_price']) {
+                $out['protection']['trigger_at'] = $bar['available_at'];
+                $out['protection']['trigger_close'] = (float)$bar['close'];
+                $out['protection']['state'] = 'armed';
             }
             // Only a completed close raises the stop for the NEXT session.
             if ($trailing) { $stop = max($stop, (float) $bar['close'] - $trailDistance); }

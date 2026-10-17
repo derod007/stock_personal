@@ -79,5 +79,5 @@ try{
 $c=PaperDatedTop100Replay::loadCandidates(__DIR__.'/../'.PaperDatedTop100Replay::CANDIDATES_YEAR,244,933);
 $baseline=PaperOpportunityResearch::baseline(__DIR__.'/../docs/historical-top100-replay-20251008-20261008/account/daily-log.jsonl',$c);
 ck(count($baseline['capacity'])===28,'actual frozen 28 recommendations extracted');
-ck(PaperStrategyVersion::current()===PaperDatedTop100Replay::STRATEGY_FINGERPRINT,'operating fingerprint unchanged');
+ck(PaperDatedTop100Replay::supportsRuntime(PaperStrategyVersion::current()),'recognized runtime; historical fingerprint stays pinned');
 echo "OK\n";

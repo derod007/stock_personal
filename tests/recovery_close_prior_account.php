@@ -42,6 +42,7 @@ foreach(['baseline','variant'] as $arm){
     $identity=['configs'=>[$arm=>$cfg],'dataset_files'=>$data['files'],'bars_sha256'=>['005930.KS'=>$data['symbols']['005930.KS']['bars_sha256']],
         'candidates_sha256'=>'synthetic','sector_sha256'=>null,'code_sha256_lf'=>PaperDatedTop100Replay::runtimeCodeHashes(PaperRecoveryClosePriorAccount::codeFiles())];
     PaperRecoveryClosePriorAccount::assertIdentity($a,$identity,$arm);rcheck(true,'journal source identity matches '.$arm);
+    $old=$a;$old['state']['version']=$old['state']['strategy_fingerprint']=PaperDatedTop100Replay::STRATEGY_FINGERPRINT;rthrows(fn()=>PaperRecoveryClosePriorAccount::assertIdentity($old,$identity,$arm),'old journal cannot become current runtime '.$arm);
     $bad=$identity;$bad['candidates_sha256']='changed';rthrows(fn()=>PaperRecoveryClosePriorAccount::assertIdentity($a,$bad,$arm),'different input journal refused '.$arm);
     $altered=$b;$altered['state_hash']='changed';rthrows(fn()=>PaperRecoveryClosePriorAccount::splitCheck($a,$altered,$days),'different final state refused '.$arm);
     $altered=$b;$altered['state']['halted']=true;rthrows(fn()=>PaperRecoveryClosePriorAccount::splitCheck($a,$altered,$days),'halted full-count run refused '.$arm);
@@ -50,4 +51,4 @@ foreach(['baseline','variant'] as $arm){
 $r=PaperRecoveryClosePriorAccount::compare($journals['baseline'],$journals['variant']);
 rcheck($r['period']['sessions']===243&&$r['halves']['baseline'][0]['through']===$days[121]&&$r['halves']['baseline'][1]['from']===$days[122]&&$r['halves']['baseline'][1]['through']===$days[242],'prior 122/121 split covers all dates');
 rcheck($r['variant']['event_counts']['order']>0,'prior variant fixture actually places orders');
-rcheck(PaperStrategyVersion::current()===PaperDatedTop100Replay::STRATEGY_FINGERPRINT,'operational fingerprint preserved');
+rcheck(PaperDatedTop100Replay::supportsRuntime(PaperStrategyVersion::current()),'recognized current runtime');

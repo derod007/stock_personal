@@ -68,19 +68,31 @@ final class PaperPortfolio
             $bar=$bars[$symbol];
             if($s['mode']==='forward' && self::openTime($session,$cfg['currency'])<=$o['recorded_at']) { unset($o);continue; }
             $o['history'][]=$bar;
-            $t=(new TradeSimulator())->simulate($o['plan'],$o['history'],20);
+            // Policy lives on the execution order, never on the frozen signal snapshot.
+            $executionPlan=$o['plan'];
+            $newPolicy=!$o['filled'] && PaperForwardExitPolicy::forNewFill($s,self::openTime($session,$cfg['currency']));
+            if (($o['exit_policy']??null)===PaperForwardExitPolicy::POLICY || $newPolicy) {
+                $executionPlan['protection_mode']=PaperForwardExitPolicy::POLICY;
+            }
+            $t=(new TradeSimulator())->simulate($executionPlan,$o['history'],20);
             if($t['filled'] && !$o['filled']) {
                 $cost=$o['quantity']*$t['entry_fill']*1.001;
                 if($cost>$s['cash']+0.01) throw new \RuntimeException('Cash invariant failed');
+                if ($newPolicy) {
+                    $o['exit_policy']=PaperForwardExitPolicy::POLICY;
+                    $emit('trade_exit_policy_assigned',['symbol'=>$symbol,'session'=>$session,
+                        'policy'=>PaperForwardExitPolicy::POLICY,'entry_fill'=>$t['entry_fill'],'initial_stop'=>$o['plan']['stop']]);
+                }
                 $s['cash']-=$cost;$o['filled']=true;$o['entry_fill']=$t['entry_fill'];$o['entry_cost']=$cost;
                 $emit('fill',['symbol'=>$symbol,'session'=>$session,'quantity'=>$o['quantity'],'price'=>$t['entry_fill'],'fee'=>$o['quantity']*$t['entry_fill']*0.001]);
             }
+            PaperForwardExitPolicy::record($o,$t,$symbol,$session,$emit);
             if($t['status']==='closed') {
                 $proceeds=$o['quantity']*$t['exit_fill']*0.999;
                 $net=$proceeds-$o['entry_cost'];$s['cash']+=$proceeds;$s['realized']+=$net;
                 $s['closed_trades']++;if($net>0)$s['wins']++;if($net<0)$s['losses']++;
                 $emit('exit',['symbol'=>$symbol,'session'=>$session,'quantity'=>$o['quantity'],
-                    'price'=>$t['exit_fill'],'net_pnl'=>$net,'reason'=>$t['first_exit'],'ambiguous_bar'=>$t['ambiguous_bar']]);
+                    'price'=>$t['exit_fill'],'net_pnl'=>$net,'reason'=>$t['first_exit'],'ambiguous_bar'=>$t['ambiguous_bar']] + (isset($t['protection'])?['protection'=>$t['protection']]:[]));
                 unset($s['active'][$symbol]);
             } elseif(in_array($t['status'],['unfilled','cancelled_before_entry','invalid_levels'],true)) {
                 $emit('order_cancelled',['symbol'=>$symbol,'session'=>$session,'reason'=>$t['status'],'ambiguous_bar'=>$t['ambiguous_bar']]);

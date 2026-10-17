@@ -63,8 +63,12 @@ $unreal=$equity-$s['config']['initial_cash']-$s['realized'];
 <section class="panel">
   <h2 class="paper-section-title">보유 종목과 대기 주문</h2>
   <?php if(!$s['active']): ?><p class="paper-empty">보유·대기 주문 없음</p>
-  <?php else: ?><div class="scan-table-wrap"><table class="scan-table"><thead><tr><th>종목</th><th>상태</th><th>수량</th><th>계획 진입 / 손절 / 목표</th><th>계획 위험</th></tr></thead><tbody>
-  <?php foreach($s['active'] as $symbol=>$o): ?><tr><td class="mono"><?= ph($symbol) ?></td><td><?= $o['filled']?'보유':'지정가 대기' ?></td><td class="mono"><?= ph($o['quantity']) ?></td><td class="mono"><?= paper_prices($o['plan']) ?></td><td class="mono"><?= ph(round($o['planned_risk'],2)) ?></td></tr><?php endforeach ?>
+  <?php else: ?><div class="scan-table-wrap"><table class="scan-table"><thead><tr><th>종목</th><th>상태</th><th>수량</th><th>계획 진입 / 손절 / 목표</th><th>보호청산 / 현재 손절</th><th>계획 위험</th></tr></thead><tbody>
+  <?php foreach($s['active'] as $symbol=>$o): ?><tr><td class="mono"><?= ph($symbol) ?></td><td><?= $o['filled']?'보유':'지정가 대기' ?></td><td class="mono"><?= ph($o['quantity']) ?></td><td class="mono"><?= paper_prices($o['plan']) ?></td><td><?php $protection=$o['protection']??null; if($protection): ?>
+    <?= ph(['waiting'=>'상승 확인 대기','armed'=>'다음 거래일부터 보호','active'=>'보호 적용 중'][$protection['state']]??$protection['state']) ?><br>
+    <span class="mono">현재 <?= ph(number_format($protection['effective_stop'],2)) ?> / 보호 <?= ph(number_format($protection['new_stop'],2)) ?></span><br>
+    <small>확인 종가 <?= ph($protection['trigger_close']===null?'—':number_format($protection['trigger_close'],2)) ?> · <?= ph(pt($protection['trigger_at']??0)) ?></small>
+    <?php else: ?>기존 고정 손절<?php endif ?></td><td class="mono"><?= ph(round($o['planned_risk'],2)) ?></td></tr><?php endforeach ?>
   </tbody></table></div><?php endif ?>
 </section>
 <section class="panel">
@@ -86,6 +90,7 @@ $unreal=$equity-$s['config']['initial_cash']-$s['realized'];
   <?php foreach(array_reverse(array_slice($d['events'],-80)) as $e): $p=$e['payload']; ?>
   <tr><td class="mono"><?= ph($e['id'].' / '.pt($e['recorded_at'])) ?></td><td><span class="badge"><?= ph(paper_ko((string) $e['type'])) ?></span></td><td><?php
   if($e['type']==='snapshot') echo ph(($p['symbol']??'').' · '.paper_ko((string) ($p['plan']['status']??'')).' · '.paper_ko((string) ($p['origin']??'')));
+  elseif(in_array($e['type'],['protection_armed','protection_activated'],true)) echo ph(($p['symbol']??'').' · 손절 '.$p['initial_stop'].' → '.$p['new_stop'].' · 확인 종가 '.$p['trigger_close'].' · 적용 '.pt($p['active_at']??0));
   elseif(isset($p['symbol'])) echo ph((string) $p['symbol'].(isset($p['reason']) ? ' · '.paper_ko((string) $p['reason']) : ''));
   else echo ph(PaperJournal::encode($p));
   ?></td></tr><?php endforeach ?>

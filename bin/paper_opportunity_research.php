@@ -9,11 +9,11 @@ foreach(array_keys($o) as $k)PaperOpportunityResearch::demand(in_array($k,['stat
 if(isset($o['state-dir']))putenv('PAPER_STATE_DIR='.$o['state-dir']);
 $root=dirname(__DIR__);$profile=PaperDatedTop100Replay::profile(PaperDatedTop100Replay::PROFILE_YEAR);
 $cpath=$root.'/'.$profile['candidates'];$log=$root.'/'.$profile['docs'].'/account/daily-log.jsonl';
-PaperOpportunityResearch::demand(PaperStrategyVersion::current()===PaperDatedTop100Replay::STRATEGY_FINGERPRINT,'Strategy changed');
 PaperOpportunityResearch::demand(PaperStrategyVersion::fileHash($cpath)==='ece25f22de2f8e1fd2c99550110568b1769b577abc6dc607b17e5d227b8672b5','Frozen candidates changed');
 PaperOpportunityResearch::demand(PaperStrategyVersion::fileHash($log)==='e34c1581b1bf1dc089e206cf112a6ec8d18af5d2df74e041ac135e5c35af750c','Frozen daily log changed');
 $c=PaperDatedTop100Replay::loadCandidates($cpath,244,933);$base=PaperOpportunityResearch::baseline($log,$c);
 if($cmd==='inventory'){echo PaperOpportunityResearch::encode(['writes'=>false,'baseline'=>$base['counts'],'capacity'=>$base['capacity']])."\n";exit;}
+PaperOpportunityResearch::demand(PaperStrategyVersion::current()===PaperDatedTop100Replay::STRATEGY_FINGERPRINT,'Strategy changed');
 $run=$o['run-id']??'opportunity-v1';PaperOpportunityResearch::demand((bool)preg_match('/^opportunity-[A-Za-z0-9_-]+$/D',$run),'Run ID must start opportunity-');
 $limit=filter_var($o['max-sessions']??8,FILTER_VALIDATE_INT);PaperOpportunityResearch::demand($limit!==false&&$limit>=1&&$limit<=244,'max-sessions must be 1..244');
 $state=PaperAccountReplay::stateRoot();$ds=$o['dataset-dir']??PaperHistoryResearch::datasetDir($state,$profile['dataset']);

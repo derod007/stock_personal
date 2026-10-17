@@ -1,3 +1,27 @@
+## 2026-10-18 02:31 · Cursor · 끝
+- 한 일: PR #106 판단 보완. 도달률·순손익 우위 분리. 유형1 고정 분류 지속성. 초안 보고서 보존. 군집 재학습·운영 변경 없음
+- 파일: docs/research/top100_pre_rise_shapes.py, docs/top100-pre-rise-v4/protocol.md, docs/top100-pre-rise-v4/README.md, docs/top100-pre-rise-v4/report.md, docs/top100-pre-rise-v4/report-before-rev1.md, docs/top100-pre-rise-v4/charts, tests/test_top100_pre_rise_shapes.py, docs/work-log.md
+- 커밋: 연구 브랜치
+- 롤백: 없음
+
+## 2026-10-18 02:28 · Cursor · 진행
+- 한 일: PR #106 판단 보완. 6유형 도달률·순손익 우위 분리. 유형1 고정 분류로 지속성만 확인. 군집 재학습·운영 변경 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
+## 2026-10-18 02:16 · Cursor · 끝
+- 한 일: 상승 전 60봉 가격·거래량 6유형 탐색. 이전 기간 라벨 없이 k-means, 최근 기간 배정. 관찰 가치. 운영·원본·103~105 결과 변경 없음
+- 파일: docs/research/top100_pre_rise_shapes.py, docs/top100-pre-rise-v4/protocol.md, docs/top100-pre-rise-v4/README.md, docs/top100-pre-rise-v4/report.md, docs/top100-pre-rise-v4/charts, tests/test_top100_pre_rise_shapes.py, docs/work-log.md
+- 커밋: 연구 브랜치
+- 롤백: 없음
+
+## 2026-10-18 02:11 · Cursor · 진행
+- 한 일: 상승 전 60봉 가격·거래량 흐름 6유형 탐색. 라벨 없이 이전 기간 군집, 최근 기간 배정. 조건·손절 최적화 없음. 운영·원본·103~105 결과 변경 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-18 02:08 · Cursor · 끝
 - 한 일: PR #105 추천 커버 분류 보완. 부분 기록 미발견은 unknown. 손익과 추천 집계 분리. 103~105 표. 상위 AND 조합 채택 근거 부족으로 탐색 종료. 운영·추가 탐색 없음
 - 파일: docs/research/top100_pre_rise_tertiles.py, docs/top100-pre-rise-v3/protocol.md, docs/top100-pre-rise-v3/README.md, docs/top100-pre-rise-v3/report.md, docs/top100-pre-rise-v3/report-before-rev1.md, tests/test_top100_pre_rise_tertiles.py, docs/work-log.md

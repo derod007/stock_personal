@@ -1,3 +1,27 @@
+## 2026-10-18 02:08 · Cursor · 끝
+- 한 일: PR #105 추천 커버 분류 보완. 부분 기록 미발견은 unknown. 손익과 추천 집계 분리. 103~105 표. 상위 AND 조합 채택 근거 부족으로 탐색 종료. 운영·추가 탐색 없음
+- 파일: docs/research/top100_pre_rise_tertiles.py, docs/top100-pre-rise-v3/protocol.md, docs/top100-pre-rise-v3/README.md, docs/top100-pre-rise-v3/report.md, docs/top100-pre-rise-v3/report-before-rev1.md, tests/test_top100_pre_rise_tertiles.py, docs/work-log.md
+- 커밋: 연구 브랜치
+- 롤백: 없음
+
+## 2026-10-18 02:03 · Cursor · 진행
+- 한 일: PR #105 추천 커버 분류 보완. 부분 기록 구간 미발견은 unknown. 손익과 추천 집계 분리. 103~105 표. 상위 AND 조합 탐색 종료. 운영·추가 탐색 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
+## 2026-10-18 01:58 · Cursor · 끝
+- 한 일: PR #104 후속. 이전 기간 라벨 없는 3분위 경계를 최근 기간에 고정 적용. 상위 AND 조합 하나. 구별력만 있음. 운영·원본·103·104 결과 변경 없음
+- 파일: docs/research/top100_pre_rise_tertiles.py, docs/top100-pre-rise-v3/protocol.md, docs/top100-pre-rise-v3/README.md, docs/top100-pre-rise-v3/report.md, tests/test_top100_pre_rise_tertiles.py, docs/work-log.md
+- 커밋: 연구 브랜치
+- 롤백: 없음
+
+## 2026-10-18 01:54 · Cursor · 진행
+- 한 일: PR #104 후속. 60봉 종가 상승률·거래량 비 3분위가 신규 후보 구별에 쓰이는지 탐색. 조건·손절 최적화 없음. 운영·원본·104 결과 변경 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-10-18 01:31 · Cursor · 끝
 - 한 일: PR #104 수정. 차트 상승을 unconstrained.hit15로, 비중첩 구간 명명, 같은 봉 순서 미확정, 대기 T+20 짝 비교. 초안 보고서 보존. 조건 최적화·운영 변경 없음
 - 파일: docs/research/top100_pre_rise_episode.py, docs/top100-pre-rise-v2/protocol.md, docs/top100-pre-rise-v2/report.md, docs/top100-pre-rise-v2/report-before-rev1.md, docs/top100-pre-rise-v2/README.md, tests/test_top100_pre_rise_episode.py, docs/work-log.md

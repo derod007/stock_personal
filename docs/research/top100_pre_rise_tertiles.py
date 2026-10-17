@@ -11,7 +11,7 @@ from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-VERSION = "top100_pre_rise_v3"
+VERSION = "top100_pre_rise_v3_rev1"
 SEED = 1042018
 N_BOOT = 1000
 FEATURES = ("close_change_60", "vol_ratio_10_50")
@@ -99,13 +99,45 @@ def overlap(rise: list[float], flat: list[float]) -> dict:
     }
 
 
-def rec_status(e: dict) -> str:
-    if not e.get("rec_known"):
-        return "unknown"
-    return "caught" if e.get("caught_in_window") else "not_caught"
+def window_days(period_days: list[str], anchor: str | None, end: str | None) -> list[str]:
+    if not period_days or not anchor or not end:
+        return []
+    try:
+        i = period_days.index(anchor)
+        j = period_days.index(end)
+    except ValueError:
+        return []
+    if j < i:
+        return []
+    return period_days[i : j + 1]
 
 
-def valid_row(e: dict) -> dict | None:
+def rec_cover_kind(rec_n: int, need_n: int) -> str:
+    if need_n <= 0 or rec_n <= 0:
+        return "none"
+    if rec_n < need_n:
+        return "partial"
+    return "full"
+
+
+def rec_status(caught: bool, rec_n: int, need_n: int) -> str:
+    if caught:
+        return "caught"
+    if need_n > 0 and rec_n == need_n:
+        return "not_caught"
+    return "unknown"
+
+
+def rec_cover_for_episode(e: dict, period: dict | None) -> tuple[int, int]:
+    if period is None:
+        return 0, 0
+    span = window_days(period.get("days") or [], e.get("anchor"), e.get("end"))
+    covered = period.get("covered") or set()
+    rec_n = sum(1 for d in span if d in covered)
+    return rec_n, len(span)
+
+
+def valid_row(e: dict, period: dict | None = None) -> dict | None:
     sh = e.get("shape")
     imm = e.get("immediate")
     unc = e.get("unconstrained")
@@ -117,6 +149,8 @@ def valid_row(e: dict) -> dict | None:
         return None
     if not math.isfinite(cc) or not math.isfinite(vr):
         return None
+    rec_n, need_n = rec_cover_for_episode(e, period)
+    caught = bool(e.get("caught_in_window"))
     return {
         "symbol": e["symbol"],
         "anchor": e["anchor"],
@@ -125,19 +159,48 @@ def valid_row(e: dict) -> dict | None:
         "hit15": bool(unc["hit15"]),
         "net": imm["tradable_net_pct"],
         "win": bool(imm["tradable_win"]),
-        "rec_status": rec_status(e),
+        "rec_status": rec_status(caught, rec_n, need_n),
+        "rec_cover_n": rec_n,
+        "rec_cover_need": need_n,
+        "rec_cover_kind": rec_cover_kind(rec_n, need_n),
         "new_entry_status": "unknown",
         "left_censored": bool(e.get("left_censored")),
     }
 
 
-def rows_from_episodes(episodes: list[dict]) -> list[dict]:
+def rows_from_episodes(episodes: list[dict], period: dict | None = None) -> list[dict]:
     out = []
     for e in episodes:
-        r = valid_row(e)
+        r = valid_row(e, period)
         if r:
             out.append(r)
     return out
+
+
+def rec_day_meta(period: dict) -> dict:
+    days = period.get("days") or []
+    covered = period.get("covered") or set()
+    miss = [d for d in days if d not in covered]
+    return {
+        "period_n": len(days),
+        "covered_n": sum(1 for d in days if d in covered),
+        "uncovered_n": len(miss),
+        "uncovered_first": miss[0] if miss else None,
+        "uncovered_last": miss[-1] if miss else None,
+    }
+
+
+def rec_counts(rows: list[dict]) -> dict:
+    status = {"unknown": 0, "not_caught": 0, "caught": 0}
+    cover = {"none": 0, "partial": 0, "full": 0}
+    for r in rows:
+        st = r.get("rec_status")
+        if st in status:
+            status[st] += 1
+        ck = r.get("rec_cover_kind")
+        if ck in cover:
+            cover[ck] += 1
+    return {"n": len(rows), "rec_status_n": status, "rec_cover_kind_n": cover}
 
 
 def group_metrics(rows: list[dict]) -> dict:
@@ -152,9 +215,6 @@ def group_metrics(rows: list[dict]) -> dict:
         by_sym[r["symbol"]].append(r)
     sym_hit = [sum(x["hit15"] for x in v) / len(v) for v in by_sym.values()]
     sym_net = [sum(x["net"] for x in v) / len(v) for v in by_sym.values()]
-    rec = defaultdict(int)
-    for r in rows:
-        rec[r["rec_status"]] += 1
     return {
         "n": len(rows),
         "symbols": len(by_sym),
@@ -167,7 +227,6 @@ def group_metrics(rows: list[dict]) -> dict:
         "loss_n": len(losses),
         "symbol_equal_hit15_pct": _round(100 * _mean(sym_hit), 2),
         "symbol_equal_mean_net_pct": _round(_mean(sym_net)),
-        "rec_status_n": dict(rec),
     }
 
 
@@ -256,6 +315,10 @@ def period_block(rows: list[dict], cuts: dict) -> dict:
     return {
         "valid_n": len(labeled),
         "base": base,
+        "rec": {
+            "all": rec_counts(labeled),
+            "combo_top": rec_counts(combo_rows),
+        },
         "dist_close_change_60": {
             "rise": dist(rise),
             "nonrise": dist(flat),
@@ -287,15 +350,23 @@ def judge(prior: dict, recent: dict) -> dict:
     both_mean = mean_ok(prior) and mean_ok(recent)
     both_hit = hit_ok(prior) and hit_ok(recent)
     if both_mean:
-        label = "유리함"
+        observation = "유리함"
         note = "고정 조합이 두 기간 모두 비용 반영 평균이 양수이고 전체 유효 표본보다 크다. 탐색 관찰이며 운영 채택이 아니다."
     elif both_hit:
-        label = "구별력만 있음"
+        observation = "구별력만 있음"
         note = "두 기간 모두 +15% 도달률은 전체보다 높으나, 비용 반영 평균이 양수이면서 전체보다 나은 조건은 동시에 채우지 못했다."
     else:
-        label = "근거 부족"
-        note = "고정 조합이 두 기간에서 도달률·순손익을 함께 개선하지 못했다. 조건을 더 붙이거나 손절을 바꾸지 않는다."
-    return {"label": label, "note": note, "combo_mean_ok_both_periods": both_mean, "combo_hit_ok_both_periods": both_hit}
+        observation = "근거 부족"
+        note = "고정 조합이 두 기간에서 도달률·순손익을 함께 개선하지 못했다."
+    return {
+        "observation": observation,
+        "label": "채택 근거 부족" if not both_mean else "유리함",
+        "adoption": "안 함",
+        "exploration": "종료",
+        "note": note + " 현재 거래 모형에서 이 조합 탐색을 종료한다. 하위 거래량 조합·손절 변경은 하지 않는다.",
+        "combo_mean_ok_both_periods": both_mean,
+        "combo_hit_ok_both_periods": both_hit,
+    }
 
 
 def render_report(rep: dict) -> str:
@@ -306,7 +377,7 @@ def render_report(rep: dict) -> str:
         "",
         "탐색 연구다. PR #103·#104 결과는 유지한다. 손절 5%·목표 15%·T+20 종료를 바꾸지 않았다. 운영·원본·계좌는 바꾸지 않았다. 두 기간은 이미 썼으므로 독립 검증이 아니다.",
         "",
-        f"판단: **{j['label']}**. {j['note']}",
+        f"판단: **{j['label']}** (관찰 {j.get('observation')}). {j['note']}",
         "",
         "## 구간 경계와 분석 기준",
         "",
@@ -378,51 +449,96 @@ def render_report(rep: dict) -> str:
         "",
         "## 고정 조합 하나: 60봉 상승률 상 AND 거래량 비 상",
         "",
-        "| 기간 | n | 종목 | 도달% | 평균% | 중앙% | 승률% | 손실평균% | 도달Δ | 평균Δ | 종목평균% | 재표집 평균Δ | rec unknown/not_caught/caught |",
-        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|",
+        "| 기간 | n | 종목 | 도달% | 평균% | 중앙% | 승률% | 손실평균% | 도달Δ | 평균Δ | 종목평균% | 재표집 평균Δ |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|",
     ]
+    combo_sym_ci = []
     for key in ("prior", "recent"):
         p = rep["periods"][key]
         c = p["combo_top"]
         vs = c.get("vs_all") or {}
         boot = c.get("bootstrap_mean_net_minus_all") or {}
-        rec = c.get("rec_status_n") or {}
-        rec_s = f"{rec.get('unknown', 0)}/{rec.get('not_caught', 0)}/{rec.get('caught', 0)}"
         lo, hi = boot.get("trade_mean_minus_all_p025"), boot.get("trade_mean_minus_all_p975")
         slo, shi = boot.get("symbol_mean_minus_all_p025"), boot.get("symbol_mean_minus_all_p975")
         ci = f"{lo}~{hi}" if lo is not None and hi is not None else "—"
         sci = f"{slo}~{shi}" if slo is not None and shi is not None else "—"
-        rec_s = rec_s + f" / 종목재표집Δ {sci}"
+        combo_sym_ci.append(sci)
         lines.append(
             f"| {p['label']} | {c.get('n', 0)} | {c.get('symbols', 0)} | {c.get('hit15_pct')} | {c.get('mean_net_pct')} | "
             f"{c.get('median_net_pct')} | {c.get('win_pct')} | {c.get('mean_loss_net_pct')} | {vs.get('hit15_pct')} | "
-            f"{vs.get('mean_net_pct')} | {c.get('symbol_equal_mean_net_pct')} | {ci} | {rec_s} |"
+            f"{vs.get('mean_net_pct')} | {c.get('symbol_equal_mean_net_pct')} | {ci} |"
         )
-    pb = rep["periods"]["prior"]["base"].get("rec_status_n") or {}
-    rb = rep["periods"]["recent"]["base"].get("rec_status_n") or {}
     lines += [
         "",
-        "rec_status는 별도 표시다. unknown은 추천 기록이 없는 날이며 미추천이 아니다. "
-        f"이 유효 표본에서는 구간 T..T+20에 추천 기록이 한 날이라도 있는 경우가 전부라 unknown이 0이다 "
-        f"(이전 {pb.get('unknown', 0)}/{pb.get('not_caught', 0)}/{pb.get('caught', 0)}, "
-        f"최근 {rb.get('unknown', 0)}/{rb.get('not_caught', 0)}/{rb.get('caught', 0)}). "
         "같은 종목의 여러 구간이 있으므로 표본 수로 독립을 주장하지 않는다. "
-        "재표집은 종목을 복원추출하며, 표의 구간은 거래평균 차이, 조합 표 비고의 종목재표집Δ는 종목평균 차이다.",
+        "재표집은 종목을 복원추출하며, 표의 구간은 거래평균 차이. "
+        f"종목평균 재표집Δ는 이전 {combo_sym_ci[0]}, 최근 {combo_sym_ci[1]}다.",
+        "",
+        "## 추천 커버 (손익 표와 분리)",
+        "",
+        "주 분석은 위 전체 유효 표본 손익이다. 추천 여부는 여기서만 센다. "
+        "`not_caught`는 T..T+20 **모든** 날에 추천 기록이 있고 그 종목 신호가 없을 때만 쓴다. "
+        "일부 날만 기록이 있는데 신호를 못 찾으면 `unknown`이다. 미추천이 아니다. "
+        "기록이 있는 날에서 신호를 찾으면 부분 커버여도 `caught`다.",
+        "",
+        "| 기간 | 집단 | n | unknown | not_caught | caught | 커버 없음 | 부분 | 전체 |",
+        "|---|---|---:|---:|---:|---:|---:|---:|---:|",
+    ]
+    for key in ("prior", "recent"):
+        p = rep["periods"][key]
+        rec = p.get("rec") or {}
+        for gname, gkey in (("전체 유효", "all"), ("고정 조합", "combo_top")):
+            g = rec.get(gkey) or {}
+            st = g.get("rec_status_n") or {}
+            cv = g.get("rec_cover_kind_n") or {}
+            lines.append(
+                f"| {p['label']} | {gname} | {g.get('n', 0)} | {st.get('unknown', 0)} | "
+                f"{st.get('not_caught', 0)} | {st.get('caught', 0)} | {cv.get('none', 0)} | "
+                f"{cv.get('partial', 0)} | {cv.get('full', 0)} |"
+            )
+    rec_notes = []
+    for key in ("prior", "recent"):
+        p = rep["periods"][key]
+        meta = p.get("rec_days") or {}
+        rec_notes.append(
+            f"{p['label']}: 거래일 {meta.get('period_n')} 중 추천 기록 {meta.get('covered_n')}일"
+            + (
+                f" (없음 {meta.get('uncovered_n')}일 {meta.get('uncovered_first')}~{meta.get('uncovered_last')})"
+                if meta.get("uncovered_n")
+                else ""
+            )
+        )
+    lines.append("")
+    lines.append(
+        "기간 말 기록이 없는 날을 포함하는 구간은 미래창 부족·봉 없음으로 유효 표본에 안 들어오면, "
+        "유효 구간이 모두 전체 커버여서 unknown이 0일 수 있다. 그래도 부분 커버 미발견을 not_caught로 넣지 않는다. "
+        + " / ".join(rec_notes)
+        + "."
+    )
+    lines += [
+        "",
+        "## PR #103~#105",
+        "",
+        "| PR | 시도 | 결과 | 채택 |",
+        "|---|---|---|---|",
+        "| #103 | 일별 unique·미포착, 판단일 세 차트 특징 | 두 기간에서 유리함 없음. 특징 참이어도 평균 순익이 음수 | 안 함 |",
+        "| #104 | 비중첩 관찰 구간, 즉시 vs 특징 대기, 차트 상승=unconstrained.hit15 | 즉시·대기 모두 두 기간 평균이 동시에 양수가 아님. 대기가 즉시보다 나쁨 | 안 함 |",
+        "| #105 | 60봉 상승률·거래량 비 3분위, 상위 AND 하나 | 도달률은 오르나 비용 반영 평균은 전체보다 나쁨. 부분 커버 미발견은 unknown | 안 함. 이 후보 탐색 종료 |",
         "",
         "## 결론",
         "",
-        f"**{j['label']}.** {j['note']}",
+        f"**{j['label']}.** 관찰은 {j.get('observation')}. {j['note']}",
         "",
         "| 항목 | 내용 |",
         "|---|---|",
         "| 도달률 vs 순손익 | 위 표에서 도달Δ와 평균Δ를 따로 본다. 상위 구간은 도달률이 올라도 승률·평균순익은 더 나쁜 경우가 많다 |",
-        "| 운영 | 채택하지 않음 |",
-        "| 구제 | 추가 조건·손절 변경 없음 |",
+        f"| 운영 | 채택 {j.get('adoption', '안 함')} |",
+        f"| 탐색 | {j.get('exploration', '종료')}. 하위 거래량 조합·손절 변경 없음 |",
         "| 가격 | Yahoo 일봉, 수정 여부 미확정. 이상은 삭제·보정하지 않음. 큰 손실 근거는 v2 보고서 |",
-        "| 탐색 | 이미 쓴 두 기간. 독립 검증 아님 |",
+        "| 기간 | 이미 쓴 두 기간. 독립 검증 아님 |",
         f"| 재현 | `python docs/research/top100_pre_rise_tertiles.py --output <dir> --report docs/top100-pre-rise-v3/report.md` |",
         "",
-        "결과 JSON은 Git 밖 `history-research/top100-pre-rise-v3/summary.json`, 경계는 `cuts.json`.",
+        "결과 JSON은 Git 밖 `history-research/top100-pre-rise-v3/summary.json`, 경계는 `cuts.json`. 초안 보고서는 `report-before-rev1.md`.",
         "",
     ]
     return "\n".join(lines) + "\n"
@@ -438,7 +554,7 @@ def main(argv=None) -> int:
     out.mkdir(parents=True, exist_ok=True)
     prior_p = v2.load_period("prior")
     recent_p = v2.load_period("recent")
-    prior_rows = rows_from_episodes(v2.build_episodes(prior_p))
+    prior_rows = rows_from_episodes(v2.build_episodes(prior_p), prior_p)
     cuts = {
         "close_change_60": tertile_cuts([r["close_change_60"] for r in prior_rows]),
         "vol_ratio_10_50": tertile_cuts([r["vol_ratio_10_50"] for r in prior_rows]),
@@ -446,7 +562,7 @@ def main(argv=None) -> int:
         "p33_p67": "linear interpolation on sorted values",
     }
     (out / "cuts.json").write_text(json.dumps(cuts, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    recent_rows = rows_from_episodes(v2.build_episodes(recent_p))
+    recent_rows = rows_from_episodes(v2.build_episodes(recent_p), recent_p)
     report = {
         "version": VERSION,
         "price_basis": v2.PRICE_BASIS,
@@ -464,8 +580,8 @@ def main(argv=None) -> int:
             "recent_signals": recent_p["signals_sha256"],
         },
         "periods": {
-            "prior": {"label": prior_p["label"], **period_block(prior_rows, cuts)},
-            "recent": {"label": recent_p["label"], **period_block(recent_rows, cuts)},
+            "prior": {"label": prior_p["label"], "rec_days": rec_day_meta(prior_p), **period_block(prior_rows, cuts)},
+            "recent": {"label": recent_p["label"], "rec_days": rec_day_meta(recent_p), **period_block(recent_rows, cuts)},
         },
         "limitations": [
             "Exploratory; already-used periods, not independent validation",
@@ -489,6 +605,8 @@ def main(argv=None) -> int:
                 "recent_combo": report["periods"]["recent"]["combo_top"],
                 "prior_base": report["periods"]["prior"]["base"],
                 "recent_base": report["periods"]["recent"]["base"],
+                "prior_rec": report["periods"]["prior"]["rec"],
+                "recent_rec": report["periods"]["recent"]["rec"],
             },
             ensure_ascii=False,
             indent=2,

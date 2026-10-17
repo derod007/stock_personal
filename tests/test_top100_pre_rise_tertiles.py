@@ -71,6 +71,57 @@ class TertileTests(unittest.TestCase):
         self.assertEqual(r["new_entry_status"], "unknown")
         self.assertTrue(r["hit15"])
 
+    def test_valid_row_partial_window_cover(self):
+        days = [f"2024-01-{i:02d}" for i in range(1, 22)]
+        e = {
+            "symbol": "A.KS",
+            "anchor": "2024-01-01",
+            "end": "2024-01-21",
+            "caught_in_window": False,
+            "shape": {"close_change_60": 0.1, "vol_ratio_10_50": 1.1},
+            "immediate": {"tradable_net_pct": -1.0, "tradable_win": False},
+            "unconstrained": {"hit15": False},
+        }
+        partial = m.valid_row(e, {"days": days, "covered": set(days[:5])})
+        self.assertEqual(partial["rec_status"], "unknown")
+        self.assertEqual(partial["rec_cover_kind"], "partial")
+        self.assertEqual(partial["rec_cover_n"], 5)
+        self.assertEqual(partial["rec_cover_need"], 21)
+        full = m.valid_row(e, {"days": days, "covered": set(days)})
+        self.assertEqual(full["rec_status"], "not_caught")
+        self.assertEqual(full["rec_cover_kind"], "full")
+
+    def test_rec_day_meta_counts_uncovered(self):
+        meta = m.rec_day_meta(
+            {"days": ["a", "b", "c"], "covered": {"a", "b"}}
+        )
+        self.assertEqual(meta["period_n"], 3)
+        self.assertEqual(meta["covered_n"], 2)
+        self.assertEqual(meta["uncovered_n"], 1)
+        self.assertEqual(meta["uncovered_first"], "c")
+
+    def test_partial_cover_miss_is_unknown(self):
+        self.assertEqual(m.rec_status(False, 5, 21), "unknown")
+        self.assertEqual(m.rec_cover_kind(5, 21), "partial")
+
+    def test_full_cover_miss_is_not_caught(self):
+        self.assertEqual(m.rec_status(False, 21, 21), "not_caught")
+        self.assertEqual(m.rec_cover_kind(21, 21), "full")
+
+    def test_partial_cover_hit_is_caught(self):
+        self.assertEqual(m.rec_status(True, 5, 21), "caught")
+
+    def test_no_cover_is_unknown(self):
+        self.assertEqual(m.rec_status(False, 0, 21), "unknown")
+        self.assertEqual(m.rec_cover_kind(0, 21), "none")
+
+    def test_group_metrics_omit_rec_counts(self):
+        g = m.group_metrics([row(rec_status="unknown"), row(rec_status="caught")])
+        self.assertNotIn("rec_status_n", g)
+        rec = m.rec_counts([row(rec_status="unknown", rec_cover_kind="partial"), row(rec_status="caught", rec_cover_kind="full")])
+        self.assertEqual(rec["rec_status_n"]["unknown"], 1)
+        self.assertEqual(rec["rec_status_n"]["caught"], 1)
+
     def test_combo_judgment_categories(self):
         def block(mean_g, mean_b, hit_g, hit_b, n=50):
             return {
@@ -79,11 +130,16 @@ class TertileTests(unittest.TestCase):
             }
 
         j = m.judge(block(1.0, 0.0, 40, 30), block(0.5, 0.1, 35, 28))
-        self.assertEqual(j["label"], "유리함")
+        self.assertEqual(j["observation"], "유리함")
+        self.assertEqual(j["adoption"], "안 함")
+        self.assertEqual(j["exploration"], "종료")
         j2 = m.judge(block(-0.2, -0.4, 40, 30), block(-0.1, -0.3, 35, 28))
-        self.assertEqual(j2["label"], "구별력만 있음")
+        self.assertEqual(j2["observation"], "구별력만 있음")
+        self.assertEqual(j2["label"], "채택 근거 부족")
+        self.assertEqual(j2["exploration"], "종료")
         j3 = m.judge(block(-0.5, -0.2, 20, 30), block(-0.4, -0.1, 22, 28))
-        self.assertEqual(j3["label"], "근거 부족")
+        self.assertEqual(j3["observation"], "근거 부족")
+        self.assertEqual(j3["label"], "채택 근거 부족")
 
     def test_bootstrap_is_deterministic(self):
         rows = [row(symbol="A.KS", net=1.0, close_change_60=0.3)] + [

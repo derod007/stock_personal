@@ -1,0 +1,83 @@
+{
+  "all_types": {
+    "status": "halted",
+    "last_good_day": "2023-12-26",
+    "annual_return_pct": null,
+    "partial_return_pct": -19.426189387820823,
+    "max_drawdown_pct": 22.747831036601664,
+    "counts": {
+      "order": 117,
+      "decision": 1866,
+      "equity": 120,
+      "order_cancelled": 27,
+      "fill": 88,
+      "exit": 86
+    },
+    "audit": {
+      "cash_reconciled": true,
+      "order_limits_pass": true
+    },
+    "halt": {
+      "reason": "unresolved_reference_discontinuity",
+      "day": "2023-12-27",
+      "symbols": [
+        "000100.KS"
+      ]
+    },
+    "halt_orders": {
+      "000100.KS": {
+        "filled": true
+      }
+    },
+    "common_end": "2023-09-04",
+    "common_return_pct": -10.179796407052722,
+    "common_mdd_pct": 10.638246342098856,
+    "monthly_realized": {
+      "2023-07": -10889867.889657097,
+      "2023-08": -1060073.328633124,
+      "2023-09": -3074562.9192767367,
+      "2023-10": -5761034.009578394,
+      "2023-11": 1355939.7266107646,
+      "2023-12": -1616313.865536252
+    }
+  },
+  "type1": {
+    "status": "halted",
+    "last_good_day": "2023-09-04",
+    "annual_return_pct": null,
+    "partial_return_pct": 1.0659237638160013,
+    "max_drawdown_pct": 4.929697579749659,
+    "counts": {
+      "order": 28,
+      "decision": 169,
+      "equity": 45,
+      "fill": 25,
+      "order_cancelled": 2,
+      "exit": 22
+    },
+    "audit": {
+      "cash_reconciled": true,
+      "order_limits_pass": true
+    },
+    "halt": {
+      "reason": "unresolved_reference_discontinuity",
+      "day": "2023-09-05",
+      "symbols": [
+        "005070.KS"
+      ]
+    },
+    "halt_orders": {
+      "005070.KS": {
+        "filled": false
+      }
+    },
+    "common_end": "2023-09-04",
+    "common_return_pct": 1.0659237638160013,
+    "common_mdd_pct": 4.929697579749659,
+    "monthly_realized": {
+      "2023-07": -3497503.6362504857,
+      "2023-08": 4488263.397659023,
+      "2023-09": -840106.438717491
+    }
+  }
+}

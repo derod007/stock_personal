@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "kind": "krx_type1_prehistory_calendar_v1",
+  "range": [
+    "2023-01-02",
+    "2023-06-30"
+  ],
+  "closed_weekdays": {
+    "20230123": "설날 연휴",
+    "20230124": "설날 대체공휴일",
+    "20230301": "삼일절",
+    "20230501": "근로자의 날",
+    "20230505": "어린이날",
+    "20230529": "부처님오신날 대체공휴일",
+    "20230606": "현충일"
+  },
+  "sources": [
+    "https://www.kasi.re.kr/kor/publication/post/newsMaterial/29168",
+    "https://astro.kasi.re.kr/kor/life/post/calendarData?search_year=2023",
+    "https://www.samsungpop.com/ux/kor/customer/notice/notice/noticeViewContent.do?MenuSeqNo=19564",
+    "https://money2.daishin.com/html/Notice/2023/n_65.html"
+  ],
+  "note": "Weekdays excluding documented closures. Empty API response is not a holiday. This is preparation only; evaluation TOP100 remains unchanged."
+}

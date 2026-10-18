@@ -1,0 +1,1307 @@
+[
+  {
+    "day": "2023-07-04",
+    "symbol": "361570.KQ",
+    "previous_observed_day": "2023-07-03",
+    "previous_close": 17200.0,
+    "implied_comparison_price": 5740.0,
+    "relative_difference_pct": -66.62790697674419,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-07-12",
+    "symbol": "297890.KQ",
+    "previous_observed_day": "2023-07-11",
+    "previous_close": 19110.0,
+    "implied_comparison_price": 4780.0,
+    "relative_difference_pct": -74.98691784406071,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-07-14",
+    "symbol": "241820.KQ",
+    "previous_observed_day": "2023-07-13",
+    "previous_close": 6910.0,
+    "implied_comparison_price": 6170.0,
+    "relative_difference_pct": -10.709117221418229,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-07-21",
+    "symbol": "079810.KQ",
+    "previous_observed_day": "2023-07-20",
+    "previous_close": 31650.0,
+    "implied_comparison_price": 28450.0,
+    "relative_difference_pct": -10.110584518167453,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-07-21",
+    "symbol": "310210.KQ",
+    "previous_observed_day": "2023-07-20",
+    "previous_close": 56900.0,
+    "implied_comparison_price": 55600.0,
+    "relative_difference_pct": -2.284710017574687,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-07-26",
+    "symbol": "016790.KQ",
+    "previous_observed_day": "2023-07-25",
+    "previous_close": 19700.0,
+    "implied_comparison_price": 6570.0,
+    "relative_difference_pct": -66.6497461928934,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-07-28",
+    "symbol": "079160.KS",
+    "previous_observed_day": "2023-07-27",
+    "previous_close": 11650.0,
+    "implied_comparison_price": 8140.0,
+    "relative_difference_pct": -30.12875536480687,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-07-28",
+    "symbol": "000480.KS",
+    "previous_observed_day": "2023-07-27",
+    "previous_close": 21200.0,
+    "implied_comparison_price": 21900.0,
+    "relative_difference_pct": 3.301886792452824,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-08-02",
+    "symbol": "028300.KQ",
+    "previous_observed_day": "2023-08-01",
+    "previous_close": 33550.0,
+    "implied_comparison_price": 32000.0,
+    "relative_difference_pct": -4.619970193740686,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-08-03",
+    "symbol": "096770.KS",
+    "previous_observed_day": "2023-08-02",
+    "previous_close": 199400.0,
+    "implied_comparison_price": 196200.0,
+    "relative_difference_pct": -1.6048144433299938,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-08-03",
+    "symbol": "096775.KS",
+    "previous_observed_day": "2023-08-02",
+    "previous_close": 130500.0,
+    "implied_comparison_price": 127300.0,
+    "relative_difference_pct": -2.452107279693483,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-08-04",
+    "symbol": "376930.KQ",
+    "previous_observed_day": "2023-08-03",
+    "previous_close": 5170.0,
+    "implied_comparison_price": 4440.0,
+    "relative_difference_pct": -14.119922630560932,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-08-04",
+    "symbol": "088800.KQ",
+    "previous_observed_day": "2023-08-03",
+    "previous_close": 2880.0,
+    "implied_comparison_price": 2550.0,
+    "relative_difference_pct": -11.458333333333337,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-08-07",
+    "symbol": "084650.KQ",
+    "previous_observed_day": "2023-08-04",
+    "previous_close": 8990.0,
+    "implied_comparison_price": 4495.0,
+    "relative_difference_pct": -50.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-08-08",
+    "symbol": "405920.KQ",
+    "previous_observed_day": "2023-08-07",
+    "previous_close": 15850.0,
+    "implied_comparison_price": 7930.0,
+    "relative_difference_pct": -49.968454258675074,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-08-10",
+    "symbol": "352770.KQ",
+    "previous_observed_day": "2023-08-09",
+    "previous_close": 4845.0,
+    "implied_comparison_price": 3245.0,
+    "relative_difference_pct": -33.02373581011352,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-08-14",
+    "symbol": "322180.KQ",
+    "previous_observed_day": "2023-08-11",
+    "previous_close": 19350.0,
+    "implied_comparison_price": 6450.0,
+    "relative_difference_pct": -66.66666666666667,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-08-17",
+    "symbol": "025560.KS",
+    "previous_observed_day": "2023-08-16",
+    "previous_close": 28650.0,
+    "implied_comparison_price": 4795.0,
+    "relative_difference_pct": -83.26352530541013,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-08-18",
+    "symbol": "347770.KQ",
+    "previous_observed_day": "2023-08-17",
+    "previous_close": 17790.0,
+    "implied_comparison_price": 5930.0,
+    "relative_difference_pct": -66.66666666666667,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-08-25",
+    "symbol": "214370.KQ",
+    "previous_observed_day": "2023-08-24",
+    "previous_close": 203000.0,
+    "implied_comparison_price": 40600.0,
+    "relative_difference_pct": -80.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-08-28",
+    "symbol": "001390.KS",
+    "previous_observed_day": "2023-08-25",
+    "previous_close": 45650.0,
+    "implied_comparison_price": 9130.0,
+    "relative_difference_pct": -80.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-08-30",
+    "symbol": "294140.KQ",
+    "previous_observed_day": "2023-08-29",
+    "previous_close": 4975.0,
+    "implied_comparison_price": 4765.0,
+    "relative_difference_pct": -4.2211055276381915,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-08-31",
+    "symbol": "419050.KQ",
+    "previous_observed_day": "2023-08-30",
+    "previous_close": 18490.0,
+    "implied_comparison_price": 4625.0,
+    "relative_difference_pct": -74.98647917793402,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-08-31",
+    "symbol": "304840.KQ",
+    "previous_observed_day": "2023-08-30",
+    "previous_close": 9300.0,
+    "implied_comparison_price": 8500.0,
+    "relative_difference_pct": -8.602150537634412,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-09-01",
+    "symbol": "315640.KQ",
+    "previous_observed_day": "2023-08-31",
+    "previous_close": 26000.0,
+    "implied_comparison_price": 25250.0,
+    "relative_difference_pct": -2.8846153846153855,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-09-05",
+    "symbol": "005070.KS",
+    "previous_observed_day": "2023-09-04",
+    "previous_close": 156100.0,
+    "implied_comparison_price": 154200.0,
+    "relative_difference_pct": -1.21716848174247,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-09-05",
+    "symbol": "005420.KS",
+    "previous_observed_day": "2023-09-04",
+    "previous_close": 43650.0,
+    "implied_comparison_price": 42950.0,
+    "relative_difference_pct": -1.6036655211912998,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-09-06",
+    "symbol": "158430.KQ",
+    "previous_observed_day": "2023-09-05",
+    "previous_close": 22450.0,
+    "implied_comparison_price": 4490.0,
+    "relative_difference_pct": -80.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-09-13",
+    "symbol": "310210.KQ",
+    "previous_observed_day": "2023-09-12",
+    "previous_close": 78500.0,
+    "implied_comparison_price": 65800.0,
+    "relative_difference_pct": -16.17834394904458,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-09-14",
+    "symbol": "241820.KQ",
+    "previous_observed_day": "2023-09-13",
+    "previous_close": 9190.0,
+    "implied_comparison_price": 3065.0,
+    "relative_difference_pct": -66.64853101196952,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-09-15",
+    "symbol": "011810.KS",
+    "previous_observed_day": "2023-09-14",
+    "previous_close": 36250.0,
+    "implied_comparison_price": 40000.0,
+    "relative_difference_pct": 10.344827586206895,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-09-18",
+    "symbol": "245620.KQ",
+    "previous_observed_day": "2023-09-15",
+    "previous_close": 1132.0,
+    "implied_comparison_price": 1040.0,
+    "relative_difference_pct": -8.127208480565374,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-09-20",
+    "symbol": "323990.KQ",
+    "previous_observed_day": "2023-09-19",
+    "previous_close": 34150.0,
+    "implied_comparison_price": 32050.0,
+    "relative_difference_pct": -6.149341142020493,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-09-20",
+    "symbol": "217820.KQ",
+    "previous_observed_day": "2023-09-19",
+    "previous_close": 7730.0,
+    "implied_comparison_price": 7560.0,
+    "relative_difference_pct": -2.1992238033635148,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-09-21",
+    "symbol": "078590.KQ",
+    "previous_observed_day": "2023-09-20",
+    "previous_close": 2380.0,
+    "implied_comparison_price": 1190.0,
+    "relative_difference_pct": -50.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-09-22",
+    "symbol": "042660.KS",
+    "previous_observed_day": "2023-09-21",
+    "previous_close": 35400.0,
+    "implied_comparison_price": 31450.0,
+    "relative_difference_pct": -11.158192090395481,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-09-22",
+    "symbol": "328130.KQ",
+    "previous_observed_day": "2023-09-21",
+    "previous_close": 214500.0,
+    "implied_comparison_price": 207000.0,
+    "relative_difference_pct": -3.4965034965035002,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-09-25",
+    "symbol": "376930.KQ",
+    "previous_observed_day": "2023-09-22",
+    "previous_close": 11120.0,
+    "implied_comparison_price": 5560.0,
+    "relative_difference_pct": -50.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-09-26",
+    "symbol": "214610.KQ",
+    "previous_observed_day": "2023-09-25",
+    "previous_close": 5040.0,
+    "implied_comparison_price": 4315.0,
+    "relative_difference_pct": -14.38492063492064,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-09-26",
+    "symbol": "038110.KQ",
+    "previous_observed_day": "2023-09-25",
+    "previous_close": 4415.0,
+    "implied_comparison_price": 4265.0,
+    "relative_difference_pct": -3.3975084937712396,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-09-27",
+    "symbol": "378340.KQ",
+    "previous_observed_day": "2023-09-26",
+    "previous_close": 66000.0,
+    "implied_comparison_price": 33000.0,
+    "relative_difference_pct": -50.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-10-04",
+    "symbol": "235980.KQ",
+    "previous_observed_day": "2023-09-27",
+    "previous_close": 9780.0,
+    "implied_comparison_price": 8580.0,
+    "relative_difference_pct": -12.269938650306745,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-10-10",
+    "symbol": "223250.KQ",
+    "previous_observed_day": "2023-10-06",
+    "previous_close": 23050.0,
+    "implied_comparison_price": 5770.0,
+    "relative_difference_pct": -74.96746203904556,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-10-10",
+    "symbol": "205100.KQ",
+    "previous_observed_day": "2023-10-06",
+    "previous_close": 5510.0,
+    "implied_comparison_price": 2785.0,
+    "relative_difference_pct": -49.455535390199636,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-10-11",
+    "symbol": "402030.KQ",
+    "previous_observed_day": "2023-10-10",
+    "previous_close": 71100.0,
+    "implied_comparison_price": 35550.0,
+    "relative_difference_pct": -50.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-10-19",
+    "symbol": "024720.KS",
+    "previous_observed_day": "2023-10-18",
+    "previous_close": 13990.0,
+    "implied_comparison_price": 7000.0,
+    "relative_difference_pct": -49.96426018584703,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-10-23",
+    "symbol": "077500.KS",
+    "previous_observed_day": "2023-10-20",
+    "previous_close": 18400.0,
+    "implied_comparison_price": 9200.0,
+    "relative_difference_pct": -50.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-10-23",
+    "symbol": "092040.KQ",
+    "previous_observed_day": "2023-10-20",
+    "previous_close": 12580.0,
+    "implied_comparison_price": 11620.0,
+    "relative_difference_pct": -7.631160572337048,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-10-23",
+    "symbol": "304840.KQ",
+    "previous_observed_day": "2023-10-20",
+    "previous_close": 5530.0,
+    "implied_comparison_price": 4610.0,
+    "relative_difference_pct": -16.636528028933096,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-10-24",
+    "symbol": "177350.KQ",
+    "previous_observed_day": "2023-10-23",
+    "previous_close": 1945.0,
+    "implied_comparison_price": 1748.0,
+    "relative_difference_pct": -10.128534704370185,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-10-26",
+    "symbol": "382800.KQ",
+    "previous_observed_day": "2023-10-25",
+    "previous_close": 26000.0,
+    "implied_comparison_price": 6500.0,
+    "relative_difference_pct": -75.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-10-31",
+    "symbol": "397030.KQ",
+    "previous_observed_day": "2023-10-30",
+    "previous_close": 20650.0,
+    "implied_comparison_price": 10330.0,
+    "relative_difference_pct": -49.97578692493947,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-11-02",
+    "symbol": "011230.KS",
+    "previous_observed_day": "2023-11-01",
+    "previous_close": 3695.0,
+    "implied_comparison_price": 3385.0,
+    "relative_difference_pct": -8.38971583220568,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-11-06",
+    "symbol": "011810.KS",
+    "previous_observed_day": "2023-11-03",
+    "previous_close": 9910.0,
+    "implied_comparison_price": 9310.0,
+    "relative_difference_pct": -6.054490413723512,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-11-07",
+    "symbol": "238120.KQ",
+    "previous_observed_day": "2023-11-06",
+    "previous_close": 7860.0,
+    "implied_comparison_price": 3930.0,
+    "relative_difference_pct": -50.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-11-08",
+    "symbol": "032790.KQ",
+    "previous_observed_day": "2023-11-07",
+    "previous_close": 1587.0,
+    "implied_comparison_price": 1484.0,
+    "relative_difference_pct": -6.490233144297419,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-11-09",
+    "symbol": "000500.KS",
+    "previous_observed_day": "2023-11-08",
+    "previous_close": 16660.0,
+    "implied_comparison_price": 15930.0,
+    "relative_difference_pct": -4.3817527010804325,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-11-09",
+    "symbol": "328130.KQ",
+    "previous_observed_day": "2023-11-08",
+    "previous_close": 170500.0,
+    "implied_comparison_price": 85300.0,
+    "relative_difference_pct": -49.970674486803524,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-11-10",
+    "symbol": "323990.KQ",
+    "previous_observed_day": "2023-11-09",
+    "previous_close": 24000.0,
+    "implied_comparison_price": 20000.0,
+    "relative_difference_pct": -16.666666666666664,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-11-13",
+    "symbol": "270520.KQ",
+    "previous_observed_day": "2023-11-10",
+    "previous_close": 8200.0,
+    "implied_comparison_price": 2735.0,
+    "relative_difference_pct": -66.64634146341464,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-11-13",
+    "symbol": "094360.KQ",
+    "previous_observed_day": "2023-11-10",
+    "previous_close": 39500.0,
+    "implied_comparison_price": 19750.0,
+    "relative_difference_pct": -50.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-11-16",
+    "symbol": "214610.KQ",
+    "previous_observed_day": "2023-11-15",
+    "previous_close": 3300.0,
+    "implied_comparison_price": 2750.0,
+    "relative_difference_pct": -16.666666666666664,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-11-29",
+    "symbol": "148150.KQ",
+    "previous_observed_day": "2023-11-28",
+    "previous_close": 17620.0,
+    "implied_comparison_price": 5880.0,
+    "relative_difference_pct": -66.62883087400682,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-13",
+    "symbol": "092040.KQ",
+    "previous_observed_day": "2023-12-12",
+    "previous_close": 13830.0,
+    "implied_comparison_price": 6940.0,
+    "relative_difference_pct": -49.819233550253074,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-14",
+    "symbol": "103590.KS",
+    "previous_observed_day": "2023-12-13",
+    "previous_close": 12460.0,
+    "implied_comparison_price": 11780.0,
+    "relative_difference_pct": -5.45746388443018,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-14",
+    "symbol": "177350.KQ",
+    "previous_observed_day": "2023-12-13",
+    "previous_close": 2225.0,
+    "implied_comparison_price": 744.0,
+    "relative_difference_pct": -66.561797752809,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-20",
+    "symbol": "002880.KS",
+    "previous_observed_day": "2023-12-19",
+    "previous_close": 322.0,
+    "implied_comparison_price": 1130.0,
+    "relative_difference_pct": 250.93167701863354,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-20",
+    "symbol": "051380.KQ",
+    "previous_observed_day": "2023-12-19",
+    "previous_close": 8020.0,
+    "implied_comparison_price": 4010.0,
+    "relative_difference_pct": -50.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-21",
+    "symbol": "182400.KQ",
+    "previous_observed_day": "2023-12-20",
+    "previous_close": 12160.0,
+    "implied_comparison_price": 6080.0,
+    "relative_difference_pct": -50.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-26",
+    "symbol": "302550.KQ",
+    "previous_observed_day": "2023-12-22",
+    "previous_close": 16700.0,
+    "implied_comparison_price": 3340.0,
+    "relative_difference_pct": -80.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-26",
+    "symbol": "290690.KQ",
+    "previous_observed_day": "2023-12-22",
+    "previous_close": 27500.0,
+    "implied_comparison_price": 1833.0,
+    "relative_difference_pct": -93.33454545454546,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-27",
+    "symbol": "001060.KS",
+    "previous_observed_day": "2023-12-26",
+    "previous_close": 36500.0,
+    "implied_comparison_price": 35800.0,
+    "relative_difference_pct": -1.9178082191780854,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-27",
+    "symbol": "170900.KS",
+    "previous_observed_day": "2023-12-26",
+    "previous_close": 68400.0,
+    "implied_comparison_price": 67100.0,
+    "relative_difference_pct": -1.900584795321636,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-27",
+    "symbol": "000100.KS",
+    "previous_observed_day": "2023-12-26",
+    "previous_close": 69900.0,
+    "implied_comparison_price": 66900.0,
+    "relative_difference_pct": -4.29184549356223,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-27",
+    "symbol": "185750.KS",
+    "previous_observed_day": "2023-12-26",
+    "previous_close": 133600.0,
+    "implied_comparison_price": 127500.0,
+    "relative_difference_pct": -4.56586826347305,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-27",
+    "symbol": "128940.KS",
+    "previous_observed_day": "2023-12-26",
+    "previous_close": 344500.0,
+    "implied_comparison_price": 338000.0,
+    "relative_difference_pct": -1.8867924528301883,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-27",
+    "symbol": "115450.KQ",
+    "previous_observed_day": "2023-12-26",
+    "previous_close": 4180.0,
+    "implied_comparison_price": 4040.0,
+    "relative_difference_pct": -3.349282296650713,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-27",
+    "symbol": "078890.KQ",
+    "previous_observed_day": "2023-12-26",
+    "previous_close": 5010.0,
+    "implied_comparison_price": 4920.0,
+    "relative_difference_pct": -1.7964071856287456,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-27",
+    "symbol": "032750.KQ",
+    "previous_observed_day": "2023-12-26",
+    "previous_close": 6030.0,
+    "implied_comparison_price": 5390.0,
+    "relative_difference_pct": -10.613598673300162,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-27",
+    "symbol": "038070.KQ",
+    "previous_observed_day": "2023-12-26",
+    "previous_close": 9310.0,
+    "implied_comparison_price": 9100.0,
+    "relative_difference_pct": -2.2556390977443663,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-27",
+    "symbol": "045300.KQ",
+    "previous_observed_day": "2023-12-26",
+    "previous_close": 4075.0,
+    "implied_comparison_price": 4000.0,
+    "relative_difference_pct": -1.8404907975460127,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-27",
+    "symbol": "068760.KQ",
+    "previous_observed_day": "2023-12-26",
+    "previous_close": 92600.0,
+    "implied_comparison_price": 88300.0,
+    "relative_difference_pct": -4.643628509719222,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-27",
+    "symbol": "025320.KQ",
+    "previous_observed_day": "2023-12-26",
+    "previous_close": 6400.0,
+    "implied_comparison_price": 6100.0,
+    "relative_difference_pct": -4.6875,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-27",
+    "symbol": "053980.KQ",
+    "previous_observed_day": "2023-12-26",
+    "previous_close": 5750.0,
+    "implied_comparison_price": 5380.0,
+    "relative_difference_pct": -6.434782608695655,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-27",
+    "symbol": "173130.KQ",
+    "previous_observed_day": "2023-12-26",
+    "previous_close": 13520.0,
+    "implied_comparison_price": 12290.0,
+    "relative_difference_pct": -9.097633136094673,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-27",
+    "symbol": "282880.KQ",
+    "previous_observed_day": "2023-12-26",
+    "previous_close": 28200.0,
+    "implied_comparison_price": 27400.0,
+    "relative_difference_pct": -2.8368794326241176,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2023-12-28",
+    "symbol": "168360.KQ",
+    "previous_observed_day": "2023-12-27",
+    "previous_close": 19300.0,
+    "implied_comparison_price": 9650.0,
+    "relative_difference_pct": -50.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-01-02",
+    "symbol": "425040.KQ",
+    "previous_observed_day": "2023-12-28",
+    "previous_close": 51600.0,
+    "implied_comparison_price": 25800.0,
+    "relative_difference_pct": -50.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-01-04",
+    "symbol": "001360.KS",
+    "previous_observed_day": "2024-01-03",
+    "previous_close": 2280.0,
+    "implied_comparison_price": 2060.0,
+    "relative_difference_pct": -9.649122807017541,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-01-05",
+    "symbol": "073010.KQ",
+    "previous_observed_day": "2024-01-04",
+    "previous_close": 3040.0,
+    "implied_comparison_price": 2995.0,
+    "relative_difference_pct": -1.4802631578947345,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-01-08",
+    "symbol": "336370.KS",
+    "previous_observed_day": "2024-01-05",
+    "previous_close": 27000.0,
+    "implied_comparison_price": 13500.0,
+    "relative_difference_pct": -50.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-01-16",
+    "symbol": "079370.KQ",
+    "previous_observed_day": "2024-01-15",
+    "previous_close": 52800.0,
+    "implied_comparison_price": 17600.0,
+    "relative_difference_pct": -66.66666666666667,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-01-19",
+    "symbol": "358570.KQ",
+    "previous_observed_day": "2024-01-18",
+    "previous_close": 24050.0,
+    "implied_comparison_price": 12030.0,
+    "relative_difference_pct": -49.97920997920998,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-01-25",
+    "symbol": "034220.KS",
+    "previous_observed_day": "2024-01-24",
+    "previous_close": 13740.0,
+    "implied_comparison_price": 12700.0,
+    "relative_difference_pct": -7.569141193595341,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-01-30",
+    "symbol": "001440.KS",
+    "previous_observed_day": "2024-01-29",
+    "previous_close": 10700.0,
+    "implied_comparison_price": 9720.0,
+    "relative_difference_pct": -9.158878504672895,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-02-02",
+    "symbol": "355150.KQ",
+    "previous_observed_day": "2024-02-01",
+    "previous_close": 2290.0,
+    "implied_comparison_price": 11450.0,
+    "relative_difference_pct": 400.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-02-02",
+    "symbol": "033290.KQ",
+    "previous_observed_day": "2024-02-01",
+    "previous_close": 5730.0,
+    "implied_comparison_price": 4880.0,
+    "relative_difference_pct": -14.834205933682377,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-02-07",
+    "symbol": "149980.KQ",
+    "previous_observed_day": "2024-02-06",
+    "previous_close": 9950.0,
+    "implied_comparison_price": 8450.0,
+    "relative_difference_pct": -15.07537688442211,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-02-20",
+    "symbol": "033540.KQ",
+    "previous_observed_day": "2024-02-19",
+    "previous_close": 1094.0,
+    "implied_comparison_price": 2735.0,
+    "relative_difference_pct": 150.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-02-20",
+    "symbol": "078590.KQ",
+    "previous_observed_day": "2024-02-19",
+    "previous_close": 417.0,
+    "implied_comparison_price": 1042.0,
+    "relative_difference_pct": 149.8800959232614,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-02-21",
+    "symbol": "373200.KQ",
+    "previous_observed_day": "2024-02-20",
+    "previous_close": 4230.0,
+    "implied_comparison_price": 1057.0,
+    "relative_difference_pct": -75.01182033096927,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-02-22",
+    "symbol": "013310.KQ",
+    "previous_observed_day": "2024-02-21",
+    "previous_close": 4140.0,
+    "implied_comparison_price": 3890.0,
+    "relative_difference_pct": -6.038647342995174,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-02-28",
+    "symbol": "093370.KS",
+    "previous_observed_day": "2024-02-27",
+    "previous_close": 8560.0,
+    "implied_comparison_price": 8360.0,
+    "relative_difference_pct": -2.336448598130836,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-02-28",
+    "symbol": "314930.KQ",
+    "previous_observed_day": "2024-02-27",
+    "previous_close": 60000.0,
+    "implied_comparison_price": 12470.0,
+    "relative_difference_pct": -79.21666666666667,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-02-28",
+    "symbol": "114840.KQ",
+    "previous_observed_day": "2024-02-27",
+    "previous_close": 35150.0,
+    "implied_comparison_price": 17580.0,
+    "relative_difference_pct": -49.98577524893314,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-02-28",
+    "symbol": "090710.KQ",
+    "previous_observed_day": "2024-02-27",
+    "previous_close": 1220.0,
+    "implied_comparison_price": 3050.0,
+    "relative_difference_pct": 150.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-03-08",
+    "symbol": "032800.KQ",
+    "previous_observed_day": "2024-03-07",
+    "previous_close": 200.0,
+    "implied_comparison_price": 165.0,
+    "relative_difference_pct": -17.500000000000004,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-03-13",
+    "symbol": "068240.KQ",
+    "previous_observed_day": "2024-03-12",
+    "previous_close": 13290.0,
+    "implied_comparison_price": 12980.0,
+    "relative_difference_pct": -2.332580887885627,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-03-13",
+    "symbol": "377220.KQ",
+    "previous_observed_day": "2024-03-12",
+    "previous_close": 5510.0,
+    "implied_comparison_price": 2755.0,
+    "relative_difference_pct": -50.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-03-27",
+    "symbol": "196490.KQ",
+    "previous_observed_day": "2024-03-26",
+    "previous_close": 1782.0,
+    "implied_comparison_price": 356.0,
+    "relative_difference_pct": -80.02244668911335,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-03-29",
+    "symbol": "210980.KS",
+    "previous_observed_day": "2024-03-28",
+    "previous_close": 24700.0,
+    "implied_comparison_price": 14000.0,
+    "relative_difference_pct": -43.31983805668016,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-04-05",
+    "symbol": "408900.KQ",
+    "previous_observed_day": "2024-04-04",
+    "previous_close": 35900.0,
+    "implied_comparison_price": 5990.0,
+    "relative_difference_pct": -83.31476323119777,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-04-08",
+    "symbol": "315640.KQ",
+    "previous_observed_day": "2024-04-05",
+    "previous_close": 16650.0,
+    "implied_comparison_price": 8330.0,
+    "relative_difference_pct": -49.96996996996997,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-04-16",
+    "symbol": "100840.KS",
+    "previous_observed_day": "2024-04-15",
+    "previous_close": 33200.0,
+    "implied_comparison_price": 12050.0,
+    "relative_difference_pct": -63.70481927710843,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-04-16",
+    "symbol": "003060.KS",
+    "previous_observed_day": "2024-04-15",
+    "previous_close": 190.0,
+    "implied_comparison_price": 1818.0,
+    "relative_difference_pct": 856.842105263158,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-04-16",
+    "symbol": "042500.KQ",
+    "previous_observed_day": "2024-04-15",
+    "previous_close": 8040.0,
+    "implied_comparison_price": 6480.0,
+    "relative_difference_pct": -19.402985074626866,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-04-16",
+    "symbol": "340930.KQ",
+    "previous_observed_day": "2024-04-15",
+    "previous_close": 15730.0,
+    "implied_comparison_price": 5280.0,
+    "relative_difference_pct": -66.43356643356644,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-04-22",
+    "symbol": "001340.KS",
+    "previous_observed_day": "2024-04-19",
+    "previous_close": 7790.0,
+    "implied_comparison_price": 9090.0,
+    "relative_difference_pct": 16.68806161745828,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-04-25",
+    "symbol": "086520.KQ",
+    "previous_observed_day": "2024-04-24",
+    "previous_close": 517000.0,
+    "implied_comparison_price": 103400.0,
+    "relative_difference_pct": -80.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-04-26",
+    "symbol": "243840.KQ",
+    "previous_observed_day": "2024-04-25",
+    "previous_close": 56200.0,
+    "implied_comparison_price": 11240.0,
+    "relative_difference_pct": -80.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-04-29",
+    "symbol": "430690.KQ",
+    "previous_observed_day": "2024-04-26",
+    "previous_close": 17770.0,
+    "implied_comparison_price": 8890.0,
+    "relative_difference_pct": -49.97186268992684,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-05-02",
+    "symbol": "457190.KS",
+    "previous_observed_day": "2024-04-30",
+    "previous_close": 339500.0,
+    "implied_comparison_price": 67900.0,
+    "relative_difference_pct": -80.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-05-02",
+    "symbol": "006380.KS",
+    "previous_observed_day": "2024-04-30",
+    "previous_close": 732.0,
+    "implied_comparison_price": 3660.0,
+    "relative_difference_pct": 400.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-05-02",
+    "symbol": "294140.KQ",
+    "previous_observed_day": "2024-04-30",
+    "previous_close": 1930.0,
+    "implied_comparison_price": 3800.0,
+    "relative_difference_pct": 96.89119170984455,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-05-02",
+    "symbol": "290690.KQ",
+    "previous_observed_day": "2024-04-30",
+    "previous_close": 2785.0,
+    "implied_comparison_price": 13930.0,
+    "relative_difference_pct": 400.1795332136445,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-05-03",
+    "symbol": "025900.KQ",
+    "previous_observed_day": "2024-05-02",
+    "previous_close": 56300.0,
+    "implied_comparison_price": 22550.0,
+    "relative_difference_pct": -59.94671403197158,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-05-09",
+    "symbol": "067630.KQ",
+    "previous_observed_day": "2024-05-08",
+    "previous_close": 16450.0,
+    "implied_comparison_price": 16030.0,
+    "relative_difference_pct": -2.553191489361706,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-05-09",
+    "symbol": "215600.KQ",
+    "previous_observed_day": "2024-05-08",
+    "previous_close": 4710.0,
+    "implied_comparison_price": 4360.0,
+    "relative_difference_pct": -7.430997876857748,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-05-10",
+    "symbol": "255220.KQ",
+    "previous_observed_day": "2024-05-09",
+    "previous_close": 1573.0,
+    "implied_comparison_price": 1404.0,
+    "relative_difference_pct": -10.743801652892559,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-05-10",
+    "symbol": "033230.KQ",
+    "previous_observed_day": "2024-05-09",
+    "previous_close": 2800.0,
+    "implied_comparison_price": 2615.0,
+    "relative_difference_pct": -6.607142857142856,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-05-10",
+    "symbol": "198940.KQ",
+    "previous_observed_day": "2024-05-09",
+    "previous_close": 2715.0,
+    "implied_comparison_price": 2315.0,
+    "relative_difference_pct": -14.7329650092081,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-05-13",
+    "symbol": "003060.KS",
+    "previous_observed_day": "2024-05-10",
+    "previous_close": 1631.0,
+    "implied_comparison_price": 1281.0,
+    "relative_difference_pct": -21.45922746781116,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-05-17",
+    "symbol": "036630.KQ",
+    "previous_observed_day": "2024-05-16",
+    "previous_close": 638.0,
+    "implied_comparison_price": 632.0,
+    "relative_difference_pct": -0.9404388714733591,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-05-17",
+    "symbol": "052260.KQ",
+    "previous_observed_day": "2024-05-16",
+    "previous_close": 13000.0,
+    "implied_comparison_price": 6500.0,
+    "relative_difference_pct": -50.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-05-21",
+    "symbol": "199820.KQ",
+    "previous_observed_day": "2024-05-20",
+    "previous_close": 23450.0,
+    "implied_comparison_price": 11730.0,
+    "relative_difference_pct": -49.978678038379535,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-05-24",
+    "symbol": "363260.KQ",
+    "previous_observed_day": "2024-05-23",
+    "previous_close": 659.0,
+    "implied_comparison_price": 3295.0,
+    "relative_difference_pct": 400.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-06-03",
+    "symbol": "092870.KQ",
+    "previous_observed_day": "2024-05-31",
+    "previous_close": 20350.0,
+    "implied_comparison_price": 19470.0,
+    "relative_difference_pct": -4.324324324324325,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-06-04",
+    "symbol": "101360.KQ",
+    "previous_observed_day": "2024-06-03",
+    "previous_close": 38900.0,
+    "implied_comparison_price": 36900.0,
+    "relative_difference_pct": -5.141388174807194,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-06-10",
+    "symbol": "432720.KQ",
+    "previous_observed_day": "2024-06-07",
+    "previous_close": 23900.0,
+    "implied_comparison_price": 22850.0,
+    "relative_difference_pct": -4.3933054393305415,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-06-11",
+    "symbol": "056090.KQ",
+    "previous_observed_day": "2024-06-10",
+    "previous_close": 1180.0,
+    "implied_comparison_price": 2360.0,
+    "relative_difference_pct": 100.0,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-06-17",
+    "symbol": "043910.KQ",
+    "previous_observed_day": "2024-06-14",
+    "previous_close": 950.0,
+    "implied_comparison_price": 864.0,
+    "relative_difference_pct": -9.052631578947368,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-06-19",
+    "symbol": "067310.KQ",
+    "previous_observed_day": "2024-06-18",
+    "previous_close": 23350.0,
+    "implied_comparison_price": 22950.0,
+    "relative_difference_pct": -1.7130620985010725,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-06-26",
+    "symbol": "083450.KQ",
+    "previous_observed_day": "2024-06-25",
+    "previous_close": 43300.0,
+    "implied_comparison_price": 21700.0,
+    "relative_difference_pct": -49.88452655889145,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-06-28",
+    "symbol": "450520.KQ",
+    "previous_observed_day": "2024-06-27",
+    "previous_close": 18820.0,
+    "implied_comparison_price": 6280.0,
+    "relative_difference_pct": -66.63124335812964,
+    "cause": "unconfirmed_reference_discontinuity"
+  },
+  {
+    "day": "2024-06-28",
+    "symbol": "198940.KQ",
+    "previous_observed_day": "2024-06-27",
+    "previous_close": 2185.0,
+    "implied_comparison_price": 1820.0,
+    "relative_difference_pct": -16.704805491990847,
+    "cause": "unconfirmed_reference_discontinuity"
+  }
+]

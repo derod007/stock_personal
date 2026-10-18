@@ -1,0 +1,1011 @@
+{
+  "period": [
+    "2023-07-03",
+    "2024-06-28"
+  ],
+  "sessions": 243,
+  "collection": {
+    "symbols": 1405,
+    "saved": 1364,
+    "unavailable": [
+      {
+        "symbol": "003410.KS",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/003410.KS?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T04:11:33.864025+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "005390.KS",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/005390.KS?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T04:11:46.512963+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "006380.KS",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/006380.KS?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T04:11:50.295510+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 400,
+        "raw_sha256": "4c8811905b849b0c427258c34201c72294a01126a1fed2ce7054f07130e86877"
+      },
+      {
+        "symbol": "010600.KS",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/010600.KS?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T04:12:06.222645+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "010620.KS",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/010620.KS?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T04:12:06.223271+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "012510.KS",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/012510.KS?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T04:12:18.465537+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "016790.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/016790.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T04:12:30.433180+00:00",
+        "http_status": 200,
+        "raw_sha256": "75900243327c295d4cf0c182204a345b48ebaf3db5d5e2d99d480db8595e8833",
+        "status": "unavailable",
+        "reason": "ValueError",
+        "detail": "provider_instrument_mismatch"
+      },
+      {
+        "symbol": "022100.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/022100.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T04:12:42.495652+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "034230.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/034230.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T04:13:13.265727+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "036690.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/036690.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T04:13:19.350082+00:00",
+        "http_status": 200,
+        "raw_sha256": "da1467b6311c1dbfbfdc1a0cc5273d2ca36e2861e56e9bc44ec6f4281b91d700",
+        "status": "unavailable",
+        "reason": "ValueError",
+        "detail": "provider_instrument_mismatch"
+      },
+      {
+        "symbol": "042670.KS",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/042670.KS?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T04:13:42.699294+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "066970.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/066970.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:39:58.512014+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "068400.KS",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/068400.KS?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:40:04.011182+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "071460.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/071460.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:40:09.653516+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "073640.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/073640.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:40:09.759599+00:00",
+        "http_status": 200,
+        "raw_sha256": "88bd1aa2eb7abb2c52c61a9459aa929fd089287be83b8b8c6d9cef8f1a8cdb2d",
+        "status": "unavailable",
+        "reason": "ValueError",
+        "detail": "provider_instrument_mismatch"
+      },
+      {
+        "symbol": "078940.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/078940.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:40:15.506566+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "082640.KS",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/082640.KS?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:40:21.033349+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "082660.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/082660.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:40:21.034006+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 400,
+        "raw_sha256": "4c8811905b849b0c427258c34201c72294a01126a1fed2ce7054f07130e86877"
+      },
+      {
+        "symbol": "091990.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/091990.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:40:39.119041+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "096610.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/096610.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:40:44.725305+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 400,
+        "raw_sha256": "4c8811905b849b0c427258c34201c72294a01126a1fed2ce7054f07130e86877"
+      },
+      {
+        "symbol": "115960.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/115960.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:41:05.134492+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "119860.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/119860.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:41:05.162980+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "138490.KS",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/138490.KS?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:41:17.228827+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "138580.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/138580.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:41:17.235111+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "152550.KS",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/152550.KS?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:41:28.445472+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "164060.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/164060.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:41:35.466121+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "182400.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/182400.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:41:41.167581+00:00",
+        "http_status": 200,
+        "raw_sha256": "7e73dc1fc9f390e5c62d30fa24aae80ccdcac3cc44ceab6bc5c4d431b2db3b3e",
+        "status": "unavailable",
+        "reason": "ValueError",
+        "detail": "provider_instrument_mismatch"
+      },
+      {
+        "symbol": "196490.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/196490.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:41:46.760633+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 400,
+        "raw_sha256": "4c8811905b849b0c427258c34201c72294a01126a1fed2ce7054f07130e86877"
+      },
+      {
+        "symbol": "208340.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/208340.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:41:57.969630+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "222810.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/222810.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:42:09.397100+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "230980.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/230980.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:42:14.973837+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "245620.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/245620.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:42:25.898806+00:00",
+        "http_status": 200,
+        "raw_sha256": "0669b0a2d481060c6043f5b37430a29ee8028b2f3307576c9eeba474d21afc60",
+        "status": "unavailable",
+        "reason": "ValueError",
+        "detail": "provider_instrument_mismatch"
+      },
+      {
+        "symbol": "258830.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/258830.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:42:31.636470+00:00",
+        "http_status": 200,
+        "raw_sha256": "8cbd2767b2d0d86827b7348079b06696daa9814b36178bde736308df6c76679f",
+        "status": "unavailable",
+        "reason": "ValueError",
+        "detail": "provider_instrument_mismatch"
+      },
+      {
+        "symbol": "287410.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/287410.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:42:48.383983+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "295310.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/295310.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:42:54.014146+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 400,
+        "raw_sha256": "4c8811905b849b0c427258c34201c72294a01126a1fed2ce7054f07130e86877"
+      },
+      {
+        "symbol": "299900.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/299900.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:42:59.641776+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "335890.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/335890.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:43:16.702883+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "376190.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/376190.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:43:44.743286+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "377460.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/377460.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:43:44.860587+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      },
+      {
+        "symbol": "418250.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/418250.KQ?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:44:02.212311+00:00",
+        "http_status": 200,
+        "raw_sha256": "f1e70db100fead43dcaed5d039ac84e91eba2f15a6b6e414957aeb411e70e62f",
+        "status": "unavailable",
+        "reason": "ValueError",
+        "detail": "provider_instrument_mismatch"
+      },
+      {
+        "symbol": "450140.KS",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/450140.KS?period1=1672498800&period2=1719586800&interval=1d&events=div%2Csplits",
+        "fetched_at": "2026-10-18T07:44:19.165215+00:00",
+        "status": "unavailable",
+        "reason": "http_error",
+        "http_status": 404,
+        "raw_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769"
+      }
+    ],
+    "issues": {
+      "invalid_ohlcv": 1438,
+      "null_quote": 1
+    }
+  },
+  "sector_counts": {
+    "consumer": 138,
+    "bio": 207,
+    "trans": 17,
+    "other": 72,
+    "auto": 114,
+    "indust": 115,
+    "fin": 40,
+    "energy": 233,
+    "semi": 245,
+    "unclassified": 29,
+    "soft": 194,
+    "etf": 1
+  },
+  "signals": 3618,
+  "clusters": {
+    "0": 387,
+    "1": 775,
+    "5": 423,
+    "4": 1023,
+    "3": 632,
+    "2": 378
+  },
+  "skips": {
+    "missing_anchor": 138,
+    "insufficient_history": 153,
+    "period_end": 323
+  },
+  "arms": {
+    "opening_all_types": {
+      "status": "halted",
+      "last_good_day": "2024-01-12",
+      "return_pct": null,
+      "partial_marked_return_pct": -18.586161776472597,
+      "partial_return_through": "2024-01-12",
+      "max_drawdown_pct": 24.002526267614954,
+      "drawdown_scope": "partial_only",
+      "fills": 93,
+      "closed": 89,
+      "blocked": {
+        "position_limit": 2059,
+        "cash_or_risk_or_sector_limit": 57
+      },
+      "cancelled": null,
+      "halt": {
+        "day": "2024-01-15",
+        "reason": "missing_required_bar",
+        "symbols": [
+          "003010.KS",
+          "028300.KQ",
+          "053450.KQ",
+          "056080.KQ",
+          "079550.KS",
+          "090360.KQ",
+          "124560.KQ"
+        ]
+      },
+      "audit": {},
+      "monthly_realized": {
+        "2023-07": {
+          "trades": 24,
+          "realized_pnl": -10366140.120968154
+        },
+        "2023-08": {
+          "trades": 11,
+          "realized_pnl": -3751945.563499998
+        },
+        "2023-09": {
+          "trades": 7,
+          "realized_pnl": -4166049.510688279
+        },
+        "2023-10": {
+          "trades": 22,
+          "realized_pnl": -4244756.366619418
+        },
+        "2023-11": {
+          "trades": 11,
+          "realized_pnl": 3714052.85525
+        },
+        "2023-12": {
+          "trades": 11,
+          "realized_pnl": -3083381.949625001
+        },
+        "2024-01": {
+          "trades": 3,
+          "realized_pnl": 4174078.174678318
+        }
+      },
+      "symbol_realized": {
+        "000680.KS": 4678153.703999994,
+        "000430.KS": 2702516.7037499957,
+        "019170.KS": 2537592.9750000015,
+        "018470.KS": 2487997.7025000006,
+        "034730.KS": 2236307.7375000017,
+        "000520.KS": 2223183.311999999,
+        "035760.KQ": 2222144.1450000014,
+        "001685.KS": 2182250.6999999993,
+        "000990.KS": 2178287.7749999985,
+        "010120.KS": 2092741.4339999985,
+        "000810.KS": 472155.25,
+        "000100.KS": 424545.3285624981,
+        "002360.KS": 304558.12499999977,
+        "033160.KQ": 279641.3950000014,
+        "009190.KS": 36708.42749999999,
+        "011420.KS": 36184.44074999992,
+        "006650.KS": 15829.199999999953,
+        "089150.KQ": -2437.7255000000005,
+        "000240.KS": -6537.570000000007,
+        "004060.KS": -12744.339999999997,
+        "003620.KS": -30883.125,
+        "009150.KS": -31331.599999999977,
+        "011040.KQ": -42580.27950000006,
+        "000490.KS": -63928.10750000004,
+        "006220.KS": -90704.98199999984,
+        "017890.KQ": -95145.91874999995,
+        "003550.KS": -190426.59999999963,
+        "013310.KQ": -199889.80000000075,
+        "000660.KS": -372172.86499999836,
+        "001040.KS": -771371.290000001,
+        "004560.KS": -777357.1074999999,
+        "001390.KS": -790781.0044999998,
+        "001060.KS": -793005.8758835476,
+        "052600.KQ": -793118.1724999994,
+        "032350.KS": -793546.8650000002,
+        "000225.KS": -803819.6074999999,
+        "008830.KQ": -805278.8560651615,
+        "003070.KS": -813821.3739999998,
+        "005950.KS": -816508.9055000003,
+        "000720.KS": -816561.30125,
+        "004100.KS": -817360.9979999997,
+        "010060.KS": -819621.4239230491,
+        "001250.KS": -820468.7540000007,
+        "001380.KS": -831147.9605,
+        "003490.KS": -833640.1987500004,
+        "011200.KS": -835331.1524999999,
+        "007770.KQ": -835680.4575000014,
+        "003000.KS": -842735.3599999994,
+        "003220.KS": -844958.209999999,
+        "014680.KS": -847646.7999999989,
+        "002620.KS": -853217.15625,
+        "005290.KQ": -856194.1875,
+        "056080.KQ": -864386.977500001,
+        "036560.KQ": -867800.6400000006,
+        "005420.KS": -870948.5081882793,
+        "031980.KQ": -888266.7374999989,
+        "078140.KQ": -893522.1899999976,
+        "042600.KQ": -901032.2475000005,
+        "037950.KQ": -904837.02575,
+        "017370.KS": -915001.2719999999,
+        "030960.KQ": -916901.808749998,
+        "029480.KQ": -917088.6339999996,
+        "080580.KQ": -925171.8692499995,
+        "000150.KS": -926912.5724999985,
+        "001680.KS": -929338.5,
+        "020710.KQ": -941472.2399999984,
+        "006260.KS": -942170.8499999978,
+        "060370.KQ": -944800.1639999971,
+        "023440.KQ": -953474.5714999996,
+        "004250.KS": -953480.9224999994,
+        "005850.KS": -964439.0437499993,
+        "000250.KQ": -999922.6099999994,
+        "001120.KS": -1008858.9962499999,
+        "001230.KS": -1066158.3533500042,
+        "001790.KS": -1713393.683374999,
+        "000270.KS": -2673604.4874999975
+      },
+      "exit_reasons": {
+        "stop": 66,
+        "target": 15,
+        "time": 8
+      }
+    },
+    "opening_type1": {
+      "status": "halted",
+      "last_good_day": "2024-01-12",
+      "return_pct": null,
+      "partial_marked_return_pct": 0.4460505239516577,
+      "partial_return_through": "2024-01-12",
+      "max_drawdown_pct": 8.776436120378017,
+      "drawdown_scope": "partial_only",
+      "fills": 51,
+      "closed": 47,
+      "blocked": {
+        "position_limit": 447
+      },
+      "cancelled": null,
+      "halt": {
+        "day": "2024-01-15",
+        "reason": "missing_required_bar",
+        "symbols": [
+          "012330.KS",
+          "041510.KQ"
+        ]
+      },
+      "audit": {},
+      "monthly_realized": {
+        "2023-07": {
+          "trades": 8,
+          "realized_pnl": -1061165.5157499933
+        },
+        "2023-08": {
+          "trades": 9,
+          "realized_pnl": 1268687.4062500028
+        },
+        "2023-09": {
+          "trades": 5,
+          "realized_pnl": -2127757.0062499978
+        },
+        "2023-10": {
+          "trades": 12,
+          "realized_pnl": -2655966.1537499973
+        },
+        "2023-11": {
+          "trades": 5,
+          "realized_pnl": 4067296.2740620105
+        },
+        "2023-12": {
+          "trades": 7,
+          "realized_pnl": 2764174.274389605
+        },
+        "2024-01": {
+          "trades": 1,
+          "realized_pnl": -876840.2300000004
+        }
+      },
+      "symbol_realized": {
+        "034730.KS": 4769371.462500002,
+        "001570.KS": 2766385.844999999,
+        "011200.KS": 2329049.184000002,
+        "009150.KS": 1749786.9649999999,
+        "028260.KS": 1652082.3000000007,
+        "034220.KS": 1328278.7374370098,
+        "006260.KS": 1221579.8000000007,
+        "003490.KS": 1134873.75,
+        "001450.KS": 843510.3249999993,
+        "036930.KQ": 568019.25,
+        "011070.KS": 278943.0375000001,
+        "010060.KS": 261399.2491250001,
+        "259960.KS": 257516.73750000005,
+        "365340.KQ": 254728.0125000002,
+        "010140.KS": 201595.09999999963,
+        "030200.KS": 97416.0,
+        "008770.KS": 21957.540000000008,
+        "001780.KS": -7776.799499999994,
+        "348370.KQ": -41334.42499999993,
+        "009830.KS": -44012.429999999935,
+        "039440.KQ": -81380.12624999997,
+        "248070.KS": -91015.12250000006,
+        "012330.KS": -133609.1625000001,
+        "229640.KS": -304822.5959999999,
+        "277810.KQ": -832785.459999999,
+        "041510.KQ": -858888.0700000003,
+        "005420.KS": -876840.2300000004,
+        "000250.KQ": -883021.870000001,
+        "418550.KQ": -895752.9787499998,
+        "065350.KQ": -953216.2974999994,
+        "000720.KS": -978490.6312499978,
+        "376930.KQ": -985315.5036103986,
+        "214450.KQ": -1003193.375,
+        "042660.KS": -1012608.7325000018,
+        "058610.KQ": -1020288.1499999985,
+        "001120.KS": -1020751.2437499985,
+        "316140.KS": -1105978.3199999966,
+        "000270.KS": -1350575.7774999943,
+        "004020.KS": -1885855.3550000023,
+        "000660.KS": -1990551.5899999961
+      },
+      "exit_reasons": {
+        "target": 8,
+        "stop": 28,
+        "time": 11
+      }
+    },
+    "limit_all_types": {
+      "status": "halted",
+      "last_good_day": "2024-01-12",
+      "return_pct": null,
+      "partial_marked_return_pct": -19.780266809631065,
+      "partial_return_through": "2024-01-12",
+      "max_drawdown_pct": 22.205608788327357,
+      "drawdown_scope": "partial_only",
+      "fills": 91,
+      "closed": 87,
+      "blocked": {
+        "position_limit": 1952,
+        "cash_or_risk_or_sector_limit": 160,
+        "unpriced_position": 5
+      },
+      "cancelled": {
+        "cancelled_before_entry": 20,
+        "unfilled": 8
+      },
+      "halt": {
+        "state": {
+          "halted": true,
+          "halt_reason": "unpriced_position"
+        },
+        "quality": [
+          {
+            "day": "2024-01-15",
+            "symbol": "002900.KS",
+            "reasons": [
+              "missing_session",
+              "invalid_recent_ohlcv"
+            ],
+            "active": true,
+            "filled": true,
+            "signal": false
+          },
+          {
+            "day": "2024-01-15",
+            "symbol": "005290.KQ",
+            "reasons": [
+              "missing_session",
+              "invalid_recent_ohlcv"
+            ],
+            "active": true,
+            "filled": true,
+            "signal": false
+          },
+          {
+            "day": "2024-01-15",
+            "symbol": "041510.KQ",
+            "reasons": [
+              "missing_session",
+              "invalid_recent_ohlcv"
+            ],
+            "active": true,
+            "filled": true,
+            "signal": false
+          }
+        ],
+        "events": [
+          {
+            "day": "2024-01-15",
+            "type": "account_halted",
+            "payload": {
+              "symbol": "041510.KQ",
+              "session": 1705300200,
+              "reason": "unpriced_position",
+              "action": "do_not_infer_missing_execution_path"
+            }
+          }
+        ]
+      },
+      "audit": {
+        "cash_reconciled": true,
+        "order_limits_pass": true
+      },
+      "monthly_realized": {
+        "2023-07": {
+          "trades": 19,
+          "realized_pnl": -10220560.908672808
+        },
+        "2023-08": {
+          "trades": 11,
+          "realized_pnl": -1173803.976978721
+        },
+        "2023-09": {
+          "trades": 11,
+          "realized_pnl": -3115788.2988292594
+        },
+        "2023-10": {
+          "trades": 22,
+          "realized_pnl": -5855340.718561441
+        },
+        "2023-11": {
+          "trades": 6,
+          "realized_pnl": 1603809.1036085142
+        },
+        "2023-12": {
+          "trades": 14,
+          "realized_pnl": -3772701.9377111406
+        },
+        "2024-01": {
+          "trades": 4,
+          "realized_pnl": 3713268.687513767
+        }
+      },
+      "symbol_realized": {
+        "034730.KS": 4330379.714000007,
+        "019170.KS": 2477396.2963500023,
+        "001200.KS": 2306108.1170000006,
+        "011170.KS": 1165679.7267000023,
+        "000250.KQ": 1074624.9541499987,
+        "001450.KS": 733908.3750000019,
+        "000100.KS": 482161.4933573026,
+        "033160.KQ": 331774.363970004,
+        "004720.KS": 160481.3669700008,
+        "011210.KS": 77177.70000000001,
+        "002720.KS": 5076.429750000003,
+        "033780.KS": 2243.0512500000186,
+        "104480.KQ": -140.49772699999994,
+        "004090.KS": -267.5168677499969,
+        "208370.KQ": -305.62189274999855,
+        "382480.KQ": -416.5651949999992,
+        "002880.KS": -953.5673193750008,
+        "263600.KQ": -1104.0995069999954,
+        "052600.KQ": -2028.4328159999568,
+        "015760.KS": -3090.42574875,
+        "001840.KQ": -3601.5648675000048,
+        "036620.KQ": -4117.4221934999805,
+        "001040.KS": -4555.691222499998,
+        "025950.KQ": -6359.15294999996,
+        "035600.KQ": -22459.71500049997,
+        "000480.KS": -23191.037124249968,
+        "018470.KS": -26742.867148124613,
+        "003570.KS": -30665.439524999936,
+        "004060.KS": -36504.245247999905,
+        "004020.KS": -38809.875857499894,
+        "023440.KQ": -46538.823578249896,
+        "007770.KQ": -49715.06716124527,
+        "000810.KS": -182242.19467499852,
+        "003010.KS": -233036.30756249838,
+        "000520.KS": -251695.84058099613,
+        "006880.KS": -293622.75303974934,
+        "003070.KS": -340617.78882299736,
+        "000240.KS": -363914.2592999954,
+        "013310.KQ": -424198.8282479998,
+        "017890.KQ": -451163.58495599777,
+        "001250.KS": -467459.6329724975,
+        "001380.KS": -498378.1589324977,
+        "000910.KS": -549518.3768249974,
+        "002210.KS": -559767.5279759988,
+        "009160.KS": -568221.3443785384,
+        "000220.KS": -575001.6791219972,
+        "037950.KQ": -576474.7269851193,
+        "039560.KQ": -622199.086199997,
+        "000720.KS": -622462.4935024958,
+        "029480.KQ": -655650.294592496,
+        "008830.KQ": -663567.2469076253,
+        "003850.KS": -672808.6195649952,
+        "000490.KS": -686468.2354214966,
+        "006650.KS": -764309.1599999946,
+        "009420.KS": -778653.5785124972,
+        "001795.KS": -795982.7950076219,
+        "009150.KS": -807947.0106224976,
+        "001060.KS": -817884.2697305866,
+        "010060.KS": -833387.134425275,
+        "032350.KS": -840540.7579087485,
+        "002140.KS": -852988.9613699988,
+        "005290.KQ": -866390.4836249966,
+        "020710.KQ": -870223.1491529942,
+        "000230.KS": -872681.7099409979,
+        "031980.KQ": -878110.7937499974,
+        "030960.KQ": -904270.6317249965,
+        "001680.KS": -911321.2289999984,
+        "060370.KQ": -912962.09372475,
+        "000150.KS": -932983.5440674945,
+        "001230.KS": -978396.2888487503,
+        "001120.KS": -991190.4941749945,
+        "000660.KS": -998750.110679999,
+        "004250.KS": -1016364.4827649966,
+        "001790.KS": -1221467.5042177476,
+        "000270.KS": -2561286.8453624956
+      },
+      "exit_reasons": {
+        "stop": 72,
+        "target": 7,
+        "time": 8
+      }
+    },
+    "limit_type1": {
+      "status": "halted",
+      "last_good_day": "2024-01-12",
+      "return_pct": null,
+      "partial_marked_return_pct": 2.546754572527088,
+      "partial_return_through": "2024-01-12",
+      "max_drawdown_pct": 11.231854718354018,
+      "drawdown_scope": "partial_only",
+      "fills": 57,
+      "closed": 53,
+      "blocked": {
+        "position_limit": 408,
+        "cash_or_risk_or_sector_limit": 28,
+        "unpriced_position": 1
+      },
+      "cancelled": {
+        "unfilled": 5
+      },
+      "halt": {
+        "state": {
+          "halted": true,
+          "halt_reason": "unpriced_position"
+        },
+        "quality": [
+          {
+            "day": "2024-01-15",
+            "symbol": "000270.KS",
+            "reasons": [
+              "missing_session",
+              "invalid_recent_ohlcv"
+            ],
+            "active": true,
+            "filled": true,
+            "signal": false
+          },
+          {
+            "day": "2024-01-15",
+            "symbol": "041510.KQ",
+            "reasons": [
+              "missing_session",
+              "invalid_recent_ohlcv"
+            ],
+            "active": true,
+            "filled": true,
+            "signal": false
+          }
+        ],
+        "events": [
+          {
+            "day": "2024-01-15",
+            "type": "account_halted",
+            "payload": {
+              "symbol": "041510.KQ",
+              "session": 1705300200,
+              "reason": "unpriced_position",
+              "action": "do_not_infer_missing_execution_path"
+            }
+          }
+        ]
+      },
+      "audit": {
+        "cash_reconciled": true,
+        "order_limits_pass": true
+      },
+      "monthly_realized": {
+        "2023-07": {
+          "trades": 6,
+          "realized_pnl": -3497503.6362504857
+        },
+        "2023-08": {
+          "trades": 15,
+          "realized_pnl": 4462775.527765271
+        },
+        "2023-09": {
+          "trades": 7,
+          "realized_pnl": -4717840.537907479
+        },
+        "2023-10": {
+          "trades": 13,
+          "realized_pnl": -3985390.6162337195
+        },
+        "2023-11": {
+          "trades": 4,
+          "realized_pnl": 3292779.8828997435
+        },
+        "2023-12": {
+          "trades": 5,
+          "realized_pnl": 4558382.000403761
+        },
+        "2024-01": {
+          "trades": 3,
+          "realized_pnl": 1916988.6358500072
+        }
+      },
+      "symbol_realized": {
+        "034730.KS": 4463301.429600006,
+        "094360.KQ": 2867107.200000003,
+        "008770.KS": 2841061.0620000027,
+        "000250.KQ": 2781945.600000005,
+        "338220.KQ": 2737147.0500000045,
+        "011200.KS": 2599460.2590000033,
+        "028260.KS": 1596396.9409500025,
+        "006260.KS": 1415300.5944000036,
+        "034220.KS": 1341769.0642977096,
+        "003490.KS": 1037912.8077000082,
+        "001450.KS": 848398.0815000013,
+        "010060.KS": 277436.1776520312,
+        "035900.KQ": 94492.52100000007,
+        "011210.KS": 77177.70000000001,
+        "028300.KQ": 40371.85400000005,
+        "010950.KS": 38618.42000000001,
+        "067160.KQ": 29673.495000000024,
+        "036540.KQ": -321.3623382499991,
+        "064350.KS": -3017.948917499991,
+        "001780.KS": -5110.118387999988,
+        "353200.KS": -19866.273748749925,
+        "012330.KS": -35937.011887499946,
+        "039440.KQ": -362809.5792749971,
+        "005420.KS": -609881.6881462522,
+        "316140.KS": -613278.2673374936,
+        "018290.KQ": -613641.885631498,
+        "418550.KQ": -697536.5846625008,
+        "018260.KS": -728919.4721549936,
+        "042660.KS": -796396.1411099955,
+        "248070.KS": -819775.3350224951,
+        "214450.KQ": -827777.2670399994,
+        "041510.KQ": -838516.3358849958,
+        "009150.KS": -848683.8346874975,
+        "009830.KS": -879947.6160487533,
+        "000720.KS": -905190.117536243,
+        "065350.KQ": -918346.616687499,
+        "058610.KQ": -921475.9104074985,
+        "138040.KS": -953906.1719949953,
+        "011070.KS": -972639.9584999979,
+        "000660.KS": -998750.110679999,
+        "011790.KS": -1000301.8766199984,
+        "189300.KQ": -1044611.085149996,
+        "004020.KS": -1908250.3780462444,
+        "222800.KQ": -2019436.847686247,
+        "000270.KS": -2713053.204982493
+      },
+      "exit_reasons": {
+        "stop": 34,
+        "target": 9,
+        "time": 10
+      }
+    }
+  },
+  "hashes": {
+    "frozen_dataset_manifest": "4ead31811cbdd61361b5266c43771daef928e5cd2b63ad3a69d3f88bfd581366",
+    "centers": "768c083a5c51cb452dad032f018a97b20527d07ff6fc1ab36559b53c406b4dfd",
+    "candidates": "6d2551dd30c4d70dc7184bc7498fdce045f1eac4b05ba9be645f1de1c90898ac",
+    "sectors": "ecb42a2cfd45f3e5f9884b2ee99ee3e648f4fcf26e3a9b0735e2b65470772a29",
+    "engine_input": "d459b28841175e1a530c3b3feeee438c9cd55902d21d3e9c4b09a2fc1f980c3c"
+  },
+  "price_audit_sha256": "f8d77c92c65b871137883ae6e89fa728302f7a79e5221daab6fe10da0a5af441"
+}

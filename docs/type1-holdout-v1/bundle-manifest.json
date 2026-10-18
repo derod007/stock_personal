@@ -3,5 +3,6 @@
   "docs/research/historical-amount-top100-pilot.py": "a7965b6832c93bcbb6458f41443db793f08ea0f74c6ee8b0d0c7c3223f1281fc",
   "docs/research/dated-amount-top100-range.py": "3518fcf7991ae886d3465bc3d8da06d50ee7db5c3cfcb97bdeff68cfa334d45e",
   "docs/type1-holdout-v1/trading-calendar.json": "12422bdef3826f0fcc6a75f793b226bbc2a4feca21b41e7276ec499e7f5f0bc0",
-  "docs/type1-holdout-v1/protocol.md": "99c7576e203bb0ab9afb642ab2489b70c33fb11196d15bedc71c8e03fedfd5e9"
+  "docs/type1-holdout-v1/protocol.md": "99c7576e203bb0ab9afb642ab2489b70c33fb11196d15bedc71c8e03fedfd5e9",
+  "docs/historical-top100-pilot/evidence.json": "40e8dcf47840df63bca3c53258adcd61e8346d2390a731f9834d125ba4f7652b"
 }

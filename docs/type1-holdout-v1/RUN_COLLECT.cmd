@@ -16,7 +16,10 @@ py -3 "%~dp0docs\research\type1_holdout_collect.py" --collect %*
 set "TASK_RESULT=%ERRORLEVEL%"
 echo.
 echo Exit code: %TASK_RESULT%
-echo Success: upload the ZIP shown after READY_TO_UPLOAD.
-echo Failure: keep the data folder; use RUN_COLLECT.cmd --resume after fixing the issue.
+if "%TASK_RESULT%"=="0" (
+  echo Success: upload the ZIP shown after READY_TO_UPLOAD.
+) else (
+  echo Failure: keep the data folder; use RUN_COLLECT.cmd --resume after fixing the issue.
+)
 pause
 exit /b %TASK_RESULT%

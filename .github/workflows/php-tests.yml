@@ -21,6 +21,7 @@ jobs:
           php tests/account_rollout.php
           php tests/half_risk_protection.php
           php tests/forward_protection.php
+          php tests/type1_engine_replay.php
           php tests/rr_pattern_labels.php
           php tests/trend_recovery.php
           php tests/spike_dump.php

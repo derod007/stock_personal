@@ -1,3 +1,9 @@
+## 2026-10-25 · Codex · 끝
+- 급등 전날 후보의 당시 TOP100/과거 관찰 명단, 고정 선별 특징, 미래 라벨 및 비용 반영 성과를 분리한 연구 CLI 추가. 미래 명단 차단 합성검사와 저장 기준 대조 완료. 실데이터 결과는 비공개 파일 보존, 운영·계좌 변경 및 병합 없음.
+
+## 2026-10-25 · Codex · 진행
+- 매일 장 마감 시점 후보를 고정하고 다음 세션 급등·시가 진입 성과를 별도로 확인하는 연구. 결과로 후보를 역선택하지 않음.
+
 ## 2026-10-18 00:52 · Cursor · 끝
 - 한 일: PR #101 main 위에 #87, #88–#98, #99–#100 병합. 연구 CLI만 101 운영 지문을 허용하고 KRX 어댑터를 재생성. 운영 보호청산·지문·예약 경로 유지
 - 파일: bin/paper/KrxAccountReplay.php, bin/paper/KrxAccountStudy.php, bin/paper/KrxSignalStudy.php, bin/paper/RecentNoPullbackStudy.php, tests/krx_account_study.php, docs/work-log.md, .github/workflows/php-tests.yml

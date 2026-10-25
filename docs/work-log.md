@@ -1,3 +1,9 @@
+## 2026-10-25 · Codex · 끝
+- 당시 관찰 명단에서 D−20..D 차트 특징 비교, 첫 구간 분포 경계·특징 선택 고정 후 후속 구간 적용 연구 추가. 도달 라벨과 비용 반영 만기수익 분리, 비중첩/가중 민감도·반대 결과 차트 예시 제공. 합성·저장기준·독립 집계·압축 저장 무결성 검증 완료. 실데이터 결과는 비공개 보존, 운영·계좌 변경 및 병합 없음.
+
+## 2026-10-25 · Codex · 진행
+- 매일 과거 창을 이동하며 상승/미상승 차이를 비교하는 연구. 미래 명단과 결과를 후보 구성에 사용하지 않으며 뒤 구간에서 조건 재선택 없음.
+
 ## 2026-10-18 00:52 · Cursor · 끝
 - 한 일: PR #101 main 위에 #87, #88–#98, #99–#100 병합. 연구 CLI만 101 운영 지문을 허용하고 KRX 어댑터를 재생성. 운영 보호청산·지문·예약 경로 유지
 - 파일: bin/paper/KrxAccountReplay.php, bin/paper/KrxAccountStudy.php, bin/paper/KrxSignalStudy.php, bin/paper/RecentNoPullbackStudy.php, tests/krx_account_study.php, docs/work-log.md, .github/workflows/php-tests.yml

@@ -1,3 +1,9 @@
+## 2026-10-25 · Codex · 끝
+- 고정 진입의 동일 초기 위험 아래 목표·추적손절·추세이탈·기간청산 연구 추가. 미청산 평가/가격 미확정/공통표본 및 원래 무손절 기준 분리. 합성 검사·독립 경로·집계·저장 무결성 대조 완료. 실제 결과·원본 가격 공백 감사는 비공개 보존. 운영·계좌 변경 및 병합 없음.
+
+## 2026-10-25 · Codex · 진행
+- 종목과 진입일을 유지하고 과거 완료봉으로만 청산 판단. 오늘 확정된 추적선은 다음 봉부터 적용, 추세 이탈은 다음 시가 청산. 결과로 파라미터 최적화하지 않음.
+
 ## 2026-10-18 00:52 · Cursor · 끝
 - 한 일: PR #101 main 위에 #87, #88–#98, #99–#100 병합. 연구 CLI만 101 운영 지문을 허용하고 KRX 어댑터를 재생성. 운영 보호청산·지문·예약 경로 유지
 - 파일: bin/paper/KrxAccountReplay.php, bin/paper/KrxAccountStudy.php, bin/paper/KrxSignalStudy.php, bin/paper/RecentNoPullbackStudy.php, tests/krx_account_study.php, docs/work-log.md, .github/workflows/php-tests.yml

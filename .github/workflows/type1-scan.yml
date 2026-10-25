@@ -1,0 +1,17 @@
+name: Type1 scan
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  scan:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax and offline regression
+        run: |
+          php -l index.php
+          php -l type1_scan.php
+          php -l bin/type1/Classifier.php
+          php -l bin/type1/Scanner.php
+          php -l bin/type1/Page.php
+          php tests/type1_scan.php

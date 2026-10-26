@@ -1,0 +1,83 @@
+{
+  "halt_date": "2024-01-15",
+  "invalid_rows_by_reason": {
+    "ohlc_order": 1438,
+    "null_quote": 1
+  },
+  "invalid_rows_by_day": {
+    "2023-01-25": 71,
+    "2023-01-26": 59,
+    "2023-01-27": 61,
+    "2023-01-30": 73,
+    "2023-01-31": 48,
+    "2023-02-01": 48,
+    "2023-02-02": 77,
+    "2023-02-03": 47,
+    "2023-02-06": 84,
+    "2023-02-07": 52,
+    "2023-02-08": 59,
+    "2023-02-09": 77,
+    "2023-02-10": 81,
+    "2023-07-11": 1,
+    "2024-01-15": 601
+  },
+  "halt_date_affected": 601,
+  "halt_date_rows": {
+    "003010.KS": {
+      "reason": "ohlc_order",
+      "yahoo": {
+        "open": 5600.0,
+        "high": 5630.0,
+        "low": 5560.0,
+        "close": 5500.0,
+        "volume": 20442
+      },
+      "krx": {
+        "open": 5600.0,
+        "high": 5630.0,
+        "low": 5470.0,
+        "close": 5500.0,
+        "volume": 123358.0
+      },
+      "bars_sha256": "0684275775d90827a844fcd50d390065509fb32b061cf870e3b240b40d569acc"
+    },
+    "012330.KS": {
+      "reason": "ohlc_order",
+      "yahoo": {
+        "open": 215000.0,
+        "high": 216000.0,
+        "low": 214500.0,
+        "close": 216500.0,
+        "volume": 16131
+      },
+      "krx": {
+        "open": 215000.0,
+        "high": 217500.0,
+        "low": 214500.0,
+        "close": 216500.0,
+        "volume": 84744.0
+      },
+      "bars_sha256": "73071633f5e8b89b1c1a0e7ad329e3208ec09c80414343fb609f8983f186bf97"
+    },
+    "041510.KQ": {
+      "reason": "ohlc_order",
+      "yahoo": {
+        "open": 88300.0,
+        "high": 88900.0,
+        "low": 86700.0,
+        "close": 85500.0,
+        "volume": 38124
+      },
+      "krx": {
+        "open": 88300.0,
+        "high": 88900.0,
+        "low": 84100.0,
+        "close": 85500.0,
+        "volume": 312839.0
+      },
+      "bars_sha256": "a8f9bbaffa962afb90615591f599c614f69c576fab930e99073ec78dbfc2a829"
+    }
+  },
+  "interpretation": "Stored Yahoo OHLC inconsistency confirmed; KRX is comparison evidence only. Provider root cause and compatible adjustment basis remain unconfirmed. No prices substituted.",
+  "note": "Three illustrative source comparisons only; full per-symbol audit is preserved in the private evidence ZIP."
+}

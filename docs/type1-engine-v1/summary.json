@@ -1,0 +1,178 @@
+{
+  "prior": {
+    "all_types": {
+      "arm": "all_types",
+      "research_id": "research-type1-engine-20241008-all_types",
+      "status": "halted",
+      "last_good_day": "2024-10-11",
+      "return_pct": null,
+      "max_drawdown_pct": 1.1607581990831561,
+      "counts": {
+        "order": 7,
+        "decision": 170,
+        "equity": 4,
+        "fill": 5,
+        "order_cancelled": 2,
+        "exit": 2,
+        "account_halted": 1
+      },
+      "blocked": {
+        "cash_or_risk_or_sector_limit": 2,
+        "position_limit": 145,
+        "unpriced_position": 23
+      },
+      "cancelled": {
+        "unfilled": 2
+      },
+      "max_held_at_close": 3,
+      "max_pending_at_close": 4,
+      "max_reserved_cash": 57278621.39999998,
+      "audit": {
+        "cash_reconciled": true,
+        "order_limits_pass": true
+      },
+      "input_sha256": "a6a07ed67a62f2d6fe5ab58c65a0bdbbba9a49893c21f450afa6470cb1bfc1ef",
+      "code_hashes": {
+        "src/PaperPortfolio.php": "8c10ae5dca2d063241b6bd3c1c25b73af62ff602ce7509ef75429ecaa67171ec",
+        "src/TradeSimulator.php": "f1eb7d82e96f7183d8e9892270690b5b8cfc1f3145d941d074fa24cc00cc3d3c",
+        "src/PaperQuality.php": "dac9a2ed7614ea00862656b9d0d9e5b2a6494e015f333cc397e9190bf5ddd82c",
+        "src/CandleClock.php": "fa4eeaf906a4a9219211b855b9dd9f3202f603c4db263a6044319240a9e0431d",
+        "src/PaperForwardExitPolicy.php": "3b24ea5c37fd0a806a1fe97a413c428884a0f36023bc2dacb5ac495e233bd132",
+        "docs/research/Type1EngineReplay.php": "7ce23e0d2340664757f35e7323e36779e0bd44acd9061b1cf5650c9e7360f494",
+        "docs/research/top100_type1_engine.php": "e8da13bc3230ac53c7b9e6804fe85812ce038b549666a20330dc75e7928145e3",
+        "config/paper-kr-recovery-v1.json": "dc092bc8e3939a5de22eb25ed79a442666928f46b30d672dd48afd0e7ecd7bb4"
+      }
+    },
+    "type1": {
+      "arm": "type1",
+      "research_id": "research-type1-engine-20241008-type1",
+      "status": "halted",
+      "last_good_day": "2024-10-11",
+      "return_pct": null,
+      "max_drawdown_pct": 1.619006670930001,
+      "counts": {
+        "order": 8,
+        "decision": 69,
+        "equity": 4,
+        "order_cancelled": 3,
+        "fill": 5,
+        "exit": 1,
+        "account_halted": 1
+      },
+      "blocked": {
+        "cash_or_risk_or_sector_limit": 4,
+        "position_limit": 60,
+        "unpriced_position": 5
+      },
+      "cancelled": {
+        "unfilled": 3
+      },
+      "max_held_at_close": 4,
+      "max_pending_at_close": 4,
+      "max_reserved_cash": 57242385.199999996,
+      "audit": {
+        "cash_reconciled": true,
+        "order_limits_pass": true
+      },
+      "input_sha256": "a6a07ed67a62f2d6fe5ab58c65a0bdbbba9a49893c21f450afa6470cb1bfc1ef",
+      "code_hashes": {
+        "src/PaperPortfolio.php": "8c10ae5dca2d063241b6bd3c1c25b73af62ff602ce7509ef75429ecaa67171ec",
+        "src/TradeSimulator.php": "f1eb7d82e96f7183d8e9892270690b5b8cfc1f3145d941d074fa24cc00cc3d3c",
+        "src/PaperQuality.php": "dac9a2ed7614ea00862656b9d0d9e5b2a6494e015f333cc397e9190bf5ddd82c",
+        "src/CandleClock.php": "fa4eeaf906a4a9219211b855b9dd9f3202f603c4db263a6044319240a9e0431d",
+        "src/PaperForwardExitPolicy.php": "3b24ea5c37fd0a806a1fe97a413c428884a0f36023bc2dacb5ac495e233bd132",
+        "docs/research/Type1EngineReplay.php": "7ce23e0d2340664757f35e7323e36779e0bd44acd9061b1cf5650c9e7360f494",
+        "docs/research/top100_type1_engine.php": "e8da13bc3230ac53c7b9e6804fe85812ce038b549666a20330dc75e7928145e3",
+        "config/paper-kr-recovery-v1.json": "dc092bc8e3939a5de22eb25ed79a442666928f46b30d672dd48afd0e7ecd7bb4"
+      }
+    }
+  },
+  "recent": {
+    "all_types": {
+      "arm": "all_types",
+      "research_id": "research-type1-engine-20251010-all_types",
+      "status": "completed",
+      "last_good_day": "2026-10-08",
+      "return_pct": -9.66686400884128,
+      "max_drawdown_pct": 22.30939898321286,
+      "counts": {
+        "order": 314,
+        "decision": 2333,
+        "equity": 244,
+        "fill": 234,
+        "order_cancelled": 80,
+        "exit": 234
+      },
+      "blocked": {
+        "cash_or_risk_or_sector_limit": 36,
+        "position_limit": 2292,
+        "data_quality": 5
+      },
+      "cancelled": {
+        "cancelled_before_entry": 57,
+        "unfilled": 23
+      },
+      "max_held_at_close": 4,
+      "max_pending_at_close": 4,
+      "max_reserved_cash": 61633471.89999999,
+      "audit": {
+        "cash_reconciled": true,
+        "order_limits_pass": true
+      },
+      "input_sha256": "4315e71d75767334c66de0af11968d7845df86fb5ded081292f3fd6d8109b1c1",
+      "code_hashes": {
+        "src/PaperPortfolio.php": "8c10ae5dca2d063241b6bd3c1c25b73af62ff602ce7509ef75429ecaa67171ec",
+        "src/TradeSimulator.php": "f1eb7d82e96f7183d8e9892270690b5b8cfc1f3145d941d074fa24cc00cc3d3c",
+        "src/PaperQuality.php": "dac9a2ed7614ea00862656b9d0d9e5b2a6494e015f333cc397e9190bf5ddd82c",
+        "src/CandleClock.php": "fa4eeaf906a4a9219211b855b9dd9f3202f603c4db263a6044319240a9e0431d",
+        "src/PaperForwardExitPolicy.php": "3b24ea5c37fd0a806a1fe97a413c428884a0f36023bc2dacb5ac495e233bd132",
+        "docs/research/Type1EngineReplay.php": "7ce23e0d2340664757f35e7323e36779e0bd44acd9061b1cf5650c9e7360f494",
+        "docs/research/top100_type1_engine.php": "e8da13bc3230ac53c7b9e6804fe85812ce038b549666a20330dc75e7928145e3",
+        "config/paper-kr-recovery-v1.json": "dc092bc8e3939a5de22eb25ed79a442666928f46b30d672dd48afd0e7ecd7bb4"
+      }
+    },
+    "type1": {
+      "arm": "type1",
+      "research_id": "research-type1-engine-20251010-type1",
+      "status": "completed",
+      "last_good_day": "2026-10-08",
+      "return_pct": 3.8883162530651383,
+      "max_drawdown_pct": 23.86524046377092,
+      "counts": {
+        "order": 223,
+        "decision": 787,
+        "equity": 244,
+        "fill": 171,
+        "order_cancelled": 52,
+        "exit": 171
+      },
+      "blocked": {
+        "cash_or_risk_or_sector_limit": 14,
+        "position_limit": 772,
+        "data_quality": 1
+      },
+      "cancelled": {
+        "cancelled_before_entry": 22,
+        "unfilled": 30
+      },
+      "max_held_at_close": 4,
+      "max_pending_at_close": 4,
+      "max_reserved_cash": 71780408.69999999,
+      "audit": {
+        "cash_reconciled": true,
+        "order_limits_pass": true
+      },
+      "input_sha256": "4315e71d75767334c66de0af11968d7845df86fb5ded081292f3fd6d8109b1c1",
+      "code_hashes": {
+        "src/PaperPortfolio.php": "8c10ae5dca2d063241b6bd3c1c25b73af62ff602ce7509ef75429ecaa67171ec",
+        "src/TradeSimulator.php": "f1eb7d82e96f7183d8e9892270690b5b8cfc1f3145d941d074fa24cc00cc3d3c",
+        "src/PaperQuality.php": "dac9a2ed7614ea00862656b9d0d9e5b2a6494e015f333cc397e9190bf5ddd82c",
+        "src/CandleClock.php": "fa4eeaf906a4a9219211b855b9dd9f3202f603c4db263a6044319240a9e0431d",
+        "src/PaperForwardExitPolicy.php": "3b24ea5c37fd0a806a1fe97a413c428884a0f36023bc2dacb5ac495e233bd132",
+        "docs/research/Type1EngineReplay.php": "7ce23e0d2340664757f35e7323e36779e0bd44acd9061b1cf5650c9e7360f494",
+        "docs/research/top100_type1_engine.php": "e8da13bc3230ac53c7b9e6804fe85812ce038b549666a20330dc75e7928145e3",
+        "config/paper-kr-recovery-v1.json": "dc092bc8e3939a5de22eb25ed79a442666928f46b30d672dd48afd0e7ecd7bb4"
+      }
+    }
+  }
+}

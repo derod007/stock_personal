@@ -1,0 +1,78 @@
+{
+  "price_basis": "krx_tdd_ohlcv_adjustment_unverified",
+  "evaluation_period": [
+    "2023-07-03",
+    "2024-06-28"
+  ],
+  "verified_files": 1098,
+  "symbols": 1405,
+  "quality": {
+    "valid": 483572,
+    "nonpositive_price": 3485
+  },
+  "candidate_coverage": {
+    "ready60": 22849,
+    "under60": 1451,
+    "ready60_with_reference_event": 678
+  },
+  "nonoverlap_episodes": {
+    "ready60": 3719,
+    "under60": 190,
+    "ready60_with_reference_event": 124,
+    "period_end": 323
+  },
+  "first_day_short": [
+    {
+      "symbol": "440320.KQ",
+      "valid_bars_including_anchor": 2,
+      "status": "under60"
+    },
+    {
+      "symbol": "457190.KS",
+      "valid_bars_including_anchor": 21,
+      "status": "under60"
+    },
+    {
+      "symbol": "354320.KQ",
+      "valid_bars_including_anchor": 2,
+      "status": "under60"
+    },
+    {
+      "symbol": "420770.KQ",
+      "valid_bars_including_anchor": 27,
+      "status": "under60"
+    },
+    {
+      "symbol": "232830.KQ",
+      "valid_bars_including_anchor": 3,
+      "status": "under60"
+    }
+  ],
+  "reference_event_count": 201,
+  "reference_symbols": 175,
+  "prehistory_events": 55,
+  "evaluation_events": 146,
+  "join_events": [
+    {
+      "symbol": "126600.KQ",
+      "day": "2023-07-03",
+      "previous_day": "2023-06-30",
+      "previous_close": 6260.0,
+      "comparison_price": 5950.0,
+      "cause": "unconfirmed"
+    }
+  ],
+  "entry_policy_counts": {
+    "eligible": 3550,
+    "blocked": 359,
+    "under60": 190,
+    "invalid_recent90": 78,
+    "reference_inside60": 124
+  },
+  "retrospective_exposure_not_filter": {
+    "eligible_windows_with_future_event": 42,
+    "event_on_next_session": 2
+  },
+  "account_execution": false,
+  "decision": "Entry quality and active EOD halt policy specified; account adapter not yet integrated; no returns computed"
+}

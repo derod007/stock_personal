@@ -1,0 +1,1040 @@
+{
+  "price_basis": "krx_tdd_ohlcv_adjustment_unverified",
+  "period": [
+    "2023-07-03",
+    "2024-06-28"
+  ],
+  "sessions": 243,
+  "raw_files": 486,
+  "symbols": 1405,
+  "candidate_observations": 24300,
+  "observed_rows": 329577,
+  "counts": {
+    "valid": 326920,
+    "nonpositive_price": 2657
+  },
+  "daily": {
+    "2023-07-03": {
+      "valid": 1299,
+      "nonpositive_price": 4
+    },
+    "2023-07-04": {
+      "valid": 1300,
+      "nonpositive_price": 3
+    },
+    "2023-07-05": {
+      "valid": 1299,
+      "nonpositive_price": 4
+    },
+    "2023-07-06": {
+      "valid": 1301,
+      "nonpositive_price": 3
+    },
+    "2023-07-07": {
+      "valid": 1301,
+      "nonpositive_price": 3
+    },
+    "2023-07-10": {
+      "valid": 1301,
+      "nonpositive_price": 3
+    },
+    "2023-07-11": {
+      "valid": 1301,
+      "nonpositive_price": 3
+    },
+    "2023-07-12": {
+      "valid": 1301,
+      "nonpositive_price": 3
+    },
+    "2023-07-13": {
+      "valid": 1301,
+      "nonpositive_price": 3
+    },
+    "2023-07-14": {
+      "valid": 1302,
+      "nonpositive_price": 3
+    },
+    "2023-07-17": {
+      "valid": 1302,
+      "nonpositive_price": 3
+    },
+    "2023-07-18": {
+      "valid": 1301,
+      "nonpositive_price": 4
+    },
+    "2023-07-19": {
+      "valid": 1302,
+      "nonpositive_price": 4
+    },
+    "2023-07-20": {
+      "valid": 1302,
+      "nonpositive_price": 5
+    },
+    "2023-07-21": {
+      "valid": 1303,
+      "nonpositive_price": 4
+    },
+    "2023-07-24": {
+      "valid": 1304,
+      "nonpositive_price": 4
+    },
+    "2023-07-25": {
+      "valid": 1304,
+      "nonpositive_price": 4
+    },
+    "2023-07-26": {
+      "valid": 1305,
+      "nonpositive_price": 4
+    },
+    "2023-07-27": {
+      "valid": 1307,
+      "nonpositive_price": 4
+    },
+    "2023-07-28": {
+      "valid": 1309,
+      "nonpositive_price": 3
+    },
+    "2023-07-31": {
+      "valid": 1309,
+      "nonpositive_price": 3
+    },
+    "2023-08-01": {
+      "valid": 1309,
+      "nonpositive_price": 3
+    },
+    "2023-08-02": {
+      "valid": 1309,
+      "nonpositive_price": 3
+    },
+    "2023-08-03": {
+      "valid": 1310,
+      "nonpositive_price": 3
+    },
+    "2023-08-04": {
+      "valid": 1310,
+      "nonpositive_price": 4
+    },
+    "2023-08-07": {
+      "valid": 1312,
+      "nonpositive_price": 3
+    },
+    "2023-08-08": {
+      "valid": 1312,
+      "nonpositive_price": 3
+    },
+    "2023-08-09": {
+      "valid": 1312,
+      "nonpositive_price": 3
+    },
+    "2023-08-10": {
+      "valid": 1313,
+      "nonpositive_price": 4
+    },
+    "2023-08-11": {
+      "valid": 1313,
+      "nonpositive_price": 4
+    },
+    "2023-08-14": {
+      "valid": 1312,
+      "nonpositive_price": 5
+    },
+    "2023-08-16": {
+      "valid": 1313,
+      "nonpositive_price": 4
+    },
+    "2023-08-17": {
+      "valid": 1311,
+      "nonpositive_price": 7
+    },
+    "2023-08-18": {
+      "valid": 1313,
+      "nonpositive_price": 5
+    },
+    "2023-08-21": {
+      "valid": 1314,
+      "nonpositive_price": 5
+    },
+    "2023-08-22": {
+      "valid": 1314,
+      "nonpositive_price": 6
+    },
+    "2023-08-23": {
+      "valid": 1314,
+      "nonpositive_price": 6
+    },
+    "2023-08-24": {
+      "valid": 1315,
+      "nonpositive_price": 6
+    },
+    "2023-08-25": {
+      "valid": 1315,
+      "nonpositive_price": 6
+    },
+    "2023-08-28": {
+      "valid": 1316,
+      "nonpositive_price": 5
+    },
+    "2023-08-29": {
+      "valid": 1316,
+      "nonpositive_price": 5
+    },
+    "2023-08-30": {
+      "valid": 1315,
+      "nonpositive_price": 6
+    },
+    "2023-08-31": {
+      "valid": 1316,
+      "nonpositive_price": 6
+    },
+    "2023-09-01": {
+      "valid": 1315,
+      "nonpositive_price": 7
+    },
+    "2023-09-04": {
+      "valid": 1316,
+      "nonpositive_price": 6
+    },
+    "2023-09-05": {
+      "valid": 1315,
+      "nonpositive_price": 7
+    },
+    "2023-09-06": {
+      "valid": 1317,
+      "nonpositive_price": 5
+    },
+    "2023-09-07": {
+      "valid": 1317,
+      "nonpositive_price": 5
+    },
+    "2023-09-08": {
+      "valid": 1319,
+      "nonpositive_price": 4
+    },
+    "2023-09-11": {
+      "valid": 1319,
+      "nonpositive_price": 4
+    },
+    "2023-09-12": {
+      "valid": 1319,
+      "nonpositive_price": 4
+    },
+    "2023-09-13": {
+      "valid": 1319,
+      "nonpositive_price": 4
+    },
+    "2023-09-14": {
+      "valid": 1319,
+      "nonpositive_price": 4
+    },
+    "2023-09-15": {
+      "valid": 1321,
+      "nonpositive_price": 3
+    },
+    "2023-09-18": {
+      "valid": 1322,
+      "nonpositive_price": 3
+    },
+    "2023-09-19": {
+      "valid": 1323,
+      "nonpositive_price": 3
+    },
+    "2023-09-20": {
+      "valid": 1323,
+      "nonpositive_price": 3
+    },
+    "2023-09-21": {
+      "valid": 1324,
+      "nonpositive_price": 2
+    },
+    "2023-09-22": {
+      "valid": 1324,
+      "nonpositive_price": 2
+    },
+    "2023-09-25": {
+      "valid": 1325,
+      "nonpositive_price": 2
+    },
+    "2023-09-26": {
+      "valid": 1324,
+      "nonpositive_price": 3
+    },
+    "2023-09-27": {
+      "valid": 1325,
+      "nonpositive_price": 3
+    },
+    "2023-10-04": {
+      "valid": 1326,
+      "nonpositive_price": 3
+    },
+    "2023-10-05": {
+      "valid": 1326,
+      "nonpositive_price": 4
+    },
+    "2023-10-06": {
+      "valid": 1326,
+      "nonpositive_price": 5
+    },
+    "2023-10-10": {
+      "valid": 1328,
+      "nonpositive_price": 4
+    },
+    "2023-10-11": {
+      "valid": 1327,
+      "nonpositive_price": 5
+    },
+    "2023-10-12": {
+      "valid": 1327,
+      "nonpositive_price": 5
+    },
+    "2023-10-13": {
+      "valid": 1327,
+      "nonpositive_price": 5
+    },
+    "2023-10-16": {
+      "valid": 1327,
+      "nonpositive_price": 5
+    },
+    "2023-10-17": {
+      "valid": 1327,
+      "nonpositive_price": 5
+    },
+    "2023-10-18": {
+      "valid": 1328,
+      "nonpositive_price": 5
+    },
+    "2023-10-19": {
+      "valid": 1327,
+      "nonpositive_price": 7
+    },
+    "2023-10-20": {
+      "valid": 1328,
+      "nonpositive_price": 7
+    },
+    "2023-10-23": {
+      "valid": 1329,
+      "nonpositive_price": 6
+    },
+    "2023-10-24": {
+      "valid": 1330,
+      "nonpositive_price": 5
+    },
+    "2023-10-25": {
+      "valid": 1330,
+      "nonpositive_price": 5
+    },
+    "2023-10-26": {
+      "valid": 1333,
+      "nonpositive_price": 3
+    },
+    "2023-10-27": {
+      "valid": 1332,
+      "nonpositive_price": 5
+    },
+    "2023-10-30": {
+      "valid": 1333,
+      "nonpositive_price": 4
+    },
+    "2023-10-31": {
+      "valid": 1333,
+      "nonpositive_price": 4
+    },
+    "2023-11-01": {
+      "valid": 1333,
+      "nonpositive_price": 4
+    },
+    "2023-11-02": {
+      "valid": 1335,
+      "nonpositive_price": 4
+    },
+    "2023-11-03": {
+      "valid": 1336,
+      "nonpositive_price": 5
+    },
+    "2023-11-06": {
+      "valid": 1337,
+      "nonpositive_price": 4
+    },
+    "2023-11-07": {
+      "valid": 1338,
+      "nonpositive_price": 4
+    },
+    "2023-11-08": {
+      "valid": 1338,
+      "nonpositive_price": 4
+    },
+    "2023-11-09": {
+      "valid": 1342,
+      "nonpositive_price": 4
+    },
+    "2023-11-10": {
+      "valid": 1342,
+      "nonpositive_price": 4
+    },
+    "2023-11-13": {
+      "valid": 1343,
+      "nonpositive_price": 5
+    },
+    "2023-11-14": {
+      "valid": 1344,
+      "nonpositive_price": 4
+    },
+    "2023-11-15": {
+      "valid": 1345,
+      "nonpositive_price": 4
+    },
+    "2023-11-16": {
+      "valid": 1346,
+      "nonpositive_price": 3
+    },
+    "2023-11-17": {
+      "valid": 1347,
+      "nonpositive_price": 3
+    },
+    "2023-11-20": {
+      "valid": 1348,
+      "nonpositive_price": 3
+    },
+    "2023-11-21": {
+      "valid": 1351,
+      "nonpositive_price": 2
+    },
+    "2023-11-22": {
+      "valid": 1351,
+      "nonpositive_price": 2
+    },
+    "2023-11-23": {
+      "valid": 1351,
+      "nonpositive_price": 2
+    },
+    "2023-11-24": {
+      "valid": 1354,
+      "nonpositive_price": 2
+    },
+    "2023-11-27": {
+      "valid": 1354,
+      "nonpositive_price": 2
+    },
+    "2023-11-28": {
+      "valid": 1354,
+      "nonpositive_price": 3
+    },
+    "2023-11-29": {
+      "valid": 1353,
+      "nonpositive_price": 4
+    },
+    "2023-11-30": {
+      "valid": 1354,
+      "nonpositive_price": 3
+    },
+    "2023-12-01": {
+      "valid": 1354,
+      "nonpositive_price": 4
+    },
+    "2023-12-04": {
+      "valid": 1352,
+      "nonpositive_price": 6
+    },
+    "2023-12-05": {
+      "valid": 1355,
+      "nonpositive_price": 4
+    },
+    "2023-12-06": {
+      "valid": 1356,
+      "nonpositive_price": 4
+    },
+    "2023-12-07": {
+      "valid": 1352,
+      "nonpositive_price": 8
+    },
+    "2023-12-08": {
+      "valid": 1354,
+      "nonpositive_price": 6
+    },
+    "2023-12-11": {
+      "valid": 1354,
+      "nonpositive_price": 6
+    },
+    "2023-12-12": {
+      "valid": 1355,
+      "nonpositive_price": 6
+    },
+    "2023-12-13": {
+      "valid": 1356,
+      "nonpositive_price": 6
+    },
+    "2023-12-14": {
+      "valid": 1355,
+      "nonpositive_price": 7
+    },
+    "2023-12-15": {
+      "valid": 1356,
+      "nonpositive_price": 6
+    },
+    "2023-12-18": {
+      "valid": 1355,
+      "nonpositive_price": 7
+    },
+    "2023-12-19": {
+      "valid": 1352,
+      "nonpositive_price": 10
+    },
+    "2023-12-20": {
+      "valid": 1356,
+      "nonpositive_price": 6
+    },
+    "2023-12-21": {
+      "valid": 1355,
+      "nonpositive_price": 8
+    },
+    "2023-12-22": {
+      "valid": 1357,
+      "nonpositive_price": 7
+    },
+    "2023-12-26": {
+      "valid": 1357,
+      "nonpositive_price": 7
+    },
+    "2023-12-27": {
+      "valid": 1356,
+      "nonpositive_price": 8
+    },
+    "2023-12-28": {
+      "valid": 1357,
+      "nonpositive_price": 7
+    },
+    "2024-01-02": {
+      "valid": 1357,
+      "nonpositive_price": 7
+    },
+    "2024-01-03": {
+      "valid": 1355,
+      "nonpositive_price": 9
+    },
+    "2024-01-04": {
+      "valid": 1357,
+      "nonpositive_price": 8
+    },
+    "2024-01-05": {
+      "valid": 1356,
+      "nonpositive_price": 9
+    },
+    "2024-01-08": {
+      "valid": 1357,
+      "nonpositive_price": 8
+    },
+    "2024-01-09": {
+      "valid": 1356,
+      "nonpositive_price": 9
+    },
+    "2024-01-10": {
+      "valid": 1356,
+      "nonpositive_price": 9
+    },
+    "2024-01-11": {
+      "valid": 1356,
+      "nonpositive_price": 9
+    },
+    "2024-01-12": {
+      "valid": 1355,
+      "nonpositive_price": 9
+    },
+    "2024-01-15": {
+      "valid": 1355,
+      "nonpositive_price": 9
+    },
+    "2024-01-16": {
+      "valid": 1355,
+      "nonpositive_price": 9
+    },
+    "2024-01-17": {
+      "valid": 1355,
+      "nonpositive_price": 9
+    },
+    "2024-01-18": {
+      "valid": 1355,
+      "nonpositive_price": 9
+    },
+    "2024-01-19": {
+      "valid": 1355,
+      "nonpositive_price": 9
+    },
+    "2024-01-22": {
+      "valid": 1352,
+      "nonpositive_price": 12
+    },
+    "2024-01-23": {
+      "valid": 1353,
+      "nonpositive_price": 11
+    },
+    "2024-01-24": {
+      "valid": 1354,
+      "nonpositive_price": 11
+    },
+    "2024-01-25": {
+      "valid": 1356,
+      "nonpositive_price": 11
+    },
+    "2024-01-26": {
+      "valid": 1357,
+      "nonpositive_price": 11
+    },
+    "2024-01-29": {
+      "valid": 1355,
+      "nonpositive_price": 14
+    },
+    "2024-01-30": {
+      "valid": 1355,
+      "nonpositive_price": 14
+    },
+    "2024-01-31": {
+      "valid": 1355,
+      "nonpositive_price": 13
+    },
+    "2024-02-01": {
+      "valid": 1357,
+      "nonpositive_price": 13
+    },
+    "2024-02-02": {
+      "valid": 1360,
+      "nonpositive_price": 11
+    },
+    "2024-02-05": {
+      "valid": 1359,
+      "nonpositive_price": 12
+    },
+    "2024-02-06": {
+      "valid": 1360,
+      "nonpositive_price": 12
+    },
+    "2024-02-07": {
+      "valid": 1360,
+      "nonpositive_price": 12
+    },
+    "2024-02-08": {
+      "valid": 1359,
+      "nonpositive_price": 13
+    },
+    "2024-02-13": {
+      "valid": 1359,
+      "nonpositive_price": 13
+    },
+    "2024-02-14": {
+      "valid": 1359,
+      "nonpositive_price": 13
+    },
+    "2024-02-15": {
+      "valid": 1359,
+      "nonpositive_price": 14
+    },
+    "2024-02-16": {
+      "valid": 1360,
+      "nonpositive_price": 13
+    },
+    "2024-02-19": {
+      "valid": 1361,
+      "nonpositive_price": 13
+    },
+    "2024-02-20": {
+      "valid": 1363,
+      "nonpositive_price": 11
+    },
+    "2024-02-21": {
+      "valid": 1363,
+      "nonpositive_price": 11
+    },
+    "2024-02-22": {
+      "valid": 1365,
+      "nonpositive_price": 10
+    },
+    "2024-02-23": {
+      "valid": 1367,
+      "nonpositive_price": 10
+    },
+    "2024-02-26": {
+      "valid": 1367,
+      "nonpositive_price": 10
+    },
+    "2024-02-27": {
+      "valid": 1368,
+      "nonpositive_price": 10
+    },
+    "2024-02-28": {
+      "valid": 1368,
+      "nonpositive_price": 10
+    },
+    "2024-02-29": {
+      "valid": 1368,
+      "nonpositive_price": 10
+    },
+    "2024-03-04": {
+      "valid": 1367,
+      "nonpositive_price": 11
+    },
+    "2024-03-05": {
+      "valid": 1367,
+      "nonpositive_price": 11
+    },
+    "2024-03-06": {
+      "valid": 1367,
+      "nonpositive_price": 10
+    },
+    "2024-03-07": {
+      "valid": 1368,
+      "nonpositive_price": 10
+    },
+    "2024-03-08": {
+      "valid": 1368,
+      "nonpositive_price": 10
+    },
+    "2024-03-11": {
+      "valid": 1367,
+      "nonpositive_price": 11
+    },
+    "2024-03-12": {
+      "valid": 1367,
+      "nonpositive_price": 11
+    },
+    "2024-03-13": {
+      "valid": 1368,
+      "nonpositive_price": 11
+    },
+    "2024-03-14": {
+      "valid": 1367,
+      "nonpositive_price": 12
+    },
+    "2024-03-15": {
+      "valid": 1367,
+      "nonpositive_price": 12
+    },
+    "2024-03-18": {
+      "valid": 1367,
+      "nonpositive_price": 12
+    },
+    "2024-03-19": {
+      "valid": 1367,
+      "nonpositive_price": 12
+    },
+    "2024-03-20": {
+      "valid": 1366,
+      "nonpositive_price": 13
+    },
+    "2024-03-21": {
+      "valid": 1367,
+      "nonpositive_price": 13
+    },
+    "2024-03-22": {
+      "valid": 1364,
+      "nonpositive_price": 16
+    },
+    "2024-03-25": {
+      "valid": 1366,
+      "nonpositive_price": 15
+    },
+    "2024-03-26": {
+      "valid": 1366,
+      "nonpositive_price": 16
+    },
+    "2024-03-27": {
+      "valid": 1366,
+      "nonpositive_price": 16
+    },
+    "2024-03-28": {
+      "valid": 1365,
+      "nonpositive_price": 17
+    },
+    "2024-03-29": {
+      "valid": 1367,
+      "nonpositive_price": 16
+    },
+    "2024-04-01": {
+      "valid": 1366,
+      "nonpositive_price": 17
+    },
+    "2024-04-02": {
+      "valid": 1366,
+      "nonpositive_price": 17
+    },
+    "2024-04-03": {
+      "valid": 1366,
+      "nonpositive_price": 18
+    },
+    "2024-04-04": {
+      "valid": 1366,
+      "nonpositive_price": 18
+    },
+    "2024-04-05": {
+      "valid": 1366,
+      "nonpositive_price": 18
+    },
+    "2024-04-08": {
+      "valid": 1362,
+      "nonpositive_price": 22
+    },
+    "2024-04-09": {
+      "valid": 1360,
+      "nonpositive_price": 24
+    },
+    "2024-04-11": {
+      "valid": 1357,
+      "nonpositive_price": 27
+    },
+    "2024-04-12": {
+      "valid": 1354,
+      "nonpositive_price": 30
+    },
+    "2024-04-15": {
+      "valid": 1354,
+      "nonpositive_price": 30
+    },
+    "2024-04-16": {
+      "valid": 1355,
+      "nonpositive_price": 29
+    },
+    "2024-04-17": {
+      "valid": 1355,
+      "nonpositive_price": 29
+    },
+    "2024-04-18": {
+      "valid": 1355,
+      "nonpositive_price": 29
+    },
+    "2024-04-19": {
+      "valid": 1354,
+      "nonpositive_price": 30
+    },
+    "2024-04-22": {
+      "valid": 1356,
+      "nonpositive_price": 28
+    },
+    "2024-04-23": {
+      "valid": 1355,
+      "nonpositive_price": 29
+    },
+    "2024-04-24": {
+      "valid": 1354,
+      "nonpositive_price": 30
+    },
+    "2024-04-25": {
+      "valid": 1357,
+      "nonpositive_price": 28
+    },
+    "2024-04-26": {
+      "valid": 1357,
+      "nonpositive_price": 28
+    },
+    "2024-04-29": {
+      "valid": 1358,
+      "nonpositive_price": 27
+    },
+    "2024-04-30": {
+      "valid": 1358,
+      "nonpositive_price": 28
+    },
+    "2024-05-02": {
+      "valid": 1362,
+      "nonpositive_price": 25
+    },
+    "2024-05-03": {
+      "valid": 1365,
+      "nonpositive_price": 24
+    },
+    "2024-05-07": {
+      "valid": 1366,
+      "nonpositive_price": 24
+    },
+    "2024-05-08": {
+      "valid": 1367,
+      "nonpositive_price": 24
+    },
+    "2024-05-09": {
+      "valid": 1365,
+      "nonpositive_price": 26
+    },
+    "2024-05-10": {
+      "valid": 1366,
+      "nonpositive_price": 25
+    },
+    "2024-05-13": {
+      "valid": 1366,
+      "nonpositive_price": 25
+    },
+    "2024-05-14": {
+      "valid": 1366,
+      "nonpositive_price": 25
+    },
+    "2024-05-16": {
+      "valid": 1367,
+      "nonpositive_price": 24
+    },
+    "2024-05-17": {
+      "valid": 1368,
+      "nonpositive_price": 24
+    },
+    "2024-05-20": {
+      "valid": 1368,
+      "nonpositive_price": 24
+    },
+    "2024-05-21": {
+      "valid": 1369,
+      "nonpositive_price": 23
+    },
+    "2024-05-22": {
+      "valid": 1369,
+      "nonpositive_price": 23
+    },
+    "2024-05-23": {
+      "valid": 1370,
+      "nonpositive_price": 23
+    },
+    "2024-05-24": {
+      "valid": 1371,
+      "nonpositive_price": 22
+    },
+    "2024-05-27": {
+      "valid": 1371,
+      "nonpositive_price": 22
+    },
+    "2024-05-28": {
+      "valid": 1371,
+      "nonpositive_price": 22
+    },
+    "2024-05-29": {
+      "valid": 1371,
+      "nonpositive_price": 22
+    },
+    "2024-05-30": {
+      "valid": 1371,
+      "nonpositive_price": 22
+    },
+    "2024-05-31": {
+      "valid": 1371,
+      "nonpositive_price": 22
+    },
+    "2024-06-03": {
+      "valid": 1371,
+      "nonpositive_price": 22
+    },
+    "2024-06-04": {
+      "valid": 1371,
+      "nonpositive_price": 22
+    },
+    "2024-06-05": {
+      "valid": 1371,
+      "nonpositive_price": 22
+    },
+    "2024-06-07": {
+      "valid": 1371,
+      "nonpositive_price": 22
+    },
+    "2024-06-10": {
+      "valid": 1371,
+      "nonpositive_price": 22
+    },
+    "2024-06-11": {
+      "valid": 1372,
+      "nonpositive_price": 21
+    },
+    "2024-06-12": {
+      "valid": 1372,
+      "nonpositive_price": 21
+    },
+    "2024-06-13": {
+      "valid": 1372,
+      "nonpositive_price": 21
+    },
+    "2024-06-14": {
+      "valid": 1373,
+      "nonpositive_price": 21
+    },
+    "2024-06-17": {
+      "valid": 1374,
+      "nonpositive_price": 21
+    },
+    "2024-06-18": {
+      "valid": 1374,
+      "nonpositive_price": 21
+    },
+    "2024-06-19": {
+      "valid": 1375,
+      "nonpositive_price": 21
+    },
+    "2024-06-20": {
+      "valid": 1375,
+      "nonpositive_price": 21
+    },
+    "2024-06-21": {
+      "valid": 1374,
+      "nonpositive_price": 22
+    },
+    "2024-06-24": {
+      "valid": 1373,
+      "nonpositive_price": 23
+    },
+    "2024-06-25": {
+      "valid": 1374,
+      "nonpositive_price": 23
+    },
+    "2024-06-26": {
+      "valid": 1374,
+      "nonpositive_price": 23
+    },
+    "2024-06-27": {
+      "valid": 1375,
+      "nonpositive_price": 23
+    },
+    "2024-06-28": {
+      "valid": 1376,
+      "nonpositive_price": 23
+    }
+  },
+  "candidate_issues": [],
+  "duplicates": [],
+  "halt_date_examples": [
+    {
+      "symbol": "012330.KS",
+      "day": "2024-01-15",
+      "open": 215000.0,
+      "high": 217500.0,
+      "low": 214500.0,
+      "close": 216500.0,
+      "volume": 84744.0,
+      "quality": "valid"
+    },
+    {
+      "symbol": "003010.KS",
+      "day": "2024-01-15",
+      "open": 5600.0,
+      "high": 5630.0,
+      "low": 5470.0,
+      "close": 5500.0,
+      "volume": 123358.0,
+      "quality": "valid"
+    },
+    {
+      "symbol": "041510.KQ",
+      "day": "2024-01-15",
+      "open": 88300.0,
+      "high": 88900.0,
+      "low": 84100.0,
+      "close": 85500.0,
+      "volume": 312839.0,
+      "quality": "valid"
+    }
+  ],
+  "candidates_sha256": "6d2551dd30c4d70dc7184bc7498fdce045f1eac4b05ba9be645f1de1c90898ac",
+  "prehistory": {
+    "needed": "at least 60 valid completed bars at the first decision date",
+    "available_before_evaluation_start": 0,
+    "status": "missing"
+  },
+  "account_execution": false,
+  "limitations": [
+    "A coherent daily OHLC does not establish adjustment consistency across dates.",
+    "Implied reference differences are evidence to investigate, not confirmed splits or automatic adjustment factors.",
+    "Market-specific symbols are not stitched; missing dates are not filled.",
+    "Future-trained Yahoo centers cannot be called point-in-time KRX validation."
+  ],
+  "reference_discontinuity_count": 145,
+  "reference_discontinuity_symbols": 129,
+  "nonpositive_symbols": 76
+}

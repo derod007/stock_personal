@@ -1,0 +1,25 @@
+name: Integrated research PHP checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  research:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: e39d0f38a3c2dedc7258062281ed5ac317fb1156
+          path: original-score-fixture
+          persist-credentials: false
+      - name: Research and bottom-wave regression
+        env:
+          ORIGINAL_SCORE_ROOT: ${{ github.workspace }}/original-score-fixture/src
+        run: |
+          php tests/bottom_wave.php
+          php tests/independent_trade_diagnostic.php
+          php tests/inverse_bottom_only.php
+          php tests/original_composite_study.php
+          php tests/research_event_orders.php
+          php tests/type1_engine_replay.php
+          php tests/type1_krx_engine.php

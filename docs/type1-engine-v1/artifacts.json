@@ -1,0 +1,23 @@
+{
+  "recent-all_types.json.xz": {
+    "uncompressed_sha256": "afb84fa2d1db1ddbfdc005d849e0dc102a73acf938ed030cdc15d348139c04c8"
+  },
+  "recent-type1.json.xz": {
+    "uncompressed_sha256": "4f51d9569dd81e9e60019f17129af36973d2fd500612641b6af59f9f2a8cdb96"
+  },
+  "prior-type1.json.xz": {
+    "uncompressed_sha256": "38e878a20d23fa66cb2af9bf564aa239720475de86c8f1db92b83c798c324d00"
+  },
+  "matched-type1.json.xz": {
+    "uncompressed_sha256": "a983abadbadbfe415e4f996cffab9739270e59eef27e041f342b31e99b24fbd0"
+  },
+  "prior-all_types.json.xz": {
+    "uncompressed_sha256": "dd38bff6ffcf2b8a18be1f7cb310cbdef3d3c4ca955ea4263011ce7fe9072f5a"
+  },
+  "prior-input.json.xz": {
+    "uncompressed_sha256": "a6a07ed67a62f2d6fe5ab58c65a0bdbbba9a49893c21f450afa6470cb1bfc1ef"
+  },
+  "recent-input.json.xz": {
+    "uncompressed_sha256": "4315e71d75767334c66de0af11968d7845df86fb5ded081292f3fd6d8109b1c1"
+  }
+}

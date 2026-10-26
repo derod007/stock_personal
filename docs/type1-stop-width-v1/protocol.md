@@ -1,0 +1,7 @@
+# Frozen type1 5% vs 10% stop — fixed before execution
+
+Use exactly the saved baseline signals from type1 entry-delay v1. Same next-session opening entry, fixed +15% target, original T+20 close deadline, buy multiplier1.0015 and sell multiplier0.9985. Change only stop from entry×0.95 to entry×0.90. Same-bar stop and target: stop first, intraday order unknown. Gap below stop exits at open; target gap receives only target price. Missing/invalid prices or reference discontinuity during exposure are unresolved, never zero returns. No account, capital, position, sector or risk limits; same-notional independent trade comparison.
+
+Reproduce saved baseline exactly. Report both all-closed arm statistics and common-completed paired statistics, with increased unknown exposure explicit. Include winning percentage, average/median net, mean loss, holding duration, stops rescued, worsened stops, half-period changes and symbol-cluster bootstrap1000 seed1042026. The original capital-selected recent subset is frozen only for a supplementary comparison; longer holding would change subsequent real account selection so it is NOT an account replay. No annualized returns, portfolio P&L or reconstructed capital return.
+
+10% stop doubles planned price risk for unchanged notional; equal-risk sizing would approximately halve the position (before costs and gaps). This task does not optimize sizing or test other widths. Already explored periods, post-hoc type1 selection and source-price limitations retained. Research only; no operational changes or merges.

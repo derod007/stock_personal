@@ -1,0 +1,8 @@
+{
+  "docs/research/type1_krx_prehistory_collect.py": "ee49dee98a31362bde433079e327588d19b28d1e6d60c443a763b7a9b112c9de",
+  "docs/research/historical-amount-top100-pilot.py": "a7965b6832c93bcbb6458f41443db793f08ea0f74c6ee8b0d0c7c3223f1281fc",
+  "docs/research/dated-amount-top100-range.py": "3518fcf7991ae886d3465bc3d8da06d50ee7db5c3cfcb97bdeff68cfa334d45e",
+  "docs/historical-top100-pilot/evidence.json": "40e8dcf47840df63bca3c53258adcd61e8346d2390a731f9834d125ba4f7652b",
+  "docs/type1-krx-input-v1/trading-calendar.json": "248797b4e267f395cbd4a0a4c48ce65aa4d10cbb0c4568137f623f8dc0d21a9e",
+  "docs/type1-krx-input-v1/protocol.md": "1b7cf54ff1ad3e0086236896f14d253f96047986d48a39b09f70167595bc66ed"
+}

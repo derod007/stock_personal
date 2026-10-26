@@ -1,0 +1,69 @@
+{
+  "schema": 1,
+  "kind": "krx_equity_trading_calendar_v1",
+  "range": {
+    "from": "2023-07-03",
+    "to": "2024-06-28"
+  },
+  "closed_weekdays": {
+    "20230815": {
+      "name": "광복절"
+    },
+    "20230928": {
+      "name": "추석 연휴"
+    },
+    "20230929": {
+      "name": "추석"
+    },
+    "20231002": {
+      "name": "임시공휴일"
+    },
+    "20231003": {
+      "name": "개천절"
+    },
+    "20231009": {
+      "name": "한글날"
+    },
+    "20231225": {
+      "name": "성탄절"
+    },
+    "20231229": {
+      "name": "연말 휴장"
+    },
+    "20240101": {
+      "name": "신정"
+    },
+    "20240209": {
+      "name": "설 연휴"
+    },
+    "20240212": {
+      "name": "설 대체공휴일"
+    },
+    "20240301": {
+      "name": "삼일절"
+    },
+    "20240410": {
+      "name": "국회의원 선거"
+    },
+    "20240501": {
+      "name": "근로자의 날"
+    },
+    "20240506": {
+      "name": "어린이날 대체공휴일"
+    },
+    "20240515": {
+      "name": "부처님오신날"
+    },
+    "20240606": {
+      "name": "현충일"
+    }
+  },
+  "sources": [
+    "https://astro.kasi.re.kr/kor/life/post/calendarData?search_year=2023",
+    "https://www.kasi.re.kr/kor/publication/post/newsMaterial/29633?cPage=7",
+    "https://www.korea.kr/news/policyNewsView.do?newsId=148919798",
+    "https://strn.krx.co.kr/corebbs5/BHPSTRN0401/view?bbsSeq=98",
+    "https://open.krx.co.kr/contents/MKD/01/0110/01100305/MKD01100305.jsp"
+  ],
+  "note": "예정 거래일과 API 실제 응답을 대조한다. 빈 응답만으로 휴장 처리하거나 다른 날로 대체하지 않는다."
+}

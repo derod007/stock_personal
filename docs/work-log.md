@@ -1,4 +1,96 @@
 ## 2026-10-26 · Codex · 끝
+- #135 병합 main 위에 #103~#134 총32개 PR 통합. #118 저점 근거 패널 포함, 점수/주문/예약 변경 없음.
+- 검증: Python348개·PHP84개 테스트 스크립트·전략 버전 통합 검사 통과. 원본192개 변경 경로 대조 및 운영 전략 파일 main 동일 확인.
+- 연구 테스트 의존성과 과거 점수 소스 CI 준비를 추가. 원본 PR별 대응표: docs/research/integration-103-134.md. 병합/사용자 계좌 재실행 없음.
+
+## 2026-10-26 · Codex · 진행
+- #135 병합 main 기준 #103~#134 통합·회귀검사 시작.
+
+## 2026-10-18 02:31 · Cursor · 끝
+- 한 일: PR #106 판단 보완. 도달률·순손익 우위 분리. 유형1 고정 분류 지속성. 초안 보고서 보존. 군집 재학습·운영 변경 없음
+- 파일: docs/research/top100_pre_rise_shapes.py, docs/top100-pre-rise-v4/protocol.md, docs/top100-pre-rise-v4/README.md, docs/top100-pre-rise-v4/report.md, docs/top100-pre-rise-v4/report-before-rev1.md, docs/top100-pre-rise-v4/charts, tests/test_top100_pre_rise_shapes.py, docs/work-log.md
+- 커밋: 연구 브랜치
+- 롤백: 없음
+
+## 2026-10-18 02:28 · Cursor · 진행
+- 한 일: PR #106 판단 보완. 6유형 도달률·순손익 우위 분리. 유형1 고정 분류로 지속성만 확인. 군집 재학습·운영 변경 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
+## 2026-10-18 02:16 · Cursor · 끝
+- 한 일: 상승 전 60봉 가격·거래량 6유형 탐색. 이전 기간 라벨 없이 k-means, 최근 기간 배정. 관찰 가치. 운영·원본·103~105 결과 변경 없음
+- 파일: docs/research/top100_pre_rise_shapes.py, docs/top100-pre-rise-v4/protocol.md, docs/top100-pre-rise-v4/README.md, docs/top100-pre-rise-v4/report.md, docs/top100-pre-rise-v4/charts, tests/test_top100_pre_rise_shapes.py, docs/work-log.md
+- 커밋: 연구 브랜치
+- 롤백: 없음
+
+## 2026-10-18 02:11 · Cursor · 진행
+- 한 일: 상승 전 60봉 가격·거래량 흐름 6유형 탐색. 라벨 없이 이전 기간 군집, 최근 기간 배정. 조건·손절 최적화 없음. 운영·원본·103~105 결과 변경 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
+## 2026-10-18 02:08 · Cursor · 끝
+- 한 일: PR #105 추천 커버 분류 보완. 부분 기록 미발견은 unknown. 손익과 추천 집계 분리. 103~105 표. 상위 AND 조합 채택 근거 부족으로 탐색 종료. 운영·추가 탐색 없음
+- 파일: docs/research/top100_pre_rise_tertiles.py, docs/top100-pre-rise-v3/protocol.md, docs/top100-pre-rise-v3/README.md, docs/top100-pre-rise-v3/report.md, docs/top100-pre-rise-v3/report-before-rev1.md, tests/test_top100_pre_rise_tertiles.py, docs/work-log.md
+- 커밋: 연구 브랜치
+- 롤백: 없음
+
+## 2026-10-18 02:03 · Cursor · 진행
+- 한 일: PR #105 추천 커버 분류 보완. 부분 기록 구간 미발견은 unknown. 손익과 추천 집계 분리. 103~105 표. 상위 AND 조합 탐색 종료. 운영·추가 탐색 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
+## 2026-10-18 01:58 · Cursor · 끝
+- 한 일: PR #104 후속. 이전 기간 라벨 없는 3분위 경계를 최근 기간에 고정 적용. 상위 AND 조합 하나. 구별력만 있음. 운영·원본·103·104 결과 변경 없음
+- 파일: docs/research/top100_pre_rise_tertiles.py, docs/top100-pre-rise-v3/protocol.md, docs/top100-pre-rise-v3/README.md, docs/top100-pre-rise-v3/report.md, tests/test_top100_pre_rise_tertiles.py, docs/work-log.md
+- 커밋: 연구 브랜치
+- 롤백: 없음
+
+## 2026-10-18 01:54 · Cursor · 진행
+- 한 일: PR #104 후속. 60봉 종가 상승률·거래량 비 3분위가 신규 후보 구별에 쓰이는지 탐색. 조건·손절 최적화 없음. 운영·원본·104 결과 변경 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
+## 2026-10-18 01:31 · Cursor · 끝
+- 한 일: PR #104 수정. 차트 상승을 unconstrained.hit15로, 비중첩 구간 명명, 같은 봉 순서 미확정, 대기 T+20 짝 비교. 초안 보고서 보존. 조건 최적화·운영 변경 없음
+- 파일: docs/research/top100_pre_rise_episode.py, docs/top100-pre-rise-v2/protocol.md, docs/top100-pre-rise-v2/report.md, docs/top100-pre-rise-v2/report-before-rev1.md, docs/top100-pre-rise-v2/README.md, tests/test_top100_pre_rise_episode.py, docs/work-log.md
+- 커밋: 연구 브랜치
+- 롤백: 없음
+
+## 2026-10-18 01:29 · Cursor · 진행
+- 한 일: PR #104 코드 검토 수정. 상승 라벨을 unconstrained.hit15로, 구간 명명·같은 봉 순서·대기 보유 제한 보완. 조건 최적화 없음. 운영·원본 변경 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
+## 2026-10-18 01:20 · Cursor · 끝
+- 한 일: PR #103 후속. TOP100 최초 진입 20세션 구간으로 즉시 vs 특징 대기 비교. 손절·목표 유지. 유리함 없음. 운영·원본·103 결과 변경 없음
+- 파일: docs/research/top100_pre_rise_episode.py, docs/top100-pre-rise-v2/protocol.md, docs/top100-pre-rise-v2/report.md, docs/top100-pre-rise-v2/README.md, tests/test_top100_pre_rise_episode.py, docs/work-log.md
+- 커밋: 연구 브랜치
+- 롤백: 없음
+
+## 2026-10-18 01:17 · Cursor · 진행
+- 한 일: PR #103 후속. TOP100 최초 진입 20세션 구간 관찰. 조건·손절·목표 최적화 없음. 운영·원본·103 결과 변경 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
+## 2026-10-18 01:12 · Cursor · 끝
+- 한 일: 2년 TOP100 전체에서 판단일 완료봉 단순 특징 3개 비교. unique 미포착 결정 표본에서 유리함 없음. 운영·계좌·원본 변경 없음
+- 파일: docs/research/top100_pre_rise.py, docs/top100-pre-rise-v1/protocol.md, docs/top100-pre-rise-v1/report.md, docs/top100-pre-rise-v1/README.md, tests/test_top100_pre_rise.py, docs/work-log.md
+- 커밋: 연구 브랜치
+- 롤백: 없음
+
+## 2026-10-18 01:04 · Cursor · 진행
+- 한 일: 2년 TOP100에서 기존 추천에 안 잡힌 상승의 판단일 차트 공통점 후보 연구. 운영·계좌·원본 변경 없음
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
+## 2026-10-26 · Codex · 끝
 - 거래대금 스캔(코스피) 옆 유형1 탭 추가. 통합 TOP100·완료 60일봉·고정 6중심 분류 후 유형1만 거래대금순 표시. 분석일·가격·평가 불가 분리.
 - 검증: PHP 8.3.6 문법 검사 및 합성 회귀 32개 통과(Python 6유형/거리 일치 포함). 실서버 시세 연결·브라우저 검증은 미실행.
 - 자동주문·예약·기존 점수/계좌 변경 없음. PR 제출, 병합 없음.

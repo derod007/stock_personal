@@ -21,6 +21,7 @@ jobs:
           php tests/account_rollout.php
           php tests/half_risk_protection.php
           php tests/forward_protection.php
+          php tests/type1_engine_replay.php
           php tests/rr_pattern_labels.php
           php tests/trend_recovery.php
           php tests/spike_dump.php
@@ -49,7 +50,14 @@ jobs:
           php tests/weekly.php
           php tests/amount_exclude.php
           php tests/sector_collect.php
-      - name: Operational logging tests
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Research test dependencies
+        run: python3 -m pip install -r docs/research/requirements-test.txt
+      - name: Operational logging and research tests
+        env:
+          PR107_SOURCE: ${{ github.workspace }}/docs/research/top100_type1_portfolio.py
         run: python3 -m unittest discover -s tests -p "test_*.py"
   comparison:
     if: github.event_name == 'push'

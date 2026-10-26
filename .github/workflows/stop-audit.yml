@@ -12,7 +12,13 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 -m pip install -r docs/research/requirements-test.txt
       - run: python3 -m unittest discover -s tests -p 'test_*.py'
+        env:
+          PR107_SOURCE: ${{ github.workspace }}/docs/research/top100_type1_portfolio.py
       - run: python3 -m py_compile bin/audit_stops.py bin/fetch_comparison_data.py
       - run: php tests/v4.php
       - uses: actions/download-artifact@v4

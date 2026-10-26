@@ -1,3 +1,11 @@
+## 2026-10-26 · Codex · 끝
+- 거래대금 스캔(코스피) 옆 유형1 탭 추가. 통합 TOP100·완료 60일봉·고정 6중심 분류 후 유형1만 거래대금순 표시. 분석일·가격·평가 불가 분리.
+- 검증: PHP 8.3.6 문법 검사 및 합성 회귀 32개 통과(Python 6유형/거리 일치 포함). 실서버 시세 연결·브라우저 검증은 미실행.
+- 자동주문·예약·기존 점수/계좌 변경 없음. PR 제출, 병합 없음.
+
+## 2026-10-26 · Codex · 진행
+- 유형1 전용 완료봉 스캔 탭·거래대금 정렬·평가 불가 분리 구현. 자동주문 연결 없음.
+
 ## 2026-10-18 00:52 · Cursor · 끝
 - 한 일: PR #101 main 위에 #87, #88–#98, #99–#100 병합. 연구 CLI만 101 운영 지문을 허용하고 KRX 어댑터를 재생성. 운영 보호청산·지문·예약 경로 유지
 - 파일: bin/paper/KrxAccountReplay.php, bin/paper/KrxAccountStudy.php, bin/paper/KrxSignalStudy.php, bin/paper/RecentNoPullbackStudy.php, tests/krx_account_study.php, docs/work-log.md, .github/workflows/php-tests.yml
@@ -1121,4 +1129,5 @@ Cursor · Astra · 사람이 같은 저장소를 만질 때 겹치지 않게 여
 - 파일: `docs/work-log.md`, `.cursor/rules/work-log.mdc`
 - 커밋: 안 함
 - 롤백: 없음
+
 

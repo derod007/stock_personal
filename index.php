@@ -444,6 +444,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
             href="?<?= h($qsProfile) ?>&scan=kr_amount_kospi&limit=100"
             <?= $scanMode && $scanMarket === 'kospi' ? 'aria-current="page"' : '' ?>
           >거래대금 스캔(코스피)</a>
+          <a class="tabs__link" href="type1_scan.php">거래대금 스캔(유형1)</a>
         <?php endif; ?>
         <a class="tabs__link" href="paper.php">모의 계좌</a>
       </nav>
@@ -1689,3 +1690,4 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
   </script>
 </body>
 </html>
+

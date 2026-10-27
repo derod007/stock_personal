@@ -15,3 +15,11 @@ jobs:
           php -l bin/type1/Scanner.php
           php -l bin/type1/Page.php
           php tests/type1_scan.php
+          php -l bin/type1/Tracker.php
+          php -l bin/type1/Store.php
+          php -l bin/type1/Collector.php
+          php -l bin/type1/TrackingView.php
+          php -l bin/type1_track.php
+          php -l type1_tracking.php
+          php tests/type1_tracking.php
+          python3 -m unittest tests.test_paper_daily tests.test_followup_daily tests.test_target_tracking_daily tests.test_account_rollout

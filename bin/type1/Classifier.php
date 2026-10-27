@@ -17,7 +17,7 @@ final class Classifier
 
     public function classify(array $bars, string $symbol, int $asOf): array
     {
-        if (!preg_match('/^\d{6}\.(KS|KQ)$/D', $symbol)) {
+        if (!preg_match('/^[0-9A-Z]{6}\.(KS|KQ)$/D', $symbol)) {
             throw new \RuntimeException('지원하지 않는 종목 코드');
         }
         $closed = [];

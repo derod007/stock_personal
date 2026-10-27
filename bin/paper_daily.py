@@ -186,6 +186,22 @@ def update(config_path, state_dir, runner=subprocess.run):
                 record["higher_low_research"].update(status="failed", error_type=type(exc).__name__)
                 print("Higher-low research failed: " + type(exc).__name__, file=sys.stderr)
             record["higher_low_research"]["finished_at"] = int(time.time())
+        # Independent Type1 observations, including zero recommendations.
+        if universe == "kr_amount_scan":
+            record["type1_tracking"] = {"status": "running", "started_at": int(time.time())}
+            save_record(log, record)
+            try:
+                tracking = runner(["php", str(ROOT / "bin/type1_track.php")], cwd=ROOT, env=env,
+                                  check=True, timeout=2400, capture_output=True, text=True,
+                                  encoding="utf-8", errors="replace")
+                result = json.loads(tracking.stdout)
+                if not isinstance(result, dict) or result.get("status") not in ("saved", "unchanged", "skipped"):
+                    raise ValueError("Invalid Type1 tracking summary")
+                record["type1_tracking"].update(result)
+            except Exception as exc:
+                record["type1_tracking"].update(status="failed", error_type=type(exc).__name__)
+                print("Type1 tracking failed: " + type(exc).__name__, file=sys.stderr)
+            record["type1_tracking"]["finished_at"] = int(time.time())
         record["finished_at"] = int(time.time())
         save_record(log, record)
 

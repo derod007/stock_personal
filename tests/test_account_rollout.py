@@ -17,7 +17,7 @@ class Rollout(unittest.TestCase):
                 if script=='paper_account_preflight.php':
                     return SimpleNamespace(stdout=json.dumps({'status':'new_account','account':'paper-kr-recovery-v1'}))
                 if script=='paper_scan_universe.php':return SimpleNamespace(stdout='{"ok":true,"symbols":{}}')
-                self.assertIn('--account=paper-kr-recovery-v1',cmd)
+                if script!='type1_track.php':self.assertIn('--account=paper-kr-recovery-v1',cmd)
                 return SimpleNamespace(stdout='{"status":"saved"}')
             self.assertEqual(daily.update(ROOT/'config/paper-kr-recovery-v1.json',state,runner),0)
             self.assertEqual(calls[:2],['paper_account_preflight.php','paper_scan_universe.php'])

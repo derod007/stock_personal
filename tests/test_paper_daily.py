@@ -18,7 +18,7 @@ class DailyTests(unittest.TestCase):
             calls=[]
             def runner(cmd, **kw):
                 calls.append((cmd,kw))
-                if str(cmd[1]).endswith(('paper_followup.php', 'paper_target_tracking.php', 'paper_envelope_research.php', 'paper_higher_low.php')):
+                if str(cmd[1]).endswith(('paper_followup.php', 'paper_target_tracking.php', 'paper_envelope_research.php', 'paper_higher_low.php', 'type1_track.php')):
                     return SimpleNamespace(stdout=json.dumps({'status':'saved'}))
                 script=' '.join(str(part) for part in cmd)
                 stage='collect' if 'fetch_comparison_data.py' in script else (
@@ -92,7 +92,7 @@ class DailyTests(unittest.TestCase):
             calls=[]
             def runner(cmd, **kw):
                 calls.append((cmd,kw))
-                if str(cmd[1]).endswith(('paper_followup.php', 'paper_target_tracking.php', 'paper_envelope_research.php', 'paper_higher_low.php')):
+                if str(cmd[1]).endswith(('paper_followup.php', 'paper_target_tracking.php', 'paper_envelope_research.php', 'paper_higher_low.php', 'type1_track.php')):
                     return SimpleNamespace(stdout=json.dumps({'status':'saved'}))
                 script=' '.join(str(part) for part in cmd)
                 if 'paper_scan_universe.php' in script:
@@ -104,7 +104,7 @@ class DailyTests(unittest.TestCase):
                 return SimpleNamespace(returncode=0)
             code=daily.update(config,root/'state',runner)
             self.assertEqual(code,0)
-            self.assertEqual(len(calls),8)
+            self.assertEqual(len(calls),9)
             self.assertTrue(str(calls[0][0][1]).endswith('paper_scan_universe.php'))
             self.assertIn('--years=2', calls[1][0])
             self.assertTrue(any('005930.KS' in str(part) for part in calls[1][0]))
@@ -119,12 +119,12 @@ class DailyTests(unittest.TestCase):
             calls=[]
             def runner(cmd, **kw):
                 calls.append(cmd)
-                if str(cmd[1]).endswith(('paper_followup.php', 'paper_target_tracking.php', 'paper_envelope_research.php', 'paper_higher_low.php')):
+                if str(cmd[1]).endswith(('paper_followup.php', 'paper_target_tracking.php', 'paper_envelope_research.php', 'paper_higher_low.php', 'type1_track.php')):
                     return SimpleNamespace(stdout=json.dumps({'status':'saved'}))
                 return SimpleNamespace(stdout=json.dumps({'ok':True,'symbols':{},'held':[],'candidates':[]}))
             code=daily.update(config,root/'state',runner)
             self.assertEqual(code,0)
-            self.assertEqual(len(calls),5)
+            self.assertEqual(len(calls),6)
             record=json.loads(next((root/'state/runs/test-forward').glob('*.json')).read_text())
             self.assertTrue(record['summary']['empty_universe'])
     def test_scan_once_keeps_holding_without_recommendations(self):
@@ -134,7 +134,7 @@ class DailyTests(unittest.TestCase):
             before=config.read_bytes();calls=[]
             def runner(cmd, **kw):
                 calls.append(cmd)
-                if str(cmd[1]).endswith(('paper_followup.php', 'paper_target_tracking.php', 'paper_envelope_research.php', 'paper_higher_low.php')):
+                if str(cmd[1]).endswith(('paper_followup.php', 'paper_target_tracking.php', 'paper_envelope_research.php', 'paper_higher_low.php', 'type1_track.php')):
                     return SimpleNamespace(stdout=json.dumps({'status':'saved'}))
                 if str(cmd[1]).endswith('paper_scan_universe.php'):
                     self.assertIn('--limit=100',cmd)
@@ -167,7 +167,7 @@ class DailyTests(unittest.TestCase):
                 config.write_text(json.dumps({'id':'paper-kr','universe':'kr_amount_scan','symbols':{}}))
                 audit={'status':status,'path':'rr-audit/paper-kr/run.json'}
                 def runner(cmd, **kw):
-                    if str(cmd[1]).endswith(('paper_followup.php', 'paper_target_tracking.php', 'paper_envelope_research.php', 'paper_higher_low.php')):
+                    if str(cmd[1]).endswith(('paper_followup.php', 'paper_target_tracking.php', 'paper_envelope_research.php', 'paper_higher_low.php', 'type1_track.php')):
                         return SimpleNamespace(stdout=json.dumps({'status':'saved'}))
                     self.assertTrue(str(cmd[1]).endswith('paper_scan_universe.php'))
                     return SimpleNamespace(stdout=json.dumps({'ok':True,'symbols':{},'rr_audit':audit}))
@@ -202,3 +202,23 @@ class ForwardUpgradePreflightTests(unittest.TestCase):
             self.assertEqual(daily.update(config,root/'state',runner),0)
             self.assertEqual(calls[0],'paper_account_preflight.php')
             self.assertIn('paper_account.php',calls)
+
+class Type1TrackingTests(unittest.TestCase):
+    def test_failure_does_not_change_account_outcome(self):
+        for failure in (False, True):
+            with self.subTest(failure=failure), tempfile.TemporaryDirectory() as tmp:
+                root=pathlib.Path(tmp);config=root/'config.json'
+                config.write_text(json.dumps({'id':'test','universe':'kr_amount_scan'}))
+                calls=[]
+                def runner(cmd, **kw):
+                    script=pathlib.Path(cmd[1]).name;calls.append(script)
+                    if script=='paper_scan_universe.php':
+                        return SimpleNamespace(stdout=json.dumps({'ok':True,'symbols':{}}))
+                    if script=='type1_track.php' and failure:
+                        raise subprocess.CalledProcessError(1,cmd)
+                    return SimpleNamespace(stdout=json.dumps({'status':'saved'}))
+                self.assertEqual(daily.update(config,root/'state',runner),0)
+                self.assertNotIn('paper_account.php',calls)
+                self.assertEqual(calls.count('type1_track.php'),1)
+                r=json.loads(next((root/'state/runs/test-forward').glob('*.json')).read_text())
+                self.assertEqual(r['type1_tracking']['status'],'failed' if failure else 'saved')

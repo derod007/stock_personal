@@ -31,4 +31,20 @@ $state=['last_day'=>'2026-10-29','captures'=>['2026-10-29'=>['rows'=>[
  ['symbol'=>'C','episode_state'=>'new','classification'=>['matches'=>false]]]]]];
 check(array_column(Intraday::candidates($state),'symbol')===['A'],'new matches only');
 check(Intraday::candidates([])===[],'empty state');
+// Provider-like last row: not a complete interval and must not refresh the clock.
+$x=array_slice($b,0,8);$tail=bar(8,106,106,106,106);$tail['time']+=13;$tail['volume']=0;$x[]=$tail;
+$r=Intraday::evaluate($x,$t+2800);
+check($r['status']==='반등 확인' && $r['excluded_tail_rows']===1,'offgrid flat tail excluded');
+check($r['as_of']===date('c',$t+2400),'tail cannot advance asof');
+check(Intraday::evaluate($x,$t+3301)['status']==='판단 불가','tail cannot hide stale data');
+$x[8]['time']=$t+2400;$r=Intraday::evaluate($x,$t+2800);
+check($r['excluded_tail_rows']===1 && $r['as_of']===date('c',$t+2400),'aligned zero flat tail conservative exclusion');
+$x[8]['time']+=13;$x[8]['volume']=1;
+check(str_contains(Intraday::evaluate($x,$t+2800)['reason'],'5분 경계 밖 행'),'traded offgrid blocked');
+$x[8]['volume']=0;$x[8]['high']=107;
+check(str_contains(Intraday::evaluate($x,$t+2800)['reason'],'5분 경계 밖 행'),'nonflat offgrid blocked');
+$x[8]=$tail;$x[]=bar(9,106,108,103,107);
+check(str_contains(Intraday::evaluate($x,$t+3000)['reason'],'5분 경계 밖 행'),'middle offgrid never discarded');
+$x=array_slice($b,0,8);$x[]=$tail;$x[]=$tail;
+check(Intraday::evaluate($x,$t+2800)['status']==='판단 불가','duplicate quote tail not hidden');
 echo "$n checks passed\n";

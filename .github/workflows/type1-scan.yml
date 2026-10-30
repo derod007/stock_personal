@@ -28,3 +28,6 @@ jobs:
           php -l type1_intraday.php
           php -l bin/type1/Intraday.php
           php tests/type1_intraday.php
+          php -l src/Breakout20.php
+          php -l bin/paper/Breakout20Panel.php
+          php tests/breakout20.php

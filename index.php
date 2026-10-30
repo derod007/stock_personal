@@ -6,6 +6,7 @@ require __DIR__ . '/bin/bootstrap.php';
 require_once __DIR__ . '/bin/paper/Chrome.php';
 require_once __DIR__ . '/bin/paper/PatternPanel.php';
 require_once __DIR__ . '/bin/paper/ScorePanel.php';
+require_once __DIR__ . '/bin/paper/Breakout20Panel.php';
 
 use ChartEntryLab\AccountProfile;
 use ChartEntryLab\CurrentQuoteClient;
@@ -54,6 +55,15 @@ $service = new ProposalService(
 
 $input = isset($_GET['symbol']) ? trim((string) $_GET['symbol']) : '';
 $result = $input !== '' ? $service->propose($input, useCache: true, cacheMaxAgeSeconds: 600, includeInProgress: true) : null;
+$breakout20 = null;
+if (is_array($result) && !empty($result['symbol'])) {
+    try {
+        $daily20 = (new YahooChartClient(__DIR__.'/data/ohlcv'))->fetch((string)$result['symbol'], range:'3mo', interval:'1d', maxAgeSeconds:600);
+        $breakout20 = \ChartEntryLab\Breakout20::analyze($daily20, (string)$result['symbol'], time());
+    } catch (Throwable $e) {
+        $breakout20 = ['status'=>'판단 불가','reason'=>'일봉 자료를 조회하지 못했습니다.','level'=>null,'distance_pct'=>null,'day'=>null,'complete'=>false,'points'=>[],'previous_breakout'=>null];
+    }
+}
 $currentQuote = is_array($result) && !empty($result['symbol'])
     ? (new CurrentQuoteClient())->fetch((string)$result['symbol']) : null;
 
@@ -1176,6 +1186,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
             <code class="action__code"><?= h((string) $proposal['action']) ?></code>
           <?php endif; ?>
         </p>
+        <?php if ($breakout20 !== null) paper_breakout20_panel($breakout20); ?>
         <?php paper_score_panel($scoreBreakdown, (string) ($proposal['analysis_note'] ?? $analysisLabel)); ?>
         <?php paper_pattern_panel(\ChartEntryLab\PatternEvidence::capture($proposal)); ?>
 

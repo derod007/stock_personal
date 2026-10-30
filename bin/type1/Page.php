@@ -15,7 +15,7 @@ function render(array $report): void
 </style></head><body class="ui-mode-simple"><main class="type1">
 <nav aria-label="화면"><a href="index.php">차트</a><a href="index.php?scan=kr_amount">거래대금 스캔</a><a href="index.php?scan=kr_amount_kospi">거래대금 스캔(코스피)</a><a href="type1_scan.php" aria-current="page">거래대금 스캔(유형1)</a><a href="paper.php">모의 계좌</a></nav>
 <h1>거래대금 스캔(유형1)</h1>
-<p><a class="refresh" href="type1_tracking.php">마감 고정 후보 · 신규/관찰 중 · 결과 보기</a></p>
+<p><a class="refresh" href="type1_tracking.php">마감 고정 후보 · 신규/관찰 중 · 결과 보기</a> · <a href="type1_intraday.php">장중 조정·반등 관찰</a></p>
 <p>코스피·코스닥 통합 TOP100 중 <strong>완료된 60일봉이 유형1에 해당하는 종목</strong>을 거래대금 순으로 보여줍니다.</p>
 <p class="muted">조회 시작 <?= $h($at) ?> KST · 스팩·ETF·ETN·단일종목 레버리지 제외<br>거래대금 순위는 조회 시점 기준입니다. 장중 미완료봉은 분류에 쓰지 않으며 분석 기준일은 종목별로 표시합니다.</p>
 <p><a class="refresh" href="type1_scan.php?refresh=1">새로 조회</a> <span class="muted">최대 100종목을 조회하므로 잠시 걸릴 수 있습니다.</span></p>

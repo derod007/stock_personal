@@ -40,11 +40,11 @@ $h=static fn($s)=>htmlspecialchars((string)$s,ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8')
 <p class="notice">마감 신규 후보에서 첫 30분을 지켜본 뒤 조정과 반등을 구분합니다. 자동 주문·매수 추천이 아닙니다. 기존 독립 모의 경로와 별도이며, 조회 결과는 장부에 저장하지 않습니다.</p>
 <p>마감 후보 기준일: <strong><?= $h($day??'기록 없음') ?></strong> · 신규 <?=count($rows)?>종목 · 대상은 후보 다음 거래일만</p>
 <p>완료된 5분봉 · 09:00~09:30 관찰 · 조정 후 직전 고점 위 종가로 반등 확인. 종목별 확인 시각은 다를 수 있습니다. 가격 제공 지연으로 실제 가격과 다를 수 있습니다.</p>
-<details><summary>판단 규칙과 가격 읽는 법</summary><p>첫 30분 고점 이후, 이전 봉보다 종가가 낮아지면 조정으로 봅니다. 조정 시작 전 고점을 돌파 기준으로 고정하고, 조정 저점은 반등 확인 전까지 갱신합니다. 이후 완료봉 종가가 돌파 기준을 넘으면 반등 확인입니다. 같은 봉에서 새 조정 저점까지 만들면 확인하지 않습니다.</p><p>반등 전 첫 30분 저점 접촉·이탈, 또는 반등 후 고정 조정 저점 접촉·이탈이면 당일 조건 무효입니다. 당일 재진입은 표시하지 않습니다. 반등 확인 가격으로 실제 체결됐다는 뜻이 아니며 목표가·부분 청산·추적 손절은 이번 화면에 포함하지 않았습니다.</p><p>봉 누락·가격 모순·합성 봉·15분 초과 지연은 판단 불가입니다. 하루 전체가 아닌 조회 시점까지의 자료로 다시 계산하며, 공급자의 과거 봉 수정으로 상태가 달라질 수 있습니다. 지수 거래일 확인 실패도 판단 불가로 남깁니다.</p></details>
+<details><summary>판단 규칙과 가격 읽는 법</summary><p>첫 30분 고점 이후, 이전 봉보다 종가가 낮아지면 조정으로 봅니다. 조정 시작 전 고점을 돌파 기준으로 고정하고, 조정 저점은 반등 확인 전까지 갱신합니다. 이후 완료봉 종가가 돌파 기준을 넘으면 반등 확인입니다. 같은 봉에서 새 조정 저점까지 만들면 확인하지 않습니다.</p><p>반등 전 첫 30분 저점 접촉·이탈, 또는 반등 후 고정 조정 저점 접촉·이탈이면 당일 조건 무효입니다. 당일 재진입은 표시하지 않습니다. 반등 확인 가격으로 실제 체결됐다는 뜻이 아니며 목표가·부분 청산·추적 손절은 이번 화면에 포함하지 않았습니다.</p><p>마지막 거래량 0·시가/고가/저가/종가 동일 행은 보수적으로 제외합니다. 봉 누락·가격 모순·합성 봉·15분 초과 지연은 판단 불가입니다. 하루 전체가 아닌 조회 시점까지의 자료로 다시 계산하며, 공급자의 과거 봉 수정으로 상태가 달라질 수 있습니다. 지수 거래일 확인 실패도 판단 불가로 남깁니다.</p></details>
 <?php if($error): ?><p role="alert"><?= $h($error) ?></p><?php endif ?>
 <button id="all" <?=!$rows?'disabled':''?>>전체 후보 조회</button><p id="progress" role="status" aria-live="polite">아직 장중 자료를 조회하지 않았습니다.</p>
-<div class="scroll"><table><thead><tr><th>대금 순위 / 종목</th><th>상태 / 사유</th><th>돌파 기준</th><th>무효화 기준</th><th>최근 완료봉 종가</th><th>봉 마감 / 반등 확인 시각(KST)</th><th>조회</th></tr></thead><tbody>
-<?php foreach($rows as $r): ?><tr data-symbol="<?= $h($r['symbol']) ?>"><td><?= $h($r['rank']) ?> · <?= $h($r['name']) ?><small><?= $h($r['symbol']) ?></small></td><td class="reason"><strong data-field="status">미조회</strong><small data-field="reason">버튼을 눌러 확인하세요.</small></td><td data-field="trigger">—</td><td data-field="invalidation">—</td><td data-field="close">—</td><td><span data-field="as_of">—</span><small data-field="confirmed_at">—</small></td><td><button class="one">조회</button></td></tr><?php endforeach ?>
+<div class="scroll"><table><thead><tr><th>대금 순위 / 종목</th><th>상태 / 사유</th><th>돌파 기준</th><th>무효화 기준</th><th>최근 완료봉 종가</th><th>봉 마감 / 반등 확인 / 조회 시각(KST)</th><th>조회</th></tr></thead><tbody>
+<?php foreach($rows as $r): ?><tr data-symbol="<?= $h($r['symbol']) ?>"><td><?= $h($r['rank']) ?> · <?= $h($r['name']) ?><small><?= $h($r['symbol']) ?></small></td><td class="reason"><strong data-field="status">미조회</strong><small data-field="reason">버튼을 눌러 확인하세요.</small></td><td data-field="trigger">—</td><td data-field="invalidation">—</td><td data-field="close">—</td><td><span data-field="as_of">—</span><small data-field="confirmed_at">—</small><small data-field="checked_at">—</small></td><td><button class="one">조회</button></td></tr><?php endforeach ?>
 </tbody></table></div>
 <script>
 const day=<?=json_encode($day,JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT)?>;
@@ -58,7 +58,8 @@ async function refresh(row){
   const response=await fetch('type1_intraday.php?symbol='+encodeURIComponent(row.dataset.symbol)+'&day='+encodeURIComponent(day),{cache:'no-store',signal:AbortSignal.timeout(120000)});
   if(!response.ok)throw Error('HTTP '+response.status);
   const data=await response.json();
-  row.querySelectorAll('[data-field]').forEach(el=>{const k=el.dataset.field,v=data[k];el.textContent=['as_of','confirmed_at'].includes(k)?clock(v):typeof v==='number'?v.toLocaleString('ko-KR',{maximumFractionDigits:2})+'원':v??'—';});
+  if(data.excluded_tail_rows)data.reason+=' · 마지막 무거래 단일가격 행 '+data.excluded_tail_rows+'개 제외';
+  row.querySelectorAll('[data-field]').forEach(el=>{const k=el.dataset.field,v=data[k];el.textContent=['as_of','confirmed_at','checked_at'].includes(k)?clock(v):typeof v==='number'?v.toLocaleString('ko-KR',{maximumFractionDigits:2})+'원':v??'—';});
  }catch(e){row.querySelector('[data-field=status]').textContent='판단 불가';row.querySelector('[data-field=reason]').textContent='조회 실패 · 다시 조회하세요.';row.querySelectorAll('[data-field]').forEach(el=>{if(!['status','reason'].includes(el.dataset.field))el.textContent='—';});}
  finally{button.disabled=false;}
 }

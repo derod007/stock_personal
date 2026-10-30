@@ -27,6 +27,7 @@ try {
         'summary'=>['total'=>0,'evaluated'=>0,'matches'=>0,'errors'=>0],
         'error'=>'유형1 스캔을 준비하지 못했습니다. 기준 파일과 서버 캐시 폴더 권한을 확인해 주세요.'];
 }
+$report['scope'] = ($_GET['scope'] ?? '') === 'breakout' ? 'breakout' : 'all';
 header('Cache-Control: no-store');
 if (($_GET['format'] ?? '') === 'json') {
     header('Content-Type: application/json; charset=utf-8');

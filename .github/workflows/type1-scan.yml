@@ -31,3 +31,6 @@ jobs:
           php -l src/Breakout20.php
           php -l bin/paper/Breakout20Panel.php
           php tests/breakout20.php
+          php -l src/Type1Breakout.php
+          php -l type1_breakout.php
+          php tests/type1_breakout.php

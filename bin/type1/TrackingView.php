@@ -7,6 +7,7 @@ function renderTracking(?array $state,?string $error=null,string $scope="new",ar
     echo '<h1>마감 고정 후보 · 유형1 관찰</h1><p>수익성이 검증된 추천이나 자동 주문이 아닙니다. 각 후보를 독립 추적하며, 자금 한도를 적용한 계좌 수익률과 다릅니다.</p>';
     if($error!==null){echo '<p role="alert">'.$h($error).'</p>';return;}
     if(!$state||!$state['last_day']){echo '<p>아직 저장된 마감 기록이 없습니다. 병합·적용 후 한국 daily 실행에서 자동 저장됩니다.</p>';return;}
+    echo '<p><a href="type1_breakout.php">마감 고정 · 유형1 + 20일 고가 돌파 후보</a></p>';
     $day=$state['last_day'];$capture=$state['captures'][$day];
     echo '<p>마지막 저장일 <strong>'.$h($day).'</strong> · 시작 전 TOP100 이력은 미확정입니다.</p>';
     if(!$capture['ranking_session_verified'])echo '<p class="notice">마감 후 수집한 순위입니다. 제공 자료에 거래일이 없어 당일 최종 TOP100 여부는 미확정입니다.</p>';

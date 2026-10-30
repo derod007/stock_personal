@@ -3,7 +3,7 @@ declare(strict_types=1);
 namespace ChartEntryLab\Type1Scan;
 final class Store
 {
-    public static function folder(): string {return (getenv('PAPER_STATE_DIR')?:dirname(__DIR__,3).'/../stock-personal-paper').'/type1-observations';}
+    public static function folder(): string {return (getenv('PAPER_STATE_DIR')?:dirname(__DIR__,3).'/stock-personal-paper').'/type1-observations';}
     public static function load(string $folder): array {return is_file($folder.'/latest.json')?json_decode(file_get_contents($folder.'/latest.json'),true,512,JSON_THROW_ON_ERROR):Tracker::empty();}
     public static function atomic(string $path,array $data): void
     {

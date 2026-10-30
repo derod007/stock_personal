@@ -23,7 +23,7 @@ if(($_GET['format']??'')==='json'){
 }
 ?><!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>유형1 고정 관찰</title>
 <style>body{background:#0b1220;color:#e7edf8;font-family:sans-serif;margin:30px auto;max-width:1280px;padding:0 20px}a{color:#95bfff}p{line-height:1.7}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;white-space:nowrap}th,td{padding:12px;border-bottom:1px solid #35435a;text-align:right}small{display:block;color:#a6b5cb}.notice{padding:16px;background:#192b45}.filters{display:flex;gap:12px;margin:20px 0}.filters a,summary{padding:12px;border:1px solid #35435a;border-radius:8px}.filters [aria-current]{background:#244473;color:white}details{margin:24px 0}summary{cursor:pointer}.candles{display:block;width:100%;min-width:680px;background:#111e30;border-radius:12px}.candles text{fill:#bdcce0;font-size:11px}.chart-detail{overflow-x:auto}.after{border-top:2px solid #60718d;padding-top:20px}a:focus-visible,summary:focus-visible{outline:2px solid #fff;outline-offset:4px}</style></head><body><main>
-<nav><a href="type1_scan.php">거래대금 스캔(유형1)</a> · <a href="type1_tracking.php">고정 신규 후보</a></nav>
+<nav><a href="type1_intraday.php">장중 조정·반등 관찰</a> · <a href="type1_scan.php">거래대금 스캔(유형1)</a> · <a href="type1_tracking.php">고정 신규 후보</a></nav>
 <?php
 if($chartError)echo '<p class="notice" role="alert">'.htmlspecialchars($chartError,ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8').'</p>';
 if($detail)Charts::render($detail);

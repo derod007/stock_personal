@@ -25,3 +25,6 @@ jobs:
           python3 -m unittest tests.test_paper_daily tests.test_followup_daily tests.test_target_tracking_daily tests.test_account_rollout
           php -l bin/type1/Charts.php
           php tests/type1_tracking_ui.php
+          php -l type1_intraday.php
+          php -l bin/type1/Intraday.php
+          php tests/type1_intraday.php

@@ -28,7 +28,7 @@ final class Scanner
                 catch (\Throwable $e) { throw new \RuntimeException('일봉 조회 실패'); }
                 $result = $this->classifier->classify($bars, $symbol, $asOf);
                 $report['summary']['evaluated']++;
-                if ($result['matches']) { $report['rows'][] = array_merge($row,$result,['symbol'=>$symbol]); }
+                if ($result['matches']) { $report['rows'][] = array_merge($row,$result,['symbol'=>$symbol,'breakout20'=>\ChartEntryLab\Type1Breakout::evidence($bars,$symbol,$result,$asOf)]); }
             } catch (\Throwable $e) {
                 $report['errors'][] = ['symbol'=>$symbol,'name'=>$row['name'] ?? '',
                     'reason'=>$e instanceof \RuntimeException ? $e->getMessage() : '일봉 평가 실패'];

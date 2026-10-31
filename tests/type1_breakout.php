@@ -40,4 +40,8 @@ ok($orderOf($htmlFor($report))===array_merge(['7','38','88','84','99'],['7','38'
 $report['rows'][3]['breakout20']['distance_pct']=3.63001;
 ok($orderOf($htmlFor($report))[1]==='38','tied distance uses amount rank');
 $report['scope']='all';ok(!str_contains($htmlFor($report),'id="breakout-sort"'),'only confirmed view offers distance sort');
+$report['scope']='breakout';$report['sort']='near';
+$report['rows'][1]['retest_event']=['status'=>'재이탈','recovery'=>['kst'=>'2026-10-29 09:25'],'retest'=>['kst'=>'2026-10-29 10:10']];
+$html=$htmlFor($report);
+ok(preg_match('~<tr data-near="[0-9]+" data-amount="38">(?:(?!</tr>).)*09:25 → 2026-10-29 10:10(?:(?!</tr>).)*</tr>~s',$html)===1,'sorted decision table retains events on correct symbol');
 echo "$n checks passed\n";

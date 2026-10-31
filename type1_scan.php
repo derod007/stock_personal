@@ -33,5 +33,6 @@ if (($_GET['format'] ?? '') === 'json') {
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($report, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 } else {
+    $report['sort'] = ($_GET['sort'] ?? '') === 'near' ? 'near' : 'amount';
     \ChartEntryLab\Type1Scan\render($report);
 }

@@ -34,3 +34,5 @@ jobs:
           php -l src/Type1Breakout.php
           php -l type1_breakout.php
           php tests/type1_breakout.php
+          php -l bin/type1/EntryReference.php
+          php tests/type1_entry_reference.php

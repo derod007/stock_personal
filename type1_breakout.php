@@ -21,7 +21,14 @@ try{
     $nextError=null;$later=null;
     try{if($state['last_day']>$day)$later=Charts::snapshot(Store::folder(),$state,$state['last_day']);}
     catch(Throwable){$nextError='이후 스냅샷 검증 실패';}
+    $eventPath=Store::folder().'/breakout-retest/'.$day.'.json';$events=[];
+    if(is_file($eventPath)){
+        $record=json_decode(file_get_contents($eventPath),true,512,JSON_THROW_ON_ERROR);
+        if(($record['anchor']??null)!==$day||($record['snapshot_sha256']??null)!==$capture['snapshot_sha256'])throw new RuntimeException('회복 기록 기준일 불일치');
+        $events=$record['rows'];
+    }
     foreach($report['rows'] as &$row){
+        $row['retest_event']=$events[$row['symbol']]??null;
         $row['next_open']=\ChartEntryLab\Type1Scan\EntryReference::nextOpen($day,$row['symbol'],$row['breakout20'],$row['analysis_close'],$later,$nextError);
     }unset($row);
     usort($report['rows'],static fn($a,$b)=>($a['rank']<=>$b['rank'])?:strcmp($a['symbol'],$b['symbol']));

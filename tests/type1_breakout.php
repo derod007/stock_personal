@@ -21,4 +21,23 @@ $report=['ok'=>true,'as_of'=>date(DATE_ATOM,$now),'rows'=>[$row],'errors'=>[],'s
 ob_start();\ChartEntryLab\Type1Scan\render($report);$html=ob_get_clean();ok(str_contains($html,'종가 돌파 확인 1'),'filter count');ok(!str_contains($html,'<script>'),'escaping');ok(str_contains($html,'scope=breakout'),'refresh preserves filter');
 $report['rows'][0]['breakout20']['confirmed']=false;ob_start();\ChartEntryLab\Type1Scan\render($report);$html=ob_get_clean();ok(str_contains($html,'종가 돌파 확인 후보가 없습니다'),'empty confirmed distinct');ok(!str_contains($html,'&lt;script&gt;'),'filtered row absent');
 $report['source']='saved';$report['saved_day']='2026-10-21';ob_start();\ChartEntryLab\Type1Scan\render($report);$html=ob_get_clean();ok(str_contains($html,'당시 스냅샷'),'saved semantics');ok(!str_contains($html,'refresh=1'),'no live refresh in saved view');
+// The two visible tables must reorder the same confirmed rows without changing their ranks.
+$fixture=[];
+foreach([[7,'028050.KS',0.47],[38,'064400.KS',3.67],[84,'425420.KQ',8.73],[88,'144960.KQ',3.63],[99,'000001.KS',null]] as [$rank,$symbol,$dist]){
+    $fixture[]=array_replace($row,['rank'=>$rank,'symbol'=>$symbol,'name'=>$symbol,
+        'breakout20'=>['confirmed'=>true,'distance_pct'=>$dist]]);
+}
+$report['rows']=$fixture;
+$htmlFor=static function($r){ob_start();\ChartEntryLab\Type1Scan\render($r);return ob_get_clean();};
+$orderOf=static function($html){preg_match_all('/<tr data-near="\d+" data-amount="(\d+)">/',$html,$m);return $m[1];};
+$near=['7','88','38','84','99'];$amount=['7','38','84','88','99'];
+ok($orderOf($htmlFor($report))===array_merge($amount,$amount),'amount remains default in both tables');
+$report['sort']='near';$html=$htmlFor($report);
+ok($orderOf($html)===array_merge($near,$near),'near in both tables; missing last');
+ok(str_contains($html,'day=2026-10-21&amp;sort=near'),'preserve selected snapshot date');
+$report['rows'][1]['breakout20']['distance_pct']=3.63001;$report['rows'][3]['breakout20']['distance_pct']=3.63002;
+ok($orderOf($htmlFor($report))===array_merge(['7','38','88','84','99'],['7','38','88','84','99']),'use unrounded distances');
+$report['rows'][3]['breakout20']['distance_pct']=3.63001;
+ok($orderOf($htmlFor($report))[1]==='38','tied distance uses amount rank');
+$report['scope']='all';ok(!str_contains($htmlFor($report),'id="breakout-sort"'),'only confirmed view offers distance sort');
 echo "$n checks passed\n";

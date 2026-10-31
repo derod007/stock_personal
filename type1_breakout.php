@@ -28,4 +28,5 @@ try{
     $report['summary']['matches']=count($report['rows']);$report['summary']['errors']=count($report['errors']);
 }catch(Throwable $e){$report['ok']=false;$report['error']=$e instanceof RuntimeException?$e->getMessage():'마감 기록을 확인하지 못했습니다.';}
 if(($_GET['format']??'')==='json'){header('Content-Type: application/json; charset=utf-8');echo json_encode($report,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR);exit;}
+$report['sort'] = ($_GET['sort'] ?? '') === 'near' ? 'near' : 'amount';
 \ChartEntryLab\Type1Scan\render($report);

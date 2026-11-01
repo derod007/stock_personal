@@ -36,3 +36,4 @@ jobs:
           php tests/type1_breakout.php
           php -l bin/type1/EntryReference.php
           php tests/type1_entry_reference.php
+          php tests/type1_breakout_retest.php

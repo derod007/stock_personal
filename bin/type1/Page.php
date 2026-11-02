@@ -62,14 +62,15 @@ function render(array $report): void
 </tr><?php endforeach ?></tbody></table></div><?php endif ?>
 <?php if($visible): ?><details open><summary>진입 판단표 · 참고 가격</summary>
 <p>확정 저점은 판단일 포함 최근 20봉에서 좌우 2봉보다 저가가 낮은 가장 최근 봉입니다. 우측 2봉도 판단일까지 완료되어야 합니다. 없으면 미확정입니다. 저점까지 변화율은 (저점 ÷ 기준 가격 − 1)이며, 손절 지시나 최대 손실 보장이 아닙니다.</p>
-<div class="table-wrap"><table><thead><tr><th>종목</th><th>판단 종가 / 고가선 대비</th><th>확정 저점 / 종가→저점</th><th>다음 시가 / 종가 대비 갭</th><th>시가의 고가선 대비 / 시가→저점</th><th>시가 상태</th></tr></thead><tbody>
+<?php if($saved): ?><p>장중 경로는 다음 거래일 마감 수집 후 원래 판단일에 표시합니다. 위 날짜 선택에서 이전 판단일을 보세요. 시각은 신호를 확인할 수 있었던 5분봉 마감(KST)이며 체결 시각이 아닙니다. 첫 30분에 선 위로 마친 뒤, 이후 첫 저가 접촉 봉의 종가가 선 이상이면 유지, 아래면 재이탈입니다. 필요한 봉이 비면 미확정입니다.</p><?php endif ?>
+<div class="table-wrap"><table><thead><tr><th>종목</th><th>판단 종가 / 고가선 대비</th><th>확정 저점 / 종가→저점</th><th>다음 시가 / 종가 대비 갭</th><th>시가의 고가선 대비 / 시가→저점</th><th>시가 상태</th><?php if($saved): ?><th>첫 30분 회복 → 첫 재시험 (KST)</th><?php endif ?></tr></thead><tbody>
 <?php foreach($visible as $row): $e=$row['breakout20']??[];$n=$row['next_open']??[]; ?>
 <tr<?= $orderAttrs($row) ?>><td><?= $h($row['name']) ?><small><?= $h($row['analysis_date']) ?></small></td>
 <td><?= $num($row['analysis_close']) ?><small><?= isset($e['distance_pct'])?$num($e['distance_pct'],2).'%':'—' ?></small></td>
 <td><?= isset($e['pivot_low'])?$num($e['pivot_low']):'미확정' ?><small><?= $h($e['pivot_day']??'') ?> · <?= isset($e['pivot_distance_pct'])?$num($e['pivot_distance_pct'],2).'%':'—' ?></small></td>
 <td><?= $num($n['open']??null) ?><small><?= $h($n['day']??'') ?> · <?= isset($n['gap_pct'])?$num($n['gap_pct'],2).'%':'—' ?></small></td>
 <td><?= isset($n['level_pct'])?$num($n['level_pct'],2).'%':'—' ?><small><?= isset($n['pivot_pct'])?$num($n['pivot_pct'],2).'%':'—' ?></small></td>
-<td><?= $h($n['status']??'마감 고정 화면에서 확인') ?><small><?= isset($n['source_day'])?'자료 저장일 '.$h($n['source_day']):'' ?></small></td></tr>
+<td><?= $h($n['status']??'마감 고정 화면에서 확인') ?><small><?= isset($n['source_day'])?'자료 저장일 '.$h($n['source_day']):'' ?></small></td><?php if($saved): $ev=$row['retest_event']??null; ?><td><?= $h($ev['status']??(($e['confirmed']??false)?'기록 없음':'—')) ?><small><?= $h($ev['recovery']['kst']??'—') ?> → <?= $h($ev['retest']['kst']??'—') ?></small><small><?= $h($ev['reason']??'') ?></small></td><?php endif ?></tr>
 <?php endforeach ?></tbody></table></div>
 <p>다음 시가는 코스피·코스닥 지수 날짜가 일치한 저장 달력의 바로 다음 날짜만 비교합니다. 거래소 휴장 달력과의 독립 대조는 하지 않았습니다. 해당 봉이 없으면 이후 날짜로 대체하지 않습니다. 마감 후 저장된 일봉이므로 장 시작 실시간 안내가 아니며 공급자 수정이 반영될 수 있습니다. 당시 기준선·저점은 원래 판단일 스냅샷으로 고정합니다. 수수료·슬리피지는 이 가격 거리 표에 반영하지 않습니다.</p>
 </details><?php endif ?>

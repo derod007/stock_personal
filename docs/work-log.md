@@ -1,3 +1,9 @@
+## 2026-11-03 01:40 · Cursor · 끝
+- 한 일: ponytail 규칙·스킬과 Cloudflare security-audit 스킬 설치. Node 없어 hooks 미사용. 운영 코드 변경 없음.
+- 파일: .cursor/rules/ponytail.mdc, ~/.cursor/skills/{ponytail*,security-audit}/, ~/.cursor/vendor/{ponytail,security-audit-skill}/
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-11-01 · Codex · 끝
 - 실시간/마감 유형1 종가 돌파 목록과 판단표에 거래대금 순(기본)·돌파선 가까운 순 추가. 후보와 대금 순위 불변, 화면 안에서 재조회 없이 양쪽 표 동시 정렬.
 - 신규 6개 포함 PHP 관련 96개, 변경 PHP/JS 구문 및 JS 정렬 전환 확인. 브라우저 실화면 미검증.

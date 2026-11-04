@@ -1,3 +1,15 @@
+## 2026-11-05 · Cursor · 끝
+- 한 일: type1_breakout.php에 최근 마감 기록(최대10)·돌파 확인/평가 불가/회복 관찰 대상 구분. 기록 없는 날을 미회복으로 세지 않음. 읽기 전용.
+- 파일: type1_breakout.php, bin/type1/BreakoutRetest.php, bin/type1/Page.php, tests/type1_breakout_recent.php, docs/type1-breakout/README.md, docs/work-log.md
+- 커밋: 연구 브랜치 PR
+- 롤백: 없음
+
+## 2026-11-05 · Cursor · 진행
+- 한 일: type1_breakout.php에 최근 마감 기록(최대10)·다음 거래일 관찰 상태 구분 표시. 읽기 전용, 후보·점수·계좌 불변.
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-11-03 01:40 · Cursor · 끝
 - 한 일: ponytail 규칙·스킬과 Cloudflare security-audit 스킬 설치. Node 없어 hooks 미사용. 운영 코드 변경 없음.
 - 파일: .cursor/rules/ponytail.mdc, ~/.cursor/skills/{ponytail*,security-audit}/, ~/.cursor/vendor/{ponytail,security-audit-skill}/

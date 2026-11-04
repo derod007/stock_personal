@@ -1,14 +1,15 @@
 <?php
 declare(strict_types=1);
 require __DIR__.'/bin/bootstrap.php';
-foreach(['Tracker','Store','Charts','EntryReference','Page'] as $f)require __DIR__.'/bin/type1/'.$f.'.php';
-use ChartEntryLab\Type1Scan\{Store,Charts};
+foreach(['Tracker','Store','Charts','EntryReference','BreakoutRetest','Page'] as $f)require __DIR__.'/bin/type1/'.$f.'.php';
+use ChartEntryLab\Type1Scan\{Store,Charts,BreakoutRetest};
 use ChartEntryLab\Type1Breakout;
 header('Cache-Control: no-store');
-$report=['ok'=>true,'as_of'=>date(DATE_ATOM),'source'=>'saved','saved_day'=>null,'scope'=>($_GET['scope']??'breakout')==='all'?'all':'breakout','rows'=>[],'errors'=>[],'summary'=>['total'=>0,'evaluated'=>0,'matches'=>0,'errors'=>0],'error'=>null];
+$report=['ok'=>true,'as_of'=>date(DATE_ATOM),'source'=>'saved','saved_day'=>null,'scope'=>($_GET['scope']??'breakout')==='all'?'all':'breakout','rows'=>[],'errors'=>[],'summary'=>['total'=>0,'evaluated'=>0,'matches'=>0,'errors'=>0],'recent'=>[],'error'=>null];
 try{
     $state=Store::load(Store::folder());$day=$_GET['day']??$state['last_day'];
     if(!$day)throw new RuntimeException('아직 마감 저장 기록이 없습니다.');
+    $report['recent']=BreakoutRetest::recentSummaries(Store::folder(),$state,10);
     $snapshot=Charts::snapshot(Store::folder(),$state,$day);$capture=$state['captures'][$day];
     $report['saved_days']=array_keys($state['captures']);
     $report['saved_day']=$day;$report['as_of']=date(DATE_ATOM,$capture['as_of']);

@@ -142,6 +142,25 @@ try {
     check(str_contains($html, 'type1_breakout.php?day=2026-10-28'), 'day link');
     check(str_contains($html, '다음 거래일 관찰 대기'), 'waiting text');
     check(!str_contains($html, '미회복 4건'), 'no invented unrecovered count');
+
+    foreach (['all', 'breakout'] as $scope) {
+    $report['scope'] = $scope;
+    $report['sort'] = 'near';
+    ob_start();
+    \ChartEntryLab\Type1Scan\render($report);
+    $html = ob_get_clean();
+    preg_match_all('/href="([^"]+)"/', $html, $links);
+    $recentLinks = 0;
+    foreach ($links[1] as $href) {
+        $url = html_entity_decode($href, ENT_QUOTES, 'UTF-8');
+        if (!str_starts_with($url, 'type1_breakout.php?day=')) continue;
+        parse_str(parse_url($url, PHP_URL_QUERY), $query);
+        check(($query['scope'] ?? null) === $scope, 'recent link preserves scope');
+        check(($query['sort'] ?? null) === ($scope === 'breakout' ? 'near' : null), 'recent link preserves applicable sort');
+        $recentLinks++;
+    }
+    check($recentLinks >= 3, 'recent date links checked');
+    }
 } finally {
     foreach (glob($dir.'/breakout-retest/*') ?: [] as $f) {
         unlink($f);

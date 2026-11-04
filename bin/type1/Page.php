@@ -50,12 +50,13 @@ function render(array $report): void
 <div class="table-wrap"><table><thead><tr><th scope="col">판단일</th><th scope="col">종가 돌파 확인</th><th scope="col">다음 거래일 관찰</th><th scope="col">비고</th></tr></thead><tbody>
 <?php foreach($report['recent'] as $recent):
     $q=$base.'?day='.rawurlencode($recent['day']).'&amp;scope='.rawurlencode($scope).($near?'&amp;sort=near':'');
+    $pathQ=$q.'#post-path';
     $confirmedLabel=$recent['confirmed']===null?'미확정':((string)(int)$recent['confirmed'].'건');
     if(($recent['unevaluable']??0)>0)$confirmedLabel.=' · 평가 불가 '.(int)$recent['unevaluable'].'건';
     $obs=$recent['observation']??['state'=>'기록 없음','label'=>'다음 거래일 관찰 기록 없음'];
 ?>
 <tr>
-<td><a href="<?= $h($q) ?>"><?= $h($recent['day']) ?></a><?php if(!empty($recent['recent_candidate'])): ?> <small>최근 후보일</small><?php endif ?><?php if(($report['saved_day']??null)===$recent['day']): ?> <small>현재 상세</small><?php endif ?></td>
+<td><a href="<?= $h($q) ?>"><?= $h($recent['day']) ?></a><?php if(!empty($recent['recent_candidate'])): ?> <small>최근 후보일</small><?php endif ?><?php if(($report['saved_day']??null)===$recent['day']): ?> <small>현재 상세</small><?php endif ?><?php if(($recent['confirmed']??0)>0): ?> · <a href="<?= $h($pathQ) ?>">이후 경로</a><?php endif ?></td>
 <td><?= $h($confirmedLabel) ?></td>
 <td><?= $h($obs['label']??'') ?><small><?= $h($obs['state']??'') ?></small></td>
 <td><?php
@@ -101,6 +102,50 @@ function render(array $report): void
 <?php endforeach ?></tbody></table></div>
 <p>다음 시가는 코스피·코스닥 지수 날짜가 일치한 저장 달력의 바로 다음 날짜만 비교합니다. 거래소 휴장 달력과의 독립 대조는 하지 않았습니다. 해당 봉이 없으면 이후 날짜로 대체하지 않습니다. 마감 후 저장된 일봉이므로 장 시작 실시간 안내가 아니며 공급자 수정이 반영될 수 있습니다. 당시 기준선·저점은 원래 판단일 스냅샷으로 고정합니다. 수수료·슬리피지는 이 가격 거리 표에 반영하지 않습니다.</p>
 </details><?php endif ?>
+<?php if ($saved): ?>
+<section id="post-path" class="notice" style="margin:28px 0">
+<h2 style="font-size:18px;margin:0 0 12px">후보 이후 경로 · 고정 돌파선 대비</h2>
+<p class="muted" style="margin-top:0">종가 돌파가 확인된 후보만 봅니다. 식별자는 판단일+종목코드이며, 같은 종목의 다른 판단일은 별도 관찰입니다. 고정선은 판단 스냅샷의 20일 고가선입니다. 이후 일봉은 최신 해시 검증 스냅샷 하나만 사용하고, 판단 스냅샷과 같은 날짜 봉이 다르면 충돌로 표시하며 조용히 섞지 않습니다. 등호는 돌파·이탈에 넣지 않습니다. 최대 고가·저가 거리는 가격 거리이며 체결·계좌 수익률이 아닙니다. 기존 모의 매매의 T+20 청산 규칙은 바꾸지 않으며, 자료가 있으면 20봉 이후도 관찰합니다. 분봉 사건은 일봉으로 추정하지 않습니다.</p>
+<?php $paths=$report['post_paths']??[]; if(!$paths): ?>
+<p>이 판단일에 표시할 종가 돌파 확인 후보의 이후 경로가 없습니다.</p>
+<?php else:
+    $asOf=$paths[0]['observation_as_of']??null;$sessions=$paths[0]['observed_sessions']??null;
+?>
+<p>관찰 기준일 <?= $h($report['saved_day']??'') ?> · 경로 자료 기준 <?= $h($asOf??'미확정') ?><?php if($sessions!==null): ?> · 관찰 거래일 수 <?= $h((string)$sessions) ?><?php endif ?></p>
+<div class="table-wrap"><table><thead><tr>
+<th>대금 순위</th><th>종목</th><th>판단 종가 / 고정선</th><th>다음 시가</th><th>최근 종가</th><th>시가→최근 종가</th><th>고정선 대비</th><th>완전성</th>
+</tr></thead><tbody>
+<?php foreach($paths as $p): ?>
+<tr>
+<td><?= $h($p['rank']??'—') ?></td>
+<td><?= $h($p['name']??'') ?><small><?= $h($p['symbol']) ?> · <?= $h($p['id']??'') ?></small></td>
+<td><?= $num($p['judgment_close']??null) ?><small><?= $num($p['level']??null) ?></small></td>
+<td><?= $num($p['entry_open']??null) ?><small><?= $h($p['entry_day']??'—') ?></small></td>
+<td><?= $num($p['latest_close']??null) ?><small><?= $h($p['latest_close_day']??'—') ?></small></td>
+<td><?= isset($p['change_from_entry_pct'])?$num($p['change_from_entry_pct'],2).'%':'—' ?></td>
+<td><?= $h($p['latest_vs_level']??'—') ?></td>
+<td><?= !empty($p['path_complete'])?'확인 완료':'미확정' ?><small><?= $h($p['reason']??'') ?></small></td>
+</tr>
+<?php endforeach ?></tbody></table></div>
+<details><summary>상세 · 최대 고가·저가 거리와 최초 이탈/회복</summary>
+<div class="table-wrap"><table><thead><tr>
+<th>종목</th><th>최대 고가 상승률</th><th>최대 저가 하락률</th><th>최초 종가&lt;선</th><th>이후 최초 종가&gt;선</th><th>누락 일</th>
+</tr></thead><tbody>
+<?php foreach($paths as $p): ?>
+<tr>
+<td><?= $h($p['name']??'') ?><small><?= $h($p['symbol']) ?></small></td>
+<td><?= !empty($p['extremes_complete'])&&isset($p['max_high_pct'])?$num($p['max_high_pct'],2).'%':'미확정' ?><small><?= isset($p['max_high'])?$num($p['max_high']):'' ?></small></td>
+<td><?= !empty($p['extremes_complete'])&&isset($p['max_low_pct'])?$num($p['max_low_pct'],2).'%':'미확정' ?><small><?= isset($p['min_low'])?$num($p['min_low']):'' ?></small></td>
+<td><?= !empty($p['level_cross_complete'])?$h($p['first_close_below_day']??'없음'):'미확정' ?></td>
+<td><?= !empty($p['level_cross_complete'])?$h($p['first_close_above_after_breach_day']??'없음'):'미확정' ?></td>
+<td><?= $h($p['missing_days']?implode(', ',$p['missing_days']):($p['conflict']['message']??'—')) ?></td>
+</tr>
+<?php endforeach ?></tbody></table></div>
+<p>진입일 일봉의 고가·저가 발생 순서는 판단하지 않습니다. 확인된 구간 값만 숫자로 두고, 누락·충돌이 있으면 완전 확인으로 표시하지 않습니다.</p>
+</details>
+<?php endif ?>
+</section>
+<?php endif ?>
 <?php if ($report['errors']): ?><details><summary>평가 불가 <?= count($report['errors']) ?>종목 — 유형1 미해당과 구분</summary><ul><?php foreach ($report['errors'] as $error): ?><li><?= $h($error['name'].' ('.$error['symbol'].') · '.$error['reason']) ?></li><?php endforeach ?></ul></details><?php endif ?>
 <details><summary>유형1은 어떻게 고르나요?</summary><p>완료된 60일봉의 종가와 거래량 모양을 정규화하고, 연구에서 고정한 6개 대표 모양 중 가장 가까운 유형을 찾습니다. 유형 번호는 성적 순위가 아닙니다.</p><p>이 목록은 오늘 조회한 차트 모양의 일치 여부입니다. 기존 추천 점수·보유 한도·재진입 간격을 적용한 주문 목록과는 다릅니다. 기본 정렬은 거래대금 순이며 수익 확률 순위가 아닙니다. 종목을 누르면 기존 차트 분석으로 이동합니다. 자동 주문은 실행하지 않습니다.</p></details>
 </main></body></html>

@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 require __DIR__.'/bin/bootstrap.php';
-foreach(['Tracker','Store','Charts','EntryReference','BreakoutRetest','Page'] as $f)require __DIR__.'/bin/type1/'.$f.'.php';
-use ChartEntryLab\Type1Scan\{Store,Charts,BreakoutRetest};
+foreach(['Tracker','Store','Charts','EntryReference','BreakoutRetest','BreakoutPath','Page'] as $f)require __DIR__.'/bin/type1/'.$f.'.php';
+use ChartEntryLab\Type1Scan\{Store,Charts,BreakoutRetest,BreakoutPath};
 use ChartEntryLab\Type1Breakout;
 header('Cache-Control: no-store');
-$report=['ok'=>true,'as_of'=>date(DATE_ATOM),'source'=>'saved','saved_day'=>null,'scope'=>($_GET['scope']??'breakout')==='all'?'all':'breakout','rows'=>[],'errors'=>[],'summary'=>['total'=>0,'evaluated'=>0,'matches'=>0,'errors'=>0],'recent'=>[],'error'=>null];
+$report=['ok'=>true,'as_of'=>date(DATE_ATOM),'source'=>'saved','saved_day'=>null,'scope'=>($_GET['scope']??'breakout')==='all'?'all':'breakout','rows'=>[],'errors'=>[],'summary'=>['total'=>0,'evaluated'=>0,'matches'=>0,'errors'=>0],'recent'=>[],'post_paths'=>[],'error'=>null];
 try{
     $state=Store::load(Store::folder());$day=$_GET['day']??$state['last_day'];
     if(!$day)throw new RuntimeException('아직 마감 저장 기록이 없습니다.');
@@ -20,7 +20,8 @@ try{
         $report['rows'][]=array_merge($row,$c,['breakout20'=>Type1Breakout::evidence($snapshot['prices'][$row['symbol']]??[],$row['symbol'],$c,$capture['as_of'])]);
     }
     $nextError=null;$later=null;
-    try{if($state['last_day']>$day)$later=Charts::snapshot(Store::folder(),$state,$state['last_day']);}
+    try{if($state['last_day']>$day)$later=Charts::snapshot(Store::folder(),$state,$state['last_day']);
+        elseif($state['last_day']===$day)$later=$snapshot;}
     catch(Throwable){$nextError='이후 스냅샷 검증 실패';}
     $eventPath=Store::folder().'/breakout-retest/'.$day.'.json';$events=[];
     if(is_file($eventPath)){
@@ -34,6 +35,7 @@ try{
     }unset($row);
     usort($report['rows'],static fn($a,$b)=>($a['rank']<=>$b['rank'])?:strcmp($a['symbol'],$b['symbol']));
     $report['summary']['matches']=count($report['rows']);$report['summary']['errors']=count($report['errors']);
+    $report['post_paths']=BreakoutPath::forConfirmedRows($day,$report['rows'],$snapshot,$later,$nextError);
 }catch(Throwable $e){$report['ok']=false;$report['error']=$e instanceof RuntimeException?$e->getMessage():'마감 기록을 확인하지 못했습니다.';}
 if(($_GET['format']??'')==='json'){header('Content-Type: application/json; charset=utf-8');echo json_encode($report,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR);exit;}
 $report['sort'] = ($_GET['sort'] ?? '') === 'near' ? 'near' : 'amount';

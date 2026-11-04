@@ -295,6 +295,27 @@ check(($p['gap_kind'] ?? null) === 'next_bar_invalid', 'invalid next gap_kind');
 check(($p['entry_day'] ?? null) === '2026-10-22', 'invalid next keeps entry day');
 check(str_contains((string)$p['reason'], '유효성 검사'), 'invalid next reason');
 
+// 10b) Next bar exists in raw data but is_complete=false — not next_bar_missing.
+$incSym = '313131.KQ';
+$incBars = [
+    candle('2026-10-20', 90, 100, 89, 95),
+    candle($judgeDay, 100, 106, 99, 105),
+    ['time_kst' => '2026-10-22 09:00:00', 'open' => 106, 'high' => 110, 'low' => 104, 'close' => 108, 'volume' => 100, 'is_complete' => false],
+    candle('2026-10-23', 108, 120, 106, 115),
+    candle('2026-10-24', 115, 118, 110, 116),
+];
+$p = BreakoutPath::forRow(
+    $judgeDay,
+    $rowBase($incSym, '미완료다음', 12),
+    $snap($judgeDay, [$incSym => array_slice($incBars, 0, 2)]),
+    $snap('2026-10-28', [$incSym => $incBars])
+);
+check(($p['gap_kind'] ?? null) === 'next_bar_invalid', 'incomplete next is invalid not missing');
+check(($p['entry_day'] ?? null) === '2026-10-22', 'incomplete next keeps exact entry day');
+check($p['entry_open'] === null && $p['path_complete'] === false, 'incomplete next unused and not substituted');
+check(str_contains((string)$p['reason'], '미완료'), 'incomplete next reason');
+check(!str_contains((string)$p['reason'], '원본에 없어'), 'incomplete next not claimed absent');
+
 // 11) Next calendar day missing.
 $calSym = '404040.KQ';
 $calDays = ['2026-10-20', '2026-10-21'];

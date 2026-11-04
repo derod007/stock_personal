@@ -1,4 +1,17 @@
 ## 2026-11-05 · Cursor · 끝
+- 한 일: PR #151 — byDay가 미완료 봉을 제외해 next_bar_missing으로 오인하던 오류 수정. 원본 조회(rawDayBar)로 부재/미완료·무효 구분. Tracker·수집·원본 불변.
+- 검증: tests/type1_breakout_path 53(미완료 다음봉 회귀 포함).
+- 파일: bin/type1/BreakoutPath.php, tests/type1_breakout_path.php, docs/type1-breakout/README.md, docs/work-log.md
+- 커밋: 같은 PR #151 푸시
+- 롤백: 없음
+
+## 2026-11-05 · Cursor · 진행
+- 한 일: PR #151 검토 — byDay가 미완료 봉을 빼 next_bar_missing으로 오인하는 오류 수정. Tracker·수집·원본 불변.
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
+## 2026-11-05 · Cursor · 끝
 - 한 일: 10/28 티에프이·뉴파워프라즈마 경로 미확정 원인 조사. Collector는 TOP100+미종료 trade만 수집. 두 종목은 TOP100 이탈 후 trade 종료(144960 10/30, 425420 11/03)로 최신(11/04) prices 키 소실. 표시를 symbol_absent/empty/next_bar_missing/invalid/calendar/mid 구분. 수집 정책 변경 없음.
 - 검증: tests/type1_breakout_path 48. noramu.test JSON·화면에서 gap_kind=symbol_absent_in_latest, 경로 저장본 2026-11-04.
 - 파일: bin/type1/BreakoutPath.php, bin/type1/Page.php, tests/type1_breakout_path.php, docs/type1-breakout/README.md, docs/work-log.md

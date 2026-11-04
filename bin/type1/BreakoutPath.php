@@ -101,11 +101,32 @@ final class BreakoutPath
         $entryDay = $days[$i + 1];
         $entryBar = $latestBars[$entryDay] ?? null;
         if ($entryBar === null) {
-            $out = $base + self::uncertain(
-                '최신 저장본('.(string)$latestDay.')에 종목은 있으나 정확한 다음 거래일('.$entryDay.') 봉이 없어 이후 날짜로 대체하지 않았습니다.',
-                $conflict,
-                'next_bar_missing'
-            );
+            // byDay skips is_complete=false; look at raw bars so missing ≠ unusable.
+            try {
+                $rawEntry = self::rawDayBar($rawBars, $symbol, $entryDay, (int)$latestSnapshot['as_of']);
+            } catch (\Throwable $e) {
+                $out = $base + self::uncertain('일봉 날짜 중복 또는 잘못된 봉: '.$e->getMessage(), $conflict, 'bar_parse_error');
+                $out['entry_day'] = $entryDay;
+                $out['observation_as_of'] = $latestDay;
+                $out['source'] = $source;
+                return $out;
+            }
+            if ($rawEntry === null) {
+                $out = $base + self::uncertain(
+                    '최신 저장본('.(string)$latestDay.')에 종목은 있으나 정확한 다음 거래일('.$entryDay.') 봉이 원본에 없어 이후 날짜로 대체하지 않았습니다.',
+                    $conflict,
+                    'next_bar_missing'
+                );
+            } else {
+                $detail = (($rawEntry['is_complete'] ?? true) === false)
+                    ? '미완료(is_complete=false)'
+                    : '유효하지 않음';
+                $out = $base + self::uncertain(
+                    '최신 저장본('.(string)$latestDay.')에 다음 거래일('.$entryDay.') 봉은 있으나 '.$detail.'이라 경로에 쓰지 않으며 이후 날짜로 대체하지 않았습니다.',
+                    $conflict,
+                    'next_bar_invalid'
+                );
+            }
             $out['entry_day'] = $entryDay;
             $out['observation_as_of'] = $latestDay;
             $out['observed_sessions'] = 0;
@@ -237,6 +258,31 @@ final class BreakoutPath
             'observed_valid_sessions' => null,
             'source' => null,
         ];
+    }
+
+    /**
+     * Day lookup without dropping incomplete bars. Does not change Tracker::byDay.
+     * @return ?array raw bar for $day, or null if absent
+     */
+    private static function rawDayBar(array $bars, string $symbol, string $day, int $asOf): ?array
+    {
+        $found = null;
+        $tz = new \DateTimeZone((str_ends_with($symbol, '.KS') || str_ends_with($symbol, '.KQ')) ? 'Asia/Seoul' : 'America/New_York');
+        foreach ($bars as $b) {
+            $stamp = \ChartEntryLab\CandleClock::closeTime($b, $symbol);
+            if ($stamp > $asOf) {
+                continue;
+            }
+            $d = (new \DateTimeImmutable('@'.$stamp))->setTimezone($tz)->format('Y-m-d');
+            if ($d !== $day) {
+                continue;
+            }
+            if ($found !== null) {
+                throw new \RuntimeException('Duplicate price session');
+            }
+            $found = $b;
+        }
+        return $found;
     }
 
     private static function dayConflict(?array $a, ?array $b): ?array

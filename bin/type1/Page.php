@@ -105,7 +105,7 @@ function render(array $report): void
 <?php if ($saved): ?>
 <section id="post-path" class="notice" style="margin:28px 0">
 <h2 style="font-size:18px;margin:0 0 12px">후보 이후 경로 · 고정 돌파선 대비</h2>
-<p class="muted" style="margin-top:0">종가 돌파가 확인된 후보만 봅니다. 식별자는 판단일+종목코드이며, 같은 종목의 다른 판단일은 별도 관찰입니다. 고정선은 판단 스냅샷의 20일 고가선입니다. 이후 일봉은 최신 해시 검증 스냅샷 하나만 사용하고, 판단 스냅샷과 같은 날짜 OHLC가 다르면 가격 충돌로 표시하며 조용히 섞지 않습니다. 거래량만 다른 경우는 가격 충돌이 아닙니다. 등호는 돌파·이탈에 넣지 않습니다. 최대 고가·저가 거리는 가격 거리이며 체결·계좌 수익률이 아닙니다. 기존 모의 매매의 T+20 청산 규칙은 바꾸지 않으며, 자료가 있으면 20봉 이후도 관찰합니다. 분봉 사건은 일봉으로 추정하지 않습니다.</p>
+<p class="muted" style="margin-top:0">종가 돌파가 확인된 후보만 봅니다. 식별자는 판단일+종목코드이며, 같은 종목의 다른 판단일은 별도 관찰입니다. 고정선은 판단 스냅샷의 20일 고가선입니다. 이후 일봉은 최신 해시 검증 스냅샷 하나만 사용하고, 판단 스냅샷과 같은 날짜 OHLC가 다르면 가격 충돌로 표시하며 조용히 섞지 않습니다. 거래량만 다른 경우는 가격 충돌이 아닙니다. 최신 저장본에 종목 키가 없는 것과 종목은 있으나 다음 거래일 봉이 없는 것, 봉이 무효인 것, 중간 봉 누락, 다음 거래일 달력 미확정을 구분합니다. ‘최신 저장본에 없음’은 과거 저장본에도 없었다는 뜻이 아니며, 이 화면은 페이지마다 과거 저장본을 다시 검색하지 않습니다. 등호는 돌파·이탈에 넣지 않습니다. 최대 고가·저가 거리는 가격 거리이며 체결·계좌 수익률이 아닙니다. 기존 모의 매매의 T+20 청산 규칙은 바꾸지 않으며, 자료가 있으면 20봉 이후도 관찰합니다. 분봉 사건은 일봉으로 추정하지 않습니다.</p>
 <?php $paths=$report['post_paths']??[]; if(!$paths): ?>
 <p>이 판단일에 표시할 종가 돌파 확인 후보의 이후 경로가 없습니다.</p>
 <?php else:
@@ -124,12 +124,12 @@ function render(array $report): void
 <td><?= $num($p['latest_close']??null) ?><small><?= $h($p['latest_close_day']??'—') ?></small></td>
 <td><?= isset($p['change_from_entry_pct'])?$num($p['change_from_entry_pct'],2).'%':'—' ?></td>
 <td><?= $h($p['latest_vs_level']??'—') ?></td>
-<td><?= !empty($p['path_complete'])?'확인 완료':'미확정' ?><small><?= $h($p['reason']??'') ?></small></td>
+<td><?php if(!empty($p['path_complete'])): ?>확인 완료<?php else: ?>미확정<?php endif ?><small><?= $h($p['reason']??'') ?></small><small>판단일 <?= $h($p['judgment_day']??$report['saved_day']??'') ?> · 경로 저장본 <?= $h($p['observation_as_of']??($p['source']['latest_snapshot_day']??'—')) ?><?php if(!empty($p['gap_kind'])): ?> · <?= $h($p['gap_kind']) ?><?php endif ?></small></td>
 </tr>
 <?php endforeach ?></tbody></table></div>
 <details><summary>상세 · 최대 고가·저가 거리와 최초 이탈/회복</summary>
 <div class="table-wrap"><table><thead><tr>
-<th>종목</th><th>최대 고가 상승률</th><th>최대 저가 하락률</th><th>최초 종가&lt;선</th><th>이후 최초 종가&gt;선</th><th>누락 일</th>
+<th>종목</th><th>최대 고가 상승률</th><th>최대 저가 하락률</th><th>최초 종가&lt;선</th><th>이후 최초 종가&gt;선</th><th>누락·사유</th>
 </tr></thead><tbody>
 <?php foreach($paths as $p): ?>
 <tr>
@@ -138,7 +138,12 @@ function render(array $report): void
 <td><?= !empty($p['extremes_complete'])&&isset($p['max_low_pct'])?$num($p['max_low_pct'],2).'%':'미확정' ?><small><?= isset($p['min_low'])?$num($p['min_low']):'' ?></small></td>
 <td><?= !empty($p['level_cross_complete'])?$h($p['first_close_below_day']??'없음'):'미확정' ?></td>
 <td><?= !empty($p['level_cross_complete'])?$h($p['first_close_above_after_breach_day']??'없음'):'미확정' ?></td>
-<td><?= $h($p['missing_days']?implode(', ',$p['missing_days']):($p['conflict']['message']??'—')) ?></td>
+<td><?php
+    if($p['missing_days']??[]) echo $h(implode(', ',$p['missing_days']));
+    elseif(!empty($p['conflict']['message'])) echo $h($p['conflict']['message']);
+    elseif(!empty($p['reason'])) echo $h($p['reason']);
+    else echo '—';
+?><small><?= $h($p['gap_kind']??'') ?></small></td>
 </tr>
 <?php endforeach ?></tbody></table></div>
 <p>진입일 일봉의 고가·저가 발생 순서는 판단하지 않습니다. 확인된 구간 값만 숫자로 두고, 누락·충돌이 있으면 완전 확인으로 표시하지 않습니다.</p>

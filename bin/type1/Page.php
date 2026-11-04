@@ -43,6 +43,33 @@ function render(array $report): void
 <p class="muted">조회 시작 <?= $h($at) ?> KST · 스팩·ETF·ETN·단일종목 레버리지 제외<br>거래대금 순위는 조회 시점 기준입니다. 장중 미완료봉은 분류에 쓰지 않으며 분석 기준일은 종목별로 표시합니다.</p>
 <p><a class="refresh" href="type1_scan.php?refresh=1&amp;scope=<?= $h($scope) ?><?= $sortQuery ?>" data-sort-refresh>새로 조회</a> <span class="muted">최대 100종목을 조회하므로 잠시 걸릴 수 있습니다.</span></p>
 <?php endif ?>
+<?php if($saved && !empty($report['recent'])): ?>
+<section class="notice" aria-label="최근 마감 기록">
+<h2 style="font-size:18px;margin:0 0 12px">최근 마감 기록</h2>
+<p class="muted" style="margin-top:0">저장된 판단일 최대 10개입니다. 날짜를 누르면 아래 상세 표로 이동합니다. 기본 선택 날짜는 바꾸지 않습니다. 회복·유지·재이탈은 저장된 다음 거래일 관찰 기록이 있을 때만 셉니다.</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">판단일</th><th scope="col">종가 돌파 확인</th><th scope="col">다음 거래일 관찰</th><th scope="col">비고</th></tr></thead><tbody>
+<?php foreach($report['recent'] as $recent):
+    $q=$base.'?day='.rawurlencode($recent['day']).'&amp;scope='.rawurlencode($scope).($near?'&amp;sort=near':'');
+    $confirmedLabel=$recent['confirmed']===null?'미확정':((string)(int)$recent['confirmed'].'건');
+    if(($recent['unevaluable']??0)>0)$confirmedLabel.=' · 평가 불가 '.(int)$recent['unevaluable'].'건';
+    $obs=$recent['observation']??['state'=>'기록 없음','label'=>'다음 거래일 관찰 기록 없음'];
+?>
+<tr>
+<td><a href="<?= $h($q) ?>"><?= $h($recent['day']) ?></a><?php if(!empty($recent['recent_candidate'])): ?> <small>최근 후보일</small><?php endif ?><?php if(($report['saved_day']??null)===$recent['day']): ?> <small>현재 상세</small><?php endif ?></td>
+<td><?= $h($confirmedLabel) ?></td>
+<td><?= $h($obs['label']??'') ?><small><?= $h($obs['state']??'') ?></small></td>
+<td><?php
+    if(($recent['confirmed']??null)===0 && ($obs['state']??'')==='요약') echo $h('평가 완료 · 돌파 확인 후보 없음');
+    elseif(($recent['confirmed']??0)>0 && ($obs['state']??'')==='요약' && str_starts_with((string)($obs['label']??''),'회복 관찰 대상 0건')) echo $h('돌파 후보는 있으나 다음 시가 ≥ 기준선');
+    elseif(($obs['state']??'')==='대기') echo $h('다음 거래일 미도래 또는 미저장');
+    elseif(($obs['state']??'')==='기록 없음') echo $h('과거 관찰 파일 없음');
+    elseif(($obs['state']??'')==='미확정') echo $h('파일 누락·해시/가격 문제로 미확정');
+    else echo '—';
+?></td>
+</tr>
+<?php endforeach ?></tbody></table></div>
+</section>
+<?php endif ?>
 <?php if($saved && !empty($report['saved_days'])): ?><form method="get"><label>판단일 <select name="day"><?php foreach(array_reverse($report['saved_days']) as $d): ?><option value="<?= $h($d) ?>"<?= $d===$report['saved_day']?' selected':'' ?>><?= $h($d) ?></option><?php endforeach ?></select></label><input type="hidden" name="scope" value="<?= $h($scope) ?>"><input type="hidden" name="sort" value="<?= $near?'near':'amount' ?>"><button>저장 기록 보기</button></form><?php endif ?>
 <nav aria-label="후보 필터"><a href="<?= $base ?>?scope=all<?= $dayQuery ?>"<?= $scope==='all'?' aria-current="page"':'' ?>>유형1 전체 <?= count($report['rows']) ?></a><a href="<?= $base ?>?scope=breakout<?= $dayQuery ?>"<?= $scope==='breakout'?' aria-current="page"':'' ?>>종가 돌파 확인 <?= count($confirmed) ?></a></nav>
 <?php if($scope==='breakout'): ?><nav aria-label="돌파 후보 정렬" id="breakout-sort">

@@ -1,4 +1,16 @@
 ## 2026-11-05 · Cursor · 끝
+- 한 일: 유형1+20일 돌파 확인 후보의 선정 이후 일봉 경로(고정선 대비)를 type1_breakout에 읽기 전용 추가. 최근 요약→#post-path 링크. 모의·손절·계좌·스냅샷 불변.
+- 파일: bin/type1/BreakoutPath.php, type1_breakout.php, bin/type1/Page.php, tests/type1_breakout_path.php, docs/type1-breakout/README.md, docs/work-log.md
+- 커밋: 연구 브랜치 PR
+- 롤백: 없음
+
+## 2026-11-05 · Cursor · 진행
+- 한 일: 유형1+20일 돌파 후보의 선정 이후 일봉 경로(고정선 대비)를 마감 화면에 읽기 전용으로 추가. 모의·손절·계좌 불변.
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
+## 2026-11-05 · Cursor · 끝
 - 한 일: type1_breakout.php에 최근 마감 기록(최대10)·돌파 확인/평가 불가/회복 관찰 대상 구분. 기록 없는 날을 미회복으로 세지 않음. 읽기 전용.
 - 파일: type1_breakout.php, bin/type1/BreakoutRetest.php, bin/type1/Page.php, tests/type1_breakout_recent.php, docs/type1-breakout/README.md, docs/work-log.md
 - 커밋: 연구 브랜치 PR

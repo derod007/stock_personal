@@ -49,7 +49,7 @@ function render(array $report): void
 <p class="muted" style="margin-top:0">저장된 판단일 최대 10개입니다. 날짜를 누르면 아래 상세 표로 이동합니다. 기본 선택 날짜는 바꾸지 않습니다. 회복·유지·재이탈은 저장된 다음 거래일 관찰 기록이 있을 때만 셉니다.</p>
 <div class="table-wrap"><table><thead><tr><th scope="col">판단일</th><th scope="col">종가 돌파 확인</th><th scope="col">다음 거래일 관찰</th><th scope="col">비고</th></tr></thead><tbody>
 <?php foreach($report['recent'] as $recent):
-    $q=$base.'?day='.rawurlencode($recent['day']).'&amp;scope='.rawurlencode($scope).($near?'&amp;sort=near':'');
+    $q=$base.'?day='.rawurlencode($recent['day']).'&scope='.rawurlencode($scope).($near?'&sort=near':'');
     $pathQ=$q.'#post-path';
     $confirmedLabel=$recent['confirmed']===null?'미확정':((string)(int)$recent['confirmed'].'건');
     if(($recent['unevaluable']??0)>0)$confirmedLabel.=' · 평가 불가 '.(int)$recent['unevaluable'].'건';

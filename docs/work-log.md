@@ -1,4 +1,22 @@
 ## 2026-11-05 · Cursor · 끝
+- 한 일: 10/28 삼성E&A·LG씨엔에스 경로 ‘가격 충돌’ 조사. OHLC 동일, 거래량만 10/29부터 수정. dayConflict를 OHLC만 비교하도록 수정·회귀 추가. 원본 스냅샷 불변.
+- 근거: 028050 거래량 4357692→4237254, 064400 1271755→1250906. open/high/low/close·시각·완료·출처 동일.
+- 검증: tests/type1_breakout_path 36통과. noramu.test?day=2026-10-28 JSON에서 두 종목 path_complete=true·conflict=null.
+- 파일: bin/type1/BreakoutPath.php, bin/type1/Page.php, tests/type1_breakout_path.php, docs/type1-breakout/README.md, docs/work-log.md
+- 커밋: 연구 브랜치 PR
+- 롤백: 없음
+
+## 2026-11-05 · Cursor · 진행
+- 한 일: 10/28 후보 이후 경로의 삼성E&A·LG씨엔에스 ‘저장 버전 간 판단일 가격 충돌’ 원인 조사(OHLC vs 거래량 vs 비교 코드). 원본 스냅샷 불변.
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
+## 2026-11-05 · Codex · 끝
+- 실제 브라우저에서 최근 저장일 6개와 10/28·11/04 상세를 확인. 원본 스냅샷 해시 검증 후 돌파 건수(4/0/0/0/0/2)·평가 불가(5/5/7/6/8/7) 및 관찰 파일 유무 대조 일치.
+- 최근 날짜/이후 경로 링크의 HTML 이중 이스케이프로 필터·정렬이 사라지는 오류만 수정하고 회귀 검사 추가. 매매 규칙·계좌·예약·원본 자료 변경 없음. 별도 PR, 병합하지 않음.
+
+## 2026-11-05 · Cursor · 끝
 - 한 일: 유형1+20일 돌파 확인 후보의 선정 이후 일봉 경로(고정선 대비)를 type1_breakout에 읽기 전용 추가. 최근 요약→#post-path 링크. 모의·손절·계좌·스냅샷 불변.
 - 파일: bin/type1/BreakoutPath.php, type1_breakout.php, bin/type1/Page.php, tests/type1_breakout_path.php, docs/type1-breakout/README.md, docs/work-log.md
 - 커밋: 연구 브랜치 PR

@@ -220,6 +220,30 @@ check(($p['conflict']['field'] ?? null) === 'high', 'conflict field high');
 check($p['level'] === 100.0 && $p['entry_open'] === 106.0, 'level from judgment; path from latest only');
 check(str_contains((string)$p['reason'], '충돌'), 'conflict reason');
 
+// 7b) Volume-only revision is not a price conflict (real 10/28 028050/064400 pattern).
+$volSym = '888888.KS';
+$volJudge = [
+    candle('2026-10-20', 90, 100, 89, 95, 1000),
+    candle($judgeDay, 100, 106, 99, 105, 4357692),
+];
+$volLatest = [
+    candle('2026-10-20', 90, 100, 89, 95, 1000),
+    candle($judgeDay, 100, 106, 99, 105, 4237254),
+    candle('2026-10-22', 106, 110, 104, 108, 2000),
+    candle('2026-10-23', 108, 112, 106, 110, 2000),
+    candle('2026-10-24', 110, 115, 108, 112, 2000),
+    candle('2026-10-27', 112, 118, 110, 114, 2000),
+    candle('2026-10-28', 114, 120, 112, 116, 2000),
+];
+$p = BreakoutPath::forRow(
+    $judgeDay,
+    $rowBase($volSym, '거래량만', 8),
+    $snap($judgeDay, [$volSym => $volJudge]),
+    $snap('2026-10-28', [$volSym => $volLatest])
+);
+check($p['ok'] && $p['path_complete'] && $p['conflict'] === null, 'volume-only not price conflict');
+check($p['latest_vs_level'] === '위' && $p['entry_open'] === 106.0, 'volume-only path still complete');
+
 // Non-confirmed rows are skipped by batch helper.
 $batch = BreakoutPath::forConfirmedRows($judgeDay, [
     $rowBase($staySym, '유지', 1),

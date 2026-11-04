@@ -182,13 +182,14 @@ final class BreakoutPath
         if (!$a || !$b || !Tracker::valid($a) || !Tracker::valid($b)) {
             return null;
         }
-        foreach (['open', 'high', 'low', 'close', 'volume'] as $k) {
+        // Path metrics use OHLC only. Volume revisions alone are not a price conflict.
+        foreach (['open', 'high', 'low', 'close'] as $k) {
             if ((float)$a[$k] !== (float)$b[$k]) {
                 return [
                     'field' => $k,
                     'judgment' => $a[$k],
                     'latest' => $b[$k],
-                    'message' => '판단 스냅샷과 최신 스냅샷의 같은 날짜 봉이 달라 섞지 않았습니다. 기준선은 판단 스냅샷, 이후 경로는 최신 스냅샷만 씁니다.',
+                    'message' => '판단 스냅샷과 최신 스냅샷의 같은 날짜 OHLC가 달라 섞지 않았습니다. 기준선은 판단 스냅샷, 이후 경로는 최신 스냅샷만 씁니다. 거래량만 다른 경우는 가격 충돌이 아닙니다.',
                 ];
             }
         }

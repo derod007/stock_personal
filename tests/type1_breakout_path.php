@@ -135,7 +135,8 @@ $latestSnap = $snap('2026-10-28', [$missNextSym => $missNextBars]);
 $p = BreakoutPath::forRow($judgeDay, $rowBase($missNextSym, '다음누락', 4), $judgeSnap, $latestSnap);
 check(!$p['ok'] && $p['entry_day'] === '2026-10-22', 'missing next names exact day');
 check($p['entry_open'] === null && $p['path_complete'] === false, 'missing next not substituted');
-check(str_contains((string)$p['reason'], '다음 거래일'), 'missing next reason');
+check(($p['gap_kind'] ?? null) === 'next_bar_missing', 'missing next gap_kind');
+check(str_contains((string)$p['reason'], '종목은 있으나'), 'missing next reason distinguishes presence');
 
 // 5) Middle session gap — extremes/crosses not marked complete; confirmed segment still reported.
 $gapSym = '555555.KS';
@@ -243,6 +244,68 @@ $p = BreakoutPath::forRow(
 );
 check($p['ok'] && $p['path_complete'] && $p['conflict'] === null, 'volume-only not price conflict');
 check($p['latest_vs_level'] === '위' && $p['entry_open'] === 106.0, 'volume-only path still complete');
+
+// 8) Symbol key absent in latest snapshot — not the same as missing next bar.
+$absSym = '101010.KQ';
+$absJudge = [candle('2026-10-20', 90, 100, 89, 95), candle($judgeDay, 100, 106, 99, 105)];
+$p = BreakoutPath::forRow(
+    $judgeDay,
+    $rowBase($absSym, '키없음', 10),
+    $snap($judgeDay, [$absSym => $absJudge]),
+    ['day' => '2026-10-28', 'as_of' => $asOf, 'days' => $days, 'prices' => ['999999.KS' => $stayBars]]
+);
+check(($p['gap_kind'] ?? null) === 'symbol_absent_in_latest', 'absent key gap_kind');
+check(str_contains((string)$p['reason'], '일봉 키가 없습니다'), 'absent key reason');
+check(str_contains((string)$p['reason'], '과거에도 없었다는 뜻이 아닙니다'), 'absent key not forever-missing');
+check(($p['observation_as_of'] ?? null) === '2026-10-28', 'absent key names latest day');
+
+// 9) Empty price array in latest.
+$emptySym = '202020.KQ';
+$p = BreakoutPath::forRow(
+    $judgeDay,
+    $rowBase($emptySym, '빈배열', 11),
+    $snap($judgeDay, [$emptySym => $absJudge]),
+    [
+        'day' => '2026-10-28',
+        'as_of' => $asOf,
+        'days' => $days,
+        'prices' => [$emptySym => []],
+        'errors' => [$emptySym => '일봉 조회 실패'],
+    ]
+);
+check(($p['gap_kind'] ?? null) === 'symbol_empty_in_latest', 'empty array gap_kind');
+check(str_contains((string)$p['reason'], '비어 있습니다'), 'empty array reason');
+check(str_contains((string)$p['reason'], '일봉 조회 실패'), 'empty array includes stored error');
+
+// 10) Next bar present but invalid.
+$badSym = '303030.KQ';
+$badBars = [
+    candle('2026-10-20', 90, 100, 89, 95),
+    candle($judgeDay, 100, 106, 99, 105),
+    ['time_kst' => '2026-10-22 09:00:00', 'open' => 106, 'high' => 110, 'low' => 104, 'close' => 108, 'volume' => 100, 'is_complete' => true, 'synthetic' => true],
+    candle('2026-10-23', 108, 112, 106, 110),
+];
+$p = BreakoutPath::forRow(
+    $judgeDay,
+    $rowBase($badSym, '무효봉', 12),
+    $snap($judgeDay, [$badSym => array_slice($badBars, 0, 2)]),
+    $snap('2026-10-28', [$badSym => $badBars])
+);
+check(($p['gap_kind'] ?? null) === 'next_bar_invalid', 'invalid next gap_kind');
+check(($p['entry_day'] ?? null) === '2026-10-22', 'invalid next keeps entry day');
+check(str_contains((string)$p['reason'], '유효성 검사'), 'invalid next reason');
+
+// 11) Next calendar day missing.
+$calSym = '404040.KQ';
+$calDays = ['2026-10-20', '2026-10-21'];
+$calBars = [candle('2026-10-20', 90, 100, 89, 95), candle($judgeDay, 100, 106, 99, 105)];
+$p = BreakoutPath::forRow(
+    $judgeDay,
+    $rowBase($calSym, '달력없음', 13),
+    ['day' => $judgeDay, 'as_of' => $asOf, 'days' => $calDays, 'prices' => [$calSym => $calBars]],
+    ['day' => $judgeDay, 'as_of' => $asOf, 'days' => $calDays, 'prices' => [$calSym => $calBars]]
+);
+check(($p['gap_kind'] ?? null) === 'next_calendar_missing', 'calendar missing gap_kind');
 
 // Non-confirmed rows are skipped by batch helper.
 $batch = BreakoutPath::forConfirmedRows($judgeDay, [

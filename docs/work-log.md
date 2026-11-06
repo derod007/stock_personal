@@ -1,3 +1,10 @@
+## 2026-11-06 · Cursor · 끝
+- 한 일: 돌파 후보 20거래일 관찰을 스냅샷과 분리 저장하는 설계만 문서화. 코드·수집·원본 불변.
+- 근거: 2026-11-06 저장분 후보 13, 현재 수집과 안 겹치는 종목 2(425420.KQ·144960.KQ). 8개 스냅샷 사후 집계 추가 종목-일 8. 장기 비용은 단정하지 않음.
+- 파일: docs/type1-breakout/observation-retention-plan.md, docs/work-log.md
+- 커밋: 문서 PR
+- 롤백: 없음
+
 ## 2026-11-05 · Cursor · 끝
 - 한 일: PR #151 — byDay가 미완료 봉을 제외해 next_bar_missing으로 오인하던 오류 수정. 원본 조회(rawDayBar)로 부재/미완료·무효 구분. Tracker·수집·원본 불변.
 - 검증: tests/type1_breakout_path 53(미완료 다음봉 회귀 포함).

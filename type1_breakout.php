@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 require __DIR__.'/bin/bootstrap.php';
-foreach(['Tracker','Store','Charts','EntryReference','BreakoutRetest','BreakoutPath','Page'] as $f)require __DIR__.'/bin/type1/'.$f.'.php';
+foreach(['Tracker','Store','Charts','EntryReference','BreakoutRetest','BreakoutWatch','BreakoutPath','Page'] as $f)require __DIR__.'/bin/type1/'.$f.'.php';
 use ChartEntryLab\Type1Scan\{Store,Charts,BreakoutRetest,BreakoutPath};
 use ChartEntryLab\Type1Breakout;
 header('Cache-Control: no-store');
@@ -35,7 +35,9 @@ try{
     }unset($row);
     usort($report['rows'],static fn($a,$b)=>($a['rank']<=>$b['rank'])?:strcmp($a['symbol'],$b['symbol']));
     $report['summary']['matches']=count($report['rows']);$report['summary']['errors']=count($report['errors']);
-    $report['post_paths']=BreakoutPath::forConfirmedRows($day,$report['rows'],$snapshot,$later,$nextError);
+    $report['post_paths']=BreakoutPath::forConfirmedRows($day,$report['rows'],$snapshot,$later,$nextError,[
+        'folder'=>Store::folder(),'days'=>$state['days']??[],'as_of_day'=>(string)($state['last_day']??$day),
+    ]);
 }catch(Throwable $e){$report['ok']=false;$report['error']=$e instanceof RuntimeException?$e->getMessage():'마감 기록을 확인하지 못했습니다.';}
 if(($_GET['format']??'')==='json'){header('Content-Type: application/json; charset=utf-8');echo json_encode($report,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR);exit;}
 $report['sort'] = ($_GET['sort'] ?? '') === 'near' ? 'near' : 'amount';

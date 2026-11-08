@@ -300,4 +300,51 @@ final class BreakoutWatch
             }
         }
     }
+
+    /** @return array{status:string,data:?array,reason:string} */
+    public static function registryView(string $folder): array
+    {
+        $view = self::readJson($folder.'/breakout-watch/registry.json');
+        if ($view['status'] === 'ok' && !is_array($view['data']['entries'] ?? null)) {
+            return ['status'=>'unreadable','data'=>null,'reason'=>'관찰 명부가 손상되었습니다.'];
+        }
+        return $view;
+    }
+
+    /** @return array{status:string,data:?array,reason:string} */
+    public static function barFileView(string $folder, string $day): array
+    {
+        if (!preg_match('/^\d{4}-\d{2}-\d{2}$/D', $day)) {
+            return ['status'=>'unreadable','data'=>null,'reason'=>'일봉 날짜가 아닙니다.'];
+        }
+        $view = self::readJson($folder.'/breakout-watch/bars/'.$day.'.json');
+        if ($view['status'] === 'ok' && ($view['data']['day'] ?? null) !== $day) {
+            return ['status'=>'unreadable','data'=>null,'reason'=>'일봉 파일의 날짜가 다릅니다.'];
+        }
+        return $view;
+    }
+
+    /** Web reads must not rename or delete a half-written file. */
+    private static function readJson(string $path): array
+    {
+        $side = is_file($path.'.bak') || is_file($path.'.tmp');
+        if (!is_file($path)) {
+            return $side
+                ? ['status'=>'unreadable','data'=>null,'reason'=>'교체 중인 파일을 읽지 못했습니다.']
+                : ['status'=>'absent','data'=>null,'reason'=>''];
+        }
+        $raw = file_get_contents($path);
+        if ($raw === false || $raw === '') {
+            return ['status'=>'unreadable','data'=>null,'reason'=>'관찰 파일을 읽지 못했습니다.'];
+        }
+        try {
+            $data = json_decode($raw, true, 512, JSON_THROW_ON_ERROR);
+        } catch (\Throwable) {
+            return ['status'=>'unreadable','data'=>null,'reason'=>'관찰 파일이 손상되었습니다.'];
+        }
+        if (!is_array($data)) {
+            return ['status'=>'unreadable','data'=>null,'reason'=>'관찰 파일이 손상되었습니다.'];
+        }
+        return ['status'=>'ok','data'=>$data,'reason'=>''];
+    }
 }

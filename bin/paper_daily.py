@@ -152,6 +152,17 @@ def update(config_path, state_dir, runner=subprocess.run):
                 record["target_tracking"].update(result)
             except Exception as exc:
                 record["target_tracking"].update(status="failed", error_type=type(exc).__name__)
+                if isinstance(exc, subprocess.CalledProcessError):
+                    record["target_tracking"]["exit_code"] = exc.returncode
+                    err = str(exc.stderr or "").strip()
+                    out = str(exc.stdout or "").strip()
+                    if err and out:
+                        detail = err[-2000:] + "\n" + out[-2000:]
+                    else:
+                        detail = (err or out)[-4000:]
+                    if detail:
+                        record["target_tracking"]["error_detail"] = detail
+                        print(detail, file=sys.stderr)
                 print("Target tracking failed: " + type(exc).__name__, file=sys.stderr)
             record["target_tracking"]["finished_at"] = int(time.time())
         # Envelope observations keep their own snapshots and observe unfinished 20-bar horizons.

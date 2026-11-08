@@ -1,3 +1,10 @@
+## 2026-11-08 12:05 · Cursor · 끝
+- 한 일: 목표 추적 실패의 종료 코드와 출력 끝을 실행 기록에 남김. 추적 로직은 그대로.
+- 검증: tests/test_target_tracking_daily.py
+- 파일: bin/paper_daily.py, tests/test_target_tracking_daily.py, docs/work-log.md
+- 커밋: 진단 PR
+- 롤백: 없음
+
 ## 2026-11-08 11:50 · Cursor · 끝
 - 한 일: 기준일 안에 양쪽 봉이 없으면 비교 불가로 분류. 한쪽에만 있으면 추가·삭제 유지.
 - 검증: tests/revision.php 21.

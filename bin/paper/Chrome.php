@@ -119,6 +119,7 @@ function paper_ko(string $code): string
         'key_order_only' => '값 순서만 다름',
         'input_difference' => '입력 값이 다름',
         'hash_mismatch_without_row_difference' => '요약은 다른데 봉 내용은 같음',
+        'comparison_unavailable' => '비교할 봉이 없어 판단할 수 없음',
         'overlapping_order' => '주문이 겹침',
         'unmatched_fill' => '체결이 주문과 안 맞음',
         'unmatched_exit' => '청산이 체결과 안 맞음',

@@ -5,13 +5,16 @@ final class PaperRevision
 {
     public static function describe(array $state,array $incoming,array $sources,array $events,int $now):array
     {
-        $changes=[];$affected=[];$origins=[];
-        foreach($state['config']['symbols'] as $symbol=>$sector) {
-            $horizon=0;foreach($state['frozen'] as $key=>$frozen){[$sym,$date]=explode(':',$key);if($sym===$symbol)$horizon=max($horizon,(int)$date);}
+        $changes=[];$affected=[];$origins=[];$skipped=[];
+        $targets=[];foreach($state['frozen'] as $key=>$frozen){$sym=explode(':',(string)$key,2)[0];if($sym!=='')$targets[$sym]=true;}
+        $history=is_array($state['history']??null)?$state['history']:[];
+        foreach(array_keys($targets) as $symbol) {
+            $horizon=0;foreach($state['frozen'] as $key=>$frozen){[$sym,$date]=explode(':',(string)$key,2);if($sym===$symbol)$horizon=max($horizon,(int)$date);}
             if(!$horizon)continue;
             $before=[];$after=[];
-            foreach($state['history'][$symbol]??[] as $b)if($b['available_at']<=$horizon)$before[$b['available_at']]=$b;
+            foreach($history[$symbol]??[] as $b)if($b['available_at']<=$horizon)$before[$b['available_at']]=$b;
             foreach($incoming[$symbol]??[] as $b)if($b['available_at']<=$horizon)$after[$b['available_at']]=$b;
+            if($before===[] && $after===[]){$skipped[]=$symbol;continue;}
             $dates=array_unique(array_merge(array_keys($before),array_keys($after)));sort($dates,SORT_NUMERIC);
             $first=null;
             foreach($dates as $at) {
@@ -43,7 +46,7 @@ final class PaperRevision
         $active=[];foreach($state['active'] as $sym=>$order)if(isset($origins[$sym]))$active[$sym]=['filled'=>$order['filled'],'quantity'=>$order['quantity'],'snapshot_key'=>$order['snapshot_key']];
         return ['schema'=>1,'detected_at'=>$now,'changes'=>$changes,'change_count'=>count($changes),'sources'=>$origins,
             'potentially_affected_snapshots'=>$affected,'related_trade_events'=>$related,'active_orders_or_positions'=>$active,
-            'classification'=>$changes?'input_difference':'hash_mismatch_without_row_difference',
+            'classification'=>$changes?'input_difference':($skipped?'comparison_unavailable':'hash_mismatch_without_row_difference'),
             'cause'=>'unconfirmed','impact'=>'potential_only_not_recalculated'];
     }
     public static function read(string $directory,string $hash):array

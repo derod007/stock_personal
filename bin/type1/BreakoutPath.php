@@ -208,26 +208,200 @@ final class BreakoutPath
             'observation_as_of' => $latestDay,
             'observed_sessions' => count($pathDays),
             'observed_valid_sessions' => count($pathDays) - count($gaps),
+            'data_source' => '기존 스냅샷',
+            'observe_status' => null,
+            'data_status' => null,
+            'elapsed_sessions' => null,
+            'collected_bars' => null,
             'source' => $source,
         ];
     }
 
-    /** @param list<array> $rows */
+    /**
+     * Registered ids use breakout-watch bars. A missing registry keeps the snapshot path.
+     * Unreadable registry or hash mismatch is not treated as unregistered.
+     * $watch: folder, days, as_of_day. Read-only.
+     * @param list<array> $rows
+     */
     public static function forConfirmedRows(
         string $judgmentDay,
         array $rows,
         array $judgmentSnapshot,
         ?array $latestSnapshot,
-        ?string $latestError = null
+        ?string $latestError = null,
+        ?array $watch = null
     ): array {
+        $reg = $watch === null
+            ? ['status' => 'absent', 'data' => null, 'reason' => '']
+            : BreakoutWatch::registryView($watch['folder']);
+        $cache = [];
         $out = [];
         foreach ($rows as $row) {
             if (!($row['breakout20']['confirmed'] ?? false)) {
                 continue;
             }
-            $out[] = self::forRow($judgmentDay, $row, $judgmentSnapshot, $latestSnapshot, $latestError);
+            $id = $judgmentDay.'|'.$row['symbol'];
+            if ($reg['status'] === 'unreadable') {
+                $out[] = self::watchStop($judgmentDay, $row, $reg['reason'].' 등록 여부를 알 수 없어 기존 스냅샷으로 대체하지 않았습니다.', '미확정', null);
+                continue;
+            }
+            $entry = ($reg['status'] === 'ok') ? ($reg['data']['entries'][$id] ?? null) : null;
+            $out[] = is_array($entry)
+                ? self::forWatch($judgmentDay, $row, $judgmentSnapshot, $entry, $watch, $cache)
+                : self::forRow($judgmentDay, $row, $judgmentSnapshot, $latestSnapshot, $latestError);
         }
         return $out;
+    }
+
+    private static function forWatch(string $day, array $row, array $judgmentSnapshot, array $entry, array $watch, array &$cache): array
+    {
+        $symbol = $row['symbol'];
+        if (($entry['judgment_day'] ?? null) !== $day || ($entry['symbol'] ?? null) !== $symbol) {
+            return self::watchStop($day, $row, '명부 항목이 판단일·종목과 맞지 않습니다. 기존 스냅샷으로 대체하지 않았습니다.', '미확정', null);
+        }
+        try {
+            $hash = hash('sha256', json_encode($judgmentSnapshot, JSON_THROW_ON_ERROR));
+        } catch (\Throwable) {
+            return self::watchStop($day, $row, '판단 스냅샷 해시를 확인하지 못했습니다. 기존 스냅샷으로 대체하지 않았습니다.', '미확정', null);
+        }
+        $expect = $entry['snapshot_sha256'] ?? '';
+        if (!is_string($expect) || $expect === '' || !hash_equals($expect, $hash)) {
+            return self::watchStop($day, $row, '명부의 판단 스냅샷 해시가 저장된 스냅샷과 다릅니다. 기존 스냅샷으로 대체하지 않았습니다.', '미확정', null);
+        }
+        $days = $watch['days'] ?? [];
+        $asOf = (string)($watch['as_of_day'] ?? '');
+        $from = array_search($day, $days, true);
+        $at = array_search($asOf, $days, true);
+        if ($from === false || $at === false || $at < $from) {
+            return self::watchStop($day, $row, '저장 달력에서 판단일 또는 자료 기준일을 확인하지 못했습니다.', '달력 미확정', null, $asOf !== '' ? $asOf : null);
+        }
+        $elapsed = $at - $from;
+        $observe = $elapsed === 0 ? '대기' : ($elapsed <= 20 ? '진행 중' : '기간 종료');
+        $window = array_slice($days, $from + 1, min(20, $elapsed));
+        if ($window === []) {
+            return array_replace(self::watchStop($day, $row, '관찰 거래일이 아직 없습니다.', '확보 범위 내 정상', $observe, $asOf), [
+                'ok' => true,
+                'elapsed_sessions' => 0,
+                'collected_bars' => 0,
+                'missing_days' => [],
+            ]);
+        }
+        $bars = [];
+        $missing = [];
+        $notes = [];
+        $blocked = false;
+        foreach ($window as $d) {
+            if (!isset($cache[$d])) {
+                $cache[$d] = BreakoutWatch::barFileView($watch['folder'], $d);
+            }
+            $file = $cache[$d];
+            if ($file['status'] === 'unreadable') {
+                $blocked = true;
+                $missing[] = $d;
+                $notes[] = $d.' '.$file['reason'];
+                continue;
+            }
+            $slot = $file['status'] === 'ok' ? ($file['data']['symbols'][$symbol] ?? null) : null;
+            $picked = self::watchBar($slot, $d, $symbol);
+            if ($picked['bar']) {
+                $bars[] = $picked['bar'];
+            } else {
+                $missing[] = $d;
+                $notes[] = $picked['note'];
+            }
+        }
+        $synth = [
+            'day' => $asOf,
+            'as_of' => strtotime($asOf.' 20:00:00 +0900') ?: 0,
+            'days' => array_merge([$day], $window),
+            'prices' => [$symbol => $bars],
+        ];
+        $path = self::forRow($day, $row, $judgmentSnapshot, $synth, null);
+        $path['data_source'] = '독립 관찰';
+        $path['observe_status'] = $observe;
+        $path['data_status'] = $blocked ? '미확정' : ($missing === [] ? '확보 범위 내 정상' : '결측 있음');
+        $path['elapsed_sessions'] = $elapsed;
+        $path['collected_bars'] = count($bars);
+        $path['missing_days'] = $missing;
+        $path['observation_as_of'] = $asOf;
+        $path['source'] = [
+            'judgment_snapshot_day' => $judgmentSnapshot['day'] ?? $day,
+            'latest_snapshot_day' => null,
+            'policy' => '등록 후보의 기준선·판단 종가는 판단 스냅샷에 고정하고, 판단일 다음 1~20거래일은 일별로 처음 저장한 관찰 봉만 잇습니다. 다른 판단일이나 과거 스냅샷으로 결측을 메우지 않습니다.',
+        ];
+        if ($notes !== []) {
+            $path['reason'] = implode(' · ', $notes);
+        }
+        if ($blocked || $missing !== []) {
+            $path['path_complete'] = false;
+            $path['extremes_complete'] = false;
+            $path['level_cross_complete'] = false;
+        }
+        if ($blocked || $path['entry_open'] === null) {
+            $path['ok'] = false;
+        }
+        return $path;
+    }
+
+    /** @return array{bar:?array,note:string} */
+    private static function watchBar(mixed $slot, string $day, string $symbol): array
+    {
+        if (!is_array($slot) || !array_key_exists('bar', $slot)) {
+            return ['bar' => null, 'note' => $day.' 유효 봉 없음'];
+        }
+        $bar = $slot['bar'];
+        if ($bar === null) {
+            $kind = is_array($slot['attempt'] ?? null) ? (string)($slot['attempt']['kind'] ?? '') : '';
+            $labels = ['incomplete' => '미완료', 'invalid' => '무효', 'fetch_error' => '조회 실패'];
+            return ['bar' => null, 'note' => $day.' '.($labels[$kind] ?? '유효 봉 없음')];
+        }
+        if (is_array($bar) && array_is_list($bar)) {
+            return ['bar' => null, 'note' => $day.' 같은 날 봉이 중복'];
+        }
+        if (!is_array($bar) || (($slot['session_day'] ?? null) !== $day) || !self::barOnDay($bar, $symbol, $day)) {
+            return ['bar' => null, 'note' => $day.' 날짜가 맞지 않음'];
+        }
+        if (($bar['is_complete'] ?? true) === false) {
+            return ['bar' => null, 'note' => $day.' 미완료'];
+        }
+        if (!empty($bar['synthetic'])) {
+            return ['bar' => null, 'note' => $day.' 합성'];
+        }
+        if (!Tracker::valid($bar)) {
+            return ['bar' => null, 'note' => $day.' 무효'];
+        }
+        return ['bar' => $bar, 'note' => ''];
+    }
+
+    private static function barOnDay(array $bar, string $symbol, string $day): bool
+    {
+        try {
+            $stamp = \ChartEntryLab\CandleClock::closeTime($bar, $symbol);
+        } catch (\Throwable) {
+            return false;
+        }
+        return (new \DateTimeImmutable('@'.$stamp))->setTimezone(new \DateTimeZone('Asia/Seoul'))->format('Y-m-d') === $day;
+    }
+
+    private static function watchStop(string $day, array $row, string $reason, ?string $dataStatus, ?string $observe, ?string $asOf = null): array
+    {
+        $symbol = $row['symbol'];
+        return array_replace(self::uncertain($reason), [
+            'id' => $day.'|'.$symbol,
+            'judgment_day' => $day,
+            'symbol' => $symbol,
+            'name' => $row['name'] ?? $symbol,
+            'rank' => $row['rank'] ?? null,
+            'judgment_close' => $row['analysis_close'] ?? ($row['classification']['analysis_close'] ?? null),
+            'level' => $row['breakout20']['level'] ?? null,
+            'note' => '같은 종목의 다른 판단일은 별도 관찰입니다. 연구 재진입 간격을 새로 적용하지 않습니다.',
+            'data_source' => '독립 관찰',
+            'observe_status' => $observe,
+            'data_status' => $dataStatus,
+            'observation_as_of' => $asOf,
+            'reason' => $reason,
+            'gap_kind' => null,
+        ]);
     }
 
     private static function uncertain(string $reason, ?array $conflict = null, ?string $gapKind = null): array
@@ -256,6 +430,11 @@ final class BreakoutPath
             'observation_as_of' => null,
             'observed_sessions' => null,
             'observed_valid_sessions' => null,
+            'data_source' => '기존 스냅샷',
+            'observe_status' => null,
+            'data_status' => null,
+            'elapsed_sessions' => null,
+            'collected_bars' => null,
             'source' => null,
         ];
     }

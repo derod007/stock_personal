@@ -1,3 +1,16 @@
+## 2026-11-08 10:45 · Cursor · 끝
+- 한 일: 명부에 있는 돌파 후보의 이후 경로만 breakout-watch 일봉으로 표시. 웹은 파일을 읽기만 함.
+- 검증: tests/type1_breakout_watch_path.php 55, path 53, breakout 22, watch 28. 운영 명부 없음. 운영 화면은 기존 스냅샷, 새 표시는 임시 HTML.
+- 파일: bin/type1/BreakoutPath.php, bin/type1/BreakoutWatch.php, bin/type1/Page.php, type1_breakout.php, tests/type1_breakout_watch_path.php, .github/workflows/type1-scan.yml, docs/type1-breakout/README.md, docs/type1-breakout/observation-retention-plan.md, docs/work-log.md
+- 커밋: 화면 PR
+- 롤백: 없음
+
+## 2026-11-08 10:21 · Cursor · 진행
+- 한 일: breakout-watch 저장 일봉을 후보 이후 경로에 읽기 전용으로 연결.
+- 파일: docs/work-log.md
+- 커밋: 안 함
+- 롤백: 없음
+
 ## 2026-11-08 · Cursor · 끝
 - 한 일: breakout-watch 교체 중 .bak만 남으면 명부·일봉을 복구. 날짜가 다른 일봉 파일은 덮어쓰지 않음.
 - 검증: tests/type1_breakout_watch.php. 운영 type1_track 실행 없음.

@@ -245,10 +245,15 @@ final class BreakoutPath
                 $out[] = self::watchStop($judgmentDay, $row, $reg['reason'].' 등록 여부를 알 수 없어 기존 스냅샷으로 대체하지 않았습니다.', '미확정', null);
                 continue;
             }
-            $entry = ($reg['status'] === 'ok') ? ($reg['data']['entries'][$id] ?? null) : null;
+            $entries = ($reg['status'] === 'ok') ? $reg['data']['entries'] : null;
+            if (!is_array($entries) || !array_key_exists($id, $entries)) {
+                $out[] = self::forRow($judgmentDay, $row, $judgmentSnapshot, $latestSnapshot, $latestError);
+                continue;
+            }
+            $entry = $entries[$id];
             $out[] = is_array($entry)
                 ? self::forWatch($judgmentDay, $row, $judgmentSnapshot, $entry, $watch, $cache)
-                : self::forRow($judgmentDay, $row, $judgmentSnapshot, $latestSnapshot, $latestError);
+                : self::watchStop($judgmentDay, $row, '명부 항목 형식이 잘못되었습니다. 기존 스냅샷으로 대체하지 않았습니다.', '미확정', null);
         }
         return $out;
     }
@@ -287,6 +292,7 @@ final class BreakoutPath
             ]);
         }
         $bars = [];
+        $lastValidDay = null;
         $missing = [];
         $notes = [];
         $blocked = false;
@@ -305,6 +311,7 @@ final class BreakoutPath
             $picked = self::watchBar($slot, $d, $symbol);
             if ($picked['bar']) {
                 $bars[] = $picked['bar'];
+                $lastValidDay = $d;
             } else {
                 $missing[] = $d;
                 $notes[] = $picked['note'];
@@ -323,6 +330,12 @@ final class BreakoutPath
         $path['elapsed_sessions'] = $elapsed;
         $path['collected_bars'] = count($bars);
         $path['missing_days'] = $missing;
+        if ($lastValidDay !== null) {
+            $path['latest_close_day'] = $lastValidDay;
+        }
+        if ($path['entry_open'] === null) {
+            $path['change_from_entry_pct'] = null;
+        }
         $path['observation_as_of'] = $asOf;
         $path['source'] = [
             'judgment_snapshot_day' => $judgmentSnapshot['day'] ?? $day,

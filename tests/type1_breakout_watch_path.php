@@ -104,6 +104,13 @@ try {
     ]]);
     $plain = $same(fn() => BreakoutPath::forConfirmedRows($day, [row($day, $sym, '미등록', 100, 105)], $judge, $tempt, null, $watchOf($cal[3])));
     check($plain[0]['data_source'] === '기존 스냅샷' && $plain[0]['entry_open'] === 999.0, 'unlisted id keeps snapshot path');
+    foreach ([null, 'bad-entry'] as $badEntry) {
+        put($tmp.'/breakout-watch/registry.json', ['version'=>1,'start_day'=>$day,'entries'=>[$day.'|'.$sym => $badEntry]]);
+        $damaged = $same(fn() => BreakoutPath::forConfirmedRows($day, [row($day, $sym, '손상', 100, 105)], $judge, $tempt, null, $watchOf($cal[3])));
+        check($damaged[0]['data_source'] === '독립 관찰' && $damaged[0]['data_status'] === '미확정', 'bad entry type stays on watch');
+        check($damaged[0]['entry_open'] === null && !str_contains((string)$damaged[0]['reason'], '999'), 'bad entry type does not use snapshot open');
+        check(str_contains((string)$damaged[0]['reason'], '대체하지 않았습니다'), 'bad entry type says it did not fall back');
+    }
 
     $entry = static fn(string $d, string $symbol, string $sha): array => [
         'judgment_day'=>$d,'symbol'=>$symbol,'name'=>$symbol,'level'=>1,'judgment_close'=>1,'snapshot_sha256'=>$sha,'enrolled_at'=>'x',
@@ -146,8 +153,18 @@ try {
 
     unlink($tmp.'/breakout-watch/bars/'.$cal[1].'.json');
     $next = $same(fn() => BreakoutPath::forConfirmedRows($day, [row($day, $sym, '등록', 100, 105)], $judge, $tempt, null, $watchOf($cal[3])));
-    check($next[0]['entry_open'] === null && in_array($cal[1], $next[0]['missing_days'], true), 'missing next open is not taken from a later bar');
-    check(!str_contains((string)$next[0]['reason'], '999'), 'later snapshot open is not copied into the reason');
+    check($next[0]['entry_open'] === null && $next[0]['change_from_entry_pct'] === null, 'missing next open is not taken from a later bar');
+    check($next[0]['collected_bars'] === 1 && $next[0]['latest_close_day'] === $cal[3], 'one later bar still has a last valid day');
+    check(in_array($cal[1], $next[0]['missing_days'], true) && !str_contains((string)$next[0]['reason'], '999'), 'later snapshot open is not copied into the reason');
+    ob_start();
+    \ChartEntryLab\Type1Scan\render([
+        'ok'=>true,'as_of'=>date(DATE_ATOM),'source'=>'saved','saved_day'=>$day,'scope'=>'breakout','sort'=>'amount',
+        'rows'=>[],'errors'=>[],'summary'=>['total'=>0,'evaluated'=>0,'matches'=>0,'errors'=>0],'recent'=>[],'saved_days'=>[$day],
+        'post_paths'=>[$next[0]],'error'=>null,
+    ]);
+    $gapHtml = ob_get_clean();
+    check(str_contains($gapHtml, '확보 1') && str_contains($gapHtml, '마지막 유효 '.$cal[3]), 'html shows one bar and its date');
+    check(str_contains($gapHtml, '>—<small>'.$cal[1]) && !str_contains($gapHtml, '112') && !str_contains($gapHtml, '999'), 'html leaves the next open blank');
 
     put($tmp.'/breakout-watch/bars/'.$cal[1].'.json', ['day'=>$cal[1],'symbols'=>[
         $sym => $kept($cal[1], candle($cal[1], 106, 110, 104, 108, false)),

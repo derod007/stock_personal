@@ -1,3 +1,10 @@
+## 2026-11-08 11:50 · Cursor · 끝
+- 한 일: 기준일 안에 양쪽 봉이 없으면 비교 불가로 분류. 한쪽에만 있으면 추가·삭제 유지.
+- 검증: tests/revision.php 21.
+- 파일: bin/paper/Revision.php, tests/revision.php, docs/work-log.md
+- 커밋: 같은 PR #156
+- 롤백: 없음
+
 ## 2026-11-08 11:45 · Cursor · 끝
 - 한 일: 빈 종목 목록이어도 고정 스냅샷 종목을 변경 진단에서 비교. 봉이 없으면 같음으로 분류하지 않음.
 - 검증: tests/revision.php 17. revision_integration.py 중단·원본 유지.

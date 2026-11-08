@@ -11,10 +11,10 @@ final class PaperRevision
         foreach(array_keys($targets) as $symbol) {
             $horizon=0;foreach($state['frozen'] as $key=>$frozen){[$sym,$date]=explode(':',(string)$key,2);if($sym===$symbol)$horizon=max($horizon,(int)$date);}
             if(!$horizon)continue;
-            if(!array_key_exists($symbol,$history)&&!array_key_exists($symbol,$incoming)){$skipped[]=$symbol;continue;}
             $before=[];$after=[];
             foreach($history[$symbol]??[] as $b)if($b['available_at']<=$horizon)$before[$b['available_at']]=$b;
             foreach($incoming[$symbol]??[] as $b)if($b['available_at']<=$horizon)$after[$b['available_at']]=$b;
+            if($before===[] && $after===[]){$skipped[]=$symbol;continue;}
             $dates=array_unique(array_merge(array_keys($before),array_keys($after)));sort($dates,SORT_NUMERIC);
             $first=null;
             foreach($dates as $at) {

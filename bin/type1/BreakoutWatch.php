@@ -40,7 +40,8 @@ final class BreakoutWatch
                 $snapshot = null;
             }
             $path = $dir.'/registry.json';
-            if (!is_file($path)) {
+            $reg = self::load($path);
+            if ($reg === null) {
                 if (!$snapshot) {
                     $report['status'] = '스냅샷 검증 실패';
                     return $report;
@@ -48,8 +49,6 @@ final class BreakoutWatch
                 $reg = ['version'=>1,'start_day'=>$today,'started_at'=>date(DATE_ATOM),'entries'=>[]];
                 self::atomic($path, $reg);
                 $report['registry_initialized'] = true;
-            } else {
-                $reg = json_decode((string)file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
             }
             $report['start_day'] = $reg['start_day'] ?? null;
             if ($snapshot && $today >= ($reg['start_day'] ?? $today)) {
@@ -72,8 +71,12 @@ final class BreakoutWatch
                 return $report;
             }
             $barsPath = $dir.'/bars/'.$today.'.json';
-            $stored = is_file($barsPath) ? json_decode((string)file_get_contents($barsPath), true, 512, JSON_THROW_ON_ERROR) : ['day'=>$today,'symbols'=>[]];
-            if (($stored['day'] ?? null) !== $today) {
+            $stored = self::load($barsPath);
+            if ($stored !== null && ($stored['day'] ?? null) !== $today) {
+                $report['status'] = '일봉 날짜 불일치';
+                return $report;
+            }
+            if ($stored === null) {
                 $stored = ['day'=>$today,'symbols'=>[]];
             }
             $asOf = (int)($snapshot['as_of'] ?? $state['captures'][$today]['as_of'] ?? strtotime($today.' 23:59:59 +0900'));
@@ -205,33 +208,94 @@ final class BreakoutWatch
         return ['session_day'=>$day,'collected_at'=>date(DATE_ATOM),'source'=>null,'snapshot_sha256'=>null,'bar'=>null,'attempt'=>['kind'=>$kind,'reason'=>$reason,'at'=>date(DATE_ATOM)]];
     }
 
+    /** Restore a crash that left only the backup. Null means neither file exists. */
+    private static function load(string $path): ?array
+    {
+        $text = self::prepare($path);
+        if ($text === null) {
+            return null;
+        }
+        $data = json_decode($text, true, 512, JSON_THROW_ON_ERROR);
+        if (!is_array($data)) {
+            throw new \RuntimeException('관찰 기록을 읽지 못했습니다.');
+        }
+        return $data;
+    }
+
+    private static function prepare(string $path): ?string
+    {
+        $bak = $path.'.bak';
+        $pathOk = self::readable($path);
+        $bakOk = self::readable($bak);
+        if ($pathOk && $bakOk) {
+            unlink($bak);
+        } elseif (!$pathOk && $bakOk) {
+            if (is_file($path) && !unlink($path)) {
+                throw new \RuntimeException('손상된 관찰 기록을 치우지 못했습니다.');
+            }
+            if (!rename($bak, $path)) {
+                throw new \RuntimeException('관찰 기록 복구에 실패했습니다.');
+            }
+        } elseif ((is_file($path) || is_file($bak)) && !$pathOk && !$bakOk) {
+            throw new \RuntimeException('관찰 기록을 읽지 못했습니다.');
+        }
+        if (!is_file($path)) {
+            return null;
+        }
+        $text = file_get_contents($path);
+        if ($text === false) {
+            throw new \RuntimeException('관찰 기록을 읽지 못했습니다.');
+        }
+        return $text;
+    }
+
+    private static function readable(string $path): bool
+    {
+        if (!is_file($path)) {
+            return false;
+        }
+        $raw = file_get_contents($path);
+        if ($raw === false || $raw === '') {
+            return false;
+        }
+        try {
+            return is_array(json_decode($raw, true, 512, JSON_THROW_ON_ERROR));
+        } catch (\Throwable) {
+            return false;
+        }
+    }
+
     private static function atomic(string $path, array $data): void
     {
         $dir = dirname($path);
         if (!is_dir($dir) && !mkdir($dir, 0770, true) && !is_dir($dir)) {
             throw new \RuntimeException('관찰 폴더를 만들지 못했습니다.');
         }
+        self::prepare($path);
         $bytes = json_encode($data, JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR);
-        $tmp = tempnam($dir, 'watch-');
+        $tmp = $path.'.tmp';
         $bak = $path.'.bak';
+        $tmpReady = false;
         try {
             if (file_put_contents($tmp, $bytes) !== strlen($bytes)) {
                 throw new \RuntimeException('관찰 기록을 쓰지 못했습니다.');
             }
+            $tmpReady = true;
             if (is_file($path) && !rename($path, $bak)) {
                 throw new \RuntimeException('관찰 기록을 바꾸지 못했습니다.');
             }
             if (!rename($tmp, $path)) {
-                if (is_file($bak)) {
+                if (is_file($bak) && !is_file($path)) {
                     rename($bak, $path);
                 }
                 throw new \RuntimeException('관찰 기록을 바꾸지 못했습니다.');
             }
-            if (is_file($bak)) {
+            $tmpReady = false;
+            if (is_file($bak) && is_file($path)) {
                 unlink($bak);
             }
         } finally {
-            if (is_file($tmp)) {
+            if ($tmpReady && is_file($tmp)) {
                 unlink($tmp);
             }
         }

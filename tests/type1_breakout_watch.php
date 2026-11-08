@@ -123,6 +123,26 @@ try {
     check($calls === [] && $r['fetched'] === 0, 'saved valid bar is not requested again');
     $again = json_decode(file_get_contents($tmp.'/breakout-watch/bars/'.$next.'.json'), true, 512, JSON_THROW_ON_ERROR);
     check($again['symbols'][$symbol]['bar']['close'] === 111, 'valid bar not overwritten');
+    $regFile = $tmp.'/breakout-watch/registry.json';
+    $barFile = $tmp.'/breakout-watch/bars/'.$next.'.json';
+    rename($regFile, $regFile.'.bak');
+    check(!is_file($regFile) && is_file($regFile.'.bak'), 'registry crash leaves only bak');
+    $calls = [];
+    $r = BreakoutWatch::record($tmp, $state, $next, function () use (&$calls) {
+        $calls[] = 1;
+        return [candle($next, 9, 9, 9, 9)];
+    });
+    $restored = json_decode(file_get_contents($regFile), true, 512, JSON_THROW_ON_ERROR);
+    check($r['registry_initialized'] === false && $restored['start_day'] === $start && isset($restored['entries'][$start.'|'.$symbol]), 'registry bak is not a new install');
+    check($calls === [], 'restored bar is not fetched again');
+    rename($barFile, $barFile.'.bak');
+    $calls = [];
+    BreakoutWatch::record($tmp, $state, $next, function () use (&$calls) {
+        $calls[] = 1;
+        return [candle($next, 8, 8, 8, 8)];
+    });
+    $restoredBar = json_decode(file_get_contents($barFile), true, 512, JSON_THROW_ON_ERROR);
+    check($calls === [] && $restoredBar['symbols'][$symbol]['bar']['close'] === 111 && !is_file($barFile.'.bak'), 'bar bak restores the valid bar');
 
     $day20 = $cal[$j + 20];
     $day21 = $cal[$j + 21];
@@ -195,6 +215,17 @@ try {
     $file = json_decode(file_get_contents($tmp.'/breakout-watch/bars/'.$badBar.'.json'), true, 512, JSON_THROW_ON_ERROR);
     check($file['symbols'][$symbol]['attempt']['kind'] === 'invalid', 'invalid bar is not kept as a price');
     check(hash_file('sha256', $tmp.'/latest.json') === $latestHash, 'ledger still unchanged after failures');
+    $wrong = $tmp.'/breakout-watch/bars/'.$badBar.'.json';
+    $decoded = json_decode(file_get_contents($wrong), true, 512, JSON_THROW_ON_ERROR);
+    $decoded['day'] = '1999-01-04';
+    file_put_contents($wrong, json_encode($decoded, JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR));
+    $wrongHash = hash_file('sha256', $wrong);
+    $calls = [];
+    $r = BreakoutWatch::record($tmp, $state, $badBar, function () use (&$calls) {
+        $calls[] = 1;
+        return [];
+    });
+    check($r['status'] === '일봉 날짜 불일치' && $calls === [] && hash_file('sha256', $wrong) === $wrongHash, 'mismatched bar file is kept and not replaced');
 } finally {
     $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($tmp, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST);
     foreach ($it as $file) {

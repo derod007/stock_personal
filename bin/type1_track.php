@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 if(PHP_SAPI!=='cli'){http_response_code(404);exit;}
-require __DIR__.'/bootstrap.php';foreach(['Classifier','Tracker','Store','Collector','Charts','BreakoutRetest'] as $f)require __DIR__.'/type1/'.$f.'.php';
+require __DIR__.'/bootstrap.php';foreach(['Classifier','Tracker','Store','Collector','Charts','BreakoutRetest','BreakoutWatch'] as $f)require __DIR__.'/type1/'.$f.'.php';
 use ChartEntryLab\Type1Scan\{Classifier,Tracker,Store,Collector};
 try{
     $o=getopt('',['snapshot:','state-dir:']);if(isset($o['snapshot'])&&!isset($o['state-dir']))throw new RuntimeException('Replay requires --state-dir');
@@ -23,5 +23,17 @@ try{
                 static fn($s)=>$client->fetch($s,range:'1mo',interval:'1d',useCache:false));
         }catch(Throwable $err){$result['breakout_retest']=['status'=>'기록 실패','reason'=>$err->getMessage()];}
     }
+    try{
+        $saved=Store::load($folder);$watchDay=$saved['last_day']??null;
+        $seoul=(new DateTimeImmutable('now',new DateTimeZone('Asia/Seoul')))->format('Y-m-d');
+        if($watchDay!==null && ($watchDay===$seoul || isset($o['snapshot']))){
+            $fetch=null;
+            if(!isset($o['snapshot'])){
+                $client=new ChartEntryLab\YahooChartClient($folder.'/breakout-watch/cache');
+                $fetch=static fn($s)=>$client->fetch($s,range:'2y',interval:'1d',useCache:false);
+            }
+            $result['breakout_watch']=\ChartEntryLab\Type1Scan\BreakoutWatch::record($folder,$saved,$watchDay,$fetch);
+        }
+    }catch(Throwable $err){$result['breakout_watch']=['status'=>'기록 실패','reason'=>$err->getMessage()];}
     echo json_encode($result,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR)."\n";
 }catch(Throwable $e){fwrite(STDERR,'Type1 tracking failed: '.$e->getMessage()."\n");exit(1);}

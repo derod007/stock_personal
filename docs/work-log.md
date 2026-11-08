@@ -1,4 +1,18 @@
 ## 2026-11-08 · Cursor · 끝
+- 한 일: breakout-watch 교체 중 .bak만 남으면 명부·일봉을 복구. 날짜가 다른 일봉 파일은 덮어쓰지 않음.
+- 검증: tests/type1_breakout_watch.php. 운영 type1_track 실행 없음.
+- 파일: bin/type1/BreakoutWatch.php, tests/type1_breakout_watch.php, docs/work-log.md
+- 커밋: 같은 PR #154
+- 롤백: 없음
+
+## 2026-11-08 · Cursor · 끝
+- 한 일: 돌파 후보 20거래일 일봉을 breakout-watch에만 저장. 마감 후 재실행 연결. 화면·추세·Collector 대상·Tracker 청산·운영 수집은 그대로.
+- 검증: tests/type1_breakout_watch.php 23. 운영 type1_track 실행 없음.
+- 파일: bin/type1/BreakoutWatch.php, bin/type1_track.php, tests/type1_breakout_watch.php, .github/workflows/type1-scan.yml, docs/type1-breakout/README.md, docs/type1-breakout/observation-retention-plan.md, docs/work-log.md
+- 커밋: 구현 PR
+- 롤백: 없음
+
+## 2026-11-08 · Cursor · 끝
 - 한 일: #152 병합에 빠진 cc2f12f 문서 보완을 새 PR로 분리. 재시도는 당일 수집 대상 중 유효 봉이 없는 종목(시도 기록 없음 포함). 시행일은 명부 초기화 성공이며 일봉 확보와 구분.
 - 파일: docs/type1-breakout/observation-retention-plan.md, docs/work-log.md
 - 커밋: 문서 PR

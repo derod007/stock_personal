@@ -1,3 +1,9 @@
+## 2026-11-08 · Cursor · 끝
+- 한 일: #152 병합에 빠진 cc2f12f 문서 보완을 새 PR로 분리. 재시도는 당일 수집 대상 중 유효 봉이 없는 종목(시도 기록 없음 포함). 시행일은 명부 초기화 성공이며 일봉 확보와 구분.
+- 파일: docs/type1-breakout/observation-retention-plan.md, docs/work-log.md
+- 커밋: 문서 PR
+- 롤백: 없음
+
 ## 2026-11-07 · Cursor · 끝
 - 한 일: PR #152 설계에 경과 20일 수집, 관찰/자료 상태 분리, 최초 유효 봉 유지, 마감 후 중단 재실행, 출처, 시행 전 공백 문구를 문서만 보완.
 - 파일: docs/type1-breakout/observation-retention-plan.md, docs/work-log.md

@@ -93,11 +93,26 @@ sw($at['entry'] === 36.0 && $at['next_resistance'] === 80.0 && $at['reward_risk'
     && $laterHigh['reward_risk'] === $at['reward_risk'] && $laterHigh['confirm_day'] === $at['confirm_day']
     && $laterHigh['resistance_as_of_day'] === $at['resistance_as_of_day'] && $laterHigh['resistance_as_of_day'] !== $laterHigh['as_of_day']
     && $laterHigh['current_status'] === '새 저항' && $laterHigh['current_resistance'] === 50.0, 'a later high does not rewrite the signal');
+$same = known(32, 80);
+$unchanged = SwingResearch::diagnose($same, $symbol, $same[31]['available_at']);
+$goneBars = $base;
+$goneBars[] = ['available_at' => $base[24]['available_at'] + 86400, 'open' => 80, 'high' => 82, 'low' => 79, 'close' => 81, 'volume' => 1000];
+$gone = SwingResearch::diagnose($goneBars, $symbol, $goneBars[25]['available_at']);
+foreach ([$unchanged, $laterHigh, $gone] as $now) {
+    sw($now['entry'] === $at['entry'] && $now['next_resistance'] === 80.0 && $now['reward_risk'] === $at['reward_risk'], 'later bars keep the signal resistance');
+}
+sw($unchanged['current_resistance'] === 80.0 && $unchanged['current_status'] === '변화 없음', 'an unchanged 80 stays visible');
+sw($laterHigh['current_resistance'] === 50.0 && $laterHigh['current_status'] === '새 저항', 'a changed resistance is separate from the signal');
+sw($gone['current_resistance'] === null && $gone['current_status'] === '저항 소멸', 'a vanished resistance is not an unchanged one');
+$samePage = SwingResearch::page($unchanged);
+sw(str_contains($samePage, '<th scope="row">현재 저항</th><td>80</td>') && str_contains($samePage, '<th scope="row">현재 상태</th><td>변화 없음</td>'), 'the page shows 80 when the resistance did not change');
+
 $brokeAfter = $base;
 $brokeAfter[] = ['available_at' => $base[24]['available_at'] + 86400, 'open' => 30, 'high' => 30, 'low' => 27, 'close' => 28, 'volume' => 1000];
 $still = SwingResearch::diagnose($brokeAfter, $symbol, $brokeAfter[25]['available_at']);
 sw($still['retest_status'] === '확인' && $still['entry'] === $at['entry'] && $still['next_resistance'] === $at['next_resistance']
-    && $still['reward_risk'] === $at['reward_risk'] && $still['current_status'] === '지지 이탈', 'a later support break stays in the current state');
+    && $still['reward_risk'] === $at['reward_risk'] && $still['current_resistance'] === 80.0
+    && $still['current_status'] === '지지 이탈', 'a later support break stays in the current state');
 
 $tight = known(25, 40);
 $wait = SwingResearch::diagnose($tight, $symbol, $tight[24]['available_at']);

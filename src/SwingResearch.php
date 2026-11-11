@@ -124,8 +124,10 @@ final class SwingResearch
             }
         }
         $live = self::nearest($done, $symbol, (int) $done[count($done) - 1]['available_at'], $entry, $level);
-        $out['current_resistance'] = $live !== null && $live != $out['next_resistance'] ? $live : null;
-        $out['current_status'] = $brokeAfter ? '지지 이탈' : ($out['current_resistance'] !== null ? '새 저항' : '변화 없음');
+        $out['current_resistance'] = $live;
+        $out['current_status'] = $brokeAfter ? '지지 이탈'
+            : ($live === null && $out['next_resistance'] !== null ? '저항 소멸'
+            : ($live != $out['next_resistance'] ? '새 저항' : '변화 없음'));
         return $out;
     }
 

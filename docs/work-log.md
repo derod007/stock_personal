@@ -1,3 +1,10 @@
+## 2026-11-12 04:07 · Cursor · 끝
+- 한 일: 현재 저항 값과 변경 여부를 분리. 같은 80도 표시하고 소멸은 따로 둠.
+- 검증: tests/swing_research.php
+- 파일: src/SwingResearch.php, tests/swing_research.php, docs/work-log.md
+- 커밋: PR #159
+- 롤백: 없음
+
 ## 2026-11-12 04:00 · Cursor · 끝
 - 한 일: 스윙 연구 진단을 신호 당시와 현재 상태로 나눔. 손익비는 확인일까지로 고정.
 - 검증: tests/swing_research.php. 화면 설명에 손익비 1 이하 대기를 표시.

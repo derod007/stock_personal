@@ -12,6 +12,7 @@ jobs:
         run: |
           find src bin tests -name '*.php' -print0 | xargs -0 -n1 php -l
           php -l index.php
+          php -l swing_research.php
           php -l paper.php
           php -l paper_diagnostics.php
           php -l paper_trades.php
@@ -51,6 +52,7 @@ jobs:
           php tests/weekly.php
           php tests/amount_exclude.php
           php tests/sector_collect.php
+          php tests/swing_research.php
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'

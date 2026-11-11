@@ -1,3 +1,24 @@
+## 2026-11-12 04:07 · Cursor · 끝
+- 한 일: 현재 저항 값과 변경 여부를 분리. 같은 80도 표시하고 소멸은 따로 둠.
+- 검증: tests/swing_research.php
+- 파일: src/SwingResearch.php, tests/swing_research.php, docs/work-log.md
+- 커밋: PR #159
+- 롤백: 없음
+
+## 2026-11-12 04:00 · Cursor · 끝
+- 한 일: 스윙 연구 진단을 신호 당시와 현재 상태로 나눔. 손익비는 확인일까지로 고정.
+- 검증: tests/swing_research.php. 화면 설명에 손익비 1 이하 대기를 표시.
+- 파일: src/SwingResearch.php, tests/swing_research.php, docs/work-log.md
+- 커밋: PR #159
+- 롤백: 없음
+
+## 2026-11-12 03:51 · Cursor · 끝
+- 한 일: 스윙 연구 탭과 읽기 전용 돌파·재시험 진단.
+- 검증: tests/swing_research.php, tests/type1_scan.php. 화면 조회 후 운영 파일 해시는 그대로.
+- 파일: src/SwingResearch.php, swing_research.php, tests/swing_research.php, index.php, bin/type1/Page.php, .github/workflows/php-tests.yml, docs/ronny-swing-research.md, docs/work-log.md
+- 커밋: 별도 PR
+- 롤백: 없음
+
 ## 2026-11-11 10:02 · Cursor · 끝
 - 한 일: 목표 추적이 감사 묶음을 한 파일씩 등록. 후보 조건은 그대로.
 - 검증: tests/target_tracking_memory.php, tests/target_tracking.php

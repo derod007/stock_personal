@@ -455,6 +455,7 @@ if ($marketLabel === '' && is_array($result) && !empty($result['symbol'])) {
             <?= $scanMode && $scanMarket === 'kospi' ? 'aria-current="page"' : '' ?>
           >거래대금 스캔(코스피)</a>
           <a class="tabs__link" href="type1_scan.php">거래대금 스캔(유형1)</a>
+          <a class="tabs__link" href="swing_research.php">스윙 연구</a>
         <?php endif; ?>
         <a class="tabs__link" href="paper.php">모의 계좌</a>
       </nav>

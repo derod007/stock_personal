@@ -13,8 +13,8 @@ try{
     if(($report['as_of']??0)>$now)throw new RuntimeException('Refuse older ledger update');
     $report['generated_at']=time();$report['as_of']=$now;$report['errors']=[];$report['added']=0;
     $execution=PaperTargetTracking::executionVersion();$fingerprint=PaperStrategyVersion::current();
-    $obs=PaperFollowup::observations($source.'/rr-audit/'.$id);
-    $report=PaperTargetTracking::register($report,$obs,$now,$fingerprint,$execution);
+    $stream=PaperFollowup::observationStream($source.'/rr-audit/'.$id);
+    $report=PaperTargetTracking::registerStream($report,$stream,$now,$fingerprint,$execution);
     $saved=[];
     if(isset($o['saved-evidence'])){
         $followup=PaperFollowup::load($source,$id);

@@ -137,4 +137,40 @@ sw(str_contains($split, '신호 당시') && str_contains($split, '현재 상태'
     && str_contains($split, '손익비가 1보다 큽니다'), 'the page keeps the signal beside the current state');
 $waitPage = SwingResearch::page($wait);
 sw(str_contains($waitPage, '손익비가 1 이하이면 대기합니다') && !str_contains($waitPage, '임계값은 두지 않습니다'), 'the page states the same one-to-one wait');
+$dir = sys_get_temp_dir() . '/swing-stored-' . getmypid();
+mkdir($dir);
+$source = known(32, 80, [28 => ['open' => 31, 'high' => 50, 'low' => 30, 'close' => 31]]);
+$stored = [];
+foreach ($source as $bar) {
+    $stored[] = ['time' => $bar['available_at'], 'open' => $bar['open'], 'high' => $bar['high'], 'low' => $bar['low'], 'close' => $bar['close'], 'volume' => 1000];
+}
+$path = $dir . '/TEST.KS_2y_1d_closed_v2.json';
+file_put_contents($path, json_encode($stored));
+$before = hash_file('sha256', $path);
+$day = (new DateTimeImmutable('@' . $source[24]['available_at']))->setTimezone(new DateTimeZone('Asia/Seoul'))->format('Y-m-d');
+$asOf = (new DateTimeImmutable($day . ' 15:30:00', new DateTimeZone('Asia/Seoul')))->getTimestamp();
+$signal = SwingResearch::diagnose($stored, 'TEST.KS', $asOf);
+$shown = SwingResearch::diagnose($stored, 'TEST.KS', $asOf, CandleClock::closeTime($stored[31], 'TEST.KS'));
+sw($shown['entry'] === $signal['entry'] && $shown['next_resistance'] === $signal['next_resistance'] && $shown['reward_risk'] === $signal['reward_risk']
+    && $shown['entry'] === 36.0 && $shown['next_resistance'] === 80.0 && $shown['current_resistance'] === 50.0
+    && $shown['as_of_day'] === $day && $shown['current_as_of_day'] !== $shown['as_of_day'], 'bars after the judgment stay out of the signal');
+$saved = SwingResearch::view($dir, ['symbol' => 'TEST.KS', 'day' => $day]);
+$rr = (string) round($shown['reward_risk'], 3);
+sw(hash_file('sha256', $path) === $before
+    && str_contains($saved, '<th scope="row">진입 참고가</th><td>' . $shown['entry'] . '</td>')
+    && str_contains($saved, '<th scope="row">신호 당시 저항</th><td>' . $shown['next_resistance'] . '</td>')
+    && str_contains($saved, '<th scope="row">신호 당시 손익비</th><td>' . $rr . '</td>')
+    && str_contains($saved, '<th scope="row">현재 자료 기준일</th><td>' . $shown['current_as_of_day'] . '</td>'), 'the page matches the stored bars');
+file_put_contents($dir . '/BAD.KS_2y_1d_closed_v2.json', '{');
+$bad = SwingResearch::view($dir, ['symbol' => 'BAD.KS', 'day' => $day]);
+sw(str_contains($bad, '손상') && !str_contains($bad, '<td>36</td>'), 'a damaged file is shown and not repaired');
+$missing = SwingResearch::view($dir, ['symbol' => 'ZZZ.KS', 'day' => $day]);
+sw(str_contains($missing, '저장 일봉이 없습니다'), 'a missing symbol is not filled in');
+$oddBars = $stored;
+$oddBars[3]['high'] = 1;
+file_put_contents($dir . '/ODD.KS_2y_1d_closed_v2.json', json_encode($oddBars));
+$oddPath = $dir . '/ODD.KS_2y_1d_closed_v2.json';
+$oddBefore = hash_file('sha256', $oddPath);
+$odd = SwingResearch::view($dir, ['symbol' => 'ODD.KS', 'day' => $day]);
+sw(str_contains($odd, '완료로 쓰지 않은 봉이 1개') && hash_file('sha256', $oddPath) === $oddBefore, 'an invalid bar stays invalid');
 echo "SWING_OK\n";

@@ -1,3 +1,10 @@
+## 2026-11-12 03:51 · Cursor · 끝
+- 한 일: 스윙 연구 탭과 읽기 전용 돌파·재시험 진단.
+- 검증: tests/swing_research.php, tests/type1_scan.php. 화면 조회 후 운영 파일 해시는 그대로.
+- 파일: src/SwingResearch.php, swing_research.php, tests/swing_research.php, index.php, bin/type1/Page.php, .github/workflows/php-tests.yml, docs/ronny-swing-research.md, docs/work-log.md
+- 커밋: 별도 PR
+- 롤백: 없음
+
 ## 2026-11-11 10:02 · Cursor · 끝
 - 한 일: 목표 추적이 감사 묶음을 한 파일씩 등록. 후보 조건은 그대로.
 - 검증: tests/target_tracking_memory.php, tests/target_tracking.php

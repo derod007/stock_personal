@@ -52,7 +52,10 @@ foreach ($held as $i => $bar) {
 }
 $asHeld = $held[29]['available_at'];
 $ok = SwingResearch::diagnose($held, $symbol, $asHeld);
-sw($ok['retest_status'] === '확인' && $ok['next_resistance'] === 80.0 && $ok['reward_risk'] > 1 && $ok['score'] === null, 'retest confirmation keeps the next high and no score');
+sw($ok['retest_status'] === '확인' && $ok['entry'] === 36.0 && $ok['next_resistance'] === null && $ok['reward_risk'] === null
+    && $ok['wait_reason'] === '다음 저항 미확정' && $ok['confirm_day'] === $ok['resistance_as_of_day']
+    && $ok['confirm_day'] !== $ok['as_of_day'] && $ok['current_status'] === '새 저항' && $ok['current_resistance'] === 80.0
+    && $ok['score'] === null, 'confirmation with too few bars stays unpriced');
 $later = $held;
 $later[] = ['available_at' => $asHeld + 86400, 'open' => 200, 'high' => 220, 'low' => 190, 'close' => 210, 'volume' => 1000];
 sw(SwingResearch::diagnose($later, $symbol, $asHeld) === $ok, 'bars after the judgment do not change it');
@@ -65,30 +68,58 @@ $lost = bars(17, [
 $down = SwingResearch::diagnose($lost, $symbol, $lost[16]['available_at']);
 sw($down['retest_status'] === '지지 이탈' && $down['invalidation'] === 30.0, 'close back through the level invalidates');
 
-$tight = bars(30, [
-    4 => ['high' => 40], 10 => ['high' => 30],
-    14 => ['open' => 30, 'high' => 32, 'low' => 28, 'close' => 31],
-    16 => ['open' => 30, 'high' => 33, 'low' => 29, 'close' => 31],
-    18 => ['open' => 35, 'high' => 36, 'low' => 34, 'close' => 36],
-]);
-foreach ($tight as $i => $bar) {
-    if ($i > 14 && !isset([16 => 1, 18 => 1][$i])) {
-        $tight[$i] = array_replace($bar, ['open' => 31, 'high' => 32, 'low' => 30, 'close' => 31]);
+function known(int $n, float $far, array $extra = []): array
+{
+    $bars = bars($n, array_replace([
+        4 => ['high' => $far], 16 => ['high' => 30],
+        20 => ['open' => 30, 'high' => 32, 'low' => 28, 'close' => 31],
+        22 => ['open' => 30, 'high' => 33, 'low' => 29, 'close' => 31],
+        24 => ['open' => 35, 'high' => 36, 'low' => 34, 'close' => 36],
+    ], $extra));
+    foreach ($bars as $i => $bar) {
+        if ($i > 20 && !isset([22 => 1, 24 => 1][$i]) && !isset($extra[$i])) {
+            $bars[$i] = array_replace($bar, ['open' => 31, 'high' => 32, 'low' => 30, 'close' => 31]);
+        }
     }
+    return $bars;
 }
-$wait = SwingResearch::diagnose($tight, $symbol, $tight[29]['available_at']);
-sw($wait['retest_status'] === '보상 여유 없음' && $wait['next_resistance'] === 40.0 && $wait['reward_risk'] <= 1, 'nearby resistance waits without using the old 1.5 rule');
+
+$base = known(25, 80);
+$at = SwingResearch::diagnose($base, $symbol, $base[24]['available_at']);
+$grown = known(32, 80, [28 => ['open' => 31, 'high' => 50, 'low' => 30, 'close' => 31]]);
+$laterHigh = SwingResearch::diagnose($grown, $symbol, $grown[31]['available_at']);
+sw($at['entry'] === 36.0 && $at['next_resistance'] === 80.0 && $at['reward_risk'] > 1
+    && $laterHigh['entry'] === $at['entry'] && $laterHigh['next_resistance'] === $at['next_resistance']
+    && $laterHigh['reward_risk'] === $at['reward_risk'] && $laterHigh['confirm_day'] === $at['confirm_day']
+    && $laterHigh['resistance_as_of_day'] === $at['resistance_as_of_day'] && $laterHigh['resistance_as_of_day'] !== $laterHigh['as_of_day']
+    && $laterHigh['current_status'] === '새 저항' && $laterHigh['current_resistance'] === 50.0, 'a later high does not rewrite the signal');
+$brokeAfter = $base;
+$brokeAfter[] = ['available_at' => $base[24]['available_at'] + 86400, 'open' => 30, 'high' => 30, 'low' => 27, 'close' => 28, 'volume' => 1000];
+$still = SwingResearch::diagnose($brokeAfter, $symbol, $brokeAfter[25]['available_at']);
+sw($still['retest_status'] === '확인' && $still['entry'] === $at['entry'] && $still['next_resistance'] === $at['next_resistance']
+    && $still['reward_risk'] === $at['reward_risk'] && $still['current_status'] === '지지 이탈', 'a later support break stays in the current state');
+
+$tight = known(25, 40);
+$wait = SwingResearch::diagnose($tight, $symbol, $tight[24]['available_at']);
+sw($wait['retest_status'] === '보상 여유 없음' && $wait['next_resistance'] === 40.0 && $wait['reward_risk'] <= 1
+    && $wait['wait_reason'] === '손익비가 1 이하이면 대기합니다.', 'nearby resistance waits without using the old 1.5 rule');
 
 $done = CandleClock::completed($held, $symbol, $asHeld);
 sw(count($done) === count($held), 'completed bars match CandleClock');
 $trend = (new TrendContext())->analyze($done, $symbol, $asHeld);
 sw($ok['stock_trend'] === $trend['label'], 'stock trend matches the existing context');
-$near = PaperTargetResearch::inspect($held, $symbol, $asHeld, 36.0, 30.0, 1036.0);
-sw($ok['next_resistance'] === $near['nearest_upper_resistance']['price'], 'resistance matches the existing nearest high');
+$near = PaperTargetResearch::inspect($base, $symbol, $base[24]['available_at'], 36.0, 30.0, 1036.0);
+sw($at['next_resistance'] === $near['nearest_upper_resistance']['price'], 'resistance matches the existing nearest high');
 
 $html = SwingResearch::page(null);
 sw(str_contains($html, '스윙 연구') && str_contains($html, '연구 단계') && str_contains($html, '가격 자료가 없습니다')
-    && str_contains($html, 'assets/app.css') && !str_contains($html, 'TEST.KS'), 'empty page is research only');
+    && str_contains($html, '손익비가 1 이하이면 대기합니다') && str_contains($html, 'assets/app.css')
+    && !str_contains($html, 'TEST.KS') && !str_contains($html, '임계값은 두지 않습니다'), 'empty page is research only');
 $filled = SwingResearch::page($broke);
 sw(str_contains($filled, '돌파만 발생') && str_contains($filled, 'TEST.KS') && str_contains($filled, '고정 예시') === false, 'diagnosis text is available to the page');
+$split = SwingResearch::page($still);
+sw(str_contains($split, '신호 당시') && str_contains($split, '현재 상태') && str_contains($split, '지지 이탈')
+    && str_contains($split, '손익비가 1보다 큽니다'), 'the page keeps the signal beside the current state');
+$waitPage = SwingResearch::page($wait);
+sw(str_contains($waitPage, '손익비가 1 이하이면 대기합니다') && !str_contains($waitPage, '임계값은 두지 않습니다'), 'the page states the same one-to-one wait');
 echo "SWING_OK\n";

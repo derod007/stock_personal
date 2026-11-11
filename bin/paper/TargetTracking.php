@@ -63,6 +63,18 @@ final class PaperTargetTracking
             }catch(Throwable $e){$report['errors'][]=['symbol'=>$r['symbol'],'session'=>$r['session'],'error'=>$e->getMessage()];}
         }return $report;
     }
+    /** One audit bundle at a time. observations() keeps every bar array and exhausts 512M. */
+    public static function registerStream(array $report, \Generator $stream, int $now, string $fingerprint, string $execution): array
+    {
+        $prior=$report['errors']??[];$report['errors']=[];
+        foreach($stream as $key=>$record){
+            $report=self::register($report,['records'=>[$key=>$record],'errors'=>[]],$now,$fingerprint,$execution);
+            unset($record);
+        }
+        $meta=$stream->getReturn();
+        $report['errors']=array_merge($prior,is_array($meta)?($meta['errors']??[]):[],$report['errors']);
+        return $report;
+    }
     public static function refresh(array $row,callable $provider,string $execution,int $now):array
     {
         try{

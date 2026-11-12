@@ -173,4 +173,56 @@ $oddPath = $dir . '/ODD.KS_2y_1d_closed_v2.json';
 $oddBefore = hash_file('sha256', $oddPath);
 $odd = SwingResearch::view($dir, ['symbol' => 'ODD.KS', 'day' => $day]);
 sw(str_contains($odd, '완료로 쓰지 않은 봉이 1개') && hash_file('sha256', $oddPath) === $oddBefore, 'an invalid bar stays invalid');
+function seoulDay(int $ts): string
+{
+    return (new DateTimeImmutable('@' . $ts))->setTimezone(new DateTimeZone('Asia/Seoul'))->format('Y-m-d');
+}
+$pack = $stored;
+$fromDay = seoulDay($source[0]['available_at']);
+$endDay = seoulDay($source[31]['available_at']);
+$play = SwingResearch::replay($pack, 'TEST.KS', $fromDay, $endDay);
+sw($play['error'] === null && str_contains($play['basis'], '현재 캐시') && str_contains($play['basis'], '판단 기록이 아닙니다'), 'replay is labeled as a cache recalculation');
+foreach ($play['days'] as $row) {
+    if ($row['diagnosis'] === null) {
+        continue;
+    }
+    $cut = (new DateTimeImmutable($row['day'] . ' 15:30:00', new DateTimeZone('Asia/Seoul')))->getTimestamp();
+    sw($row['diagnosis'] === SwingResearch::diagnose($pack, 'TEST.KS', $cut), 'replay day ' . $row['day'] . ' matches the single diagnosis');
+}
+$level30 = array_values(array_filter($play['signals'], static fn (array $s): bool => $s['breakout_level'] == 30));
+sw(count($level30) === 1 && $level30[0]['entry'] === 36.0 && $level30[0]['resistance'] === 80.0 && $level30[0]['retest_day'] !== null, 'one persisting signal is counted once');
+$stamp = $source[31]['available_at'];
+do {
+    $stamp += 86400;
+    $nextDay = seoulDay($stamp);
+    $week = (int) (new DateTimeImmutable($nextDay . ' 12:00:00', new DateTimeZone('Asia/Seoul')))->format('N');
+} while ($week >= 6);
+$more = $pack;
+$more[] = ['time' => $stamp, 'open' => 55, 'high' => 60, 'low' => 54, 'close' => 60, 'volume' => 1000];
+$laterPlay = SwingResearch::replay($more, 'TEST.KS', $fromDay, $nextDay);
+$kept = array_values(array_filter($laterPlay['signals'], static fn (array $s): bool => $s['breakout_level'] == 30));
+$second = array_values(array_filter($laterPlay['signals'], static fn (array $s): bool => $s['breakout_level'] == 50));
+sw(count($kept) === 1 && count($second) === 1 && $kept[0]['confirm_day'] === $level30[0]['confirm_day']
+    && $kept[0]['entry'] === 36.0 && $kept[0]['resistance'] === 80.0 && $kept[0]['reward_risk'] === $level30[0]['reward_risk'], 'a later breakout does not rewrite the earlier signal');
+$future = $pack;
+$future[] = ['time' => $stamp, 'open' => 200, 'high' => 220, 'low' => 190, 'close' => 210, 'volume' => 1000];
+$unchangedPlay = SwingResearch::replay($future, 'TEST.KS', $fromDay, $endDay);
+sw($unchangedPlay['days'] === $play['days'] && $unchangedPlay['signals'] === $play['signals'], 'a bar after the replay does not change earlier days');
+$gap = $pack;
+$gapDay = null;
+foreach ($source as $i => $bar) {
+    $candidate = seoulDay($bar['available_at']);
+    $week = (int) (new DateTimeImmutable($candidate . ' 12:00:00', new DateTimeZone('Asia/Seoul')))->format('N');
+    if ($week < 6 && $i >= 8 && $i < 12) {
+        $gap[$i]['high'] = 1;
+        $gapDay = $candidate;
+        break;
+    }
+}
+$gapped = SwingResearch::replay($gap, 'TEST.KS', $fromDay, $endDay);
+$miss = array_values(array_filter($gapped['days'], static fn (array $row): bool => $row['day'] === $gapDay));
+sw($gapDay !== null && ($miss[0]['status'] ?? '') === '결측' && $miss[0]['diagnosis'] === null, 'a missing weekday stays missing');
+$replayPage = SwingResearch::view($dir, ['symbol' => 'TEST.KS', 'from' => $fromDay, 'to' => $endDay]);
+sw(hash_file('sha256', $path) === $before && str_contains($replayPage, '현재 캐시로 과거') && str_contains($replayPage, '판단 기록이 아닙니다')
+    && str_contains($replayPage, '<td>36</td>') && str_contains($replayPage, '<td>80</td>'), 'the replay page keeps the frozen signal');
 echo "SWING_OK\n";

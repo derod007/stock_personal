@@ -222,7 +222,7 @@ final class SwingResearch
                         'id' => $id, 'breakout_day' => $diagnosis['breakout_day'], 'breakout_level' => $diagnosis['breakout_level'],
                         'retest_day' => null, 'retest_price' => null, 'confirm_day' => null, 'entry' => null,
                         'resistance' => null, 'reward_risk' => null, 'resistance_as_of_day' => null,
-                        'break_day' => null, 'break_price' => null, 'locked' => false,
+                        'wait_reason' => null, 'break_day' => null, 'break_price' => null, 'locked' => false,
                     ];
                 }
                 $slot = &$signals[$index[$id]];
@@ -237,6 +237,7 @@ final class SwingResearch
                     $slot['resistance'] = $diagnosis['next_resistance'];
                     $slot['reward_risk'] = $diagnosis['reward_risk'];
                     $slot['resistance_as_of_day'] = $diagnosis['resistance_as_of_day'];
+                    $slot['wait_reason'] = $diagnosis['wait_reason'];
                 }
                 if ($slot['break_day'] === null && $diagnosis['break_day'] !== null) {
                     $slot['break_day'] = $diagnosis['break_day'];
@@ -262,6 +263,245 @@ final class SwingResearch
             unset($open);
         }
         return ['error' => null, 'basis' => $basis, 'identity' => $identity, 'signals' => $signals, 'days' => $days];
+    }
+
+    /**
+     * Price path after a replay confirmation. The reference is the next stored trading day's open.
+     * shortcut: research calendars end 2026-10-08 and skip an uncovered gap, upgrade when one exchange calendar is stored.
+     *
+     * @param list<array<string,mixed>> $signals
+     * @return list<array<string,mixed>>
+     */
+    public static function observe(array $bars, string $symbol, array $signals, string $asOfDay): array
+    {
+        $asOf = self::realDay($asOfDay) ? self::closeOf($asOfDay, $symbol) : 0;
+        $byDay = [];
+        foreach ($asOf > 0 ? CandleClock::completed($bars, $symbol, $asOf) : [] as $bar) {
+            $byDay[self::day($bar, $symbol)] = $bar;
+        }
+        $rows = [];
+        foreach ($signals as $signal) {
+            if (($signal['confirm_day'] ?? null) === null) {
+                continue;
+            }
+            $rows[] = self::pathOf($signal, $byDay, $symbol, $asOf);
+        }
+        return $rows;
+    }
+
+    /** @param array<string,array<string,mixed>> $byDay */
+    private static function pathOf(array $signal, array $byDay, string $symbol, int $asOf): array
+    {
+        $empty = static fn (string $status): array => ['status' => $status, 'close_change' => null, 'max_up' => null, 'max_down' => null];
+        $row = [
+            'confirm_day' => $signal['confirm_day'], 'entry' => $signal['entry'] ?? null,
+            'resistance' => $signal['resistance'] ?? null, 'invalidation' => $signal['breakout_level'] ?? null,
+            'reward_risk' => $signal['reward_risk'] ?? null, 'wait_reason' => $signal['wait_reason'] ?? null,
+            'ref_day' => null, 'ref_open' => null, 'ref_status' => '미확정',
+            'horizons' => [5 => $empty('미확정'), 10 => $empty('미확정'), 20 => $empty('미확정')],
+            'resistance_status' => '미확정', 'resistance_day' => null,
+            'invalidation_status' => '미확정', 'invalidation_day' => null,
+        ];
+        $kr = str_ends_with($symbol, '.KS') || str_ends_with($symbol, '.KQ');
+        if (!$kr || !self::realDay((string) $signal['confirm_day']) || !is_numeric($signal['breakout_level'] ?? null)) {
+            return $row;
+        }
+        $plan = self::tradingDaysThrough((string) $signal['confirm_day'], $symbol, $asOf);
+        $refDay = $plan['days'][0] ?? null;
+        if ($refDay === null) {
+            if ($plan['halt'] === 'unknown') {
+                return $row;
+            }
+            $refDay = self::nextTradingDay((string) $signal['confirm_day']);
+            if ($refDay === null) {
+                return $row;
+            }
+            $row['ref_day'] = $refDay;
+            $row['ref_status'] = '미완료';
+            foreach ([5, 10, 20] as $n) {
+                $row['horizons'][$n] = $empty('미완료');
+            }
+            $row['resistance_status'] = is_numeric($signal['resistance'] ?? null) ? '미완료' : '미확정';
+            $row['invalidation_status'] = '미완료';
+            return $row;
+        }
+        $row['ref_day'] = $refDay;
+        if (!isset($byDay[$refDay])) {
+            return $row;
+        }
+        $open = (float) $byDay[$refDay]['open'];
+        $row['ref_open'] = $open;
+        $row['ref_status'] = '확정';
+        $usable = [];
+        $halt = null;
+        foreach ($plan['days'] as $day) {
+            if (!isset($byDay[$day])) {
+                $halt = 'unknown';
+                break;
+            }
+            $usable[] = $byDay[$day];
+        }
+        if ($halt === null && $plan['halt'] === 'unknown' && count($usable) < 20) {
+            $halt = 'unknown';
+        }
+        foreach ([5, 10, 20] as $n) {
+            if (count($usable) < $n) {
+                $row['horizons'][$n] = $empty($halt === 'unknown' ? '미확정' : '미완료');
+                continue;
+            }
+            $window = array_slice($usable, 0, $n);
+            $close = (float) $window[$n - 1]['close'];
+            $high = max(array_map(static fn (array $bar): float => (float) $bar['high'], $window));
+            $low = min(array_map(static fn (array $bar): float => (float) $bar['low'], $window));
+            $row['horizons'][$n] = [
+                'status' => '완료',
+                'close_change' => $open > 0 ? $close / $open - 1 : null,
+                'max_up' => $open > 0 ? $high / $open - 1 : null,
+                'max_down' => $open > 0 ? $low / $open - 1 : null,
+            ];
+        }
+        $resistance = is_numeric($signal['resistance'] ?? null) ? (float) $signal['resistance'] : null;
+        $level = (float) $signal['breakout_level'];
+        $resDay = null;
+        $inv = null;
+        $ambig = null;
+        foreach ($usable as $bar) {
+            $high = (float) $bar['high'];
+            $low = (float) $bar['low'];
+            $close = (float) $bar['close'];
+            $day = self::day($bar, $symbol);
+            if ($resistance !== null && $resDay === null && $inv === null && $high >= $resistance && $low <= $level) {
+                $ambig = $day;
+                break;
+            }
+            if ($resDay === null && $resistance !== null && $high >= $resistance) {
+                $resDay = $day;
+            }
+            if ($inv === null && $close < $level) {
+                $inv = ['종가 이탈', $day];
+            } elseif ($inv === null && $low <= $level) {
+                $inv = ['장중 접촉', $day];
+            }
+        }
+        $pending = $halt === 'unknown' ? '미확정' : '미완료';
+        if ($ambig !== null) {
+            $row['resistance_status'] = '선후관계 미확정';
+            $row['resistance_day'] = $ambig;
+            $row['invalidation_status'] = '선후관계 미확정';
+            $row['invalidation_day'] = $ambig;
+            return $row;
+        }
+        if ($resistance === null) {
+            $row['resistance_status'] = '미확정';
+        } elseif ($resDay !== null) {
+            $row['resistance_status'] = '도달';
+            $row['resistance_day'] = $resDay;
+        } else {
+            $row['resistance_status'] = $pending;
+        }
+        if ($inv !== null) {
+            $row['invalidation_status'] = $inv[0];
+            $row['invalidation_day'] = $inv[1];
+        } else {
+            $row['invalidation_status'] = $pending;
+        }
+        return $row;
+    }
+
+    /** @return array{days:list<string>,halt:?string} */
+    private static function tradingDaysThrough(string $day, string $symbol, int $asOf): array
+    {
+        $cursor = new \DateTimeImmutable($day . ' 12:00:00', new \DateTimeZone('Asia/Seoul'));
+        $days = [];
+        for ($i = 0; $i < 400; $i++) {
+            $cursor = $cursor->modify('+1 day');
+            $next = $cursor->format('Y-m-d');
+            if (self::closeOf($next, $symbol) > $asOf) {
+                return ['days' => $days, 'halt' => null];
+            }
+            $kind = self::krxDay($next);
+            if ($kind === 'closed') {
+                continue;
+            }
+            if ($kind !== 'open') {
+                return ['days' => $days, 'halt' => 'unknown'];
+            }
+            $days[] = $next;
+        }
+        // shortcut: 400 calendar days, upgrade if one observation window is longer
+        return ['days' => $days, 'halt' => 'unknown'];
+    }
+
+    private static function nextTradingDay(string $day): ?string
+    {
+        $cursor = new \DateTimeImmutable($day . ' 12:00:00', new \DateTimeZone('Asia/Seoul'));
+        for ($i = 0; $i < 40; $i++) {
+            $cursor = $cursor->modify('+1 day');
+            $next = $cursor->format('Y-m-d');
+            $kind = self::krxDay($next);
+            if ($kind === 'open') {
+                return $next;
+            }
+            if ($kind !== 'closed') {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    private static function krxDay(string $day): string
+    {
+        $week = (int) (new \DateTimeImmutable($day . ' 12:00:00', new \DateTimeZone('Asia/Seoul')))->format('N');
+        if ($week >= 6) {
+            return 'closed';
+        }
+        $flags = [];
+        foreach (self::krxRanges() as $range) {
+            if ($day < $range['from'] || $day > $range['to']) {
+                continue;
+            }
+            $flags[] = isset($range['closed'][$day]) ? 'closed' : 'open';
+        }
+        if ($flags === [] || count(array_unique($flags)) > 1) {
+            return 'unknown';
+        }
+        return $flags[0];
+    }
+
+    /** @return list<array{from:string,to:string,closed:array<string,int>}> */
+    private static function krxRanges(): array
+    {
+        static $ranges = null;
+        if ($ranges !== null) {
+            return $ranges;
+        }
+        $ranges = [];
+        foreach ([
+            'docs/type1-krx-input-v1/trading-calendar.json',
+            'docs/type1-holdout-v1/trading-calendar.json',
+            'docs/krx-prep-bars-before-20241008/trading-calendar.json',
+            'docs/historical-top100-20241008-20251002/trading-calendar.json',
+            'docs/historical-top100-20251008-20261008/trading-calendar.json',
+        ] as $file) {
+            $json = json_decode((string) file_get_contents(dirname(__DIR__) . '/' . $file), true);
+            if (isset($json['search_range'])) {
+                $from = $json['search_range']['from'];
+                $to = $json['search_range']['to'];
+            } elseif (isset($json['range']['from'])) {
+                $from = $json['range']['from'];
+                $to = $json['range']['to'];
+            } else {
+                $from = $json['range'][0];
+                $to = $json['range'][1];
+            }
+            $closed = [];
+            foreach ($json['closed_weekdays'] as $key => $unused) {
+                $key = (string) $key;
+                $closed[strlen($key) === 8 ? substr($key, 0, 4) . '-' . substr($key, 4, 2) . '-' . substr($key, 6, 2) : $key] = 1;
+            }
+            $ranges[] = ['from' => $from, 'to' => $to, 'closed' => $closed];
+        }
+        return $ranges;
     }
 
     /** Stored Yahoo daily cache only. fetch() writes and can fill from another source. */
@@ -294,6 +534,7 @@ final class SwingResearch
             }
             $form['note'] = $dropped;
             $form['replay'] = self::replay($loaded['bars'], $symbol, $form['from'], $form['to']);
+            $form['replay']['paths'] = self::observe($loaded['bars'], $symbol, $form['replay']['signals'], $form['to']);
             return self::page(null, $form);
         }
         if (!self::realDay($day)) {
@@ -401,7 +642,42 @@ final class SwingResearch
                 $open[] = $row['day'];
             }
         }
-        return $html . '<p>거래일인지 알 수 없는 평일: ' . ($open === [] ? '없음' : $h(implode(', ', $open))) . '. 미확정이며 보충하지 않습니다.</p>';
+        return $html . '<p>거래일인지 알 수 없는 평일: ' . ($open === [] ? '없음' : $h(implode(', ', $open))) . '. 미확정이며 보충하지 않습니다.</p>'
+            . self::pathHtml($replay['paths'] ?? [], $h);
+    }
+
+    /** @param list<array<string,mixed>> $paths @param callable(string): string $h */
+    private static function pathHtml(array $paths, callable $h): string
+    {
+        $html = '<h2>가격 경로 관찰</h2><p>가격 경로 관찰입니다. 체결·비용·수수료를 반영한 수익률이 아닙니다. '
+            . '현재 캐시로 과거 거래일을 다시 계산한 결과입니다. 당시 저장했던 판단 기록이 아닙니다.</p>'
+            . '<p>관찰 기준가는 확인일 다음 거래일의 시가입니다. 거래일을 확인할 수 없거나 그 봉이 없으면 미확정이며, 뒤의 시가로 채우지 않습니다. '
+            . '5·10·20거래일은 관찰 기준일부터 셉니다. 기간이 남거나 봉이 빠지면 완료로 보이지 않습니다. '
+            . '같은 일봉에서 저항과 무효화 기준선을 모두 건드리면 선후관계는 미확정입니다.</p>';
+        $rows = '';
+        foreach ($paths as $path) {
+            $rows .= '<tr><td>' . $h((string) $path['confirm_day']) . '</td><td>' . $h((string) ($path['wait_reason'] ?? '없음')) . '</td>'
+                . '<td>' . $h((string) ($path['ref_day'] ?? '없음')) . '</td><td>' . $h($path['ref_status'] === '확정' ? self::num($path['ref_open']) : (string) $path['ref_status']) . '</td>'
+                . '<td>' . $h(self::span($path['horizons'][5])) . '</td><td>' . $h(self::span($path['horizons'][10])) . '</td><td>' . $h(self::span($path['horizons'][20])) . '</td>'
+                . '<td>' . $h(self::reach($path['resistance_status'], $path['resistance_day'])) . '</td>'
+                . '<td>' . $h(self::reach($path['invalidation_status'], $path['invalidation_day'])) . '</td></tr>';
+        }
+        return $html . '<table><thead><tr><th>확인일</th><th>당시 상태</th><th>기준일</th><th>기준가</th><th>5거래일</th><th>10거래일</th><th>20거래일</th><th>당시 저항</th><th>무효화 기준선</th></tr></thead><tbody>'
+            . ($rows === '' ? '<tr><td colspan="9">확인된 신호가 없습니다.</td></tr>' : $rows) . '</tbody></table>';
+    }
+
+    private static function span(array $horizon): string
+    {
+        if ($horizon['status'] !== '완료') {
+            return (string) $horizon['status'];
+        }
+        $pct = static fn (?float $ratio): string => $ratio === null ? '없음' : (string) round($ratio * 100, 2);
+        return '종가 ' . $pct($horizon['close_change']) . '% · 상승 ' . $pct($horizon['max_up']) . '% · 하락 ' . $pct($horizon['max_down']) . '%';
+    }
+
+    private static function reach(string $status, ?string $day): string
+    {
+        return $day === null ? $status : $status . ' ' . $day;
     }
 
     /** @return list<string> */

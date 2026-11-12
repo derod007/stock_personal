@@ -300,7 +300,9 @@ final class SwingResearch
             'ref_day' => null, 'ref_open' => null, 'ref_status' => '미확정',
             'horizons' => [5 => $empty('미확정'), 10 => $empty('미확정'), 20 => $empty('미확정')],
             'resistance_status' => '미확정', 'resistance_day' => null,
-            'invalidation_status' => '미확정', 'invalidation_day' => null,
+            'touch_status' => '미확정', 'touch_day' => null,
+            'close_break_status' => '미확정', 'close_break_day' => null,
+            'order_status' => '없음', 'order_day' => null,
         ];
         $kr = str_ends_with($symbol, '.KS') || str_ends_with($symbol, '.KQ');
         if (!$kr || !self::realDay((string) $signal['confirm_day']) || !is_numeric($signal['breakout_level'] ?? null)) {
@@ -322,7 +324,8 @@ final class SwingResearch
                 $row['horizons'][$n] = $empty('미완료');
             }
             $row['resistance_status'] = is_numeric($signal['resistance'] ?? null) ? '미완료' : '미확정';
-            $row['invalidation_status'] = '미완료';
+            $row['touch_status'] = '미완료';
+            $row['close_break_status'] = '미완료';
             return $row;
         }
         $row['ref_day'] = $refDay;
@@ -363,34 +366,30 @@ final class SwingResearch
         $resistance = is_numeric($signal['resistance'] ?? null) ? (float) $signal['resistance'] : null;
         $level = (float) $signal['breakout_level'];
         $resDay = null;
-        $inv = null;
-        $ambig = null;
+        $touchDay = null;
+        $closeDay = null;
+        $orderDay = null;
         foreach ($usable as $bar) {
             $high = (float) $bar['high'];
             $low = (float) $bar['low'];
             $close = (float) $bar['close'];
             $day = self::day($bar, $symbol);
-            if ($resistance !== null && $resDay === null && $inv === null && $high >= $resistance && $low <= $level) {
-                $ambig = $day;
-                break;
+            $hitRes = $resistance !== null && $high >= $resistance;
+            $hitLow = $low <= $level;
+            if ($orderDay === null && $hitRes && $hitLow && $resDay === null && $touchDay === null) {
+                $orderDay = $day;
             }
-            if ($resDay === null && $resistance !== null && $high >= $resistance) {
+            if ($resDay === null && $hitRes) {
                 $resDay = $day;
             }
-            if ($inv === null && $close < $level) {
-                $inv = ['종가 이탈', $day];
-            } elseif ($inv === null && $low <= $level) {
-                $inv = ['장중 접촉', $day];
+            if ($touchDay === null && $hitLow) {
+                $touchDay = $day;
+            }
+            if ($closeDay === null && $close < $level) {
+                $closeDay = $day;
             }
         }
         $pending = $halt === 'unknown' ? '미확정' : '미완료';
-        if ($ambig !== null) {
-            $row['resistance_status'] = '선후관계 미확정';
-            $row['resistance_day'] = $ambig;
-            $row['invalidation_status'] = '선후관계 미확정';
-            $row['invalidation_day'] = $ambig;
-            return $row;
-        }
         if ($resistance === null) {
             $row['resistance_status'] = '미확정';
         } elseif ($resDay !== null) {
@@ -399,11 +398,21 @@ final class SwingResearch
         } else {
             $row['resistance_status'] = $pending;
         }
-        if ($inv !== null) {
-            $row['invalidation_status'] = $inv[0];
-            $row['invalidation_day'] = $inv[1];
+        if ($touchDay !== null) {
+            $row['touch_status'] = '장중 접촉';
+            $row['touch_day'] = $touchDay;
         } else {
-            $row['invalidation_status'] = $pending;
+            $row['touch_status'] = $pending;
+        }
+        if ($closeDay !== null) {
+            $row['close_break_status'] = '종가 이탈';
+            $row['close_break_day'] = $closeDay;
+        } else {
+            $row['close_break_status'] = $pending;
+        }
+        if ($orderDay !== null) {
+            $row['order_status'] = '선후관계 미확정';
+            $row['order_day'] = $orderDay;
         }
         return $row;
     }
@@ -653,17 +662,19 @@ final class SwingResearch
             . '현재 캐시로 과거 거래일을 다시 계산한 결과입니다. 당시 저장했던 판단 기록이 아닙니다.</p>'
             . '<p>관찰 기준가는 확인일 다음 거래일의 시가입니다. 거래일을 확인할 수 없거나 그 봉이 없으면 미확정이며, 뒤의 시가로 채우지 않습니다. '
             . '5·10·20거래일은 관찰 기준일부터 셉니다. 기간이 남거나 봉이 빠지면 완료로 보이지 않습니다. '
-            . '같은 일봉에서 저항과 무효화 기준선을 모두 건드리면 선후관계는 미확정입니다.</p>';
+            . '저항 도달, 장중 하단 접촉, 종가 이탈은 각자 처음 날짜를 남깁니다. 같은 일봉에서 저항과 하단이 함께 닿으면 순서만 미확정입니다.</p>';
         $rows = '';
         foreach ($paths as $path) {
             $rows .= '<tr><td>' . $h((string) $path['confirm_day']) . '</td><td>' . $h((string) ($path['wait_reason'] ?? '없음')) . '</td>'
                 . '<td>' . $h((string) ($path['ref_day'] ?? '없음')) . '</td><td>' . $h($path['ref_status'] === '확정' ? self::num($path['ref_open']) : (string) $path['ref_status']) . '</td>'
                 . '<td>' . $h(self::span($path['horizons'][5])) . '</td><td>' . $h(self::span($path['horizons'][10])) . '</td><td>' . $h(self::span($path['horizons'][20])) . '</td>'
                 . '<td>' . $h(self::reach($path['resistance_status'], $path['resistance_day'])) . '</td>'
-                . '<td>' . $h(self::reach($path['invalidation_status'], $path['invalidation_day'])) . '</td></tr>';
+                . '<td>' . $h(self::reach($path['touch_status'], $path['touch_day'])) . '</td>'
+                . '<td>' . $h(self::reach($path['close_break_status'], $path['close_break_day'])) . '</td>'
+                . '<td>' . $h(self::reach($path['order_status'], $path['order_day'])) . '</td></tr>';
         }
-        return $html . '<table><thead><tr><th>확인일</th><th>당시 상태</th><th>기준일</th><th>기준가</th><th>5거래일</th><th>10거래일</th><th>20거래일</th><th>당시 저항</th><th>무효화 기준선</th></tr></thead><tbody>'
-            . ($rows === '' ? '<tr><td colspan="9">확인된 신호가 없습니다.</td></tr>' : $rows) . '</tbody></table>';
+        return $html . '<table><thead><tr><th>확인일</th><th>당시 상태</th><th>기준일</th><th>기준가</th><th>5거래일</th><th>10거래일</th><th>20거래일</th><th>저항 도달</th><th>장중 하단 접촉</th><th>종가 이탈</th><th>순서</th></tr></thead><tbody>'
+            . ($rows === '' ? '<tr><td colspan="11">확인된 신호가 없습니다.</td></tr>' : $rows) . '</tbody></table>';
     }
 
     private static function span(array $horizon): string

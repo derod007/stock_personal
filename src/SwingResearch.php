@@ -9,13 +9,15 @@ final class SwingResearch
 {
     public const VERSION = 'swing_retest_read_v2';
 
-    public static function diagnose(array $bars, string $symbol, int $asOf): array
+    public static function diagnose(array $bars, string $symbol, int $asOf, ?int $currentAsOf = null): array
     {
         $done = CandleClock::completed($bars, $symbol, $asOf);
+        $later = $currentAsOf !== null && $currentAsOf > $asOf ? CandleClock::completed($bars, $symbol, $currentAsOf) : $done;
         $trend = (new TrendContext())->analyze($done, $symbol, $asOf);
         $out = [
             'version' => self::VERSION, 'symbol' => $symbol, 'judged_at' => $asOf,
             'as_of_day' => $done === [] ? null : self::day($done[count($done) - 1], $symbol),
+            'current_as_of_day' => $later === [] ? null : self::day($later[count($later) - 1], $symbol),
             'breakout_level' => null, 'retest_status' => '자료 부족',
             'confirm_day' => null, 'entry' => null, 'resistance_as_of_day' => null,
             'entry_condition' => '완료된 일봉이 5개 미만입니다.', 'invalidation' => null,
@@ -123,7 +125,20 @@ final class SwingResearch
                 $out['wait_reason'] = '손익비가 1보다 큽니다. 추천 점수는 아닙니다.';
             }
         }
-        $live = self::nearest($done, $symbol, (int) $done[count($done) - 1]['available_at'], $entry, $level);
+        if ($later !== $done) {
+            $end = (int) $done[count($done) - 1]['available_at'];
+            foreach ($later as $bar) {
+                if ((int) $bar['available_at'] <= $end) {
+                    continue;
+                }
+                if ((float) $bar['close'] < $level) {
+                    $brokeAfter = true;
+                    break;
+                }
+            }
+        }
+        $cursor = $later[count($later) - 1];
+        $live = self::nearest($later, $symbol, (int) $cursor['available_at'], $entry, $level);
         $out['current_resistance'] = $live;
         $out['current_status'] = $brokeAfter ? '지지 이탈'
             : ($live === null && $out['next_resistance'] !== null ? '저항 소멸'
@@ -146,7 +161,38 @@ final class SwingResearch
         return (new \DateTimeImmutable('@' . $bar['available_at']))->setTimezone($tz)->format('Y-m-d');
     }
 
-    public static function page(?array $diagnosis): string
+    /** Stored Yahoo daily cache only. fetch() writes and can fill from another source. */
+    public static function view(string $dir, array $query): string
+    {
+        $symbols = self::symbols($dir);
+        $symbol = strtoupper(trim((string) ($query['symbol'] ?? '')));
+        $day = trim((string) ($query['day'] ?? ''));
+        $form = ['symbols' => $symbols, 'symbol' => $symbol, 'day' => $day, 'note' => null];
+        if ($symbol === '') {
+            return self::page(null, $form);
+        }
+        if (!in_array($symbol, $symbols, true)) {
+            $form['note'] = '저장 일봉이 없습니다. 없는 종목은 보충하지 않습니다.';
+            return self::page(null, $form);
+        }
+        $loaded = self::readStored($dir, $symbol);
+        if ($loaded['error'] !== null) {
+            $form['note'] = $loaded['error'];
+            return self::page(null, $form);
+        }
+        if (!self::realDay($day)) {
+            $form['note'] = '판단일을 고르면 그 날까지 알려진 봉만으로 진단합니다. 저장 기간 ' . $loaded['from'] . '~' . $loaded['to'] . '.';
+            return self::page(null, $form);
+        }
+        $asOf = self::closeOf($day, $symbol);
+        $last = CandleClock::closeTime($loaded['bars'][count($loaded['bars']) - 1], $symbol);
+        $form['note'] = $loaded['dropped'] > 0
+            ? '저장 봉 중 완료로 쓰지 않은 봉이 ' . $loaded['dropped'] . '개입니다. 보충하지 않습니다.'
+            : null;
+        return self::page(self::diagnose($loaded['bars'], $symbol, $asOf, $last), $form);
+    }
+
+    public static function page(?array $diagnosis, array $form = []): string
     {
         $h = static fn(string $value): string => htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
         $rows = '';
@@ -154,6 +200,7 @@ final class SwingResearch
             $fields = [
                 '종목' => $diagnosis['symbol'], '판단 시각' => (string) $diagnosis['judged_at'],
                 '자료 기준일' => (string) ($diagnosis['as_of_day'] ?? '없음'),
+                '현재 자료 기준일' => (string) ($diagnosis['current_as_of_day'] ?? '없음'),
                 '돌파 기준선' => self::num($diagnosis['breakout_level']),
                 '재시험 상태' => $diagnosis['retest_status'],
                 '확인일' => (string) ($diagnosis['confirm_day'] ?? '없음'),
@@ -183,6 +230,19 @@ final class SwingResearch
         $body = $diagnosis === null
             ? '<p class="notice">가격 자료가 없습니다. 개별 일봉, 시장 지수, 외국인 선물, 옵션 미결제 자료는 이 화면에 연결되어 있지 않습니다. 없는 값은 미확정이며, 이 조회는 파일을 만들지 않습니다.</p>'
             : ($diagnosis['confirm_day'] !== null ? '<h2>신호 당시</h2>' : '') . '<table><tbody>' . $rows . '</tbody></table>';
+        $chooser = '';
+        if (isset($form['symbols'])) {
+            $options = '<option value="">선택</option>';
+            foreach ($form['symbols'] as $name) {
+                $options .= '<option' . ($name === ($form['symbol'] ?? '') ? ' selected' : '') . '>' . $h($name) . '</option>';
+            }
+            $chooser = '<form method="get"><label>종목 <select name="symbol">' . $options . '</select></label> '
+                . '<label>판단일 <input type="date" name="day" value="' . $h((string) ($form['day'] ?? '')) . '"></label> '
+                . '<button type="submit">진단</button></form>';
+            if (($form['note'] ?? null) !== null) {
+                $chooser .= '<p class="notice">' . $h((string) $form['note']) . '</p>';
+            }
+        }
         return '<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><title>스윙 연구</title>'
             . '<link rel="stylesheet" href="assets/app.css"><link rel="stylesheet" href="assets/readability.css">'
             . '</head><body><nav class="tabs" aria-label="화면"><a class="tabs__link" href="index.php">차트</a>'
@@ -190,7 +250,63 @@ final class SwingResearch
             . '<a class="tabs__link is-active" href="swing_research.php" aria-current="page">스윙 연구</a>'
             . '<a class="tabs__link" href="paper.php">모의 계좌</a></nav>'
             . '<h1>스윙 연구</h1><p>연구 단계입니다. 돌파 뒤 재시험과 지지 확인만 진단합니다. 신호 당시 손익비는 확인일까지 알려진 자료만 사용하고, 손익비가 1 이하이면 대기합니다. 확인 이후의 지지 이탈과 새 저항은 현재 상태에만 표시합니다. 추천 점수나 자동 주문이 아닙니다.</p>'
-            . $body . '</body></html>';
+            . $chooser . $body . '</body></html>';
+    }
+
+    /** @return list<string> */
+    private static function symbols(string $dir): array
+    {
+        $out = [];
+        foreach (glob($dir . '/*_2y_1d_closed_v2.json') ?: [] as $file) {
+            if (preg_match('/^([A-Z0-9.^=-]+)_2y_1d_closed_v2\.json$/', basename($file), $m)) {
+                $out[] = $m[1];
+            }
+        }
+        sort($out);
+        return $out;
+    }
+
+    /** @return array{error:?string,bars:list<array<string,mixed>>,from:?string,to:?string,dropped:int} */
+    private static function readStored(string $dir, string $symbol): array
+    {
+        $empty = ['error' => '저장 일봉이 없습니다. 없는 종목은 보충하지 않습니다.', 'bars' => [], 'from' => null, 'to' => null, 'dropped' => 0];
+        $root = realpath($dir);
+        $file = realpath($dir . '/' . $symbol . '_2y_1d_closed_v2.json');
+        if ($root === false || $file === false || !str_starts_with($file, $root . DIRECTORY_SEPARATOR)) {
+            return $empty;
+        }
+        try {
+            $raw = json_decode((string) file_get_contents($file), true, 512, JSON_THROW_ON_ERROR);
+        } catch (\JsonException) {
+            return ['error' => '저장 일봉이 손상되었습니다. 보충하지 않습니다.', 'bars' => [], 'from' => null, 'to' => null, 'dropped' => 0];
+        }
+        if (!is_array($raw) || !array_is_list($raw) || $raw === []) {
+            return ['error' => '저장 일봉이 손상되었습니다. 보충하지 않습니다.', 'bars' => [], 'from' => null, 'to' => null, 'dropped' => 0];
+        }
+        foreach ($raw as $bar) {
+            if (!is_array($bar) || !is_numeric($bar['time'] ?? null) || !is_numeric($bar['open'] ?? null)
+                || !is_numeric($bar['high'] ?? null) || !is_numeric($bar['low'] ?? null) || !is_numeric($bar['close'] ?? null)) {
+                return ['error' => '저장 일봉이 손상되었습니다. 보충하지 않습니다.', 'bars' => [], 'from' => null, 'to' => null, 'dropped' => 0];
+            }
+        }
+        $last = CandleClock::closeTime($raw[count($raw) - 1], $symbol);
+        $kept = CandleClock::completed($raw, $symbol, $last);
+        $tz = new \DateTimeZone(str_ends_with($symbol, '.KS') || str_ends_with($symbol, '.KQ') ? 'Asia/Seoul' : 'America/New_York');
+        $fmt = static fn (int $t): string => (new \DateTimeImmutable('@' . $t))->setTimezone($tz)->format('Y-m-d');
+        return ['error' => null, 'bars' => $raw, 'from' => $fmt((int) $raw[0]['time']), 'to' => $fmt($last), 'dropped' => count($raw) - count($kept)];
+    }
+
+    private static function realDay(string $day): bool
+    {
+        $parsed = \DateTimeImmutable::createFromFormat('!Y-m-d', $day);
+        return $parsed !== false && $parsed->format('Y-m-d') === $day;
+    }
+
+    private static function closeOf(string $day, string $symbol): int
+    {
+        $kr = str_ends_with($symbol, '.KS') || str_ends_with($symbol, '.KQ');
+        $tz = new \DateTimeZone($kr ? 'Asia/Seoul' : 'America/New_York');
+        return (new \DateTimeImmutable($day . ($kr ? ' 15:30:00' : ' 16:00:00'), $tz))->getTimestamp();
     }
 
     private static function num(mixed $value): string

@@ -1,3 +1,10 @@
+## 2026-11-12 04:17 · Cursor · 끝
+- 한 일: 스윙 연구 탭이 저장 일봉을 읽어 종목·판단일 진단을 보여 줌. 판단일 이후 봉은 당시 신호에서 제외.
+- 검증: tests/swing_research.php. 000270.KS 2025-05-02 화면과 저장값 대조. 조회 전후 파일 해시 동일.
+- 파일: src/SwingResearch.php, swing_research.php, tests/swing_research.php, docs/work-log.md
+- 커밋: 별도 PR
+- 롤백: 없음
+
 ## 2026-11-12 04:07 · Cursor · 끝
 - 한 일: 현재 저항 값과 변경 여부를 분리. 같은 80도 표시하고 소멸은 따로 둠.
 - 검증: tests/swing_research.php

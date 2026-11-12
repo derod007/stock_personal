@@ -209,42 +209,57 @@ final class SwingResearch
                 }
             }
             if (!$present) {
-                $days[] = ['day' => $day, 'status' => '결측', 'diagnosis' => null];
+                $days[] = ['day' => $day, 'status' => '미확정', 'diagnosis' => null];
                 continue;
             }
             $diagnosis = self::diagnose($bars, $symbol, $asOf);
             $days[] = ['day' => $day, 'status' => $diagnosis['retest_status'], 'diagnosis' => $diagnosis];
-            if ($diagnosis['breakout_level'] === null || $diagnosis['breakout_day'] === null) {
-                continue;
+            if ($diagnosis['breakout_level'] !== null && $diagnosis['breakout_day'] !== null) {
+                $id = $diagnosis['breakout_level'] . '|' . $diagnosis['breakout_day'];
+                if (!isset($index[$id])) {
+                    $index[$id] = count($signals);
+                    $signals[] = [
+                        'id' => $id, 'breakout_day' => $diagnosis['breakout_day'], 'breakout_level' => $diagnosis['breakout_level'],
+                        'retest_day' => null, 'retest_price' => null, 'confirm_day' => null, 'entry' => null,
+                        'resistance' => null, 'reward_risk' => null, 'resistance_as_of_day' => null,
+                        'break_day' => null, 'break_price' => null, 'locked' => false,
+                    ];
+                }
+                $slot = &$signals[$index[$id]];
+                if ($slot['retest_day'] === null && $diagnosis['retest_day'] !== null) {
+                    $slot['retest_day'] = $diagnosis['retest_day'];
+                    $slot['retest_price'] = $diagnosis['breakout_level'];
+                }
+                if ($slot['locked'] === false && $diagnosis['confirm_day'] !== null) {
+                    $slot['locked'] = true;
+                    $slot['confirm_day'] = $diagnosis['confirm_day'];
+                    $slot['entry'] = $diagnosis['entry'];
+                    $slot['resistance'] = $diagnosis['next_resistance'];
+                    $slot['reward_risk'] = $diagnosis['reward_risk'];
+                    $slot['resistance_as_of_day'] = $diagnosis['resistance_as_of_day'];
+                }
+                if ($slot['break_day'] === null && $diagnosis['break_day'] !== null) {
+                    $slot['break_day'] = $diagnosis['break_day'];
+                    $slot['break_price'] = $diagnosis['invalidation'];
+                }
+                unset($slot);
             }
-            $id = $diagnosis['breakout_level'] . '|' . $diagnosis['breakout_day'];
-            if (!isset($index[$id])) {
-                $index[$id] = count($signals);
-                $signals[] = [
-                    'id' => $id, 'breakout_day' => $diagnosis['breakout_day'], 'breakout_level' => $diagnosis['breakout_level'],
-                    'retest_day' => null, 'retest_price' => null, 'confirm_day' => null, 'entry' => null,
-                    'resistance' => null, 'reward_risk' => null, 'resistance_as_of_day' => null,
-                    'break_day' => null, 'break_price' => null, 'locked' => false,
-                ];
+            foreach ($signals as &$open) {
+                if ($open['break_day'] !== null) {
+                    continue;
+                }
+                foreach ($done as $bar) {
+                    if (self::day($bar, $symbol) <= $open['breakout_day']) {
+                        continue;
+                    }
+                    if ((float) $bar['close'] < (float) $open['breakout_level']) {
+                        $open['break_day'] = self::day($bar, $symbol);
+                        $open['break_price'] = $open['breakout_level'];
+                        break;
+                    }
+                }
             }
-            $slot = &$signals[$index[$id]];
-            if ($slot['retest_day'] === null && $diagnosis['retest_day'] !== null) {
-                $slot['retest_day'] = $diagnosis['retest_day'];
-                $slot['retest_price'] = $diagnosis['breakout_level'];
-            }
-            if ($slot['locked'] === false && $diagnosis['confirm_day'] !== null) {
-                $slot['locked'] = true;
-                $slot['confirm_day'] = $diagnosis['confirm_day'];
-                $slot['entry'] = $diagnosis['entry'];
-                $slot['resistance'] = $diagnosis['next_resistance'];
-                $slot['reward_risk'] = $diagnosis['reward_risk'];
-                $slot['resistance_as_of_day'] = $diagnosis['resistance_as_of_day'];
-            }
-            if ($slot['break_day'] === null && $diagnosis['break_day'] !== null) {
-                $slot['break_day'] = $diagnosis['break_day'];
-                $slot['break_price'] = $diagnosis['invalidation'];
-            }
-            unset($slot);
+            unset($open);
         }
         return ['error' => null, 'basis' => $basis, 'identity' => $identity, 'signals' => $signals, 'days' => $days];
     }
@@ -255,7 +270,8 @@ final class SwingResearch
         $symbols = self::symbols($dir);
         $symbol = strtoupper(trim((string) ($query['symbol'] ?? '')));
         $day = trim((string) ($query['day'] ?? ''));
-        $form = ['symbols' => $symbols, 'symbol' => $symbol, 'day' => $day, 'from' => trim((string) ($query['from'] ?? '')), 'to' => trim((string) ($query['to'] ?? '')), 'note' => null, 'replay' => null];
+        $mode = (string) ($query['mode'] ?? '');
+        $form = ['symbols' => $symbols, 'symbol' => $symbol, 'day' => $day, 'from' => trim((string) ($query['from'] ?? '')), 'to' => trim((string) ($query['to'] ?? '')), 'mode' => $mode, 'note' => null, 'replay' => null];
         if ($symbol === '') {
             return self::page(null, $form);
         }
@@ -271,7 +287,11 @@ final class SwingResearch
         $dropped = $loaded['dropped'] > 0
             ? '저장 봉 중 완료로 쓰지 않은 봉이 ' . $loaded['dropped'] . '개입니다. 보충하지 않습니다.'
             : null;
-        if (self::realDay($form['from']) && self::realDay($form['to'])) {
+        if ($mode === 'replay') {
+            if (!self::realDay($form['from']) || !self::realDay($form['to'])) {
+                $form['note'] = '재생은 시작일과 종료일이 필요합니다.';
+                return self::page(null, $form);
+            }
             $form['note'] = $dropped;
             $form['replay'] = self::replay($loaded['bars'], $symbol, $form['from'], $form['to']);
             return self::page(null, $form);
@@ -332,10 +352,15 @@ final class SwingResearch
             }
             $chooser = '<form method="get"><label>종목 <select name="symbol">' . $options . '</select></label> '
                 . '<label>판단일 <input type="date" name="day" value="' . $h((string) ($form['day'] ?? '')) . '"></label> '
-                . '<button type="submit">진단</button> '
+                . '<button type="submit" name="mode" value="diagnose">진단</button> '
                 . '<label>시작일 <input type="date" name="from" value="' . $h((string) ($form['from'] ?? '')) . '"></label> '
                 . '<label>종료일 <input type="date" name="to" value="' . $h((string) ($form['to'] ?? '')) . '"></label> '
-                . '<button type="submit">재생</button></form>';
+                . '<button type="submit" name="mode" value="replay">재생</button></form>';
+            if (($form['mode'] ?? '') === 'replay') {
+                $chooser .= '<p>실행: 재생. 각 날짜는 그 날 마감까지의 봉만 사용합니다.</p>';
+            } elseif (($form['mode'] ?? '') === 'diagnose') {
+                $chooser .= '<p>실행: 진단. 판단일까지의 신호와, 저장 마지막 봉까지의 현재 상태를 보여 줍니다.</p>';
+            }
             if (($form['note'] ?? null) !== null) {
                 $chooser .= '<p class="notice">' . $h((string) $form['note']) . '</p>';
             }
@@ -370,13 +395,13 @@ final class SwingResearch
         }
         $html .= '<table><thead><tr><th>돌파일</th><th>돌파 기준선</th><th>재시험일</th><th>재시험 기준가</th><th>확인일</th><th>진입 참고가</th><th>당시 저항</th><th>당시 손익비</th><th>이탈일</th><th>이탈 기준가</th></tr></thead><tbody>'
             . ($rows === '' ? '<tr><td colspan="10">이 구간의 돌파 신호가 없습니다.</td></tr>' : $rows) . '</tbody></table>';
-        $missing = [];
+        $open = [];
         foreach ($replay['days'] as $row) {
-            if ($row['status'] === '결측') {
-                $missing[] = $row['day'];
+            if ($row['status'] === '미확정') {
+                $open[] = $row['day'];
             }
         }
-        return $html . '<p>결측 거래일: ' . ($missing === [] ? '없음' : $h(implode(', ', $missing))) . '. 없는 날은 보충하지 않습니다.</p>';
+        return $html . '<p>거래일인지 알 수 없는 평일: ' . ($open === [] ? '없음' : $h(implode(', ', $open))) . '. 미확정이며 보충하지 않습니다.</p>';
     }
 
     /** @return list<string> */

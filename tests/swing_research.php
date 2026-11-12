@@ -221,8 +221,27 @@ foreach ($source as $i => $bar) {
 }
 $gapped = SwingResearch::replay($gap, 'TEST.KS', $fromDay, $endDay);
 $miss = array_values(array_filter($gapped['days'], static fn (array $row): bool => $row['day'] === $gapDay));
-sw($gapDay !== null && ($miss[0]['status'] ?? '') === '결측' && $miss[0]['diagnosis'] === null, 'a missing weekday stays missing');
-$replayPage = SwingResearch::view($dir, ['symbol' => 'TEST.KS', 'from' => $fromDay, 'to' => $endDay]);
-sw(hash_file('sha256', $path) === $before && str_contains($replayPage, '현재 캐시로 과거') && str_contains($replayPage, '판단 기록이 아닙니다')
-    && str_contains($replayPage, '<td>36</td>') && str_contains($replayPage, '<td>80</td>'), 'the replay page keeps the frozen signal');
+sw($gapDay !== null && ($miss[0]['status'] ?? '') === '미확정' && $miss[0]['diagnosis'] === null, 'a weekday without a bar stays undetermined');
+$stamp2 = $stamp;
+do {
+    $stamp2 += 86400;
+    $breakDay = seoulDay($stamp2);
+    $week = (int) (new DateTimeImmutable($breakDay . ' 12:00:00', new DateTimeZone('Asia/Seoul')))->format('N');
+} while ($week >= 6);
+$both = $more;
+$both[] = ['time' => $stamp2, 'open' => 28, 'high' => 29, 'low' => 24, 'close' => 25, 'volume' => 1000];
+$brokenPlay = SwingResearch::replay($both, 'TEST.KS', $fromDay, $breakDay);
+$old = array_values(array_filter($brokenPlay['signals'], static fn (array $s): bool => $s['breakout_level'] == 30));
+$newer = array_values(array_filter($brokenPlay['signals'], static fn (array $s): bool => $s['breakout_level'] == 50));
+sw(count($old) === 1 && count($newer) === 1 && $old[0]['break_day'] === $breakDay && $newer[0]['break_day'] === $breakDay
+    && $old[0]['break_price'] === 30.0 && $newer[0]['break_price'] === 50.0
+    && $old[0]['confirm_day'] === $level30[0]['confirm_day'] && $old[0]['entry'] === 36.0
+    && $old[0]['resistance'] === 80.0 && $old[0]['reward_risk'] === $level30[0]['reward_risk'], 'a later close breaks both levels without rewriting the first signal');
+$replayPage = SwingResearch::view($dir, ['symbol' => 'TEST.KS', 'from' => $fromDay, 'to' => $endDay, 'mode' => 'replay']);
+sw(hash_file('sha256', $path) === $before && str_contains($replayPage, '실행: 재생') && str_contains($replayPage, '현재 캐시로 과거')
+    && str_contains($replayPage, '판단 기록이 아닙니다') && str_contains($replayPage, '<td>36</td>') && str_contains($replayPage, '<td>80</td>')
+    && !str_contains($replayPage, '실행: 진단'), 'the replay page keeps the frozen signal');
+$back = SwingResearch::view($dir, ['symbol' => 'TEST.KS', 'day' => $day, 'from' => $fromDay, 'to' => $endDay, 'mode' => 'diagnose']);
+sw(str_contains($back, '실행: 진단') && str_contains($back, '신호 당시') && str_contains($back, '<th scope="row">진입 참고가</th><td>36</td>')
+    && !str_contains($back, '날짜순 재생'), 'diagnosis mode returns after a replay range is still filled in');
 echo "SWING_OK\n";

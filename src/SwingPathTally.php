@@ -112,28 +112,167 @@ final class SwingPathTally
     /** @param list<array<string,mixed>> $reports @return array<string,mixed> */
     public static function combine(array $reports): array
     {
-        $rows = [];
+        $blank = self::combined(null, [], [], [], []);
+        if ($reports === []) {
+            $blank['errors'][] = '합칠 보고서가 없습니다.';
+            return $blank;
+        }
+        $stamps = [];
+        foreach ($reports as $report) {
+            $stamps[] = self::stamp(is_array($report) ? $report : []);
+        }
+        $encoded = array_map(static fn (?array $stamp): string => $stamp === null ? '' : json_encode($stamp, JSON_UNESCAPED_UNICODE), $stamps);
+        if (count(array_unique($encoded)) !== 1 || $encoded[0] === '') {
+            $blank['errors'][] = '확인일 범위, 관찰 종료일, 버전, 달력 해시가 다른 보고서는 합치지 않습니다.';
+            return $blank;
+        }
         $files = [];
+        $fileMark = [];
+        $fileClash = [];
+        $rows = [];
+        $rowBody = [];
+        $rowClash = [];
         $errors = [];
         foreach ($reports as $report) {
-            foreach ($report['observations'] ?? [] as $row) {
-                $rows[] = $row;
+            foreach ($report['errors'] ?? [] as $error) {
+                if (is_string($error) && $error !== '') {
+                    $errors[$error] = true;
+                }
             }
             foreach ($report['files'] ?? [] as $file) {
-                $files[] = $file;
+                if (!is_array($file)) {
+                    continue;
+                }
+                $symbol = (string) ($file['symbol'] ?? '');
+                $mark = json_encode(['sha256' => (string) ($file['sha256'] ?? ''), 'bytes' => $file['bytes'] ?? null], JSON_UNESCAPED_UNICODE);
+                if ($symbol === '' || ($file['sha256'] ?? '') === '') {
+                    $errors['입력 해시가 없는 종목은 합치지 않습니다.'] = true;
+                    continue;
+                }
+                if (isset($fileMark[$symbol]) && $fileMark[$symbol] !== $mark) {
+                    $fileClash[$symbol] = true;
+                    $errors[$symbol . ' 입력 해시가 묶음마다 다릅니다.'] = true;
+                    continue;
+                }
+                if (!isset($fileMark[$symbol])) {
+                    $fileMark[$symbol] = $mark;
+                    $files[$symbol] = ['symbol' => $symbol, 'sha256' => (string) $file['sha256'], 'bytes' => $file['bytes'] ?? null];
+                }
             }
-            foreach ($report['errors'] ?? [] as $error) {
-                $errors[] = $error;
+            foreach ($report['observations'] ?? [] as $row) {
+                if (!is_array($row)) {
+                    continue;
+                }
+                $key = self::observationKey($row);
+                $body = self::observationBody($row);
+                if (isset($rowBody[$key]) && $rowBody[$key] !== $body) {
+                    $rowClash[$key] = true;
+                    $errors[($row['symbol'] ?? '') . ' ' . ($row['breakout_day'] ?? '') . ' 관찰값이 묶음마다 다릅니다.'] = true;
+                    continue;
+                }
+                if (!isset($rowBody[$key])) {
+                    $rowBody[$key] = $body;
+                    $rows[$key] = json_decode($body, true);
+                }
             }
         }
+        foreach (array_keys($fileClash) as $symbol) {
+            unset($files[$symbol]);
+            foreach (array_keys($rows) as $key) {
+                if (str_starts_with($key, $symbol . '|')) {
+                    unset($rows[$key]);
+                }
+            }
+        }
+        foreach (array_keys($rowClash) as $key) {
+            unset($rows[$key]);
+        }
+        ksort($files);
+        ksort($rows);
+        ksort($errors);
+        $kept = array_values($rows);
+        return self::combined($stamps[0], array_values($files), array_keys($errors), $kept);
+    }
+
+    /** @param array<string,mixed>|null $stamp @param list<array<string,mixed>> $files @param list<string> $errors @param list<array<string,mixed>> $rows @return array<string,mixed> */
+    private static function combined(?array $stamp, array $files, array $errors, array $rows): array
+    {
         return [
-            'version' => self::VERSION,
+            'version' => $stamp['version'] ?? null,
+            'research_version' => $stamp['research_version'] ?? null,
+            'confirm_from' => $stamp['confirm_from'] ?? null,
+            'confirm_to' => $stamp['confirm_to'] ?? null,
+            'as_of' => $stamp['as_of'] ?? null,
+            'calendars' => $stamp['calendars'] ?? [],
             'notes' => self::notes(),
             'files' => $files,
             'errors' => $errors,
             'observations' => $rows,
             'groups' => self::summarize($rows),
         ];
+    }
+
+    /** @param array<string,mixed> $report @return array<string,mixed>|null */
+    private static function stamp(array $report): ?array
+    {
+        foreach (['version', 'research_version', 'confirm_from', 'confirm_to', 'as_of'] as $key) {
+            if (!is_string($report[$key] ?? null) || $report[$key] === '') {
+                return null;
+            }
+        }
+        if (!is_array($report['calendars'] ?? null) || $report['calendars'] === []) {
+            return null;
+        }
+        $calendars = [];
+        foreach ($report['calendars'] as $calendar) {
+            if (!is_array($calendar) || !is_string($calendar['file'] ?? null) || !is_string($calendar['sha256'] ?? null) || $calendar['sha256'] === '') {
+                return null;
+            }
+            $calendars[] = [
+                'file' => $calendar['file'],
+                'from' => (string) ($calendar['from'] ?? ''),
+                'to' => (string) ($calendar['to'] ?? ''),
+                'sha256' => $calendar['sha256'],
+            ];
+        }
+        usort($calendars, static fn (array $left, array $right): int => strcmp($left['file'], $right['file']));
+        return [
+            'version' => $report['version'],
+            'research_version' => $report['research_version'],
+            'confirm_from' => $report['confirm_from'],
+            'confirm_to' => $report['confirm_to'],
+            'as_of' => $report['as_of'],
+            'calendars' => $calendars,
+        ];
+    }
+
+    /** @param array<string,mixed> $row */
+    private static function observationKey(array $row): string
+    {
+        return (string) ($row['symbol'] ?? '') . '|' . (string) (float) ($row['breakout_level'] ?? 0) . '|' . (string) ($row['breakout_day'] ?? '');
+    }
+
+    /** @param array<string,mixed> $row */
+    private static function observationBody(array $row): string
+    {
+        $horizons = [];
+        foreach ([5, 10, 20] as $n) {
+            $horizon = is_array($row['horizons'][$n] ?? null) ? $row['horizons'][$n] : [];
+            $horizons[$n] = [
+                'status' => $horizon['status'] ?? null,
+                'close_change' => $horizon['close_change'] ?? null,
+                'max_up' => $horizon['max_up'] ?? null,
+                'max_down' => $horizon['max_down'] ?? null,
+            ];
+        }
+        return json_encode([
+            'symbol' => $row['symbol'] ?? null,
+            'breakout_level' => $row['breakout_level'] ?? null,
+            'breakout_day' => $row['breakout_day'] ?? null,
+            'confirm_day' => $row['confirm_day'] ?? null,
+            'wait_reason' => $row['wait_reason'] ?? null,
+            'horizons' => $horizons,
+        ], JSON_UNESCAPED_UNICODE);
     }
 
     /** @param array<string,mixed> $row @return array<string,mixed> */

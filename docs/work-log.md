@@ -1,3 +1,9 @@
+## 2026-11-13 14:18 · Cursor · 끝
+- 한 일: 1차 관찰 종료일 이후의 검증 기간을 2025-10-10~2026-09-07, 관찰 종료 2026-10-08로 문서에 고정. 신호는 계산하지 않음.
+- 파일: docs/swing-path-validate-20251010/protocol.md, docs/work-log.md
+- 커밋: 별도 PR
+- 롤백: 없음
+
 ## 2026-11-13 14:08 · Cursor · 끝
 - 한 일: 원본 폴더나 대조 문서가 있으면 인증키·요청·쓰기 전에 수집을 멈추는 검사를 넣음.
 - 파일: docs/research/sep19_five_fetch.py, tests/test_sep19_five_fetch.py, docs/swing-path-compare-2025h1/sep19-five-fetch/report.md, docs/work-log.md

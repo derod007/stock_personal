@@ -1,3 +1,9 @@
+## 2026-11-13 10:45 · Cursor · 끝
+- 한 일: 스윙 경로 관찰을 종목 목록과 확인일 범위로 집계하는 CLI를 추가. 웹 조회에서는 실행하지 않음.
+- 파일: src/SwingPathTally.php, src/SwingResearch.php, bin/swing_path_tally.php, tests/swing_path_tally.php, .github/workflows/php-tests.yml, docs/work-log.md
+- 커밋: 별도 PR
+- 롤백: 없음
+
 ## 2026-11-12 16:48 · Cursor · 끝
 - 한 일: 경로 관찰의 저항 도달·장중 접촉·종가 이탈을 각각 첫 날짜로 남기고 순서는 따로 표시.
 - 파일: src/SwingResearch.php, tests/swing_research.php, docs/work-log.md

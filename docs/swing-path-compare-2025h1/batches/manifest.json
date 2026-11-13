@@ -1,0 +1,77 @@
+{
+    "note": "임시 폴더에 있던 원래 12개 묶음 보고서. 내용은 바꾸지 않았다. 측정용 8종목 보고서는 넣지 않았다.",
+    "files": [
+        {
+            "batch": 1,
+            "file": "batch-1.json",
+            "sha256": "e907507fc05b2e4b3b269fd59b1c50dbbb996f4e11da3dd746424b986819721b",
+            "bytes": 36759
+        },
+        {
+            "batch": 2,
+            "file": "batch-2.json",
+            "sha256": "b94200bf111780b7fa1b1d0c7f3cc3f2cc60029373a066eb367113debd478570",
+            "bytes": 38965
+        },
+        {
+            "batch": 3,
+            "file": "batch-3.json",
+            "sha256": "03bdf58b8f6fcca5fbcede70d2a429f19abf0a46ecc8517b7844617aa4cf9a28",
+            "bytes": 33746
+        },
+        {
+            "batch": 4,
+            "file": "batch-4.json",
+            "sha256": "08bf83e438660b59152084f2d7e66a21493ae0cd49a0cfbba6a743dff63efcf4",
+            "bytes": 40816
+        },
+        {
+            "batch": 5,
+            "file": "batch-5.json",
+            "sha256": "3d6cd55388aac629f993f11c384d3c4171cdbad4aa9757d7fbf22e7aa36521ee",
+            "bytes": 35775
+        },
+        {
+            "batch": 6,
+            "file": "batch-6.json",
+            "sha256": "59967d8f61c97a0c234871be2421c164860fefd29efce6c34b2653c26a4cb3fa",
+            "bytes": 29606
+        },
+        {
+            "batch": 7,
+            "file": "batch-7.json",
+            "sha256": "81ae0f0acd604091a5c8f923cf1e89d13f4a4b257d3e3804f4c42122d17de834",
+            "bytes": 46824
+        },
+        {
+            "batch": 8,
+            "file": "batch-8.json",
+            "sha256": "2785e737903b6a045451bae036f3aa5d8b594acf9508dfb04d67e2e2c6fe7ce4",
+            "bytes": 39938
+        },
+        {
+            "batch": 9,
+            "file": "batch-9.json",
+            "sha256": "4fd0fcd67581772008f87c6b8bc8cb1b78fa3ecfa4524684a5ba662a4bb42e6e",
+            "bytes": 35806
+        },
+        {
+            "batch": 10,
+            "file": "batch-10.json",
+            "sha256": "b2447800ae6b57482e3f71e5968c1bc09910655e228c0fb5f28ad38d9e4ba7fa",
+            "bytes": 34570
+        },
+        {
+            "batch": 11,
+            "file": "batch-11.json",
+            "sha256": "01f24b85cb8db6e2c3011d3b8c3dbc8231a823e38242f219cf6fe3072f04c7c1",
+            "bytes": 35725
+        },
+        {
+            "batch": 12,
+            "file": "batch-12.json",
+            "sha256": "aa8811552bcd15e3161858f604fef8ef39be3d77b6c151f2f62675f05d72f851",
+            "bytes": 25799
+        }
+    ]
+}

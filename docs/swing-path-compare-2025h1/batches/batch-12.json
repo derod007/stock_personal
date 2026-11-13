@@ -1,0 +1,685 @@
+{
+    "version": "swing_path_tally_v1",
+    "research_version": "swing_retest_read_v2",
+    "confirm_from": "2025-01-01",
+    "confirm_to": "2025-08-29",
+    "as_of": "2025-09-30",
+    "calendars": [
+        {
+            "file": "docs\/type1-krx-input-v1\/trading-calendar.json",
+            "from": "2023-01-02",
+            "to": "2023-06-30",
+            "sha256": "12df19bd2c78869945df7ec8d048c15e266b49053edf904d670266d6244f0492"
+        },
+        {
+            "file": "docs\/type1-holdout-v1\/trading-calendar.json",
+            "from": "2023-07-03",
+            "to": "2024-06-28",
+            "sha256": "0c284bce27aed696e63dc5a842f81a6f10aca885fd1781551d25bdff753453b2"
+        },
+        {
+            "file": "docs\/krx-prep-bars-before-20241008\/trading-calendar.json",
+            "from": "2023-09-01",
+            "to": "2024-10-07",
+            "sha256": "ebfd4e8d8d2598291ab31b93f3c5e93780e9c6333775e489288138a039e3d9b4"
+        },
+        {
+            "file": "docs\/historical-top100-20241008-20251002\/trading-calendar.json",
+            "from": "2024-10-08",
+            "to": "2025-10-02",
+            "sha256": "611a671040d0f9f0d1ff45ab0641d1b2afb4347061e7a7bf95976fc3b313d900"
+        },
+        {
+            "file": "docs\/historical-top100-20251008-20261008\/trading-calendar.json",
+            "from": "2025-10-08",
+            "to": "2026-10-08",
+            "sha256": "8a311ed538f016060260ba78c3c5247a625ebaae5961238d1a41949de2a4161e"
+        }
+    ],
+    "files": [
+        {
+            "symbol": "417200.KQ",
+            "sha256": "e95f3c5d0a5d9454d7e0e6374e632c15c469f2a62d9bf5bde6b5c6ad21ed58e2",
+            "bytes": 161385
+        },
+        {
+            "symbol": "417840.KQ",
+            "sha256": "985f86bb1d04dd9c256ccd69d3d5ee546a21f1f27566d3424bf787e454d37ff5",
+            "bytes": 169827
+        },
+        {
+            "symbol": "419050.KQ",
+            "sha256": "eb9c2c048f39c54bb3231bcb578d91c7d1d771509938b2879c15ea9e90db2129",
+            "bytes": 159180
+        },
+        {
+            "symbol": "437730.KQ",
+            "sha256": "ac453ae762d83afda8c7b94fdad81d320b1aab859cedb6925432e9931fd6badf",
+            "bytes": 161238
+        },
+        {
+            "symbol": "440110.KQ",
+            "sha256": "f02dca79ae0d2b2d0e77bea33400851b392955a38d8eb986b36acb6fecc74be7",
+            "bytes": 161320
+        },
+        {
+            "symbol": "443670.KQ",
+            "sha256": "fe9b963f32785366b2ba50c4564e2b29078bc789b815e98d18cdcc7620c937ee",
+            "bytes": 159330
+        },
+        {
+            "symbol": "445680.KQ",
+            "sha256": "755a732728edf14520b6fbcdebb3b60aa3f6ccc40ffec7841f6a0994261f0eda",
+            "bytes": 161087
+        },
+        {
+            "symbol": "452190.KQ",
+            "sha256": "e9228772c4579fa95c05e8a0a78f2ff6646e199f03d88a844b39dc6a918b4e85",
+            "bytes": 158820
+        },
+        {
+            "symbol": "452280.KQ",
+            "sha256": "ed4c7499cdfb8b6e8cce110c4d6da199ba54abde962c37a77c0ad96536bd0b19",
+            "bytes": 160226
+        },
+        {
+            "symbol": "456160.KQ",
+            "sha256": "18344562f8f54e13e84607f7d47b2e2ceba285dc1e799feb39843c697b9caaaf",
+            "bytes": 96382
+        },
+        {
+            "symbol": "457190.KS",
+            "sha256": "0754cab41d8e77314149679ee33dcb992dc709b8e9dc4564c9b8d01acb66c2a5",
+            "bytes": 161544
+        },
+        {
+            "symbol": "457550.KQ",
+            "sha256": "0cf672781cc8159d37b386088ccbd227fc59a4ace5bb9eb5843383b106851462",
+            "bytes": 161156
+        },
+        {
+            "symbol": "458350.KQ",
+            "sha256": "61c3476315c5b30766c936abb4c59ab78fbc85d5404416db9e1af26ee327a437",
+            "bytes": 50476
+        },
+        {
+            "symbol": "475150.KS",
+            "sha256": "9f8ee96d0ea08aef6e91e7bd4c1e801551789f029b198bf5f01ed2c4cff21ed5",
+            "bytes": 161531
+        },
+        {
+            "symbol": "478340.KQ",
+            "sha256": "3c9efba271e486cd60ee07ce474d88e9dcb01f2f630c2b1e6b053c73e1311654",
+            "bytes": 65355
+        },
+        {
+            "symbol": "491000.KQ",
+            "sha256": "0ca089a440f9a28b9b1469f0338de5621440c29b143fd83ec8f2d93dd7a2fbcb",
+            "bytes": 69736
+        }
+    ],
+    "errors": [],
+    "notes": [
+        "상승 비율은 매매 승률이 아닙니다.",
+        "같은 종목의 겹치는 관찰 기간은 독립된 거래가 아닙니다.",
+        "현재 저장 종목으로 계산한 결과이며 과거 전체 시장을 대표하지 않습니다."
+    ],
+    "observations": [
+        {
+            "symbol": "417840.KQ",
+            "breakout_level": 2286.666748046875,
+            "breakout_day": "2025-01-02",
+            "confirm_day": "2025-01-08",
+            "wait_reason": "다음 저항 미확정",
+            "horizons": {
+                "5": {
+                    "status": "완료",
+                    "close_change": -0.07464210182611197,
+                    "max_up": 0.03783228587519161,
+                    "max_down": -0.08895705521472397
+                },
+                "10": {
+                    "status": "완료",
+                    "close_change": 0.0521472392638036,
+                    "max_up": 0.059304678513228515,
+                    "max_down": -0.08895705521472397
+                },
+                "20": {
+                    "status": "완료",
+                    "close_change": -0.12985682575249236,
+                    "max_up": 0.059304678513228515,
+                    "max_down": -0.2188138809672162
+                }
+            }
+        },
+        {
+            "symbol": "417840.KQ",
+            "breakout_level": 2600,
+            "breakout_day": "2025-05-13",
+            "confirm_day": "2025-05-16",
+            "wait_reason": "손익비가 1보다 큽니다. 추천 점수는 아닙니다.",
+            "horizons": {
+                "5": {
+                    "status": "완료",
+                    "close_change": 0.07825080467371115,
+                    "max_up": 0.17146138893648555,
+                    "max_down": -0.02531651117381606
+                },
+                "10": {
+                    "status": "완료",
+                    "close_change": 0.14844648604812227,
+                    "max_up": 0.19792861996973055,
+                    "max_down": -0.02531651117381606
+                },
+                "20": {
+                    "status": "완료",
+                    "close_change": 0.23130033872614386,
+                    "max_up": 0.28078247264775213,
+                    "max_down": -0.02531651117381606
+                }
+            }
+        },
+        {
+            "symbol": "419050.KQ",
+            "breakout_level": 1633,
+            "breakout_day": "2025-04-18",
+            "confirm_day": "2025-04-23",
+            "wait_reason": "손익비가 1보다 큽니다. 추천 점수는 아닙니다.",
+            "horizons": {
+                "5": {
+                    "status": "완료",
+                    "close_change": -0.010707911957168359,
+                    "max_up": 0.04104699583581195,
+                    "max_down": -0.01130279595478878
+                },
+                "10": {
+                    "status": "완료",
+                    "close_change": 0.03628792385484836,
+                    "max_up": 0.04402141582391428,
+                    "max_down": -0.024390243902439046
+                },
+                "20": {
+                    "status": "완료",
+                    "close_change": -0.002974419988102328,
+                    "max_up": 0.06365258774538973,
+                    "max_down": -0.024390243902439046
+                }
+            }
+        },
+        {
+            "symbol": "443670.KQ",
+            "breakout_level": 7080,
+            "breakout_day": "2025-06-04",
+            "confirm_day": "2025-06-09",
+            "wait_reason": "손익비가 1 이하이면 대기합니다.",
+            "horizons": {
+                "5": {
+                    "status": "완료",
+                    "close_change": -0.024357239512855178,
+                    "max_up": 0.012178619756427533,
+                    "max_down": -0.06630581867388363
+                },
+                "10": {
+                    "status": "완료",
+                    "close_change": 0.05818673883626513,
+                    "max_up": 0.20703653585926918,
+                    "max_down": -0.06630581867388363
+                },
+                "20": {
+                    "status": "완료",
+                    "close_change": -0.05953991880920162,
+                    "max_up": 0.20703653585926918,
+                    "max_down": -0.06630581867388363
+                }
+            }
+        },
+        {
+            "symbol": "445680.KQ",
+            "breakout_level": 19550,
+            "breakout_day": "2025-01-03",
+            "confirm_day": "2025-01-09",
+            "wait_reason": "손익비가 1보다 큽니다. 추천 점수는 아닙니다.",
+            "horizons": {
+                "5": {
+                    "status": "완료",
+                    "close_change": -0.029748283752860427,
+                    "max_up": 0.006864988558352492,
+                    "max_down": -0.08558352402745995
+                },
+                "10": {
+                    "status": "완료",
+                    "close_change": -0.1212814645308925,
+                    "max_up": 0.006864988558352492,
+                    "max_down": -0.12860411899313506
+                },
+                "20": {
+                    "status": "완료",
+                    "close_change": -0.13775743707093824,
+                    "max_up": 0.006864988558352492,
+                    "max_down": -0.1560640732265446
+                }
+            }
+        },
+        {
+            "symbol": "445680.KQ",
+            "breakout_level": 17290,
+            "breakout_day": "2025-04-02",
+            "confirm_day": "2025-04-08",
+            "wait_reason": "손익비가 1 이하이면 대기합니다.",
+            "horizons": {
+                "5": {
+                    "status": "완료",
+                    "close_change": 0.20355411954765756,
+                    "max_up": 0.2224017232094777,
+                    "max_down": -0.02746365105008075
+                },
+                "10": {
+                    "status": "완료",
+                    "close_change": 0.3651050080775444,
+                    "max_up": 0.43511039310716204,
+                    "max_down": -0.02746365105008075
+                },
+                "20": {
+                    "status": "완료",
+                    "close_change": 0.39472267097469027,
+                    "max_up": 0.4539579967689822,
+                    "max_down": -0.02746365105008075
+                }
+            }
+        },
+        {
+            "symbol": "445680.KQ",
+            "breakout_level": 19090,
+            "breakout_day": "2025-04-10",
+            "confirm_day": "2025-04-14",
+            "wait_reason": "손익비가 1보다 큽니다. 추천 점수는 아닙니다.",
+            "horizons": {
+                "5": {
+                    "status": "완료",
+                    "close_change": 0.10585585585585577,
+                    "max_up": 0.2004504504504505,
+                    "max_down": -0.027027027027026973
+                },
+                "10": {
+                    "status": "완료",
+                    "close_change": 0.05180180180180183,
+                    "max_up": 0.2004504504504505,
+                    "max_down": -0.027027027027026973
+                },
+                "20": {
+                    "status": "완료",
+                    "close_change": 0.2364864864864864,
+                    "max_up": 0.2432432432432432,
+                    "max_down": -0.027027027027026973
+                }
+            }
+        },
+        {
+            "symbol": "445680.KQ",
+            "breakout_level": 27000,
+            "breakout_day": "2025-05-15",
+            "confirm_day": "2025-05-19",
+            "wait_reason": "다음 저항 미확정",
+            "horizons": {
+                "5": {
+                    "status": "완료",
+                    "close_change": 0.07583774250440922,
+                    "max_up": 0.09347442680776008,
+                    "max_down": -0.012345679012345734
+                },
+                "10": {
+                    "status": "완료",
+                    "close_change": 0.11816578483245155,
+                    "max_up": 0.12698412698412698,
+                    "max_down": -0.012345679012345734
+                },
+                "20": {
+                    "status": "완료",
+                    "close_change": 0.28747795414462085,
+                    "max_up": 0.4391534391534391,
+                    "max_down": -0.012345679012345734
+                }
+            }
+        },
+        {
+            "symbol": "445680.KQ",
+            "breakout_level": 31950,
+            "breakout_day": "2025-06-09",
+            "confirm_day": "2025-06-12",
+            "wait_reason": "다음 저항 미확정",
+            "horizons": {
+                "5": {
+                    "status": "완료",
+                    "close_change": -0.024113475177305,
+                    "max_up": 0.1574468085106382,
+                    "max_down": -0.06099290780141842
+                },
+                "10": {
+                    "status": "완료",
+                    "close_change": 0.10354609929078018,
+                    "max_up": 0.1574468085106382,
+                    "max_down": -0.07659574468085106
+                },
+                "20": {
+                    "status": "완료",
+                    "close_change": 0.23687943262411348,
+                    "max_up": 0.29361702127659584,
+                    "max_down": -0.07659574468085106
+                }
+            }
+        },
+        {
+            "symbol": "445680.KQ",
+            "breakout_level": 40800,
+            "breakout_day": "2025-07-01",
+            "confirm_day": "2025-07-03",
+            "wait_reason": "다음 저항 미확정",
+            "horizons": {
+                "5": {
+                    "status": "완료",
+                    "close_change": -0.021324354657688005,
+                    "max_up": 0.001122334455667895,
+                    "max_down": -0.11111111111111116
+                },
+                "10": {
+                    "status": "완료",
+                    "close_change": -0.0572390572390572,
+                    "max_up": 0.004489337822671136,
+                    "max_down": -0.15263748597081928
+                },
+                "20": {
+                    "status": "완료",
+                    "close_change": -0.13580246913580252,
+                    "max_up": 0.004489337822671136,
+                    "max_down": -0.20650953984287312
+                }
+            }
+        },
+        {
+            "symbol": "452280.KQ",
+            "breakout_level": 7390,
+            "breakout_day": "2025-06-04",
+            "confirm_day": "2025-06-09",
+            "wait_reason": "손익비가 1보다 큽니다. 추천 점수는 아닙니다.",
+            "horizons": {
+                "5": {
+                    "status": "완료",
+                    "close_change": -0.003989361702127714,
+                    "max_up": 0.02659574468085113,
+                    "max_down": -0.025265957446808485
+                },
+                "10": {
+                    "status": "완료",
+                    "close_change": -0.07047872340425532,
+                    "max_up": 0.02659574468085113,
+                    "max_down": -0.10904255319148937
+                },
+                "20": {
+                    "status": "완료",
+                    "close_change": -0.10771276595744683,
+                    "max_up": 0.02659574468085113,
+                    "max_down": -0.1103723404255319
+                }
+            }
+        },
+        {
+            "symbol": "452280.KQ",
+            "breakout_level": 7070,
+            "breakout_day": "2025-07-25",
+            "confirm_day": "2025-07-29",
+            "wait_reason": "손익비가 1 이하이면 대기합니다.",
+            "horizons": {
+                "5": {
+                    "status": "완료",
+                    "close_change": -0.018716577540106916,
+                    "max_up": 0.012032085561497263,
+                    "max_down": -0.11229946524064172
+                },
+                "10": {
+                    "status": "완료",
+                    "close_change": -0.010695187165775444,
+                    "max_up": 0.021390374331550888,
+                    "max_down": -0.11229946524064172
+                },
+                "20": {
+                    "status": "완료",
+                    "close_change": -0.03475935828877008,
+                    "max_up": 0.021390374331550888,
+                    "max_down": -0.11229946524064172
+                }
+            }
+        },
+        {
+            "symbol": "457190.KS",
+            "breakout_level": 39250,
+            "breakout_day": "2025-02-10",
+            "confirm_day": "2025-04-04",
+            "wait_reason": "손익비가 1보다 큽니다. 추천 점수는 아닙니다.",
+            "horizons": {
+                "5": {
+                    "status": "완료",
+                    "close_change": 0.002409638554216942,
+                    "max_up": 0.009638554216867545,
+                    "max_down": -0.13012048192771086
+                },
+                "10": {
+                    "status": "완료",
+                    "close_change": 0.004819277108433662,
+                    "max_up": 0.06385542168674707,
+                    "max_down": -0.13012048192771086
+                },
+                "20": {
+                    "status": "완료",
+                    "close_change": 0.014457831325301207,
+                    "max_up": 0.1325301204819278,
+                    "max_down": -0.13012048192771086
+                }
+            }
+        },
+        {
+            "symbol": "457550.KQ",
+            "breakout_level": 21450,
+            "breakout_day": "2025-06-12",
+            "confirm_day": "2025-06-16",
+            "wait_reason": "손익비가 1 이하이면 대기합니다.",
+            "horizons": {
+                "5": {
+                    "status": "완료",
+                    "close_change": 0.3613963039014374,
+                    "max_up": 0.5277207392197125,
+                    "max_down": -0.09650924024640661
+                },
+                "10": {
+                    "status": "완료",
+                    "close_change": 0.3305954825462012,
+                    "max_up": 0.7248459958932238,
+                    "max_down": -0.09650924024640661
+                },
+                "20": {
+                    "status": "완료",
+                    "close_change": 0.09034907597535935,
+                    "max_up": 0.7248459958932238,
+                    "max_down": -0.09650924024640661
+                }
+            }
+        },
+        {
+            "symbol": "475150.KS",
+            "breakout_level": 13800,
+            "breakout_day": "2025-02-14",
+            "confirm_day": "2025-03-26",
+            "wait_reason": "손익비가 1 이하이면 대기합니다.",
+            "horizons": {
+                "5": {
+                    "status": "완료",
+                    "close_change": -0.04488078541374474,
+                    "max_up": 0.03015427769985979,
+                    "max_down": -0.12342215988779803
+                },
+                "10": {
+                    "status": "완료",
+                    "close_change": -0.07994389901823284,
+                    "max_up": 0.03015427769985979,
+                    "max_down": -0.12342215988779803
+                },
+                "20": {
+                    "status": "완료",
+                    "close_change": 0.29382889200561,
+                    "max_up": 0.3113604488078541,
+                    "max_down": -0.12342215988779803
+                }
+            }
+        }
+    ],
+    "groups": [
+        {
+            "label": "손익비 조건 통과",
+            "signals": 6,
+            "symbols": 5,
+            "horizons": {
+                "5": {
+                    "complete": 6,
+                    "incomplete": 0,
+                    "undetermined": 0,
+                    "close_change_mean": 0.023678456945271226,
+                    "close_change_median": -0.000789861573955386,
+                    "close_change_n": 6,
+                    "rose_ratio": 0.5,
+                    "rose_n": 6,
+                    "max_up_median": 0.03382137025833154,
+                    "max_up_n": 6,
+                    "max_down_median": -0.026171769100421516,
+                    "max_down_n": 6
+                },
+                "10": {
+                    "complete": 6,
+                    "incomplete": 0,
+                    "undetermined": 0,
+                    "close_change_mean": 0.008265883479676384,
+                    "close_change_median": 0.02055360048164101,
+                    "close_change_n": 6,
+                    "rose_ratio": 0.6666666666666666,
+                    "rose_n": 6,
+                    "max_up_median": 0.053938418755330675,
+                    "max_up_n": 6,
+                    "max_down_median": -0.06803479010925817,
+                    "max_down_n": 6
+                },
+                "20": {
+                    "complete": 6,
+                    "incomplete": 0,
+                    "undetermined": 0,
+                    "close_change_mean": 0.03896667225357401,
+                    "close_change_median": 0.005741705668599439,
+                    "close_change_n": 6,
+                    "rose_ratio": 0.5,
+                    "rose_n": 6,
+                    "max_up_median": 0.09809135411365877,
+                    "max_up_n": 6,
+                    "max_down_median": -0.06869968372627944,
+                    "max_down_n": 6
+                }
+            }
+        },
+        {
+            "label": "손익비 부족",
+            "signals": 5,
+            "symbols": 5,
+            "horizons": {
+                "5": {
+                    "complete": 5,
+                    "incomplete": 0,
+                    "undetermined": 0,
+                    "close_change_mean": 0.09539916419647762,
+                    "close_change_median": -0.018716577540106916,
+                    "close_change_n": 5,
+                    "rose_ratio": 0.4,
+                    "rose_n": 5,
+                    "max_up_median": 0.03015427769985979,
+                    "max_up_n": 5,
+                    "max_down_median": -0.09650924024640661,
+                    "max_down_n": 5
+                },
+                "10": {
+                    "complete": 5,
+                    "incomplete": 0,
+                    "undetermined": 0,
+                    "close_change_mean": 0.1326496286552005,
+                    "close_change_median": 0.05818673883626513,
+                    "close_change_n": 5,
+                    "rose_ratio": 0.6,
+                    "rose_n": 5,
+                    "max_up_median": 0.20703653585926918,
+                    "max_up_n": 5,
+                    "max_down_median": -0.09650924024640661,
+                    "max_down_n": 5
+                },
+                "20": {
+                    "complete": 5,
+                    "incomplete": 0,
+                    "undetermined": 0,
+                    "close_change_mean": 0.1369202723715376,
+                    "close_change_median": 0.09034907597535935,
+                    "close_change_n": 5,
+                    "rose_ratio": 0.6,
+                    "rose_n": 5,
+                    "max_up_median": 0.3113604488078541,
+                    "max_up_n": 5,
+                    "max_down_median": -0.09650924024640661,
+                    "max_down_n": 5
+                }
+            }
+        },
+        {
+            "label": "저항 미확정",
+            "signals": 4,
+            "symbols": 2,
+            "horizons": {
+                "5": {
+                    "complete": 4,
+                    "incomplete": 0,
+                    "undetermined": 0,
+                    "close_change_mean": -0.011060547289173939,
+                    "close_change_median": -0.022718914917496502,
+                    "close_change_n": 4,
+                    "rose_ratio": 0.25,
+                    "rose_n": 4,
+                    "max_up_median": 0.06565335634147584,
+                    "max_up_n": 4,
+                    "max_down_median": -0.07497498150807119,
+                    "max_down_n": 4
+                },
+                "10": {
+                    "complete": 4,
+                    "incomplete": 0,
+                    "undetermined": 0,
+                    "close_change_mean": 0.05415501653699453,
+                    "close_change_median": 0.07784666927729189,
+                    "close_change_n": 4,
+                    "rose_ratio": 0.75,
+                    "rose_n": 4,
+                    "max_up_median": 0.09314440274867775,
+                    "max_up_n": 4,
+                    "max_down_median": -0.08277639994778752,
+                    "max_down_n": 4
+                },
+                "20": {
+                    "complete": 4,
+                    "incomplete": 0,
+                    "undetermined": 0,
+                    "close_change_mean": 0.06467452297010987,
+                    "close_change_median": 0.053511303435810564,
+                    "close_change_n": 4,
+                    "rose_ratio": 0.5,
+                    "rose_n": 4,
+                    "max_up_median": 0.17646084989491218,
+                    "max_up_n": 4,
+                    "max_down_median": -0.1415526422618621,
+                    "max_down_n": 4
+                }
+            }
+        }
+    ],
+    "elapsed_ms": 7365.261,
+    "peak_bytes": 6291456
+}

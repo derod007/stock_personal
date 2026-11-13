@@ -54,6 +54,7 @@ jobs:
           php tests/sector_collect.php
           php tests/swing_research.php
           php tests/swing_path_tally.php
+          php tests/swing_path_check.php
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'

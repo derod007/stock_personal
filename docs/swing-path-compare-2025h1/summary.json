@@ -1,0 +1,194 @@
+{
+    "version": "swing_path_tally_v1",
+    "research_version": "swing_retest_read_v2",
+    "confirm_from": "2025-01-01",
+    "confirm_to": "2025-08-29",
+    "as_of": "2025-09-30",
+    "calendars": [
+        {
+            "file": "docs\/historical-top100-20241008-20251002\/trading-calendar.json",
+            "from": "2024-10-08",
+            "to": "2025-10-02",
+            "sha256": "611a671040d0f9f0d1ff45ab0641d1b2afb4347061e7a7bf95976fc3b313d900"
+        },
+        {
+            "file": "docs\/historical-top100-20251008-20261008\/trading-calendar.json",
+            "from": "2025-10-08",
+            "to": "2026-10-08",
+            "sha256": "8a311ed538f016060260ba78c3c5247a625ebaae5961238d1a41949de2a4161e"
+        },
+        {
+            "file": "docs\/krx-prep-bars-before-20241008\/trading-calendar.json",
+            "from": "2023-09-01",
+            "to": "2024-10-07",
+            "sha256": "ebfd4e8d8d2598291ab31b93f3c5e93780e9c6333775e489288138a039e3d9b4"
+        },
+        {
+            "file": "docs\/type1-holdout-v1\/trading-calendar.json",
+            "from": "2023-07-03",
+            "to": "2024-06-28",
+            "sha256": "0c284bce27aed696e63dc5a842f81a6f10aca885fd1781551d25bdff753453b2"
+        },
+        {
+            "file": "docs\/type1-krx-input-v1\/trading-calendar.json",
+            "from": "2023-01-02",
+            "to": "2023-06-30",
+            "sha256": "12df19bd2c78869945df7ec8d048c15e266b49053edf904d670266d6244f0492"
+        }
+    ],
+    "notes": [
+        "상승 비율은 매매 승률이 아닙니다.",
+        "같은 종목의 겹치는 관찰 기간은 독립된 거래가 아닙니다.",
+        "현재 저장 종목으로 계산한 결과이며 과거 전체 시장을 대표하지 않습니다."
+    ],
+    "errors": [],
+    "groups": [
+        {
+            "label": "손익비 조건 통과",
+            "signals": 98,
+            "symbols": 82,
+            "horizons": {
+                "5": {
+                    "complete": 98,
+                    "incomplete": 0,
+                    "undetermined": 0,
+                    "close_change_mean": 0.016602616875745626,
+                    "close_change_median": -0.0027195510241894705,
+                    "close_change_n": 98,
+                    "rose_ratio": 0.4387755102040816,
+                    "rose_n": 98,
+                    "max_up_median": 0.04163687429804752,
+                    "max_up_n": 98,
+                    "max_down_median": -0.033791344724544814,
+                    "max_down_n": 98
+                },
+                "10": {
+                    "complete": 98,
+                    "incomplete": 0,
+                    "undetermined": 0,
+                    "close_change_mean": 0.0341085801847066,
+                    "close_change_median": 0.012807939916025468,
+                    "close_change_n": 98,
+                    "rose_ratio": 0.5816326530612245,
+                    "rose_n": 98,
+                    "max_up_median": 0.0611916440395901,
+                    "max_up_n": 98,
+                    "max_down_median": -0.045954656590353415,
+                    "max_down_n": 98
+                },
+                "20": {
+                    "complete": 95,
+                    "incomplete": 0,
+                    "undetermined": 3,
+                    "close_change_mean": 0.04350675412750311,
+                    "close_change_median": 0.017025089605734678,
+                    "close_change_n": 95,
+                    "rose_ratio": 0.5578947368421052,
+                    "rose_n": 95,
+                    "max_up_median": 0.1019955654101996,
+                    "max_up_n": 95,
+                    "max_down_median": -0.0677290836653387,
+                    "max_down_n": 95
+                }
+            }
+        },
+        {
+            "label": "손익비 부족",
+            "signals": 131,
+            "symbols": 103,
+            "horizons": {
+                "5": {
+                    "complete": 131,
+                    "incomplete": 0,
+                    "undetermined": 0,
+                    "close_change_mean": 0.004803228140165987,
+                    "close_change_median": 0,
+                    "close_change_n": 131,
+                    "rose_ratio": 0.48854961832061067,
+                    "rose_n": 131,
+                    "max_up_median": 0.04409171075837737,
+                    "max_up_n": 131,
+                    "max_down_median": -0.04454022988505746,
+                    "max_down_n": 131
+                },
+                "10": {
+                    "complete": 131,
+                    "incomplete": 0,
+                    "undetermined": 0,
+                    "close_change_mean": 0.013718223629623055,
+                    "close_change_median": -0.003676470588235281,
+                    "close_change_n": 131,
+                    "rose_ratio": 0.48091603053435117,
+                    "rose_n": 131,
+                    "max_up_median": 0.08668076109936584,
+                    "max_up_n": 131,
+                    "max_down_median": -0.05543710021321957,
+                    "max_down_n": 131
+                },
+                "20": {
+                    "complete": 129,
+                    "incomplete": 0,
+                    "undetermined": 2,
+                    "close_change_mean": 0.024895255785501624,
+                    "close_change_median": -0.006570302233902758,
+                    "close_change_n": 129,
+                    "rose_ratio": 0.4883720930232558,
+                    "rose_n": 129,
+                    "max_up_median": 0.10471204188481686,
+                    "max_up_n": 129,
+                    "max_down_median": -0.08062709966405379,
+                    "max_down_n": 129
+                }
+            }
+        },
+        {
+            "label": "저항 미확정",
+            "signals": 65,
+            "symbols": 48,
+            "horizons": {
+                "5": {
+                    "complete": 65,
+                    "incomplete": 0,
+                    "undetermined": 0,
+                    "close_change_mean": 0.0008550783804553541,
+                    "close_change_median": 0.0022222222222221255,
+                    "close_change_n": 65,
+                    "rose_ratio": 0.5230769230769231,
+                    "rose_n": 65,
+                    "max_up_median": 0.06233766233766236,
+                    "max_up_n": 65,
+                    "max_down_median": -0.05361050328227568,
+                    "max_down_n": 65
+                },
+                "10": {
+                    "complete": 65,
+                    "incomplete": 0,
+                    "undetermined": 0,
+                    "close_change_mean": 0.02597096343895731,
+                    "close_change_median": 0.016233766233766156,
+                    "close_change_n": 65,
+                    "rose_ratio": 0.5538461538461539,
+                    "rose_n": 65,
+                    "max_up_median": 0.10599078341013835,
+                    "max_up_n": 65,
+                    "max_down_median": -0.060175054704595166,
+                    "max_down_n": 65
+                },
+                "20": {
+                    "complete": 65,
+                    "incomplete": 0,
+                    "undetermined": 0,
+                    "close_change_mean": 0.03208409116663852,
+                    "close_change_median": 0.004098360655737654,
+                    "close_change_n": 65,
+                    "rose_ratio": 0.5076923076923077,
+                    "rose_n": 65,
+                    "max_up_median": 0.1477541371158393,
+                    "max_up_n": 65,
+                    "max_down_median": -0.07111111111111112,
+                    "max_down_n": 65
+                }
+            }
+        }
+    ]
+}

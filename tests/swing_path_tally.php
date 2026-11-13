@@ -45,7 +45,7 @@ $split = SwingPathTally::summarize([$one, $other, $low]);
 tally($split[0]['signals'] === 2 && $split[1]['signals'] === 1 && $split[2]['signals'] === 0
     && $split[0]['horizons'][5]['close_change_mean'] === 0.2 && $split[0]['horizons'][5]['close_change_median'] === 0.2
     && $split[0]['horizons'][5]['rose_ratio'] == 1 && $split[0]['horizons'][5]['rose_n'] === 2
-    && $split[0]['horizons'][5]['max_up_n'] === 2, 'passed and short reward stay in separate groups');
+    && $split[0]['horizons'][5]['max_up_n'] === 2 && $split[0]['symbols'] === 1, 'passed and short reward stay in separate groups');
 
 $signal = ['confirm_day' => '2024-11-01', 'breakout_level' => 30.0, 'breakout_day' => '2024-10-28', 'wait_reason' => $pass];
 tally(count(SwingPathTally::select([$signal, $signal], '2024-11-01', '2024-11-01')) === 1
@@ -114,4 +114,78 @@ tally(count($confirmed) === 1 && hash_file('sha256', $path) === $before && $repo
     && str_contains($notes, '독립된 거래가 아닙니다.')
     && str_contains($notes, '과거 전체 시장을 대표하지 않습니다.')
     && !array_key_exists('win_rate', $report['groups'][0]['horizons'][5]), 'the stored run keeps the same path and the file');
+function tallyReport(array $observations, array $files = [], array $extra = []): array
+{
+    return array_replace([
+        'version' => SwingPathTally::VERSION,
+        'research_version' => SwingResearch::VERSION,
+        'confirm_from' => '2024-10-01',
+        'confirm_to' => '2024-11-30',
+        'as_of' => '2024-12-31',
+        'calendars' => [
+            ['file' => 'docs/b.json', 'from' => '2024-07-01', 'to' => '2024-12-31', 'sha256' => 'bbb'],
+            ['file' => 'docs/a.json', 'from' => '2024-01-01', 'to' => '2024-06-30', 'sha256' => 'aaa'],
+        ],
+        'files' => $files,
+        'errors' => [],
+        'observations' => $observations,
+    ], $extra);
+}
+$left = SwingPathTally::summarize([tallyRow('2024-10-28', $pass, '완료', 1.0)]);
+$right = SwingPathTally::summarize([
+    tallyRow('2024-11-03', $pass, '완료', 0.0, '2024-11-03'),
+    tallyRow('2024-11-04', $pass, '완료', 0.0, '2024-11-04'),
+    tallyRow('2024-11-05', $pass, '완료', 0.0, '2024-11-05'),
+]);
+$first = tallyReport([tallyRow('2024-10-28', $pass, '완료', 1.0)], [['symbol' => 'TEST.KS', 'sha256' => 'abc', 'bytes' => 3]]);
+$second = tallyReport([
+    tallyRow('2024-11-03', $pass, '완료', 0.0, '2024-11-03'),
+    tallyRow('2024-11-04', $pass, '완료', 0.0, '2024-11-04'),
+    tallyRow('2024-11-05', $pass, '완료', 0.0, '2024-11-05'),
+], [['symbol' => 'TEST.KS', 'sha256' => 'abc', 'bytes' => 3]]);
+$second['calendars'] = array_reverse($second['calendars']);
+$pooled = SwingPathTally::combine([$first, $second]);
+$reversed = SwingPathTally::combine([$second, $first]);
+$meanOfMeans = ($left[0]['horizons'][5]['close_change_mean'] + $right[0]['horizons'][5]['close_change_mean']) / 2;
+tally($pooled['groups'][0]['signals'] === 4 && $pooled['groups'][0]['horizons'][5]['close_change_n'] === 4
+    && $pooled['groups'][0]['horizons'][5]['close_change_mean'] === 0.25
+    && $pooled['groups'][0]['horizons'][5]['close_change_mean'] !== $meanOfMeans
+    && $pooled['confirm_from'] === '2024-10-01' && $pooled['confirm_to'] === '2024-11-30' && $pooled['as_of'] === '2024-12-31'
+    && $pooled['version'] === SwingPathTally::VERSION && $pooled['research_version'] === SwingResearch::VERSION
+    && $pooled['calendars'][0]['sha256'] === 'aaa' && $pooled['errors'] === []
+    && json_encode($pooled) === json_encode($reversed), 'pooled observations are not an average of batch averages');
+$same = tallyReport([tallyRow('2024-10-28', $pass, '완료', 1.0)], [['symbol' => 'TEST.KS', 'sha256' => 'abc', 'bytes' => 3]]);
+$copied = SwingPathTally::combine([$first, $same]);
+tally($copied['errors'] === [] && count($copied['files']) === 1 && count($copied['observations']) === 1
+    && $copied['groups'][0]['signals'] === 1, 'an identical duplicate is kept once');
+$otherDay = tallyReport([tallyRow('2024-10-28', $pass, '완료', 1.0)], [], ['as_of' => '2025-01-31']);
+$otherVersion = tallyReport([tallyRow('2024-10-28', $pass, '완료', 1.0)], [], ['research_version' => 'other']);
+$otherHash = tallyReport([tallyRow('2024-10-28', $pass, '완료', 1.0)], [], ['calendars' => [['file' => 'docs/a.json', 'from' => '2024-01-01', 'to' => '2024-06-30', 'sha256' => 'zzz']]]);
+$rejected = SwingPathTally::combine([$first, $otherDay]);
+$rejectedAgain = SwingPathTally::combine([$otherVersion, $otherHash, $first]);
+tally($rejected['observations'] === [] && $rejected['groups'][0]['signals'] === 0 && $rejected['confirm_from'] === null
+    && $rejected['errors'] === $rejectedAgain['errors']
+    && json_encode($rejected) === json_encode(SwingPathTally::combine([$otherDay, $first])), 'different run conditions stay unmerged');
+$clashFile = tallyReport([tallyRow('2024-10-28', $pass, '완료', 1.0)], [['symbol' => 'TEST.KS', 'sha256' => 'def', 'bytes' => 3]]);
+$clashed = SwingPathTally::combine([$first, $clashFile]);
+tally($clashed['errors'] === ['TEST.KS 입력 해시가 묶음마다 다릅니다.'] && $clashed['files'] === []
+    && $clashed['observations'] === [] && $clashed['confirm_from'] === '2024-10-01'
+    && json_encode($clashed) === json_encode(SwingPathTally::combine([$clashFile, $first])), 'a changed input hash is an error');
+$clashRow = tallyReport([tallyRow('2024-10-28', $pass, '완료', 0.9)], [['symbol' => 'TEST.KS', 'sha256' => 'abc', 'bytes' => 3]]);
+$clashedRow = SwingPathTally::combine([$first, $clashRow]);
+tally($clashedRow['errors'] === ['TEST.KS 2024-10-28 관찰값이 묶음마다 다릅니다.'] && $clashedRow['groups'][0]['signals'] === 0
+    && json_encode($clashedRow) === json_encode(SwingPathTally::combine([$clashRow, $first])), 'a changed observation is an error');
+$bare = tallyReport([tallyRow('2024-10-28', $pass, '완료', 1.0)]);
+$donor = tallyReport([], [['symbol' => 'TEST.KS', 'sha256' => 'abc', 'bytes' => 3]]);
+$unlinked = SwingPathTally::combine([$bare, $donor]);
+tally($unlinked['observations'] === [] && $unlinked['groups'][0]['signals'] === 0
+    && $unlinked['files'] === [['symbol' => 'TEST.KS', 'sha256' => 'abc', 'bytes' => 3]]
+    && $unlinked['errors'] === ['TEST.KS 2024-10-28 같은 보고서의 입력 해시가 없습니다.']
+    && json_encode($unlinked) === json_encode(SwingPathTally::combine([$donor, $bare])), 'another report\'s file does not cover a missing hash');
+$blankHash = tallyReport([tallyRow('2024-10-28', $pass, '완료', 1.0)], [['symbol' => 'TEST.KS', 'sha256' => '', 'bytes' => 3]]);
+$blanked = SwingPathTally::combine([$blankHash, $donor]);
+tally($blanked['observations'] === [] && $blanked['groups'][0]['signals'] === 0
+    && $blanked['files'] === [['symbol' => 'TEST.KS', 'sha256' => 'abc', 'bytes' => 3]]
+    && $blanked['errors'] === ['TEST.KS 2024-10-28 입력 해시가 비어 있습니다.']
+    && json_encode($blanked) === json_encode(SwingPathTally::combine([$donor, $blankHash])), 'an empty hash drops that report\'s observation');
 echo "TALLY_OK\n";

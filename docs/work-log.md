@@ -1,3 +1,9 @@
+## 2026-11-13 14:08 · Cursor · 끝
+- 한 일: 원본 폴더나 대조 문서가 있으면 인증키·요청·쓰기 전에 수집을 멈추는 검사를 넣음.
+- 파일: docs/research/sep19_five_fetch.py, tests/test_sep19_five_fetch.py, docs/swing-path-compare-2025h1/sep19-five-fetch/report.md, docs/work-log.md
+- 커밋: 같은 PR
+- 롤백: 없음
+
 ## 2026-11-13 14:02 · Cursor · 끝
 - 한 일: 다섯 종목의 2025-09-18·19·22 KRX·Yahoo 원응답을 연구 폴더에 저장하고 대조. 9/19는 KRX 유효, Yahoo는 시각만 있고 가격 null.
 - 파일: docs/research/sep19_five_fetch.py, docs/swing-path-compare-2025h1/sep19-five-fetch/, tests/test_sep19_five_fetch.py, docs/work-log.md

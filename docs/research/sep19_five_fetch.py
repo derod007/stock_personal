@@ -248,9 +248,9 @@ def _rel(path: Path) -> str:
     return str(path.relative_to(ROOT)).replace("\\", "/")
 
 
-def _inside_raw(path: Path) -> None:
+def _inside_raw(path: Path, raw_root: Path = RAW_ROOT) -> None:
     resolved = path.resolve()
-    root = RAW_ROOT.resolve()
+    root = raw_root.resolve()
     if resolved != root and root not in resolved.parents:
         raise SystemExit("refusing write outside research raw")
 
@@ -269,13 +269,23 @@ def write_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
-def fetch(sleep_s: float = 1.2) -> dict[str, Any]:
-    pilot = load_pilot()
+def fetch(
+    sleep_s: float = 1.2,
+    *,
+    raw_root: Path | None = None,
+    docs: Path | None = None,
+    pilot: Any = None,
+) -> dict[str, Any]:
+    raw_root = RAW_ROOT if raw_root is None else raw_root
+    docs = DOCS if docs is None else docs
+    if raw_root.exists() or (docs / "manifest.json").exists() or (docs / "comparison.json").exists():
+        raise SystemExit("원본 저장 폴더 또는 manifest.json·comparison.json이 이미 있어 다시 받지 않습니다.")
+    pilot = load_pilot() if pilot is None else pilot
     auth = pilot.load_auth_key()
-    krx_dir = RAW_ROOT / "krx"
-    yahoo_dir = RAW_ROOT / "yahoo"
-    _inside_raw(krx_dir)
-    _inside_raw(yahoo_dir)
+    krx_dir = raw_root / "krx"
+    yahoo_dir = raw_root / "yahoo"
+    _inside_raw(krx_dir, raw_root)
+    _inside_raw(yahoo_dir, raw_root)
     krx_dir.mkdir(parents=True, exist_ok=True)
     yahoo_dir.mkdir(parents=True, exist_ok=True)
     summary: dict[str, Any] = {"requests": 0, "retries": 0, "errors": [], "bytes": 0}
@@ -350,7 +360,7 @@ def fetch(sleep_s: float = 1.2) -> dict[str, Any]:
         url = yahoo_url(symbol)
         status, _headers, body = pilot.http_get(url, {"Accept": "application/json"})
         dest = yahoo_dir / f"{symbol}_1d.json"
-        _inside_raw(dest)
+        _inside_raw(dest, raw_root)
         dest.write_bytes(body)
         parsed = classify_yahoo_response(status, body)
         yahoo_files.append({
@@ -420,8 +430,8 @@ def fetch(sleep_s: float = 1.2) -> dict[str, Any]:
         "current_supply_only": True,
         "symbols": comparison_symbols,
     }
-    write_json(DOCS / "manifest.json", manifest)
-    write_json(DOCS / "comparison.json", comparison)
+    write_json(docs / "manifest.json", manifest)
+    write_json(docs / "comparison.json", comparison)
     return {"manifest": manifest, "comparison": comparison}
 
 

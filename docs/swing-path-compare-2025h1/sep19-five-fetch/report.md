@@ -10,7 +10,7 @@
 
 KRX는 기존 Open API 본호출이다. 코스피 `stk_bydd_trd`, 코스닥 `ksq_bydd_trd`, `basDd`는 20250918·20250919·20250922. 인증키는 요청 헤더에만 썼고 기록하지 않았다. Yahoo는 `period1=1757894400`, `period2=1758672000`, `interval=1d` chart 원문이다. `YahooChartClient::fetch`와 운영 수집 CLI는 실행하지 않았다.
 
-원응답은 `data/raw/research/sep19-five-20250918-22/`에 있다. KRX Open API 이용약관은 제3자 제공을 금하므로 원본 JSON은 커밋하지 않는다. Yahoo 원응답도 그 폴더에만 둔다. `/data/raw/`는 Git에서 빠진다. 다시 확인하려면 로컬 파일 sha256을 `manifest.json`과 대조한다. 저장소 클론만으로는 원본 바이트가 없고, 아래 표의 다섯 종목 숫자만 남는다.
+원응답은 `data/raw/research/sep19-five-20250918-22/`에 있다. 이 폴더나 `manifest.json`·`comparison.json`이 있으면 스크립트는 인증키를 읽기 전에 종료한다. KRX Open API 이용약관은 제3자 제공을 금하므로 원본 JSON은 커밋하지 않는다. Yahoo 원응답도 그 폴더에만 둔다. `/data/raw/`는 Git에서 빠진다. 다시 확인하려면 로컬 파일 sha256을 `manifest.json`과 대조한다. 저장소 클론만으로는 원본 바이트가 없고, 아래 표의 다섯 종목 숫자만 남는다.
 
 이번 KRX 6개 파일의 sha256은 `docs/yahoo-20250919-gap-probe/comparison.json`에 적힌 같은 파일명 해시와 같다. 그 일치는 이번 응답 바이트가 그때 해시된 파일과 같다는 뜻이다. 다섯 종목의 과거 Yahoo 공백 원인은 아니다.
 

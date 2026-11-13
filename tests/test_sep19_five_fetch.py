@@ -1,4 +1,5 @@
 import importlib.util
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -95,6 +96,42 @@ class Sep19FiveFetchTest(unittest.TestCase):
         self.assertEqual(failed["days"]["2025-09-19"]["status"], "request_failed")
         broken = m.classify_yahoo_response(200, b"{")
         self.assertEqual(broken["status"], "unreadable")
+
+    def test_rerun_stops_before_auth_network_or_write(self):
+        m = self.m
+        calls = {"auth": 0, "http": 0, "resolve": 0}
+
+        class Pilot:
+            def load_auth_key(self):
+                calls["auth"] += 1
+                raise AssertionError("auth")
+
+            def http_get(self, *_args, **_kwargs):
+                calls["http"] += 1
+                raise AssertionError("http")
+
+            def resolve_market_response(self, **_kwargs):
+                calls["resolve"] += 1
+                raise AssertionError("resolve")
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            raw = root / "raw"
+            docs = root / "docs"
+            raw.mkdir()
+            docs.mkdir()
+            original = raw / "kept.json"
+            manifest = docs / "manifest.json"
+            comparison = docs / "comparison.json"
+            original.write_bytes(b"original-bytes")
+            manifest.write_bytes(b"manifest-bytes")
+            comparison.write_bytes(b"comparison-bytes")
+            with self.assertRaises(SystemExit):
+                m.fetch(raw_root=raw, docs=docs, pilot=Pilot())
+            self.assertEqual(calls, {"auth": 0, "http": 0, "resolve": 0})
+            self.assertEqual(original.read_bytes(), b"original-bytes")
+            self.assertEqual(manifest.read_bytes(), b"manifest-bytes")
+            self.assertEqual(comparison.read_bytes(), b"comparison-bytes")
 
 
 if __name__ == "__main__":

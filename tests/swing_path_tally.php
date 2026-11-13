@@ -45,7 +45,7 @@ $split = SwingPathTally::summarize([$one, $other, $low]);
 tally($split[0]['signals'] === 2 && $split[1]['signals'] === 1 && $split[2]['signals'] === 0
     && $split[0]['horizons'][5]['close_change_mean'] === 0.2 && $split[0]['horizons'][5]['close_change_median'] === 0.2
     && $split[0]['horizons'][5]['rose_ratio'] == 1 && $split[0]['horizons'][5]['rose_n'] === 2
-    && $split[0]['horizons'][5]['max_up_n'] === 2, 'passed and short reward stay in separate groups');
+    && $split[0]['horizons'][5]['max_up_n'] === 2 && $split[0]['symbols'] === 1, 'passed and short reward stay in separate groups');
 
 $signal = ['confirm_day' => '2024-11-01', 'breakout_level' => 30.0, 'breakout_day' => '2024-10-28', 'wait_reason' => $pass];
 tally(count(SwingPathTally::select([$signal, $signal], '2024-11-01', '2024-11-01')) === 1
@@ -114,4 +114,22 @@ tally(count($confirmed) === 1 && hash_file('sha256', $path) === $before && $repo
     && str_contains($notes, '독립된 거래가 아닙니다.')
     && str_contains($notes, '과거 전체 시장을 대표하지 않습니다.')
     && !array_key_exists('win_rate', $report['groups'][0]['horizons'][5]), 'the stored run keeps the same path and the file');
+$left = SwingPathTally::summarize([tallyRow('2024-10-28', $pass, '완료', 1.0)]);
+$right = SwingPathTally::summarize([
+    tallyRow('2024-11-03', $pass, '완료', 0.0, '2024-11-03'),
+    tallyRow('2024-11-04', $pass, '완료', 0.0, '2024-11-04'),
+    tallyRow('2024-11-05', $pass, '완료', 0.0, '2024-11-05'),
+]);
+$pooled = SwingPathTally::combine([
+    ['observations' => [tallyRow('2024-10-28', $pass, '완료', 1.0)], 'files' => [], 'errors' => []],
+    ['observations' => [
+        tallyRow('2024-11-03', $pass, '완료', 0.0, '2024-11-03'),
+        tallyRow('2024-11-04', $pass, '완료', 0.0, '2024-11-04'),
+        tallyRow('2024-11-05', $pass, '완료', 0.0, '2024-11-05'),
+    ], 'files' => [], 'errors' => []],
+]);
+$meanOfMeans = ($left[0]['horizons'][5]['close_change_mean'] + $right[0]['horizons'][5]['close_change_mean']) / 2;
+tally($pooled['groups'][0]['signals'] === 4 && $pooled['groups'][0]['horizons'][5]['close_change_n'] === 4
+    && $pooled['groups'][0]['horizons'][5]['close_change_mean'] === 0.25
+    && $pooled['groups'][0]['horizons'][5]['close_change_mean'] !== $meanOfMeans, 'pooled observations are not an average of batch averages');
 echo "TALLY_OK\n";

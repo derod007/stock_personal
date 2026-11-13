@@ -26,6 +26,7 @@ final class SwingPathTally
             'files' => [],
             'errors' => [],
             'notes' => self::notes(),
+            'observations' => [],
             'groups' => self::summarize([]),
             'elapsed_ms' => 0,
             'peak_bytes' => memory_get_peak_usage(true),
@@ -53,7 +54,8 @@ final class SwingPathTally
                 $rows[] = $row;
             }
         }
-        $base['groups'] = self::summarize($rows);
+        $base['observations'] = array_map(self::compact(...), $rows);
+        $base['groups'] = self::summarize($base['observations']);
         $base['elapsed_ms'] = (hrtime(true) - $started) / 1e6;
         $base['peak_bytes'] = memory_get_peak_usage(true);
         return $base;
@@ -98,9 +100,63 @@ final class SwingPathTally
         }
         $out = [];
         foreach ($groups as $name => $items) {
-            $out[] = ['label' => $name, 'signals' => count($items), 'horizons' => self::horizons($items)];
+            $symbols = [];
+            foreach ($items as $row) {
+                $symbols[(string) ($row['symbol'] ?? '')] = true;
+            }
+            $out[] = ['label' => $name, 'signals' => count($items), 'symbols' => count($symbols), 'horizons' => self::horizons($items)];
         }
         return $out;
+    }
+
+    /** @param list<array<string,mixed>> $reports @return array<string,mixed> */
+    public static function combine(array $reports): array
+    {
+        $rows = [];
+        $files = [];
+        $errors = [];
+        foreach ($reports as $report) {
+            foreach ($report['observations'] ?? [] as $row) {
+                $rows[] = $row;
+            }
+            foreach ($report['files'] ?? [] as $file) {
+                $files[] = $file;
+            }
+            foreach ($report['errors'] ?? [] as $error) {
+                $errors[] = $error;
+            }
+        }
+        return [
+            'version' => self::VERSION,
+            'notes' => self::notes(),
+            'files' => $files,
+            'errors' => $errors,
+            'observations' => $rows,
+            'groups' => self::summarize($rows),
+        ];
+    }
+
+    /** @param array<string,mixed> $row @return array<string,mixed> */
+    private static function compact(array $row): array
+    {
+        $horizons = [];
+        foreach ([5, 10, 20] as $n) {
+            $horizon = $row['horizons'][$n] ?? ['status' => '미확정', 'close_change' => null, 'max_up' => null, 'max_down' => null];
+            $horizons[$n] = [
+                'status' => $horizon['status'],
+                'close_change' => $horizon['close_change'],
+                'max_up' => $horizon['max_up'],
+                'max_down' => $horizon['max_down'],
+            ];
+        }
+        return [
+            'symbol' => $row['symbol'] ?? null,
+            'breakout_level' => $row['breakout_level'] ?? null,
+            'breakout_day' => $row['breakout_day'] ?? null,
+            'confirm_day' => $row['confirm_day'] ?? null,
+            'wait_reason' => $row['wait_reason'] ?? null,
+            'horizons' => $horizons,
+        ];
     }
 
     /** @return list<string> */

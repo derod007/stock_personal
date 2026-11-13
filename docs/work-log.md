@@ -1,3 +1,9 @@
+## 2026-11-13 14:02 · Cursor · 끝
+- 한 일: 다섯 종목의 2025-09-18·19·22 KRX·Yahoo 원응답을 연구 폴더에 저장하고 대조. 9/19는 KRX 유효, Yahoo는 시각만 있고 가격 null.
+- 파일: docs/research/sep19_five_fetch.py, docs/swing-path-compare-2025h1/sep19-five-fetch/, tests/test_sep19_five_fetch.py, docs/work-log.md
+- 커밋: 별도 PR
+- 롤백: 없음
+
 ## 2026-11-13 13:20 · Cursor · 끝
 - 한 일: 미확정 다섯 종목의 2025-09-19 KRX 원본이 로컬에 없음을 확인하고, Yahoo chart 원본도 없어 날짜 부재와 null OHLCV를 구분하지 않음.
 - 파일: docs/swing-path-compare-2025h1/sep19-stored-krx.md, docs/work-log.md

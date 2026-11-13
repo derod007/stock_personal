@@ -1,3 +1,9 @@
+## 2026-11-13 11:53 · Cursor · 끝
+- 한 일: 원래 12개 묶음 보고서를 보존하고, 그 파일만 다시 합쳐 summary.json과 비교하는 CLI를 추가.
+- 파일: docs/swing-path-compare-2025h1/batches/, docs/swing-path-compare-2025h1/protocol.md, src/SwingPathCheck.php, bin/swing_path_check.php, tests/swing_path_check.php, .github/workflows/php-tests.yml, .gitattributes, docs/work-log.md
+- 커밋: 별도 PR
+- 롤백: 없음
+
 ## 2026-11-13 11:43 · Cursor · 끝
 - 한 일: 관찰값은 같은 보고서의 종목 해시가 있을 때만 집계. 원래 12개 묶음을 다시 합쳐 294건과 통계가 같음을 확인.
 - 파일: src/SwingPathTally.php, tests/swing_path_tally.php, docs/swing-path-compare-2025h1/protocol.md, docs/swing-path-compare-2025h1/summary.json, docs/work-log.md

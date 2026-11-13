@@ -1,3 +1,9 @@
+## 2026-11-13 12:52 · Cursor · 끝
+- 한 일: 저장 국내 종목의 2025-09-18·19·22 봉 유무를 읽고, 그 사흘 수집 로그가 없음을 확인.
+- 파일: docs/swing-path-compare-2025h1/sep19-bar-presence.md, docs/work-log.md
+- 커밋: 별도 PR
+- 롤백: 없음
+
 ## 2026-11-13 12:37 · Cursor · 끝
 - 한 일: 20거래일 미확정 5건이 2025-09-19 봉 없음에서 멈춘 것을 읽기만 하고 기록.
 - 파일: docs/swing-path-compare-2025h1/undetermined-20.md, docs/work-log.md

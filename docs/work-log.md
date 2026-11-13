@@ -1,3 +1,9 @@
+## 2026-11-13 12:50 · Cursor · 끝
+- 한 일: 2025-09-19 시장 개장 기사 근거를 조사 문서에 추가. 개별 거래와 봉 누락 원인은 미확정으로 유지.
+- 파일: docs/swing-path-compare-2025h1/undetermined-20.md, docs/work-log.md
+- 커밋: 별도 PR
+- 롤백: 없음
+
 ## 2026-11-13 12:37 · Cursor · 끝
 - 한 일: 20거래일 미확정 5건이 2025-09-19 봉 없음에서 멈춘 것을 읽기만 하고 기록.
 - 파일: docs/swing-path-compare-2025h1/undetermined-20.md, docs/work-log.md

@@ -116,7 +116,7 @@ try {
         mkdir(dirname($root . '/' . $c['file']), 0777, true);
         copy(__DIR__ . '/../' . $c['file'], $root . '/' . $c['file']);
     }
-    $observations = [signal($files[0]['symbol'], 0.1)];
+    $observations = [signal($files[0]['symbol'], 0.1), signal($files[1]['symbol'], 0.2)];
     $batch = ['version' => SwingPathTally::VERSION, 'research_version' => SwingResearch::VERSION,
         'confirm_from' => '2025-11-07', 'confirm_to' => '2025-11-07', 'as_of' => '2025-12-05',
         'calendars' => $calendars, 'files' => $files, 'errors' => [], 'observations' => $observations];
@@ -129,7 +129,12 @@ try {
     unset($combined['files'], $combined['observations']);
     put($exp . '/summary.json', $combined);
     $run = fn () => SwingPeerCompare::run($root, $exp, $root . '/prices');
-    check(count($run()['observations']) === 1, 'Verified fixture executes');
+    check(count($run()['observations']) === 2, 'Verified fixture executes');
+    put($exp . '/observations.json', array_reverse($observations));
+    check(count($run()['observations']) === 2, 'Preserved observation order does not change identity');
+    put($exp . '/observations.json', [$observations[0], $observations[0]]);
+    fails($run, 'Duplicate frozen observation');
+    put($exp . '/observations.json', $observations);
     $path = $root . '/prices/' . $files[0]['symbol'] . '_2y_1d_closed_v2.json';
     $saved = file_get_contents($path);
     file_put_contents($path, $saved . ' ');

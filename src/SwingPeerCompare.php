@@ -79,7 +79,7 @@ final class SwingPeerCompare
         }
         $combined = SwingPathTally::combine($batches);
         $observations = $read($experiment . '/observations.json');
-        if ($combined['errors'] !== [] || $combined['observations'] !== $observations
+        if ($combined['errors'] !== [] || self::observationMap($combined['observations']) !== self::observationMap($observations)
             || $combined['version'] !== SwingPathTally::VERSION
             || $combined['research_version'] !== SwingResearch::VERSION) {
             throw new \RuntimeException('Frozen observations or research version mismatch');
@@ -226,6 +226,20 @@ final class SwingPeerCompare
         }
         unset($group);
         return ['groups' => array_values($groups), 'observations' => $rows, 'pools' => $pools];
+    }
+
+    private static function observationMap(array $rows): array
+    {
+        $out = [];
+        foreach ($rows as $row) {
+            $key = $row['symbol'] . '|' . (string) (float) $row['breakout_level'] . '|' . $row['breakout_day'];
+            if (isset($out[$key])) {
+                throw new \RuntimeException('Duplicate frozen observation');
+            }
+            $out[$key] = json_encode($row, JSON_THROW_ON_ERROR);
+        }
+        ksort($out);
+        return $out;
     }
 
     private static function fileMap(array $files): array

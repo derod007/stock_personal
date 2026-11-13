@@ -239,9 +239,82 @@ sw(count($old) === 1 && count($newer) === 1 && $old[0]['break_day'] === $breakDa
     && $old[0]['resistance'] === 80.0 && $old[0]['reward_risk'] === $level30[0]['reward_risk'], 'a later close breaks both levels without rewriting the first signal');
 $replayPage = SwingResearch::view($dir, ['symbol' => 'TEST.KS', 'from' => $fromDay, 'to' => $endDay, 'mode' => 'replay']);
 sw(hash_file('sha256', $path) === $before && str_contains($replayPage, '실행: 재생') && str_contains($replayPage, '현재 캐시로 과거')
-    && str_contains($replayPage, '판단 기록이 아닙니다') && str_contains($replayPage, '<td>36</td>') && str_contains($replayPage, '<td>80</td>')
+    && str_contains($replayPage, '판단 기록이 아닙니다') && str_contains($replayPage, '가격 경로 관찰')
+    && str_contains($replayPage, '수익률이 아닙니다') && str_contains($replayPage, '<td>36</td>') && str_contains($replayPage, '<td>80</td>')
     && !str_contains($replayPage, '실행: 진단'), 'the replay page keeps the frozen signal');
 $back = SwingResearch::view($dir, ['symbol' => 'TEST.KS', 'day' => $day, 'from' => $fromDay, 'to' => $endDay, 'mode' => 'diagnose']);
 sw(str_contains($back, '실행: 진단') && str_contains($back, '신호 당시') && str_contains($back, '<th scope="row">진입 참고가</th><td>36</td>')
     && !str_contains($back, '날짜순 재생'), 'diagnosis mode returns after a replay range is still filled in');
+function seoulBar(string $day, float $open, float $high, float $low, float $close): array
+{
+    $stamp = (new DateTimeImmutable($day . ' 10:00:00', new DateTimeZone('Asia/Seoul')))->getTimestamp();
+    return ['time' => $stamp, 'open' => $open, 'high' => $high, 'low' => $low, 'close' => $close, 'volume' => 1000];
+}
+function pathSignal(): array
+{
+    return [
+        'confirm_day' => '2024-11-01', 'entry' => 36.0, 'resistance' => 80.0, 'reward_risk' => 2.0,
+        'breakout_level' => 30.0, 'breakout_day' => '2024-10-28',
+        'wait_reason' => '손익비가 1보다 큽니다. 추천 점수는 아닙니다.',
+    ];
+}
+$pathDays = ['2024-11-04', '2024-11-05', '2024-11-06', '2024-11-07', '2024-11-08', '2024-11-11', '2024-11-12'];
+$pathBars = [];
+foreach ($pathDays as $i => $pathDay) {
+    $pathBars[] = seoulBar($pathDay, 100, $i === 4 ? 112 : 101, $i === 1 ? 98 : 99, $i === 4 ? 110 : 100);
+}
+$cut = SwingResearch::observe($pathBars, 'TEST.KS', [pathSignal()], '2024-11-08');
+$cutAgain = SwingResearch::observe(array_merge($pathBars, [seoulBar('2024-11-11', 100, 101, 50, 50)]), 'TEST.KS', [pathSignal()], '2024-11-08');
+sw($cut === $cutAgain && $cut[0]['horizons'][5]['status'] === '완료' && round($cut[0]['horizons'][5]['close_change'] * 100, 2) === 10.0
+    && round($cut[0]['horizons'][5]['max_up'] * 100, 2) === 12.0 && round($cut[0]['horizons'][5]['max_down'] * 100, 2) === -2.0
+    && $cut[0]['horizons'][10]['status'] === '미완료' && $cut[0]['horizons'][10]['close_change'] === null, 'bars after the observation day stay out of the path');
+$skipped = $pathBars;
+array_shift($skipped);
+$skipped[0] = seoulBar('2024-11-05', 777, 778, 776, 777);
+$missingOpen = SwingResearch::observe($skipped, 'TEST.KS', [pathSignal()], '2024-11-12');
+sw($missingOpen[0]['ref_day'] === '2024-11-04' && $missingOpen[0]['ref_open'] === null && $missingOpen[0]['ref_status'] === '미확정'
+    && $missingOpen[0]['horizons'][5]['status'] === '미확정', 'a missing first session is not replaced by the next open');
+$partial = SwingResearch::observe($pathBars, 'TEST.KS', [pathSignal()], '2024-11-12');
+sw($partial[0]['horizons'][5]['status'] === '완료' && $partial[0]['horizons'][10]['status'] === '미완료'
+    && $partial[0]['horizons'][20]['status'] === '미완료' && $partial[0]['horizons'][10]['close_change'] === null, 'an unfinished horizon is not shown as complete');
+$ambiguous = SwingResearch::observe([seoulBar('2024-11-04', 50, 80, 30, 40)], 'TEST.KS', [pathSignal()], '2024-11-04');
+sw($ambiguous[0]['resistance_status'] === '도달' && $ambiguous[0]['resistance_day'] === '2024-11-04'
+    && $ambiguous[0]['touch_status'] === '장중 접촉' && $ambiguous[0]['touch_day'] === '2024-11-04'
+    && $ambiguous[0]['close_break_day'] === null && $ambiguous[0]['order_status'] === '선후관계 미확정', 'one bar touching both sides keeps the reach and marks only the order unknown');
+$sequence = SwingResearch::observe([
+    seoulBar('2024-11-04', 40, 42, 30, 31),
+    seoulBar('2024-11-05', 32, 33, 28, 29),
+], 'TEST.KS', [pathSignal()], '2024-11-05');
+sw($sequence[0]['touch_day'] === '2024-11-04' && $sequence[0]['touch_status'] === '장중 접촉'
+    && $sequence[0]['close_break_day'] === '2024-11-05' && $sequence[0]['close_break_status'] === '종가 이탈'
+    && $sequence[0]['order_status'] === '없음', 'a next-day close break keeps the earlier intraday touch');
+$sameClose = SwingResearch::observe([seoulBar('2024-11-04', 50, 80, 28, 29)], 'TEST.KS', [pathSignal()], '2024-11-04');
+sw($sameClose[0]['resistance_status'] === '도달' && $sameClose[0]['resistance_day'] === '2024-11-04'
+    && $sameClose[0]['touch_day'] === '2024-11-04' && $sameClose[0]['close_break_status'] === '종가 이탈'
+    && $sameClose[0]['close_break_day'] === '2024-11-04' && $sameClose[0]['order_status'] === '선후관계 미확정', 'one bar keeps the reach and the close break beside an unknown order');
+$touched = SwingResearch::observe([seoulBar('2024-11-04', 40, 42, 30, 31)], 'TEST.KS', [pathSignal()], '2024-11-04');
+$closedThrough = SwingResearch::observe([seoulBar('2024-11-04', 32, 33, 28, 29)], 'TEST.KS', [pathSignal()], '2024-11-04');
+sw($touched[0]['touch_status'] === '장중 접촉' && $touched[0]['close_break_day'] === null
+    && $closedThrough[0]['close_break_status'] === '종가 이탈' && $closedThrough[0]['touch_day'] === '2024-11-04', 'an intraday touch stays distinct from a close break');
+$eventPage = SwingResearch::page(null, [
+    'symbols' => ['TEST.KS'], 'symbol' => 'TEST.KS', 'mode' => 'replay', 'day' => '', 'from' => '', 'to' => '', 'note' => null,
+    'replay' => ['error' => null, 'basis' => '현재 캐시로 과거 거래일을 다시 계산한 결과입니다. 당시 저장했던 판단 기록이 아닙니다.', 'identity' => '신호는 한 번만 셉니다.', 'signals' => [], 'days' => [], 'paths' => [$sequence[0], $sameClose[0]]],
+]);
+sw(str_contains($eventPage, '<th>저항 도달</th>') && str_contains($eventPage, '<th>장중 하단 접촉</th>') && str_contains($eventPage, '<th>종가 이탈</th>') && str_contains($eventPage, '<th>순서</th>')
+    && str_contains($eventPage, '장중 접촉 2024-11-04') && str_contains($eventPage, '종가 이탈 2024-11-05')
+    && str_contains($eventPage, '도달 2024-11-04') && str_contains($eventPage, '종가 이탈 2024-11-04')
+    && str_contains($eventPage, '선후관계 미확정 2024-11-04'), 'the page keeps the three events apart from the unknown order');
+$stamp = $tight[24]['available_at'];
+do {
+    $stamp += 86400;
+    $week = (int) (new DateTimeImmutable('@' . $stamp))->setTimezone(new DateTimeZone('Asia/Seoul'))->format('N');
+} while ($week >= 6);
+$afterWait = $tight;
+$afterWait[] = ['available_at' => $stamp, 'open' => 36, 'high' => 37, 'low' => 35, 'close' => 36, 'volume' => 1000];
+$waitPlay = SwingResearch::replay($afterWait, 'TEST.KS', seoulDay($tight[0]['available_at']), seoulDay($stamp));
+$waitPaths = SwingResearch::observe($afterWait, 'TEST.KS', $waitPlay['signals'], seoulDay($stamp));
+sw(count($waitPaths) === 1 && $waitPaths[0]['wait_reason'] === '손익비가 1 이하이면 대기합니다.' && $waitPaths[0]['resistance'] == 40, 'a low reward confirmation stays in the path');
+$openPlay = SwingResearch::replay($held, 'TEST.KS', seoulDay($held[0]['available_at']), seoulDay($held[29]['available_at']));
+$openPaths = SwingResearch::observe($held, 'TEST.KS', $openPlay['signals'], seoulDay($held[29]['available_at']));
+sw(count($openPaths) === 1 && $openPaths[0]['wait_reason'] === '다음 저항 미확정' && $openPaths[0]['resistance_status'] === '미확정', 'an unpriced confirmation stays in the path');
 echo "SWING_OK\n";

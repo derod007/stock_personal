@@ -1,3 +1,15 @@
+## 2026-11-12 16:48 · Cursor · 끝
+- 한 일: 경로 관찰의 저항 도달·장중 접촉·종가 이탈을 각각 첫 날짜로 남기고 순서는 따로 표시.
+- 파일: src/SwingResearch.php, tests/swing_research.php, docs/work-log.md
+- 커밋: PR #162
+- 롤백: 없음
+
+## 2026-11-12 16:00 · Cursor · 끝
+- 한 일: 스윙 연구 재생의 확인 신호에 가격 경로 관찰을 붙임. 다음 거래일 시가가 기준이고, 없는 봉은 미확정.
+- 파일: src/SwingResearch.php, tests/swing_research.php, docs/work-log.md
+- 커밋: 별도 PR
+- 롤백: 없음
+
 ## 2026-11-12 14:47 · Cursor · 끝
 - 한 일: 재생이 이전 신호의 첫 지지 이탈을 기록하고 확인 값은 유지. 봉 없는 평일은 미확정. 진단과 재생 모드를 구분.
 - 파일: src/SwingResearch.php, tests/swing_research.php, docs/work-log.md

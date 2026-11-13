@@ -1,0 +1,585 @@
+{
+  "schema": 1,
+  "kind": "sep19_five_compare_v1",
+  "timezone": "Asia/Seoul",
+  "finished_at_kst": "2026-11-13 13:56:53",
+  "price_basis": "미확정",
+  "current_supply_only": true,
+  "symbols": [
+    {
+      "code": "067310",
+      "market": "kosdaq_equity",
+      "symbol": "067310.KQ",
+      "days": [
+        {
+          "day": "2025-09-18",
+          "krx": {
+            "status": "valid_ohlcv",
+            "volume_state": "positive",
+            "open": 18990.0,
+            "high": 20500.0,
+            "low": 18440.0,
+            "close": 20000.0,
+            "volume": 2575748.0,
+            "kind": "ok"
+          },
+          "yahoo": {
+            "status": "valid_ohlcv",
+            "timestamp": 1758153600,
+            "volume_state": "positive",
+            "adjclose": 20043.943359375,
+            "adjclose_state": "number",
+            "open": 18990.0,
+            "high": 20500.0,
+            "low": 18440.0,
+            "close": 20100.0,
+            "volume": 2575748.0
+          },
+          "compare": {
+            "fields": {
+              "open": "equal",
+              "high": "equal",
+              "low": "equal",
+              "close": "differ",
+              "volume": "equal"
+            },
+            "yahoo_adjclose_vs_close": "differ",
+            "price_basis": "미확정"
+          }
+        },
+        {
+          "day": "2025-09-19",
+          "krx": {
+            "status": "valid_ohlcv",
+            "volume_state": "positive",
+            "open": 20050.0,
+            "high": 20100.0,
+            "low": 19150.0,
+            "close": 19730.0,
+            "volume": 1077232.0,
+            "kind": "ok"
+          },
+          "yahoo": {
+            "status": "bad_price",
+            "timestamp": 1758240000,
+            "volume_state": "missing",
+            "adjclose": null,
+            "adjclose_state": "null",
+            "open": null,
+            "high": null,
+            "low": null,
+            "close": null,
+            "volume": null
+          },
+          "compare": {
+            "fields": {
+              "open": "not_compared",
+              "high": "not_compared",
+              "low": "not_compared",
+              "close": "not_compared",
+              "volume": "not_compared"
+            },
+            "yahoo_adjclose_vs_close": "adjclose_null",
+            "price_basis": "미확정"
+          }
+        },
+        {
+          "day": "2025-09-22",
+          "krx": {
+            "status": "valid_ohlcv",
+            "volume_state": "positive",
+            "open": 19820.0,
+            "high": 20550.0,
+            "low": 19640.0,
+            "close": 20250.0,
+            "volume": 1201811.0,
+            "kind": "ok"
+          },
+          "yahoo": {
+            "status": "valid_ohlcv",
+            "timestamp": 1758499200,
+            "volume_state": "positive",
+            "adjclose": 20193.525390625,
+            "adjclose_state": "number",
+            "open": 19820.0,
+            "high": 20550.0,
+            "low": 19640.0,
+            "close": 20250.0,
+            "volume": 1201811.0
+          },
+          "compare": {
+            "fields": {
+              "open": "equal",
+              "high": "equal",
+              "low": "equal",
+              "close": "equal",
+              "volume": "equal"
+            },
+            "yahoo_adjclose_vs_close": "differ",
+            "price_basis": "미확정"
+          }
+        }
+      ]
+    },
+    {
+      "code": "104620",
+      "market": "kosdaq_equity",
+      "symbol": "104620.KQ",
+      "days": [
+        {
+          "day": "2025-09-18",
+          "krx": {
+            "status": "valid_ohlcv",
+            "volume_state": "positive",
+            "open": 6630.0,
+            "high": 6800.0,
+            "low": 6520.0,
+            "close": 6700.0,
+            "volume": 1364736.0,
+            "kind": "ok"
+          },
+          "yahoo": {
+            "status": "valid_ohlcv",
+            "timestamp": 1758153600,
+            "volume_state": "positive",
+            "adjclose": 6620.0,
+            "adjclose_state": "number",
+            "open": 6630.0,
+            "high": 6800.0,
+            "low": 6520.0,
+            "close": 6620.0,
+            "volume": 1364736.0
+          },
+          "compare": {
+            "fields": {
+              "open": "equal",
+              "high": "equal",
+              "low": "equal",
+              "close": "differ",
+              "volume": "equal"
+            },
+            "yahoo_adjclose_vs_close": "equal",
+            "price_basis": "미확정"
+          }
+        },
+        {
+          "day": "2025-09-19",
+          "krx": {
+            "status": "valid_ohlcv",
+            "volume_state": "positive",
+            "open": 6700.0,
+            "high": 6770.0,
+            "low": 6520.0,
+            "close": 6730.0,
+            "volume": 702559.0,
+            "kind": "ok"
+          },
+          "yahoo": {
+            "status": "bad_price",
+            "timestamp": 1758240000,
+            "volume_state": "missing",
+            "adjclose": null,
+            "adjclose_state": "null",
+            "open": null,
+            "high": null,
+            "low": null,
+            "close": null,
+            "volume": null
+          },
+          "compare": {
+            "fields": {
+              "open": "not_compared",
+              "high": "not_compared",
+              "low": "not_compared",
+              "close": "not_compared",
+              "volume": "not_compared"
+            },
+            "yahoo_adjclose_vs_close": "adjclose_null",
+            "price_basis": "미확정"
+          }
+        },
+        {
+          "day": "2025-09-22",
+          "krx": {
+            "status": "valid_ohlcv",
+            "volume_state": "positive",
+            "open": 6790.0,
+            "high": 6860.0,
+            "low": 6610.0,
+            "close": 6700.0,
+            "volume": 558913.0,
+            "kind": "ok"
+          },
+          "yahoo": {
+            "status": "valid_ohlcv",
+            "timestamp": 1758499200,
+            "volume_state": "positive",
+            "adjclose": 6700.0,
+            "adjclose_state": "number",
+            "open": 6790.0,
+            "high": 6860.0,
+            "low": 6610.0,
+            "close": 6700.0,
+            "volume": 558913.0
+          },
+          "compare": {
+            "fields": {
+              "open": "equal",
+              "high": "equal",
+              "low": "equal",
+              "close": "equal",
+              "volume": "equal"
+            },
+            "yahoo_adjclose_vs_close": "equal",
+            "price_basis": "미확정"
+          }
+        }
+      ]
+    },
+    {
+      "code": "128940",
+      "market": "kospi_equity",
+      "symbol": "128940.KS",
+      "days": [
+        {
+          "day": "2025-09-18",
+          "krx": {
+            "status": "valid_ohlcv",
+            "volume_state": "positive",
+            "open": 316000.0,
+            "high": 337500.0,
+            "low": 316000.0,
+            "close": 332500.0,
+            "volume": 189108.0,
+            "kind": "ok"
+          },
+          "yahoo": {
+            "status": "valid_ohlcv",
+            "timestamp": 1758153600,
+            "volume_state": "positive",
+            "adjclose": 332285.0625,
+            "adjclose_state": "number",
+            "open": 316000.0,
+            "high": 337500.0,
+            "low": 316000.0,
+            "close": 333500.0,
+            "volume": 189108.0
+          },
+          "compare": {
+            "fields": {
+              "open": "equal",
+              "high": "equal",
+              "low": "equal",
+              "close": "differ",
+              "volume": "equal"
+            },
+            "yahoo_adjclose_vs_close": "differ",
+            "price_basis": "미확정"
+          }
+        },
+        {
+          "day": "2025-09-19",
+          "krx": {
+            "status": "valid_ohlcv",
+            "volume_state": "positive",
+            "open": 329500.0,
+            "high": 374500.0,
+            "low": 329000.0,
+            "close": 360500.0,
+            "volume": 305317.0,
+            "kind": "ok"
+          },
+          "yahoo": {
+            "status": "bad_price",
+            "timestamp": 1758240000,
+            "volume_state": "missing",
+            "adjclose": null,
+            "adjclose_state": "null",
+            "open": null,
+            "high": null,
+            "low": null,
+            "close": null,
+            "volume": null
+          },
+          "compare": {
+            "fields": {
+              "open": "not_compared",
+              "high": "not_compared",
+              "low": "not_compared",
+              "close": "not_compared",
+              "volume": "not_compared"
+            },
+            "yahoo_adjclose_vs_close": "adjclose_null",
+            "price_basis": "미확정"
+          }
+        },
+        {
+          "day": "2025-09-22",
+          "krx": {
+            "status": "valid_ohlcv",
+            "volume_state": "positive",
+            "open": 362500.0,
+            "high": 373500.0,
+            "low": 357500.0,
+            "close": 366000.0,
+            "volume": 157927.0,
+            "kind": "ok"
+          },
+          "yahoo": {
+            "status": "valid_ohlcv",
+            "timestamp": 1758499200,
+            "volume_state": "positive",
+            "adjclose": 364666.65625,
+            "adjclose_state": "number",
+            "open": 362500.0,
+            "high": 373500.0,
+            "low": 357500.0,
+            "close": 366000.0,
+            "volume": 157927.0
+          },
+          "compare": {
+            "fields": {
+              "open": "equal",
+              "high": "equal",
+              "low": "equal",
+              "close": "equal",
+              "volume": "equal"
+            },
+            "yahoo_adjclose_vs_close": "differ",
+            "price_basis": "미확정"
+          }
+        }
+      ]
+    },
+    {
+      "code": "089890",
+      "market": "kosdaq_equity",
+      "symbol": "089890.KQ",
+      "days": [
+        {
+          "day": "2025-09-18",
+          "krx": {
+            "status": "valid_ohlcv",
+            "volume_state": "positive",
+            "open": 14400.0,
+            "high": 14600.0,
+            "low": 13970.0,
+            "close": 14300.0,
+            "volume": 227298.0,
+            "kind": "ok"
+          },
+          "yahoo": {
+            "status": "valid_ohlcv",
+            "timestamp": 1758153600,
+            "volume_state": "positive",
+            "adjclose": 14580.0,
+            "adjclose_state": "number",
+            "open": 14400.0,
+            "high": 14600.0,
+            "low": 13970.0,
+            "close": 14580.0,
+            "volume": 227298.0
+          },
+          "compare": {
+            "fields": {
+              "open": "equal",
+              "high": "equal",
+              "low": "equal",
+              "close": "differ",
+              "volume": "equal"
+            },
+            "yahoo_adjclose_vs_close": "equal",
+            "price_basis": "미확정"
+          }
+        },
+        {
+          "day": "2025-09-19",
+          "krx": {
+            "status": "valid_ohlcv",
+            "volume_state": "positive",
+            "open": 14300.0,
+            "high": 14790.0,
+            "low": 14260.0,
+            "close": 14600.0,
+            "volume": 160726.0,
+            "kind": "ok"
+          },
+          "yahoo": {
+            "status": "bad_price",
+            "timestamp": 1758240000,
+            "volume_state": "missing",
+            "adjclose": null,
+            "adjclose_state": "null",
+            "open": null,
+            "high": null,
+            "low": null,
+            "close": null,
+            "volume": null
+          },
+          "compare": {
+            "fields": {
+              "open": "not_compared",
+              "high": "not_compared",
+              "low": "not_compared",
+              "close": "not_compared",
+              "volume": "not_compared"
+            },
+            "yahoo_adjclose_vs_close": "adjclose_null",
+            "price_basis": "미확정"
+          }
+        },
+        {
+          "day": "2025-09-22",
+          "krx": {
+            "status": "valid_ohlcv",
+            "volume_state": "positive",
+            "open": 14780.0,
+            "high": 15970.0,
+            "low": 14610.0,
+            "close": 15320.0,
+            "volume": 707169.0,
+            "kind": "ok"
+          },
+          "yahoo": {
+            "status": "valid_ohlcv",
+            "timestamp": 1758499200,
+            "volume_state": "positive",
+            "adjclose": 15320.0,
+            "adjclose_state": "number",
+            "open": 14780.0,
+            "high": 15970.0,
+            "low": 14610.0,
+            "close": 15320.0,
+            "volume": 707169.0
+          },
+          "compare": {
+            "fields": {
+              "open": "equal",
+              "high": "equal",
+              "low": "equal",
+              "close": "equal",
+              "volume": "equal"
+            },
+            "yahoo_adjclose_vs_close": "equal",
+            "price_basis": "미확정"
+          }
+        }
+      ]
+    },
+    {
+      "code": "095610",
+      "market": "kosdaq_equity",
+      "symbol": "095610.KQ",
+      "days": [
+        {
+          "day": "2025-09-18",
+          "krx": {
+            "status": "valid_ohlcv",
+            "volume_state": "positive",
+            "open": 41750.0,
+            "high": 43850.0,
+            "low": 40850.0,
+            "close": 42950.0,
+            "volume": 443561.0,
+            "kind": "ok"
+          },
+          "yahoo": {
+            "status": "valid_ohlcv",
+            "timestamp": 1758153600,
+            "volume_state": "positive",
+            "adjclose": 42663.4609375,
+            "adjclose_state": "number",
+            "open": 41750.0,
+            "high": 43850.0,
+            "low": 40850.0,
+            "close": 43500.0,
+            "volume": 443561.0
+          },
+          "compare": {
+            "fields": {
+              "open": "equal",
+              "high": "equal",
+              "low": "equal",
+              "close": "differ",
+              "volume": "equal"
+            },
+            "yahoo_adjclose_vs_close": "differ",
+            "price_basis": "미확정"
+          }
+        },
+        {
+          "day": "2025-09-19",
+          "krx": {
+            "status": "valid_ohlcv",
+            "volume_state": "positive",
+            "open": 43800.0,
+            "high": 43800.0,
+            "low": 41900.0,
+            "close": 43300.0,
+            "volume": 210036.0,
+            "kind": "ok"
+          },
+          "yahoo": {
+            "status": "bad_price",
+            "timestamp": 1758240000,
+            "volume_state": "missing",
+            "adjclose": null,
+            "adjclose_state": "null",
+            "open": null,
+            "high": null,
+            "low": null,
+            "close": null,
+            "volume": null
+          },
+          "compare": {
+            "fields": {
+              "open": "not_compared",
+              "high": "not_compared",
+              "low": "not_compared",
+              "close": "not_compared",
+              "volume": "not_compared"
+            },
+            "yahoo_adjclose_vs_close": "adjclose_null",
+            "price_basis": "미확정"
+          }
+        },
+        {
+          "day": "2025-09-22",
+          "krx": {
+            "status": "valid_ohlcv",
+            "volume_state": "positive",
+            "open": 43200.0,
+            "high": 44800.0,
+            "low": 43100.0,
+            "close": 43850.0,
+            "volume": 275949.0,
+            "kind": "ok"
+          },
+          "yahoo": {
+            "status": "valid_ohlcv",
+            "timestamp": 1758499200,
+            "volume_state": "positive",
+            "adjclose": 43006.73046875,
+            "adjclose_state": "number",
+            "open": 43200.0,
+            "high": 44800.0,
+            "low": 43100.0,
+            "close": 43850.0,
+            "volume": 275949.0
+          },
+          "compare": {
+            "fields": {
+              "open": "equal",
+              "high": "equal",
+              "low": "equal",
+              "close": "equal",
+              "volume": "equal"
+            },
+            "yahoo_adjclose_vs_close": "differ",
+            "price_basis": "미확정"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "schema": 1,
+  "kind": "sep19_five_fetch_v1",
+  "timezone": "Asia/Seoul",
+  "started_at_kst": "2026-11-13 13:56:30",
+  "finished_at_kst": "2026-11-13 13:56:53",
+  "current_supply_only": true,
+  "does_not_prove_past_response": true,
+  "symbols": [
+    "067310.KQ",
+    "104620.KQ",
+    "128940.KS",
+    "089890.KQ",
+    "095610.KQ"
+  ],
+  "days": [
+    "2025-09-18",
+    "2025-09-19",
+    "2025-09-22"
+  ],
+  "auth_key_recorded": false,
+  "raw_committed": false,
+  "raw_dir": "data/raw/research/sep19-five-20250918-22",
+  "raw_not_in_git": "KRX Open API 이용약관은 제3자 제공을 금지한다. Yahoo 원응답도 이 폴더에만 둔다. /data/raw/ 는 Git 무시.",
+  "reverify": "로컬 파일 sha256이 이 manifest와 같은지 본다. 저장소 클론만으로는 원본 바이트가 없다.",
+  "krx": {
+    "source": "https://data-dbg.krx.co.kr",
+    "paths": {
+      "kospi_equity": "/svc/apis/sto/stk_bydd_trd",
+      "kosdaq_equity": "/svc/apis/sto/ksq_bydd_trd"
+    },
+    "query": "basDd=요청일",
+    "auth_key_present": true,
+    "files": [
+      {
+        "date": "20250918",
+        "market": "kospi_equity",
+        "path": "data/raw/research/sep19-five-20250918-22/krx/20250918_kospi_equity.json",
+        "http_status": 200,
+        "kind": "ok",
+        "bytes": 298219,
+        "sha256": "34edee24093ec91e918bff6a6d4191102dcca4a86d9c6f1dee188254a8aa84e8",
+        "n": 960,
+        "found_dates": [
+          "20250918"
+        ],
+        "status": "saved"
+      },
+      {
+        "date": "20250918",
+        "market": "kosdaq_equity",
+        "path": "data/raw/research/sep19-five-20250918-22/krx/20250918_kosdaq_equity.json",
+        "http_status": 200,
+        "kind": "ok",
+        "bytes": 589306,
+        "sha256": "6754d1104a5a2230e47e9d6bbb6afd8f2f5d3693fa962fbb5d238e03e25992fb",
+        "n": 1802,
+        "found_dates": [
+          "20250918"
+        ],
+        "status": "saved"
+      },
+      {
+        "date": "20250919",
+        "market": "kospi_equity",
+        "path": "data/raw/research/sep19-five-20250918-22/krx/20250919_kospi_equity.json",
+        "http_status": 200,
+        "kind": "ok",
+        "bytes": 299127,
+        "sha256": "85442908a24201a12af1bd33a3c6e1a6ea89ccfe59ad9f52563213c22d58c228",
+        "n": 960,
+        "found_dates": [
+          "20250919"
+        ],
+        "status": "saved"
+      },
+      {
+        "date": "20250919",
+        "market": "kosdaq_equity",
+        "path": "data/raw/research/sep19-five-20250918-22/krx/20250919_kosdaq_equity.json",
+        "http_status": 200,
+        "kind": "ok",
+        "bytes": 590488,
+        "sha256": "5a3f0739263e33f305e5bb3199cc4dc9a202dd658fc40d5a04a7b2830d2d003c",
+        "n": 1803,
+        "found_dates": [
+          "20250919"
+        ],
+        "status": "saved"
+      },
+      {
+        "date": "20250922",
+        "market": "kospi_equity",
+        "path": "data/raw/research/sep19-five-20250918-22/krx/20250922_kospi_equity.json",
+        "http_status": 200,
+        "kind": "ok",
+        "bytes": 298904,
+        "sha256": "5d024d2cb33ec2696674a5b0e5ae4c9063e061f8ec45334270a45d5949fb212d",
+        "n": 960,
+        "found_dates": [
+          "20250922"
+        ],
+        "status": "saved"
+      },
+      {
+        "date": "20250922",
+        "market": "kosdaq_equity",
+        "path": "data/raw/research/sep19-five-20250918-22/krx/20250922_kosdaq_equity.json",
+        "http_status": 200,
+        "kind": "ok",
+        "bytes": 590686,
+        "sha256": "cffd2ce8f22e166b4aef13c2a1047d613feda1dda1a4ccf641be52be094397d8",
+        "n": 1803,
+        "found_dates": [
+          "20250922"
+        ],
+        "status": "saved"
+      }
+    ]
+  },
+  "yahoo": {
+    "source": "https://query1.finance.yahoo.com/v8/finance/chart/",
+    "period1": 1757894400,
+    "period2": 1758672000,
+    "period1_utc": "2025-09-15T00:00:00+00:00",
+    "period2_utc": "2025-09-24T00:00:00+00:00",
+    "interval": "1d",
+    "files": [
+      {
+        "symbol": "067310.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/067310.KQ?period1=1757894400&period2=1758672000&interval=1d",
+        "http_status": 200,
+        "path": "data/raw/research/sep19-five-20250918-22/yahoo/067310.KQ_1d.json",
+        "bytes": 1702,
+        "sha256": "b30c8228d3e8dcc7935d5e0cb0b595ba402a1a44ec4f0fe54ff62cfec25e87d6",
+        "status": "ok",
+        "fetched_at_kst": "2026-11-13 13:56:45"
+      },
+      {
+        "symbol": "104620.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/104620.KQ?period1=1757894400&period2=1758672000&interval=1d",
+        "http_status": 200,
+        "path": "data/raw/research/sep19-five-20250918-22/yahoo/104620.KQ_1d.json",
+        "bytes": 1611,
+        "sha256": "f0583b1e44462a093174d776a1cfca64fef13cbf0513d2f1a24ed41f8e205906",
+        "status": "ok",
+        "fetched_at_kst": "2026-11-13 13:56:47"
+      },
+      {
+        "symbol": "128940.KS",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/128940.KS?period1=1757894400&period2=1758672000&interval=1d",
+        "http_status": 200,
+        "path": "data/raw/research/sep19-five-20250918-22/yahoo/128940.KS_1d.json",
+        "bytes": 1704,
+        "sha256": "70208441e19c8ba4f722d53bbb80fcc81dc1f371ba5013b5a8d113dd37b1403b",
+        "status": "ok",
+        "fetched_at_kst": "2026-11-13 13:56:49"
+      },
+      {
+        "symbol": "089890.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/089890.KQ?period1=1757894400&period2=1758672000&interval=1d",
+        "http_status": 200,
+        "path": "data/raw/research/sep19-five-20250918-22/yahoo/089890.KQ_1d.json",
+        "bytes": 1631,
+        "sha256": "2e0d1e6b87bf1bafb77e685448713c33d4d32bd39fee4010ae465eb1552d837e",
+        "status": "ok",
+        "fetched_at_kst": "2026-11-13 13:56:50"
+      },
+      {
+        "symbol": "095610.KQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/095610.KQ?period1=1757894400&period2=1758672000&interval=1d",
+        "http_status": 200,
+        "path": "data/raw/research/sep19-five-20250918-22/yahoo/095610.KQ_1d.json",
+        "bytes": 1669,
+        "sha256": "aabff27041652bcd49fa7284c8decc08b59aadb17608c0552ce27552c68c307a",
+        "status": "ok",
+        "fetched_at_kst": "2026-11-13 13:56:52"
+      }
+    ]
+  }
+}

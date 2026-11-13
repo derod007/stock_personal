@@ -142,7 +142,7 @@ $second = tallyReport([
     tallyRow('2024-11-03', $pass, '완료', 0.0, '2024-11-03'),
     tallyRow('2024-11-04', $pass, '완료', 0.0, '2024-11-04'),
     tallyRow('2024-11-05', $pass, '완료', 0.0, '2024-11-05'),
-]);
+], [['symbol' => 'TEST.KS', 'sha256' => 'abc', 'bytes' => 3]]);
 $second['calendars'] = array_reverse($second['calendars']);
 $pooled = SwingPathTally::combine([$first, $second]);
 $reversed = SwingPathTally::combine([$second, $first]);
@@ -171,8 +171,21 @@ $clashed = SwingPathTally::combine([$first, $clashFile]);
 tally($clashed['errors'] === ['TEST.KS 입력 해시가 묶음마다 다릅니다.'] && $clashed['files'] === []
     && $clashed['observations'] === [] && $clashed['confirm_from'] === '2024-10-01'
     && json_encode($clashed) === json_encode(SwingPathTally::combine([$clashFile, $first])), 'a changed input hash is an error');
-$clashRow = tallyReport([tallyRow('2024-10-28', $pass, '완료', 0.9)]);
+$clashRow = tallyReport([tallyRow('2024-10-28', $pass, '완료', 0.9)], [['symbol' => 'TEST.KS', 'sha256' => 'abc', 'bytes' => 3]]);
 $clashedRow = SwingPathTally::combine([$first, $clashRow]);
 tally($clashedRow['errors'] === ['TEST.KS 2024-10-28 관찰값이 묶음마다 다릅니다.'] && $clashedRow['groups'][0]['signals'] === 0
     && json_encode($clashedRow) === json_encode(SwingPathTally::combine([$clashRow, $first])), 'a changed observation is an error');
+$bare = tallyReport([tallyRow('2024-10-28', $pass, '완료', 1.0)]);
+$donor = tallyReport([], [['symbol' => 'TEST.KS', 'sha256' => 'abc', 'bytes' => 3]]);
+$unlinked = SwingPathTally::combine([$bare, $donor]);
+tally($unlinked['observations'] === [] && $unlinked['groups'][0]['signals'] === 0
+    && $unlinked['files'] === [['symbol' => 'TEST.KS', 'sha256' => 'abc', 'bytes' => 3]]
+    && $unlinked['errors'] === ['TEST.KS 2024-10-28 같은 보고서의 입력 해시가 없습니다.']
+    && json_encode($unlinked) === json_encode(SwingPathTally::combine([$donor, $bare])), 'another report\'s file does not cover a missing hash');
+$blankHash = tallyReport([tallyRow('2024-10-28', $pass, '완료', 1.0)], [['symbol' => 'TEST.KS', 'sha256' => '', 'bytes' => 3]]);
+$blanked = SwingPathTally::combine([$blankHash, $donor]);
+tally($blanked['observations'] === [] && $blanked['groups'][0]['signals'] === 0
+    && $blanked['files'] === [['symbol' => 'TEST.KS', 'sha256' => 'abc', 'bytes' => 3]]
+    && $blanked['errors'] === ['TEST.KS 2024-10-28 입력 해시가 비어 있습니다.']
+    && json_encode($blanked) === json_encode(SwingPathTally::combine([$donor, $blankHash])), 'an empty hash drops that report\'s observation');
 echo "TALLY_OK\n";

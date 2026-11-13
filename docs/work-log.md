@@ -1,3 +1,9 @@
+## 2026-11-13 11:43 · Cursor · 끝
+- 한 일: 관찰값은 같은 보고서의 종목 해시가 있을 때만 집계. 원래 12개 묶음을 다시 합쳐 294건과 통계가 같음을 확인.
+- 파일: src/SwingPathTally.php, tests/swing_path_tally.php, docs/swing-path-compare-2025h1/protocol.md, docs/swing-path-compare-2025h1/summary.json, docs/work-log.md
+- 커밋: PR #164
+- 롤백: 없음
+
 ## 2026-11-13 11:24 · Cursor · 끝
 - 한 일: 경로 집계 병합은 실행 조건이 같고 중복 값이 같을 때만 한 번 남기게 함. 평균·중앙값 문장을 수치에 맞춤.
 - 파일: src/SwingPathTally.php, tests/swing_path_tally.php, docs/swing-path-compare-2025h1/protocol.md, docs/work-log.md

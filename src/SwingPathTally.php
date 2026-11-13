@@ -139,16 +139,28 @@ final class SwingPathTally
                     $errors[$error] = true;
                 }
             }
+            $own = [];
+            $ownEmpty = [];
             foreach ($report['files'] ?? [] as $file) {
                 if (!is_array($file)) {
                     continue;
                 }
                 $symbol = (string) ($file['symbol'] ?? '');
-                $mark = json_encode(['sha256' => (string) ($file['sha256'] ?? ''), 'bytes' => $file['bytes'] ?? null], JSON_UNESCAPED_UNICODE);
-                if ($symbol === '' || ($file['sha256'] ?? '') === '') {
-                    $errors['입력 해시가 없는 종목은 합치지 않습니다.'] = true;
+                $hash = (string) ($file['sha256'] ?? '');
+                if ($symbol === '' || $hash === '') {
+                    if ($symbol !== '' && $hash === '') {
+                        $ownEmpty[$symbol] = true;
+                    } else {
+                        $errors['입력 해시가 없는 종목은 합치지 않습니다.'] = true;
+                    }
                     continue;
                 }
+                $mark = json_encode(['sha256' => $hash, 'bytes' => $file['bytes'] ?? null], JSON_UNESCAPED_UNICODE);
+                if (isset($own[$symbol]) && $own[$symbol] !== $mark) {
+                    $fileClash[$symbol] = true;
+                    $errors[$symbol . ' 입력 해시가 묶음마다 다릅니다.'] = true;
+                }
+                $own[$symbol] = $mark;
                 if (isset($fileMark[$symbol]) && $fileMark[$symbol] !== $mark) {
                     $fileClash[$symbol] = true;
                     $errors[$symbol . ' 입력 해시가 묶음마다 다릅니다.'] = true;
@@ -156,23 +168,38 @@ final class SwingPathTally
                 }
                 if (!isset($fileMark[$symbol])) {
                     $fileMark[$symbol] = $mark;
-                    $files[$symbol] = ['symbol' => $symbol, 'sha256' => (string) $file['sha256'], 'bytes' => $file['bytes'] ?? null];
+                    $files[$symbol] = ['symbol' => $symbol, 'sha256' => $hash, 'bytes' => $file['bytes'] ?? null];
                 }
             }
+            $notedEmpty = [];
             foreach ($report['observations'] ?? [] as $row) {
                 if (!is_array($row)) {
+                    continue;
+                }
+                $symbol = (string) ($row['symbol'] ?? '');
+                if (!isset($own[$symbol]) || isset($ownEmpty[$symbol])) {
+                    $reason = isset($ownEmpty[$symbol]) ? '입력 해시가 비어 있습니다.' : '같은 보고서의 입력 해시가 없습니다.';
+                    $errors[$symbol . ' ' . (string) ($row['breakout_day'] ?? '') . ' ' . $reason] = true;
+                    if (isset($ownEmpty[$symbol])) {
+                        $notedEmpty[$symbol] = true;
+                    }
                     continue;
                 }
                 $key = self::observationKey($row);
                 $body = self::observationBody($row);
                 if (isset($rowBody[$key]) && $rowBody[$key] !== $body) {
                     $rowClash[$key] = true;
-                    $errors[($row['symbol'] ?? '') . ' ' . ($row['breakout_day'] ?? '') . ' 관찰값이 묶음마다 다릅니다.'] = true;
+                    $errors[$symbol . ' ' . (string) ($row['breakout_day'] ?? '') . ' 관찰값이 묶음마다 다릅니다.'] = true;
                     continue;
                 }
                 if (!isset($rowBody[$key])) {
                     $rowBody[$key] = $body;
                     $rows[$key] = json_decode($body, true);
+                }
+            }
+            foreach (array_keys($ownEmpty) as $symbol) {
+                if (!isset($notedEmpty[$symbol])) {
+                    $errors[$symbol . ' 입력 해시가 비어 있습니다.'] = true;
                 }
             }
         }

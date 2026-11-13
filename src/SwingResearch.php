@@ -284,7 +284,11 @@ final class SwingResearch
             if (($signal['confirm_day'] ?? null) === null) {
                 continue;
             }
-            $rows[] = self::pathOf($signal, $byDay, $symbol, $asOf);
+            $row = self::pathOf($signal, $byDay, $symbol, $asOf);
+            $row['symbol'] = $symbol;
+            $row['breakout_day'] = $signal['breakout_day'] ?? null;
+            $row['breakout_level'] = $signal['breakout_level'] ?? null;
+            $rows[] = $row;
         }
         return $rows;
     }
@@ -508,9 +512,35 @@ final class SwingResearch
                 $key = (string) $key;
                 $closed[strlen($key) === 8 ? substr($key, 0, 4) . '-' . substr($key, 4, 2) . '-' . substr($key, 6, 2) : $key] = 1;
             }
-            $ranges[] = ['from' => $from, 'to' => $to, 'closed' => $closed];
+            $ranges[] = ['file' => $file, 'from' => $from, 'to' => $to, 'closed' => $closed];
         }
         return $ranges;
+    }
+
+    /** @return list<array{file:string,from:string,to:string,sha256:string}> */
+    public static function calendarSources(): array
+    {
+        $out = [];
+        foreach (self::krxRanges() as $range) {
+            $path = dirname(__DIR__) . '/' . $range['file'];
+            $out[] = [
+                'file' => $range['file'],
+                'from' => $range['from'],
+                'to' => $range['to'],
+                'sha256' => hash_file('sha256', $path),
+            ];
+        }
+        return $out;
+    }
+
+    /** @return array{error:?string,bars:list<array<string,mixed>>,from:?string,to:?string,dropped:int,sha256:?string,bytes:?int} */
+    public static function load(string $dir, string $symbol): array
+    {
+        $loaded = self::readStored($dir, $symbol);
+        $file = $dir . '/' . $symbol . '_2y_1d_closed_v2.json';
+        $loaded['sha256'] = is_file($file) ? hash_file('sha256', $file) : null;
+        $loaded['bytes'] = is_file($file) ? filesize($file) : null;
+        return $loaded;
     }
 
     /** Stored Yahoo daily cache only. fetch() writes and can fill from another source. */

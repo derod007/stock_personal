@@ -1,3 +1,11 @@
+## 2026-11-14 · Codex · 완료
+- 한 일: #173 계획의 같은 날·같은 시장 비교를 구현하고 1차 294건·2차 399건을 계산. 자기 종목 제외, 입력 해시 연결, 기존 결과 덮어쓰기 차단을 적용.
+- 검증: 임시 자료 17개 검사와 보존 결과 산술 검사, 기존 스윙 연구·집계·보존 검사 통과. 별도 계산으로 46,896개 비교 경로와 693개 신호 집계 일치 확인.
+- 결과: 20일 손익비 통과 집단 차이 중앙값은 1차 +0.282%p, 2차 -2.150%p. 지속적인 우위로 해석하지 않음.
+- 파일: src/SwingPeerCompare.php, src/SwingResearch.php, bin/swing_peer_compare.php, tests/swing_peer_compare.php, docs/swing-path-peer-compare/, .github/workflows/php-tests.yml, .gitattributes
+- 운영: 가격 수집·신호 재생·계좌·예약 실행 없음. 기존 실험·원본 변경 없음.
+- 커밋: 별도 PR. 결과 JSON은 해제 바이트 검증 후 gzip으로 보존.
+
 ## 2026-11-13 23:54 · Cursor · 끝
 - 한 일: 비교 중앙값은 신호 종목을 뺀 시장별로 계산하고, 묶음·입력 해시 확인 절차를 계획에 적음.
 - 파일: docs/swing-path-peer-compare/protocol.md, docs/work-log.md

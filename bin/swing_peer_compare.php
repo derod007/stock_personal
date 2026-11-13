@@ -12,13 +12,16 @@ if (!isset($experiments[$name])) {
     exit(1);
 }
 $root = dirname(__DIR__);
-$output = $root . '/docs/swing-path-peer-compare/' . $name . '.json';
+$output = $root . '/docs/swing-path-peer-compare/' . $name . '.json.gz';
 try {
     if (file_exists($output)) {
         throw new RuntimeException('Refusing to overwrite existing comparison: ' . $output);
     }
     $report = ChartEntryLab\SwingPeerCompare::run($root, $root . '/docs/' . $experiments[$name], $root . '/data/ohlcv');
-    $json = json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR) . "\n";
+    $json = gzencode(json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR) . "\n", 9);
+    if ($json === false) {
+        throw new RuntimeException('Cannot compress comparison output');
+    }
     $handle = fopen($output, 'x');
     if ($handle === false) {
         throw new RuntimeException('Cannot create comparison output');

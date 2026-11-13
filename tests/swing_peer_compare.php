@@ -125,16 +125,17 @@ try {
     put($exp . '/batches/batch-1.json', $batch);
     put($exp . '/batches/manifest.json', ['files' => [['file' => 'batch-1.json', 'sha256' => hash_file('sha256', $exp . '/batches/batch-1.json')]]]);
     $combined = SwingPathTally::combine([$batch]);
-    put($exp . '/observations.json', $combined['observations']);
+    $frozen = $combined['observations'];
+    put($exp . '/observations.json', $frozen);
     unset($combined['files'], $combined['observations']);
     put($exp . '/summary.json', $combined);
     $run = fn () => SwingPeerCompare::run($root, $exp, $root . '/prices');
     check(count($run()['observations']) === 2, 'Verified fixture executes');
-    put($exp . '/observations.json', array_reverse($observations));
+    put($exp . '/observations.json', array_reverse($frozen));
     check(count($run()['observations']) === 2, 'Preserved observation order does not change identity');
-    put($exp . '/observations.json', [$observations[0], $observations[0]]);
+    put($exp . '/observations.json', [$frozen[0], $frozen[0]]);
     fails($run, 'Duplicate frozen observation');
-    put($exp . '/observations.json', $observations);
+    put($exp . '/observations.json', $frozen);
     $path = $root . '/prices/' . $files[0]['symbol'] . '_2y_1d_closed_v2.json';
     $saved = file_get_contents($path);
     file_put_contents($path, $saved . ' ');
@@ -151,5 +152,37 @@ try {
         $file->isDir() ? rmdir($file->getPathname()) : unlink($file->getPathname());
     }
     rmdir($root);
+}
+$archiveRoot = __DIR__ . '/../docs/swing-path-peer-compare';
+if (is_file($archiveRoot . '/manifest.json')) {
+    $manifest = json_decode(file_get_contents($archiveRoot . '/manifest.json'), true, 512, JSON_THROW_ON_ERROR);
+    foreach ($manifest['files'] as $file) {
+        $bytes = file_get_contents($archiveRoot . '/' . $file['file']);
+        check(hash('sha256', $bytes) === $file['sha256'] && strlen($bytes) === $file['bytes'], 'Archive bytes match manifest');
+        $json = gzdecode($bytes);
+        check($json !== false && hash('sha256', $json) === $file['json_sha256'], 'Decompressed result matches original JSON');
+        $result = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
+        check(count($result['observations']) === $file['observations'], 'Preserved observation count');
+        foreach ($result['observations'] as $row) {
+            $pool = $result['pools'][$row['pool']];
+            check(substr($row['symbol'], -3) === $pool['market'], 'Stored comparison stays in its market');
+            foreach ([5, 10, 20] as $n) {
+                $values = [];
+                foreach ($pool['eligible'] as $symbol => $peer) {
+                    if ($symbol !== $row['symbol'] && $peer['horizons'][$n]['status'] === '완료') {
+                        $values[] = $peer['horizons'][$n]['close_change'];
+                    }
+                }
+                sort($values, SORT_NUMERIC);
+                $count = count($values);
+                $median = $count === 0 ? null : ($count % 2 ? $values[intdiv($count, 2)] : ($values[$count / 2 - 1] + $values[$count / 2]) / 2);
+                $h = $row['horizons'][$n];
+                check($count === $h['complete'] && $median == $h['peer_median'], 'Stored self-excluded median');
+                if ($h['difference'] !== null) {
+                    check(abs($h['difference'] - ($h['signal_change'] - $median)) < 1e-12, 'Stored difference arithmetic');
+                }
+            }
+        }
+    }
 }
 echo "SWING_PEER_OK $checks checks\n";

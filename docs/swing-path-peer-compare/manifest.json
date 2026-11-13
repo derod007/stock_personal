@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "source_content_commit": "782de76601dfd600c888f7c65ad72fc11201c96d",
+  "note": "Calculation input and code byte hashes are inside each report. Original JSON outputs were losslessly gzip-compressed after calculation; the final CLI also writes gzip. No signal replay or price collection.",
+  "files": [
+    {
+      "experiment": "first",
+      "file": "first.json.gz",
+      "sha256": "2b5d083bfdb3402ea71571f447bb96b575200098e799f0a3c11fe67a2389eda2",
+      "bytes": 861519,
+      "json_sha256": "0caccb9b086e9a24320e8bf7cdce302fff17ec14552fc1cba95f205e2ce69f04",
+      "json_bytes": 14335508,
+      "output_written_at_kst": "2026-11-14T00:45:08.149846+09:00",
+      "command": "E:\\xampp\\php\\php.exe -d memory_limit=512M bin/swing_peer_compare.php --experiment=first",
+      "elapsed_ms": 11623.6738,
+      "peak_bytes": 239075328,
+      "independently_checked_paths": 19600,
+      "observations": 294
+    },
+    {
+      "experiment": "second",
+      "file": "second.json.gz",
+      "sha256": "426098a7eb61d785703573952dd3655508dfb66b2294341f95ad5618e769713c",
+      "bytes": 1188091,
+      "json_sha256": "bbf1154fc7cb60b058f549ad87e8d7c55c1962b5ce217c0bb5ad8a644223c05c",
+      "json_bytes": 19906061,
+      "output_written_at_kst": "2026-11-14T00:45:53.813557+09:00",
+      "command": "E:\\xampp\\php\\php.exe -d memory_limit=512M bin/swing_peer_compare.php --experiment=second",
+      "elapsed_ms": 18133.078,
+      "peak_bytes": 314572800,
+      "independently_checked_paths": 27296,
+      "observations": 399
+    }
+  ]
+}

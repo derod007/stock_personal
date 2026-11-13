@@ -1,0 +1,1667 @@
+{
+    "frozen_at_kst": "2026-11-13 17:02:05",
+    "freeze_note": "이 시각의 종목 목록, 일봉 해시, 달력 해시, universe 해시가 입력 고정이다.",
+    "code_commit": "4a42be4069dcd09e0831a2891245046bf4cea1e7",
+    "research_version": "swing_retest_read_v2",
+    "tally_version": "swing_path_tally_v1",
+    "confirm_from": "2025-10-10",
+    "confirm_to": "2026-09-07",
+    "as_of": "2026-10-08",
+    "universe_file": "docs\/swing-path-compare-2025h1\/universe.json",
+    "universe_sha256": "736fc45f064aa6eec6f9b0d2c5d5aef78b8d85d165c665af312020e0a07c3ebb",
+    "universe_bytes": 41846,
+    "symbol_count": 236,
+    "symbols": [
+        "000100.KS",
+        "000150.KS",
+        "000250.KQ",
+        "000270.KS",
+        "000500.KS",
+        "000650.KS",
+        "000660.KS",
+        "000720.KS",
+        "000810.KS",
+        "000990.KS",
+        "001210.KS",
+        "001440.KS",
+        "001820.KS",
+        "002320.KS",
+        "002720.KS",
+        "002990.KS",
+        "003010.KS",
+        "003160.KS",
+        "003230.KS",
+        "003280.KS",
+        "003490.KS",
+        "003495.KS",
+        "003670.KS",
+        "004090.KS",
+        "005160.KQ",
+        "005380.KS",
+        "005490.KS",
+        "005830.KS",
+        "005930.KS",
+        "005935.KS",
+        "006110.KS",
+        "006260.KS",
+        "006360.KS",
+        "006400.KS",
+        "006800.KS",
+        "007660.KS",
+        "007810.KS",
+        "008830.KQ",
+        "008930.KQ",
+        "008930.KS",
+        "008970.KS",
+        "009150.KS",
+        "009420.KS",
+        "009540.KS",
+        "009830.KS",
+        "009900.KS",
+        "010060.KS",
+        "010120.KS",
+        "010130.KS",
+        "010140.KS",
+        "010170.KQ",
+        "010580.KS",
+        "010950.KS",
+        "011070.KS",
+        "011200.KS",
+        "012210.KQ",
+        "012330.KS",
+        "012450.KS",
+        "014950.KQ",
+        "015760.KS",
+        "016360.KS",
+        "017670.KS",
+        "017900.KS",
+        "018260.KS",
+        "018880.KS",
+        "020150.KS",
+        "023530.KS",
+        "028050.KS",
+        "028260.KS",
+        "028300.KQ",
+        "028670.KS",
+        "030530.KQ",
+        "030960.KQ",
+        "031980.KQ",
+        "032830.KS",
+        "033160.KQ",
+        "033780.KS",
+        "033790.KQ",
+        "034020.KS",
+        "034230.KS",
+        "034730.KS",
+        "035420.KS",
+        "035720.KS",
+        "035900.KQ",
+        "036540.KQ",
+        "036710.KQ",
+        "036930.KQ",
+        "038500.KQ",
+        "039030.KQ",
+        "039610.KQ",
+        "039860.KQ",
+        "042510.KQ",
+        "042660.KS",
+        "042700.KS",
+        "043260.KQ",
+        "046970.KQ",
+        "047040.KS",
+        "047810.KS",
+        "047920.KQ",
+        "051910.KS",
+        "052690.KS",
+        "053800.KQ",
+        "055550.KS",
+        "058470.KQ",
+        "058610.KQ",
+        "062040.KS",
+        "064290.KQ",
+        "064350.KS",
+        "064400.KS",
+        "065450.KQ",
+        "066570.KS",
+        "066970.KS",
+        "067290.KQ",
+        "067310.KQ",
+        "068270.KS",
+        "069540.KQ",
+        "071050.KS",
+        "072950.KQ",
+        "077500.KS",
+        "078350.KQ",
+        "078600.KQ",
+        "078930.KS",
+        "079550.KS",
+        "079650.KQ",
+        "080220.KQ",
+        "082740.KS",
+        "084370.KQ",
+        "084670.KS",
+        "086520.KQ",
+        "086790.KS",
+        "087010.KQ",
+        "089030.KQ",
+        "089890.KQ",
+        "089970.KQ",
+        "092870.KQ",
+        "095610.KQ",
+        "096770.KS",
+        "098460.KQ",
+        "101360.KQ",
+        "103590.KS",
+        "104620.KQ",
+        "105560.KS",
+        "108490.KQ",
+        "112610.KS",
+        "119850.KQ",
+        "121600.KQ",
+        "126340.KQ",
+        "128820.KS",
+        "128940.KS",
+        "131290.KQ",
+        "131970.KQ",
+        "138040.KS",
+        "138360.KQ",
+        "141000.KQ",
+        "142280.KQ",
+        "144960.KQ",
+        "161890.KS",
+        "170920.KQ",
+        "178320.KQ",
+        "180640.KS",
+        "181710.KS",
+        "196170.KQ",
+        "204270.KQ",
+        "207940.KS",
+        "211270.KQ",
+        "214450.KQ",
+        "218410.KQ",
+        "222800.KQ",
+        "225530.KQ",
+        "226950.KQ",
+        "229640.KS",
+        "232140.KQ",
+        "240810.KQ",
+        "247540.KQ",
+        "250030.KQ",
+        "257720.KQ",
+        "259960.KS",
+        "263860.KQ",
+        "267250.KS",
+        "267260.KS",
+        "267270.KS",
+        "267320.KQ",
+        "267850.KS",
+        "272210.KS",
+        "272450.KS",
+        "277810.KQ",
+        "277810.KS",
+        "278470.KS",
+        "278650.KQ",
+        "281820.KS",
+        "282720.KQ",
+        "290650.KQ",
+        "290720.KQ",
+        "298040.KS",
+        "302550.KQ",
+        "307750.KQ",
+        "316140.KS",
+        "317240.KQ",
+        "317850.KQ",
+        "319660.KQ",
+        "322000.KS",
+        "326030.KS",
+        "327260.KQ",
+        "328130.KQ",
+        "329180.KS",
+        "336260.KS",
+        "347850.KQ",
+        "352820.KS",
+        "353200.KS",
+        "354320.KQ",
+        "356680.KQ",
+        "356860.KQ",
+        "361610.KS",
+        "373220.KS",
+        "389260.KQ",
+        "393210.KQ",
+        "396300.KQ",
+        "399720.KQ",
+        "402340.KS",
+        "403870.KQ",
+        "417200.KQ",
+        "417840.KQ",
+        "419050.KQ",
+        "437730.KQ",
+        "440110.KQ",
+        "443670.KQ",
+        "445680.KQ",
+        "452190.KQ",
+        "452280.KQ",
+        "456160.KQ",
+        "457190.KS",
+        "457550.KQ",
+        "458350.KQ",
+        "475150.KS",
+        "478340.KQ",
+        "491000.KQ"
+    ],
+    "calendars": [
+        {
+            "file": "docs\/type1-krx-input-v1\/trading-calendar.json",
+            "from": "2023-01-02",
+            "to": "2023-06-30",
+            "sha256": "12df19bd2c78869945df7ec8d048c15e266b49053edf904d670266d6244f0492"
+        },
+        {
+            "file": "docs\/type1-holdout-v1\/trading-calendar.json",
+            "from": "2023-07-03",
+            "to": "2024-06-28",
+            "sha256": "0c284bce27aed696e63dc5a842f81a6f10aca885fd1781551d25bdff753453b2"
+        },
+        {
+            "file": "docs\/krx-prep-bars-before-20241008\/trading-calendar.json",
+            "from": "2023-09-01",
+            "to": "2024-10-07",
+            "sha256": "ebfd4e8d8d2598291ab31b93f3c5e93780e9c6333775e489288138a039e3d9b4"
+        },
+        {
+            "file": "docs\/historical-top100-20241008-20251002\/trading-calendar.json",
+            "from": "2024-10-08",
+            "to": "2025-10-02",
+            "sha256": "611a671040d0f9f0d1ff45ab0641d1b2afb4347061e7a7bf95976fc3b313d900"
+        },
+        {
+            "file": "docs\/historical-top100-20251008-20261008\/trading-calendar.json",
+            "from": "2025-10-08",
+            "to": "2026-10-08",
+            "sha256": "8a311ed538f016060260ba78c3c5247a625ebaae5961238d1a41949de2a4161e"
+        }
+    ],
+    "files": [
+        {
+            "symbol": "000100.KS",
+            "sha256": "3b2a6c411180d715c364b13d5236106eb66d2b4760ae225c0f1b1158ae793bba",
+            "bytes": 162764
+        },
+        {
+            "symbol": "000150.KS",
+            "sha256": "9e8f39690f18d8cf9b11921175ca5cbceb31b9d7b77804f7c117999af2b7b5c8",
+            "bytes": 163762
+        },
+        {
+            "symbol": "000250.KQ",
+            "sha256": "f3eea5a99ce45878ad394f1808726254a895ecccfed1d19445e8e107ba8ee063",
+            "bytes": 162566
+        },
+        {
+            "symbol": "000270.KS",
+            "sha256": "a654c888dcd1b298eda273230de8795bc121420775dacf91ed944f8c5b4a561b",
+            "bytes": 162979
+        },
+        {
+            "symbol": "000500.KS",
+            "sha256": "a8004dcd66f38569ba9242590959d21aa48b64252b87c34d087df8d8775805d9",
+            "bytes": 173688
+        },
+        {
+            "symbol": "000650.KS",
+            "sha256": "e7e04d56f91b07bb2306193a1404a788d0edf635798640a0537fe5ff9f13bf34",
+            "bytes": 160327
+        },
+        {
+            "symbol": "000660.KS",
+            "sha256": "f962ffa45ccf4fdf6c581e1dd10ca8c7b9ae4e00800946a6a343fc0f3448ff0c",
+            "bytes": 164402
+        },
+        {
+            "symbol": "000720.KS",
+            "sha256": "770b8c8ac9878dddbfc991a45c6b0d60af8250e2d95a14bf69d01092dd7cd3ac",
+            "bytes": 162240
+        },
+        {
+            "symbol": "000810.KS",
+            "sha256": "6b0c35645f9eb7936716b51db3580eee21ae0f6ecb684a5ee88b7f658f58bf99",
+            "bytes": 163035
+        },
+        {
+            "symbol": "000990.KS",
+            "sha256": "ed63ccfbb9faa8ee8457ce9f5cade5509d1f90049033b5edb361ae7feb0899cc",
+            "bytes": 161778
+        },
+        {
+            "symbol": "001210.KS",
+            "sha256": "a5be80e0d789bd8767a92baefdfbe12dbc89eb429d3f77fa0867f0c3050c00f7",
+            "bytes": 159313
+        },
+        {
+            "symbol": "001440.KS",
+            "sha256": "e02f19ce0589c36f42af016908a72d19661536fdcca88ffa643037b4004b09f9",
+            "bytes": 161757
+        },
+        {
+            "symbol": "001820.KS",
+            "sha256": "3fb6f37706b16210cf6d0bc461ddd2774154692be977e350b44bccc07dadd440",
+            "bytes": 161415
+        },
+        {
+            "symbol": "002320.KS",
+            "sha256": "a9aa47ce9f25b801f55870ed5408767937ec28d974478ee4518b958b5fc39c50",
+            "bytes": 160838
+        },
+        {
+            "symbol": "002720.KS",
+            "sha256": "075d524f1dfa265ac7504d1a4d68072f81daa69d4d244c542f884e5f5165419e",
+            "bytes": 159214
+        },
+        {
+            "symbol": "002990.KS",
+            "sha256": "d991fdc94b287fb4cf8932c25f93478f78572c8e83539dbf155eeece1dbc6d3d",
+            "bytes": 159578
+        },
+        {
+            "symbol": "003010.KS",
+            "sha256": "b5f333da207b25fe34dde6c3a40c3c67f8e99b04a91ef37afd6e34b977b871ab",
+            "bytes": 159242
+        },
+        {
+            "symbol": "003160.KS",
+            "sha256": "06a12dbdbeab1e88195512a671654dc2090a9bd1b527a88cd0ec55031b1c4002",
+            "bytes": 161424
+        },
+        {
+            "symbol": "003230.KS",
+            "sha256": "984bab0ee0ae779d836d385c94f9b5f507e345337313d698c2f6433f7b927965",
+            "bytes": 164319
+        },
+        {
+            "symbol": "003280.KS",
+            "sha256": "a6b90ed8ba5099842a471d629121b239260e944e7cc1708e4a78e1dbc35d3c30",
+            "bytes": 123681
+        },
+        {
+            "symbol": "003490.KS",
+            "sha256": "02c61f971e669ab58fbe565e418fe676384cb54e927cf4a4c33820715657546e",
+            "bytes": 161723
+        },
+        {
+            "symbol": "003495.KS",
+            "sha256": "fa7fb50c26d284ef5d947e9bd006b4c84ebeaf3afbb6d64c0c7c7c180fc81659",
+            "bytes": 160421
+        },
+        {
+            "symbol": "003670.KS",
+            "sha256": "27be5a1e4b3a79333632b2e84182cb380b950dd217ce2f5afbaf56716ff941b9",
+            "bytes": 163436
+        },
+        {
+            "symbol": "004090.KS",
+            "sha256": "9181834c59b5ede9f977682c84a4139d9d7e31364e3cca2f4c2b48cb526e88cc",
+            "bytes": 124969
+        },
+        {
+            "symbol": "005160.KQ",
+            "sha256": "a62f54add177fb3053df30c2edffe5574c98c166731d70c71df45cb0f2088d9b",
+            "bytes": 158560
+        },
+        {
+            "symbol": "005380.KS",
+            "sha256": "6977e6aeaa79575ea163753160854ba7150463a0b91aea4f1152f0cc76659c30",
+            "bytes": 163448
+        },
+        {
+            "symbol": "005490.KS",
+            "sha256": "6fe4c170f6ee1714b9ab37035495e9585ce60b9c0f09e07c1dab519f809cce45",
+            "bytes": 163314
+        },
+        {
+            "symbol": "005830.KS",
+            "sha256": "e79e8fe701ac756af51d6f3c0cf557efd7a8c05ed17bc1ff3b9cda9690a4df6a",
+            "bytes": 162932
+        },
+        {
+            "symbol": "005930.KS",
+            "sha256": "3a27e51978a1ad374e5a05c6587c6d0d48deda84e8be6df0a3c8caf5adf6d4dd",
+            "bytes": 163305
+        },
+        {
+            "symbol": "005935.KS",
+            "sha256": "47c9069eb5a36fa308ed1fd6a53869b0e75e1c2f5874606d004406eef586e13c",
+            "bytes": 162625
+        },
+        {
+            "symbol": "006110.KS",
+            "sha256": "dd88ff77354a3b1e41ae83d9a51691a3f8d54288a388e5d762efe08d9b1ba9e6",
+            "bytes": 160765
+        },
+        {
+            "symbol": "006260.KS",
+            "sha256": "2d66a5090e8e6c02eeb2778cfd0e895ff66c86bb517c1670744d4d78219c472e",
+            "bytes": 163099
+        },
+        {
+            "symbol": "006360.KS",
+            "sha256": "b21c4c5f7aeeaa29653da3cd099e0cd9ecec9d3d283801d0c6bd1bc356f2ea16",
+            "bytes": 161514
+        },
+        {
+            "symbol": "006400.KS",
+            "sha256": "3e800579db139afddd91b79ee36862d650c10023ac90763e35954a392918790a",
+            "bytes": 163525
+        },
+        {
+            "symbol": "006800.KS",
+            "sha256": "7f758fe3a10fc0379ba2b29bcc2824c37ee965cef176ad6659f88a124ffb9884",
+            "bytes": 173414
+        },
+        {
+            "symbol": "007660.KS",
+            "sha256": "d94cd7d1857c19b66891266270e3ef3b8c7309db3e6acc7ad28c8adbb1083529",
+            "bytes": 162651
+        },
+        {
+            "symbol": "007810.KS",
+            "sha256": "8e9850f025045b9491861a3b523fd75f3a63457a28925f510e46d88f10d3743d",
+            "bytes": 161098
+        },
+        {
+            "symbol": "008830.KQ",
+            "sha256": "9551027d1ecc3e219997c015cf6ad324e81d80e56389a63eab7758b1f3e4de48",
+            "bytes": 177366
+        },
+        {
+            "symbol": "008930.KQ",
+            "sha256": "ebe12b381777fae7279188dc8f28e42b47a08a02a1b94767d3587b029e5de2f8",
+            "bytes": 124755
+        },
+        {
+            "symbol": "008930.KS",
+            "sha256": "4443ef3215667f57ac8fb5a2cf90474affd4c0487e15ff8574a8f830a5abd07b",
+            "bytes": 160574
+        },
+        {
+            "symbol": "008970.KS",
+            "sha256": "9a53d1d50da0d755b3dff641cee78e99b75af505c7b3440003ed45ced9458c64",
+            "bytes": 159946
+        },
+        {
+            "symbol": "009150.KS",
+            "sha256": "fb86736d5b5a7d0416dcebdea5c966c991821396448d3c753a3e90fb7ea2d5f5",
+            "bytes": 163823
+        },
+        {
+            "symbol": "009420.KS",
+            "sha256": "1a6514173a15b4cbcfe694c30a6f9302d9a31489116d830d3ff571d5878eaa68",
+            "bytes": 161388
+        },
+        {
+            "symbol": "009540.KS",
+            "sha256": "e6399a1c0f66166ab48daa24b33399590e5910c7bfaab8ddf657c7e95cc706e3",
+            "bytes": 163290
+        },
+        {
+            "symbol": "009830.KS",
+            "sha256": "ac936970b57ba11887adaabf5506ff1648a6f0364ae1bfcaa0dc5d2bf2df33b2",
+            "bytes": 162122
+        },
+        {
+            "symbol": "009900.KS",
+            "sha256": "a66218b627f15fa1cee665246c813655e52cd5f60e47cb17ec7a1e9ac424b6ba",
+            "bytes": 159807
+        },
+        {
+            "symbol": "010060.KS",
+            "sha256": "22db755660752480fabe50e20dcd5ed8debf8088a0bccd26f659e6195bd3396a",
+            "bytes": 162278
+        },
+        {
+            "symbol": "010120.KS",
+            "sha256": "b66def9650595cfada962b16a5ab063a1c06da1c970ddd7223370176597394ce",
+            "bytes": 162418
+        },
+        {
+            "symbol": "010130.KS",
+            "sha256": "68b3f8bbc199d87b80f331896b016d6f6d6b3dbc8860b5905e34ee5158eaa1b7",
+            "bytes": 163923
+        },
+        {
+            "symbol": "010140.KS",
+            "sha256": "edb5123a9c8f53420b0a386a6051e3cc7c973a1ec9c16bca047e7afde048ec02",
+            "bytes": 161909
+        },
+        {
+            "symbol": "010170.KQ",
+            "sha256": "e70e98378b1014d107e500adf36d255c54b77773fbfe626f0938a8f541572b03",
+            "bytes": 160412
+        },
+        {
+            "symbol": "010580.KS",
+            "sha256": "0a2cef1f3ecc8729e3bf6c13aead965119c18141032388afc5dd2c0f80e2547e",
+            "bytes": 158973
+        },
+        {
+            "symbol": "010950.KS",
+            "sha256": "b1718fc6932524634d405ba5405c711e525ac6a22015eab2a663d84f3756dcc1",
+            "bytes": 162054
+        },
+        {
+            "symbol": "011070.KS",
+            "sha256": "dd01978f9e9cf1ee44be076a38af8cd5133943e58694558a689e069119ce9bda",
+            "bytes": 163326
+        },
+        {
+            "symbol": "011200.KS",
+            "sha256": "c0735ddf5df77ae3e7b8f4dcc3775d86df93fce7aa539238746289b04e0b8f95",
+            "bytes": 161740
+        },
+        {
+            "symbol": "012210.KQ",
+            "sha256": "4b5482c94cff57fcf7a239b0105bce313a9d4b5b5c0be5b42b9d21d0d847358e",
+            "bytes": 158867
+        },
+        {
+            "symbol": "012330.KS",
+            "sha256": "359d8c70fd5a72903944a5c25505091bd2279d650fc1c404ab50824a914ad663",
+            "bytes": 163296
+        },
+        {
+            "symbol": "012450.KS",
+            "sha256": "3107c58367888132cc0d2d2aa632ca3f93ad72429a05ddfe2d8ecb64eb1f0ec9",
+            "bytes": 164138
+        },
+        {
+            "symbol": "014950.KQ",
+            "sha256": "681fdf76578a2240f665bda6472f11187d730b4ffa2efa1ea525fd968751bb1b",
+            "bytes": 84479
+        },
+        {
+            "symbol": "015760.KS",
+            "sha256": "5b24947c27fb310e0eb73be10fc010b52947b1c9bd3b3b1c4c5dde27e508ee68",
+            "bytes": 161799
+        },
+        {
+            "symbol": "016360.KS",
+            "sha256": "063a806a7e13e57f2f4d50f45172acc7c3496988f843b6610dc00dc726b5ffe2",
+            "bytes": 161701
+        },
+        {
+            "symbol": "017670.KS",
+            "sha256": "ee6128f2c3dadcc0582da6f3e41d59c57eedb25eaf3bbb9cd10f623604d2de2e",
+            "bytes": 161618
+        },
+        {
+            "symbol": "017900.KS",
+            "sha256": "da510ce464e478e0fc87adf66a8705ea77a21da21c1331556919cef709395ead",
+            "bytes": 158767
+        },
+        {
+            "symbol": "018260.KS",
+            "sha256": "9e311cc174ea59e510b8f62ecd3c215c951f9cae30109a6c4dc8a061bdfc7143",
+            "bytes": 163248
+        },
+        {
+            "symbol": "018880.KS",
+            "sha256": "224dcedde0e937bd44bdb4191f7d885ff199ad558819a1a4df3d931279cc1486",
+            "bytes": 160191
+        },
+        {
+            "symbol": "020150.KS",
+            "sha256": "258045463b1da66df2e6cc546fa9b62d91b677fc6fa0172d8220540f1be4c327",
+            "bytes": 160907
+        },
+        {
+            "symbol": "023530.KS",
+            "sha256": "bae5efcb7e0b9d2b5499046a2a6a321a014ca3263d929ecaa631843166e715a8",
+            "bytes": 161628
+        },
+        {
+            "symbol": "028050.KS",
+            "sha256": "5ec54ee8f18f9edb85910b602dc161caab682a479cefe831e0c61bb3496a0831",
+            "bytes": 161622
+        },
+        {
+            "symbol": "028260.KS",
+            "sha256": "f9960a86906a51a4934bed6767cfe216d1a7e7842a883cc708bdf4cfcc120ce6",
+            "bytes": 163308
+        },
+        {
+            "symbol": "028300.KQ",
+            "sha256": "5f383ce4726d80321772429acdf27ab32e24352e8e7bc8ba56ecf838777effb5",
+            "bytes": 161459
+        },
+        {
+            "symbol": "028670.KS",
+            "sha256": "009518993be2df97680f5e135f69a3303ff245b93dba3774a3c392c909dc8859",
+            "bytes": 159834
+        },
+        {
+            "symbol": "030530.KQ",
+            "sha256": "a6a07b79b07d0f79352c8c8cae005c1f0790b9266baafce11d6e05f7db39edf7",
+            "bytes": 160921
+        },
+        {
+            "symbol": "030960.KQ",
+            "sha256": "e27def6b15b0982556d0c6619be58701893e9a9d36d31c216ee1ff5de630d9ef",
+            "bytes": 158871
+        },
+        {
+            "symbol": "031980.KQ",
+            "sha256": "cf3d06b79d4203b71eb6a0583f6d1bb07f1d8552906f7a86b24fd0e514b2aaf2",
+            "bytes": 161930
+        },
+        {
+            "symbol": "032830.KS",
+            "sha256": "a3f9b54e28607480691f13f0af4767c0a0b2075b2b9afad9dc0fe0a41749e584",
+            "bytes": 162865
+        },
+        {
+            "symbol": "033160.KQ",
+            "sha256": "32ec373b1aae2810a880cc882c8c1d5977839359fc74db6126d4d3e5939e1830",
+            "bytes": 159326
+        },
+        {
+            "symbol": "033780.KS",
+            "sha256": "7c075ec31671d23713694c7c2bc9b229248bb9e1077bc85d275fadb7f4daee9e",
+            "bytes": 163228
+        },
+        {
+            "symbol": "033790.KQ",
+            "sha256": "3ab29bde72b97ee5c232057224f488ff4b7649d65b2527128e38f4679eefad89",
+            "bytes": 158935
+        },
+        {
+            "symbol": "034020.KS",
+            "sha256": "a963b2e991b65d97a1f635bb8f5b14a541464d752952e62bfd2cace0b27bae66",
+            "bytes": 162157
+        },
+        {
+            "symbol": "034230.KS",
+            "sha256": "48303e1c5941aa79a2a671b1da8241b8892d032f735a933a14011659dc87d8b8",
+            "bytes": 161030
+        },
+        {
+            "symbol": "034730.KS",
+            "sha256": "81aee5657f4cc44062b8ee9865ecfeafdb8ee01bdaed5d615347d808401d1521",
+            "bytes": 163209
+        },
+        {
+            "symbol": "035420.KS",
+            "sha256": "d925adb5f58b851755cc295783e14fa2770dc979182decd5cd518d228466ff68",
+            "bytes": 163486
+        },
+        {
+            "symbol": "035720.KS",
+            "sha256": "65d5e8f61dbae16584eab0ad8a0899ccff83853133ea5aeedbbc091f82a72535",
+            "bytes": 161832
+        },
+        {
+            "symbol": "035900.KQ",
+            "sha256": "7fa16b4c4001801af348e519315c307ca0dbe4e6890005c765e1bb59312982f7",
+            "bytes": 161388
+        },
+        {
+            "symbol": "036540.KQ",
+            "sha256": "76a9364a73a9fde61ac475390f538603b14853b43ff73e0c35f723da6676a5de",
+            "bytes": 159751
+        },
+        {
+            "symbol": "036710.KQ",
+            "sha256": "0ca681462dea8bca655bc27fc838b329919057004ec002f68d935ff0c770bf3f",
+            "bytes": 159333
+        },
+        {
+            "symbol": "036930.KQ",
+            "sha256": "1493bfdccd5fa45a95e9149b25b93decd642e536fa333d32acdce5e7d818ed6e",
+            "bytes": 162076
+        },
+        {
+            "symbol": "038500.KQ",
+            "sha256": "c4c07ecd8c83661472463390d76f01c4aa3157c26969fbb03c80d5677546aa54",
+            "bytes": 159889
+        },
+        {
+            "symbol": "039030.KQ",
+            "sha256": "bcd615c0d6e6cf673d3519a99dd9a4abaa9ccf1f583d73301b606c8e9c2379e8",
+            "bytes": 163108
+        },
+        {
+            "symbol": "039610.KQ",
+            "sha256": "4a0698bf34db6628536169c11aed786249d6e30cc02fbf45f4ccab3cc8a04593",
+            "bytes": 159178
+        },
+        {
+            "symbol": "039860.KQ",
+            "sha256": "26f0f81f76e1c8e9067f4944fce920d26cb06fb7d8999b5eae0bd77748ba891e",
+            "bytes": 159384
+        },
+        {
+            "symbol": "042510.KQ",
+            "sha256": "998c26af0be1cea11ff911246fba8a6669c64678de0850325d04323164ce15a8",
+            "bytes": 159942
+        },
+        {
+            "symbol": "042660.KS",
+            "sha256": "3c5a2ad436f4aa41b30ebe8689f18e99c4a247a8a7796100f87b345b1086389f",
+            "bytes": 162679
+        },
+        {
+            "symbol": "042700.KS",
+            "sha256": "42b965181acab70ccdb3c82535a1d7bdcc996f301f823a7667149e3bd6d270ea",
+            "bytes": 162745
+        },
+        {
+            "symbol": "043260.KQ",
+            "sha256": "1d2beff17a1a5a671ccebad045ac44eab49b084b868a470b93d8ff44b8eb4c23",
+            "bytes": 160435
+        },
+        {
+            "symbol": "046970.KQ",
+            "sha256": "a254733ee354f6e2b795120881683983fc8d6fb4c2557098b539e67ba18cf6e0",
+            "bytes": 159705
+        },
+        {
+            "symbol": "047040.KS",
+            "sha256": "7bca2855ec6bdd79a02095df5a2fd94b175490ae7c19679c824211cb0b968714",
+            "bytes": 160516
+        },
+        {
+            "symbol": "047810.KS",
+            "sha256": "43fb4e3c033269a456a4f7a2e0d60a83ccbffea74da0f2f862b0d995c5883350",
+            "bytes": 162532
+        },
+        {
+            "symbol": "047920.KQ",
+            "sha256": "2d42831ea2f04fc6bd6ce982d5d12bb9a7b38953c89ae645ff3cf92274779a31",
+            "bytes": 161062
+        },
+        {
+            "symbol": "051910.KS",
+            "sha256": "085ccc9468eaa233aebce220fc9fbc13bf8ff55f61d0edb2acd117ee11cd65b8",
+            "bytes": 163297
+        },
+        {
+            "symbol": "052690.KS",
+            "sha256": "6964945ec2490f1f9b37901a338eb911cd4dc4419751d7cb54d18ba7a61a77e0",
+            "bytes": 162041
+        },
+        {
+            "symbol": "053800.KQ",
+            "sha256": "128dc42f24980385840eacaefc477b8241ce2db3ef42d3caaca3148bd5002ea7",
+            "bytes": 161032
+        },
+        {
+            "symbol": "055550.KS",
+            "sha256": "98cafd7aa9a1a0bdd485c9f0314a63cf8ef9dbfd5ad36c1ab9beb62e00255253",
+            "bytes": 162041
+        },
+        {
+            "symbol": "058470.KQ",
+            "sha256": "26e608e64d8ed3f249920e72ebc6d76dff7705ce6ec24fb84736b594daacb7a2",
+            "bytes": 161619
+        },
+        {
+            "symbol": "058610.KQ",
+            "sha256": "34e115a23c5fa0a86c93fe2cf47238025937b97cd0881af89c7bf160dfcee2d9",
+            "bytes": 161834
+        },
+        {
+            "symbol": "062040.KS",
+            "sha256": "9f1fd8e21c23a59af0da4c0ecbc8b867e064fb2374d2c87b743bfe7005feafd6",
+            "bytes": 162633
+        },
+        {
+            "symbol": "064290.KQ",
+            "sha256": "29c3724a2f4177d86fa03200d47c55535dbc5038eb5f5c912fa0fa09e80a2b9d",
+            "bytes": 160734
+        },
+        {
+            "symbol": "064350.KS",
+            "sha256": "9c1a3af6323b0eb02f2ab6201a7f9052f4303425742d092f6829d2b071bf7417",
+            "bytes": 163049
+        },
+        {
+            "symbol": "064400.KS",
+            "sha256": "b761143d715c3dffbd492c593224f6eb885ae1d4ae90c3a817195dc82e36a3ed",
+            "bytes": 143919
+        },
+        {
+            "symbol": "065450.KQ",
+            "sha256": "6a486f314b8feebc3f0d7ae345e10e2ba6469df0eeae83231a043d33807de861",
+            "bytes": 159478
+        },
+        {
+            "symbol": "066570.KS",
+            "sha256": "73fa7ac6451ecb9ff750c9cf907fb2ace91a1f08169fa0f8949bcfb5c73a5006",
+            "bytes": 162289
+        },
+        {
+            "symbol": "066970.KS",
+            "sha256": "a9baab9abf52ce2b45b280876ba9cb9e88de2557427b44c7c530d2e041f8e5bd",
+            "bytes": 162328
+        },
+        {
+            "symbol": "067290.KQ",
+            "sha256": "0a4131ed485840dfc739af12a0548801565639fd75268dfdbe5f30e77148ae25",
+            "bytes": 173494
+        },
+        {
+            "symbol": "067310.KQ",
+            "sha256": "bf3be06cc507b746dc0b7493ac89f48d008c545a1474b3afff1899582cffabfb",
+            "bytes": 161523
+        },
+        {
+            "symbol": "068270.KS",
+            "sha256": "8fd676d5418975f198dce69ef73cd28d8358259e25a3475293c1f712afb5da36",
+            "bytes": 172356
+        },
+        {
+            "symbol": "069540.KQ",
+            "sha256": "06f82ec5087dd0e95e4310c3b132fa2a702eccf69938797bc04e643ab0335ee2",
+            "bytes": 159128
+        },
+        {
+            "symbol": "071050.KS",
+            "sha256": "505ddf70782bcba94db6b1408701f0eebcba4fb6b1a4bcb6ae4aee5edea89d65",
+            "bytes": 162337
+        },
+        {
+            "symbol": "072950.KQ",
+            "sha256": "0f7915b50dd1b8a6308404cc9f910672efdee8f0db31749b8b419b7c97b14c54",
+            "bytes": 159408
+        },
+        {
+            "symbol": "077500.KS",
+            "sha256": "a6537808c03ec05379f220978f95a9f21b2e7d180c220bd3c3f2ccff036d9860",
+            "bytes": 159400
+        },
+        {
+            "symbol": "078350.KQ",
+            "sha256": "7d52394224361994da72f042a330cb6ab52b52a0eae3ca5df5dadda5c252e5b3",
+            "bytes": 160567
+        },
+        {
+            "symbol": "078600.KQ",
+            "sha256": "9843369d35122806ce951d0477f9a31f9d35f31c9505ee7978ca1b806ea84a0c",
+            "bytes": 161706
+        },
+        {
+            "symbol": "078930.KS",
+            "sha256": "3a845a0f00be2f770d1ff686c14b5576342b220c9cf1d4862bc95c5e89633fdd",
+            "bytes": 161166
+        },
+        {
+            "symbol": "079550.KS",
+            "sha256": "ec7b3261042006708dcbd28ebe15aa256eac6d67a5d6210d242d577f69516493",
+            "bytes": 163241
+        },
+        {
+            "symbol": "079650.KQ",
+            "sha256": "d5ce547b61deb424ea309c0e761afad0a96ac8dd649a11fb4bcdd5f5afbc21e9",
+            "bytes": 159026
+        },
+        {
+            "symbol": "080220.KQ",
+            "sha256": "bec6b1f719b3667d71f67d88936b6cea13b7cc7b866c4bcc5c89baee92f0cfe2",
+            "bytes": 161539
+        },
+        {
+            "symbol": "082740.KS",
+            "sha256": "0c6d0b14646729c89f87862f7dfc4547e0821da613211108fcb234a453741f30",
+            "bytes": 160900
+        },
+        {
+            "symbol": "084370.KQ",
+            "sha256": "2a4e84eeb9ffa9a3ef20dccb700008b0c6c250ea2c8930287d4f1c7f13ac7700",
+            "bytes": 161284
+        },
+        {
+            "symbol": "084670.KS",
+            "sha256": "26babed58469f4560334ab9980a1951eb4cf0ba0fa9db2e03572aebf9a1a8f0b",
+            "bytes": 159611
+        },
+        {
+            "symbol": "086520.KQ",
+            "sha256": "9d2a6780a40601bc6a7fbc425555d545c121d3fd330e71f01bb03bb93f1bb289",
+            "bytes": 164123
+        },
+        {
+            "symbol": "086790.KS",
+            "sha256": "73fd98523be68635bedd471bf0e3884b33a1096d988e60356c04d5325478a7be",
+            "bytes": 162307
+        },
+        {
+            "symbol": "087010.KQ",
+            "sha256": "3ad1451e989213d000bf52129d0dac012d81c962cab590d50042159ddf3f7e17",
+            "bytes": 162926
+        },
+        {
+            "symbol": "089030.KQ",
+            "sha256": "479cae261245fe8ff151f1c646aecc56e361dc4ea6fd5ec4fac51ccfa71802f7",
+            "bytes": 161511
+        },
+        {
+            "symbol": "089890.KQ",
+            "sha256": "5767adaeefc79e89469956bb65674649af48ad060a279e5b635121778474a31b",
+            "bytes": 160524
+        },
+        {
+            "symbol": "089970.KQ",
+            "sha256": "ed2fad68746ca93708f9142106dbb04cd223856ca7cc0bd031c19781368d58f3",
+            "bytes": 160207
+        },
+        {
+            "symbol": "092870.KQ",
+            "sha256": "1d5011aa5897385f11855cdbd7b90799340bdc5d906865a225375e60e015dc5b",
+            "bytes": 161144
+        },
+        {
+            "symbol": "095610.KQ",
+            "sha256": "26e142841e4d9bc710ec2420ad044d987e553bfdcaaa50c03187169ea3801a8b",
+            "bytes": 161704
+        },
+        {
+            "symbol": "096770.KS",
+            "sha256": "02fbff2197b8d5a94d8a31fdcc10ecb38b0754a3584bd128bae3cb4a331763c5",
+            "bytes": 163096
+        },
+        {
+            "symbol": "098460.KQ",
+            "sha256": "32a9c18e2362e27d4f5def503e91af49800f3fb785c52e0666f707d29c4da51f",
+            "bytes": 161514
+        },
+        {
+            "symbol": "101360.KQ",
+            "sha256": "ebdd49cdbf43daefb5dd5b5b08746b1a90efb544b7dc6f428403b93fc0214c95",
+            "bytes": 160175
+        },
+        {
+            "symbol": "103590.KS",
+            "sha256": "e34bf486aa1488ff5a8f57430cd02889eaef7b972bcdef9574713a929c9bd714",
+            "bytes": 161200
+        },
+        {
+            "symbol": "104620.KQ",
+            "sha256": "6a6fedf9c97f7a7721ef95085bbfaa0e525c20f9d69d89ee077191a69f4bc27a",
+            "bytes": 159180
+        },
+        {
+            "symbol": "105560.KS",
+            "sha256": "18ba05196bcce8e88098d0fdbd66a7c4a28ab71e667ddfd6541bad62e1bb70c7",
+            "bytes": 163069
+        },
+        {
+            "symbol": "108490.KQ",
+            "sha256": "2657dc8ec9af4b34c04777815335d653c10d7983637a2cf3396b2936ea35463a",
+            "bytes": 162716
+        },
+        {
+            "symbol": "112610.KS",
+            "sha256": "595fac92086e4a86811e235d564d52876df70b88dc29f3cd2f569635eb0a01e7",
+            "bytes": 161369
+        },
+        {
+            "symbol": "119850.KQ",
+            "sha256": "ed19318fb8509730d1b06eda2f1d0c561a75b89d428e71cca25df9ae95032e43",
+            "bytes": 161239
+        },
+        {
+            "symbol": "121600.KQ",
+            "sha256": "b6c979c742e612da54728393f289414ba46d97f9d52283274c38b154f33596e6",
+            "bytes": 161012
+        },
+        {
+            "symbol": "126340.KQ",
+            "sha256": "5f1b18eafea7a7658bd5cc0ab85e01eed092ba2b211cec2b7e81f17c29cd4312",
+            "bytes": 170924
+        },
+        {
+            "symbol": "128820.KS",
+            "sha256": "d75ab75056989eca1bfb768ac0a01841a451f4224a7db564c1fdaf0d9b51dbc7",
+            "bytes": 175489
+        },
+        {
+            "symbol": "128940.KS",
+            "sha256": "a6e2e9a5bd00506ca1f3d4a950da01d421ebfe810589415d9e1c71d4d40df51a",
+            "bytes": 162979
+        },
+        {
+            "symbol": "131290.KQ",
+            "sha256": "b32f974d313045e4dfe262030a00d25f6ad36f1f6f2f0a3e1e2be7bd407b108f",
+            "bytes": 161696
+        },
+        {
+            "symbol": "131970.KQ",
+            "sha256": "dddfa375d5958175f1f551b0919a05fd38547be9c4acb40e2d2fe8d5878da256",
+            "bytes": 161588
+        },
+        {
+            "symbol": "138040.KS",
+            "sha256": "e8d15f2d2c42c836c335c4db085372d6b823f6376b4faf56b7b884c92a46e4fd",
+            "bytes": 163273
+        },
+        {
+            "symbol": "138360.KQ",
+            "sha256": "daff53fac3e5aa979148c985cac460636bb49c3f2365d80ca659edc929ad2435",
+            "bytes": 158405
+        },
+        {
+            "symbol": "141000.KQ",
+            "sha256": "da32b5986b24abb7ce3c11d9ef6e4a8fa3faaf018528ff17b6151da0a1eac81c",
+            "bytes": 159112
+        },
+        {
+            "symbol": "142280.KQ",
+            "sha256": "437297167ba0bce0c92ea33c5af52dc437ee21218deb7eb16e8e4865ad9ccbb1",
+            "bytes": 158909
+        },
+        {
+            "symbol": "144960.KQ",
+            "sha256": "76ecbd343283a3e26453f2ce1b2a5389dafa4a92d5b6c43f41f39cd493ef5f3a",
+            "bytes": 159656
+        },
+        {
+            "symbol": "161890.KS",
+            "sha256": "9244b6c0bf9b71b91d5e5cea15b9971e335d4d671cc5c8ec47ccfd23303983da",
+            "bytes": 161636
+        },
+        {
+            "symbol": "170920.KQ",
+            "sha256": "cb035f23cd815ca6ace2127824999d05645fa5231de6b6ea7cbc995bf5846967",
+            "bytes": 160831
+        },
+        {
+            "symbol": "178320.KQ",
+            "sha256": "c3f1783b5333ed5a0075bdcaaf43473527cdd56bfda2769c364d4534cbf633bf",
+            "bytes": 161514
+        },
+        {
+            "symbol": "180640.KS",
+            "sha256": "65a790ac3c638b824046b1a21a6f6fe5cf24d90a74d1ffdaac35b14987382864",
+            "bytes": 162453
+        },
+        {
+            "symbol": "181710.KS",
+            "sha256": "bacb275781c8a4a6846a891f9213cf4d29b6abbe33ec00df9baab8376e761769",
+            "bytes": 161068
+        },
+        {
+            "symbol": "196170.KQ",
+            "sha256": "68f5dd57be89c5e5f384cb3b9f4019852b5056098f6f443eb74ac0815e96f1fb",
+            "bytes": 171949
+        },
+        {
+            "symbol": "204270.KQ",
+            "sha256": "3caf52246edc43fe50f098587133bab72057f3b1f9b6a3c2d28cf1f3e3aba98a",
+            "bytes": 161407
+        },
+        {
+            "symbol": "207940.KS",
+            "sha256": "c6e427822029db0420b9c72fd1d812a23bd1d3457847edf8fc68298397d3838c",
+            "bytes": 167791
+        },
+        {
+            "symbol": "211270.KQ",
+            "sha256": "825ed72fdbd0c148599ea2045a6732c4fc546ed948962260953f563fda6dfca5",
+            "bytes": 160780
+        },
+        {
+            "symbol": "214450.KQ",
+            "sha256": "493b03562b474ecb5bb9c61461871a6de8f8deba8ebc4768ddd97fa0c0de236e",
+            "bytes": 163068
+        },
+        {
+            "symbol": "218410.KQ",
+            "sha256": "70432c0c2d18bd77512beef9cf551fa4f7725560f9274566a445486fd4fcc835",
+            "bytes": 161373
+        },
+        {
+            "symbol": "222800.KQ",
+            "sha256": "a1d38ac47bfe5d5ef998783747967378e8f3bd427f3d0a348a68afe87979be05",
+            "bytes": 161919
+        },
+        {
+            "symbol": "225530.KQ",
+            "sha256": "39f57c3224d2304f9b75188b5dc58bfedafe247f7979454ffd93a326a5c8bc52",
+            "bytes": 158999
+        },
+        {
+            "symbol": "226950.KQ",
+            "sha256": "ab6216f9774daf41b2bd4df9c5ecf2513b02e1e0549727daa3f5feacf92fd607",
+            "bytes": 161651
+        },
+        {
+            "symbol": "229640.KS",
+            "sha256": "9e35d981513d675e3700a6a119a28ad64fcaf8623feb5e7e2bae230913582314",
+            "bytes": 161261
+        },
+        {
+            "symbol": "232140.KQ",
+            "sha256": "7dc6a294fb48588331440b336cd19647e75d15accc6d3932e2b5e6f49d08c6b9",
+            "bytes": 161220
+        },
+        {
+            "symbol": "240810.KQ",
+            "sha256": "2040bc1f491bdea5d8b4cfe7d84e726e1d0b7fb628f23d862a5dd04112298607",
+            "bytes": 162119
+        },
+        {
+            "symbol": "247540.KQ",
+            "sha256": "520b8a2a75c13c19060ab050199c041f33946717c88c4b4ee025bfe6d6bc779c",
+            "bytes": 163291
+        },
+        {
+            "symbol": "250030.KQ",
+            "sha256": "6484bf674a2c4054c2e96b681f669d13fab611ffe86433879079c2a5ca1f82cd",
+            "bytes": 159067
+        },
+        {
+            "symbol": "257720.KQ",
+            "sha256": "5a4771e7525c3c7063b957fb69f9fe32bf0be20f5fa61402975619c8557f425c",
+            "bytes": 160862
+        },
+        {
+            "symbol": "259960.KS",
+            "sha256": "906f8f37a1fc74fca1c5e84b9a72820c382a3342d2fc72edd6555b3f5c1b7836",
+            "bytes": 163108
+        },
+        {
+            "symbol": "263860.KQ",
+            "sha256": "c0a553f6197184f35434fe2a879ff2ae3bb11e767424da613a219e2bf878f7da",
+            "bytes": 160829
+        },
+        {
+            "symbol": "267250.KS",
+            "sha256": "d960206587e8a278a09e38016d50f8c69cce09a2f4e80a88bd2670ae6dc4c1ec",
+            "bytes": 162672
+        },
+        {
+            "symbol": "267260.KS",
+            "sha256": "1e4ca848c936da0685224303283d2be486d0f8106445db9d484e8a4a7f69937a",
+            "bytes": 163453
+        },
+        {
+            "symbol": "267270.KS",
+            "sha256": "9cf836ccfaee8936364e2b2436210fcccdf97f34db219295533ec04c9c78451f",
+            "bytes": 162094
+        },
+        {
+            "symbol": "267320.KQ",
+            "sha256": "7277340e4cc1af5778041c47a135b581c6c9610e6d43d0357c6b24306b1088d0",
+            "bytes": 158968
+        },
+        {
+            "symbol": "267850.KS",
+            "sha256": "4687aba61111372791137c6e71077a74c03943af252988f2dd7823f7c8c4e08f",
+            "bytes": 160226
+        },
+        {
+            "symbol": "272210.KS",
+            "sha256": "88884ccedc5015e4a629160b5952185f5e2f38b4b1deda1dfa6297fa4c44c64f",
+            "bytes": 162003
+        },
+        {
+            "symbol": "272450.KS",
+            "sha256": "c0dde6fcd49c88dc3d389ff99816450f7c7da90aee7241b5148d360f4d53dcf3",
+            "bytes": 159378
+        },
+        {
+            "symbol": "277810.KQ",
+            "sha256": "1474462f8438a440ff86ad1755c5d9b76fe44b6670e9ebfd44a1993689ac1d6b",
+            "bytes": 163178
+        },
+        {
+            "symbol": "277810.KS",
+            "sha256": "9515ef033dea2162033b0d1f99d3a800e769154e518bcb3332991036068ffe58",
+            "bytes": 126694
+        },
+        {
+            "symbol": "278470.KS",
+            "sha256": "446c217d7cfbc29735ee61f0ad0345c52c5a31adee2d82485a0e0e02ae64af4c",
+            "bytes": 162850
+        },
+        {
+            "symbol": "278650.KQ",
+            "sha256": "e82d0b99bd4947771958228752ce57543062a6ec95e41983a9704ab2858994e6",
+            "bytes": 158703
+        },
+        {
+            "symbol": "281820.KS",
+            "sha256": "6ff540356fb2b796763504be5190e13fa61a060d262cf1f5641c9637f9441e32",
+            "bytes": 160533
+        },
+        {
+            "symbol": "282720.KQ",
+            "sha256": "953e4d6da021f73571b9f4690408caf9ab02a5bbf3cc507450801c3d7edd2ff2",
+            "bytes": 159996
+        },
+        {
+            "symbol": "290650.KQ",
+            "sha256": "80b0714ced40c673b85a551d0e0b02cb27a00c1a5e28060b7efa9b0681e8a155",
+            "bytes": 160867
+        },
+        {
+            "symbol": "290720.KQ",
+            "sha256": "1dd063c1398d7fad75fc18a66fc5febbbfdc6f3914f7676806db53f62e824762",
+            "bytes": 158964
+        },
+        {
+            "symbol": "298040.KS",
+            "sha256": "e9338014c62bf583a13aff71d0378d03500b9064ae57e8433494488a17235a5d",
+            "bytes": 164163
+        },
+        {
+            "symbol": "302550.KQ",
+            "sha256": "05dbc8291f6ca55197e775beebc57fd47efaab16bbd3ed324fea28c011ceda03",
+            "bytes": 158470
+        },
+        {
+            "symbol": "307750.KQ",
+            "sha256": "2d3c9a3d6f94913e4a0888c6742f2419613f05cbfda82a2b16883ac97771d509",
+            "bytes": 159234
+        },
+        {
+            "symbol": "316140.KS",
+            "sha256": "059dcf58778c719593fbd48f77c289f7091210d5c394b4cb0f51933da134b276",
+            "bytes": 161814
+        },
+        {
+            "symbol": "317240.KQ",
+            "sha256": "7026a30f60b2fa50bf801491f86b4102857787bf67a925a333889db10a5f1900",
+            "bytes": 158464
+        },
+        {
+            "symbol": "317850.KQ",
+            "sha256": "554243131b616620c739a40551bd7fd2cfcbcac583d0c8f557fd6ed865e5c33f",
+            "bytes": 159235
+        },
+        {
+            "symbol": "319660.KQ",
+            "sha256": "1b5a60c64e7dd73c9946c205eb9a25d91d6c463e720de9d40970fe1a812df0c6",
+            "bytes": 161806
+        },
+        {
+            "symbol": "322000.KS",
+            "sha256": "be15de4869a8267242f8bcc6b23f5f14d7112508cd271d435c0fcab48ccee9d3",
+            "bytes": 161897
+        },
+        {
+            "symbol": "326030.KS",
+            "sha256": "ae7c125f16e379817ef402ad74304385393661fa2464b4980f614051e177f84d",
+            "bytes": 162362
+        },
+        {
+            "symbol": "327260.KQ",
+            "sha256": "fb695efb1cfb7f62a09d8b361532351b40e58799edfdac3d90420308d7e61bb3",
+            "bytes": 176136
+        },
+        {
+            "symbol": "328130.KQ",
+            "sha256": "d6c57352624a45feb19920e78387e4079c6585251d1c2addea893ae0d85861df",
+            "bytes": 172887
+        },
+        {
+            "symbol": "329180.KS",
+            "sha256": "5493ace93ca7e6512009a71b5a7e01a633ef4fecd2890c061d93dc63e9609a18",
+            "bytes": 163296
+        },
+        {
+            "symbol": "336260.KS",
+            "sha256": "2abfcff41624fc22fc9f2a0e6abb80f9546f0ec4cb112dc420f4d13da4ad54a9",
+            "bytes": 161461
+        },
+        {
+            "symbol": "347850.KQ",
+            "sha256": "8ebf89f8a4b4d986a62e48e23c84e68dcc6e8610fa67f5c605d974b6fa207f09",
+            "bytes": 161790
+        },
+        {
+            "symbol": "352820.KS",
+            "sha256": "e46ec7d86d7b2134a5ea41c633c6091e40f0a5d3790d560434a9c8352b27ac86",
+            "bytes": 163286
+        },
+        {
+            "symbol": "353200.KS",
+            "sha256": "5345089aa7a63d0fe883c26c9470058d8ee6875f79b85a576504cfb5e4df70db",
+            "bytes": 162019
+        },
+        {
+            "symbol": "354320.KQ",
+            "sha256": "93f0a9c7d8bb8c050180fad6f15179e9cc21582b0fc6c0a1173a1df7e264c7a5",
+            "bytes": 161009
+        },
+        {
+            "symbol": "356680.KQ",
+            "sha256": "c24b8d8f4b975ec4a6fc40e9772e1e9daf5c275c9bd70771ae11813bd9f28bdf",
+            "bytes": 160087
+        },
+        {
+            "symbol": "356860.KQ",
+            "sha256": "9581dedba8b21e3d43b885423241c73601597b14e70e885540d2d6eb18c2ebf8",
+            "bytes": 175214
+        },
+        {
+            "symbol": "361610.KS",
+            "sha256": "6135d4eb4a834d182a9518d986b509c7df4563fc7c52d4e5ac71264227a3db77",
+            "bytes": 125062
+        },
+        {
+            "symbol": "373220.KS",
+            "sha256": "9e9178114604e2a5844a3616d6ffb43e2b0525aa9ee663d2802000be8faa1fec",
+            "bytes": 163299
+        },
+        {
+            "symbol": "389260.KQ",
+            "sha256": "647ab78f9f9f54dbdb6b0c3757cee3aa75aaf7e1a21c0f669bd5e3f50cf46e31",
+            "bytes": 161048
+        },
+        {
+            "symbol": "393210.KQ",
+            "sha256": "e68e7ab82e7b50e40998302f5c6d30647a7f191d7d97c18956dc0705d2c56bd7",
+            "bytes": 159328
+        },
+        {
+            "symbol": "396300.KQ",
+            "sha256": "3090a25fd30e063f75a1b8b1df8309bce00591c49d61b4fa70a65cdf28ea0cdd",
+            "bytes": 159482
+        },
+        {
+            "symbol": "399720.KQ",
+            "sha256": "6a4e4ebc224afb15815fd21c15600d8ae18c12bd5541ab84b007264b26121a6a",
+            "bytes": 161108
+        },
+        {
+            "symbol": "402340.KS",
+            "sha256": "cda822d4b004304f9bbd5e932e822ba76aa0ddd37f2bb2ca10ec76f0f7f9c92b",
+            "bytes": 163267
+        },
+        {
+            "symbol": "403870.KQ",
+            "sha256": "f975dd8ddba32225e3eeb38f72eb9dc0eba0053f86b77ddd088d32a31b2f2ee0",
+            "bytes": 161609
+        },
+        {
+            "symbol": "417200.KQ",
+            "sha256": "e95f3c5d0a5d9454d7e0e6374e632c15c469f2a62d9bf5bde6b5c6ad21ed58e2",
+            "bytes": 161385
+        },
+        {
+            "symbol": "417840.KQ",
+            "sha256": "985f86bb1d04dd9c256ccd69d3d5ee546a21f1f27566d3424bf787e454d37ff5",
+            "bytes": 169827
+        },
+        {
+            "symbol": "419050.KQ",
+            "sha256": "eb9c2c048f39c54bb3231bcb578d91c7d1d771509938b2879c15ea9e90db2129",
+            "bytes": 159180
+        },
+        {
+            "symbol": "437730.KQ",
+            "sha256": "ac453ae762d83afda8c7b94fdad81d320b1aab859cedb6925432e9931fd6badf",
+            "bytes": 161238
+        },
+        {
+            "symbol": "440110.KQ",
+            "sha256": "f02dca79ae0d2b2d0e77bea33400851b392955a38d8eb986b36acb6fecc74be7",
+            "bytes": 161320
+        },
+        {
+            "symbol": "443670.KQ",
+            "sha256": "fe9b963f32785366b2ba50c4564e2b29078bc789b815e98d18cdcc7620c937ee",
+            "bytes": 159330
+        },
+        {
+            "symbol": "445680.KQ",
+            "sha256": "755a732728edf14520b6fbcdebb3b60aa3f6ccc40ffec7841f6a0994261f0eda",
+            "bytes": 161087
+        },
+        {
+            "symbol": "452190.KQ",
+            "sha256": "e9228772c4579fa95c05e8a0a78f2ff6646e199f03d88a844b39dc6a918b4e85",
+            "bytes": 158820
+        },
+        {
+            "symbol": "452280.KQ",
+            "sha256": "ed4c7499cdfb8b6e8cce110c4d6da199ba54abde962c37a77c0ad96536bd0b19",
+            "bytes": 160226
+        },
+        {
+            "symbol": "456160.KQ",
+            "sha256": "18344562f8f54e13e84607f7d47b2e2ceba285dc1e799feb39843c697b9caaaf",
+            "bytes": 96382
+        },
+        {
+            "symbol": "457190.KS",
+            "sha256": "0754cab41d8e77314149679ee33dcb992dc709b8e9dc4564c9b8d01acb66c2a5",
+            "bytes": 161544
+        },
+        {
+            "symbol": "457550.KQ",
+            "sha256": "0cf672781cc8159d37b386088ccbd227fc59a4ace5bb9eb5843383b106851462",
+            "bytes": 161156
+        },
+        {
+            "symbol": "458350.KQ",
+            "sha256": "61c3476315c5b30766c936abb4c59ab78fbc85d5404416db9e1af26ee327a437",
+            "bytes": 50476
+        },
+        {
+            "symbol": "475150.KS",
+            "sha256": "9f8ee96d0ea08aef6e91e7bd4c1e801551789f029b198bf5f01ed2c4cff21ed5",
+            "bytes": 161531
+        },
+        {
+            "symbol": "478340.KQ",
+            "sha256": "3c9efba271e486cd60ee07ce474d88e9dcb01f2f630c2b1e6b053c73e1311654",
+            "bytes": 65355
+        },
+        {
+            "symbol": "491000.KQ",
+            "sha256": "0ca089a440f9a28b9b1469f0338de5621440c29b143fd83ec8f2d93dd7a2fbcb",
+            "bytes": 69736
+        }
+    ],
+    "batches": [
+        {
+            "batch": 1,
+            "file": "batch-1.json",
+            "sha256": "6a8d54235c78b0eb01caf686cb186363606da58ccad382846bcf9b44cd82882b",
+            "bytes": 46919,
+            "symbols": 20,
+            "observations": 35,
+            "errors": [],
+            "elapsed_ms": 28241.5651,
+            "wall_ms": 28388.5638,
+            "command": "E:\\xampp\\php\\php.exe bin\/swing_path_tally.php --dir data\/ohlcv --symbols 000100.KS,000150.KS,000250.KQ,000270.KS,000500.KS,000650.KS,000660.KS,000720.KS,000810.KS,000990.KS,001210.KS,001440.KS,001820.KS,002320.KS,002720.KS,002990.KS,003010.KS,003160.KS,003230.KS,003280.KS --confirm-from 2025-10-10 --confirm-to 2026-09-07 --as-of 2026-10-08"
+        },
+        {
+            "batch": 2,
+            "file": "batch-2.json",
+            "sha256": "13ec413069f51b7281318ccacae995803d929a8a011055669e6b3e286a2e4812",
+            "bytes": 56316,
+            "symbols": 20,
+            "observations": 44,
+            "errors": [],
+            "elapsed_ms": 28555.3353,
+            "wall_ms": 28727.6331,
+            "command": "E:\\xampp\\php\\php.exe bin\/swing_path_tally.php --dir data\/ohlcv --symbols 003490.KS,003495.KS,003670.KS,004090.KS,005160.KQ,005380.KS,005490.KS,005830.KS,005930.KS,005935.KS,006110.KS,006260.KS,006360.KS,006400.KS,006800.KS,007660.KS,007810.KS,008830.KQ,008930.KQ,008930.KS --confirm-from 2025-10-10 --confirm-to 2026-09-07 --as-of 2026-10-08"
+        },
+        {
+            "batch": 3,
+            "file": "batch-3.json",
+            "sha256": "62e8e411439c761248b5ac2074889f72e72e14184099f834a16ca09e0e18545c",
+            "bytes": 44512,
+            "symbols": 20,
+            "observations": 33,
+            "errors": [],
+            "elapsed_ms": 27019.4107,
+            "wall_ms": 27180.694,
+            "command": "E:\\xampp\\php\\php.exe bin\/swing_path_tally.php --dir data\/ohlcv --symbols 008970.KS,009150.KS,009420.KS,009540.KS,009830.KS,009900.KS,010060.KS,010120.KS,010130.KS,010140.KS,010170.KQ,010580.KS,010950.KS,011070.KS,011200.KS,012210.KQ,012330.KS,012450.KS,014950.KQ,015760.KS --confirm-from 2025-10-10 --confirm-to 2026-09-07 --as-of 2026-10-08"
+        },
+        {
+            "batch": 4,
+            "file": "batch-4.json",
+            "sha256": "0c8fe5b113c9e3cb45064274ca6e73c2c55ca0966bccacdd025dde583a4b88b7",
+            "bytes": 46948,
+            "symbols": 20,
+            "observations": 35,
+            "errors": [],
+            "elapsed_ms": 28157.3591,
+            "wall_ms": 28320.5014,
+            "command": "E:\\xampp\\php\\php.exe bin\/swing_path_tally.php --dir data\/ohlcv --symbols 016360.KS,017670.KS,017900.KS,018260.KS,018880.KS,020150.KS,023530.KS,028050.KS,028260.KS,028300.KQ,028670.KS,030530.KQ,030960.KQ,031980.KQ,032830.KS,033160.KQ,033780.KS,033790.KQ,034020.KS,034230.KS --confirm-from 2025-10-10 --confirm-to 2026-09-07 --as-of 2026-10-08"
+        },
+        {
+            "batch": 5,
+            "file": "batch-5.json",
+            "sha256": "b09ec019382682e64aa93dab1073229418d89049af41c95ca5d7f2ddcbdc5f4b",
+            "bytes": 41718,
+            "symbols": 20,
+            "observations": 30,
+            "errors": [],
+            "elapsed_ms": 29918.5727,
+            "wall_ms": 30053.1576,
+            "command": "E:\\xampp\\php\\php.exe bin\/swing_path_tally.php --dir data\/ohlcv --symbols 034730.KS,035420.KS,035720.KS,035900.KQ,036540.KQ,036710.KQ,036930.KQ,038500.KQ,039030.KQ,039610.KQ,039860.KQ,042510.KQ,042660.KS,042700.KS,043260.KQ,046970.KQ,047040.KS,047810.KS,047920.KQ,051910.KS --confirm-from 2025-10-10 --confirm-to 2026-09-07 --as-of 2026-10-08"
+        },
+        {
+            "batch": 6,
+            "file": "batch-6.json",
+            "sha256": "1f2d61e6984ebc25fdd04ec21526c473db0ad2eabc8e6cd002d79069d6adccc6",
+            "bytes": 49114,
+            "symbols": 20,
+            "observations": 37,
+            "errors": [],
+            "elapsed_ms": 27152.9179,
+            "wall_ms": 27284.2651,
+            "command": "E:\\xampp\\php\\php.exe bin\/swing_path_tally.php --dir data\/ohlcv --symbols 052690.KS,053800.KQ,055550.KS,058470.KQ,058610.KQ,062040.KS,064290.KQ,064350.KS,064400.KS,065450.KQ,066570.KS,066970.KS,067290.KQ,067310.KQ,068270.KS,069540.KQ,071050.KS,072950.KQ,077500.KS,078350.KQ --confirm-from 2025-10-10 --confirm-to 2026-09-07 --as-of 2026-10-08"
+        },
+        {
+            "batch": 7,
+            "file": "batch-7.json",
+            "sha256": "010ebae004d104de070011b8c95a03f333bc1afcd4a998842326bf3fd596700a",
+            "bytes": 46832,
+            "symbols": 20,
+            "observations": 35,
+            "errors": [],
+            "elapsed_ms": 27582.6742,
+            "wall_ms": 27745.5048,
+            "command": "E:\\xampp\\php\\php.exe bin\/swing_path_tally.php --dir data\/ohlcv --symbols 078600.KQ,078930.KS,079550.KS,079650.KQ,080220.KQ,082740.KS,084370.KQ,084670.KS,086520.KQ,086790.KS,087010.KQ,089030.KQ,089890.KQ,089970.KQ,092870.KQ,095610.KQ,096770.KS,098460.KQ,101360.KQ,103590.KS --confirm-from 2025-10-10 --confirm-to 2026-09-07 --as-of 2026-10-08"
+        },
+        {
+            "batch": 8,
+            "file": "batch-8.json",
+            "sha256": "eb7f55a8887b5229798c599deb060eb75ce603ae3e000848e915061f349293c6",
+            "bytes": 50998,
+            "symbols": 20,
+            "observations": 39,
+            "errors": [],
+            "elapsed_ms": 27137.5594,
+            "wall_ms": 27287.0557,
+            "command": "E:\\xampp\\php\\php.exe bin\/swing_path_tally.php --dir data\/ohlcv --symbols 104620.KQ,105560.KS,108490.KQ,112610.KS,119850.KQ,121600.KQ,126340.KQ,128820.KS,128940.KS,131290.KQ,131970.KQ,138040.KS,138360.KQ,141000.KQ,142280.KQ,144960.KQ,161890.KS,170920.KQ,178320.KQ,180640.KS --confirm-from 2025-10-10 --confirm-to 2026-09-07 --as-of 2026-10-08"
+        },
+        {
+            "batch": 9,
+            "file": "batch-9.json",
+            "sha256": "0514cfc25b5b1758fc9c2c20d62440f3dc8c676ced26de2d3ab3bc52d1a57d77",
+            "bytes": 49125,
+            "symbols": 20,
+            "observations": 37,
+            "errors": [],
+            "elapsed_ms": 26120.1818,
+            "wall_ms": 26274.5821,
+            "command": "E:\\xampp\\php\\php.exe bin\/swing_path_tally.php --dir data\/ohlcv --symbols 181710.KS,196170.KQ,204270.KQ,207940.KS,211270.KQ,214450.KQ,218410.KQ,222800.KQ,225530.KQ,226950.KQ,229640.KS,232140.KQ,240810.KQ,247540.KQ,250030.KQ,257720.KQ,259960.KS,263860.KQ,267250.KS,267260.KS --confirm-from 2025-10-10 --confirm-to 2026-09-07 --as-of 2026-10-08"
+        },
+        {
+            "batch": 10,
+            "file": "batch-10.json",
+            "sha256": "b5a8efb7e3128b57b7d99ba2e275f5449908ccd50cdc87b300db3aef4d56c6da",
+            "bytes": 35793,
+            "symbols": 20,
+            "observations": 24,
+            "errors": [],
+            "elapsed_ms": 26768.9184,
+            "wall_ms": 26902.2167,
+            "command": "E:\\xampp\\php\\php.exe bin\/swing_path_tally.php --dir data\/ohlcv --symbols 267270.KS,267320.KQ,267850.KS,272210.KS,272450.KS,277810.KQ,277810.KS,278470.KS,278650.KQ,281820.KS,282720.KQ,290650.KQ,290720.KQ,298040.KS,302550.KQ,307750.KQ,316140.KS,317240.KQ,317850.KQ,319660.KQ --confirm-from 2025-10-10 --confirm-to 2026-09-07 --as-of 2026-10-08"
+        },
+        {
+            "batch": 11,
+            "file": "batch-11.json",
+            "sha256": "8a93cf0eb5a86e0e1a70c0d148f3b1e77b0fba9932cbc13e3e4529a6c646c978",
+            "bytes": 41618,
+            "symbols": 20,
+            "observations": 30,
+            "errors": [],
+            "elapsed_ms": 26678.4975,
+            "wall_ms": 26834.6928,
+            "command": "E:\\xampp\\php\\php.exe bin\/swing_path_tally.php --dir data\/ohlcv --symbols 322000.KS,326030.KS,327260.KQ,328130.KQ,329180.KS,336260.KS,347850.KQ,352820.KS,353200.KS,354320.KQ,356680.KQ,356860.KQ,361610.KS,373220.KS,389260.KQ,393210.KQ,396300.KQ,399720.KQ,402340.KS,403870.KQ --confirm-from 2025-10-10 --confirm-to 2026-09-07 --as-of 2026-10-08"
+        },
+        {
+            "batch": 12,
+            "file": "batch-12.json",
+            "sha256": "42273a57962ceb06cc4e5bdb3bbe873d19e32bde5c963b242ffab2e26f580bda",
+            "bytes": 30875,
+            "symbols": 16,
+            "observations": 20,
+            "errors": [],
+            "elapsed_ms": 17827.5893,
+            "wall_ms": 17962.7036,
+            "command": "E:\\xampp\\php\\php.exe bin\/swing_path_tally.php --dir data\/ohlcv --symbols 417200.KQ,417840.KQ,419050.KQ,437730.KQ,440110.KQ,443670.KQ,445680.KQ,452190.KQ,452280.KQ,456160.KQ,457190.KS,457550.KQ,458350.KQ,475150.KS,478340.KQ,491000.KQ --confirm-from 2025-10-10 --confirm-to 2026-09-07 --as-of 2026-10-08"
+        }
+    ],
+    "hash_unchanged": true,
+    "combine": "보존한 묶음만 SwingPathTally::combine으로 한 번 집계했다. 묶음별 평균과 중앙값은 다시 평균하지 않았다.",
+    "resum_matches_summary": true,
+    "symbols_with_signal": 188,
+    "symbols_without_signal": [
+        "000650.KS",
+        "001210.KS",
+        "002320.KS",
+        "003230.KS",
+        "003495.KS",
+        "006360.KS",
+        "008830.KQ",
+        "008970.KS",
+        "010140.KS",
+        "010580.KS",
+        "011200.KS",
+        "014950.KQ",
+        "028050.KS",
+        "033160.KQ",
+        "034230.KS",
+        "039610.KQ",
+        "039860.KQ",
+        "042510.KQ",
+        "042660.KS",
+        "042700.KS",
+        "064290.KQ",
+        "064350.KS",
+        "067290.KQ",
+        "077500.KS",
+        "082740.KS",
+        "084670.KS",
+        "086520.KQ",
+        "101360.KQ",
+        "104620.KQ",
+        "121600.KQ",
+        "128820.KS",
+        "138360.KQ",
+        "144960.KQ",
+        "204270.KQ",
+        "207940.KS",
+        "218410.KQ",
+        "259960.KS",
+        "263860.KQ",
+        "302550.KQ",
+        "307750.KQ",
+        "317240.KQ",
+        "326030.KS",
+        "356680.KQ",
+        "389260.KQ",
+        "393210.KQ",
+        "403870.KQ",
+        "452280.KQ",
+        "458350.KQ"
+    ],
+    "failure_count": 0
+}

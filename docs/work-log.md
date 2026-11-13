@@ -1,3 +1,9 @@
+## 2026-11-13 17:10 · Cursor · 끝
+- 한 일: 2차 검증 236종목을 12묶음으로 집계하고, 묶음을 다시 합산해 summary와 맞는지 확인.
+- 파일: docs/swing-path-validate-20251010/, .gitattributes, docs/work-log.md
+- 커밋: 별도 PR
+- 롤백: 없음
+
 ## 2026-11-13 14:18 · Cursor · 끝
 - 한 일: 1차 관찰 종료일 이후의 검증 기간을 2025-10-10~2026-09-07, 관찰 종료 2026-10-08로 문서에 고정. 신호는 계산하지 않음.
 - 파일: docs/swing-path-validate-20251010/protocol.md, docs/work-log.md

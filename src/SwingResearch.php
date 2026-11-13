@@ -312,61 +312,20 @@ final class SwingResearch
         if (!$kr || !self::realDay((string) $signal['confirm_day']) || !is_numeric($signal['breakout_level'] ?? null)) {
             return $row;
         }
-        $plan = self::tradingDaysThrough((string) $signal['confirm_day'], $symbol, $asOf);
-        $refDay = $plan['days'][0] ?? null;
-        if ($refDay === null) {
-            if ($plan['halt'] === 'unknown') {
-                return $row;
+        $price = self::pricePath($byDay, $symbol, (string) $signal['confirm_day'], $asOf);
+        foreach (['ref_day', 'ref_open', 'ref_status', 'horizons'] as $key) {
+            $row[$key] = $price[$key];
+        }
+        if ($price['ref_status'] !== '확정') {
+            if ($price['ref_status'] === '미완료') {
+                $row['resistance_status'] = is_numeric($signal['resistance'] ?? null) ? '미완료' : '미확정';
+                $row['touch_status'] = '미완료';
+                $row['close_break_status'] = '미완료';
             }
-            $refDay = self::nextTradingDay((string) $signal['confirm_day']);
-            if ($refDay === null) {
-                return $row;
-            }
-            $row['ref_day'] = $refDay;
-            $row['ref_status'] = '미완료';
-            foreach ([5, 10, 20] as $n) {
-                $row['horizons'][$n] = $empty('미완료');
-            }
-            $row['resistance_status'] = is_numeric($signal['resistance'] ?? null) ? '미완료' : '미확정';
-            $row['touch_status'] = '미완료';
-            $row['close_break_status'] = '미완료';
             return $row;
         }
-        $row['ref_day'] = $refDay;
-        if (!isset($byDay[$refDay])) {
-            return $row;
-        }
-        $open = (float) $byDay[$refDay]['open'];
-        $row['ref_open'] = $open;
-        $row['ref_status'] = '확정';
-        $usable = [];
-        $halt = null;
-        foreach ($plan['days'] as $day) {
-            if (!isset($byDay[$day])) {
-                $halt = 'unknown';
-                break;
-            }
-            $usable[] = $byDay[$day];
-        }
-        if ($halt === null && $plan['halt'] === 'unknown' && count($usable) < 20) {
-            $halt = 'unknown';
-        }
-        foreach ([5, 10, 20] as $n) {
-            if (count($usable) < $n) {
-                $row['horizons'][$n] = $empty($halt === 'unknown' ? '미확정' : '미완료');
-                continue;
-            }
-            $window = array_slice($usable, 0, $n);
-            $close = (float) $window[$n - 1]['close'];
-            $high = max(array_map(static fn (array $bar): float => (float) $bar['high'], $window));
-            $low = min(array_map(static fn (array $bar): float => (float) $bar['low'], $window));
-            $row['horizons'][$n] = [
-                'status' => '완료',
-                'close_change' => $open > 0 ? $close / $open - 1 : null,
-                'max_up' => $open > 0 ? $high / $open - 1 : null,
-                'max_down' => $open > 0 ? $low / $open - 1 : null,
-            ];
-        }
+        $usable = $price['bars'];
+        $halt = $price['halt'];
         $resistance = is_numeric($signal['resistance'] ?? null) ? (float) $signal['resistance'] : null;
         $level = (float) $signal['breakout_level'];
         $resDay = null;
@@ -418,6 +377,73 @@ final class SwingResearch
             $row['order_status'] = '선후관계 미확정';
             $row['order_day'] = $orderDay;
         }
+        return $row;
+    }
+
+    /** Completed bars indexed by Seoul session date; shared by signals and peer observations. */
+    public static function pricePath(array $byDay, string $symbol, string $confirmDay, int $asOf): array
+    {
+        $empty = static fn (string $status): array => ['status' => $status, 'close_change' => null, 'max_up' => null, 'max_down' => null];
+        $row = ['ref_day' => null, 'ref_open' => null, 'ref_status' => '미확정',
+            'horizons' => [5 => $empty('미확정'), 10 => $empty('미확정'), 20 => $empty('미확정')],
+            'bars' => [], 'halt' => null];
+        if (!self::realDay($confirmDay) || (!str_ends_with($symbol, '.KS') && !str_ends_with($symbol, '.KQ'))) {
+            return $row;
+        }
+        $plan = self::tradingDaysThrough($confirmDay, $symbol, $asOf);
+        $refDay = $plan['days'][0] ?? null;
+        if ($refDay === null) {
+            if ($plan['halt'] === 'unknown') {
+                return $row;
+            }
+            $refDay = self::nextTradingDay($confirmDay);
+            if ($refDay === null) {
+                return $row;
+            }
+            $row['ref_day'] = $refDay;
+            $row['ref_status'] = '미완료';
+            foreach ([5, 10, 20] as $n) {
+                $row['horizons'][$n] = $empty('미완료');
+            }
+            return $row;
+        }
+        $row['ref_day'] = $refDay;
+        if (!isset($byDay[$refDay])) {
+            return $row;
+        }
+        $open = (float) $byDay[$refDay]['open'];
+        $row['ref_open'] = $open;
+        $row['ref_status'] = '확정';
+        $usable = [];
+        $halt = null;
+        foreach ($plan['days'] as $day) {
+            if (!isset($byDay[$day])) {
+                $halt = 'unknown';
+                break;
+            }
+            $usable[] = $byDay[$day];
+        }
+        if ($halt === null && $plan['halt'] === 'unknown' && count($usable) < 20) {
+            $halt = 'unknown';
+        }
+        foreach ([5, 10, 20] as $n) {
+            if (count($usable) < $n) {
+                $row['horizons'][$n] = $empty($halt === 'unknown' ? '미확정' : '미완료');
+                continue;
+            }
+            $window = array_slice($usable, 0, $n);
+            $close = (float) $window[$n - 1]['close'];
+            $high = max(array_map(static fn (array $bar): float => (float) $bar['high'], $window));
+            $low = min(array_map(static fn (array $bar): float => (float) $bar['low'], $window));
+            $row['horizons'][$n] = [
+                'status' => '완료',
+                'close_change' => $open > 0 ? $close / $open - 1 : null,
+                'max_up' => $open > 0 ? $high / $open - 1 : null,
+                'max_down' => $open > 0 ? $low / $open - 1 : null,
+            ];
+        }
+        $row['bars'] = $usable;
+        $row['halt'] = $halt;
         return $row;
     }
 

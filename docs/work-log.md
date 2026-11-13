@@ -1,3 +1,9 @@
+## 2026-11-13 13:20 · Cursor · 끝
+- 한 일: 미확정 다섯 종목의 2025-09-19 KRX 원본이 로컬에 없음을 확인하고, Yahoo chart 원본도 없어 날짜 부재와 null OHLCV를 구분하지 않음.
+- 파일: docs/swing-path-compare-2025h1/sep19-stored-krx.md, docs/work-log.md
+- 커밋: 별도 PR
+- 롤백: 없음
+
 ## 2026-11-13 12:52 · Cursor · 끝
 - 한 일: 저장 국내 종목의 2025-09-18·19·22 봉 유무를 읽고, 그 사흘 수집 로그가 없음을 확인.
 - 파일: docs/swing-path-compare-2025h1/sep19-bar-presence.md, docs/work-log.md

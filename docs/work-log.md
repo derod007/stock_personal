@@ -1,3 +1,15 @@
+## 2026-11-13 23:54 · Cursor · 끝
+- 한 일: 비교 중앙값은 신호 종목을 뺀 시장별로 계산하고, 묶음·입력 해시 확인 절차를 계획에 적음.
+- 파일: docs/swing-path-peer-compare/protocol.md, docs/work-log.md
+- 커밋: 같은 PR
+- 롤백: 없음
+
+## 2026-11-13 23:51 · Cursor · 끝
+- 한 일: 확인 신호와 같은 날 같은 시장 종목의 20거래일 차이를 보는 비교 계획을 문서로 고정. 계산은 하지 않음.
+- 파일: docs/swing-path-peer-compare/protocol.md, docs/work-log.md
+- 커밋: 별도 PR
+- 롤백: 없음
+
 ## 2026-11-13 17:10 · Cursor · 끝
 - 한 일: 2차 검증 236종목을 12묶음으로 집계하고, 묶음을 다시 합산해 summary와 맞는지 확인.
 - 파일: docs/swing-path-validate-20251010/, .gitattributes, docs/work-log.md

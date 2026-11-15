@@ -1,3 +1,12 @@
+## 2026-11-15 23:31 · Cursor · 끝
+- 한 일: 스윙 연구 화면에 사전 매매 계획 입력·저장·조회·버전 이력을 추가. 조건은 자유 입력이고 진단값은 계획으로 옮기지 않음. 저장은 제출 때만, 전용 폴더에만.
+- 테스트: tests/swing_plan.php 통과. 신규 저장, 미정, 원본 유지, 기록 시각과 자료 시각 분리, 중복 제출, 동시 수정, 손상 파일 유지, 조회 시 파일 불변, 잘못된 요청과 스크립트 입력을 임시 폴더에서 확인.
+- 브라우저: 임시 저장소로 입력·조회·수정 이력과 운영 CSS를 확인. 005930.KS 진단·재생 문구가 그대로 나옴. 운영 data/swing-plans는 만들지 않음.
+- 미검증: 휴대폰 폭, 브라우저 두 창의 동시 클릭, 가격 경로와 성과 계산.
+- 파일: src/SwingPlan.php, swing_research.php, tests/swing_plan.php, .github/workflows/php-tests.yml, .gitignore, docs/work-log.md
+- 커밋: 별도 PR, 병합 안 함
+- 롤백: 없음
+
 ## 2026-11-14 03:43 · Cursor · 끝
 - 한 일: 10/21 사전 시나리오와 10/28 진입 설명, 10/20 대기 사례의 공개 시각을 나눔. 구현 가설은 만들지 않음.
 - 파일: docs/swing-1021-1028.md, docs/swing-author-posts.md, docs/work-log.md

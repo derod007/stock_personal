@@ -54,6 +54,7 @@ jobs:
           php tests/sector_collect.php
           php tests/swing_research.php
           php tests/swing_plan.php
+          php tests/swing_plan_path.php
           php tests/swing_path_tally.php
           php tests/swing_path_check.php
           php tests/swing_peer_compare.php

@@ -35,7 +35,7 @@ final class SwingPlan
         return substr($page, 0, $at) . $section . substr($page, $at);
     }
 
-    public static function section(string $dir, array $query, ?array $post, string $cookie): string
+    public static function section(string $dir, array $query, ?array $post, string $cookie, ?string $barsDir = null, ?DateTimeImmutable $now = null): string
     {
         $result = null;
         if ($post !== null) {
@@ -46,7 +46,7 @@ final class SwingPlan
             }
         }
 
-        return self::html($dir, $query, $cookie, $result);
+        return self::html($dir, $query, $cookie, $result, $barsDir, $now);
     }
 
     public static function accept(string $dir, array $post, string $cookie, DateTimeImmutable $now): array
@@ -130,7 +130,7 @@ final class SwingPlan
         return $out;
     }
 
-    private static function html(string $dir, array $query, string $cookie, ?array $result): string
+    private static function html(string $dir, array $query, string $cookie, ?array $result, ?string $barsDir, ?DateTimeImmutable $now): string
     {
         $h = static fn(string $value): string => htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
         $focus = $query;
@@ -143,14 +143,14 @@ final class SwingPlan
         if ($result !== null) {
             $html .= '<p class="notice">' . $h($result['message']) . '</p>';
         }
-        $html .= self::detail($dir, $focus, $cookie, $h);
+        $html .= self::detail($dir, $focus, $cookie, $h, $barsDir, $now);
         $html .= '<h3>저장된 계획</h3>' . self::listHtml($dir, $h);
         $html .= '<h3>새 계획</h3>' . self::form($cookie, null, null, $h) . '</section>';
 
         return $html;
     }
 
-    private static function detail(string $dir, array $query, string $cookie, callable $h): string
+    private static function detail(string $dir, array $query, string $cookie, callable $h, ?string $barsDir, ?DateTimeImmutable $now): string
     {
         $id = (string) ($query['plan'] ?? '');
         if ($id === '') {
@@ -206,10 +206,162 @@ final class SwingPlan
         $rows .= '<tr><th scope="row">실제 기록 시각</th><td>' . $h((string) $picked['recorded_at']) . '</td></tr>';
         $gap = $missing === [] ? '없음' : implode(', ', $missing);
 
+        $price = '';
+        if ($barsDir !== null) {
+            $price = self::priceHtml($barsDir, $id, $picked, $query, $now ?? new DateTimeImmutable('now', new DateTimeZone('Asia/Seoul')), $h);
+        }
+
         return $history . '<h3>버전 ' . $h((string) $picked['version']) . '</h3><table><tbody>' . $rows . '</tbody></table>'
             . '<p>빠진 항목: ' . $h($gap) . '</p>'
             . '<p>자료 기준 시각은 참고 시각입니다. 실제 기록 시각보다 이전이어도 당시 미리 기록한 계획이 아닙니다.</p>'
+            . $price
             . '<h3>이 버전을 수정</h3>' . self::form($cookie, $picked, $id, $h);
+    }
+
+    /** shortcut: 20 rows a page, when one screen should hold the whole path */
+    private const PRICE_PAGE = 20;
+
+    public static function afterRecord(string $barsDir, string $symbol, string $recordedAt, DateTimeImmutable $now): array
+    {
+        $seoul = new DateTimeZone('Asia/Seoul');
+        try {
+            $recorded = new DateTimeImmutable($recordedAt);
+        } catch (Throwable $e) {
+            return self::priceResult('unread', null, null, $now, null, 0, 0, []);
+        }
+        $recordDay = $recorded->setTimezone($seoul)->format('Y-m-d');
+        $startDay = (new DateTimeImmutable($recordDay . ' 00:00:00', $seoul))->modify('+1 day')->format('Y-m-d');
+        $loaded = SwingResearch::storedDaily($barsDir, $symbol);
+        if ($loaded['error'] !== null) {
+            $status = str_contains($loaded['error'], '없습니다') ? 'missing' : 'damaged';
+
+            return self::priceResult($status, $recordDay, $startDay, $now, null, 0, 0, []);
+        }
+        $nowTs = $now->getTimestamp();
+        $queryDay = $now->setTimezone($seoul)->format('Y-m-d');
+        $rows = [];
+        $invalid = 0;
+        $incomplete = 0;
+        $last = null;
+        foreach ($loaded['bars'] as $bar) {
+            if (!is_array($bar)) {
+                continue;
+            }
+            $close = CandleClock::closeTime($bar, $symbol);
+            $day = (new DateTimeImmutable('@' . $close))->setTimezone($seoul)->format('Y-m-d');
+            $kind = CandleClock::acceptance($bar, $symbol, $nowTs);
+            if ($kind === 'ok' && ($last === null || $day > $last)) {
+                $last = $day;
+            }
+            if ($day <= $recordDay || $day > $queryDay) {
+                continue;
+            }
+            if ($kind === 'invalid') {
+                $invalid++;
+                continue;
+            }
+            if ($kind !== 'ok') {
+                if ($kind === 'incomplete') {
+                    $incomplete++;
+                }
+                continue;
+            }
+            $rows[] = [
+                'day' => $day,
+                'open' => $bar['open'],
+                'high' => $bar['high'],
+                'low' => $bar['low'],
+                'close' => $bar['close'],
+                'volume' => is_numeric($bar['volume'] ?? null) ? $bar['volume'] : null,
+            ];
+        }
+        usort($rows, static fn(array $a, array $b): int => $a['day'] <=> $b['day']);
+
+        return self::priceResult('read', $recordDay, $startDay, $now, $last, $invalid, $incomplete, $rows);
+    }
+
+    private static function priceHtml(string $barsDir, string $id, array $version, array $query, DateTimeImmutable $now, callable $h): string
+    {
+        $path = self::afterRecord($barsDir, (string) $version['symbol'], (string) $version['recorded_at'], $now);
+        $html = '<h3>기록 이후 가격</h3><p>계획 ' . $h($id) . ' · 버전 ' . $h((string) $version['version']) . '</p>'
+            . '<p>실제 기록 시각: ' . $h((string) $version['recorded_at']) . '</p>';
+        if ($path['status'] === 'unread') {
+            return $html . '<p class="notice">기록 시각을 읽을 수 없어 가격을 조회하지 않았습니다.</p>';
+        }
+        $html .= '<p id="plan-price-start">관찰 시작: ' . $h((string) $path['start_day']) . ' (기록일 다음 서울 날짜). 실제 진입 시점이 아닙니다.</p>'
+            . '<p>조회 기준 시각: ' . $h($path['query_at']) . '</p>'
+            . '<p>저장 자료의 마지막 유효 봉 날짜: ' . $h($path['last_day'] ?? '없음') . '</p>';
+        if ($path['status'] === 'missing') {
+            return $html . '<p class="notice">저장 일봉이 없습니다. 다른 출처로 채우지 않습니다.</p><p>표시한 봉 수: 0</p>';
+        }
+        if ($path['status'] === 'damaged') {
+            return $html . '<p class="notice">저장 일봉이 손상되었습니다. 고치거나 다시 받지 않습니다.</p><p>표시한 봉 수: 0</p>';
+        }
+        $html .= '<p>현재 저장 자료로 조회한 결과입니다. 기록 당시에 고정한 가격 자료가 아닙니다.</p>'
+            . '<p>봉이 없는 날짜는 이유를 정하지 않습니다. 있는 봉만 그 날짜로 보여 줍니다.</p>';
+        if ($path['invalid'] > 0) {
+            $html .= '<p class="notice">유효하지 않은 봉 ' . $h((string) $path['invalid']) . '개는 표에서 뺐습니다. 값을 고치거나 채우지 않았습니다.</p>';
+        }
+        if ($path['incomplete'] > 0) {
+            $html .= '<p class="notice">미완료 봉 ' . $h((string) $path['incomplete']) . '개는 제외했습니다.</p>';
+        }
+        $rows = $path['rows'];
+        if ($rows === []) {
+            return $html . '<p class="notice">기록 이후 완료된 봉이 없습니다.</p><p>표시한 봉 수: 0</p>';
+        }
+        $page = (int) ($query['price_page'] ?? 1);
+        if ($page < 1) {
+            $page = 1;
+        }
+        $total = count($rows);
+        $offset = ($page - 1) * self::PRICE_PAGE;
+        $slice = array_slice($rows, $offset, self::PRICE_PAGE);
+        if ($slice === []) {
+            return $html . '<p class="notice">이 페이지에는 봉이 없습니다.</p><p>기록 이후 완료된 봉 ' . $h((string) $total) . '개 중 이 페이지는 범위 밖입니다.</p>'
+                . self::priceLink($id, (string) $version['version'], 1, '1페이지', $h);
+        }
+        $from = $offset + 1;
+        $to = $offset + count($slice);
+        $html .= '<p>표시한 봉 수: ' . $h((string) count($slice)) . '</p>'
+            . '<p>기록 이후 완료된 봉 ' . $h((string) $total) . '개 중 ' . $h((string) $from) . '–' . $h((string) $to) . '번째, '
+            . $h($slice[0]['day']) . '~' . $h($slice[count($slice) - 1]['day']) . '.</p>';
+        if ($to < $total) {
+            $html .= '<p>이 페이지 밖 ' . $h((string) ($total - $to)) . '개는 다음 페이지에 있습니다.</p>';
+        }
+        $html .= '<div class="entries-table-wrap"><table class="entries-table"><thead><tr><th scope="col">날짜</th><th scope="col">시가</th><th scope="col">고가</th><th scope="col">저가</th><th scope="col">종가</th><th scope="col">거래량</th></tr></thead><tbody>';
+        foreach ($slice as $row) {
+            $html .= '<tr><td>' . $h($row['day']) . '</td><td>' . $h((string) $row['open']) . '</td><td>' . $h((string) $row['high'])
+                . '</td><td>' . $h((string) $row['low']) . '</td><td>' . $h((string) $row['close']) . '</td><td>'
+                . ($row['volume'] === null ? '없음' : $h((string) $row['volume'])) . '</td></tr>';
+        }
+        $html .= '</tbody></table></div><p>';
+        if ($page > 1) {
+            $html .= self::priceLink($id, (string) $version['version'], $page - 1, '이전', $h);
+        }
+        if ($to < $total) {
+            $html .= self::priceLink($id, (string) $version['version'], $page + 1, '다음', $h);
+        }
+
+        return $html . '</p>';
+    }
+
+    private static function priceLink(string $id, string $version, int $page, string $label, callable $h): string
+    {
+        return '<a class="tabs__link" href="swing_research.php?plan=' . $h($id) . '&amp;version=' . $h($version) . '&amp;price_page=' . $h((string) $page) . '">' . $h($label) . '</a> ';
+    }
+
+    private static function priceResult(string $status, ?string $recordDay, ?string $startDay, DateTimeImmutable $now, ?string $last, int $invalid, int $incomplete, array $rows): array
+    {
+        return [
+            'status' => $status,
+            'record_day' => $recordDay,
+            'start_day' => $startDay,
+            'query_at' => $now->setTimezone(new DateTimeZone('Asia/Seoul'))->format('Y-m-d\TH:i:sP'),
+            'last_day' => $last,
+            'invalid' => $invalid,
+            'incomplete' => $incomplete,
+            'rows' => $rows,
+        ];
     }
 
     private static function listHtml(string $dir, callable $h): string

@@ -86,6 +86,10 @@ $rejected = planSave($bad, planPost(['symbol' => '../005930.KS']), $now);
 sp($rejected['status'] === 'rejected' && !is_dir($bad), 'a bad symbol does not create a store');
 $csrf = SwingPlan::accept($bad, planPost(), 'ffffffffffffffffffffffffffffffff', $now);
 sp($csrf['status'] === 'rejected' && !is_dir($bad), 'a mismatched token does not write');
+foreach (['entry', 'reason', 'csrf', 'symbol', 'as_of'] as $key) {
+    $invalid = planSave($bad, planPost([$key => ['not text']]), $now);
+    sp($invalid['status'] === 'rejected' && !is_dir($bad), 'array input is rejected: ' . $key);
+}
 $script = planPost([
     'entry' => '<script>alert(1)</script>',
     'source_url' => 'javascript:alert(1)',

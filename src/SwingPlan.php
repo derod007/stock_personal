@@ -51,6 +51,11 @@ final class SwingPlan
 
     public static function accept(string $dir, array $post, string $cookie, DateTimeImmutable $now): array
     {
+        foreach (array_merge(array_keys(self::TEXT), ['csrf', 'plan_form', 'submit_id', 'plan_id', 'base_version', 'symbol', 'reason', 'source_url', 'as_of']) as $key) {
+            if (array_key_exists($key, $post) && !is_string($post[$key])) {
+                return self::result('rejected', '입력은 문자열이어야 합니다.');
+            }
+        }
         if (preg_match('/^[a-f0-9]{32}$/', $cookie) !== 1 || !hash_equals($cookie, (string) ($post['csrf'] ?? ''))) {
             return self::result('rejected', '요청을 확인하지 못했습니다.');
         }
@@ -473,7 +478,8 @@ final class SwingPlan
 
     private static function withLock(string $dir, callable $fn): array
     {
-        if (!is_dir($dir) && !mkdir($dir, 0775, true) && !is_dir($dir)) {
+        // Another first submission may create the directory before this process obtains the lock.
+        if (!is_dir($dir) && !@mkdir($dir, 0775, true) && !is_dir($dir)) {
             throw new RuntimeException('계획 저장소를 만들 수 없습니다.');
         }
         $lock = fopen($dir . '/write.lock', 'c');

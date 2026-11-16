@@ -1,3 +1,9 @@
+## 2026-11-16 16:49 · Cursor · 끝
+- 한 일: 승인된 kospi_dd_trd·kosdaq_dd_trd로 2024-09-02~2026-10-08 지수 일봉 508개씩 받음. 연구 달력의 열린 날은 빠지지 않음. 2025-01-02의 60거래일 창은 계산 가능. 2025-10-03·06·07은 달력 밖 빈 응답이라 미분류로 둠. 운영 캐시와 일봉은 그대로.
+- 파일: docs/research/index_daily_collect.py, tests/test_index_daily_collect.py, docs/index-daily-20240901-20261008/series.json, docs/index-daily-20240901-20261008/report.md, docs/work-log.md
+- 커밋: 별도 PR
+- 롤백: 없음
+
 ## 2026-11-16 · Codex · PR #180 검토
 - 401만으로 지수 API 미승인을 단정하지 않도록 문구 수정. 코스닥 단기 캐시는 존재하지만 연구 기간에 부족함을 정정.
 - 접근 기록 최종 쓰기를 배타적 생성으로 바꿔 사전 확인 뒤 생긴 파일도 덮어쓰지 않음. 저장 경로는 정규화 후 검사.

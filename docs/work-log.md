@@ -1,3 +1,17 @@
+## 2026-11-16 · Codex · PR #179 검토 보완
+- 발견: CandleClock 변경으로 운영 전략 fingerprint가 바뀌어 CI 9개 실패. 해당 파일을 main 원본으로 복원하고 계획 화면이 기존 completed()를 호출하도록 수정. 고정 해시·장부는 변경하지 않음.
+- 수정: 봉 날짜는 time에서, 사용 가능 여부는 기존 완료 판정에서 구분. 지연 available_at 때문에 기록 당일 봉이 다음 날짜로 이동하는 문제 방지. 손상된 제공 시각과 과도한 페이지 번호도 화면 중단 없이 처리.
+- 검증: 계획 경로 25개, 계획 저장, 스윙 연구 테스트 통과. no_pullback_study 64개 통과. forward_protection 전체 통과: 기본 Windows 임시 경로의 ! 문자가 CLI 인자에서 변형되는 문제를 확인하고 특수문자 없는 임시 경로로 실행. 운영 장부 변경 없음.
+
+## 2026-11-16 00:11 · Cursor · 끝
+- 한 일: 계획 버전을 열면 그 버전의 기록 시각 다음 서울 날짜부터, 조회 시각까지 완료된 저장 일봉만 표로 보여 줌. 자료 기준 시각은 시작점으로 쓰지 않음. 조회는 파일을 만들지 않음.
+- 테스트: tests/swing_plan_path.php, tests/swing_plan.php, tests/swing_research.php 통과. 장전·장중·장후, 과거 자료 시각, 버전별 종목·시각, 미래·미완료 봉, 첫 봉 누락, 중간 공백, 없음·손상·오래된 자료·유효하지 않은 봉, 조회 전후 해시.
+- 브라우저: 임시 계획과 임시 일봉, 운영 CSS. 버전 1·2 표와 다음 페이지, 390px 폭에서 표와 다음·진단·재생. 운영 data/swing-plans는 없고 운영 일봉 해시는 그대로. 진단·재생 문구 유지.
+- 미검증: 실제 휴대폰 기기.
+- 파일: src/SwingPlan.php, src/SwingResearch.php, src/CandleClock.php, swing_research.php, tests/swing_plan_path.php, .github/workflows/php-tests.yml, docs/work-log.md
+- 커밋: 별도 PR, 병합 안 함
+- 롤백: 없음
+
 ## 2026-11-15 · Codex · PR #178 검토 보완
 - 재현: Windows 동시 최초 제출에서 mkdir의 File exists 경고가 JSON 결과에 섞여 테스트가 간헐적으로 실패. 저장 파일은 한 개였으며 중복 저장은 아니었음.
 - 수정: 경쟁 중 폴더 생성 경고를 억제하고 최종 디렉터리 존재 확인과 실제 실패 예외는 유지. 배열 등 문자열이 아닌 폼 입력은 저장 전에 거절.

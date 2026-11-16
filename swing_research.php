@@ -13,6 +13,10 @@ $dir = getenv('SWING_PLAN_DIR');
 if (!is_string($dir) || $dir === '') {
     $dir = __DIR__ . '/data/swing-plans';
 }
+$bars = getenv('SWING_BAR_DIR');
+if (!is_string($bars) || $bars === '') {
+    $bars = __DIR__ . '/data/ohlcv';
+}
 $post = ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' ? $_POST : null;
 $html = ChartEntryLab\SwingResearch::view(__DIR__ . '/data/ohlcv', $_GET);
-echo ChartEntryLab\SwingPlan::insert($html, ChartEntryLab\SwingPlan::section($dir, $_GET, is_array($post) ? $post : null, $cookie));
+echo ChartEntryLab\SwingPlan::insert($html, ChartEntryLab\SwingPlan::section($dir, $_GET, is_array($post) ? $post : null, $cookie, $bars));

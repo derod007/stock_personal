@@ -674,7 +674,7 @@ final class SwingResearch
                 $chooser .= self::replayHtml($form['replay'], $h);
             }
         }
-        return '<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><title>스윙 연구</title>'
+        return '<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>스윙 연구</title>'
             . '<link rel="stylesheet" href="assets/app.css"><link rel="stylesheet" href="assets/readability.css">'
             . '</head><body><nav class="tabs" aria-label="화면"><a class="tabs__link" href="index.php">차트</a>'
             . '<a class="tabs__link" href="type1_scan.php">거래대금 스캔(유형1)</a>'
@@ -758,6 +758,12 @@ final class SwingResearch
         }
         sort($out);
         return $out;
+    }
+
+    /** @return array{error:?string,bars:list<array<string,mixed>>,from:?string,to:?string,dropped:int} */
+    public static function storedDaily(string $dir, string $symbol): array
+    {
+        return self::readStored($dir, $symbol);
     }
 
     /** @return array{error:?string,bars:list<array<string,mixed>>,from:?string,to:?string,dropped:int} */

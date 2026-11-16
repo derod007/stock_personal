@@ -1,3 +1,8 @@
+## 2026-11-16 · Codex · PR #180 검토
+- 401만으로 지수 API 미승인을 단정하지 않도록 문구 수정. 코스닥 단기 캐시는 존재하지만 연구 기간에 부족함을 정정.
+- 접근 기록 최종 쓰기를 배타적 생성으로 바꿔 사전 확인 뒤 생긴 파일도 덮어쓰지 않음. 저장 경로는 정규화 후 검사.
+- 가짜 응답 기반 테스트 6개 확인. 실제 키 조회·네트워크 재요청·가격 수집은 실행하지 않음. 다음은 계정의 키 유효 상태와 지수 API 승인 상태 확인.
+
 ## 2026-11-16 16:11 · Cursor · 끝
 - 한 일: 코스피·코스닥 지수 일봉은 확보하지 못함. 공식 kospi_dd_trd·kosdaq_dd_trd는 2024-10-08 조회가 401. 정보데이터시스템 지수 JSON은 LOGOUT. 가격 파일을 만들지 않음. 60거래일 조건은 계산 준비가 안 됨.
 - 파일: docs/research/index_daily_access.py, tests/test_index_daily_access.py, docs/index-daily-20240901-20261008/access.json, docs/index-daily-20240901-20261008/report.md, docs/work-log.md

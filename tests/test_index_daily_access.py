@@ -90,6 +90,14 @@ class IndexDailyAccessTest(unittest.TestCase):
             with self.assertRaises(SystemExit):
                 self.m.assert_research_dir(Path("data") / name / "index")
 
+    def test_writer_does_not_replace_a_record_created_after_probe(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            dest = Path(tmp) / "access.json"
+            dest.write_text("kept", encoding="utf-8")
+            with self.assertRaises(FileExistsError):
+                self.m._write(dest, {"status": "new"})
+            self.assertEqual(dest.read_text(encoding="utf-8"), "kept")
+
     def test_ok_response_is_not_saved_as_bars(self):
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp) / "index-daily"

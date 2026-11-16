@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """See whether official KOSPI and KOSDAQ daily index calls are allowed.
 
-A rejected key stops here. This does not write price bars or call another host.
-shortcut: 401 stops here, collect only after this key is approved for kospi_dd_trd and kosdaq_dd_trd.
+This probe writes no price bars. It checks Open API and the KRX data site only.
+A 401 identifies an authentication failure, not its precise account-side cause.
 """
 from __future__ import annotations
 
@@ -28,7 +28,7 @@ def now_kst() -> str:
 
 
 def assert_research_dir(out_dir: Path) -> None:
-    parts = {part.lower() for part in out_dir.parts}
+    parts = {part.lower() for part in out_dir.resolve().parts}
     if "ohlcv" in parts or "cache" in parts:
         raise SystemExit("refusing operational dir")
 
@@ -129,7 +129,8 @@ def run_access(out_dir: Path, key: str, http_get: Get, http_post: Post) -> dict[
 
 def _write(dest: Path, record: dict[str, Any]) -> None:
     dest.parent.mkdir(parents=True, exist_ok=True)
-    dest.write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    with dest.open("x", encoding="utf-8") as handle:
+        handle.write(json.dumps(record, ensure_ascii=False, indent=2) + "\n")
 
 
 def main() -> None:

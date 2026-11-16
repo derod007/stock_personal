@@ -1,3 +1,9 @@
+## 2026-11-16 16:11 · Cursor · 끝
+- 한 일: 코스피·코스닥 지수 일봉은 확보하지 못함. 공식 kospi_dd_trd·kosdaq_dd_trd는 2024-10-08 조회가 401. 정보데이터시스템 지수 JSON은 LOGOUT. 가격 파일을 만들지 않음. 60거래일 조건은 계산 준비가 안 됨.
+- 파일: docs/research/index_daily_access.py, tests/test_index_daily_access.py, docs/index-daily-20240901-20261008/access.json, docs/index-daily-20240901-20261008/report.md, docs/work-log.md
+- 커밋: 별도 PR
+- 롤백: 없음
+
 ## 2026-11-16 · Codex · PR #179 검토 보완
 - 발견: CandleClock 변경으로 운영 전략 fingerprint가 바뀌어 CI 9개 실패. 해당 파일을 main 원본으로 복원하고 계획 화면이 기존 completed()를 호출하도록 수정. 고정 해시·장부는 변경하지 않음.
 - 수정: 봉 날짜는 time에서, 사용 가능 여부는 기존 완료 판정에서 구분. 지연 available_at 때문에 기록 당일 봉이 다음 날짜로 이동하는 문제 방지. 손상된 제공 시각과 과도한 페이지 번호도 화면 중단 없이 처리.

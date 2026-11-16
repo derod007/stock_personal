@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "checked_at_kst": "2026-11-16T16:11:16+09:00",
+  "range": {
+    "from": "2024-09-01",
+    "to": "2026-10-08"
+  },
+  "probe_day": "20241008",
+  "requests": 4,
+  "bars_written": false,
+  "official": [
+    {
+      "market": "KOSPI",
+      "api_id": "kospi_dd_trd",
+      "url": "https://data-dbg.krx.co.kr/svc/apis/idx/kospi_dd_trd?basDd=20241008",
+      "http": 401,
+      "kind": "auth",
+      "bytes": 52,
+      "sha256": "a5193871d0b3d7288174d924179340dbe1650a42652b426b5304e9d426f68cfa"
+    },
+    {
+      "market": "KOSDAQ",
+      "api_id": "kosdaq_dd_trd",
+      "url": "https://data-dbg.krx.co.kr/svc/apis/idx/kosdaq_dd_trd?basDd=20241008",
+      "http": 401,
+      "kind": "auth",
+      "bytes": 52,
+      "sha256": "a5193871d0b3d7288174d924179340dbe1650a42652b426b5304e9d426f68cfa"
+    }
+  ],
+  "public_site": {
+    "page_url": "https://data.krx.co.kr/contents/MDC/STAT/standard/MDCSTAT00301.jsp",
+    "page_http": 200,
+    "page_bytes": 2952,
+    "page_sha256": "60206037d44be1558a87c22a2b84751a064abebafbd89a69faed95977048a42f",
+    "json_url": "https://data.krx.co.kr/comm/bldAttendant/getJsonData.cmd",
+    "json_http": 400,
+    "json_kind": "logout",
+    "json_bytes": 6,
+    "json_sha256": "377b375adcc04b5ba5998c978372401a4c6327ccc218e17e383f72861085cb95"
+  },
+  "status": "blocked"
+}

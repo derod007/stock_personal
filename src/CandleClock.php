@@ -21,33 +21,21 @@ final class CandleClock
         return (new \DateTimeImmutable($day . ($kr ? ' 15:30:00' : ' 16:00:00'), $tz))->getTimestamp();
     }
 
-    /** ok, incomplete, future, or invalid. The same checks completed() uses. */
-    public static function acceptance(array $bar, string $symbol, int $asOf): string
-    {
-        if (!empty($bar['synthetic']) || ($bar['is_complete'] ?? true) === false) {
-            return 'incomplete';
-        }
-        if (self::closeTime($bar, $symbol) > $asOf) {
-            return 'future';
-        }
-        foreach (['open', 'high', 'low', 'close'] as $key) {
-            if (!isset($bar[$key]) || !is_numeric($bar[$key]) || !is_finite((float) $bar[$key]) || $bar[$key] <= 0) {
-                return 'invalid';
-            }
-        }
-        if ($bar['low'] > min($bar['open'], $bar['close']) || $bar['high'] < max($bar['open'], $bar['close'])
-            || $bar['high'] < $bar['low']) {
-            return 'invalid';
-        }
-
-        return 'ok';
-    }
-
     public static function completed(array $bars, string $symbol, int $asOf): array
     {
         $out = [];
         foreach ($bars as $bar) {
-            if (self::acceptance($bar, $symbol, $asOf) !== 'ok') {
+            if (!empty($bar['synthetic']) || ($bar['is_complete'] ?? true) === false
+                || self::closeTime($bar, $symbol) > $asOf) {
+                continue;
+            }
+            foreach (['open', 'high', 'low', 'close'] as $key) {
+                if (!isset($bar[$key]) || !is_numeric($bar[$key]) || !is_finite((float) $bar[$key]) || $bar[$key] <= 0) {
+                    continue 2;
+                }
+            }
+            if ($bar['low'] > min($bar['open'], $bar['close']) || $bar['high'] < max($bar['open'], $bar['close'])
+                || $bar['high'] < $bar['low']) {
                 continue;
             }
             $bar['available_at'] = self::closeTime($bar, $symbol);

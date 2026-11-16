@@ -231,7 +231,11 @@ final class SwingPlan
         }
         $recordDay = $recorded->setTimezone($seoul)->format('Y-m-d');
         $startDay = (new DateTimeImmutable($recordDay . ' 00:00:00', $seoul))->modify('+1 day')->format('Y-m-d');
-        $loaded = SwingResearch::storedDaily($barsDir, $symbol);
+        try {
+            $loaded = SwingResearch::storedDaily($barsDir, $symbol);
+        } catch (Throwable $e) {
+            return self::priceResult('damaged', $recordDay, $startDay, $now, null, 0, 0, []);
+        }
         if ($loaded['error'] !== null) {
             $status = str_contains($loaded['error'], '없습니다') ? 'missing' : 'damaged';
 
@@ -247,9 +251,16 @@ final class SwingPlan
             if (!is_array($bar)) {
                 continue;
             }
-            $close = CandleClock::closeTime($bar, $symbol);
-            $day = (new DateTimeImmutable('@' . $close))->setTimezone($seoul)->format('Y-m-d');
-            $kind = CandleClock::acceptance($bar, $symbol, $nowTs);
+            try {
+                $close = CandleClock::closeTime($bar, $symbol);
+            } catch (Throwable $e) {
+                return self::priceResult('damaged', $recordDay, $startDay, $now, null, 0, 0, []);
+            }
+            // The session date belongs to the bar, even when its availability was delayed.
+            $day = (new DateTimeImmutable('@' . (int) $bar['time']))->setTimezone($seoul)->format('Y-m-d');
+            $kind = !empty($bar['synthetic']) || ($bar['is_complete'] ?? true) === false
+                ? 'incomplete'
+                : ($close > $nowTs ? 'future' : (CandleClock::completed([$bar], $symbol, $nowTs) === [] ? 'invalid' : 'ok'));
             if ($kind === 'ok' && ($last === null || $day > $last)) {
                 $last = $day;
             }
@@ -309,11 +320,14 @@ final class SwingPlan
         if ($rows === []) {
             return $html . '<p class="notice">기록 이후 완료된 봉이 없습니다.</p><p>표시한 봉 수: 0</p>';
         }
-        $page = (int) ($query['price_page'] ?? 1);
+        $rawPage = $query['price_page'] ?? '1';
+        $page = is_string($rawPage) && preg_match('/^[0-9]+$/D', $rawPage) === 1 ? (int) $rawPage : 1;
         if ($page < 1) {
             $page = 1;
         }
         $total = count($rows);
+        // Bound the offset before multiplication, including oversized URL parameters.
+        $page = min($page, (int) ceil($total / self::PRICE_PAGE) + 1);
         $offset = ($page - 1) * self::PRICE_PAGE;
         $slice = array_slice($rows, $offset, self::PRICE_PAGE);
         if ($slice === []) {

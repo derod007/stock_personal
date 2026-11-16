@@ -116,6 +116,13 @@ foreach (['08:00:00', '12:00:00', '16:30:00'] as $clock) {
 $past = SwingPlan::afterRecord($bars, '005930.KS', '2026-11-16T08:00:00+09:00', $clockNow);
 pp($past['start_day'] === '2026-11-17' && !in_array('2026-11-19', array_column($past['rows'], 'day'), true) && !in_array('2026-11-18', array_column($past['rows'], 'day'), true), 'future and unfinished bars stay out');
 
+ppWrite($bars, '035420.KS', [ppBar('2026-11-16', 100, ['available_at' => '2026-11-17T16:00:00+09:00']), ppBar('2026-11-17', 101)]);
+$delayed = SwingPlan::afterRecord($bars, '035420.KS', '2026-11-16T08:00:00+09:00', $clockNow);
+pp(count($delayed['rows']) === 1 && $delayed['rows'][0]['close'] === 101, 'delayed availability does not move a record-day bar to the following date');
+ppWrite($bars, '035420.KS', [ppBar('2026-11-17', 101, ['available_at' => 'not a date'])]);
+$badTime = SwingPlan::afterRecord($bars, '035420.KS', '2026-11-16T08:00:00+09:00', $clockNow);
+pp($badTime['status'] === 'damaged', 'invalid availability metadata is reported without crashing');
+
 ppWrite($bars, '000660.KS', [
     ppBar('2026-11-16', 2016),
     ppBar('2026-11-18', 2018),
@@ -190,6 +197,10 @@ $next = SwingPlan::section($plans, ['plan' => $saved['id'], 'version' => '1', 'p
 pp(str_contains($page, '<td>2026-01-02</td>') && str_contains($page, '<td>2026-01-21</td>') && !str_contains($page, '<td>2026-01-22</td>') && str_contains($page, '다음'), 'the first price page states what it cut');
 pp(str_contains($next, '<td>2026-01-22</td>') && str_contains($next, '<td>2026-01-26</td>') && !str_contains($next, '<td>2026-01-02</td>') && str_contains($next, '이전'), 'the next page shows the rest');
 pp([ppSnap($plans), ppSnap($bars)] === $again, 'paging does not change files');
+foreach (['99999999999999999999999999999', ['2']] as $badPage) {
+    $safePage = SwingPlan::section($plans, ['plan' => $saved['id'], 'version' => '1', 'price_page' => $badPage], null, $cookie, $bars, new DateTimeImmutable('2026-02-01T09:00:00+09:00'));
+    pp(str_contains($safePage, '기록 이후 가격'), 'invalid or oversized page does not crash');
+}
 
 $none = SwingPlan::section($plans, ['plan' => $saved['id'], 'version' => '9'], null, $cookie, $absentDir, $viewNow);
 pp(str_contains($none, '보려는 버전이 없습니다') && !str_contains($none, '기록 이후 가격') && !is_dir($absentDir), 'a missing version does not read prices');

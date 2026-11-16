@@ -1,0 +1,112 @@
+{
+  "checked_at_kst": "2026-11-16T16:48:26+09:00",
+  "range": {
+    "from": "2024-09-01",
+    "to": "2026-10-08"
+  },
+  "markets": {
+    "KOSPI": {
+      "api_id": "kospi_dd_trd",
+      "index_name": "코스피",
+      "date_field": "BAS_DD",
+      "date_meaning": "기준일자. 그 호출의 일별시세 날짜이며 요청한 basDd와 같아야 한다.",
+      "close_field": "CLSPRC_IDX",
+      "close_meaning": "종가. 그 기준일의 지수 종가다.",
+      "conversion": "IDX_NM이 지수명과 정확히 같은 행이 하나일 때만 날짜와 종가를 남긴다. 없거나 여럿이면 봉을 만들지 않고, 빈 목록은 채우지 않는다.",
+      "raw_files": 549,
+      "raw_seal_sha256": "dc8148bd218a42eec12f55137548b863c5f9b638a9db3e10c0ea5874a48d89b5",
+      "normalized_sha256": "5b25e5e81e7b50d35a86b228647438a239ccfa66cb8b145226c68ecfcc28e136",
+      "normalized_bytes": 65628,
+      "parse_issues": [],
+      "quality": {
+        "bars": 508,
+        "first": "2024-09-02",
+        "last": "2026-10-08",
+        "unsorted": false,
+        "duplicate": false,
+        "bad_close": [],
+        "missing_open": [],
+        "on_closed": [],
+        "on_unknown": [],
+        "unknown_absent": [
+          "2025-10-03",
+          "2025-10-06",
+          "2025-10-07"
+        ],
+        "before_2025": 79,
+        "first_open_from_2025": "2025-01-02",
+        "ready_60": true,
+        "range_clear": false
+      },
+      "cache_compare": {
+        "files": [
+          {
+            "name": "kospi_naver",
+            "present": true,
+            "sha256": "1d495adcea3f55da345b220f202a278398b30c77e3d1cf65149569b6a5ac18df",
+            "bytes": 18837,
+            "overlap": 285,
+            "equal": 285,
+            "differ": []
+          },
+          {
+            "name": "yahoo_ks11",
+            "present": true,
+            "sha256": "5ad712edc77e2d731115887252d0b6fb03aa0639d1647cbdb345d2518f366fbf",
+            "bytes": 7806,
+            "overlap": 6,
+            "equal": 6,
+            "differ": []
+          }
+        ]
+      }
+    },
+    "KOSDAQ": {
+      "api_id": "kosdaq_dd_trd",
+      "index_name": "코스닥",
+      "date_field": "BAS_DD",
+      "date_meaning": "기준일자. 그 호출의 일별시세 날짜이며 요청한 basDd와 같아야 한다.",
+      "close_field": "CLSPRC_IDX",
+      "close_meaning": "종가. 그 기준일의 지수 종가다.",
+      "conversion": "IDX_NM이 지수명과 정확히 같은 행이 하나일 때만 날짜와 종가를 남긴다. 없거나 여럿이면 봉을 만들지 않고, 빈 목록은 채우지 않는다.",
+      "raw_files": 549,
+      "raw_seal_sha256": "4cafc98b48604c7bf0979c02fc0b960ab39188e2cc6b326c49b335e2cb375d7b",
+      "normalized_sha256": "a4eb36c9789a2ba1b7a7ad7af75ca9c2e21b7a4c799a8797e15db0b167d32e17",
+      "normalized_bytes": 65721,
+      "parse_issues": [],
+      "quality": {
+        "bars": 508,
+        "first": "2024-09-02",
+        "last": "2026-10-08",
+        "unsorted": false,
+        "duplicate": false,
+        "bad_close": [],
+        "missing_open": [],
+        "on_closed": [],
+        "on_unknown": [],
+        "unknown_absent": [
+          "2025-10-03",
+          "2025-10-06",
+          "2025-10-07"
+        ],
+        "before_2025": 79,
+        "first_open_from_2025": "2025-01-02",
+        "ready_60": true,
+        "range_clear": false
+      },
+      "cache_compare": {
+        "files": [
+          {
+            "name": "yahoo_kq11",
+            "present": true,
+            "sha256": "14d8bc472ff23b9d9609b7f13bee544fb6b3e181e7635198801bb017773bd07e",
+            "bytes": 7911,
+            "overlap": 6,
+            "equal": 6,
+            "differ": []
+          }
+        ]
+      }
+    }
+  }
+}

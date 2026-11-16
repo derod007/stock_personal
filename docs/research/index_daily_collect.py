@@ -170,9 +170,13 @@ def normalize_market(raw_dir: Path, market: dict[str, str]) -> dict[str, Any]:
     dest = raw_dir / "normalized" / f"{market['api_id']}.json"
     dest.parent.mkdir(parents=True, exist_ok=True)
     if dest.exists():
-        return json.loads(dest.read_text(encoding="utf-8"))
+        existing = json.loads(dest.read_text(encoding="utf-8"))
+        if existing != record:
+            raise ValueError("existing normalized data differs from raw responses")
+        return existing
     text = json.dumps(record, ensure_ascii=False, indent=2) + "\n"
-    dest.write_text(text, encoding="utf-8")
+    with dest.open("x", encoding="utf-8") as handle:
+        handle.write(text)
     return record
 
 
@@ -221,6 +225,7 @@ def assess(bars: list[dict[str, Any]], ranges: list[dict[str, Any]], start: date
         and len(through) >= WINDOW
         and all(day in present for day in through[-WINDOW:])
         and not any(start.isoformat() <= day <= first for day in unknown_absent + on_unknown)
+        and not any(day <= first for day in on_closed)
     )
     range_clear = (
         dates == sorted(dates)
@@ -229,6 +234,7 @@ def assess(bars: list[dict[str, Any]], ranges: list[dict[str, Any]], start: date
         and not missing
         and not unknown_absent
         and not on_unknown
+        and not on_closed
     )
     return {
         "bars": len(bars),
@@ -319,6 +325,8 @@ def raw_seal(raw_dir: Path, api_id: str) -> dict[str, Any]:
 
 
 def main() -> None:
+    if (DOCS / "series.json").exists():
+        raise SystemExit("refusing to overwrite series.json before authentication or collection")
     import importlib.util
 
     spec = importlib.util.spec_from_file_location(
@@ -355,12 +363,20 @@ def main() -> None:
             "parse_issues": record["issues"],
             "quality": checked,
         }
-        (RAW_ROOT / "raw" / f"{market['api_id']}.sha256").write_text("\n".join(seal["names"]) + "\n", encoding="utf-8")
+        seal_path = RAW_ROOT / "raw" / f"{market['api_id']}.sha256"
+        seal_text = "\n".join(seal["names"]) + "\n"
+        if seal_path.exists():
+            if seal_path.read_text(encoding="utf-8") != seal_text:
+                raise ValueError("existing raw seal differs from raw responses")
+        else:
+            with seal_path.open("x", encoding="utf-8") as handle:
+                handle.write(seal_text)
         public["markets"][market["market"]]["cache_compare"] = _cache_compare(market["market"], record["bars"])
     dest = DOCS / "series.json"
     if dest.exists():
         raise SystemExit("refusing to overwrite series.json")
-    dest.write_text(json.dumps(public, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    with dest.open("x", encoding="utf-8") as handle:
+        handle.write(json.dumps(public, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps({"series": str(dest), "ready": {key: value["quality"]["ready_60"] for key, value in public["markets"].items()}}, ensure_ascii=False))
 
 

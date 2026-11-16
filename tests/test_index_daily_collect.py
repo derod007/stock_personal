@@ -4,6 +4,7 @@ import tempfile
 import unittest
 from datetime import date
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 MOD_PATH = ROOT / "docs" / "research" / "index_daily_collect.py"
@@ -75,6 +76,30 @@ class IndexDailyCollectTest(unittest.TestCase):
             self.assertEqual(result["stopped"]["http"], 401)
             self.assertFalse((raw / "raw").exists())
 
+    def test_existing_summary_stops_before_collection(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            dest = Path(tmp) / "series.json"
+            dest.write_text("kept", encoding="utf-8")
+            with patch.object(self.m, "DOCS", Path(tmp)), patch.object(self.m, "collect_raw") as collect:
+                with self.assertRaises(SystemExit):
+                    self.m.main()
+                collect.assert_not_called()
+            self.assertEqual(dest.read_text(encoding="utf-8"), "kept")
+
+    def test_changed_raw_cannot_reuse_stale_normalized_data(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            raw = root / "raw" / "kospi_dd_trd" / "20241008.json"
+            raw.parent.mkdir(parents=True)
+            raw.write_text(json.dumps(payload("코스피", "2600.00")), encoding="utf-8")
+            self.m.normalize_market(root, self.m.MARKETS[0])
+            normalized = root / "normalized" / "kospi_dd_trd.json"
+            before = normalized.read_bytes()
+            raw.write_text(json.dumps(payload("코스피", "2700.00")), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                self.m.normalize_market(root, self.m.MARKETS[0])
+            self.assertEqual(normalized.read_bytes(), before)
+
     def test_operational_dir_is_refused(self):
         with self.assertRaises(SystemExit):
             self.m.collect_raw(Path("data") / "ohlcv" / "index", "x", lambda url, headers: (200, {}, b"{}"), [])
@@ -91,6 +116,11 @@ class IndexDailyCollectTest(unittest.TestCase):
         full = self.m.assess(bars, ranges)
         self.assertTrue(full["ready_60"])
         self.assertEqual(full["missing_open"], [])
+        with_closed_bar = bars + [{"date": "2025-01-01", "close": "1.00"}]
+        with_closed_bar.sort(key=lambda bar: bar['date'])
+        conflict = self.m.assess(with_closed_bar, ranges)
+        self.assertFalse(conflict['ready_60'])
+        self.assertFalse(conflict['range_clear'])
         dropped = [bar for bar in bars if bar["date"] != "2025-06-02"]
         hole = self.m.assess(dropped, ranges)
         self.assertEqual(hole["missing_open"], ["2025-06-02"])

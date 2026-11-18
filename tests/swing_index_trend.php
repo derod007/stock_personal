@@ -70,6 +70,21 @@ $conflict = [
 check(SwingIndexTrend::judge($day, $bars, $opens, $conflict)['reason'] === 'calendar_conflict', 'calendar conflict is undetermined');
 check(SwingIndexTrend::judge($day, $bars, $opens, [])['reason'] === 'calendar_unknown', 'missing calendar is undetermined');
 
+$interiorDay = $sixty[10];
+$interiorRanges = [
+    ['from' => '2024-01-01', 'to' => '2024-06-30', 'closed' => []],
+    ['from' => $interiorDay, 'to' => $interiorDay, 'closed' => [$interiorDay => 1]],
+];
+$interiorOpens = SwingIndexTrend::openDays('2024-01-01', '2024-06-30', $interiorRanges);
+$laterDay = $all[60];
+check(SwingIndexTrend::judge($laterDay, array_fill_keys($all, '100.00'), $interiorOpens, $interiorRanges)['reason'] === 'calendar_conflict', 'interior conflict cannot be skipped');
+$interiorRanges = [
+    ['from' => '2024-01-01', 'to' => $sixty[9], 'closed' => []],
+    ['from' => $sixty[11], 'to' => '2024-06-30', 'closed' => []],
+];
+$interiorOpens = SwingIndexTrend::openDays('2024-01-01', '2024-06-30', $interiorRanges);
+check(SwingIndexTrend::judge($laterDay, array_fill_keys($all, '100.00'), $interiorOpens, $interiorRanges)['reason'] === 'calendar_unknown', 'interior calendar hole cannot be skipped');
+
 $gapRanges = [['from' => '2025-05-01', 'to' => '2025-11-28', 'closed' => []]];
 $gapOpens = SwingIndexTrend::openDays('2025-05-01', '2025-11-28', $gapRanges);
 $gapBars = array_fill_keys($gapOpens, '100.00');

@@ -64,6 +64,13 @@ final class SwingIndexTrend
                 return self::undetermined('gap_window');
             }
         }
+        // openDays omits uncertain dates; do not silently extend a window across them.
+        for ($date = new \DateTimeImmutable($window[0]); $date->format('Y-m-d') < $day; $date = $date->modify('+1 day')) {
+            $windowKind = self::dayKind($date->format('Y-m-d'), $ranges);
+            if ($windowKind === 'unknown' || $windowKind === 'conflict') {
+                return self::undetermined('calendar_' . $windowKind);
+            }
+        }
         $cents = [];
         foreach ($window as $open) {
             if (!array_key_exists($open, $bars)) {

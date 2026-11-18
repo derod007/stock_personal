@@ -58,6 +58,7 @@ jobs:
           php tests/swing_path_tally.php
           php tests/swing_path_check.php
           php tests/swing_peer_compare.php
+          php tests/swing_index_trend.php
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'

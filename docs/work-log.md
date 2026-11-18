@@ -1,3 +1,9 @@
+## 2026-11-18 12:24 · Cursor · 끝
+- 한 일: 보존된 1·2차 신호에 코스피·코스닥 60거래일 평균 판정만 붙임. 손익비 조건 통과의 20거래일 차이 중앙값은 1차 0%p, 2차 +1.736%p. 두 기간 모두 개선이 아니라 채택 근거 부족으로 끝냄.
+- 파일: docs/swing-index-trend/protocol.md, docs/swing-index-trend/report.md, docs/swing-index-trend/result.json, src/SwingIndexTrend.php, bin/swing_index_trend.php, tests/swing_index_trend.php, .github/workflows/php-tests.yml, docs/work-log.md
+- 커밋: 별도 PR
+- 롤백: 없음
+
 ## 2026-11-16 · Codex · 승인 후 지수 수집 검토
 - #180은 이미 병합되어 후속 수집 커밋을 별도 PR로 분리. 원응답 549개씩의 해시와 정규화 508봉씩, 원본에서 재구성한 봉 목록 및 품질 결과가 series.json과 일치함을 읽기 전용으로 확인.
 - 재실행 보호: 기존 series.json이 있으면 인증·수집 전에 중단. 기존 정규화 자료나 원본 해시 목록이 현재 원본과 다르면 덮어쓰거나 재사용하지 않고 중단. 휴장일에 봉이 있는 경우 준비 완료 판정 거부.

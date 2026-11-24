@@ -8,7 +8,7 @@ try{
     $folder=$o['state-dir']??Store::folder();$classifier=new Classifier(dirname(__DIR__).'/data/type1/centers.json');
     $result=Store::update($folder,static function($state)use($o,$folder){
         if(isset($o['snapshot']))return json_decode(file_get_contents($o['snapshot']),true,512,JSON_THROW_ON_ERROR);
-        $leaders=new ChartEntryLab\KrAmountLeadersClient($folder.'/cache/leaders');$prices=new ChartEntryLab\YahooChartClient($folder.'/cache/prices');
+        $leaders=new ChartEntryLab\KrAmountLeadersClient($folder.'/cache/leaders');$prices=new ChartEntryLab\YahooChartClient($folder.'/cache/prices', responseEvidence:new ChartEntryLab\YahooResponseEvidence($folder.'/diagnostics/yahoo-response/prices'));
         return Collector::capture($state,static fn()=>$leaders->topByAmount(100,useCache:false,market:'all'),static fn($s)=>$prices->fetch($s,range:'2y',interval:'1d',useCache:false),
             static function($today){$fetch=static function($symbol){$url='https://fchart.stock.naver.com/sise.nhn?symbol='.$symbol.'&timeframe=day&count=600&requestType=0';
                 $ctx=stream_context_create(['http'=>['timeout'=>30,'header'=>"User-Agent: Mozilla/5.0\r\n"]]);$raw=file_get_contents($url,false,$ctx);if($raw===false)throw new RuntimeException('Index unavailable');return $raw;};
@@ -29,7 +29,7 @@ try{
         if($watchDay!==null && ($watchDay===$seoul || isset($o['snapshot']))){
             $fetch=null;
             if(!isset($o['snapshot'])){
-                $client=new ChartEntryLab\YahooChartClient($folder.'/breakout-watch/cache');
+                $client=new ChartEntryLab\YahooChartClient($folder.'/breakout-watch/cache', responseEvidence:new ChartEntryLab\YahooResponseEvidence($folder.'/diagnostics/yahoo-response/breakout-watch'));
                 $fetch=static fn($s)=>$client->fetch($s,range:'2y',interval:'1d',useCache:false);
             }
             $result['breakout_watch']=\ChartEntryLab\Type1Scan\BreakoutWatch::record($folder,$saved,$watchDay,$fetch);

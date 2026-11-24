@@ -1,3 +1,10 @@
+## 2026-11-24 · Codex · 끝
+- 한 일: 유형1 마감·독립 관찰의 비정상 최신 완료 일봉 Yahoo 원응답을 별도 진단 폴더에 보존. 수신 시각·해시·원본 바이트 유지, 중복 수신 별도 보존, 저장 실패 로그와 가격 결과 불변 확인.
+- 파일: src/YahooResponseEvidence.php, src/YahooChartClient.php, bin/type1_track.php, tests/yahoo_response_evidence.php, .github/workflows/type1-scan.yml, docs/yahoo-response-evidence.md, docs/work-log.md
+- 검증: 새 테스트 34개, 관찰 저장 28개, 경로 66개, 추적 31개, 기존 Yahoo 결측 종가·네이버 폴백 테스트 통과. 실제 수집·계좌 갱신과 운영 자료 수정 없음.
+- 커밋: 별도 PR
+- 롤백: 진단 연결 제거 시 원응답 보존만 중지. 기존 증거 파일 유지.
+
 ## 2026-11-18 12:24 · Cursor · 끝
 - 한 일: 보존된 1·2차 신호에 코스피·코스닥 60거래일 평균 판정만 붙임. 손익비 조건 통과의 20거래일 차이 중앙값은 1차 0%p, 2차 +1.736%p. 두 기간 모두 개선이 아니라 채택 근거 부족으로 끝냄.
 - 파일: docs/swing-index-trend/protocol.md, docs/swing-index-trend/report.md, docs/swing-index-trend/result.json, src/SwingIndexTrend.php, bin/swing_index_trend.php, tests/swing_index_trend.php, .github/workflows/php-tests.yml, docs/work-log.md

@@ -23,6 +23,7 @@ final class YahooChartClient
         private readonly ?\Closure $chartTransport = null,
         private readonly ?\Closure $clock = null,
         ?NaverHistoricalClose $historicalClose = null,
+        private readonly ?YahooResponseEvidence $responseEvidence = null,
     ) {
         if (!is_dir($this->cacheDir)) {
             mkdir($this->cacheDir, 0777, true);
@@ -128,6 +129,15 @@ final class YahooChartClient
         }
         if ($code >= 400) {
             throw new \RuntimeException("Yahoo HTTP {$code} for {$symbol}");
+        }
+
+        if ($this->responseEvidence !== null) {
+            try {
+                $this->responseEvidence->record($body, $symbol, $range, $interval, $this->now());
+            } catch (\Throwable $e) {
+                // Diagnostics must not trigger the price client's stale-cache fallback.
+                error_log('Yahoo response evidence failed: '.$e->getMessage());
+            }
         }
 
         /** @var array<string,mixed> $json */

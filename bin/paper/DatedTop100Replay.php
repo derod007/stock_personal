@@ -33,9 +33,11 @@ final class PaperDatedTop100Replay
     public const STRATEGY_FINGERPRINT='934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465';
     // New journals use the actual runtime fingerprint; existing journals cannot migrate.
     public const PROTECTION_RUNTIME='2303a1b6c59353e3e53f5b49d011adb8e82a184e8cd9b31d86ed541c712b1c3f';
+    // Only the forward recovery account allowlist changed; research/replay cannot opt in.
+    public const RECOVERY_V2_RUNTIME='d19460b01938f173521c3086a26338c5c2fce6966dffadfd6d158e3fe9a897ee';
     public static function supportsRuntime(string $version):bool
     {
-        return in_array($version,[self::STRATEGY_FINGERPRINT,self::PROTECTION_RUNTIME],true);
+        return in_array($version,[self::STRATEGY_FINGERPRINT,self::PROTECTION_RUNTIME,self::RECOVERY_V2_RUNTIME],true);
     }
     public const YEAR_SECTOR_MAP='docs/historical-top100-20251008-20261008/sector-map-full-v2.json';
     public const YEAR_SECTOR_MAP_SHA256='08afb0b6f0be0106624364406d29a5a33851c65331e431467629f71600da1e8b';

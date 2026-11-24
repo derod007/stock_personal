@@ -2,10 +2,16 @@
   "schema": 1,
   "releases": {
     "934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465": {
-      "to": "2303a1b6c59353e3e53f5b49d011adb8e82a184e8cd9b31d86ed541c712b1c3f",
+      "to": "d19460b01938f173521c3086a26338c5c2fce6966dffadfd6d158e3fe9a897ee",
       "policy": "preserve_existing_filled_orders",
       "source_commit": "d893c343082d741238593b15b9d59b6d19456536",
       "scope": "forward only; preserve held orders and historical snapshots; half_risk_v1 applies only to post-activation KR recovery fills"
+    },
+    "2303a1b6c59353e3e53f5b49d011adb8e82a184e8cd9b31d86ed541c712b1c3f": {
+      "to": "d19460b01938f173521c3086a26338c5c2fce6966dffadfd6d158e3fe9a897ee",
+      "policy": "preserve_existing_filled_orders",
+      "source_commit": "4007f764ee439ea4d0053a37d59e3342b88c79cd",
+      "scope": "forward only, non-halted accounts; preserve existing orders and history; extend unchanged half_risk_v1 eligibility to explicit recovery-v2 ID; replay stays pinned"
     }
   }
 }

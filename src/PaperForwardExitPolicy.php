@@ -9,7 +9,7 @@ final class PaperForwardExitPolicy
     public static function eligible(array $s): bool
     {
         return ($s['mode'] ?? '') === 'forward'
-            && ($s['config']['id'] ?? '') === 'paper-kr-recovery-v1'
+            && in_array($s['config']['id'] ?? '', ['paper-kr-recovery-v1', 'paper-kr-recovery-v2'], true)
             && ($s['config']['currency'] ?? '') === 'KRW';
     }
     public static function adopt(array &$s, callable $emit, int $now): void

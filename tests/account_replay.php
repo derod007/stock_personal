@@ -77,7 +77,7 @@ archeck(arthrows(fn()=>PaperAccountReplay::accountDir($tmp,$research,'paper-kr-r
 archeck(PaperAccountReplay::accountId($research,'recent','a1')==='hist-smoke-kr-recovery-v1-20261009-a1'&&arthrows(fn()=>PaperAccountReplay::accountId($research,'recent','A/../x'),'Smoke label'),'smoke IDs are separate and validated');
 archeck(PaperAccountReplay::accountId($research,'prior',null,'fee20')==='hist-kr-recovery-v1-20251008-fee20','a research suffix keeps the period ID and does not reuse the operational account');
 $fp='934012285f2ddb3867fff4576dba05fb7df290a36a987c36fc260e8917bbe465';
-archeck(PaperStrategyVersion::current($root)==='2303a1b6c59353e3e53f5b49d011adb8e82a184e8cd9b31d86ed541c712b1c3f','operational release fingerprint matches protection v1');
+archeck(PaperStrategyVersion::current($root)==='d19460b01938f173521c3086a26338c5c2fce6966dffadfd6d158e3fe9a897ee','operational release fingerprint matches recovery v2 preparation');
 PaperStrategyVersion::verify(['version'=>$fp,'strategy_fingerprint'=>$fp],$fp);
 archeck(true,'an existing fingerprint account still verifies');
 $manifest=json_decode((string)file_get_contents($root.'/config/paper-strategy-files.json'),true,512,JSON_THROW_ON_ERROR);

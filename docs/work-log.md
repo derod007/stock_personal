@@ -1,6 +1,7 @@
 ## 2026-11-25 · Codex · 끝
 - 한 일: 새 KR recovery v2 설정과 기존 half_risk_v1 보호 적용 준비. 명시적 forward 버전 전환 목록 갱신, 중단·replay 거부 유지. 운영 계좌 생성·예약 전환 없음.
 - 파일: config/paper-kr-recovery-v2.json, config/paper-forward-upgrades.json, src/PaperForwardExitPolicy.php, tests/recovery_v2.php, .github/workflows/php-tests.yml, docs/paper-recovery-v2-preparation.md, docs/work-log.md
+- CI 보완: 연구 실행 버전 허용 목록에 새 지문 명시 추가. bin/paper/DatedTop100Replay.php, tests/account_replay.php, tests/dated_top100_trades.php. 과거 연구 지문·장부 재개 검사는 유지.
 - 검증: v1/v2 보호 청산 동일성 21개, 기존 forward 보호 29개, half-risk 14개, 버전·과거 자료 수정 통합 테스트와 revision 21개 통과. 운영 v1 장부·설정·예약 실행 파일 해시 불변.
 - 커밋: 별도 PR
 - 롤백: 실제 v2 시작 전 준비 커밋 되돌리기. v2 시작 후에는 새 지문으로 기록되므로 과거 코드로 무조건 되돌리지 않음.
